@@ -1,6 +1,6 @@
 {
   "projects": {
-    "staging": "join-3324b"
+    "default": "join-3324b"
   },
   "targets": {},
   "etags": {}
