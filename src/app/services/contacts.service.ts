@@ -7,17 +7,21 @@ import { Firestore, collection, doc, onSnapshot, collectionData, addDoc, updateD
 })
 export class ContactsService {
 
+  firestore: Firestore = inject(Firestore);
   contacts: ContactInterface[] = [];
   unsubContact;
-  firestore: Firestore = inject(Firestore);
 
   constructor() { 
 
     this.unsubContact = onSnapshot(this.getContactsRef(), (list)=> {
+      
       list.forEach((doc) => {
-        console.log(doc);
+        console.log(doc.data);
       })
     });
+
+    console.log("test");
+    
 
 
   } // constructor end
