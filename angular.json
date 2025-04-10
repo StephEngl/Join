@@ -90,7 +90,9 @@
               "src/assets"
             ],
             "styles": [
-              "src/styles.scss"
+              "src/styles.scss",
+              "src/assets/fonts/fonts.scss",
+              "src/assets/styles/font-types.scss"
             ],
             "scripts": []
           }

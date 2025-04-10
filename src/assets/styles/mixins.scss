@@ -1,0 +1,11 @@
+@import './colors.scss';
+
+@mixin dFlex($jc, $ai, $gap: 0px, $position: relative) {
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+    gap: $gap;
+    position: $position;
+}
+
+/* to be discussed */
