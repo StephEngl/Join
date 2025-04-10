@@ -2,6 +2,14 @@
   "projects": {
     "default": "join-3324b"
   },
-  "targets": {},
+  "targets": {
+    "join-3324b": {
+      "hosting": {
+        "join": [
+          "join-3324b"
+        ]
+      }
+    }
+  },
   "etags": {}
 }
