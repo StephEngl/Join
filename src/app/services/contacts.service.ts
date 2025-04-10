@@ -14,9 +14,8 @@ export class ContactsService {
   constructor() { 
 
     this.unsubContact = onSnapshot(this.getContactsRef(), (list)=> {
-      
-      list.forEach((doc) => {
-        console.log(doc.data);
+      list.forEach((element) => {
+        console.log(element);
       })
     });
 

@@ -13,5 +13,5 @@ import { NavbarComponent } from "./shared/navbar/navbar.component";
   styleUrl: './app.component.scss'
 })
 export class AppComponent {
-  title = 'Join';
+  title = 'join';
 }
