@@ -13,11 +13,21 @@ export class ContactsService {
 
   constructor() { 
 
-    this.unsubContact = onSnapshot(this.getContactsRef(), (list)=> {
-      list.forEach((element) => {
-        console.log(element.data());
-      })
-    });
+    this.unsubContact = onSnapshot(
+      this.getContactsRef(),
+      (snapshot) => {
+        console.log(`${snapshot.size} Alle Kontakte geladen:`);
+    
+        snapshot.forEach((doc) => {
+          const contact = doc.data();
+          console.log('Kontakt:', contact);
+        });
+      },
+      (error) => {
+        console.error('Firestore Error', error.message);
+      }
+    );
+    
 
     console.log("test");
     
