@@ -1,4 +1,5 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
+import { ContactsService } from '../../services/contacts.service';
 
 @Component({
   selector: 'app-contacts',
@@ -9,4 +10,6 @@ import { Component } from '@angular/core';
 })
 export class ContactsComponent {
 
+  contactRef = inject(ContactsService);
+  
 }
