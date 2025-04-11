@@ -11,30 +11,31 @@ import { ContactInterface } from '../../interfaces/contact.interface';
   templateUrl: './contacts.component.html',
   styleUrl: './contacts.component.scss',
 })
+
 export class ContactsComponent {
   contactsService = inject(ContactsService);
   showDialog = false;
-
-  toggleDialog() {
-    this.showDialog = !this.showDialog;
-  }
-
   sortedContacts: ContactInterface[] = [];
 
 ngOnInit() {
   this.sortList();
+  this.groupContactsByFirstLetter();
+}
+
+toggleDialog() {
+  this.showDialog = !this.showDialog;
 }
 
 sortList() {
   this.sortedContacts = this.contactsService.contacts.sort((a, b) =>
     a.name.localeCompare(b.name)
   );
+  return this.sortedContacts;
+}
 
-
-  this.sortedContacts.forEach((contact) => {
-    const letter = contact.name.charAt(0).toUpperCase();
-    console.log('letterleertt ' + letter + ' - ' + contact.name);
-  });
+groupContactsByFirstLetter() {
+  const firstLetters = [...new Set(this.sortList().map(contact => contact.name.charAt(0).toUpperCase()))];
+  return firstLetters;  
 }
 
   async deleteContact() {
