@@ -32,6 +32,14 @@
     justify-content: center;
     gap: 16px;
 
+    span {
+        font-family: "Inter", sans-serif;
+        font-weight: 300;
+        font-size: 27px;
+        line-height: 120%;
+        letter-spacing: 0.25px;
+    }
+
     img {
         width: 55.6px;
         height: 66.48px;
@@ -71,4 +79,23 @@ input {
 .dialog-content.animate-out {
     transform: translateX(100vw);
     opacity: 0;
+}
+
+.contact-title {
+    position: relative;
+    display: inline-block;
+}
+
+.subtitle {
+    margin: 0;
+    font-size: 16px;
+    color: #ffffff;
+}
+
+.underline {
+    width: 90px;
+    height: 3px;
+    background-color: #29ABE2;
+    margin-top: 8px;
+    border-radius: 2px;
 }

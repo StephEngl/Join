@@ -1,5 +1,12 @@
+@if (showDialog) {
+<app-contact-dialog (cancel)="closeDialog()" (create)="handleCreate()">
+</app-contact-dialog>
+}
 
+<<<<<<< HEAD
 <app-contact-dialog *ngIf="showDialog" (cancel)="toggleDialog()" (create)="showDialog = false"></app-contact-dialog>
+=======
+>>>>>>> baea24b (change code in contact-dialog)
 
 <section class="contacts-section">
     <div class="contacts-list">
