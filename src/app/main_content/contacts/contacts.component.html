@@ -1,1 +1,4 @@
-<p>contacts works!</p>
+<button (click)="openAddDialog()">Add new contact</button>
+
+<app-contact-dialog *ngIf="showDialog" (cancel)="closeDialog()" (create)="handleCreate()">
+</app-contact-dialog>
