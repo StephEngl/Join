@@ -15,9 +15,9 @@ export class TestContactComponent {
   async testUpdate() {
     const contact = {
       id: '1JZx6aGq41MRooCAOS0P', // ID eines existierenden Kontakts
-      name: 'Hans Mayer',
+      name: 'Lore Mayer',
       phone: '+49 165 9876543',
-      mail: 'h.mayer@blauerhimmel.de'
+      mail: 'l.mayer@blauerhimmel.de'
     };
 
     try {
