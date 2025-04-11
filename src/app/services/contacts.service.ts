@@ -22,9 +22,11 @@ import {
 export class ContactsService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
   contacts: ContactInterface[] = [];
+  // contact = {name: "Hans Meier", mail: "h.meier@blauerhimmel.de", phone: "+49 1652 9876543"}
   unsubscribeContact;
 
   constructor() {
+    // this.addContact(this.contact);
     this.unsubscribeContact = this.subContactsList();
   } // constructor end
 
@@ -39,11 +41,30 @@ export class ContactsService implements OnDestroy {
   ): Promise<void | DocumentReference> {
     try {
       const contactRef = await addDoc(this.getContactsRef(), contact);
-      console.log('Document written with ID: ', contactRef.id);
+      // console.log('Document written with ID: ', contactRef.id);
       return contactRef;
     } catch (err) {
       console.error(err);
     }
+  }
+
+  async updateContact(contact: ContactInterface) {
+    if (contact.id) {
+      try {
+        let docRef = this.getSingleDocRef(contact.id);
+        await updateDoc(docRef, this.getCleanJson(contact));
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
+
+  getCleanJson(contact: ContactInterface) {
+    return {
+      name: contact.name,
+      phone: contact.phone,
+      mail: contact.mail,
+    };
   }
 
   subContactsList() {
@@ -54,6 +75,7 @@ export class ContactsService implements OnDestroy {
         snapshot.forEach((element) => {
           const contact = element.data();
           this.contacts.push(this.setContactObject(contact));
+          console.log(this.contacts);
         });
       },
       (error) => {
@@ -72,5 +94,9 @@ export class ContactsService implements OnDestroy {
 
   getContactsRef() {
     return collection(this.firestore, 'contacts');
+  }
+
+  getSingleDocRef(docId: string) {
+    return doc(collection(this.firestore, 'contacts'), docId);
   }
 }
