@@ -28,11 +28,6 @@ export class ContactsService implements OnDestroy {
       }
     );
     
-
-    console.log("test");
-    
-
-
   } // constructor end
 
   ngOnDestroy() {
