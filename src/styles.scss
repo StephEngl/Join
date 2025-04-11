@@ -1,8 +1,7 @@
 @import "./assets/styles/colors.scss";
 
 body {
-    background-color: $col-bg-main; /* only for testing, should be declared in elements / containers */
-    font-family: 'Inter', sans-serif; /* only for testing, should be declared in font-types */
+    font-family: 'Inter', sans-serif;
 }
 
 * {
