@@ -13,6 +13,7 @@ import {
   where,
   orderBy,
   limit,
+  DocumentReference,
 } from '@angular/fire/firestore';
 
 @Injectable({
@@ -30,6 +31,18 @@ export class ContactsService implements OnDestroy {
   ngOnDestroy() {
     if (this.unsubscribeContact) {
       this.unsubscribeContact();
+    }
+  }
+
+  async addContact(
+    contact: ContactInterface
+  ): Promise<void | DocumentReference> {
+    try {
+      const contactRef = await addDoc(this.getContactsRef(), contact);
+      console.log('Document written with ID: ', contactRef.id);
+      return contactRef;
+    } catch (err) {
+      console.error(err);
     }
   }
 
