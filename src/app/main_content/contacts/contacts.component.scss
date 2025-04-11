@@ -1,0 +1,21 @@
+@import './../../../assets/styles/mixins.scss';
+
+.contacts-section {
+    @include dFlex(center, center);
+    background-color: green;
+    left: 230px;
+    height: calc(100vh - 96px);
+    width: calc(100vw - 230px);
+
+    .contacts-list {
+        max-width: 450px;
+        width: 100%;
+        background-color: red;
+        height: 100%;
+        overflow-y: auto;
+    }
+
+    .contact-infos {
+        flex: 1;
+    }
+}
