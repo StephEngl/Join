@@ -1,11 +1,11 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, OnDestroy } from '@angular/core';
 import { ContactInterface } from '../interfaces/contact.interface';
 import { Firestore, collection, doc, onSnapshot, collectionData, addDoc, updateDoc, deleteDoc, query, where, orderBy, limit } from '@angular/fire/firestore';
 
 @Injectable({
   providedIn: 'root'
 })
-export class ContactsService {
+export class ContactsService implements OnDestroy {
 
   firestore: Firestore = inject(Firestore);
   contacts: ContactInterface[] = [];
@@ -36,7 +36,9 @@ export class ContactsService {
   } // constructor end
 
   ngOnDestroy() {
-    this.unsubContact();
+    if(this.unsubContact) {
+      this.unsubContact();
+    }
   }
 
   getContactsRef() {
