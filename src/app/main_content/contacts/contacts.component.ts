@@ -1,6 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
+import { ContactsService } from '../../services/contacts.service';
 
 
 @Component({
@@ -12,21 +13,16 @@ import { ContactDialogComponent } from './contact-dialog/contact-dialog.componen
 })
 export class ContactsComponent {
 
+  contactsService = inject(ContactsService);
 
   showDialog = false;
 
-  openAddDialog() {
-    console.log('Dialog öffnen');
-    this.showDialog = true;
-  }
-
-  closeDialog() {
-    console.log('Dialog schließen');
-    this.showDialog = false;
+  toggleDialog() {
+    this.showDialog = !this.showDialog;
   }
 
   handleCreate() {
-    this.closeDialog();
+    this.showDialog = false;
   }
 
 

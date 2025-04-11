@@ -1,12 +1,17 @@
 
-<app-contact-dialog *ngIf="showDialog" (cancel)="closeDialog()" (create)="handleCreate()"></app-contact-dialog>
+<app-contact-dialog *ngIf="showDialog" (cancel)="toggleDialog()" (create)="showDialog = false"></app-contact-dialog>
 
 <section class="contacts-section">
     <div class="contacts-list">
-        <button (click)="openAddDialog()">Add new contact</button>
-
+        <button (click)="toggleDialog()">Add new contact</button>
+        <ul>
+            <li>contactA</li>
+            <li>contactA</li>
+            <li>contactA</li>
+            <li>contactA</li>
+        </ul>
     </div>
-    <div class="contact-info">
+    <div class="contact-infos">
         <div class="contact-title">
             <h1>Contacts</h1>
             <span>|</span>
@@ -22,6 +27,10 @@
         </div>
         <div class="contact-info">
             <p>Contact Information</p>
+            <p>Email</p>
+            <a href="mailto:anton@email.de">Email: anton&#64;email.de</a>
+            <p>Phone</p>
+            <a href="mailto:anton@email.de">Email: anton&#64;email.de</a>
         </div>
     </div>
 </section>
