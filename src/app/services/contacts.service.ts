@@ -59,6 +59,14 @@ export class ContactsService implements OnDestroy {
     }
   }
 
+  async deleteContact(docId: string) {
+    try {
+      await deleteDoc(this.getSingleDocRef(docId));
+    } catch (err) {
+      console.error(err);
+    }
+  }
+
   getCleanJson(contact: ContactInterface) {
     return {
       name: contact.name,
