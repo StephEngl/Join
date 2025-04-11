@@ -4,7 +4,7 @@ import { SummaryComponent } from './main_content/summary/summary.component';
 import { ContactsComponent } from './main_content/contacts/contacts.component';
 import { HeaderComponent } from "./shared/header/header.component";
 import { NavbarComponent } from "./shared/navbar/navbar.component";
-import { TestContactComponent } from "./main_content/contacts/test-contact/test-contact.component";
+import { TestContactComponent } from './main_content/contacts/test-contact/test-contact.component';
 
 @Component({
   selector: 'app-root',
