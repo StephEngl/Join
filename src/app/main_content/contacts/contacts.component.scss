@@ -2,7 +2,6 @@
 
 .contacts-section {
     @include dFlex(center, center, 0, fixed);
-    background-color: green;
     width: 100%;
     height: 100%;
     top: 96px;
@@ -12,9 +11,22 @@
         flex: 1;
         max-width: 450px;
         min-width: 200px;
-        background-color: red;
         height: 100%;
         overflow-y: auto;
+        padding: 30px;
+        border-right: 1px solid $col-font-inactive;
+
+        .letter-category {
+            @include dFlex(center, flex-start, 10px);
+            flex-direction: column;
+            margin: 40px 0 20px 0;
+            >p {
+                width: 100%;
+                margin-bottom: 10px;
+                padding-bottom: 5px;
+                border-bottom: 1px solid $col-font-inactive;
+            }
+        }
     }
 
     .contact-infos {
@@ -24,4 +36,21 @@
 
 .single-contact {
     @include dFlex(flex-start, center, 10px);
+}
+
+.contact-icon {
+    @include dFlex(center, center);
+    width: 50px;
+    height: 50px;
+    border-radius: 50%;
+    color: white;
+}
+
+.new-contact {
+    @include dFlex(center, center, 20px);
+    background-color: $col-bg-main;
+    color: white;
+    border-radius: 10px;
+    padding: 10px;
+    width: 100%;
 }

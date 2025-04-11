@@ -5,24 +5,31 @@
 
 <section class="contacts-section">
     <div class="contacts-list">
-        <button (click)="toggleDialog()">Add new contact</button>
+        <button class="new-contact" (click)="toggleDialog()">
+            Add new contact
+            <img src="./assets/icons/contacts/new_contact.svg" alt="">
+        </button>
         <ul>
             @for (letter of groupContactsByFirstLetter(); track letter) {
-                <div class="letter-category">{{ letter }}</div>
-                @for (contact of sortList(); track contact) {
-                    @if (letter === contact.name.charAt(0).toUpperCase()) {
-                        <li class="single-contact">
-                            <div class="contact-icon">
-                                {{contact.name.charAt(0).toUpperCase()}}
-                                {{contact.name.split(' ')[1].charAt(0).toUpperCase()}}
-                            </div>
-                            <div>
-                                <p>{{ contact.name }}</p>
-                                <p>{{ contact.mail }}</p>
-                            </div>
-                        </li>
-                    }
-                }
+                <div class="letter-category">
+                    <p>{{ letter }}</p>
+                        @for (contact of contactsService.contacts; track contact) {
+                            @if (letter === contact.name.charAt(0).toUpperCase()) {
+                                <li class="single-contact">
+                                    <div class="contact-icon"
+                                    [style.backgroundColor]="contact.color"
+                                    >
+                                        {{contact.name.charAt(0).toUpperCase()}}
+                                        {{contact.name.split(' ')[1].charAt(0).toUpperCase()}}
+                                    </div>
+                                    <div>
+                                        <p>{{ contact.name }}</p>
+                                        <a href="mailto:{{ contact.mail }}">{{ contact.mail }}</a>
+                                    </div>
+                                </li>
+                            }
+                        }
+                </div>
             }
         </ul>
     </div>

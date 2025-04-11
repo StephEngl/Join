@@ -72,6 +72,7 @@ export class ContactsService implements OnDestroy {
       name: contact.name,
       phone: contact.phone,
       mail: contact.mail,
+      color: contact.color
     };
   }
 
@@ -97,6 +98,7 @@ export class ContactsService implements OnDestroy {
       name: obj.name || '',
       phone: obj.phone || '',
       mail: obj.mail || '',
+      color: obj.color || '',
     };
   }
 

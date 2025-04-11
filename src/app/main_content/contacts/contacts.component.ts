@@ -16,27 +16,20 @@ export class ContactsComponent {
   contactsService = inject(ContactsService);
   showDialog = false;
   sortedContacts: ContactInterface[] = [];
+  firstLetters: string[] = [];
 
-ngOnInit() {
-  this.sortList();
-  this.groupContactsByFirstLetter();
-}
+  ngOnInit() {
+    this.groupContactsByFirstLetter();
+  }
 
-toggleDialog() {
-  this.showDialog = !this.showDialog;
-}
+  toggleDialog() {
+    this.showDialog = !this.showDialog;
+  }
 
-sortList() {
-  this.sortedContacts = this.contactsService.contacts.sort((a, b) =>
-    a.name.localeCompare(b.name)
-  );
-  return this.sortedContacts;
-}
-
-groupContactsByFirstLetter() {
-  const firstLetters = [...new Set(this.sortList().map(contact => contact.name.charAt(0).toUpperCase()))];
-  return firstLetters;  
-}
+  groupContactsByFirstLetter() {
+    this.firstLetters = [...new Set(this.contactsService.contacts.map(contact => contact.name.charAt(0).toUpperCase()))];
+    return this.firstLetters;  
+  }
 
   async deleteContact() {
     const docId = '1JZx6aGq41MRooCAOS0P'; //Platzhalter, existiert jetzt nicht mehr :)
