@@ -8,4 +8,9 @@
     position: $position;
 }
 
+@mixin appMaxWidth($padding: 30px) {
+    max-width: 1440px; /* tbd */
+    padding: $padding;
+}
+
 /* to be discussed */
