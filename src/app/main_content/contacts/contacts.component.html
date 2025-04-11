@@ -5,10 +5,18 @@
     <div class="contacts-list">
         <button (click)="toggleDialog()">Add new contact</button>
         <ul>
-            <li>contactA</li>
-            <li>contactA</li>
-            <li>contactA</li>
-            <li>contactA</li>
+            @for (lett of contactsService.contacts; track lett) {
+
+            }
+            @for (contact of contactsService.contacts; track contact) {
+                <li class="single-contact">
+                    <div class="contact-icon">MN</div>
+                    <div>
+                        <p>{{ contact.name }}</p>
+                        <p>{{ contact.mail }}</p>
+                    </div>
+                </li>
+            }
         </ul>
     </div>
     <div class="contact-infos">
