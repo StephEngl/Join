@@ -1,23 +1,27 @@
 @import './colors.scss';
 
 h1 {
-    /* define font type here */
+    font-size: clamp(2.9375rem, 2.5rem + 1.2vw, 4rem);
 }
 
 h2 {
-    /* define font type here */
-}
+    font-size: clamp(2.9375rem, 2.2rem + 1.5vw, 3.8125rem);
+}    
 
 h3 {
-    /* define font type here */
+    font-size: clamp(2.25rem, 2.1rem + 1vw, 2.9375rem);
+}
+
+h4 {
+    font-size: clamp(1.25rem, 1.15rem + 0.7vw, 1.6875rem);    
 }
 
 p {
-    /* define font type here */
+    /* define font type here/ hier haben eir verschiedene schriftarten bei desktop und */
 }
 
 a {
-    /* define font type here */
+    font-size: 1rem;
 }
 
 /* more to add */
