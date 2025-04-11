@@ -1,43 +1,63 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
 import { ContactInterface } from '../interfaces/contact.interface';
-import { Firestore, collection, doc, onSnapshot, collectionData, addDoc, updateDoc, deleteDoc, query, where, orderBy, limit } from '@angular/fire/firestore';
+import {
+  Firestore,
+  collection,
+  doc,
+  onSnapshot,
+  collectionData,
+  addDoc,
+  updateDoc,
+  deleteDoc,
+  query,
+  where,
+  orderBy,
+  limit,
+} from '@angular/fire/firestore';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class ContactsService implements OnDestroy {
-
   firestore: Firestore = inject(Firestore);
   contacts: ContactInterface[] = [];
-  unsubContact;
+  unsubscribeContact;
 
-  constructor() { 
+  constructor() {
+    this.unsubscribeContact = this.subContactsList();
+  } // constructor end
 
-    this.unsubContact = onSnapshot(
-      this.getContactsRef(),
+  ngOnDestroy() {
+    if (this.unsubscribeContact) {
+      this.unsubscribeContact();
+    }
+  }
+
+  subContactsList() {
+    const q = query(this.getContactsRef(), orderBy('name'));
+    return onSnapshot(
+      q,
       (snapshot) => {
-        console.log(`${snapshot.size} Alle Kontakte geladen:`);
-    
-        snapshot.forEach((doc) => {
-          const contact = doc.data();
-          console.log('Kontakt:', contact);
+        snapshot.forEach((element) => {
+          const contact = element.data();
+          this.contacts.push(this.setContactObject(contact));
         });
       },
       (error) => {
         console.error('Firestore Error', error.message);
       }
     );
-    
-  } // constructor end
+  }
 
-  ngOnDestroy() {
-    if(this.unsubContact) {
-      this.unsubContact();
-    }
+  setContactObject(obj: any): ContactInterface {
+    return {
+      name: obj.name || '',
+      phone: obj.phone || '',
+      mail: obj.mail || '',
+    };
   }
 
   getContactsRef() {
     return collection(this.firestore, 'contacts');
   }
 }
-
