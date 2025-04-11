@@ -27,4 +27,14 @@ export class TestContactComponent {
       console.error('Fehler beim Aktualisieren des Kontakts:', error);
     }
   }
+
+  async testDelete() {
+    const docId = "1JZx6aGq41MRooCAOS0P";
+    try {
+      await this.contactsService.deleteContact(docId);
+      console.log('Kontakt erfolgreich gelöscht');
+    } catch (error) {
+      console.error('Fehler beim Löschen des Kontakts:', error);
+    }
+  }
 }
