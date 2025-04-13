@@ -1,0 +1,11 @@
+<div
+    class="navbar-icon-link-container"
+    [ngStyle]="{ 'background-color': isActive ? 'rgba(9, 25, 49, 1)' : 'transparent' }"
+    (click)="onClick()">
+    <div class="icon-container">
+        <img [src]="currentIcon" [alt]="alt" />
+    </div>
+    <div class="link-container">
+        <a [routerLink]="route">{{ alt }}</a>
+    </div>
+</div>

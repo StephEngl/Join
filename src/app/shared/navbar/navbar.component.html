@@ -1,3 +1,23 @@
 <div class="navbar-section-desktop">
-    
+    <div class="navbar-icon-container">
+        <img class="image" src="assets/icons/navbar/logo.svg" alt="">
+    </div>
+    <div class="navbar-components-container">
+        <div class="links-allignement">
+            @for (link of links; track link.route) {
+                <app-navbar-icon-link
+                    [iconUnclicked]="link.iconUnclicked"
+                    [iconClicked]="link.iconClicked"
+                    [route]="link.route"
+                    [alt]="link.alt"
+                    [isActive]="activeLink === link.route"
+                    (activate)="setActiveLink(link.route)">
+                </app-navbar-icon-link>
+            }
+        </div>
+    </div>
+    <div class="privacy-and-legal-container">
+        <a routerLink="/privacy-policy">Privacy Policy</a>
+        <a routerLink="/legal-notice">Legal notice</a>
+    </div>
 </div>
