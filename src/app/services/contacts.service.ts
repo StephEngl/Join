@@ -81,6 +81,7 @@ export class ContactsService implements OnDestroy {
     return onSnapshot(
       q,
       (snapshot) => {
+        this.contacts = [];
         snapshot.forEach((element) => {
           const contact = element.data();
           this.contacts.push(this.setContactObject(contact));
@@ -92,6 +93,7 @@ export class ContactsService implements OnDestroy {
       }
     );
   }
+  
 
   setContactObject(obj: any): ContactInterface {
     return {
