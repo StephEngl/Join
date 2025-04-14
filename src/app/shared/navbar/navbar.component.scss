@@ -6,6 +6,7 @@
     position: fixed;
     left: 0;
     top: 0;
+    bottom: 0;
     width: 232px;
     height: 100dvh;
     background-color: rgba(42, 54, 71, 1);
@@ -46,7 +47,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 0.5rem;
         padding: 0 1rem;
         width: 232px;
         height: auto;
@@ -54,6 +54,7 @@
         .privacy-policy-background-container,
         .legal-notice-background-container {
             width: 232px;
+            height: 48px;
             display: flex;
             justify-content: center;
             transition: background-color 0.3s ease;
