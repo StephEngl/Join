@@ -22,6 +22,7 @@ import {
 export class ContactsService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
   contacts: ContactInterface[] = [];
+  contactColors: string[] = [];
   // contact = {name: "Hans Meier", mail: "h.meier@blauerhimmel.de", phone: "+49 1652 9876543"}
   unsubscribeContact;
 
@@ -72,7 +73,7 @@ export class ContactsService implements OnDestroy {
       name: contact.name,
       phone: contact.phone,
       mail: contact.mail,
-      color: contact.color
+      color: contact.color,
     };
   }
 
@@ -93,7 +94,6 @@ export class ContactsService implements OnDestroy {
       }
     );
   }
-  
 
   setContactObject(obj: any): ContactInterface {
     return {
