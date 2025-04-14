@@ -1,0 +1,38 @@
+<div class="contact-title">
+    <h1>Contacts</h1>
+    <span></span>
+    <h4>Better with a team</h4>
+</div>
+<div class="animation-container"
+[ngClass]="contactClicked ? 'animate-in' : 'animate-out'">
+    @if (contactIndex != null) {
+        <div class="contact-hero">
+            <div class="contact-icon-big"
+            [style.backgroundColor]="contactsService.contacts[contactIndex].color"
+            >
+                {{contactsService.contacts[contactIndex].name.charAt(0).toUpperCase()}}
+                {{contactsService.contacts[contactIndex].name.split(' ')[1].charAt(0).toUpperCase()}}
+            </div>
+            <div class="contact-menu">
+                <h3>{{ contactsService.contacts[contactIndex].name }}</h3>
+                <div class="btn-container">
+                    <button (click)="editContact(contactIndex)" (mouseenter)="btnEdit = true" (mouseleave)="btnEdit = false">
+                        <img class="contact-menu-icon" [src]="btnEdit ? './assets/icons/kanban/edit_active.svg' : './assets/icons/kanban/edit.svg'" alt="">
+                        <p>Edit</p>
+                    </button>
+                    <button (click)="deleteContact()" (mouseenter)="btnDelete = true" (mouseleave)="btnDelete = false">
+                        <img class="contact-menu-icon" [src]="btnDelete ? './assets/icons/kanban/delete_active.svg' : './assets/icons/kanban/delete.svg'" alt="">
+                        <p>Delete</p>
+                    </button>
+                </div>
+            </div>        
+        </div>
+        <div class="contact-info">
+            <p>Contact Information</p>
+            <p>Email</p>
+            <a href="mailto:{{ contactsService.contacts[contactIndex].mail }}">{{ contactsService.contacts[contactIndex].mail }}</a>
+            <p>Phone</p>
+            <a href="tel:{{ contactsService.contacts[contactIndex].phone }}">{{ contactsService.contacts[contactIndex].phone }}</a>
+        </div>
+    }
+</div>

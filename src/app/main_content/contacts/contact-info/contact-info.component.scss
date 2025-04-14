@@ -1,0 +1,38 @@
+@import './../../../../assets/styles/mixins.scss';
+
+.contact-icon-big {
+    @include contactIcon(120px, 47px, -5px);
+}
+
+
+.animation-container {
+    transition: all 0.5s ease;
+}
+
+.animate-in {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.animate-out {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+
+.contact-title {
+    @include dFlex(center, center);
+    margin-bottom: 15px;
+    >span {
+        height: 100%;
+        width: 4px;
+        margin: 0 20px;
+        background-color: $col-ref-highlight;
+        border-radius: 10px;
+    }
+}
+.contact-hero {
+    @include dFlex(center, center, 20px);
+}
+
+
