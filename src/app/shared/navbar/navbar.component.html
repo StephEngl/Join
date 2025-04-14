@@ -2,6 +2,7 @@
     <div class="navbar-icon-container">
         <img class="image" src="assets/icons/navbar/logo.svg" alt="">
     </div>
+
     <div class="navbar-components-container">
         <div class="links-allignement">
             @for (link of links; track link.route) {
@@ -16,6 +17,7 @@
             }
         </div>
     </div>
+
     <div class="privacy-and-legal-container">
         <div class="privacy-policy-background-container" [class.active]="activeLink === '/privacy-policy'" (click)="setActiveLink('/privacy-policy')">
             <div class="link-container">
@@ -28,5 +30,4 @@
             </div>
         </div>
     </div>
-    
 </div>
