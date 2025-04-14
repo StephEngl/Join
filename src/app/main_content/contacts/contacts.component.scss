@@ -8,15 +8,15 @@
     left: 240px;
 
     .contacts-list {
-        flex: 1;
-        max-width: 450px;
-        min-width: 280px;
+        width: 100%;
+        min-width: 400px;
+        max-width: 400px;
         height: 100%;
         overflow-y: auto;
         word-break: break-word;
         padding: 30px;
-        border-right: 1px solid $col-font-inactive;
         box-shadow: 5px 0 5px rgba(0, 0, 0, 0.2);
+        background-color: white;
 
         >ul {
             &:last-child {
@@ -54,9 +54,15 @@
     color: white;
     padding: 10px;
     width: 100%;
+    justify-self: center;
+    max-width: 400px;
     top: 0px;
     z-index: 2;
     cursor: pointer;
+    >p {
+        font-weight: 600;
+        letter-spacing: 1px;
+    }
     >p, >img {
         z-index: 2;
     }
@@ -98,8 +104,25 @@
 .contact-infos {
     @include dFlex(flex-start, flex-start, 30px);
     flex-direction: column;
-    padding: 50px 20px 20px 50px;
+    padding: 70px 20px 20px 50px;
     height: 100%;
     flex: 1;
 }
 
+
+@media screen and (max-width: 1400px) {
+    .contact-infos {
+        position: absolute;
+        width: 100%;
+        background-color: $col-bg-main;
+        z-index: 99;
+        left: 0;
+        transition: all 0.5s ease;
+    }
+
+    .contacts-list {
+        position: absolute;
+        min-width: auto;
+        max-width: 100% !important;
+    }
+}

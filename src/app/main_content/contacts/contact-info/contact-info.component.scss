@@ -4,7 +4,6 @@
     @include contactIcon(120px, 47px, -5px);
 }
 
-
 .animation-container {
     transition: all 0.5s ease;
 }
@@ -19,26 +18,32 @@
     opacity: 0;
 }
 
-
 .contact-title {
-    @include dFlex(center, center);
+    @include dFlex(space-between, center);
     margin-bottom: 15px;
-    >span {
-        height: 60px;
-        width: 4px;
-        margin: 0 20px;
-        background-color: $col-ref-highlight;
-        border-radius: 10px;
+    div {
+        @include dFlex(flex-start, center);
+        >span {
+            height: 60px;
+            width: 4px;
+            margin: 0 20px;
+            background-color: $col-ref-highlight;
+            border-radius: 10px;
+        }
     }
 }
+
 .contact-hero {
-    @include dFlex(center, center, 20px);
+    @include dFlex(flex-start, center, 20px);
+    margin-top: 50px;
 }
 
 .btn-container {
     @include dFlex(flex-start, center, 10px);
+    margin-top: 10px;
     >button {
         @include dFlex(center, center, 5px);
+        background-color: transparent;
         cursor: pointer;
         &:hover {
             color: $col-ref-highlight;
@@ -52,3 +57,22 @@
     }
 }
 
+.contact-info {
+    @include dFlex(center, flex-start, 20px);
+    flex-direction: column;
+    margin-top: 50px;
+    >p:first-child {
+        margin-bottom: 30px;
+        font-weight: 300;
+        font-size: 1.5rem;
+    }
+    >p {
+        font-weight: 600;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+    .contact-title {
+        width: calc(100vw - 340px);
+    }
+}

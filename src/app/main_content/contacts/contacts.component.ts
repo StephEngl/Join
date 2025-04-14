@@ -1,9 +1,10 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { ContactDialogComponent } from './contact-dialog/contact-dialog.component';
 import { ContactsService } from '../../services/contacts.service';
 import { ContactInterface } from '../../interfaces/contact.interface';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
+import { SignalsService } from '../../services/signals.service';
 
 @Component({
   selector: 'app-contacts',
@@ -15,6 +16,7 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
 
 export class ContactsComponent {
   contactsService = inject(ContactsService);
+  signalService = inject(SignalsService)
   showDialog = false;
   sortedContacts: ContactInterface[] = [];
   firstLetters: string[] = [];
@@ -25,7 +27,13 @@ export class ContactsComponent {
   editPhone: string | undefined;
 
   ngOnInit() {
+    this.signalService.checkScreenSize();
     this.groupContactsByFirstLetter();
+  }
+
+  @HostListener('window:resize', [])
+  onWindowResize() {
+    this.signalService.checkScreenSize();
   }
 
   toggleDialog() {
@@ -69,6 +77,11 @@ export class ContactsComponent {
     const parts = contact.name.trim().split(' ');
     const lastWord = parts.at(-1) || '';
     return lastWord.charAt(0).toUpperCase();
+  }
+
+  showInfos() {
+    console.log(this.signalService.isInfoShown);
+    this.signalService.isInfoShown = true;
   }
 
 }

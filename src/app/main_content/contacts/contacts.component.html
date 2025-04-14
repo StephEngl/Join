@@ -20,7 +20,9 @@
                     <p>{{ letter }}</p>
                     @for (contact of contactsService.contacts; track contact; let index = $index) {
                         @if (letter === contact.name.charAt(0).toUpperCase() &&contact.name != undefined) {
-                            <section class="single-contact" (click)="showContactInfo(index)"
+                            <section class="single-contact"
+                                (click)="showContactInfo(index)"
+                                (click)="signalService.isMobile() ? showInfos() : null"
                                 [style.backgroundColor]="activeContactIndex === index && contactClicked ? '#2A3647' : ''"
                                 [style.color]="activeContactIndex === index && contactClicked ? 'white' : ''"
                             >
@@ -43,15 +45,15 @@
         </ul>
     </div>
 
-    <!-- no code edits after this line  -->
-    <div class="contact-infos">
+    <div class="contact-infos"
+        [style.opacity]="signalService.isMobile() && !signalService.isInfoShown ? '0': '1'"
+        [style.transform]="signalService.isInfoShown && signalService.isMobile() || signalService.isDesktop() ? 'translateX(0)': 'translateX(100%)'"
+    >
         <app-contact-info 
             [isClicked]="contactClicked"
             [contactIndex]="activeContactIndex"
             (editContactData)="handleContactData($event)"
             (showDialog)="handleStatusDialog($event)">
-        
-        
         </app-contact-info>
     </div>
 </section>
