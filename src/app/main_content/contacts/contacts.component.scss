@@ -151,10 +151,10 @@
     position: fixed;
     top: 80vh;
     left: 50%;
-    transform: translateX(100vw); // Start außerhalb vom Viewport
+    transform: translateX(100vw);
     width: 326px;
     height: 74px;
-    background-color: $col-bg-main;
+    background-color: $col-bg-secondary;
     color: white;
     display: flex;
     align-items: center;
@@ -177,6 +177,7 @@
         opacity: 1;
     }
 }
+
 
 
 
