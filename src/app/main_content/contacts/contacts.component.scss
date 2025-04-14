@@ -47,23 +47,6 @@
     }
 }
 
-.btn-container {
-    @include dFlex(flex-start, center, 10px);
-    >button {
-        @include dFlex(center, center, 5px);
-        cursor: pointer;
-        &:hover {
-            color: $col-ref-highlight;
-            >img {
-                src: url('./../../../assets/icons/kanban/close.svg');
-            }
-        }
-        >img {
-            height: 18px;
-        }
-    }
-}
-
 .new-contact {
     @include dFlex(center, center, 20px, sticky);
     color: white;
@@ -113,7 +96,6 @@
 .contact-infos {
     @include dFlex(flex-start, flex-start, 30px);
     flex-direction: column;
-
     padding: 50px 20px 20px 50px;
     height: 100%;
     flex: 1;

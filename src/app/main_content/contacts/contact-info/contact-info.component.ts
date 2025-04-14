@@ -12,12 +12,15 @@ import { ContactInterface } from '../../../interfaces/contact.interface';
 })
 export class ContactInfoComponent {
   contactsService = inject(ContactsService);
-  editName: string | undefined;
-  editMail: string | undefined;
-  editPhone: string | undefined;
   @Input()contactIndex: number | null = null;
   @Input() isClicked: boolean = false;
   @Output()showDialog = new EventEmitter<boolean>();
+  @Output() editContactData = new EventEmitter<{ 
+    name: string;
+    mail: string;
+    phone: string
+  }>();
+
 
 
   async deleteContact() {
@@ -32,11 +35,13 @@ export class ContactInfoComponent {
 
   editContact(index: number) {
     this.showDialog.emit(true);
-    this.editName = this.contactsService.contacts[index].name;
-    this.editMail = this.contactsService.contacts[index].mail;
-    this.editPhone = this.contactsService.contacts[index].phone;
+    const contact = this.contactsService.contacts[index];
+    this.editContactData.emit({
+      name: contact.name,
+      mail: contact.mail,
+      phone: contact.phone
+    });
   }
-
 
   btnDelete: boolean = false;
   btnEdit: boolean = false;

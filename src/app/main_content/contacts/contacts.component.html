@@ -48,7 +48,8 @@
         <app-contact-info 
             [isClicked]="contactClicked"
             [contactIndex]="activeContactIndex"
-            (showDialog)="setStatusDialog($event)">
+            (editContactData)="handleContactData($event)"
+            (showDialog)="handleStatusDialog($event)">
         
         
         </app-contact-info>

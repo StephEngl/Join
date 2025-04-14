@@ -46,8 +46,14 @@ export class ContactsComponent {
     }
   }
 
-  setStatusDialog(event: boolean): void {
+  handleStatusDialog(event: boolean): void {
     this.showDialog = event;
+  }
+
+  handleContactData(data: { name: string; mail: string; phone: string }) {
+    this.editName = data.name;
+    this.editMail = data.mail;
+    this.editPhone = data.phone;
   }
 
   newContact() {

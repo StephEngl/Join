@@ -35,4 +35,20 @@
     @include dFlex(center, center, 20px);
 }
 
+.btn-container {
+    @include dFlex(flex-start, center, 10px);
+    >button {
+        @include dFlex(center, center, 5px);
+        cursor: pointer;
+        &:hover {
+            color: $col-ref-highlight;
+            >img {
+                src: url('./../../../../assets/icons/kanban/close.svg');
+            }
+        }
+        >img {
+            height: 18px;
+        }
+    }
+}
 
