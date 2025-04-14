@@ -41,11 +41,14 @@ export class NavbarComponent {
     ];
 
     constructor(private router: Router) {
-        // Setze aktiven Link immer beim Routing
+        // Setze initialen Wert beim Start
+        this.activeLink = this.router.url;
+
+        // Reagiere auf NavigationEnd und setze activeLink automatisch
         this.router.events
             .pipe(filter(event => event instanceof NavigationEnd))
-            .subscribe(() => {
-                this.activeLink = this.router.url;
+            .subscribe(event => {
+                this.activeLink = (event as NavigationEnd).urlAfterRedirects;
             });
     }
 

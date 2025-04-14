@@ -16,6 +16,7 @@
         word-break: break-word;
         padding: 30px;
         border-right: 1px solid $col-font-inactive;
+        box-shadow: 5px 0 5px rgba(0, 0, 0, 0.2);
 
         >ul {
             &:last-child {
@@ -32,14 +33,14 @@
                 width: 100%;
                 margin-bottom: 10px;
                 padding-bottom: 10px;
-                padding-left: 20px;
+                padding-left: 25px;
                 border-bottom: 1px solid $col-font-inactive;
             }
 
             .single-contact {
                 @include dFlex(flex-start, center, 10px);
                 width: 100%;
-                padding: 10px 20px;
+                padding: 10px 10px;
                 border-radius: 10px;
                 cursor: pointer;
 
@@ -57,11 +58,9 @@
         padding: 50px 20px 20px 50px;
         height: 100%;
         flex: 1;
-
         .contact-title {
             @include dFlex(center, center);
             margin-bottom: 15px;
-
             >span {
                 height: 100%;
                 width: 4px;
@@ -70,7 +69,6 @@
                 border-radius: 10px;
             }
         }
-
         .contact-hero {
             @include dFlex(center, center, 20px);
         }
@@ -79,19 +77,15 @@
 
 .btn-container {
     @include dFlex(flex-start, center, 10px);
-
     >button {
         @include dFlex(center, center, 5px);
         cursor: pointer;
-
         &:hover {
             color: $col-ref-highlight;
-
             >img {
                 src: url('./../../../assets/icons/kanban/close.svg');
             }
         }
-
         >img {
             height: 18px;
         }
@@ -127,7 +121,7 @@
         border-radius: 10px;
         width: 100%;
         height: 100%;
-        background-color: $col-bg-main;
+        background-color: $col-bg-secondary;
         z-index: 2;
     }
 
@@ -191,12 +185,11 @@
     transition: all 0.5s ease;
 }
 
-.animate-in {
-    transform: translateX(0);
-    opacity: 1;
+.contact-infos {
+    @include dFlex(flex-start, flex-start, 30px);
+    flex-direction: column;
+    padding: 50px 20px 20px 50px;
+    height: 100%;
+    flex: 1;
 }
 
-.animate-out {
-    transform: translateX(100%);
-    opacity: 0;
-}

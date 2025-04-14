@@ -1,8 +1,10 @@
 @import "./assets/styles/colors.scss";
+@import "./assets/fonts/fonts.scss";
 
 body {
     font-family: 'Inter', sans-serif;
     min-height: 100vh;
+    background-color: $col-bg-main;
 }
 
 * {

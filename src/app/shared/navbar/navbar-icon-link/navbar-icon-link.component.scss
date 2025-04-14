@@ -3,12 +3,12 @@
     justify-content: center;
     align-items: center;
     width: 232px;
-    height: auto;
+    height: 48px;
     cursor: pointer;
     transition: background-color 0.3s ease;
 
     &:hover:not(.active) {
-        background-color: #29ABE2;
+        background-color: rgb(39, 58, 83);
     }
 
     &.active {
