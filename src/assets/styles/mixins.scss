@@ -13,4 +13,14 @@
     padding: $padding;
 }
 
-/* to be discussed */
+@mixin contactIcon($size: 50px, $fontSize: 24px, $letterSpacing: 0) {
+    @include dFlex(center, center);
+    width: $size;
+    min-width: $size;
+    font-size: $fontSize;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    color: white;
+    letter-spacing: $letterSpacing;
+}
+

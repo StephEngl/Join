@@ -17,6 +17,10 @@ export class ContactsComponent {
   showDialog = false;
   sortedContacts: ContactInterface[] = [];
   firstLetters: string[] = [];
+  activeContactIndex: number | null = null;
+  contactClicked: boolean = false;
+  btnDelete: boolean = false;
+  btnEdit: boolean = false;
 
   ngOnInit() {
     this.groupContactsByFirstLetter();
@@ -29,6 +33,15 @@ export class ContactsComponent {
   groupContactsByFirstLetter() {
     this.firstLetters = [...new Set(this.contactsService.contacts.map(contact => contact.name.charAt(0).toUpperCase()))];
     return this.firstLetters;  
+  }
+
+  showContactInfo(index: number | null) {
+    if (this.activeContactIndex === index && this.contactClicked) {
+      this.contactClicked = false;
+    } else {
+      this.activeContactIndex = index;
+      this.contactClicked = true;
+    }
   }
 
   async deleteContact() {

@@ -1,58 +1,80 @@
 @if (showDialog) {
-<app-contact-dialog (cancel)="toggleDialog()" (create)="showDialog = false">
-</app-contact-dialog>
+    <app-contact-dialog (cancel)="toggleDialog()" (create)="showDialog = false"></app-contact-dialog>
 }
 
 <section class="contacts-section">
     <div class="contacts-list">
         <button class="new-contact" (click)="toggleDialog()">
-            Add new contact
+            <p>Add new contact</p>
             <img src="./assets/icons/contacts/new_contact.svg" alt="">
         </button>
         <ul>
             @for (letter of groupContactsByFirstLetter(); track letter) {
-                <div class="letter-category">
+                <li class="letter-category">
                     <p>{{ letter }}</p>
-                        @for (contact of contactsService.contacts; track contact) {
-                            @if (letter === contact.name.charAt(0).toUpperCase()) {
-                                <li class="single-contact">
-                                    <div class="contact-icon"
-                                    [style.backgroundColor]="contact.color"
-                                    >
-                                        {{contact.name.charAt(0).toUpperCase()}}
-                                        {{contact.name.split(' ')[1].charAt(0).toUpperCase()}}
-                                    </div>
-                                    <div>
-                                        <p>{{ contact.name }}</p>
-                                        <a href="mailto:{{ contact.mail }}">{{ contact.mail }}</a>
-                                    </div>
-                                </li>
-                            }
+                    @for (contact of contactsService.contacts; track contact; let index = $index) {
+                        @if (letter === contact.name.charAt(0).toUpperCase()) {
+                            <section class="single-contact" (click)="showContactInfo(index)"
+                                [style.backgroundColor]="activeContactIndex === index && contactClicked ? '#2A3647' : ''"
+                                [style.color]="activeContactIndex === index && contactClicked ? 'white' : ''"
+                            >
+                                <div class="contact-icon-small"
+                                [style.backgroundColor]="contact.color"
+                                [style.border]="activeContactIndex === index ? '2px solid white' : ''"
+                                >
+                                    {{contact.name.charAt(0).toUpperCase()}}
+                                    {{contact.name.split(' ')[1].charAt(0).toUpperCase()}}
+                                </div>
+                                <div>
+                                    <p>{{ contact.name }}</p>
+                                    <a>{{ contact.mail }}</a>
+                                </div>
+                            </section>
                         }
-                </div>
+                    }
+                </li>
             }
         </ul>
     </div>
+
     <div class="contact-infos">
         <div class="contact-title">
             <h1>Contacts</h1>
-            <span>|</span>
+            <span></span>
             <h4>Better with a team</h4>
         </div>
-        <div class="contact-hero">
-            <img src="" alt="">
-            <h3>Anton Maier</h3>
-            <div class="contact-menu">
-                <button><img src="" alt="">Edit</button>
-                <button (click)="deleteContact()"><img src="" alt="">Delete</button>
-            </div>
-        </div>
-        <div class="contact-info">
-            <p>Contact Information</p>
-            <p>Email</p>
-            <a href="mailto:anton@email.de">Email: anton&#64;email.de</a>
-            <p>Phone</p>
-            <a href="mailto:anton@email.de">Email: anton&#64;email.de</a>
+        <div class="animation-container"
+        [ngClass]="contactClicked ? 'animate-in' : 'animate-out'">
+            @if (activeContactIndex != null) {
+                <div class="contact-hero">
+                    <div class="contact-icon-big"
+                    [style.backgroundColor]="contactsService.contacts[activeContactIndex].color"
+                    >
+                        {{contactsService.contacts[activeContactIndex].name.charAt(0).toUpperCase()}}
+                        {{contactsService.contacts[activeContactIndex].name.split(' ')[1].charAt(0).toUpperCase()}}
+                    </div>
+                    <div class="contact-menu">
+                        <h3>{{ contactsService.contacts[activeContactIndex].name }}</h3>
+                        <div class="btn-container">
+                            <button (mouseenter)="btnEdit = true" (mouseleave)="btnEdit = false">
+                                <img class="contact-menu-icon" [src]="btnEdit ? './assets/icons/kanban/edit_active.svg' : './assets/icons/kanban/edit.svg'" alt="">
+                                <p>Edit</p>
+                            </button>
+                            <button (click)="deleteContact()" (mouseenter)="btnDelete = true" (mouseleave)="btnDelete = false">
+                                <img class="contact-menu-icon" [src]="btnDelete ? './assets/icons/kanban/delete_active.svg' : './assets/icons/kanban/delete.svg'" alt="">
+                                <p>Delete</p>
+                            </button>
+                        </div>
+                    </div>        
+                </div>
+                <div class="contact-info">
+                    <p>Contact Information</p>
+                    <p>Email</p>
+                    <a href="mailto:{{ contactsService.contacts[activeContactIndex].mail }}">{{ contactsService.contacts[activeContactIndex].mail }}</a>
+                    <p>Phone</p>
+                    <a href="tel:{{ contactsService.contacts[activeContactIndex].phone }}">{{ contactsService.contacts[activeContactIndex].phone }}</a>
+                </div>
+            }
         </div>
     </div>
 </section>

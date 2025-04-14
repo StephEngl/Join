@@ -2,19 +2,25 @@
 
 .contacts-section {
     @include dFlex(center, center, 0, fixed);
-    width: 100%;
-    height: 100%;
+    width: calc(100% - 240px);
+    height: calc(100% - 96px);
     top: 96px;
     left: 240px;
 
     .contacts-list {
         flex: 1;
         max-width: 450px;
-        min-width: 200px;
+        min-width: 280px;
         height: 100%;
         overflow-y: auto;
+        word-break: break-word;
         padding: 30px;
         border-right: 1px solid $col-font-inactive;
+        >ul {
+            &:last-child {
+                padding-bottom: 30px;
+            }
+        }
 
         .letter-category {
             @include dFlex(center, flex-start, 10px);
@@ -23,34 +29,126 @@
             >p {
                 width: 100%;
                 margin-bottom: 10px;
-                padding-bottom: 5px;
+                padding-bottom: 10px;
+                padding-left: 20px;
                 border-bottom: 1px solid $col-font-inactive;
+            }
+            .single-contact {
+                @include dFlex(flex-start, center, 10px);
+                width: 100%;
+                padding: 10px 20px;
+                border-radius: 10px;
+                cursor: pointer;
+                &:hover {
+                    background-color: lightgrey;
+                }
             }
         }
     }
 
     .contact-infos {
-        flex: 1;
+        @include dFlex(flex-start, flex-start, 30px);
+        flex-direction: column;
+
+        padding: 50px 20px 20px 50px;
+        height: 100%;
+        flex: 3;
+        .contact-title {
+            @include dFlex(center, center);
+            margin-bottom: 15px;
+            >span {
+                height: 100%;
+                width: 4px;
+                margin: 0 20px;
+                background-color: $col-ref-highlight;
+                border-radius: 10px;
+            }
+        }
+        .contact-hero {
+            @include dFlex(center, center, 20px);
+        }
     }
 }
 
-.single-contact {
+.btn-container {
     @include dFlex(flex-start, center, 10px);
+    >button {
+        @include dFlex(center, center, 5px);
+        cursor: pointer;
+        &:hover {
+            color: $col-ref-highlight;
+            >img {
+                src: url('./../../../assets/icons/kanban/close.svg');
+            }
+        }
+        >img {
+            height: 18px;
+        }
+    }
 }
 
-.contact-icon {
-    @include dFlex(center, center);
-    width: 50px;
-    height: 50px;
-    border-radius: 50%;
-    color: white;
+.contact-icon-small {
+    @include contactIcon(42px, 12px, -1px);
+}
+
+.contact-icon-big {
+    @include contactIcon(120px, 47px, -5px);
 }
 
 .new-contact {
-    @include dFlex(center, center, 20px);
-    background-color: $col-bg-main;
+    @include dFlex(center, center, 20px, sticky);
     color: white;
-    border-radius: 10px;
     padding: 10px;
     width: 100%;
+    top: 0px;
+    z-index: 2;
+    cursor: pointer;
+    >p, >img {
+        z-index: 2;
+    }
+    &::before {
+        content: '';
+        position: absolute;
+        display: flex;
+        border-radius: 10px;
+        width: 100%;
+        height: 100%;
+        background-color: $col-bg-main;
+        z-index: 2;
+    }
+    &::after {
+        content: '';
+        position: absolute;
+        display: flex;
+        top: -50px;
+        left: -25px;
+        width: calc(100% + 50px);
+        height: calc(100% + 50px);
+        background: white;
+        border-radius: 15px;
+        z-index: 1;
+        filter: blur(8px);
+    }
+    &:hover {
+        &::before {
+            background-color: $col-ref-highlight;
+            filter: drop-shadow(2px 4px 4px $col-font-inactive);
+        }
+    }
+}
+
+
+
+.animation-container {
+    transition: all 0.5s ease;
+}
+
+.animate-in {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.animate-out {
+    transform: translateX(100%);
+    opacity: 0;
 }
