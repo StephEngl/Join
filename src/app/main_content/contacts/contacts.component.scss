@@ -16,6 +16,7 @@
         word-break: break-word;
         padding: 30px;
         border-right: 1px solid $col-font-inactive;
+
         >ul {
             &:last-child {
                 padding-bottom: 30px;
@@ -26,6 +27,7 @@
             @include dFlex(center, flex-start, 10px);
             flex-direction: column;
             margin: 40px 0 20px 0;
+
             >p {
                 width: 100%;
                 margin-bottom: 10px;
@@ -33,12 +35,14 @@
                 padding-left: 20px;
                 border-bottom: 1px solid $col-font-inactive;
             }
+
             .single-contact {
                 @include dFlex(flex-start, center, 10px);
                 width: 100%;
                 padding: 10px 20px;
                 border-radius: 10px;
                 cursor: pointer;
+
                 &:hover {
                     background-color: lightgrey;
                 }
@@ -53,9 +57,11 @@
         padding: 50px 20px 20px 50px;
         height: 100%;
         flex: 1;
+
         .contact-title {
             @include dFlex(center, center);
             margin-bottom: 15px;
+
             >span {
                 height: 100%;
                 width: 4px;
@@ -64,6 +70,7 @@
                 border-radius: 10px;
             }
         }
+
         .contact-hero {
             @include dFlex(center, center, 20px);
         }
@@ -72,15 +79,19 @@
 
 .btn-container {
     @include dFlex(flex-start, center, 10px);
+
     >button {
         @include dFlex(center, center, 5px);
         cursor: pointer;
+
         &:hover {
             color: $col-ref-highlight;
+
             >img {
                 src: url('./../../../assets/icons/kanban/close.svg');
             }
         }
+
         >img {
             height: 18px;
         }
@@ -103,9 +114,12 @@
     top: 0px;
     z-index: 2;
     cursor: pointer;
-    >p, >img {
+
+    >p,
+    >img {
         z-index: 2;
     }
+
     &::before {
         content: '';
         position: absolute;
@@ -116,6 +130,7 @@
         background-color: $col-bg-main;
         z-index: 2;
     }
+
     &::after {
         content: '';
         position: absolute;
@@ -129,6 +144,7 @@
         z-index: 1;
         filter: blur(8px);
     }
+
     &:hover {
         &::before {
             background-color: $col-ref-highlight;
@@ -136,6 +152,38 @@
         }
     }
 }
+
+.toast {
+    position: fixed;
+    top: 80vh;
+    left: 50%;
+    transform: translateX(100vw); // Start außerhalb vom Viewport
+    width: 326px;
+    height: 74px;
+    background-color: $col-bg-main;
+    color: white;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 120%;
+    letter-spacing: 0;
+    z-index: 9999;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
+    transition: transform 0.5s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+
+    &.show {
+        transform: translateX(-50%);
+        opacity: 1;
+    }
+}
+
 
 
 
