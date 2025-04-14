@@ -1,11 +1,10 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { RouterModule } from '@angular/router';
-import { NgStyle } from '@angular/common';
 
 @Component({
     selector: 'app-navbar-icon-link',
     standalone: true,
-    imports: [RouterModule, NgStyle],
+    imports: [RouterModule],
     templateUrl: './navbar-icon-link.component.html',
     styleUrl: './navbar-icon-link.component.scss'
 })

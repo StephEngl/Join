@@ -21,6 +21,9 @@ export class ContactsComponent {
   contactClicked: boolean = false;
   btnDelete: boolean = false;
   btnEdit: boolean = false;
+  editName: string | undefined;
+  editMail: string | undefined;
+  editPhone: string | undefined;
 
   ngOnInit() {
     this.groupContactsByFirstLetter();
@@ -52,5 +55,19 @@ export class ContactsComponent {
     } catch (error) {
       console.error('Fehler beim Löschen des Kontakts:', error);
     }
+  }
+
+  editContact(index: number) {
+    this.showDialog = true;
+    this.editName = this.contactsService.contacts[index].name;
+    this.editMail = this.contactsService.contacts[index].mail;
+    this.editPhone = this.contactsService.contacts[index].phone;
+  }
+
+  newContact() {
+    this.showDialog = true;
+    this.editName = undefined;
+    this.editMail = undefined;
+    this.editPhone = undefined;
   }
 }

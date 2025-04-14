@@ -1,10 +1,16 @@
 @if (showDialog) {
-    <app-contact-dialog (cancel)="toggleDialog()" (create)="showDialog = false"></app-contact-dialog>
+    <app-contact-dialog 
+        (cancel)="toggleDialog()"
+        (create)="showDialog = false"
+        [contactName]="editName"
+        [contactMail]="editMail"
+        [contactPhone]="editPhone"
+    ></app-contact-dialog>
 }
 
 <section class="contacts-section">
     <div class="contacts-list">
-        <button class="new-contact" (click)="toggleDialog()">
+        <button class="new-contact" (click)="newContact()">
             <p>Add new contact</p>
             <img src="./assets/icons/contacts/new_contact.svg" alt="">
         </button>
@@ -56,7 +62,7 @@
                     <div class="contact-menu">
                         <h3>{{ contactsService.contacts[activeContactIndex].name }}</h3>
                         <div class="btn-container">
-                            <button (mouseenter)="btnEdit = true" (mouseleave)="btnEdit = false">
+                            <button (click)="editContact(activeContactIndex)" (mouseenter)="btnEdit = true" (mouseleave)="btnEdit = false">
                                 <img class="contact-menu-icon" [src]="btnEdit ? './assets/icons/kanban/edit_active.svg' : './assets/icons/kanban/edit.svg'" alt="">
                                 <p>Edit</p>
                             </button>
