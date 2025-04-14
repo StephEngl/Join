@@ -39,13 +39,19 @@ export class ContactsService implements OnDestroy {
     '#FF4646',
     '#FFBB2B',
   ];
-  // contact = {name: "Hans Meier", mail: "h.meier@blauerhimmel.de", phone: "+49 1652 9876543"}
+  contact = {
+    name: 'Hans Meier',
+    mail: 'h.meier@blauerhimmel.de',
+    phone: '+49 1652 9876543',
+    color: this.getRandomColor(),
+  };
   unsubscribeContact;
 
   constructor() {
     // this.addContact(this.contact);
     this.unsubscribeContact = this.subContactsList();
-  } // constructor end
+  }
+  // constructor end
 
   ngOnDestroy() {
     if (this.unsubscribeContact) {
@@ -57,12 +63,22 @@ export class ContactsService implements OnDestroy {
     contact: ContactInterface
   ): Promise<void | DocumentReference> {
     try {
-      const contactRef = await addDoc(this.getContactsRef(), contact);
+      // add random color
+      const contactWithColor = {
+        ...contact,
+        color: this.getRandomColor(),
+      };
+      const contactRef = await addDoc(this.getContactsRef(), contactWithColor);
       // console.log('Document written with ID: ', contactRef.id);
       return contactRef;
     } catch (err) {
       console.error(err);
     }
+  }
+
+  getRandomColor(): string {
+    const randomIndex = Math.floor(Math.random() * this.contactColors.length);
+    return this.contactColors[randomIndex];
   }
 
   async updateContact(contact: ContactInterface) {
@@ -89,7 +105,6 @@ export class ContactsService implements OnDestroy {
       name: contact.name,
       phone: contact.phone,
       mail: contact.mail,
-      color: contact.color,
     };
   }
 
@@ -116,7 +131,7 @@ export class ContactsService implements OnDestroy {
       name: obj.name || '',
       phone: obj.phone || '',
       mail: obj.mail || '',
-      color: obj.color || '',
+      color: obj.color || this.getRandomColor(),
     };
   }
 
