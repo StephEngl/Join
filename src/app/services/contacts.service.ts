@@ -105,6 +105,7 @@ export class ContactsService implements OnDestroy {
       name: contact.name,
       phone: contact.phone,
       mail: contact.mail,
+      color: this.getRandomColor(),
     };
   }
 
