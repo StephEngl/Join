@@ -22,7 +22,23 @@ import {
 export class ContactsService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
   contacts: ContactInterface[] = [];
-  contactColors: string[] = [];
+  contactColors: string[] = [
+    '#FF7A00',
+    '#FF5EB3',
+    '#6E52FF',
+    '#9327FF',
+    '#00BEE8',
+    '#1FD7C1',
+    '#FF745E',
+    '#FFA35E',
+    '#FC71FF',
+    '#e4b300',
+    '#0038FF',
+    '#6ed81c',
+    '#b7a202',
+    '#FF4646',
+    '#FFBB2B',
+  ];
   // contact = {name: "Hans Meier", mail: "h.meier@blauerhimmel.de", phone: "+49 1652 9876543"}
   unsubscribeContact;
 
