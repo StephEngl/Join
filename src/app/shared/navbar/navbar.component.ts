@@ -41,7 +41,7 @@ export class NavbarComponent {
     ];
 
     constructor(private router: Router) {
-        // Setze aktiven Link immer beim Routing
+
         this.router.events
             .pipe(filter(event => event instanceof NavigationEnd))
             .subscribe(() => {

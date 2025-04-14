@@ -17,7 +17,16 @@
         </div>
     </div>
     <div class="privacy-and-legal-container">
-        <a routerLink="/privacy-policy">Privacy Policy</a>
-        <a routerLink="/legal-notice">Legal notice</a>
+        <div class="privacy-policy-background-container" [class.active]="activeLink === '/privacy-policy'" (click)="setActiveLink('/privacy-policy')">
+            <div class="link-container">
+                <a routerLink="/privacy-policy">Privacy Policy</a>
+            </div>
+        </div>
+        <div class="legal-notice-background-container" [class.active]="activeLink === '/legal-notice'" (click)="setActiveLink('/legal-notice')">
+            <div class="link-container">
+                <a routerLink="/legal-notice">Legal Notice</a>
+            </div>
+        </div>
     </div>
+    
 </div>
