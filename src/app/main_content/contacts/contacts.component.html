@@ -1,11 +1,13 @@
+@if (showToast) {
+<div class="toast" [class.show]="toastVisible">Contact successfully created</div>
+}
+
+
 @if (showDialog) {
-    <app-contact-dialog 
-        (cancel)="toggleDialog()"
-        (create)="showDialog = false"
-        [contactName]="editName"
-        [contactMail]="editMail"
-        [contactPhone]="editPhone"
-    ></app-contact-dialog>
+<app-contact-dialog (cancel)="toggleDialog()" (create)="onContactCreated()" [contactName]="editName"
+    [contactMail]="editMail" [contactPhone]="editPhone">
+</app-contact-dialog>
+
 }
 
 <section class="contacts-section">

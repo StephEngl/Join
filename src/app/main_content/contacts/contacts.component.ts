@@ -18,6 +18,8 @@ export class ContactsComponent {
   contactsService = inject(ContactsService);
   signalService = inject(SignalsService)
   showDialog = false;
+  toastVisible = false;
+  showToast = false;
   sortedContacts: ContactInterface[] = [];
   firstLetters: string[] = [];
   activeContactIndex: number | null = null;
@@ -40,9 +42,18 @@ export class ContactsComponent {
     this.showDialog = !this.showDialog;
   }
 
+  onContactCreated() {
+    this.showToast = true;
+    setTimeout(() => this.toastVisible = true, 10);
+    setTimeout(() => this.toastVisible = false, 2000);
+    setTimeout(() => this.showToast = false, 2500);
+    this.showDialog = false;
+  }
+
+
   groupContactsByFirstLetter() {
     this.firstLetters = [...new Set(this.contactsService.contacts.map(contact => contact.name.charAt(0).toUpperCase()))];
-    return this.firstLetters;  
+    return this.firstLetters;
   }
 
   showContactInfo(index: number | null) {
