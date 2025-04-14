@@ -1,7 +1,27 @@
+@import "../../../assets/styles/mixins.scss";
+
 .header-section-desktop {
-    display: flex;
-    top: 0;
-    width: 100%; 
-    height: 96px;
-    background-color: rgb(60, 184, 153);
+  @include dFlex($ai: center, $jc: space-between);
+  position: absolute;
+  top: 0;
+  left: 323px;
+  width: 100%;
+  max-width: 1920px;
+  height: 96px;
+  padding: 30px;
+}
+
+.menu-section {
+  @include dFlex($ai: center, $jc: center, $gap:12px);
+
+  button {
+    border: 3px solid $col-bg-secondary;
+    width: 56px;
+    height: 56px;
+    border-radius: 50%;
+    background-color: white;
+    font-size: 20px;
+    font-weight: bold;
+    color: $col-ref-highlight;
+  }
 }
