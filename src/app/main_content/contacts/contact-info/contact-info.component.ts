@@ -62,4 +62,8 @@ export class ContactInfoComponent {
     return lastWord.charAt(0).toUpperCase();
   }
 
+  closeContactInfo() {
+    this.signalService.isInfoShown = false;
+  }
+
 }
