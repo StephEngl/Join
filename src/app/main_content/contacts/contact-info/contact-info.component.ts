@@ -16,7 +16,7 @@ export class ContactInfoComponent {
   editMail: string | undefined;
   editPhone: string | undefined;
   @Input()contactIndex: number | null = null;
-  @Input() contactClicked: boolean = false;
+  @Input() isClicked: boolean = false;
   @Output()showDialog = new EventEmitter<boolean>();
 
 
@@ -40,5 +40,13 @@ export class ContactInfoComponent {
 
   btnDelete: boolean = false;
   btnEdit: boolean = false;
+
+  lastInitial(index: number): string {
+    const contact = index != null ? this.contactsService.contacts[index] : null;
+    if (!contact || !contact.name) return '';
+    const parts = contact.name.trim().split(' ');
+    const lastWord = parts.at(-1) || '';
+    return lastWord.charAt(0).toUpperCase();
+  }
 
 }

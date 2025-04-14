@@ -38,7 +38,7 @@ export class ContactsComponent {
   }
 
   showContactInfo(index: number | null) {
-    if (this.activeContactIndex === index && this.contactClicked) {
+    if (this.activeContactIndex === index && this.contactClicked && this.activeContactIndex !== null) {
       this.contactClicked = false;
     } else {
       this.activeContactIndex = index;
@@ -55,6 +55,14 @@ export class ContactsComponent {
     this.editName = undefined;
     this.editMail = undefined;
     this.editPhone = undefined;
+  }
+
+  lastInitial(index: number): string {
+    const contact = index != null ? this.contactsService.contacts[index] : null;
+    if (!contact || !contact.name) return '';
+    const parts = contact.name.trim().split(' ');
+    const lastWord = parts.at(-1) || '';
+    return lastWord.charAt(0).toUpperCase();
   }
 
 }

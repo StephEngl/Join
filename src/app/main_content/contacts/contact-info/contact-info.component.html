@@ -4,14 +4,14 @@
     <h4>Better with a team</h4>
 </div>
 <div class="animation-container"
-[ngClass]="contactClicked ? 'animate-in' : 'animate-out'">
+[ngClass]="isClicked ? 'animate-in' : 'animate-out'">
     @if (contactIndex != null) {
         <div class="contact-hero">
             <div class="contact-icon-big"
             [style.backgroundColor]="contactsService.contacts[contactIndex].color"
             >
                 {{contactsService.contacts[contactIndex].name.charAt(0).toUpperCase()}}
-                {{contactsService.contacts[contactIndex].name.split(' ')[1].charAt(0).toUpperCase()}}
+                {{lastInitial(contactIndex)}}
             </div>
             <div class="contact-menu">
                 <h3>{{ contactsService.contacts[contactIndex].name }}</h3>
