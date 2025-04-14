@@ -63,4 +63,11 @@ export class ContactsComponent {
     this.editMail = this.contactsService.contacts[index].mail;
     this.editPhone = this.contactsService.contacts[index].phone;
   }
+
+  newContact() {
+    this.showDialog = true;
+    this.editName = undefined;
+    this.editMail = undefined;
+    this.editPhone = undefined;
+  }
 }
