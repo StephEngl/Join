@@ -1,15 +1,29 @@
-.navbar-icon-link-container {
+.navbar-icon-link-background-container {
     display: flex;
     justify-content: center;
     align-items: center;
-    width: 100%;
+    width: 232px;
     height: auto;
     cursor: pointer;
     transition: background-color 0.3s ease;
 
-    &:hover {
-        background-color: rgba(9, 25, 49, 0.8);
+    &:hover:not(.active) {
+        background-color: #29ABE2;
     }
+
+    &.active {
+        background-color: #091931;
+    }
+}
+
+.navbar-icon-link-container {
+    display: flex;
+    justify-content: flex-start;
+    align-items: center;
+    width: 140px;
+    height: auto;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 
     .icon-container {
         display: flex;
@@ -33,7 +47,8 @@
 
         a {
             text-decoration: none;
-            color: white;
+            color: #CDCDCD;
+            font-size: 1rem;
             padding: 8px 12px;
         }
     }
