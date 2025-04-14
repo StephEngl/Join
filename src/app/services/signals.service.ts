@@ -1,4 +1,4 @@
-import { Injectable, HostListener, signal} from '@angular/core';
+import { Injectable, signal} from '@angular/core';
 
 @Injectable({
   providedIn: 'root'
@@ -12,8 +12,6 @@ export class SignalsService {
     isMobile = signal<boolean>(false);
     isDesktop = signal<boolean>(false);
     isInfoShown: boolean = false;
-  
-
   
     checkScreenSize() {
       if (window.innerWidth <= 1400) {
