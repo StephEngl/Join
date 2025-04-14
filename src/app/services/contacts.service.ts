@@ -130,8 +130,8 @@ export class ContactsService implements OnDestroy {
         snapshot.forEach((element) => {
           const contact = element.data();
           this.contacts.push(this.setContactObject(contact));
-          // console.log(this.contacts);
         });
+        // console.log(this.contacts);
       },
       (error) => {
         console.error('Firestore Error', error.message);
