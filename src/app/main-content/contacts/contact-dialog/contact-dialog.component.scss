@@ -1,3 +1,5 @@
+@import './../../../../assets/styles/mixins.scss';
+
 .dialog-overlay {
     position: fixed;
     inset: 0;
@@ -22,7 +24,7 @@
 
 
 .dialog-left {
-    background-color: #1e293b;
+    background-color: $col-bg-secondary;
     color: white;
     padding: 66px 48px;
     width: 467px;
@@ -81,8 +83,10 @@
 }
 
 .buttons {
+    margin-top: 25px;
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
+    gap: 16px;
 }
 
 .dialog-content.animate-in {
@@ -109,7 +113,7 @@
 .underline {
     width: 90px;
     height: 3px;
-    background-color: #29ABE2;
+    background-color: $col-ref-highlight;
     margin-top: 8px;
     border-radius: 2px;
 }
@@ -134,17 +138,36 @@
 }
 
 input {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
     font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-weight: 400;
     line-height: 120%;
-
+    border-radius: 10px;
+    border: 1px solid rgba(0, 0, 0, 0.2);
     display: block;
-    margin-bottom: 16px;
-    width: 100%;
-    padding: 8px;
-
+    width: 422px;
+    height: 50px;
+    padding: 13px 21px 13px 21px;
+    gap: 10px;
+    transition: border-color 0.3s ease;
 }
+
+input:focus {
+    outline: none;
+    border: 1px solid $col-ref-highlight;
+}
+
+::placeholder {
+    color: rgba(0, 0, 0, 0.3);
+    opacity: 0.7;
+}
+
+
+
+
 
 .profile-placeholder {
     width: 120px;
@@ -173,6 +196,107 @@ input {
 form {
     display: flex;
     flex-direction: column;
-    gap: 16px;
+    gap: 32px;
     width: 400px;
+}
+
+.close-button {
+    cursor: pointer;
+    background: none;
+}
+
+.close-icon {
+    position: absolute;
+    top: 50px;
+    right: 190px;
+    cursor: pointer;  
+    z-index: 10;
+    width: 30px;
+    height: 30px;
+    background-color: transparent;
+    border-radius: 50%;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.close-icon img {
+    width: 14px;
+    height: 14px;
+    object-fit: contain;
+    cursor: pointer; 
+}
+
+.close-icon:hover {
+    background-color: rgba(0, 0, 0, 0.1);
+    cursor: pointer;
+    transform: scale(1.1);  /* Abruptly enlarge the close icon on hover */
+}
+
+
+
+
+.button-cancel {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 16px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid $col-bg-secondary;
+    width: 126px;
+    height: 56px;
+    font-size: 21px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+
+    img {
+        height: 14px;
+        transition: fill 0.3s ease;
+    }
+
+}
+
+.button-cancel:hover {
+
+    background-color: white;
+    text-align: center;
+    cursor: pointer;
+    border: 2px solid $col-ref-highlight;
+    color: $col-ref-highlight;
+    transform: scale(1.01) translateX(-1.01px);
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+
+
+
+    img {
+        fill: $col-ref-highlight; // funktioniert noch nicht!
+
+
+    }
+}
+
+.button-create {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: $col-bg-secondary;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    padding: 16px;
+    width: 214px;
+    height: 57px;
+    font-size: 21px;
+
+    img {
+        height: 14px;
+    }
+}
+
+.button-create:hover {
+    background-color: $col-ref-highlight;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 }
