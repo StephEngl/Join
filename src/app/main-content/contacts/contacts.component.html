@@ -65,7 +65,7 @@
         </app-contact-info>
     </div>
     <button class="mobile-button"
-        (click)="this.signalService.isInfoShown && activeContactIndex != null ? toggleBtnMenu() : toggleDialog()"
+        (click)="this.signalService.isInfoShown && activeContactIndex != null ? toggleBtnMenu() : newContact()"
         (click)="$event.stopPropagation()"
     >
         <img src="" alt=""

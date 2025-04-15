@@ -51,6 +51,10 @@ export class ContactInfoComponent {
     this.showDialog.emit(true);
     const contact = this.contactsService.contacts[index];
     this.editIndex.emit(index);
+    console.log(index);
+    console.log(contact.id);
+    
+    
     this.editContactData.emit({
       name: contact.name,
       mail: contact.mail,

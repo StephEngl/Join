@@ -86,6 +86,8 @@ export class ContactsService implements OnDestroy {
     if (contact.id) {
       try {
         let docRef = this.getSingleDocRef(contact.id);
+        console.log(docRef);
+        
         await updateDoc(docRef, this.getCleanJson(contact));
       } catch (err) {
         console.error(err);
@@ -95,6 +97,7 @@ export class ContactsService implements OnDestroy {
 
   getCleanJson(contact: ContactInterface) {
     return {
+      id: contact.id,
       name: contact.name,
       phone: contact.phone,
       mail: contact.mail,
