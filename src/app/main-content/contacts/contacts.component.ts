@@ -53,7 +53,6 @@ export class ContactsComponent {
     this.showDialog = false;
   }
 
-
   groupContactsByFirstLetter() {
     this.firstLetters = [...new Set(this.contactsService.contacts.map(contact => contact.name.charAt(0).toUpperCase()))];
     return this.firstLetters;
@@ -107,15 +106,15 @@ export class ContactsComponent {
   }
 
   async deleteContact(index: number) {
-    const contact = this.contactsService.contacts[index];
-    if (contact.id) {
+    const contactId = this.contactsService.contacts[index].id;
+    if (contactId) {
       try {
-        await this.contactsService.deleteContact(contact.id);
+        //await this.contactsService.deleteContact(contact.id);
         console.log('Kontakt erfolgreich gelöscht');
       } catch (error) {
         console.error('Fehler beim Löschen des Kontakts:', error);
       }
-    }
+    } 
   }
 
   toggleBtnMenu() {

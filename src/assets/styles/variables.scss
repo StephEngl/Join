@@ -1,6 +1,16 @@
 /* widths and heights */
-$navbar-width: 232px;
-$header-height: 122px;
-
+$navbar-width: 230px;
+$header-height: 120px;
+$nav-height-mobile: 80px;
 
 /* padding and margin */
+$main-margin: 10px;
+$main-padding: 10px;
+
+/* max sizes */
+$appMaxWidth: 1920px;
+$queryBreak1: 1400px;
+$queryBreak2: 1000px;
+
+/* assets */
+$commonButton1: 10px /*example*/
