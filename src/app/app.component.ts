@@ -19,6 +19,6 @@ export class AppComponent implements OnInit{
   constructor(private contactsService: ContactsService) {}
 
   async ngOnInit(): Promise<void> {
-    await this.contactsService.generateColorForContacts();
+    // await this.contactsService.generateColorForContacts();
   }
 }
