@@ -21,3 +21,28 @@
     color: $col-ref-highlight;
   }
 }
+
+dialog {
+  display: block;
+  position: absolute;
+  top: 96px;
+  right: 0;
+  background-color: $col-bg-secondary;
+  border: unset;
+  border-radius: 20px 0 20px 20px;
+  
+  .router-wrapper {
+    @include dFlex($ai: center, $jc: center);
+    flex-direction: column;
+    padding: 10px;
+    width: 130px;
+    
+    
+    a, p {
+      text-align: start;
+      padding: 14px 0;
+      text-decoration: none;
+      color: $col-font-dropdown;
+    }
+  }
+}
