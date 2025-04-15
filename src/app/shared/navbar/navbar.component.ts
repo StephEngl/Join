@@ -24,7 +24,7 @@ export class NavbarComponent {
             iconUnclicked: 'assets/icons/navbar/new_task_inactive.svg',
             iconClicked: 'assets/icons/navbar/new_task.svg',
             route: '/add-task',
-            alt: 'Add Task'
+            alt: 'Add\u00A0Task'
         },
         {
             iconUnclicked: 'assets/icons/navbar/board_inactive.svg',
@@ -47,7 +47,7 @@ export class NavbarComponent {
             .subscribe(event => {
                 const url = (event as NavigationEnd).urlAfterRedirects;
                 this.activeLink = url;
-                console.log('🧭 Navigiert zu:', url); // ✅ zeigt dir den aktiven Pfad
+                console.log('🧭 Navigiert zu:', url); // aktiven Pfad
             });
         // this.router.events
         //     .pipe(filter(event => event instanceof NavigationEnd))

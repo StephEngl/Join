@@ -14,7 +14,7 @@ export class SignalsService {
     isInfoShown: boolean = false;
   
     checkScreenSize() {
-      if (window.innerWidth <= 1400) {
+      if (window.innerWidth <= 1000) {
         this.isMobile.set(true);
         this.isDesktop.set(false);
       } else {
