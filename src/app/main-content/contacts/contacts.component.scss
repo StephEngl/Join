@@ -25,6 +25,11 @@
             padding-top: 50px;
             height: 100%;
         }
+        .letter-category:last-child {
+            .single-contact:last-child {
+                padding-bottom: 40px;
+            }
+        }
         .letter-category {
             @include dFlex(center, flex-start, 10px);
             flex-direction: column;
