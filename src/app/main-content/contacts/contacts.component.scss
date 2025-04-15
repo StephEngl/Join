@@ -1,5 +1,6 @@
 @import './../../../assets/styles/mixins.scss';
 @import './../../../assets/styles/variables.scss';
+@import './../../../assets/styles/colors.scss';
 
 .contacts-section {
     @include dFlex(center, center, 0, fixed);
@@ -37,6 +38,7 @@
                 margin-bottom: 10px;
                 padding-bottom: 10px;
                 padding-left: 25px;
+                border-color: $col-font-inactive;
                 border-bottom: 1px solid $col-font-inactive;
             }
 

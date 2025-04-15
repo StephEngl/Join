@@ -46,9 +46,15 @@
 
     a,
     p {
+      cursor: pointer;
+      width: 100%;
       padding: 14px 0 14px 16px;
       text-decoration: none;
       color: $col-font-dropdown;
+
+      &:hover {
+        background-color: $col-ref-hover;
+      }
     }
   }
 }
