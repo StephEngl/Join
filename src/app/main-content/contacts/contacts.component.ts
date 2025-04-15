@@ -25,6 +25,7 @@ export class ContactsComponent {
   firstLetters: string[] = [];
   activeContactIndex: number | null = null;
   contactClicked: boolean = false;
+  editId: string | undefined;
   editName: string | undefined;
   editMail: string | undefined;
   editPhone: string | undefined;
@@ -71,7 +72,8 @@ export class ContactsComponent {
     this.showDialog = event;
   }
 
-  handleContactData(data: { name: string; mail: string; phone: string }) {
+  handleContactData(data: { id: string, name: string; mail: string; phone: string }) {
+    this.editId = data.id;
     this.editName = data.name;
     this.editMail = data.mail;
     this.editPhone = data.phone;
