@@ -196,25 +196,34 @@
     height: 60px;
     bottom: 30px;
     right: 30px;
+    border-radius: 50%;
+    background-color: $col-bg-secondary;
+    box-shadow: 0px 5px 5px $col-font-inactive;
+    &:hover {
+        background-color: $col-ref-highlight;
+        cursor: pointer;
+    }
     z-index: 7;
 }
 
 .button-menu {
     @include dFlex(center, center, 5px, absolute);
     flex-direction: column;
-    bottom: 30px;
-    right: 30px;
-    width: 90px;
+    bottom: 20px;
+    right: 25px;
+    width: 100px;
     height: 80px;
     z-index: 8;
     background-color: white;
     border-radius: 10px 10px 0 10px;
+    box-shadow: 3px 5px 5px $col-font-inactive;
+    transition: all 0.3s ease;
     >button {
         @include dFlex(flex-start, center, 5px);
         width: 90%;
         background-color: transparent;
         >p {
-            font-size: 12px;
+            font-size: 14px;
         }
     }
     &:hover {

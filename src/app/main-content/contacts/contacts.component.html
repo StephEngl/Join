@@ -12,7 +12,8 @@
     </app-contact-dialog>
 }
 
-<section class="contacts-section">
+<section class="contacts-section"
+    (click)="showBtnMenu = false">
     <div class="contacts-list">
         <button class="new-contact" (click)="newContact()">
             <p>Add new contact</p>
@@ -62,6 +63,7 @@
     </div>
     <button class="mobile-button"
         (click)="this.signalService.isInfoShown && activeContactIndex != null ? toggleBtnMenu() : toggleDialog()"
+        (click)="$event.stopPropagation()"
     >
         <img src="" alt=""
             [src]="this.signalService.isInfoShown ? './assets/icons/contacts/contact_menu.svg' : './assets/icons/contacts/new_contact.svg'"
@@ -70,12 +72,13 @@
     <div class="button-menu"
     [style.opacity]="showBtnMenu ? '1': '0'"
     [style.transform]="showBtnMenu ? 'translateX(0)': 'translateX(100%)'"
-        >
+    (click)="$event.stopPropagation()"
+    >
         <button (click)="activeContactIndex !=null ? editContact(activeContactIndex) : null" (mouseenter)="btnEdit = true" (mouseleave)="btnEdit = false">
             <img class="contact-menu-icon" [src]="btnEdit ? './assets/icons/kanban/edit_active.svg' : './assets/icons/kanban/edit.svg'" alt="">
             <p [style.color]="btnEdit ? '#29ABE2' : '#0b0e13'">Edit</p>
         </button>
-        <button (click)="activeContactIndex ? deleteContact() : null" (mouseenter)="btnDelete = true" (mouseleave)="btnDelete = false">
+        <button (click)="activeContactIndex !=null ? deleteContact(activeContactIndex) : null" (mouseenter)="btnDelete = true" (mouseleave)="btnDelete = false">
             <img class="contact-menu-icon" [src]="btnDelete ? './assets/icons/kanban/delete_active.svg' : './assets/icons/kanban/delete.svg'" alt="">
             <p [style.color]="btnDelete ? '#29ABE2' : '#0b0e13'">Delete</p>
         </button>
