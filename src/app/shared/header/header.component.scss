@@ -2,9 +2,7 @@
 
 .header-section-desktop {
   @include dFlex($ai: center, $jc: space-between);
-  position: absolute;
-  top: 0;
-  left: 323px;
+//   top: 0;
   width: 100%;
   max-width: 1920px;
   height: 96px;
@@ -12,7 +10,7 @@
 }
 
 .menu-section {
-  @include dFlex($ai: center, $jc: center, $gap:12px);
+  @include dFlex($ai: center, $jc: center, $gap: 12px);
 
   button {
     border: 3px solid $col-bg-secondary;
