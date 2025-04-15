@@ -33,13 +33,15 @@ export class ContactInfoComponent {
     this.signalService.checkScreenSize();
   }
 
-  async deleteContact() {
-    const docId = '1JZx6aGq41MRooCAOS0P'; //Platzhalter, existiert jetzt nicht mehr :)
-    try {
-      await this.contactsService.deleteContact(docId);
-      console.log('Kontakt erfolgreich gelöscht');
-    } catch (error) {
-      console.error('Fehler beim Löschen des Kontakts:', error);
+  async deleteContact(index: number) {
+    const contact = this.contactsService.contacts[index];
+    if (contact.id) {
+      try {
+        await this.contactsService.deleteContact(contact.id);
+        console.log('Kontakt erfolgreich gelöscht');
+      } catch (error) {
+        console.error('Fehler beim Löschen des Kontakts:', error);
+      }
     }
   }
 
