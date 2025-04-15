@@ -28,6 +28,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   @Input() contactName?: string;
   @Input() contactMail?: string;
   @Input() contactPhone?: string;
+  @Input() contactIndex?: number | undefined;
 
   animateIn = false;
   animateOut = false;
