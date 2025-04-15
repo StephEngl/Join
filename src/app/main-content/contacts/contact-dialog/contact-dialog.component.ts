@@ -79,4 +79,14 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
       })
       .catch(() => { });
   }
+
+  editContact(index: number) {
+    const contact = this.contactsService.contacts[index];
+    if (contact.id) {
+      console.log(contact.id);
+      console.log(index);
+      //this.contactsService.updateContact(contact);
+    }
+    this.animateOut = true;
+  }
 }

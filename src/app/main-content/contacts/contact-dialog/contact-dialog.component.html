@@ -37,7 +37,8 @@
                     <div class="buttons">
                         <button class="button-cancel" type="button" (click)="onCancel()">Cancel <img src="assets/icons/kanban/close.svg" alt="Close Icon" /></button>
                         @if (contactIndex) {
-                        <button type="submit">Update contact</button>
+                        <button class="button-create" type="submit"
+                        (click)="editContact(contactIndex)">Update contact</button>
                         } @else if (contactIndex == undefined) {
                         <button class="button-create" type="submit">Create contact <img src="assets/icons/kanban/done.svg" alt="Close Icon" /></button>
                         }
