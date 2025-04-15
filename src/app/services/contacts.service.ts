@@ -117,7 +117,7 @@ export class ContactsService implements OnDestroy {
       name: contact.name,
       phone: contact.phone,
       mail: contact.mail,
-      color: this.getRandomColor(),
+      color: contact.color || this.getRandomColor(),
     };
   }
 
@@ -131,7 +131,7 @@ export class ContactsService implements OnDestroy {
           const contact = element.data();
           this.contacts.push(this.setContactObject(contact));
         });
-        // console.log(this.contacts);
+        console.log(this.contacts);
       },
       (error) => {
         console.error('Firestore Error', error.message);
