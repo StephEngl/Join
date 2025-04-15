@@ -131,30 +131,3 @@
         }
     }
 }
-
-@media (max-width: 420px) {
-    .navbar-icon-link-container {
-        .link-container {
-            a {
-                font-size: 0.8rem;
-            }
-        }
-    }
-}
-
-@media (max-width: 400px) {
-    .navbar-icon-link-background-container {
-        width: 20%;
-        .navbar-icon-link-container {
-            height: 53px;
-            width: auto;
-            .link-container {
-                a {
-                    height: 23px;
-                    padding: 5px;
-                }
-            }
-        }
-    }
-}
-
