@@ -129,7 +129,7 @@ export class ContactsService implements OnDestroy {
         this.contacts = [];
         snapshot.forEach((element) => {
           const contact = element.data();
-          this.contacts.push(this.setContactObject(contact));
+          this.contacts.push(this.setContactObject(element.id, contact));
         });
         console.log(this.contacts);
       },
@@ -139,8 +139,9 @@ export class ContactsService implements OnDestroy {
     );
   }
 
-  setContactObject(obj: any): ContactInterface {
+  setContactObject(id:string, obj: any): ContactInterface {
     return {
+      id: id,
       name: obj.name || '',
       phone: obj.phone || '',
       mail: obj.mail || '',
