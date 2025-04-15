@@ -17,7 +17,8 @@ export class ContactInfoComponent {
   @Input() isClicked: boolean = false;
   @Output()showDialog = new EventEmitter<boolean>();
   @Output() editIndex = new EventEmitter<number>();
-  @Output() editContactData = new EventEmitter<{ 
+  @Output() editContactData = new EventEmitter<{
+    id: string; 
     name: string;
     mail: string;
     phone: string
@@ -53,13 +54,14 @@ export class ContactInfoComponent {
     this.editIndex.emit(index);
     console.log(index);
     console.log(contact.id);
-    
-    
-    this.editContactData.emit({
-      name: contact.name,
-      mail: contact.mail,
-      phone: contact.phone
-    });
+    if (contact.id) {
+      this.editContactData.emit({
+        id: contact.id,
+        name: contact.name,
+        mail: contact.mail,
+        phone: contact.phone
+      });
+    }
   }
 
   lastInitial(index: number): string {
