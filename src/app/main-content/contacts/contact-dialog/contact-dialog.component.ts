@@ -88,8 +88,10 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
 
   async editContact(index: number) {
     const contact = this.contactsService.contacts[index];
+    contact.name = this.contactData.name;
+    contact.mail = this.contactData.mail;
+    contact.phone = this.contactData.phone;
     if (contact.id) {
-      console.log(contact);
       await this.contactsService.updateContact(contact);
       this.create.emit();
       this.onCancel();

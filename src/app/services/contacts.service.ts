@@ -84,8 +84,11 @@ export class ContactsService implements OnDestroy {
 
   async updateContact(contact: ContactInterface) {
     if (contact.id) {
+      console.log("in upadtecontact" , contact);
+      
       try {
         let docRef = this.getSingleDocRef(contact.id);
+        console.log("vor function updateDoc" , contact);
         await updateDoc(docRef, this.getCleanJson(contact));
       } catch (err) {
         console.error(err);
