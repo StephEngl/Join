@@ -117,7 +117,7 @@ export class ContactsComponent {
     const contactId = this.contactsService.contacts[index].id;
     if (contactId) {
       try {
-        //await this.contactsService.deleteContact(contact.id);
+        await this.contactsService.deleteContact(contactId);
         console.log('Kontakt erfolgreich gelöscht');
       } catch (error) {
         console.error('Fehler beim Löschen des Kontakts:', error);

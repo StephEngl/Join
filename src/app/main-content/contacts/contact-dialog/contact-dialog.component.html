@@ -18,7 +18,7 @@
                     <img src="assets/icons/contacts/contact_name.svg" alt="Profile" />
                 </div>
 
-                <form (submit)="onCreate()" #contactForm="ngForm">
+                <form (submit)="onCreate(contactIndex)" #contactForm="ngForm">
                     <div class="input-wrapper">
                         <input type="text" placeholder="Name" [(ngModel)]="contactData.name" name="name" />
                         <img src="assets/icons/contacts/contact_name.svg" alt="Name Icon" />
@@ -38,7 +38,7 @@
                         <button class="button-cancel" type="button" (click)="onCancel()">Cancel <img src="assets/icons/kanban/close.svg" alt="Close Icon" /></button>
                         @if (contactIndex) {
                         <button class="button-create" type="submit"
-                        (click)="editContact(contactIndex)">Update contact</button>
+                        >Update contact</button>
                         } @else if (contactIndex == undefined) {
                         <button class="button-create" type="submit">Create contact <img src="assets/icons/kanban/done.svg" alt="Close Icon" /></button>
                         }
