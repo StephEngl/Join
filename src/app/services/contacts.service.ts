@@ -85,17 +85,6 @@ export class ContactsService implements OnDestroy {
     }
   }
 
-  async generateColorForContacts(): Promise<void> {
-    const contactsRef = this.getContactsRef();
-    const snapshot = await getDocs(contactsRef);
-
-    snapshot.forEach(async (element) => {
-      const contact = element.data();
-      const newColor = this.getRandomColor();
-      await updateDoc(element.ref, { color: newColor }); // Farbe speichern
-    });
-  }
-
   getRandomColor(): string {
     const randomIndex = Math.floor(Math.random() * this.contactColors.length);
     return this.contactColors[randomIndex];
