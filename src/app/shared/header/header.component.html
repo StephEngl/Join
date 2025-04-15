@@ -1,18 +1,20 @@
-<div class="header-section-desktop">
+<section class="header-section-desktop">
   <p>Kanban Project Management Tool</p>
   <div class="menu-section">
     <a routerLink="/help"
       ><img src="../../../assets/icons/kanban/help.svg" alt=""
     /></a>
-    <button>G</button>
+    <button (click)="toggleDropdown()">G</button>
   </div>
 
-  <dialog>
+  @if (isDropdownOpen) {
+  <div class="dropdown-menu" [class.show]="isDropdownOpen">
     <div class="router-wrapper">
       <a routerLink="/help">Help</a>
       <a routerLink="/legal-notice">Legal Notice</a>
       <a routerLink="/privacy-policy">Privacy Policy</a>
-      <p>Log out</p>
+      <p (click)="logout()">Log out</p>
     </div>
-  </dialog>
-</div>
+  </div>
+  }
+</section>
