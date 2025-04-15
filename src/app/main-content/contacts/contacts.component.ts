@@ -106,8 +106,16 @@ export class ContactsComponent {
     this.editPhone = contact.phone;
   }
 
-  deleteContact() {
-
+  async deleteContact(index: number) {
+    const contact = this.contactsService.contacts[index];
+    if (contact.id) {
+      try {
+        await this.contactsService.deleteContact(contact.id);
+        console.log('Kontakt erfolgreich gelöscht');
+      } catch (error) {
+        console.error('Fehler beim Löschen des Kontakts:', error);
+      }
+    }
   }
 
   toggleBtnMenu() {
