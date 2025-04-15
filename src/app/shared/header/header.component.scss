@@ -23,26 +23,27 @@
 }
 
 .dropdown-menu {
-  position: absolute;
+  opacity: 0;
+  position: fixed;
   top: 96px;
   right: 0;
   width: 150px;
   background-color: $col-bg-secondary;
   border: unset;
   border-radius: 20px 0 20px 20px;
-  opacity: 0;
-  transform: translateY(-10px);
-  transition: opacity 0.2s ease, transform 0.2s ease;
+  transform: translateX(150px);
+  transition: transform 0.3s ease-out, opacity 0.3s ease-out;
   padding: 10px;
 
   &.show {
     opacity: 1;
-    transform: translateY(0);
+    transform: translateX(0);
   }
 
   .router-wrapper {
     @include dFlex($ai: flex-start, $jc: center);
     flex-direction: column;
+    width: 100%;
 
     a,
     p {

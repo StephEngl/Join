@@ -7,7 +7,6 @@
     <button (click)="toggleDropdown()">G</button>
   </div>
 
-  @if (isDropdownOpen) {
   <div class="dropdown-menu" [class.show]="isDropdownOpen">
     <div class="router-wrapper">
       <a (click)="toggleDropdown()" routerLink="/help">Help</a>
@@ -16,5 +15,4 @@
       <p (click)="toggleDropdown(); logout()">Log out</p>
     </div>
   </div>
-  }
 </section>
