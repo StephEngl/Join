@@ -27,6 +27,8 @@ export class ContactsComponent {
   editName: string | undefined;
   editMail: string | undefined;
   editPhone: string | undefined;
+  btnDelete: boolean = false;
+  btnEdit: boolean = false;
 
   ngOnInit() {
     this.signalService.checkScreenSize();
@@ -93,6 +95,18 @@ export class ContactsComponent {
   showInfos() {
     console.log(this.signalService.isInfoShown);
     this.signalService.isInfoShown = true;
+  }
+
+  editContact(index: number) {
+    this.showDialog =true;
+    const contact = this.contactsService.contacts[index];
+    this.editName = contact.name;
+    this.editMail = contact.mail;
+    this.editPhone = contact.phone;
+  }
+
+  deleteContact() {
+    
   }
 
 }
