@@ -77,7 +77,13 @@ export class ContactsComponent {
     this.editPhone = data.phone;
   }
 
+  handleEditIndex(event: any) {
+    this.activeContactIndex = event;
+  }
+
   newContact() {
+    this.contactClicked = false;
+    this.activeContactIndex = null;
     this.showDialog = true;
     this.editName = undefined;
     this.editMail = undefined;
