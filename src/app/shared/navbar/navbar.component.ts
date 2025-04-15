@@ -41,15 +41,19 @@ export class NavbarComponent {
     ];
 
     constructor(private router: Router) {
-        // Setze initialen Wert beim Start
-        this.activeLink = this.router.url;
 
-        // Reagiere auf NavigationEnd und setze activeLink automatisch
         this.router.events
             .pipe(filter(event => event instanceof NavigationEnd))
             .subscribe(event => {
-                this.activeLink = (event as NavigationEnd).urlAfterRedirects;
+                const url = (event as NavigationEnd).urlAfterRedirects;
+                this.activeLink = url;
+                console.log('🧭 Navigiert zu:', url); // ✅ zeigt dir den aktiven Pfad
             });
+        // this.router.events
+        //     .pipe(filter(event => event instanceof NavigationEnd))
+        //     .subscribe(() => {
+        //         this.activeLink = this.router.url;
+        //     });
     }
 
     setActiveLink(route: string) {

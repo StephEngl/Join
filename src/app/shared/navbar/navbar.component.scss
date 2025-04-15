@@ -1,3 +1,5 @@
+/** ----------DESKTOP---------- **/
+
 .navbar-section-desktop {
     display: flex;
     flex-direction: column;
@@ -50,7 +52,7 @@
         padding: 0 1rem;
         width: 232px;
         height: auto;
-
+    
         .privacy-policy-background-container,
         .legal-notice-background-container {
             width: 232px;
@@ -58,17 +60,17 @@
             display: flex;
             justify-content: center;
             transition: background-color 0.3s ease;
-
+    
             &.active {
                 background-color: #091931;
-
+    
                 .link-container a {
                     color: #A8A8A8;
                     width: 100%;
                 }
             }
         }
-
+    
         .link-container {
             display: flex;
             align-items: center;
@@ -77,7 +79,7 @@
             height: auto;
             cursor: pointer;
             padding: 0 2.5rem;
-
+    
             a {
                 text-decoration: none;
                 color: #CDCDCD;
@@ -85,11 +87,61 @@
                 opacity: 0.7;
                 transition: color 0.3s ease, opacity 0.2s ease;
             }
-
+    
             &:hover a {
                 color: #29ABE2;
                 opacity: 1;
             }
         }
     }
+}    
+
+
+/** ----------MOBILE---------- **/
+
+.navbar-section-mobile {
+    position: absolute; 
+    left: 0 ; 
+    right: 0; 
+    bottom: 0; 
+    height: 80px;
+    background-color: rgba(42, 54, 71, 1);
+    display: flex;
+    flex-direction: column;
+
+    .navbar-mobile-components-container {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        width: 100%;
+    
+        .links-mobile-allignement {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: auto;
+        }
+    }
+}
+
+
+
+/** ----------RESPONSIVENESS---------- **/
+@media (max-width: 1400px) {
+    .navbar-section-desktop {
+        display: none;   
+    }
+    .navbar-section-mobile {
+        display: block;
+    } 
+}
+
+@media (min-width: 1400px) {
+    .navbar-section-desktop {
+        display: block;   
+    }
+    .navbar-section-mobile {
+        display: none;
+    } 
 }

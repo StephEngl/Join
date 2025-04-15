@@ -8,7 +8,7 @@
     transition: background-color 0.3s ease;
 
     &:hover:not(.active) {
-        background-color: rgb(39, 58, 83);
+        background-color: rgb(53, 103, 173);
     }
 
     &.active {
@@ -24,6 +24,7 @@
     height: auto;
     cursor: pointer;
     transition: background-color 0.3s ease;
+    
 
     .icon-container {
         display: flex;
@@ -53,3 +54,4 @@
         }
     }
 }
+
