@@ -16,11 +16,14 @@ export class ContactInfoComponent {
   @Input()contactIndex: number | null = null;
   @Input() isClicked: boolean = false;
   @Output()showDialog = new EventEmitter<boolean>();
-  @Output() editContactData = new EventEmitter<{ 
+  @Output() editIndex = new EventEmitter<number>();
+  @Output() editContactData = new EventEmitter<{
+    id: string; 
     name: string;
     mail: string;
     phone: string
   }>();
+
   btnDelete: boolean = false;
   btnEdit: boolean = false;
 
@@ -48,11 +51,17 @@ export class ContactInfoComponent {
   editContact(index: number) {
     this.showDialog.emit(true);
     const contact = this.contactsService.contacts[index];
-    this.editContactData.emit({
-      name: contact.name,
-      mail: contact.mail,
-      phone: contact.phone
-    });
+    this.editIndex.emit(index);
+    console.log(index);
+    console.log(contact.id);
+    if (contact.id) {
+      this.editContactData.emit({
+        id: contact.id,
+        name: contact.name,
+        mail: contact.mail,
+        phone: contact.phone
+      });
+    }
   }
 
   lastInitial(index: number): string {

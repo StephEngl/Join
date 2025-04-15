@@ -1,9 +1,22 @@
+.page-content {
+  display: flex;
+
+  @media (max-width: 1400px) {
+    flex-direction: column;
+  }
+}
+
+.header-content {
+  display: flex;
+  flex-direction: column;
+  flex-grow: 1;
+}
+
 app-header {
   display: flex;
   background-color: white;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   height: 96px;
-  left: 232px;
-  position: absolute;
-  width: calc(100% - 232px);
+  z-index: 1;
+  width: 100%;
 }

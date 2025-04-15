@@ -28,6 +28,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   @Input() contactName?: string;
   @Input() contactMail?: string;
   @Input() contactPhone?: string;
+  @Input() contactIndex?: number | undefined;
 
   animateIn = false;
   animateOut = false;
@@ -77,5 +78,16 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
         this.onCancel();
       })
       .catch(() => { });
+  }
+
+  editContact(index: number) {
+    const contact = this.contactsService.contacts[index];
+    if (contact.id) {
+      console.log(contact);
+      console.log(contact.id);
+      console.log(index);
+      this.contactsService.updateContact(contact);
+    }
+    this.animateOut = true;
   }
 }

@@ -40,16 +40,9 @@ export class ContactsService implements OnDestroy {
     '#FF4646',
     '#FFBB2B',
   ];
-  // contact = {
-  //   name: 'Hans Meier',
-  //   mail: 'h.meier@blauerhimmel.de',
-  //   phone: '+49 1652 9876543',
-  //   color: this.getRandomColor(),
-  // };
   unsubscribeContact;
 
   constructor() {
-    // this.addContact(this.contact);
     this.unsubscribeContact = this.subContactsList();
   }
   // constructor end
@@ -70,7 +63,6 @@ export class ContactsService implements OnDestroy {
         color: this.getRandomColor(),
       };
       const contactRef = await addDoc(this.getContactsRef(), contactWithColor);
-      // console.log('Document written with ID: ', contactRef.id);
       return contactRef;
     } catch (err) {
       console.error(err);
@@ -85,17 +77,6 @@ export class ContactsService implements OnDestroy {
     }
   }
 
-  async generateColorForContacts(): Promise<void> {
-    const contactsRef = this.getContactsRef();
-    const snapshot = await getDocs(contactsRef);
-
-    snapshot.forEach(async (element) => {
-      const contact = element.data();
-      const newColor = this.getRandomColor();
-      await updateDoc(element.ref, { color: newColor }); // Farbe speichern
-    });
-  }
-
   getRandomColor(): string {
     const randomIndex = Math.floor(Math.random() * this.contactColors.length);
     return this.contactColors[randomIndex];
@@ -105,6 +86,7 @@ export class ContactsService implements OnDestroy {
     if (contact.id) {
       try {
         let docRef = this.getSingleDocRef(contact.id);
+        console.log(docRef);
         await updateDoc(docRef, this.getCleanJson(contact));
       } catch (err) {
         console.error(err);
@@ -114,10 +96,11 @@ export class ContactsService implements OnDestroy {
 
   getCleanJson(contact: ContactInterface) {
     return {
+      id: contact.id,
       name: contact.name,
       phone: contact.phone,
       mail: contact.mail,
-      color: this.getRandomColor(),
+      color: contact.color || this.getRandomColor(),
     };
   }
 
@@ -129,9 +112,9 @@ export class ContactsService implements OnDestroy {
         this.contacts = [];
         snapshot.forEach((element) => {
           const contact = element.data();
-          this.contacts.push(this.setContactObject(contact));
+          this.contacts.push(this.setContactObject(element.id, contact));
         });
-        // console.log(this.contacts);
+        console.log(this.contacts);
       },
       (error) => {
         console.error('Firestore Error', error.message);
@@ -139,8 +122,9 @@ export class ContactsService implements OnDestroy {
     );
   }
 
-  setContactObject(obj: any): ContactInterface {
+  setContactObject(id:string, obj: any): ContactInterface {
     return {
+      id: id,
       name: obj.name || '',
       phone: obj.phone || '',
       mail: obj.mail || '',

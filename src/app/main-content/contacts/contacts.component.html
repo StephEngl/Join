@@ -8,7 +8,8 @@
         (create)="onContactCreated()"
         [contactName]="editName"
         [contactMail]="editMail"
-        [contactPhone]="editPhone">
+        [contactPhone]="editPhone"
+        [contactIndex]="activeContactIndex || undefined">
     </app-contact-dialog>
 }
 
@@ -58,11 +59,13 @@
             [isClicked]="contactClicked"
             [contactIndex]="activeContactIndex"
             (editContactData)="handleContactData($event)"
-            (showDialog)="handleStatusDialog($event)">
+            (showDialog)="handleStatusDialog($event)"
+            (editContactIndex)="handleEditIndex($event)"
+            >
         </app-contact-info>
     </div>
     <button class="mobile-button"
-        (click)="this.signalService.isInfoShown && activeContactIndex != null ? toggleBtnMenu() : toggleDialog()"
+        (click)="this.signalService.isInfoShown && activeContactIndex != null ? toggleBtnMenu() : newContact()"
         (click)="$event.stopPropagation()"
     >
         <img src="" alt=""

@@ -3,7 +3,7 @@
         <img class="image" src="assets/icons/navbar/logo.svg" alt="">
     </div>
     <div class="navbar-components-container">
-        <div class="links-allignement">
+        <div class="links-alignement">
             @for (link of links; track link.route) {
                 <app-navbar-icon-link
                     [iconUnclicked]="link.iconUnclicked"
@@ -22,7 +22,7 @@
                 <a routerLink="/privacy-policy">Privacy Policy</a>
             </div>
         </div>
-        <div class="legal-notice-background-container" [class.active]="activeLink === '/legal-notice'"(click)="setActiveLink('/legal-notice')">
+        <div class="legal-notice-background-container" [class.active]="activeLink === '/legal-notice'" (click)="setActiveLink('/legal-notice')">
             <div class="link-container">
                 <a routerLink="/legal-notice">Legal Notice</a>
             </div>
@@ -31,17 +31,31 @@
 </div>
 <div class="navbar-section-mobile">
     <div class="navbar-mobile-components-container">
-        <div class="links-mobile-allignement">
-            @for (link of links; track link.route) {
-                <app-navbar-icon-link
-                    [iconUnclicked]="link.iconUnclicked"
-                    [iconClicked]="link.iconClicked"
-                    [route]="link.route"
-                    [alt]="link.alt"
-                    [isActive]="activeLink === link.route"
-                    (activate)="setActiveLink(link.route)">
-                </app-navbar-icon-link>
-            }
+        <div class="links-mobile-alignement">
+            <div class="navbar-links-mobile">
+                @for (link of links; track link.route) {
+                    <app-navbar-icon-link
+                        [iconUnclicked]="link.iconUnclicked"
+                        [iconClicked]="link.iconClicked"
+                        [route]="link.route"
+                        [alt]="link.alt"
+                        [isActive]="activeLink === link.route"
+                        (activate)="setActiveLink(link.route)">
+                    </app-navbar-icon-link>
+                }
+            </div>
+            <div class="privacy-and-legal-mobile">
+                <div class="privacy-policy-background-container" [class.active]="activeLink === '/privacy-policy'" (click)="setActiveLink('/privacy-policy')">
+                    <div class="link-container">
+                        <a routerLink="/privacy-policy">Privacy Policy</a>
+                    </div>
+                </div>
+                <div class="legal-notice-background-container" [class.active]="activeLink === '/legal-notice'" (click)="setActiveLink('/legal-notice')">
+                    <div class="link-container">
+                        <a routerLink="/legal-notice">Legal Notice</a>
+                    </div>
+                </div>
+            </div>
         </div>
     </div>
 </div>

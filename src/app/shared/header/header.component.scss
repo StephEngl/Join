@@ -2,10 +2,8 @@
 
 .header-section-desktop {
   @include dFlex($ai: center, $jc: space-between);
-//   top: 0;
-  width: 100%;
   max-width: 1920px;
-  height: 96px;
+  width: 100%;
   padding: 30px;
 }
 
@@ -21,5 +19,36 @@
     font-size: 20px;
     font-weight: bold;
     color: $col-ref-highlight;
+  }
+}
+
+.dropdown-menu {
+  position: absolute;
+  top: 96px;
+  right: 0;
+  width: 150px;
+  background-color: $col-bg-secondary;
+  border: unset;
+  border-radius: 20px 0 20px 20px;
+  opacity: 0;
+  transform: translateY(-10px);
+  transition: opacity 0.2s ease, transform 0.2s ease;
+  padding: 10px;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  .router-wrapper {
+    @include dFlex($ai: flex-start, $jc: center);
+    flex-direction: column;
+
+    a,
+    p {
+      padding: 14px 0 14px 16px;
+      text-decoration: none;
+      color: $col-font-dropdown;
+    }
   }
 }

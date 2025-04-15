@@ -25,6 +25,7 @@ export class ContactsComponent {
   firstLetters: string[] = [];
   activeContactIndex: number | null = null;
   contactClicked: boolean = false;
+  editId: string | undefined;
   editName: string | undefined;
   editMail: string | undefined;
   editPhone: string | undefined;
@@ -53,7 +54,6 @@ export class ContactsComponent {
     this.showDialog = false;
   }
 
-
   groupContactsByFirstLetter() {
     this.firstLetters = [...new Set(this.contactsService.contacts.map(contact => contact.name.charAt(0).toUpperCase()))];
     return this.firstLetters;
@@ -72,13 +72,20 @@ export class ContactsComponent {
     this.showDialog = event;
   }
 
-  handleContactData(data: { name: string; mail: string; phone: string }) {
+  handleContactData(data: { id: string, name: string; mail: string; phone: string }) {
+    this.editId = data.id;
     this.editName = data.name;
     this.editMail = data.mail;
     this.editPhone = data.phone;
   }
 
+  handleEditIndex(event: any) {
+    this.activeContactIndex = event;
+  }
+
   newContact() {
+    this.contactClicked = false;
+    this.activeContactIndex = null;
     this.showDialog = true;
     this.editName = undefined;
     this.editMail = undefined;
@@ -107,15 +114,15 @@ export class ContactsComponent {
   }
 
   async deleteContact(index: number) {
-    const contact = this.contactsService.contacts[index];
-    if (contact.id) {
+    const contactId = this.contactsService.contacts[index].id;
+    if (contactId) {
       try {
-        await this.contactsService.deleteContact(contact.id);
+        //await this.contactsService.deleteContact(contact.id);
         console.log('Kontakt erfolgreich gelöscht');
       } catch (error) {
         console.error('Fehler beim Löschen des Kontakts:', error);
       }
-    }
+    } 
   }
 
   toggleBtnMenu() {
