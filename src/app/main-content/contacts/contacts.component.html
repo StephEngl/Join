@@ -60,7 +60,21 @@
             (showDialog)="handleStatusDialog($event)">
         </app-contact-info>
     </div>
-    <button class="mobile-button">
-        <img src="./assets/icons/contacts/new_contact.svg" alt="">
+    <button class="mobile-button"
+        (click)="this.signalService.isInfoShown && activeContactIndex != null ? editContact(activeContactIndex) : toggleDialog()"
+    >
+        <img src="" alt=""
+            [src]="this.signalService.isInfoShown ? './assets/icons/contacts/contact_menu.svg' : './assets/icons/contacts/new_contact.svg'"
+        >
     </button>
+    <div class="button-menu">
+        <button (click)="activeContactIndex ? editContact(activeContactIndex) : null" (mouseenter)="btnEdit = true" (mouseleave)="btnEdit = false">
+            <img class="contact-menu-icon" [src]="btnEdit ? './assets/icons/kanban/edit_active.svg' : './assets/icons/kanban/edit.svg'" alt="">
+            <p [style.color]="btnEdit ? 'white' : 'black'">Edit</p>
+        </button>
+        <button (click)="activeContactIndex ? deleteContact() : null" (mouseenter)="btnDelete = true" (mouseleave)="btnDelete = false">
+            <img class="contact-menu-icon" [src]="btnDelete ? './assets/icons/kanban/delete_active.svg' : './assets/icons/kanban/delete.svg'" alt="">
+            <p [style.color]="btnEdit ? 'white' : 'black'">Delete</p>
+        </button>
+    </div>
 </section>

@@ -21,6 +21,8 @@ export class ContactInfoComponent {
     mail: string;
     phone: string
   }>();
+  btnDelete: boolean = false;
+  btnEdit: boolean = false;
 
   ngOnInit() {
     this.signalService.checkScreenSize();
@@ -50,9 +52,6 @@ export class ContactInfoComponent {
       phone: contact.phone
     });
   }
-
-  btnDelete: boolean = false;
-  btnEdit: boolean = false;
 
   lastInitial(index: number): string {
     const contact = index != null ? this.contactsService.contacts[index] : null;
