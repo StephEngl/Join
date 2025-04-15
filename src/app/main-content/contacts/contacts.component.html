@@ -53,7 +53,7 @@
 
     <div class="contact-infos"
         [style.opacity]="signalService.isMobile() && !signalService.isInfoShown ? '0': '1'"
-        [style.transform]="signalService.isInfoShown && signalService.isMobile() || signalService.isDesktop() ? 'translateX(0)': 'translateX(100%)'"
+        [style.transform]="signalService.isInfoShown() && signalService.isMobile() || signalService.isDesktop() ? 'translateX(0)': 'translateX(100%)'"
     >
         <app-contact-info 
             [isClicked]="contactClicked"
@@ -65,11 +65,11 @@
         </app-contact-info>
     </div>
     <button class="mobile-button"
-        (click)="this.signalService.isInfoShown && activeContactIndex != null ? toggleBtnMenu() : newContact()"
+        (click)="this.signalService.isInfoShown() && activeContactIndex != null ? toggleBtnMenu() : newContact()"
         (click)="$event.stopPropagation()"
     >
         <img src="" alt=""
-            [src]="this.signalService.isInfoShown ? './assets/icons/contacts/contact_menu.svg' : './assets/icons/contacts/new_contact.svg'"
+            [src]="this.signalService.isInfoShown() ? './assets/icons/contacts/contact_menu.svg' : './assets/icons/contacts/new_contact.svg'"
         >
     </button>
     <div class="button-menu"
@@ -86,4 +86,9 @@
             <p [style.color]="btnDelete ? '#29ABE2' : '#0b0e13'">Delete</p>
         </button>
     </div>
+    <img class="close-info-btn" src="./assets/icons/contacts/arrow_back.svg" alt=""
+        [style.opacity]="signalService.isMobile() && contactClicked ? '1' : '0'"
+        [style.transform]="signalService.isMobile() && contactClicked ? 'translateY(0)' : 'translateY(-100%)'" 
+        (click)="closeContactInfo()"
+    >
 </section>
