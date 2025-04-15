@@ -63,9 +63,11 @@
         max-width: calc(100% - $contact-list-width);
         height: 100%;
         flex: 1;
+
         .contact-title {
             @include dFlex(center, center);
             margin-bottom: 15px;
+
             >span {
                 height: 100%;
                 width: 4px;
@@ -74,6 +76,7 @@
                 border-radius: 10px;
             }
         }
+
         .contact-hero {
             @include dFlex(center, center, 20px);
         }
@@ -82,15 +85,19 @@
 
 .btn-container {
     @include dFlex(flex-start, center, 10px);
+
     >button {
         @include dFlex(center, center, 5px);
         cursor: pointer;
+
         &:hover {
             color: $col-ref-highlight;
+
             >img {
                 src: url('./../../../assets/icons/kanban/close.svg');
             }
         }
+
         >img {
             height: 18px;
         }
@@ -115,11 +122,14 @@
     top: 0px;
     z-index: 2;
     cursor: pointer;
+
     >p {
         font-weight: 600;
         letter-spacing: 1px;
     }
-    >p, >img {
+
+    >p,
+    >img {
         z-index: 2;
     }
 
@@ -156,6 +166,11 @@
     }
 }
 
+.toast.error {
+    background-color: #E74C3C;
+}
+
+
 .toast {
     @include dFlex(center, center, 0, fixed);
     top: 80vh;
@@ -181,7 +196,37 @@
         transform: translateX(-50%);
         opacity: 1;
     }
+
+    &.create {
+        background-color: $col-bg-secondary;
+    }
+
+    &.update {
+        background-color: $col-bg-secondary;
+    }
+
+    &.delete {
+        color: $col-bg-secondary;
+        background-color: white;
+        border: 1px solid $col-ref-highlight;
+    }
 }
+
+@media screen and (max-width: 1400px) {
+    .toast {
+        bottom: 0;
+        left: 50%;
+        top: auto;
+        transform: translate(-50%, 100%);
+        transition: transform 0.5s ease, opacity 0.3s ease;
+
+        &.show {
+            transform: translate(-50%, -150px);
+        }
+    }
+}
+
+
 
 .animation-container {
     transition: all 0.5s ease;
@@ -204,10 +249,12 @@
     border-radius: 50%;
     background-color: $col-bg-secondary;
     box-shadow: 0px 5px 5px $col-font-inactive;
+
     &:hover {
         background-color: $col-ref-highlight;
         cursor: pointer;
     }
+
     z-index: 7;
 }
 
@@ -223,16 +270,20 @@
     border-radius: 10px 10px 0 10px;
     box-shadow: 3px 5px 5px $col-font-inactive;
     transition: all 0.3s ease;
+
     >button {
         @include dFlex(flex-start, center, 5px);
         width: 90%;
         background-color: transparent;
+
         >p {
             font-size: 14px;
         }
     }
+
     &:hover {
         background-color: $col-bg-main;
+
         >button {
             >p {
                 color: $col-ref-highlight;
@@ -250,6 +301,7 @@
         left: 0;
     }
 }
+
 @media screen and (max-width: 1000px) {
 
     .contact-infos {

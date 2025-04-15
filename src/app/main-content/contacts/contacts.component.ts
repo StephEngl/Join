@@ -19,8 +19,12 @@ export class ContactsComponent {
   signalService = inject(SignalsService)
   showDialog = false;
   showBtnMenu = false;
+
   toastVisible = false;
   showToast = false;
+  toastMessage: string = '';
+  toastType: 'create' | 'update' | 'delete' | 'error' = 'create';
+
   sortedContacts: ContactInterface[] = [];
   firstLetters: string[] = [];
   activeContactIndex: number | null = null;
@@ -47,11 +51,36 @@ export class ContactsComponent {
   }
 
   onContactCreated() {
+    this.toastMessage = 'Contact successfully created';
+    this.toastType = 'create';
+    this.triggerToast();
+  }
+
+  onContactUpdated() {
+    this.toastMessage = 'Changes saved';
+    this.toastType = 'update';
+    this.triggerToast();
+  }
+
+  onContactDeleted() {
+    this.toastMessage = 'Contact deleted';
+    this.toastType = 'delete';
+    this.triggerToast();
+  }
+
+
+  triggerToast() {
     this.showToast = true;
     setTimeout(() => this.toastVisible = true, 10);
     setTimeout(() => this.toastVisible = false, 2000);
     setTimeout(() => this.showToast = false, 2500);
+  }
+
+  onContactError() {
     this.showDialog = false;
+    this.toastMessage = 'Something went wrong';
+    this.toastType = 'error';
+    this.triggerToast();
   }
 
   groupContactsByFirstLetter() {
@@ -106,7 +135,7 @@ export class ContactsComponent {
   }
 
   editContact(index: number) {
-    this.showDialog =true;
+    this.showDialog = true;
     const contact = this.contactsService.contacts[index];
     this.editName = contact.name;
     this.editMail = contact.mail;
@@ -119,10 +148,12 @@ export class ContactsComponent {
       try {
         await this.contactsService.deleteContact(contactId);
         console.log('Kontakt erfolgreich gelöscht');
+        this.onContactDeleted();
+        this.showDialog = false;
       } catch (error) {
         console.error('Fehler beim Löschen des Kontakts:', error);
       }
-    } 
+    }
   }
 
   toggleBtnMenu() {

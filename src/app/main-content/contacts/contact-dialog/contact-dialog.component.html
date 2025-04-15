@@ -1,23 +1,35 @@
 <div class="dialog-overlay" (click)="onOverlayClick()">
     <div class="dialog-content" [class.animate-in]="animateIn" [class.animate-out]="animateOut"
         (click)="$event.stopPropagation()">
-
+        <!-- Linke Spalte -->
         <div class="dialog-left">
             <img src="../../../../assets/icons/navbar/logo.svg" alt="Join Logo" class="logo" />
+            @if (contactIndex == undefined) {
             <h2>Add contact</h2>
             <span>Tasks are better with a team!</span>
+            } @else {
+            <h2>Edit contact</h2>}
+
+
             <div class="underline"></div>
         </div>
 
+        <!-- Rechte Spalte -->
         <div class="dialog-right">
+            <!-- Schließen-Button -->
+            <div class="close-icon" (click)="onOverlayClick()">
+                <button class="close-button">
+                    <img src="assets/icons/kanban/close.svg" alt="Close Icon" />
+                </button>
+            </div>
+
             <div class="form-wrapper">
-                <div class="close-icon" (click)="onOverlayClick()">
-                    <button class="close-button"><img src="assets/icons/kanban/close.svg" alt="Close Icon" /></button>
-                </div>
+                <!-- Profilbild -->
                 <div class="profile-placeholder">
-                    <img src="assets/icons/contacts/contact_name.svg" alt="Profile" />
+                    <img src="assets/icons/contacts/contact_name.svg" alt="Profile Icon" />
                 </div>
 
+                <!-- Formular -->
                 <form (submit)="onCreate(contactIndex)" #contactForm="ngForm">
                     <div class="input-wrapper">
                         <input type="text" placeholder="Name" [(ngModel)]="contactData.name" name="name" />
@@ -35,17 +47,35 @@
                     </div>
 
                     <div class="buttons">
-                        <button class="button-cancel" type="button" (click)="onCancel()">Cancel <img src="assets/icons/kanban/close.svg" alt="Close Icon" /></button>
-                        @if (contactIndex) {
-                        <button class="button-create" type="submit"
-                        >Update contact</button>
-                        } @else if (contactIndex == undefined) {
-                        <button class="button-create" type="submit">Create contact <img src="assets/icons/kanban/done.svg" alt="Close Icon" /></button>
+                        @if (contactIndex == undefined) {
+                        <button class="button-cancel" type="button" (click)="onCancel()">
+                            Cancel
+                            <svg class="icon-cancel" width="14" height="14" viewBox="0 0 14 14"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path
+                                    d="M7.14434 8.40005L2.24434 13.3C2.061 13.4834 1.82767 13.575 1.54434 13.575C1.261 13.575 1.02767 13.4834 0.844336 13.3C0.661003 13.1167 0.569336 12.8834 0.569336 12.6C0.569336 12.3167 0.661003 12.0834 0.844336 11.9L5.74434 7.00005L0.844336 2.10005C0.661003 1.91672 0.569336 1.68338 0.569336 1.40005C0.569336 1.11672 0.661003 0.883382 0.844336 0.700049C1.02767 0.516715 1.261 0.425049 1.54434 0.425049C1.82767 0.425049 2.061 0.516715 2.24434 0.700049L7.14434 5.60005L12.0443 0.700049C12.2277 0.516715 12.461 0.425049 12.7443 0.425049C13.0277 0.425049 13.261 0.516715 13.4443 0.700049C13.6277 0.883382 13.7193 1.11672 13.7193 1.40005C13.7193 1.68338 13.6277 1.91672 13.4443 2.10005L8.54434 7.00005L13.4443 11.9C13.6277 12.0834 13.7193 12.3167 13.7193 12.6C13.7193 12.8834 13.6277 13.1167 13.4443 13.3C13.261 13.4834 13.0277 13.575 12.7443 13.575C12.461 13.575 12.2277 13.4834 12.0443 13.3L7.14434 8.40005Z"
+                                    fill="#2A3647" />
+                            </svg>
+                        </button>
+                        } @else {
+                            <button class="button-delete" type="button" (click)="onDelete()">
+                            Delete
+                        </button>
+                        }
+
+                        @if (contactIndex !== undefined) {
+                        <button class="button-save" type="submit">
+                            Save
+                            <img src="assets/icons/kanban/done.svg" alt="Done Icon" /></button>
+                        } @else {
+                        <button class="button-create" type="submit">
+                            Create contact
+                            <img src="assets/icons/kanban/done.svg" alt="Done Icon" />
+                        </button>
                         }
                     </div>
                 </form>
             </div>
         </div>
-
     </div>
 </div>

@@ -7,11 +7,13 @@
     justify-content: center;
     align-items: center;
     background: rgba(0, 0, 0, 0.4);
-    z-index: 99;
+    z-index: 9999;
 }
 
 
 .dialog-content {
+    margin-left: 50px;
+    margin-right: 50px;
     width: 1401px;
     height: 594px;
     border-radius: 35px;
@@ -56,14 +58,21 @@
     width: 934px;
     height: 100%;
     display: flex;
-    justify-content: center;
+    flex-direction: column;
+    justify-content: flex-start;
     align-items: center;
+    position: relative;
+    gap: 32px;
+}
 
-    .form-wrapper {
-        display: flex;
-        gap: 100px;
-        align-items: center;
-    }
+.form-wrapper {
+    display: flex;
+    flex-direction: row;
+    align-items: center;
+    gap: 64px;
+    width: 100%;
+    max-width: 800px;
+    position: relative;
 }
 
 
@@ -83,10 +92,10 @@
 }
 
 .buttons {
-    margin-top: 25px;
     display: flex;
-    justify-content: flex-start;
     gap: 16px;
+    justify-content: flex-start;
+    margin-top: 16px;
 }
 
 .dialog-content.animate-in {
@@ -99,10 +108,23 @@
     opacity: 0;
 }
 
-.contact-title {
-    position: relative;
-    display: inline-block;
+@media screen and (max-width: 1400px){
+
+    .dialog-content {
+        transform: translateY(100vw);
+    }
+    .dialog-content.animate-in {
+        transform: translateY(0);
+        opacity: 1;
+    }
+    
+    .dialog-content.animate-out {
+        transform: translateY(100vw);
+        opacity: 0;
+    }
 }
+
+
 
 .subtitle {
     margin: 0;
@@ -151,7 +173,7 @@ input {
     width: 422px;
     height: 50px;
     padding: 13px 21px 13px 21px;
-    gap: 10px;
+    gap: 8px;
     transition: border-color 0.3s ease;
 }
 
@@ -197,41 +219,44 @@ form {
     display: flex;
     flex-direction: column;
     gap: 32px;
-    width: 400px;
+    width: 100%;
+    max-width: 400px;
 }
 
 .close-button {
+    background: transparent;
+    border: none;
     cursor: pointer;
-    background: none;
+    padding: 8px;
+    border-radius: 50%;
+    transition: background-color 0.2s ease;
+
+    img {
+        width: 14px;
+        height: 14px;
+        object-fit: contain;
+    }
+
+    &:hover {
+        background-color: rgba(0, 0, 0, 0.1);
+        transform: scale(1.1);
+    }
 }
 
 .close-icon {
-    position: absolute;
-    top: 50px;
-    right: 160px;
-    cursor: pointer;  
-    z-index: 10;
-    width: 30px;
-    height: 30px;
-    background-color: transparent;
-    border-radius: 50%;
+    width: 100%;
     display: flex;
-    justify-content: center;
-    align-items: center;
+    justify-content: flex-end;
 }
 
 .close-icon img {
     width: 14px;
     height: 14px;
     object-fit: contain;
-    cursor: pointer; 
+    cursor: pointer;
 }
 
-.close-icon:hover {
-    background-color: rgba(0, 0, 0, 0.1);
-    cursor: pointer;
-    transform: scale(1.1);  /* Abruptly enlarge the close icon on hover */
-}
+
 
 
 
@@ -257,22 +282,18 @@ form {
 
 }
 
+.button-delete:hover,
 .button-cancel:hover {
-
     background-color: white;
     text-align: center;
     cursor: pointer;
     border: 2px solid $col-ref-highlight;
     color: $col-ref-highlight;
-    transform: scale(1.01) translateX(-1.01px);
+    transform: scale(1.00) translateX(-1.01px);
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
 
-
-
-    img {
-        fill: $col-ref-highlight; // funktioniert noch nicht!
-
-
+    svg path {
+        fill: $col-ref-highlight;
     }
 }
 
@@ -288,15 +309,57 @@ form {
     width: 214px;
     height: 57px;
     font-size: 21px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     img {
         height: 14px;
     }
 }
 
-.button-create:hover {
+.button-create:hover,
+.button-save:hover {
     background-color: $col-ref-highlight;
     color: white;
     cursor: pointer;
     box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    transform: scale(1.00) translateX(-1.01px);
+}
+
+.button-save {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    background-color: $col-bg-secondary;
+    border-radius: 10px;
+    color: white;
+    cursor: pointer;
+    padding: 16px;
+    width: 111px;
+    height: 57px;
+    font-size: 21px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    img {
+        height: 14px;
+    }
+}
+
+.button-delete {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    padding: 15px;
+    background-color: white;
+    border-radius: 10px;
+    border: 1px solid $col-bg-secondary;
+    width: 126px;
+    height: 55px;
+    font-size: 21px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    img {
+        height: 14px;
+        transition: fill 0.3s ease;
+    }
+
 }

@@ -24,11 +24,17 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
 
   @Output() cancel = new EventEmitter<void>();
   @Output() create = new EventEmitter<void>();
+  @Output() update = new EventEmitter<void>();
+  @Output() delete = new EventEmitter<void>();
+  @Output() error = new EventEmitter<void>();
+  @Output() requestDelete = new EventEmitter<void>();
+
 
   @Input() contactName?: string;
   @Input() contactMail?: string;
   @Input() contactPhone?: string;
   @Input() contactIndex?: number | undefined;
+
   animateIn = false;
   animateOut = false;
 
@@ -52,6 +58,12 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     this.animateOut = false;
   }
 
+  onDelete(): void {
+    this.requestDelete.emit();
+    this.onCancel();
+  }
+
+
   onCancel(): void {
     this.animateIn = false;
     this.animateOut = true;
@@ -62,39 +74,68 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     this.onCancel();
   }
 
+
+  // // Simulierter Fehler beim Erstellen
+
+  //   onCreate(index: number | undefined): void {
+  //     const { name, mail } = this.contactData;
+  //     if (!name.trim() || !mail.trim()) return;
+  //     if (index === undefined || index === null) {
+  //       this.contactData.color ||= this.contactsService.contactColors[
+  //         Math.floor(Math.random() * this.contactsService.contactColors.length)
+  //       ];
+  //       this.contactsService
+  //       .addContact(this.contactData)
+  //       .then(() => {
+  //         throw new Error('Simulierter Fehler beim Erstellen');
+  //       })
+  //       .then(() => {
+  //         this.create.emit();
+  //         this.onCancel();
+  //       })
+  //       .catch((error) => {
+  //         console.error('Fehler beim Speichern:', error);
+  //         this.error.emit();
+  //       });
+  //     } else {
+  //       this.editContact(index);
+  //     }
+  //   }
+
   onCreate(index: number | undefined): void {
     const { name, mail } = this.contactData;
     if (!name.trim() || !mail.trim()) return;
-
-    if (index === undefined || index === null) {
-      console.log('erstelle kontakt');
-      
-      this.contactData.color ||= this.contactsService.contactColors[
-        Math.floor(Math.random() * this.contactsService.contactColors.length)
-      ];
-  
-      this.contactsService
-        .addContact(this.contactData)
-        .then(() => {
-          this.create.emit();
-          this.onCancel();
-        })
-        .catch(() => { });
-    } else {
-      console.log('edit kontakt');
-      this.editContact(index);
-    }
+    index == null ? this.createNewContact() : this.editContact(index);
   }
+  
+  createNewContact(): void {
+    this.contactData.color ||= this.contactsService.contactColors[
+      Math.floor(Math.random() * this.contactsService.contactColors.length)
+    ];
+    this.contactsService.addContact(this.contactData)
+      .then(() => { this.create.emit(); this.onCancel(); })
+      .catch(() => this.error.emit());
+  }
+  
+
 
   async editContact(index: number) {
     const contact = this.contactsService.contacts[index];
     contact.name = this.contactData.name;
     contact.mail = this.contactData.mail;
     contact.phone = this.contactData.phone;
+
     if (contact.id) {
-      await this.contactsService.updateContact(contact);
-      this.create.emit();
-      this.onCancel();
+      try {
+        await this.contactsService.updateContact(contact);
+        this.create.emit();
+        this.update.emit();
+        this.onCancel();
+      } catch (error) {
+        console.error('Fehler beim Aktualisieren:', error);
+        this.error.emit();
+      }
     }
   }
+
 }
