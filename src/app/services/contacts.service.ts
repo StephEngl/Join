@@ -40,16 +40,9 @@ export class ContactsService implements OnDestroy {
     '#FF4646',
     '#FFBB2B',
   ];
-  // contact = {
-  //   name: 'Hans Meier',
-  //   mail: 'h.meier@blauerhimmel.de',
-  //   phone: '+49 1652 9876543',
-  //   color: this.getRandomColor(),
-  // };
   unsubscribeContact;
 
   constructor() {
-    // this.addContact(this.contact);
     this.unsubscribeContact = this.subContactsList();
   }
   // constructor end
@@ -70,7 +63,6 @@ export class ContactsService implements OnDestroy {
         color: this.getRandomColor(),
       };
       const contactRef = await addDoc(this.getContactsRef(), contactWithColor);
-      // console.log('Document written with ID: ', contactRef.id);
       return contactRef;
     } catch (err) {
       console.error(err);
