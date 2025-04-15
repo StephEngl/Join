@@ -61,7 +61,7 @@
 
     .form-wrapper {
         display: flex;
-        gap: 40px;
+        gap: 100px;
         align-items: center;
     }
 }
@@ -208,7 +208,7 @@ form {
 .close-icon {
     position: absolute;
     top: 50px;
-    right: 190px;
+    right: 160px;
     cursor: pointer;  
     z-index: 10;
     width: 30px;
