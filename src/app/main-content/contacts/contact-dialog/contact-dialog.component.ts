@@ -67,8 +67,6 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     if (!name.trim() || !mail.trim()) return;
 
     if (index === undefined || index === null) {
-      console.log('erstelle kontakt');
-      
       this.contactData.color ||= this.contactsService.contactColors[
         Math.floor(Math.random() * this.contactsService.contactColors.length)
       ];
@@ -81,7 +79,6 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
         })
         .catch(() => { });
     } else {
-      console.log('edit kontakt');
       this.editContact(index);
     }
   }

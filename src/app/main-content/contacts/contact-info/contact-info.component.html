@@ -4,11 +4,8 @@
         <span></span>
         <h4>Better with a team</h4>
     </div>
-    <img src="./assets/icons/contacts/arrow_back.svg" alt=""
-        [style.display]="signalService.isMobile() ? 'block' : 'none'" 
-        (click)="closeContactInfo()"
-    >
 </div>
+
 <div class="animation-container"
 [ngClass]="isClicked ? 'animate-in' : 'animate-out'">
     @if (contactIndex != null) {
