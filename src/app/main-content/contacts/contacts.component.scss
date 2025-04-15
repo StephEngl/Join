@@ -1,16 +1,18 @@
 @import './../../../assets/styles/mixins.scss';
+@import './../../../assets/styles/variables.scss';
 
 .contacts-section {
     @include dFlex(center, center, 0, fixed);
-    width: calc(100% - 240px);
-    height: calc(100% - 96px);
-    top: 96px;
+    width: calc(100% - $navbar-width);
+    height: calc(100% - $header-height);
+    top: $header-height;
     left: 232px;
 
     .contacts-list {
-        width: 100%;
-        min-width: 400px;
-        max-width: 400px;
+        @include dFlex(center, center);
+        flex-direction: column;
+        min-width: $contact-list-width;
+        padding: 20px;
         height: 100%;
         overflow-y: auto;
         word-break: break-word;
@@ -55,7 +57,8 @@
     .contact-infos {
         @include dFlex(flex-start, flex-start, 30px);
         flex-direction: column;
-        padding: 50px 20px 20px 50px;
+        padding: 50px 30px 30px 50px;
+        max-width: calc(100% - $contact-list-width);
         height: 100%;
         flex: 1;
         .contact-title {
@@ -237,7 +240,6 @@
 }
 
 @media screen and (max-width: 1400px) {
-
     .contacts-section {
         @include dFlex(center, center, 0, fixed);
         width: 100%;
@@ -245,6 +247,8 @@
         top: 96px;
         left: 0;
     }
+}
+@media screen and (max-width: 1000px) {
 
     .contact-infos {
         position: absolute;
