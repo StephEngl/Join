@@ -8,6 +8,7 @@
 
 .header-content {
   display: flex;
+  flex-grow: 1;
 }
 
 app-header {
@@ -15,8 +16,6 @@ app-header {
   background-color: white;
   box-shadow: 0 0 10px 0 rgba(0, 0, 0, 0.3);
   height: 96px;
-  //   width: 100%;
-  //   left: 232px;
-  //   position: absolute;
-  //   width: calc(100% - 232px);
+  z-index: 1;
+  width: 100%;
 }

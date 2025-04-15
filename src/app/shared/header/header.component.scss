@@ -3,6 +3,7 @@
 .header-section-desktop {
   @include dFlex($ai: center, $jc: space-between);
   max-width: 1920px;
+  width: 100%;
   padding: 30px;
 }
 
