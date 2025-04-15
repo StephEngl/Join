@@ -18,6 +18,7 @@ export class ContactsComponent {
   contactsService = inject(ContactsService);
   signalService = inject(SignalsService)
   showDialog = false;
+  showBtnMenu = false;
   toastVisible = false;
   showToast = false;
   sortedContacts: ContactInterface[] = [];
@@ -106,7 +107,11 @@ export class ContactsComponent {
   }
 
   deleteContact() {
-    
+
+  }
+
+  toggleBtnMenu() {
+    this.showBtnMenu = !this.showBtnMenu;
   }
 
 }

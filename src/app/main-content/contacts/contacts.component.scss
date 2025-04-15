@@ -200,14 +200,14 @@
 }
 
 .button-menu {
-    @include dFlex(center, center, 0, absolute);
+    @include dFlex(center, center, 5px, absolute);
     flex-direction: column;
     bottom: 30px;
     right: 30px;
     width: 90px;
     height: 80px;
     z-index: 8;
-    background-color: red;
+    background-color: white;
     border-radius: 10px 10px 0 10px;
     >button {
         @include dFlex(flex-start, center, 5px);
