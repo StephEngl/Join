@@ -7,31 +7,33 @@
     width: calc(100% - $navbar-width);
     height: calc(100% - $header-height);
     top: $header-height;
-    left: 232px;
+    left: $navbar-width;
 
     .contacts-list {
         @include dFlex(center, center);
         flex-direction: column;
-        min-width: $contact-list-width;
+        width: $contact-list-width;
         padding: 20px;
         height: 100%;
         overflow-y: auto;
-        word-break: break-word;
-        padding: 30px;
+        overflow-x: hidden;
         box-shadow: 5px 0 5px rgba(0, 0, 0, 0.2);
         background-color: white;
-
         >ul {
-            &:last-child {
-                padding-bottom: 30px;
+            display: flex;
+            flex-direction: column;
+            padding-top: 50px;
+            height: 100%;
+        }
+        .letter-category:last-child {
+            .single-contact:last-child {
+                padding-bottom: 40px;
             }
         }
-
         .letter-category {
             @include dFlex(center, flex-start, 10px);
             flex-direction: column;
-            margin: 40px 0 20px 0;
-
+            margin: 20px 0 20px 0;
             >p {
                 font-weight: 700;
                 width: 100%;
@@ -41,7 +43,6 @@
                 border-color: $col-font-inactive;
                 border-bottom: 1px solid $col-font-inactive;
             }
-
             .single-contact {
                 @include dFlex(flex-start, center, 10px);
                 width: 100%;
@@ -59,7 +60,7 @@
     .contact-infos {
         @include dFlex(flex-start, flex-start, 30px);
         flex-direction: column;
-        padding: 50px 30px 30px 50px;
+        padding: 70px 20px 20px 50px;
         max-width: calc(100% - $contact-list-width);
         height: 100%;
         flex: 1;
@@ -232,16 +233,9 @@
     transition: all 0.5s ease;
 }
 
-.contact-infos {
-    @include dFlex(flex-start, flex-start, 30px);
-    flex-direction: column;
-    padding: 70px 20px 20px 50px;
-    height: 100%;
-    flex: 1;
-}
-
 .mobile-button {
     @include dFlex(center, center, 0, absolute);
+    display: none;
     width: 60px;
     height: 60px;
     bottom: 30px;
@@ -292,30 +286,64 @@
     }
 }
 
+.close-info-btn{
+    display: flex;
+    position: absolute;
+    top: 70px;
+    right: 30px;
+    z-index: 10;
+    transition: all 1.5s ease;
+}
+
+.close-info-btn:hover {
+    cursor: pointer;
+}
+
 @media screen and (max-width: 1400px) {
     .contacts-section {
         @include dFlex(center, center, 0, fixed);
-        width: 100%;
-        height: calc(100% - 176px);
-        top: 96px;
         left: 0;
+        top: $header-height;
+        width: 100%;
+        height: calc(100% - $header-height - $nav-height-mobile);
     }
 }
 
 @media screen and (max-width: 1000px) {
 
-    .contact-infos {
-        position: absolute;
-        width: 100%;
-        background-color: $col-bg-main;
-        z-index: 6;
+    .contacts-section {
+        @include dFlex(center, center, 0, fixed);
         left: 0;
-        transition: all 0.5s ease;
+        top: $header-height;
+        height: calc(100% - $header-height - $nav-height-mobile);
+    }
+
+    .contact-infos {
+        position: absolute !important;
+        padding: 50px 30px 20px 20px !important;
+        left: 0;
+        top: 0;
+        min-width: 100% !important;
+        background-color: $col-bg-main;;
+        z-index: 5;
+        transition: all 0.8s ease;
     }
 
     .contacts-list {
-        position: absolute;
-        min-width: auto;
-        max-width: 100% !important;
+        position: absolute !important;
+        left: 0;
+        top: 0;
+        width: 100% !important;
+        >ul {
+            padding-top: 10px !important;
+        }
+    }
+
+    .new-contact {
+        display: none;
+    }
+
+    .mobile-button {
+        display: flex !important;
     }
 }

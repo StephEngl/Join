@@ -1,7 +1,6 @@
 <div class="dialog-overlay" (click)="onOverlayClick()">
     <div class="dialog-content" [class.animate-in]="animateIn" [class.animate-out]="animateOut"
         (click)="$event.stopPropagation()">
-        <!-- Linke Spalte -->
         <div class="dialog-left">
             <img src="../../../../assets/icons/navbar/logo.svg" alt="Join Logo" class="logo" />
             @if (contactIndex == undefined) {
@@ -9,43 +8,32 @@
             <span>Tasks are better with a team!</span>
             } @else {
             <h2>Edit contact</h2>}
-
-
             <div class="underline"></div>
         </div>
 
-        <!-- Rechte Spalte -->
         <div class="dialog-right">
-            <!-- Schließen-Button -->
             <div class="close-icon" (click)="onOverlayClick()">
                 <button class="close-button">
                     <img src="assets/icons/kanban/close.svg" alt="Close Icon" />
                 </button>
             </div>
-
             <div class="form-wrapper">
-                <!-- Profilbild -->
                 <div class="profile-placeholder">
                     <img src="assets/icons/contacts/contact_name.svg" alt="Profile Icon" />
                 </div>
-
-                <!-- Formular -->
                 <form (submit)="onCreate(contactIndex)" #contactForm="ngForm">
                     <div class="input-wrapper">
                         <input type="text" placeholder="Name" [(ngModel)]="contactData.name" name="name" />
                         <img src="assets/icons/contacts/contact_name.svg" alt="Name Icon" />
                     </div>
-
                     <div class="input-wrapper">
                         <input type="email" placeholder="Email" [(ngModel)]="contactData.mail" name="mail" />
                         <img src="assets/icons/contacts/contact_mail.svg" alt="Mail Icon" />
                     </div>
-
                     <div class="input-wrapper">
                         <input type="text" placeholder="Phone" [(ngModel)]="contactData.phone" name="phone" />
                         <img src="assets/icons/contacts/contact_phone.svg" alt="Phone Icon" />
                     </div>
-
                     <div class="buttons">
                         @if (contactIndex == undefined) {
                         <button class="button-cancel" type="button" (click)="onCancel()">
@@ -58,11 +46,10 @@
                             </svg>
                         </button>
                         } @else {
-                            <button class="button-delete" type="button" (click)="onDelete()">
+                        <button class="button-delete" type="button" (click)="onDelete()">
                             Delete
                         </button>
                         }
-
                         @if (contactIndex !== undefined) {
                         <button class="button-save" type="submit">
                             Save

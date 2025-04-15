@@ -131,7 +131,7 @@ export class ContactsComponent {
 
   showInfos() {
     console.log(this.signalService.isInfoShown);
-    this.signalService.isInfoShown = true;
+    this.signalService.isInfoShown.set(true);
   }
 
   editContact(index: number) {
@@ -158,6 +158,11 @@ export class ContactsComponent {
 
   toggleBtnMenu() {
     this.showBtnMenu = !this.showBtnMenu;
+  }
+
+  closeContactInfo() {
+    this.signalService.isInfoShown.set(false);
+    this.contactClicked = false;
   }
 
 }
