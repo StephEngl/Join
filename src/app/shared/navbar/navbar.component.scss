@@ -28,7 +28,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        justify-content: center;
+        padding-top: 4rem;
         width: 100%;
         height: 50%;
 
@@ -56,7 +56,7 @@
             height: 48px;
             display: flex;
             justify-content: center;
-            padding-left: 10%;
+            padding-left: 25%;
             padding-right: 10%;
             transition: background-color 0.3s ease;
 
@@ -109,24 +109,24 @@
     background-color: rgba(42, 54, 71, 1);
     display: flex;
     flex-direction: column;
-    align-items: center;
     justify-content: center;
     padding: 0;
+}
 
-    .navbar-mobile-components-container {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        width: 100%;
+.navbar-mobile-components-container {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 100%;
+}
 
-        .links-mobile-alignement {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            width: 100%;
-            height: 80px;
-        }
-    }
+.links-mobile-alignement {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    max-width: 1920px;
+    height: 80px;
 }
 
 .privacy-and-legal-mobile {
@@ -135,7 +135,7 @@
     align-items: center;
     width: 20%;
     height: 76px;
-    gap: 1.6rem;
+    gap: 1rem;
 
     .privacy-policy-background-container,
     .legal-notice-background-container {
@@ -145,7 +145,7 @@
         justify-content: center;
         align-items: center;
         transition: background-color 0.3s ease;
-        padding: 0.5rem;
+        padding: 1rem;
 
         &.active {
             background-color: #091931;
@@ -211,21 +211,24 @@
     .navbar-links-mobile {
         display: flex;
         width: auto;
-
     }
 
     .privacy-and-legal-mobile {
         display: flex;
-        justify-content: center;
+        justify-content: right;
         align-items: center;
-        width: auto;
+        width: 100%;
         height: 76px;
-        gap: 1.6rem;
+        gap: 0rem;
     }
 
+    .privacy-policy-background-container,
+    .legal-notice-background-container {
+        width: 100%;
+    }
 }
 
-@media (max-width: 1100px) {
+@media (max-width: 1110px) {
     .navbar-section-mobile {
         flex-direction: row;
         justify-content: space-between;
@@ -245,7 +248,8 @@
         .privacy-and-legal-mobile {
             display: none;
         }
+        .links-mobile-alignement {
+            justify-content: center;
+        }
     }
 }
-
-
