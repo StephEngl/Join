@@ -1,17 +1,8 @@
 import { CommonModule } from '@angular/common';
-import {
-  Component,
-  EventEmitter,
-  Output,
-  OnInit,
-  OnDestroy,
-  Input,
-  inject,
-} from '@angular/core';
+import { Component, EventEmitter, Output, OnInit, OnDestroy, Input, inject, } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { ContactInterface } from '../../../interfaces/contact.interface';
 import { ContactsService } from '../../../services/contacts.service';
-import { NgForm } from '@angular/forms';
 
 @Component({
   selector: 'app-contact-dialog',
@@ -21,6 +12,7 @@ import { NgForm } from '@angular/forms';
   styleUrls: ['./contact-dialog.component.scss'],
 })
 export class ContactDialogComponent implements OnInit, OnDestroy {
+
   readonly contactsService = inject(ContactsService);
 
   @Output() cancel = new EventEmitter<void>();
@@ -30,12 +22,10 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   @Output() error = new EventEmitter<void>();
   @Output() requestDelete = new EventEmitter<void>();
 
-
   @Input() contactName?: string;
   @Input() contactMail?: string;
   @Input() contactPhone?: string;
   @Input() contactIndex: number | null | undefined;
-
 
   animateIn = false;
   animateOut = false;
@@ -43,11 +33,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   nameExists = false;
   mailExists = false;
 
-  contactData: ContactInterface = {
-    name: '',
-    mail: '',
-    phone: '',
-  };
+  contactData: ContactInterface = { name: '', mail: '', phone: '' };
 
   ngOnInit(): void {
     this.contactData = {
@@ -56,8 +42,6 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
       phone: this.contactPhone || '',
     };
     setTimeout(() => (this.animateIn = true), 10);
-    console.log(this.contactIndex);
-
   }
 
   ngOnDestroy(): void {
@@ -80,39 +64,10 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     this.onCancel();
   }
 
-  // // Simulierter Fehler beim Erstellen ^^
-
-  //   onCreate(index: number | undefined): void {
-  //     const { name, mail } = this.contactData;
-  //     if (!name.trim() || !mail.trim()) return;
-  //     if (index === undefined || index === null) {
-  //       this.contactData.color ||= this.contactsService.contactColors[
-  //         Math.floor(Math.random() * this.contactsService.contactColors.length)
-  //       ];
-  //       this.contactsService
-  //       .addContact(this.contactData)
-  //       .then(() => {
-  //         throw new Error('Simulierter Fehler beim Erstellen');
-  //       })
-  //       .then(() => {
-  //         this.create.emit();
-  //         this.onCancel();
-  //       })
-  //       .catch((error) => {
-  //         console.error('Fehler beim Speichern:', error);
-  //         this.error.emit();
-  //       });
-  //     } else {
-  //       this.editContact(index);
-  //     }
-  //   }
-
-  onCreate(index: number | null | undefined, contactForm: NgForm): void {
+  onCreate(index: number | null | undefined): void {
     this.resetValidation();
-    if (index) {
-      if (this.isInvalidForm(contactForm) || this.doubleCheckData(index)) return;
-    }
-    index == undefined ? this.createNewContact() : this.editContact(index);
+    if (this.doubleCheckData(index ?? undefined)) return;
+    index == null ? this.createNewContact() : this.editContact(index);
   }
 
   resetValidation() {
@@ -120,25 +75,16 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     this.mailExists = false;
   }
 
-  isInvalidForm(form: NgForm): boolean {
-    if (form.invalid) {
-      Object.values(form.controls).forEach(c => c?.markAsTouched());
-      return true;
-    }
-    return false;
-  }
-
   doubleCheckData(index?: number): boolean {
-    const dupe = this.contactsService.contacts.find((c, i) => i !== index && (
-      c.name.toLowerCase() === this.contactData.name.toLowerCase() ||
-      c.mail.toLowerCase() === this.contactData.mail.toLowerCase()
+    const double = this.contactsService.contacts.find((contact, i) => i !== index && (
+      contact.name.toLowerCase() === this.contactData.name.toLowerCase() ||
+      contact.mail.toLowerCase() === this.contactData.mail.toLowerCase()
     ));
-    if (!dupe) return false;
-    this.nameExists = dupe.name.toLowerCase() === this.contactData.name.toLowerCase();
-    this.mailExists = dupe.mail.toLowerCase() === this.contactData.mail.toLowerCase();
+    if (!double) return false;
+    this.nameExists = double.name.toLowerCase() === this.contactData.name.toLowerCase();
+    this.mailExists = double.mail.toLowerCase() === this.contactData.mail.toLowerCase();
     return true;
   }
-
 
   createNewContact(): void {
     this.contactData.color ||= this.contactsService.contactColors[
@@ -151,10 +97,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
 
   async editContact(index: number) {
     const contact = this.contactsService.contacts[index];
-    contact.name = this.contactData.name;
-    contact.mail = this.contactData.mail;
-    contact.phone = this.contactData.phone;
-
+    Object.assign(contact, this.contactData);
     if (contact.id) {
       try {
         await this.contactsService.updateContact(contact);
@@ -165,6 +108,8 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
         console.error('Fehler beim Aktualisieren:', error);
         this.error.emit();
       }
+    } else {
+      this.error.emit();
     }
   }
 
@@ -173,24 +118,12 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   }
 
   get isCheckmarkVisible(): boolean {
-    const filledCount = [this.contactData.name, this.contactData.mail, this.contactData.phone]
-      .filter(val => val.trim()).length;
-    return filledCount === 2;
-  }
-
-  get isDisabledWithoutCheckmark(): boolean {
-    const filledCount = [this.contactData.name, this.contactData.mail, this.contactData.phone]
-      .filter(val => val.trim()).length;
-    return filledCount < 2;
+    return [this.contactData.name, this.contactData.mail, this.contactData.phone]
+      .filter(val => val.trim()).length === 2;
   }
 
   get isAllFilled(): boolean {
     const { name, mail, phone } = this.contactData;
     return !!name.trim() && !!mail.trim() && !!phone.trim();
   }
-
-
-
-
-
 }
