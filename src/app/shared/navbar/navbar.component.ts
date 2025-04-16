@@ -23,7 +23,7 @@ export class NavbarComponent {
         {
             iconUnclicked: 'assets/icons/navbar/new_task_inactive.svg',
             iconClicked: 'assets/icons/navbar/new_task.svg',
-            route: '/add-task',
+            route: '/addtask',
             alt: 'Add\u00A0Task'
         },
         {
