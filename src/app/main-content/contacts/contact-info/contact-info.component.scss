@@ -1,40 +1,24 @@
 @import './../../../../assets/styles/mixins.scss';
 
-.contact-icon-big {
-    @include contactIcon(120px, 47px, -5px);
-}
-
-.animation-container {
-    transition: all 0.5s ease;
-}
-
-.animate-in {
-    transform: translateX(0);
-    opacity: 1;
-}
-
-.animate-out {
-    transform: translateX(100%);
-    opacity: 0;
-}
-
-.contact-title {
-    @include dFlex(space-between, center);
-    width: 100%;
-    margin-bottom: 15px;
-    div {
-        @include dFlex(flex-start, center);
-        >span {
-            height: 60px;
-            width: 4px;
-            margin: 0 20px;
-            background-color: $col-ref-highlight;
-            border-radius: 10px;
-        }
+.contact-info {
+    @include dFlex(center, flex-start, 20px);
+    flex-direction: column;
+    margin-top: 50px;
+    >p:first-child {
+        margin-bottom: 30px;
+        font-weight: 300;
+        font-size: 1.5rem;
+    }
+    >p {
+        font-weight: 600;
     }
 }
 
-
+.contact-title {
+    @include dFlex(flex-start, center);
+    width: 100%;
+    margin-bottom: 15px;
+}
 
 .contact-hero {
     @include dFlex(flex-start, center, 20px);
@@ -60,18 +44,30 @@
     }
 }
 
-.contact-info {
-    @include dFlex(center, flex-start, 20px);
-    flex-direction: column;
-    margin-top: 50px;
-    >p:first-child {
-        margin-bottom: 30px;
-        font-weight: 300;
-        font-size: 1.5rem;
-    }
-    >p {
-        font-weight: 600;
-    }
+.contact-icon-big {
+    @include contactIcon(120px, 47px, -5px);
+}
+
+.animation-container {
+    transition: all 0.5s ease;
+}
+
+.animate-in {
+    transform: translateX(0);
+    opacity: 1;
+}
+
+.animate-out {
+    transform: translateX(100%);
+    opacity: 0;
+}
+
+.v-line {
+    @include vLine();
+}
+
+.h-line {
+    @include hLine();
 }
 
 @media screen and (max-width: 1400px) {
@@ -79,5 +75,21 @@
 }
 
 @media screen and (max-width: 1000px) {
-    
+    .contact-title {
+        @include dFlex(flex-start, flex-start);
+        flex-direction: column;
+        gap: 6px;
+    }
+    .btn-container {
+        display: none;
+    }
+    .contact-icon-big {
+        @include contactIcon(80px, 30px, -3px);
+    }
+    .v-line {
+        display: none;
+    }
+    .h-line {
+        display: block;
+    }
 }

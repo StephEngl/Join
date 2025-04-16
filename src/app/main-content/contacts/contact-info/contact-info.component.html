@@ -1,13 +1,13 @@
 <div class="contact-title">
-    <div>
-        <h1>Contacts</h1>
-        <span></span>
-        <h4>Better with a team</h4>
-    </div>
+    <h1>Contacts</h1>
+    <span class="v-line"></span>
+    <h4>Better with a team</h4>
+    <span class="h-line"></span>
 </div>
 
 <div class="animation-container"
-[ngClass]="isClicked ? 'animate-in' : 'animate-out'">
+    [ngClass]="isClicked ? 'animate-in' : 'animate-out'"
+>
     @if (contactIndex != null) {
         <div class="contact-hero">
             <div class="contact-icon-big"

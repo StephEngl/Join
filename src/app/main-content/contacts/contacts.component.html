@@ -77,5 +77,6 @@
     <img class="close-info-btn" src="./assets/icons/contacts/arrow_back.svg" alt=""
         [style.opacity]="signalService.isMobile() && contactClicked ? '1' : '0'"
         [style.transform]="signalService.isMobile() && contactClicked ? 'translateY(0)' : 'translateY(-100%)'"
-        (click)="closeContactInfo()">
+        (click)="closeContactInfo()"
+    >
 </section>

@@ -149,7 +149,8 @@ export class ContactsComponent {
         await this.contactsService.deleteContact(contactId);
         console.log('Kontakt erfolgreich gelöscht');
         this.onContactDeleted();
-        this.showDialog = false;
+        this.closeContactInfo();
+        this.showBtnMenu = false;
       } catch (error) {
         console.error('Fehler beim Löschen des Kontakts:', error);
       }

@@ -24,3 +24,19 @@
     letter-spacing: $letterSpacing;
 }
 
+@mixin vLine() {
+    height: 60px;
+    width: 3px;
+    margin: 0 20px;
+    background-color: $col-ref-highlight;
+    border-radius: 10px;
+}
+
+@mixin hLine() {
+    display: none;
+    height: 3px;
+    width: 120px;
+    margin: 10px 0;
+    background-color: $col-ref-highlight;
+    border-radius: 10px;
+}
