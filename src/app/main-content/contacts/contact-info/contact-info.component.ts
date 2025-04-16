@@ -13,7 +13,7 @@ import { SignalsService } from '../../../services/signals.service';
 export class ContactInfoComponent {
   contactsService = inject(ContactsService);
   signalService = inject(SignalsService);
-  @Input()contactIndex: number | null = null;
+  @Input()contactIndex: number | undefined;
   @Input() isClicked: boolean = false;
   @Output()showDialog = new EventEmitter<boolean>();
   @Output()editIndex = new EventEmitter<number>();

@@ -25,7 +25,7 @@ export class ContactsComponent {
   toastType: 'create' | 'update' | 'delete' | 'error' = 'create';
   sortedContacts: ContactInterface[] = [];
   firstLetters: string[] = [];
-  activeContactIndex: number | null = null;
+  activeContactIndex: number | undefined;
   contactClicked: boolean = false;
   editId: string | undefined;
   editName: string | undefined;
@@ -86,7 +86,7 @@ export class ContactsComponent {
     return this.firstLetters;
   }
 
-  showContactInfo(index: number | null) {
+  showContactInfo(index: number | undefined) {
     if (this.activeContactIndex === index && this.contactClicked && this.activeContactIndex !== null) {
       this.contactClicked = false;
     } else {
@@ -116,11 +116,19 @@ export class ContactsComponent {
 
   newContact() {
     this.contactClicked = false;
-    this.activeContactIndex = null;
+    this.activeContactIndex = undefined;
     this.showDialog = true;
     this.editName = undefined;
     this.editMail = undefined;
     this.editPhone = undefined;
+  }
+
+  lastInitial(index: number): string {
+    const contact = index != null ? this.contactsService.contacts[index] : null;
+    if (!contact || !contact.name) return '';
+    const parts = contact.name.trim().split(' ');
+    const lastWord = parts.at(-1) || '';
+    return lastWord.charAt(0).toUpperCase();
   }
 
   showInfos() {

@@ -173,6 +173,7 @@ input:not(.invalid)+img+.error {
     @include dFlex(center, center);
     width: 120px;
     height: 120px;
+    aspect-ratio: 1/1;
     background-color: #d1d1d1;
     border-radius: 50%;
     margin: 0 auto 32px auto;
@@ -323,6 +324,12 @@ form {
         height: 14px;
         transition: fill 0.3s ease;
     }
+}
+
+.contact-initials {
+    font-size: 60px;
+    color: white;
+    letter-spacing: -5px;
 }
 
 @media screen and (max-width: 1400px) {
