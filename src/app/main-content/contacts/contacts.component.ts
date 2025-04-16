@@ -110,6 +110,10 @@ export class ContactsComponent {
     this.activeContactIndex = event;
   }
 
+  handleCloseContactInfo(event: boolean): void {
+    this.contactClicked = !event;
+  }
+
   newContact() {
     this.contactClicked = false;
     this.activeContactIndex = null;
@@ -117,14 +121,6 @@ export class ContactsComponent {
     this.editName = undefined;
     this.editMail = undefined;
     this.editPhone = undefined;
-  }
-
-  lastInitial(index: number): string {
-    const contact = index != null ? this.contactsService.contacts[index] : null;
-    if (!contact || !contact.name) return '';
-    const parts = contact.name.trim().split(' ');
-    const lastWord = parts.at(-1) || '';
-    return lastWord.charAt(0).toUpperCase();
   }
 
   showInfos() {

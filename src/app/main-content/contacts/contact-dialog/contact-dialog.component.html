@@ -17,9 +17,20 @@
                 </button>
             </div>
             <div class="form-wrapper">
-                <div class="profile-placeholder">
-                    <img src="assets/icons/contacts/contact_name.svg" alt="Profile Icon" />
-                </div>
+                @if (contactIndex == undefined) {
+                    <div class="profile-placeholder">
+                        <img src="assets/icons/contacts/contact_name.svg" alt="Profile Icon" />
+                    </div>
+                } @else {
+                    <div class="profile-placeholder"
+                        [style.backgroundColor]="this.contactsService.contacts[contactIndex].color"
+                        >
+                        <div class="contact-initals">
+                            {{ this.contactsService.contacts[contactIndex].name.charAt(0).toUpperCase() }}
+                            {{ this.contactsService.lastInitial(contactIndex) }}
+                        </div>
+                    </div>
+                }
                 <form (ngSubmit)="onCreate(contactIndex, contactForm)" #contactForm="ngForm">
                     <div class="input-wrapper">
                         <input type="text" placeholder="Name" [(ngModel)]="contactData.name" name="name" required

@@ -16,7 +16,7 @@
                 [style.backgroundColor]="contactsService.contacts[contactIndex].color"
             >
                 {{contactsService.contacts[contactIndex].name.charAt(0).toUpperCase()}}
-                {{lastInitial(contactIndex)}}
+                {{this.contactsService.lastInitial(contactIndex)}}
             </div>
             <div class="contact-menu">
                 <h3>{{ contactsService.contacts[contactIndex].name }}</h3>
