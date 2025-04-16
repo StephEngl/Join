@@ -45,7 +45,7 @@
                             [style.border]="activeContactIndex === index && contactClicked ? '2px solid white' : ''"
                         >
                             {{contact.name.charAt(0).toUpperCase()}}
-                            {{ lastInitial(index) }}
+                            {{ this.contactsService.lastInitial(index) }}
                         </div>
                         <div>
                             <p>{{ contact.name }}</p>

@@ -1,15 +1,11 @@
 @import './../../../../assets/styles/mixins.scss';
 
 .dialog-overlay {
-    position: fixed;
+    @include dFlex(center, center, 0, fixed);
     inset: 0;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     background: rgba(0, 0, 0, 0.4);
     z-index: 9999;
 }
-
 
 .dialog-content {
     margin-left: 50px;
@@ -23,7 +19,6 @@
     opacity: 0;
     transition: transform 0.4s ease, opacity 0.4s ease;
 }
-
 
 .dialog-left {
     background-color: $col-bg-secondary;
@@ -50,40 +45,28 @@
     }
 }
 
-
 .dialog-right {
+    @include dFlex(flex-start, center, 32px, relative);
+    flex-direction: column;
     background-color: white;
     color: #1e1e1e;
     padding: 66px 48px;
     width: 934px;
     height: 100%;
-    display: flex;
-    flex-direction: column;
-    justify-content: flex-start;
-    align-items: center;
-    position: relative;
-    gap: 32px;
 }
 
 .form-wrapper {
-    display: flex;
-    flex-direction: row;
-    align-items: center;
-    gap: 64px;
+    @include dFlex(flex-start, center, 64px, relative);
     width: 100%;
     max-width: 800px;
-    position: relative;
 }
 
-
 .profile-icon {
+    @include dFlex(center, center);
     width: 120px;
     height: 120px;
     border-radius: 50%;
     background-color: #d1d1d1;
-    display: flex;
-    align-items: center;
-    justify-content: center;
 
     img {
         width: 48px;
@@ -107,25 +90,6 @@
     transform: translateX(100vw);
     opacity: 0;
 }
-
-@media screen and (max-width: 1400px) {
-
-    .dialog-content {
-        transform: translateY(100vw);
-    }
-
-    .dialog-content.animate-in {
-        transform: translateY(0);
-        opacity: 1;
-    }
-
-    .dialog-content.animate-out {
-        transform: translateY(100vw);
-        opacity: 0;
-    }
-}
-
-
 
 .subtitle {
     margin: 0;
@@ -161,9 +125,7 @@
 }
 
 input {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+    @include dFlex(space-around, center);
     font-family: 'Inter', sans-serif;
     font-size: 20px;
     font-weight: 400;
@@ -203,20 +165,16 @@ input.invalid {
     height: 16px;
 }
 
-
 input:not(.invalid)+img+.error {
     visibility: hidden;
 }
 
-
 .profile-placeholder {
+    @include dFlex(center, center);
     width: 120px;
     height: 120px;
     background-color: #d1d1d1;
     border-radius: 50%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
     margin: 0 auto 32px auto;
 
     img {
@@ -274,26 +232,34 @@ form {
     cursor: pointer;
 }
 
-
-.button-cancel {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
+%button-shared {
+    @include dFlex(space-around, center);
     padding: 16px;
-    background-color: white;
     border-radius: 10px;
+    font-size: 21px;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    
+    img {
+    height: 14px;
+    transition: fill 0.3s ease;
+    }
+}
+    
+.button-cancel {
+    @extend %button-shared;
+    background-color: white;
     border: 1px solid $col-bg-secondary;
     width: 126px;
     height: 56px;
-    font-size: 21px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
 
-
-    img {
-        height: 14px;
-        transition: fill 0.3s ease;
-    }
-
+.button-create {
+    @extend %button-shared;
+    background-color: $col-bg-secondary;
+    color: white;
+    cursor: pointer;
+    width: 214px;
+    height: 57px;
 }
 
 .button-delete:hover,
@@ -311,24 +277,6 @@ form {
     }
 }
 
-.button-create {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: $col-bg-secondary;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    padding: 16px;
-    width: 214px;
-    height: 57px;
-    font-size: 21px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    img {
-        height: 14px;
-    }
-}
 
 .button-create:hover,
 .button-save:hover {
@@ -375,7 +323,23 @@ form {
         height: 14px;
         transition: fill 0.3s ease;
     }
+}
 
+@media screen and (max-width: 1400px) {
+
+    .dialog-content {
+        transform: translateY(100vw);
+    }
+
+    .dialog-content.animate-in {
+        transform: translateY(0);
+        opacity: 1;
+    }
+
+    .dialog-content.animate-out {
+        transform: translateY(100vw);
+        opacity: 0;
+    }
 }
 
 @media screen and (max-width: 1000px) {
@@ -446,3 +410,4 @@ form {
         max-width: 100%;
     }
 }
+

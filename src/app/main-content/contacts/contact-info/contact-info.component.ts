@@ -62,12 +62,4 @@ export class ContactInfoComponent {
     }
   }
 
-  lastInitial(index: number): string {
-    const contact = index != null ? this.contactsService.contacts[index] : null;
-    if (!contact || !contact.name) return '';
-    const parts = contact.name.trim().split(' ');
-    const lastWord = parts.at(-1) || '';
-    return lastWord.charAt(0).toUpperCase();
-  }
-
 }

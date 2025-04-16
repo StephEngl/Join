@@ -132,4 +132,13 @@ export class ContactsService implements OnDestroy {
   getSingleDocRef(docId: string) {
     return doc(collection(this.firestore, 'contacts'), docId);
   }
+
+  lastInitial(index: number): string {
+    const contact = index != null ? this.contacts[index] : null;
+    if (!contact || !contact.name) return '';
+    const parts = contact.name.trim().split(' ');
+    const lastWord = parts.at(-1) || '';
+    return lastWord.charAt(0).toUpperCase();
+  }
+
 }
