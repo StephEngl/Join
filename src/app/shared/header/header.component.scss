@@ -10,7 +10,8 @@
 .menu-section {
   @include dFlex($ai: center, $jc: center, $gap: 12px);
 
-  button {
+  .menu-button {
+    cursor: pointer;
     border: 3px solid $col-bg-secondary;
     width: 56px;
     height: 56px;
@@ -57,5 +58,35 @@
         background-color: $col-ref-hover;
       }
     }
+  }
+}
+
+.logout-popup-btn {
+  cursor: pointer;
+  opacity: 0;
+  position: absolute;
+  top: 96px;
+  left: calc(50% - 77px);;
+  justify-content: space-around;
+  align-items: center;
+  background-color: #2a3647;
+  border-radius: 10px;
+  color: white;
+  padding: 16px;
+  width: 210px;
+  height: 56px;
+  font-size: 21px;
+  border: none;
+  z-index: 99;
+  transform: translateY(-20px);
+  transition: transform 0.2s ease-out, opacity 0.2s ease-out;
+
+  &.show {
+    opacity: 1;
+    transform: translateY(0);
+  }
+
+  &:hover {
+    background-color: #1a2233;
   }
 }

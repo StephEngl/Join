@@ -4,15 +4,29 @@
     <a routerLink="/help"
       ><img src="../../../assets/icons/kanban/help.svg" alt=""
     /></a>
-    <button (click)="toggleDropdown(); $event.stopPropagation()">G</button>
-  </div>
+    <button class="menu-button" (click)="onGButtonClick($event)">G</button>
 
-  <div class="dropdown-menu" [class.show]="isDropdownOpen" (click)="$event.stopPropagation()">
-    <div class="router-wrapper">
-      <a (click)="toggleDropdown()" routerLink="/help">Help</a>
-      <a (click)="toggleDropdown()" routerLink="/legal-notice">Legal Notice</a>
-      <a (click)="toggleDropdown()" routerLink="/privacy-policy">Privacy Policy</a>
-      <p (click)="toggleDropdown(); logout()">Log out</p>
+    @if (dropdownVisible) {
+    <div class="dropdown-menu" [class.show]="showDropdown">
+      <div class="router-wrapper">
+        <a (click)="toggleDropdown()" routerLink="/help">Help</a>
+        <a (click)="toggleDropdown()" routerLink="/legal-notice"
+          >Legal Notice</a
+        >
+        <a (click)="toggleDropdown()" routerLink="/privacy-policy"
+          >Privacy Policy</a
+        >
+        <p (click)="toggleDropdown(); logout()">Log out</p>
+      </div>
     </div>
+
+    } @if (logoutPopupVisible) {
+      <button 
+      class="logout-popup-btn" 
+      [class.show]="showLogoutPopup" 
+      (click)="logout()">
+      Log out
+    </button>
+    }
   </div>
 </section>
