@@ -17,6 +17,7 @@
         height: 100%;
         overflow-y: auto;
         overflow-x: hidden;
+        
         box-shadow: 5px 0 5px rgba(0, 0, 0, 0.2);
         background-color: white;
 
@@ -24,6 +25,7 @@
             display: flex;
             flex-direction: column;
             padding-top: 50px;
+            
             height: 100%;
         }
 
@@ -37,6 +39,7 @@
             @include dFlex(center, flex-start, 10px);
             flex-direction: column;
             margin: 20px 0 20px 0;
+            
 
             >p {
                 font-weight: 700;
@@ -53,6 +56,7 @@
                 width: 100%;
                 padding: 10px 10px;
                 border-radius: 10px;
+                word-break:break-all;
                 cursor: pointer;
                 &:hover {
                     background-color: lightgrey;
@@ -169,7 +173,6 @@
 .toast.error {
     background-color: #E74C3C;
 }
-
 
 .toast {
     @include dFlex(center, center, 0, fixed);
