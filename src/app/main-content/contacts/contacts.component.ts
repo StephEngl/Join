@@ -110,6 +110,10 @@ export class ContactsComponent {
     this.activeContactIndex = event;
   }
 
+  handleCloseContactInfo(event: boolean): void {
+    this.contactClicked = !event;
+  }
+
   newContact() {
     this.contactClicked = false;
     this.activeContactIndex = null;

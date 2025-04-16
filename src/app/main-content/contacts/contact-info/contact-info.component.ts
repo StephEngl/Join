@@ -16,8 +16,9 @@ export class ContactInfoComponent {
   @Input()contactIndex: number | null = null;
   @Input() isClicked: boolean = false;
   @Output()showDialog = new EventEmitter<boolean>();
-  @Output() editIndex = new EventEmitter<number>();
-  @Output() editContactData = new EventEmitter<{
+  @Output()editIndex = new EventEmitter<number>();
+  @Output()closeContactInfo = new EventEmitter<boolean>();
+  @Output()editContactData = new EventEmitter<{
     id: string; 
     name: string;
     mail: string;
@@ -40,9 +41,9 @@ export class ContactInfoComponent {
     if (contact.id) {
       try {
         await this.contactsService.deleteContact(contact.id);
-        console.log('Kontakt erfolgreich gelöscht');
+        this.closeContactInfo.emit(true)
       } catch (error) {
-        console.error('Fehler beim Löschen des Kontakts:', error);
+        console.error('Error deleting contact:', error);
       }
     }
   }

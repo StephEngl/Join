@@ -17,9 +17,13 @@
                 </button>
             </div>
             <div class="form-wrapper">
-                <div class="profile-placeholder">
-                    <img src="assets/icons/contacts/contact_name.svg" alt="Profile Icon" />
-                </div>
+                @if (contactIndex == undefined) {
+                    <div class="profile-placeholder">
+                        <img src="assets/icons/contacts/contact_name.svg" alt="Profile Icon" />
+                    </div>
+                } @else {
+                    -
+                }
                 <form (ngSubmit)="onCreate(contactIndex, contactForm)" #contactForm="ngForm">
                     <div class="input-wrapper">
                         <input type="text" placeholder="Name" [(ngModel)]="contactData.name" name="name" required

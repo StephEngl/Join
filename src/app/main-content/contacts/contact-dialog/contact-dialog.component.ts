@@ -78,7 +78,6 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     this.onCancel();
   }
 
-
   // // Simulierter Fehler beim Erstellen ^^
 
   //   onCreate(index: number | undefined): void {
@@ -145,8 +144,6 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
       .then(() => { this.create.emit(); this.onCancel(); })
       .catch(() => this.error.emit());
   }
-
-
 
   async editContact(index: number) {
     const contact = this.contactsService.contacts[index];
