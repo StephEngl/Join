@@ -10,7 +10,6 @@
             <h2>Edit contact</h2>}
             <div class="underline"></div>
         </div>
-
         <div class="dialog-right">
             <div class="close-icon" (click)="onOverlayClick()">
                 <button class="close-button">
@@ -21,18 +20,42 @@
                 <div class="profile-placeholder">
                     <img src="assets/icons/contacts/contact_name.svg" alt="Profile Icon" />
                 </div>
-                <form (submit)="onCreate(contactIndex)" #contactForm="ngForm">
+                <form (ngSubmit)="onCreate(contactIndex, contactForm)" #contactForm="ngForm">
                     <div class="input-wrapper">
-                        <input type="text" placeholder="Name" [(ngModel)]="contactData.name" name="name" />
+                        <input type="text" placeholder="Name" [(ngModel)]="contactData.name" name="name" required
+                            #name="ngModel" [class.invalid]="name.invalid && name.touched || nameExists" />
                         <img src="assets/icons/contacts/contact_name.svg" alt="Name Icon" />
+                        <span class="error">
+                            @if (name.touched && name.invalid) {
+                            Please enter your name!
+                            } @else if (nameExists) {
+                            A contact with this name already exists!
+                            } @else {
+                            &nbsp;
+                            }
+                        </span>
                     </div>
                     <div class="input-wrapper">
-                        <input type="email" placeholder="Email" [(ngModel)]="contactData.mail" name="mail" />
+                        <input type="email" placeholder="Email" [(ngModel)]="contactData.mail" name="mail" required
+                            #mail="ngModel" [class.invalid]="mail.invalid && mail.touched || mailExists" />
                         <img src="assets/icons/contacts/contact_mail.svg" alt="Mail Icon" />
+                        <span class="error">
+                            @if (mail.touched && mail.invalid) {
+                            Please enter your email address!
+                            } @else if (mailExists) {
+                            A contact with this email already exists!
+                            } @else {
+                            &nbsp;
+                            }
+                        </span>
                     </div>
                     <div class="input-wrapper">
-                        <input type="text" placeholder="Phone" [(ngModel)]="contactData.phone" name="phone" />
+                        <input type="text" placeholder="Phone" [(ngModel)]="contactData.phone" name="phone" required
+                            #phone="ngModel" [class.invalid]="phone.invalid && phone.touched" />
                         <img src="assets/icons/contacts/contact_phone.svg" alt="Phone Icon" />
+                        <span class="error">
+                            {{ phone.touched && phone.invalid ? 'Please enter your phone number!' : '\u00A0' }}
+                        </span>
                     </div>
                     <div class="buttons">
                         @if (contactIndex == undefined) {

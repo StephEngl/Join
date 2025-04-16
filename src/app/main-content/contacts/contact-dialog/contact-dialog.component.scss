@@ -108,16 +108,17 @@
     opacity: 0;
 }
 
-@media screen and (max-width: 1400px){
+@media screen and (max-width: 1400px) {
 
     .dialog-content {
         transform: translateY(100vw);
     }
+
     .dialog-content.animate-in {
         transform: translateY(0);
         opacity: 1;
     }
-    
+
     .dialog-content.animate-out {
         transform: translateY(100vw);
         opacity: 0;
@@ -187,8 +188,25 @@ input:focus {
     opacity: 0.7;
 }
 
+input.invalid {
+    border: 1px solid red;
+}
+
+.error {
+    min-height: 16px;
+    font-size: 12px;
+    margin-top: 4px;
+    margin-left: 4px;
+    color: #f44336;
+    display: block;
+    visibility: visible;
+    height: 16px;
+}
 
 
+input:not(.invalid)+img+.error {
+    visibility: hidden;
+}
 
 
 .profile-placeholder {
@@ -218,7 +236,7 @@ input:focus {
 form {
     display: flex;
     flex-direction: column;
-    gap: 32px;
+    gap: 16px;
     width: 100%;
     max-width: 400px;
 }
@@ -255,10 +273,6 @@ form {
     object-fit: contain;
     cursor: pointer;
 }
-
-
-
-
 
 
 .button-cancel {
@@ -362,4 +376,73 @@ form {
         transition: fill 0.3s ease;
     }
 
+}
+
+@media screen and (max-width: 1000px) {
+
+    .buttons {
+        justify-content: center;
+    }
+
+    .button-cancel {
+        display: none;
+    }
+
+    .dialog-content {
+        flex-direction: column;
+        width: 100%;
+        max-width: 500px;
+        height: auto;
+        border-radius: 35px;
+        overflow: visible;
+    }
+
+    .dialog-left {
+        width: 100%;
+        height: 260px;
+        border-radius: 35px 35px 0 0;
+        padding: 48px 24px 24px 24px;
+        display: flex;
+        gap: 8px;
+
+        img.logo {
+            display: none;
+        }
+    }
+
+    .dialog-right {
+        width: 100%;
+        border-radius: 0 0 35px 35px;
+        padding: 100px 24px 32px 24px;
+        position: relative;
+    }
+
+    .profile-placeholder {
+        position: absolute;
+        top: -225px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 120px;
+        height: 120px;
+        border-radius: 50%;
+        background-color: #d1d1d1;
+        border: 4px solid white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+
+        img {
+            width: 48px;
+            height: 48px;
+        }
+    }
+
+    .form-wrapper {
+        flex-direction: column;
+        gap: 24px;
+        align-items: center;
+        width: 100%;
+        max-width: 100%;
+    }
 }
