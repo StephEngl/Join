@@ -40,3 +40,28 @@
     background-color: $col-ref-highlight;
     border-radius: 10px;
 }
+
+@mixin btn($bg: $col-bg-secondary, $color: $col-font-secondary, $hoverBg: $col-ref-highlight) {
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 21px;
+    background-color: $bg;
+    color: $color;
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    @if $hoverBg !=null {
+        &:hover {
+            background-color: $hoverBg;
+            box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+            transform: scale(1.00) translateX(-1.01px);
+        }
+    }
+
+    img {
+        height: 14px;
+        transition: fill 0.3s ease;
+    }
+}

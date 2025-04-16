@@ -6,7 +6,7 @@
 </div>
 
 <div class="animation-container" [ngClass]="isClicked ? 'animate-in' : 'animate-out'">
-    @if (contactIndex != null && contactsService.contacts[contactIndex]) {
+    @if (contactIndex != undefined && contactsService.contacts[contactIndex]) {
     <div class="contact-hero">
         <div class="contact-icon-big" [style.backgroundColor]="contactsService.contacts[contactIndex].color">
             {{ contactsService.contacts[contactIndex].name.charAt(0).toUpperCase() }}

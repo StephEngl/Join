@@ -1,9 +1,51 @@
 @import './../../../../assets/styles/mixins.scss';
 
+form {
+    display: flex;
+    flex-direction: column;
+    gap: 16px;
+    width: 100%;
+    max-width: 400px;
+}
+
+input {
+    @include dFlex(space-around, center);
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    line-height: 120%;
+    border-radius: 10px;
+    border: 1px solid $col-shadow-black;
+    display: block;
+    width: 422px;
+    height: 50px;
+    padding: 13px 21px 13px 21px;
+    gap: 8px;
+    transition: border-color 0.3s ease;
+
+    &.invalid {
+        border: 1px solid $col-error-red ;
+    }
+
+    &::placeholder {
+        color: $col-shadow-black;
+        opacity: 0.7;
+    }
+
+    &:focus {
+        outline: none;
+        border: 1px solid $col-ref-highlight;
+    }
+}
+
+input:not(.invalid)+img+.error {
+    visibility: hidden;
+}
+
 .dialog-overlay {
     @include dFlex(center, center, 0, fixed);
     inset: 0;
-    background: rgba(0, 0, 0, 0.4);
+    background: $col-shadow-black;
     z-index: 9999;
 }
 
@@ -22,7 +64,7 @@
 
 .dialog-left {
     background-color: $col-bg-secondary;
-    color: white;
+    color: $col-font-secondary;
     padding: 66px 48px;
     width: 467px;
     height: 100%;
@@ -48,8 +90,8 @@
 .dialog-right {
     @include dFlex(flex-start, center, 32px, relative);
     flex-direction: column;
-    background-color: white;
-    color: #1e1e1e;
+    background-color: $col-white;
+    color: $col-dialog-right;
     padding: 66px 48px;
     width: 934px;
     height: 100%;
@@ -66,7 +108,7 @@
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background-color: #d1d1d1;
+    background-color: $col-background-grey;
 
     img {
         width: 48px;
@@ -94,7 +136,7 @@
 .subtitle {
     margin: 0;
     font-size: 16px;
-    color: #ffffff;
+    color: $col-font-secondary;
 }
 
 .underline {
@@ -124,49 +166,15 @@
     }
 }
 
-input {
-    @include dFlex(space-around, center);
-    font-family: 'Inter', sans-serif;
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 120%;
-    border-radius: 10px;
-    border: 1px solid rgba(0, 0, 0, 0.2);
-    display: block;
-    width: 422px;
-    height: 50px;
-    padding: 13px 21px 13px 21px;
-    gap: 8px;
-    transition: border-color 0.3s ease;
-}
-
-input:focus {
-    outline: none;
-    border: 1px solid $col-ref-highlight;
-}
-
-::placeholder {
-    color: rgba(0, 0, 0, 0.3);
-    opacity: 0.7;
-}
-
-input.invalid {
-    border: 1px solid red;
-}
-
 .error {
     min-height: 16px;
     font-size: 12px;
     margin-top: 4px;
     margin-left: 4px;
-    color: #f44336;
+    color: $col-error-red;
     display: block;
     visibility: visible;
     height: 16px;
-}
-
-input:not(.invalid)+img+.error {
-    visibility: hidden;
 }
 
 .profile-placeholder {
@@ -174,7 +182,7 @@ input:not(.invalid)+img+.error {
     width: 120px;
     height: 120px;
     aspect-ratio: 1/1;
-    background-color: #d1d1d1;
+    background-color: $col-background-grey;
     border-radius: 50%;
     margin: 0 auto 32px auto;
 
@@ -187,17 +195,9 @@ input:not(.invalid)+img+.error {
         font-family: 'Inter', sans-serif;
         font-size: 36px;
         font-weight: 500;
-        color: white;
-        background-color: #2A3647;
+        color: $col-font-secondary;
+        background-color: $col-bg-secondary
     }
-}
-
-form {
-    display: flex;
-    flex-direction: column;
-    gap: 16px;
-    width: 100%;
-    max-width: 400px;
 }
 
 .close-button {
@@ -215,7 +215,7 @@ form {
     }
 
     &:hover {
-        background-color: rgba(0, 0, 0, 0.1);
+        background-color: $col-shadow-black;
         transform: scale(1.1);
     }
 }
@@ -248,7 +248,7 @@ form {
 
 .button-cancel {
     @extend %button-shared;
-    background-color: white;
+    background-color: $col-font-secondary;
     border: 1px solid $col-bg-secondary;
     width: 126px;
     height: 56px;
@@ -256,13 +256,13 @@ form {
 
 .button-delete:hover,
 .button-cancel:hover {
-    background-color: white;
+    background-color: $col-font-secondary;
     text-align: center;
     cursor: pointer;
     border: 2px solid $col-ref-highlight;
     color: $col-ref-highlight;
     transform: scale(1.00) translateX(-1.01px);
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 5px $col-shadow-black;
 
     svg path {
         fill: $col-ref-highlight;
@@ -270,62 +270,37 @@ form {
 }
 
 .button-save {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    background-color: $col-bg-secondary;
-    border-radius: 10px;
-    color: white;
-    cursor: pointer;
-    padding: 16px;
+    @include btn();
     width: 111px;
     height: 57px;
-    font-size: 21px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    img {
-        height: 14px;
-    }
 }
 
 .button-delete {
-    display: flex;
-    justify-content: space-around;
-    align-items: center;
-    padding: 15px;
-    background-color: white;
-    border-radius: 10px;
+    @include btn($col-font-secondary, $col-bg-secondary, $col-font-secondary);
     border: 1px solid $col-bg-secondary;
     width: 126px;
     height: 55px;
-    font-size: 21px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
-
-    img {
-        height: 14px;
-        transition: fill 0.3s ease;
-    }
 }
 
 .contact-initials {
     font-size: 60px;
-    color: white;
+    color: $col-font-secondary;
     letter-spacing: -5px;
 }
 
 .button-create:not(.disabled):not(.checkmark):hover,
 .button-save:hover {
     background-color: $col-ref-highlight;
-    color: white;
+    color: $col-font-secondary;
     cursor: pointer;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    box-shadow: 0px 3px 5px $col-shadow-black;
     transform: scale(1.00) translateX(-1.01px);
 }
 
 .icon-done {
     width: 18px;
     height: 18px;
-    stroke: grey
+    stroke: $col-font-inactive;
 }
 
 .button-create {
@@ -338,28 +313,9 @@ form {
     }
 }
 
-.button-create.disabled {
-    background-color: #F0F0F0;
-    color: rgba(0, 0, 0, 0.3);
-    cursor: not-allowed;
-
-    img {
-        opacity: 0.5;
-    }
-
-    &hover {
-        cursor: not-allowed;
-        box-shadow: none;
-        transform: none;
-
-        img {
-            opacity: 0.5;
-        }
-    }
-}
-
+.button-create.disabled,
 .button-create.checkmark {
-    background-color: #F0F0F0;
+    background-color: $col-background-button;
     cursor: not-allowed;
 
     img {
@@ -377,9 +333,10 @@ form {
     }
 }
 
+
 .button-create.active {
     background-color: $col-bg-secondary;
-    color: white;
+    color: $col-font-secondary;
     cursor: pointer;
 
     img {
@@ -388,7 +345,7 @@ form {
 
     &:hover {
         background-color: $col-ref-highlight;
-        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+        box-shadow: 0px 3px 5px $col-shadow-black;
         transform: scale(1.00) translateX(-1.01px);
     }
 }
@@ -401,14 +358,13 @@ form {
 
     .dialog-content.animate-in {
         transform: translateY(0);
-        opacity: 1;
     }
 
     .dialog-content.animate-out {
         transform: translateY(100vw);
-        opacity: 0;
     }
 }
+
 
 @media screen and (max-width: 1000px) {
 
@@ -457,12 +413,12 @@ form {
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        background-color: #d1d1d1;
-        border: 4px solid white;
+        background-color: $col-background-grey;
+        border: 4px solid $col-font-secondary;
         display: flex;
         justify-content: center;
         align-items: center;
-        box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+        box-shadow: 0 4px 12px $col-shadow-black;
 
         img {
             width: 48px;
