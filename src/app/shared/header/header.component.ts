@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterLink } from '@angular/router';
 
 @Component({
@@ -15,6 +15,11 @@ export class HeaderComponent {
     this.isDropdownOpen = !this.isDropdownOpen;
   }
   
+  @HostListener('document:click')
+  handleClickOutside(): void {
+    this.isDropdownOpen = false;
+  }
+
   logout() {
     // Logout-Logik
   }

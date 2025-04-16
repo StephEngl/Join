@@ -4,10 +4,10 @@
     <a routerLink="/help"
       ><img src="../../../assets/icons/kanban/help.svg" alt=""
     /></a>
-    <button (click)="toggleDropdown()">G</button>
+    <button (click)="toggleDropdown(); $event.stopPropagation()">G</button>
   </div>
 
-  <div class="dropdown-menu" [class.show]="isDropdownOpen">
+  <div class="dropdown-menu" [class.show]="isDropdownOpen" (click)="$event.stopPropagation()">
     <div class="router-wrapper">
       <a (click)="toggleDropdown()" routerLink="/help">Help</a>
       <a (click)="toggleDropdown()" routerLink="/legal-notice">Legal Notice</a>
