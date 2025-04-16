@@ -34,7 +34,8 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   @Input() contactName?: string;
   @Input() contactMail?: string;
   @Input() contactPhone?: string;
-  @Input() contactIndex: number | undefined;
+  @Input() contactIndex: number | null | undefined;
+
 
   animateIn = false;
   animateOut = false;
@@ -106,7 +107,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   //     }
   //   }
 
-  onCreate(index: number | undefined, contactForm: NgForm): void {
+  onCreate(index: number | null | undefined, contactForm: NgForm): void {
     this.resetValidation();
     if (index) {
       if (this.isInvalidForm(contactForm) || this.doubleCheckData(index)) return;
