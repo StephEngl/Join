@@ -1,9 +1,19 @@
-@import "../../../assets/styles/colors.scss";
+// @import "../../../assets/styles/colors.scss";
+@import "../../../assets/styles/mixins.scss";
 
+section {
+@include appMaxWidth();
+}
 
 p {
     padding: 16px 0;
 }
+
 span {
     color: $col-ref-highlight;
+}
+
+.help.list {
+    list-style-position: outside;
+    list-style-type: decimal;
 }
