@@ -25,11 +25,10 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   @Input() contactName?: string;
   @Input() contactMail?: string;
   @Input() contactPhone?: string;
-  @Input() contactIndex: number | null | undefined;
+  @Input() contactIndex: number | undefined;
 
   animateIn = false;
   animateOut = false;
-
   nameExists = false;
   mailExists = false;
 
@@ -64,10 +63,10 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     this.onCancel();
   }
 
-  onCreate(index: number | null | undefined): void {
+  onCreate(index: number | undefined): void {
     this.resetValidation();
     if (this.doubleCheckData(index ?? undefined)) return;
-    index == null ? this.createNewContact() : this.editContact(index);
+    index == undefined ? this.createNewContact() : this.editContact(index);
   }
 
   resetValidation() {

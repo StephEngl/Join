@@ -18,7 +18,7 @@
                 </button>
             </div>
             <div class="form-wrapper">
-                @if (contactIndex != null && this.contactsService.contacts[contactIndex]) {
+                @if (contactIndex != undefined && this.contactsService.contacts[contactIndex]) {
                 <div class="profile-placeholder"
                     [style.backgroundColor]="this.contactsService.contacts[contactIndex].color">
                     <div class="contact-initials">
@@ -69,7 +69,7 @@
                         </span>
                     </div>
                     <div class="buttons">
-                        @if (contactIndex == null) {
+                        @if (contactIndex == undefined) {
                         <button class="button-cancel" type="button" (click)="onCancel()">
                             Cancel
                             <svg class="icon-cancel" width="14" height="14" viewBox="0 0 14 14"
@@ -84,7 +84,7 @@
                             Delete
                         </button>
                         }
-                        @if (contactIndex == null) {
+                        @if (contactIndex == undefined) {
                         <button class="button-create" type="submit"
                             [ngClass]="{'active': isAllFilled,'checkmark': isCheckmarkVisible && !isAllFilled,'disabled': !isCheckmarkVisible && !isAllFilled}"
                             [disabled]="!isAllFilled">
