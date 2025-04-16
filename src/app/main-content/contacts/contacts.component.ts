@@ -19,12 +19,10 @@ export class ContactsComponent {
   signalService = inject(SignalsService)
   showDialog = false;
   showBtnMenu = false;
-
   toastVisible = false;
   showToast = false;
   toastMessage: string = '';
   toastType: 'create' | 'update' | 'delete' | 'error' = 'create';
-
   sortedContacts: ContactInterface[] = [];
   firstLetters: string[] = [];
   activeContactIndex: number | null = null;
@@ -147,12 +145,11 @@ export class ContactsComponent {
     if (contactId) {
       try {
         await this.contactsService.deleteContact(contactId);
-        console.log('Kontakt erfolgreich gelöscht');
         this.onContactDeleted();
         this.closeContactInfo();
         this.showBtnMenu = false;
       } catch (error) {
-        console.error('Fehler beim Löschen des Kontakts:', error);
+        console.error('Error deleting contact:', error);
       }
     }
   }
