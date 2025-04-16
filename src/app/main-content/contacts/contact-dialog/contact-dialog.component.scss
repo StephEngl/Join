@@ -239,28 +239,19 @@ form {
     border-radius: 10px;
     font-size: 21px;
     transition: transform 0.3s ease, box-shadow 0.3s ease;
-    
+
     img {
-    height: 14px;
-    transition: fill 0.3s ease;
+        height: 14px;
+        transition: fill 0.3s ease;
     }
 }
-    
+
 .button-cancel {
     @extend %button-shared;
     background-color: white;
     border: 1px solid $col-bg-secondary;
     width: 126px;
     height: 56px;
-}
-
-.button-create {
-    @extend %button-shared;
-    background-color: $col-bg-secondary;
-    color: white;
-    cursor: pointer;
-    width: 214px;
-    height: 57px;
 }
 
 .button-delete:hover,
@@ -276,16 +267,6 @@ form {
     svg path {
         fill: $col-ref-highlight;
     }
-}
-
-
-.button-create:hover,
-.button-save:hover {
-    background-color: $col-ref-highlight;
-    color: white;
-    cursor: pointer;
-    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
-    transform: scale(1.00) translateX(-1.01px);
 }
 
 .button-save {
@@ -330,6 +311,86 @@ form {
     font-size: 60px;
     color: white;
     letter-spacing: -5px;
+}
+
+.button-create:not(.disabled):not(.checkmark):hover,
+.button-save:hover {
+    background-color: $col-ref-highlight;
+    color: white;
+    cursor: pointer;
+    box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+    transform: scale(1.00) translateX(-1.01px);
+}
+
+.icon-done {
+    width: 18px;
+    height: 18px;
+    stroke: grey
+}
+
+.button-create {
+    @extend %button-shared;
+    width: 214px;
+    height: 57px;
+
+    img {
+        transition: opacity 0.3s ease;
+    }
+}
+
+.button-create.disabled {
+    background-color: #F0F0F0;
+    color: rgba(0, 0, 0, 0.3);
+    cursor: not-allowed;
+
+    img {
+        opacity: 0.5;
+    }
+
+    &hover {
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+
+        img {
+            opacity: 0.5;
+        }
+    }
+}
+
+.button-create.checkmark {
+    background-color: #F0F0F0;
+    cursor: not-allowed;
+
+    img {
+        opacity: 0.5;
+    }
+
+    &:hover {
+        cursor: not-allowed;
+        box-shadow: none;
+        transform: none;
+
+        img {
+            opacity: 0.5;
+        }
+    }
+}
+
+.button-create.active {
+    background-color: $col-bg-secondary;
+    color: white;
+    cursor: pointer;
+
+    img {
+        opacity: 1;
+    }
+
+    &:hover {
+        background-color: $col-ref-highlight;
+        box-shadow: 0px 3px 5px rgba(0, 0, 0, 0.2);
+        transform: scale(1.00) translateX(-1.01px);
+    }
 }
 
 @media screen and (max-width: 1400px) {
@@ -417,4 +478,3 @@ form {
         max-width: 100%;
     }
 }
-

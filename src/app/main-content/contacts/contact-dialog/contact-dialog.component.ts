@@ -57,7 +57,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     };
     setTimeout(() => (this.animateIn = true), 10);
     console.log(this.contactIndex);
-    
+
   }
 
   ngOnDestroy(): void {
@@ -109,7 +109,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
 
   onCreate(index: number | null | undefined, contactForm: NgForm): void {
     this.resetValidation();
-    if (index) {
+    if (index) {
       if (this.isInvalidForm(contactForm) || this.doubleCheckData(index)) return;
     }
     index == undefined ? this.createNewContact() : this.editContact(index);
@@ -167,5 +167,30 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
       }
     }
   }
+
+  get isCreateDisabled(): boolean {
+    return !this.isAllFilled;
+  }
+
+  get isCheckmarkVisible(): boolean {
+    const filledCount = [this.contactData.name, this.contactData.mail, this.contactData.phone]
+      .filter(val => val.trim()).length;
+    return filledCount === 2;
+  }
+
+  get isDisabledWithoutCheckmark(): boolean {
+    const filledCount = [this.contactData.name, this.contactData.mail, this.contactData.phone]
+      .filter(val => val.trim()).length;
+    return filledCount < 2;
+  }
+
+  get isAllFilled(): boolean {
+    const { name, mail, phone } = this.contactData;
+    return !!name.trim() && !!mail.trim() && !!phone.trim();
+  }
+
+
+
+
 
 }
