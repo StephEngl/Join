@@ -45,7 +45,6 @@ export class ContactsService implements OnDestroy {
   constructor() {
     this.unsubscribeContact = this.subContactsList();
   }
-  // constructor end
 
   ngOnDestroy() {
     if (this.unsubscribeContact) {
@@ -57,7 +56,6 @@ export class ContactsService implements OnDestroy {
     contact: ContactInterface
   ): Promise<void | DocumentReference> {
     try {
-      // add random color
       const contactWithColor = {
         ...contact,
         color: this.getRandomColor(),
@@ -84,11 +82,8 @@ export class ContactsService implements OnDestroy {
 
   async updateContact(contact: ContactInterface) {
     if (contact.id) {
-      console.log("in upadtecontact" , contact);
-      
       try {
         let docRef = this.getSingleDocRef(contact.id);
-        console.log("vor function updateDoc" , contact);
         await updateDoc(docRef, this.getCleanJson(contact));
       } catch (err) {
         console.error(err);
@@ -107,15 +102,12 @@ export class ContactsService implements OnDestroy {
 
   subContactsList() {
     const q = query(this.getContactsRef(), orderBy('name'));
-    return onSnapshot(
-      q,
-      (snapshot) => {
+    return onSnapshot(q, (snapshot) => {
         this.contacts = [];
         snapshot.forEach((element) => {
           const contact = element.data();
           this.contacts.push(this.setContactObject(element.id, contact));
         });
-        console.log(this.contacts);
       },
       (error) => {
         console.error('Firestore Error', error.message);

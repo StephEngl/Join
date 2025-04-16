@@ -70,10 +70,6 @@
     @include hLine();
 }
 
-@media screen and (max-width: 1400px) {
-
-}
-
 @media screen and (max-width: 1000px) {
     .contact-title {
         @include dFlex(flex-start, flex-start);

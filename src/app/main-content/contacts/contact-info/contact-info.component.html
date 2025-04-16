@@ -5,13 +5,15 @@
     <span class="h-line"></span>
 </div>
 
-<div class="animation-container"
+<div
+    class="animation-container"
     [ngClass]="isClicked ? 'animate-in' : 'animate-out'"
 >
     @if (contactIndex != null) {
         <div class="contact-hero">
-            <div class="contact-icon-big"
-            [style.backgroundColor]="contactsService.contacts[contactIndex].color"
+            <div
+                class="contact-icon-big"
+                [style.backgroundColor]="contactsService.contacts[contactIndex].color"
             >
                 {{contactsService.contacts[contactIndex].name.charAt(0).toUpperCase()}}
                 {{lastInitial(contactIndex)}}
@@ -19,11 +21,23 @@
             <div class="contact-menu">
                 <h3>{{ contactsService.contacts[contactIndex].name }}</h3>
                 <div class="btn-container">
-                    <button (click)="editContact(contactIndex)" (mouseenter)="btnEdit = true" (mouseleave)="btnEdit = false">
-                        <img class="contact-menu-icon" [src]="btnEdit ? './assets/icons/kanban/edit_active.svg' : './assets/icons/kanban/edit.svg'" alt="">
+                    <button
+                        (click)="editContact(contactIndex)"
+                        (mouseenter)="btnEdit = true"
+                        (mouseleave)="btnEdit = false"
+                    >
+                        <img 
+                            class="contact-menu-icon"
+                            [src]="btnEdit ? './assets/icons/kanban/edit_active.svg' : './assets/icons/kanban/edit.svg'"
+                            alt=""
+                        >
                         <p>Edit</p>
                     </button>
-                    <button (click)="deleteContact(contactIndex)" (mouseenter)="btnDelete = true" (mouseleave)="btnDelete = false">
+                    <button
+                        (click)="deleteContact(contactIndex)"
+                        (mouseenter)="btnDelete = true"
+                        (mouseleave)="btnDelete = false"
+                    >
                         <img class="contact-menu-icon" [src]="btnDelete ? './assets/icons/kanban/delete_active.svg' : './assets/icons/kanban/delete.svg'" alt="">
                         <p>Delete</p>
                     </button>

@@ -23,7 +23,6 @@ export class ContactInfoComponent {
     mail: string;
     phone: string
   }>();
-
   btnDelete: boolean = false;
   btnEdit: boolean = false;
 
@@ -69,7 +68,5 @@ export class ContactInfoComponent {
     const lastWord = parts.at(-1) || '';
     return lastWord.charAt(0).toUpperCase();
   }
-
-
 
 }
