@@ -10,6 +10,7 @@ import { RouterLink } from '@angular/router';
 })
 export class HeaderComponent {
   showDropdown = false;
+  isDropdownOpen = false;
   dropdownVisible = false;
   showLogoutPopup = false;
   logoutPopupVisible = false; // Steuert, ob das Element im DOM ist
@@ -23,6 +24,11 @@ export class HeaderComponent {
     } else {
       this.showDropdown = false;
     }
+  }
+
+  @HostListener('document:click')
+  handleClickOutside(): void {
+    this.closeDropdown();
   }
 
   onGButtonClick(event: MouseEvent) {
