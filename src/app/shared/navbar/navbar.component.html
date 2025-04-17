@@ -41,7 +41,6 @@
                         [alt]="link.alt"
                         [isActive]="activeLink === link.route"
                         (activate)="setActiveLink(link.route)"
-                        (click)="signalService.isMobile()? signalService.isInfoShown.set(false): null"
                     >
                     </app-navbar-icon-link>
                 }

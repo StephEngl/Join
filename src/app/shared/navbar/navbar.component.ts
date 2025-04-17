@@ -58,6 +58,10 @@ export class NavbarComponent {
     }
 
     setActiveLink(route: string) {
+        if (this.activeLink === "/contacts") {
+            this.signalService.isInfoShown.set(false)
+        }
         this.activeLink = route;
     }
+
 }
