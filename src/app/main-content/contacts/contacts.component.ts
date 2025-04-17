@@ -44,51 +44,17 @@ export class ContactsComponent {
     this.signalService.checkScreenSize();
   }
 
-  toggleDialog() {
-    this.showDialog = !this.showDialog;
-  }
-
-  onContactCreated() {
-    this.toastMessage = 'Contact successfully created';
-    this.toastType = 'create';
-    this.triggerToast();
-  }
-
-  onContactUpdated() {
-    this.toastMessage = 'Changes saved';
-    this.toastType = 'update';
-    this.triggerToast();
-  }
-
-  onContactDeleted() {
-    this.toastMessage = 'Contact deleted';
-    this.toastType = 'delete';
-    this.triggerToast();
-  }
-
-
-  triggerToast() {
-    this.showToast = true;
-    setTimeout(() => this.toastVisible = true, 10);
-    setTimeout(() => this.toastVisible = false, 2000);
-    setTimeout(() => this.showToast = false, 2500);
-  }
-
-  onContactError() {
-    this.showDialog = false;
-    this.toastMessage = 'Something went wrong';
-    this.toastType = 'error';
-    this.triggerToast();
-  }
-
   groupContactsByFirstLetter() {
     this.firstLetters = [...new Set(this.contactsService.contacts.map(contact => contact.name.charAt(0).toUpperCase()))];
     return this.firstLetters;
   }
 
   showContactInfo(index: number | undefined) {
-    if (this.activeContactIndex === index && this.contactClicked && this.activeContactIndex !== null) {
+    if (this.activeContactIndex === index && this.contactClicked && this.activeContactIndex !== undefined) {
       this.contactClicked = false;
+      setTimeout(() => {
+        this.activeContactIndex = undefined;
+      }, 500);
     } else {
       this.activeContactIndex = index;
       this.contactClicked = true;
@@ -165,6 +131,44 @@ export class ContactsComponent {
   closeContactInfo() {
     this.signalService.isInfoShown.set(false);
     this.contactClicked = false;
+  }
+
+
+  toggleDialog() {
+    this.showDialog = !this.showDialog;
+  }
+
+  onContactCreated() {
+    this.toastMessage = 'Contact successfully created';
+    this.toastType = 'create';
+    this.triggerToast();
+  }
+
+  onContactUpdated() {
+    this.toastMessage = 'Changes saved';
+    this.toastType = 'update';
+    this.triggerToast();
+  }
+
+  onContactDeleted() {
+    this.toastMessage = 'Contact deleted';
+    this.toastType = 'delete';
+    this.triggerToast();
+  }
+
+
+  triggerToast() {
+    this.showToast = true;
+    setTimeout(() => this.toastVisible = true, 10);
+    setTimeout(() => this.toastVisible = false, 2000);
+    setTimeout(() => this.showToast = false, 2500);
+  }
+
+  onContactError() {
+    this.showDialog = false;
+    this.toastMessage = 'Something went wrong';
+    this.toastType = 'error';
+    this.triggerToast();
   }
 
 }
