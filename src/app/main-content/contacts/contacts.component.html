@@ -27,6 +27,7 @@
             <p>Add new contact</p>
             <img src="./assets/icons/contacts/new_contact.svg" alt="">
         </button>
+
         <ul>
             @for (letter of groupContactsByFirstLetter(); track letter) {
             <li class="letter-category">
@@ -56,6 +57,8 @@
                 }
             </li>
             }
+            <button class="testDummy" (click)="contactsService.createDummyEntries()">test</button>
+            <button class="" (click)="contactsService.deleteAllEntries()">löschen</button>
         </ul>
     </div>
 

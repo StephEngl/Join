@@ -14,14 +14,18 @@ import {
   where,
   orderBy,
   limit,
+  getDoc,
+  setDoc,
   DocumentReference,
 } from '@angular/fire/firestore';
+import { DummyContactsService } from './dummy-contacts.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactsService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
+  dummyContacts = inject(DummyContactsService)
   contacts: ContactInterface[] = [];
   contactColors: string[] = [
     '#FF7A00',
@@ -43,6 +47,7 @@ export class ContactsService implements OnDestroy {
   unsubscribeContact;
 
   constructor() {
+    this.checkAndResetIfNeeded();
     this.unsubscribeContact = this.subContactsList();
   }
 
@@ -50,6 +55,54 @@ export class ContactsService implements OnDestroy {
     if (this.unsubscribeContact) {
       this.unsubscribeContact();
     }
+  }
+
+  deleteAllEntries() {
+    this.contacts.forEach((contact) => {
+      if (contact.id) {
+        this.deleteContact(contact.id).then(() => {
+        });
+      }
+    });
+  }
+
+  runReset() {
+    this.deleteAllEntries();
+    this.createDummyEntries();
+  }
+
+  async checkAndResetIfNeeded() {
+    const currentDate = this.getTodayDateString();
+    const docRef = doc(this.firestore, 'timeStamp', 'currentDayStamp');
+  
+    try {
+      const stampSnap = await getDoc(docRef);
+      const storedDate = stampSnap.exists() ? stampSnap.data()['currentDay'] : null;
+  
+      if (storedDate !== currentDate) {
+        console.log('detected new Day, resetted Contacts to Dummy Data.');
+        await this.runReset();
+        await this.updateDayStamp(docRef, currentDate);
+      } else {
+        console.log('no reset, current Day active.');
+      }
+    } catch (err) {
+      console.error('Error reading current timestamp:', err);
+    }
+  }
+  
+  getTodayDateString(): string {
+    return new Date().toISOString().split('T')[0];
+  }
+  
+  async updateDayStamp(docRef: DocumentReference, date: string) {
+    await setDoc(docRef, { currentDay: date });
+  }
+
+  createDummyEntries() {
+    this.dummyContacts.dummyContacts.forEach((contact) => {
+      this.addContact(contact);
+    });
   }
 
   async addContact(
