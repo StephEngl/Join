@@ -1,19 +1,24 @@
 // @import "../../../assets/styles/colors.scss";
 @import "../../../assets/styles/mixins.scss";
 
+:host {
+  display: flex;
+  overflow-y: auto;
+}
+
 section {
-@include appMaxWidth();
+  @include appMaxWidth();
 }
 
 p {
-    padding: 16px 0;
+  padding: 16px 0;
 }
 
 span {
-    color: $col-ref-highlight;
+  color: $col-ref-highlight;
 }
 
 .help.list {
-    list-style-position: outside;
-    list-style-type: decimal;
+  list-style-position: outside;
+  list-style-type: decimal;
 }

@@ -198,13 +198,9 @@
     gap: 0;
 
     @media (max-width: 1000px) {
-        // .privacy-and-legal-mobile {
-          display: none;
-        // }
+      display: none;
+    }
   }
-}
-
-
 }
 
 @media (max-width: 650px) {
