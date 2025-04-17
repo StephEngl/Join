@@ -49,7 +49,6 @@ export class NavbarComponent {
             .subscribe(event => {
                 const url = (event as NavigationEnd).urlAfterRedirects;
                 this.activeLink = url;
-                console.log('🧭 Navigiert zu:', url); // aktiven Pfad
             });
         // this.router.events
         //     .pipe(filter(event => event instanceof NavigationEnd))
