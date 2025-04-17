@@ -47,8 +47,8 @@ export class ContactsService implements OnDestroy {
   unsubscribeContact;
 
   constructor() {
-    this.checkAndResetIfNeeded();
     this.unsubscribeContact = this.subContactsList();
+    this.checkAndResetIfNeeded();
   }
 
   ngOnDestroy() {

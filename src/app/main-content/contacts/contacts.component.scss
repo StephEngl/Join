@@ -337,3 +337,13 @@
         display: flex !important;
     }
 }
+
+@media screen and (max-height: 800px) {
+    .contact-infos {
+        padding: 20px!important;
+    }
+
+    .close-info-btn{
+        top: 40px;
+    }
+}
