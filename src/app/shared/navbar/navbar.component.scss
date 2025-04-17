@@ -1,20 +1,15 @@
-@import "../../../assets/styles/colors.scss";
+@import "../../../assets/styles/mixins.scss";
 
 /** ----------DESKTOP---------- **/
-
 .navbar-section-desktop {
-  display: flex;
+  @include dFlex(space-around, center);
   flex-direction: column;
-  justify-content: space-around;
-  align-items: center;
   width: 230px;
   height: 100dvh;
-  background-color: rgba(42, 54, 71, 1);
+  background-color: $col-bg-secondary;
 
   .navbar-icon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include dFlex(center, center);
     width: 100%;
     height: 25%;
     margin: 0;
@@ -44,10 +39,9 @@
   }
 
   .privacy-and-legal-container {
-    display: flex;
+    @include dFlex(center, center);
     flex-direction: column;
     align-items: center;
-    justify-content: center;
     padding: 1rem;
     width: 100%;
     height: 25%;
@@ -63,8 +57,7 @@
       transition: background-color 0.3s ease;
 
       &.active {
-        background-color: #091931;
-
+        background-color: $col-ref-active-nav;
         .link-container p {
           color: $col-font-dropdown;
           width: 100%;
@@ -73,9 +66,7 @@
     }
 
     .link-container {
-      display: flex;
-      align-items: center;
-      justify-content: flex-start;
+      @include dFlex(flex-start, center);
       width: 230px;
       height: auto;
       cursor: pointer;
@@ -89,7 +80,7 @@
         transition: color 0.2s ease, opacity 0.2s ease;
 
         &:hover {
-          color: #29abe2;
+          color: $col-ref-highlight;
           font-weight: bold;
           opacity: 1;
         }
@@ -99,13 +90,12 @@
 }
 
 /** ----------MOBILE---------- **/
-
 .navbar-section-mobile {
   display: none;
   position: relative;
   width: 100%;
   height: 80px;
-  background-color: rgba(42, 54, 71, 1);
+  background-color: $col-bg-secondary;
   padding: 2px 20px;
 }
 
@@ -121,9 +111,7 @@
 }
 
 .privacy-and-legal-mobile {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include dFlex(center, center);
   width: 20%;
   gap: 1rem;
 
@@ -137,35 +125,30 @@
     &.active {
       display: flex;
       align-items: center;
-      background-color: #091931;
+      background-color: $col-ref-active-nav;
       border-radius: 8px;
       height: 76px;
 
       .link-container a {
-        color: #a8a8a8;
+        color: $col-font-secondary;
       }
     }
 
     .link-container {
-      position: relative;
-      display: flex;
-      align-items: center;
-      justify-content: center;
+      @include dFlex(center, center);
       gap: 2px;
       height: auto;
       cursor: pointer;
 
       p {
         text-decoration: none;
-        color: #cdcdcd;
+        color: $col-font-dropdown;
         font-size: 1rem;
         opacity: 0.7;
         transition: color 0.3s ease, opacity 0.2s ease;
       }
 
       &:hover p {
-        color: #29abe2;
-        font-weight: bold;
         opacity: 1;
       }
     }
@@ -190,9 +173,7 @@
   }
 
   .privacy-and-legal-mobile {
-    display: flex;
-    justify-content: flex-end;
-    align-items: center;
+    @include dFlex(flex-end, center);
     width: 100%;
     height: 76px;
     gap: 0;

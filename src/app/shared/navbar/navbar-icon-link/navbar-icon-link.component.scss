@@ -1,34 +1,30 @@
+@import '../../../../assets/styles/mixins.scss';
+
 .navbar-icon-link-background-container {
-  display: flex;
-  justify-content: center;
-  align-items: center;
+  @include dFlex(center, center);
   width: 230px;
   height: 48px;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   &:hover:not(.active) {
-    background-color: rgb(53, 103, 173);
+    background-color: $col-ref-highlight;
   }
 
   &.active {
-    background-color: #091931;
+    background-color: $col-ref-active-nav;
   }
 }
 
 .navbar-icon-link-container {
-  display: flex;
-  justify-content: flex-start;
-  align-items: center;
+  @include dFlex(flex-start, center);
   width: 140px;
   height: auto;
   cursor: pointer;
   transition: background-color 0.3s ease;
 
   .icon-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include dFlex(center, center);
     width: 30px;
     height: 30px;
     padding: 5px;
@@ -41,13 +37,11 @@
   }
 
   .link-container {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include dFlex(center, center);
 
     p {
       text-decoration: none;
-      color: #cdcdcd;
+      color: $col-font-dropdown;
       font-size: 1rem;
       padding: 8px 12px;
     }
@@ -61,14 +55,14 @@
     padding: 1rem;
 
     &:hover:not(.active) {
-      background-color: rgb(53, 103, 173);
+      background-color: $col-ref-highlight;
       border-radius: 8px;
       padding-bottom: 16px;
       padding-top: 16px;
     }
 
     &.active {
-      background-color: #091931;
+      background-color: $col-ref-active-nav;
       border-radius: 8px;
     }
   }
@@ -85,7 +79,7 @@
     .link-container {
       p {
         text-decoration: none;
-        color: #cdcdcd;
+        color: $col-font-dropdown;
         font-size: 1rem;
         padding: 1rem;
       }
