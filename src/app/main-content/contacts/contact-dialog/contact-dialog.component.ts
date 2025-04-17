@@ -3,6 +3,8 @@ import { Component, EventEmitter, Output, OnInit, OnDestroy, Input, inject, } fr
 import { FormsModule } from '@angular/forms';
 import { ContactInterface } from '../../../interfaces/contact.interface';
 import { ContactsService } from '../../../services/contacts.service';
+import { NgForm } from '@angular/forms';
+
 
 @Component({
   selector: 'app-contact-dialog',
@@ -63,16 +65,25 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     this.onCancel();
   }
 
-  onCreate(index: number | undefined): void {
+  onCreate(index: number | undefined, form: NgForm): void {
+    if (form.invalid) {
+      form.controls['name']?.markAsTouched();
+      form.controls['mail']?.markAsTouched();
+      form.controls['phone']?.markAsTouched();
+      return;
+    }
     this.resetValidation();
-    if (this.doubleCheckData(index ?? undefined)) return;
-    index == undefined ? this.createNewContact() : this.editContact(index);
+    if (this.doubleCheckData(index)) return;
+    index === undefined ? this.createNewContact() : this.editContact(index);
   }
+
 
   resetValidation() {
     this.nameExists = false;
     this.mailExists = false;
   }
+
+
 
   doubleCheckData(index?: number): boolean {
     const double = this.contactsService.contacts.find((contact, i) => i !== index && (
