@@ -1,12 +1,12 @@
 import { Component } from '@angular/core';
-import { Router, NavigationEnd } from '@angular/router';
+import { Router, NavigationEnd, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NavbarIconLinkComponent } from './navbar-icon-link/navbar-icon-link.component';
 
 @Component({
     selector: 'app-navbar',
     standalone: true,
-    imports: [NavbarIconLinkComponent],
+    imports: [NavbarIconLinkComponent, RouterLink],
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.scss'
 })
