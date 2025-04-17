@@ -12,7 +12,7 @@ export class HeaderComponent {
   showDropdown = false;
   dropdownVisible = false;
   showLogoutPopup = false;
-  logoutPopupVisible = false; // Steuert, ob das Element im DOM ist
+  logoutPopupVisible = false;
   isWideScreen = window.innerWidth > 1920;
 
   @HostListener('window:resize', ['$event'])

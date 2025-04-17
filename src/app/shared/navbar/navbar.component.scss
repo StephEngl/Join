@@ -65,8 +65,8 @@
       &.active {
         background-color: #091931;
 
-        .link-container a {
-          color: white;
+        .link-container p {
+          color: $col-font-dropdown;
           width: 100%;
         }
       }
@@ -80,19 +80,19 @@
       height: auto;
       cursor: pointer;
 
-      a {
+      p {
         width: 100%;
         text-decoration: none;
         color: $col-font-dropdown;
         font-size: 1rem;
         opacity: 0.7;
         transition: color 0.2s ease, opacity 0.2s ease;
-      }
 
-      &:hover a {
-        color: #29abe2;
-        font-weight: bold;
-        opacity: 1;
+        &:hover {
+          color: #29abe2;
+          font-weight: bold;
+          opacity: 1;
+        }
       }
     }
   }
@@ -155,7 +155,7 @@
       height: auto;
       cursor: pointer;
 
-      a {
+      p {
         text-decoration: none;
         color: #cdcdcd;
         font-size: 1rem;
@@ -163,7 +163,7 @@
         transition: color 0.3s ease, opacity 0.2s ease;
       }
 
-      &:hover a {
+      &:hover p {
         color: #29abe2;
         font-weight: bold;
         opacity: 1;
