@@ -35,6 +35,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   mailExists = false;
 
   contactData: ContactInterface = { name: '', mail: '', phone: '' };
+  originalData: ContactInterface = { name: '', mail: '', phone: '' };
 
   ngOnInit(): void {
     this.contactData = {
@@ -42,6 +43,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
       mail: this.contactMail || '',
       phone: this.contactPhone || '',
     };
+    this.originalData = { ...this.contactData };
     setTimeout(() => (this.animateIn = true), 10);
   }
 
@@ -77,13 +79,10 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     index === undefined ? this.createNewContact() : this.editContact(index);
   }
 
-
   resetValidation() {
     this.nameExists = false;
     this.mailExists = false;
   }
-
-
 
   doubleCheckData(index?: number): boolean {
     const double = this.contactsService.contacts.find((contact, i) => i !== index && (
@@ -135,5 +134,11 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   get isAllFilled(): boolean {
     const { name, mail, phone } = this.contactData;
     return !!name.trim() && !!mail.trim() && !!phone.trim();
+  }
+
+  get isEdited(): boolean {
+    return this.contactData.name !== this.originalData.name ||
+      this.contactData.mail !== this.originalData.mail ||
+      this.contactData.phone !== this.originalData.phone;
   }
 }

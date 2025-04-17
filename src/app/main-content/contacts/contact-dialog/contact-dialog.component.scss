@@ -269,11 +269,7 @@ input:not(.invalid)+img+.error {
     }
 }
 
-.button-save {
-    @include btn();
-    width: 111px;
-    height: 57px;
-}
+
 
 .button-delete {
     @include btn($col-font-secondary, $col-bg-secondary, $col-font-secondary);
@@ -342,6 +338,39 @@ input:not(.invalid)+img+.error {
     img {
         opacity: 1;
     }
+
+    &:hover {
+        background-color: $col-ref-highlight;
+        box-shadow: 0px 3px 5px $col-shadow-black;
+        transform: scale(1.00) translateX(-1.01px);
+    }
+}
+
+.button-save {
+    @include btn();
+    width: 111px;
+    height: 57px;
+}
+
+.button-save.disabled {
+    background-color: $col-background-button;
+    color: rgba(0, 0, 0, 0.3);
+    cursor: not-allowed;
+
+    img,
+    svg {
+        opacity: 0.5;
+    }
+
+    &:hover {
+        box-shadow: none;
+        transform: none;
+    }
+}
+
+.button-save.active {
+    background-color: $col-bg-secondary;
+    color: $col-font-secondary;
 
     &:hover {
         background-color: $col-ref-highlight;
