@@ -185,6 +185,8 @@
 
   .navbar-links-mobile {
     display: flex;
+    width: 100%;
+    justify-content: center;
   }
 
   .privacy-and-legal-mobile {
@@ -194,21 +196,25 @@
     width: 100%;
     height: 76px;
     gap: 0;
+
+    @media (max-width: 1000px) {
+        // .privacy-and-legal-mobile {
+          display: none;
+        // }
   }
 }
 
-@media (max-width: 1000px) {
-  .navbar-mobile-components-container {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-  }
 
-  .privacy-and-legal-mobile {
-    display: none;
+}
+
+@media (max-width: 650px) {
+  .navbar-links-mobile {
+    justify-content: space-between;
   }
-  .links-mobile-alignement {
-    justify-content: center;
+}
+
+@media (max-width: 400px) {
+  .navbar-section-mobile {
+    padding: 0;
   }
 }
