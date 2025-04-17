@@ -5,6 +5,7 @@ import { ContactsService } from '../../services/contacts.service';
 import { ContactInterface } from '../../interfaces/contact.interface';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { SignalsService } from '../../services/signals.service';
+import { DummyContactsService } from '../../services/dummy-contacts.service';
 
 @Component({
   selector: 'app-contacts',
@@ -16,7 +17,7 @@ import { SignalsService } from '../../services/signals.service';
 
 export class ContactsComponent {
   contactsService = inject(ContactsService);
-  signalService = inject(SignalsService)
+  signalService = inject(SignalsService);
   showDialog = false;
   showBtnMenu = false;
   toastVisible = false;
