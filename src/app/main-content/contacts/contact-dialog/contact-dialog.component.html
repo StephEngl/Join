@@ -48,7 +48,7 @@
                     </div>
                     <div class="input-wrapper">
                         <input type="email" placeholder="Email" [(ngModel)]="contactData.mail" name="mail" required
-                            pattern="^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$" email #mail="ngModel"
+                            pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$" email #mail="ngModel"
                             [class.invalid]="mail.invalid && mail.touched || mailExists" />
                         <img src="assets/icons/contacts/contact_mail.svg" alt="Mail Icon" />
                         <span class="error">
