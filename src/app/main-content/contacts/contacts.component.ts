@@ -99,7 +99,6 @@ export class ContactsComponent {
   }
 
   showInfos() {
-    console.log(this.signalService.isInfoShown);
     this.signalService.isInfoShown.set(true);
   }
 

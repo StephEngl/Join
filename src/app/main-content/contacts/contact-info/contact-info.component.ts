@@ -42,6 +42,7 @@ export class ContactInfoComponent {
       try {
         await this.contactsService.deleteContact(contact.id);
         this.closeContactInfo.emit(true)
+        this.contactIndex = undefined;
       } catch (error) {
         console.error('Error deleting contact:', error);
       }

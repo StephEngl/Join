@@ -99,8 +99,12 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     this.contactData.color ||= this.contactsService.contactColors[
       Math.floor(Math.random() * this.contactsService.contactColors.length)
     ];
+    this.contactData.name = this.contactData.name.charAt(0).toUpperCase() + this.contactData.name.slice(1);
     this.contactsService.addContact(this.contactData)
-      .then(() => { this.create.emit(); this.onCancel(); })
+      .then(() => {
+        this.create.emit();
+        this.onCancel();
+      })
       .catch(() => this.error.emit());
   }
 
@@ -109,6 +113,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     Object.assign(contact, this.contactData);
     if (contact.id) {
       try {
+        contact.name = contact.name.charAt(0).toUpperCase() + contact.name.slice(1);
         await this.contactsService.updateContact(contact);
         this.create.emit();
         this.update.emit();
