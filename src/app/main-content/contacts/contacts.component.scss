@@ -10,7 +10,7 @@
     left: $navbar-width;
 
     .contacts-list {
-        @include dFlex(center, center);
+        @include dFlex(center, normal);
         flex-direction: column;
         width: $contact-list-width;
         padding: 20px;
