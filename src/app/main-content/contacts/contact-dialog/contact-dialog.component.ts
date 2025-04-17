@@ -74,14 +74,81 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
       form.controls['phone']?.markAsTouched();
       return;
     }
+
+    const name = this.contactData.name;
+
+    if (!this.validNameCharacters(this.contactData.name)) {
+      form.controls['name']?.setErrors({ invalidCharacters: true });
+      return;
+    }
+    if (!this.valideFullName(name)) {
+      this.nameExists = false;
+      form.controls['name']?.setErrors({ invalidFullName: true });
+      return;
+    }
+    if (!this.validNameCharacters(name)) {
+      this.nameExists = false;
+      form.controls['name']?.setErrors({ invalidCharacters: true });
+      return;
+    }
     this.resetValidation();
     if (this.doubleCheckData(index)) return;
     index === undefined ? this.createNewContact() : this.editContact(index);
   }
 
+  valideFullName(name: string): boolean {
+    const parts = name.trim().split(/\s+/);
+    return parts.length >= 2 && parts.every(part => part.length >= 2);
+  }
+
+  validNameCharacters(name: string): boolean {
+    const allowedCharsRegex = /^[A-Za-zÄäÖöÜüß\s'-]+$/;
+    return allowedCharsRegex.test(name);
+  }
+
   resetValidation() {
     this.nameExists = false;
     this.mailExists = false;
+  }
+
+  focusNumbers(): void {
+    if (!this.contactData.phone || this.contactData.phone.trim() === '') {
+      this.contactData.phone = '+49 ';
+    }
+  }
+
+  resetNumb(): void {
+    if (this.contactData.phone.trim() === '+49') {
+      this.contactData.phone = '';
+    }
+  }
+
+  onlyNumbers(event: KeyboardEvent): void {
+    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab'];
+    const input = event.target as HTMLInputElement;
+    if (allowedKeys.includes(event.key)) return;
+    const currentValue = input.value;
+    const cursorPosition = input.selectionStart || 0;
+    if (!/^\d$/.test(event.key) || (cursorPosition < 4 && currentValue.startsWith('+49'))) {
+      event.preventDefault();
+    }
+  }
+
+  noDeleteNumb(event: KeyboardEvent): void {
+    const input = event.target as HTMLInputElement;
+    const cursorPos = input.selectionStart || 0;
+    const prefix = '+49 ';
+    if (
+      (event.key === 'Backspace' && cursorPos <= prefix.length) ||
+      (event.key === 'Delete' && cursorPos < prefix.length)
+    ) {
+      event.preventDefault();
+    }
+    if (!input.value.startsWith(prefix)) {
+      input.value = prefix + input.value.replace(/^\+?49\s?/, '');
+      this.contactData.phone = input.value;
+      event.preventDefault();
+    }
   }
 
   doubleCheckData(index?: number): boolean {

@@ -41,21 +41,21 @@
                                     fill="#FFFFFF" />
                             </g>
                         </svg>
-
                     </div>
                     }
                 </div>
-
-
-
                 <form (ngSubmit)="onCreate(contactIndex, contactForm)" #contactForm="ngForm">
                     <div class="input-wrapper">
                         <input type="text" placeholder="Name" [(ngModel)]="contactData.name" name="name" required
                             #name="ngModel" [class.invalid]="name.invalid && name.touched || nameExists" />
                         <img src="assets/icons/contacts/contact_name.svg" alt="Name Icon" />
                         <span class="error">
-                            @if (name.touched && name.invalid) {
+                            @if (name.touched && name.invalid && name.errors?.['required']) {
                             Please enter your name!
+                            } @else if (name.touched && name.errors?.['invalidFullName']) {
+                            Please enter a first and last name!
+                            } @else if (name.touched && name.errors?.['invalidCharacters']) {
+                            Only letters, spaces, hyphens and apostrophes are allowed!
                             } @else if (nameExists) {
                             A contact with this name already exists!
                             } @else {
@@ -79,14 +79,21 @@
                             &nbsp;
                             }
                         </span>
-
                     </div>
                     <div class="input-wrapper">
-                        <input type="text" placeholder="Phone" [(ngModel)]="contactData.phone" name="phone" required
-                            #phone="ngModel" [class.invalid]="phone.invalid && phone.touched" />
+                        <input type="tel" name="phone" placeholder="Phone" required [(ngModel)]="contactData.phone"
+                            #phone="ngModel" (keydown)="noDeleteNumb($event)" (focus)="focusNumbers()"
+                            (blur)="resetNumb()" pattern="^\+49\s\d{3,}$" inputmode="numeric"
+                            [class.invalid]="phone.invalid && phone.touched" (keypress)="onlyNumbers($event)" />
                         <img src="assets/icons/contacts/contact_phone.svg" alt="Phone Icon" />
                         <span class="error">
-                            {{ phone.touched && phone.invalid ? 'Please enter your phone number!' : '\u00A0' }}
+                            @if (phone.touched && phone.errors?.['required']) {
+                            Please enter your phone number!
+                            } @else if (phone.touched && phone.errors?.['pattern']) {
+                            Phone number must start with +49 followed by at least 3 digits!
+                            } @else {
+                            &nbsp;
+                            }
                         </span>
                     </div>
                     <div class="buttons">
