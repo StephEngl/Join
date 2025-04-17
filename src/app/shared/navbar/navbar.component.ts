@@ -1,7 +1,8 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Router, NavigationEnd, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NavbarIconLinkComponent } from './navbar-icon-link/navbar-icon-link.component';
+import { SignalsService } from '../../services/signals.service';
 
 @Component({
     selector: 'app-navbar',
@@ -12,6 +13,7 @@ import { NavbarIconLinkComponent } from './navbar-icon-link/navbar-icon-link.com
 })
 export class NavbarComponent {
     activeLink: string = '';
+    signalService = inject(SignalsService);
 
     links = [
         {

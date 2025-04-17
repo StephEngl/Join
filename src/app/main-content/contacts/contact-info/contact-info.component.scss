@@ -89,3 +89,13 @@
         display: block;
     }
 }
+
+@media screen and (max-height: 800px) {
+    .contact-hero {
+        margin-top: 20px;
+    }
+    .contact-info {
+        @include dFlex(center, flex-start, 5px);
+        margin-top: 20px;
+    }
+}
