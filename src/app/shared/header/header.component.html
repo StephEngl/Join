@@ -5,10 +5,10 @@
     <a routerLink="/help"
       ><img class="help-icon" src="../../../assets/icons/header/help.svg" alt=""
     /></a>
-    <button class="menu-button" (click)="onGButtonClick($event)">G</button>
+    <button class="menu-button" (click)="onGButtonClick($event); $event.stopPropagation()">G</button>
 
     @if (dropdownVisible) {
-    <div class="dropdown-menu" [class.show]="showDropdown">
+    <div class="dropdown-menu" [class.show]="showDropdown" (click)="$event.stopPropagation()">
       <div class="router-wrapper">
         <a (click)="toggleDropdown()" routerLink="/help">Help</a>
         <a (click)="toggleDropdown()" routerLink="/legal-notice"
