@@ -16,6 +16,14 @@ import { NgForm } from '@angular/forms';
 export class ContactDialogComponent implements OnInit, OnDestroy {
 
   readonly contactsService = inject(ContactsService);
+  readonly nameBlacklist = [
+    'arschloch', 'hurensohn', 'idiot', 'dummkopf', 'wichser', 'hure', 'schlampe',
+    'ficker', 'miststück', 'penner', 'spast', 'bastard', 'scheißkerl', 'scheisse', 'verpisser',
+    'spasti', 'nutte', 'depp', 'trottel', 'versager', 'mongo', 'vollidiot', 'huso', 'hurenkind',
+    'schwachkopf', 'drecksack', 'arsch', 'blödmann', 'klappspaten', 'pisser', 'krüppel', 'verrückt',
+    'missgeburt', 'abfall', 'abschaum', 'dumm', 'hirnlos', 'nullnummer', 'irre', 'psychopath',
+    'arschgeige', 'geistesgestört', 'freak', 'honk', 'atze', 'nazi', 'hitler', 'hitlergruß'
+  ];
 
   @Output() cancel = new EventEmitter<void>();
   @Output() create = new EventEmitter<void>();
@@ -74,26 +82,31 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
       form.controls['phone']?.markAsTouched();
       return;
     }
-
-    const name = this.contactData.name;
-
-    if (!this.validNameCharacters(this.contactData.name)) {
-      form.controls['name']?.setErrors({ invalidCharacters: true });
-      return;
-    }
-    if (!this.valideFullName(name)) {
-      this.nameExists = false;
-      form.controls['name']?.setErrors({ invalidFullName: true });
-      return;
-    }
-    if (!this.validNameCharacters(name)) {
-      this.nameExists = false;
-      form.controls['name']?.setErrors({ invalidCharacters: true });
-      return;
-    }
+    if (!this.validateName(this.contactData.name, form)) return;
     this.resetValidation();
     if (this.doubleCheckData(index)) return;
     index === undefined ? this.createNewContact() : this.editContact(index);
+  }
+
+  validateName(name: string, form: NgForm): boolean {
+    if (!this.validNameCharacters(name)) {
+      form.controls['name']?.setErrors({ invalidCharacters: true });
+      return false;
+    }
+    if (!this.valideFullName(name)) {
+      form.controls['name']?.setErrors({ invalidFullName: true });
+      return false;
+    }
+    if (this.blackListName(name)) {
+      form.controls['name']?.setErrors({ forbiddenWord: true });
+      return false;
+    }
+    return true;
+  }
+
+  blackListName(name: string): boolean {
+    const lower = name.toLowerCase();
+    return this.nameBlacklist.some(entry => lower.includes(entry));
   }
 
   valideFullName(name: string): boolean {
