@@ -2,6 +2,11 @@
     <div class="dialog-content" [class.animate-in]="animateIn" [class.animate-out]="animateOut"
         (click)="$event.stopPropagation()">
         <div class="dialog-left">
+            <div class="mobile-close">
+                <button (click)="onOverlayClick()" class="close-button">
+                    <img src="../../../../assets/icons/kanban/close_white.svg" alt="Close Icon" />
+                </button>
+            </div>
             <img src="../../../../assets/icons/navbar/logo.svg" alt="Join Logo" class="logo" />
             @if (contactName) {
             <h2>Edit contact</h2>

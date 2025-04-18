@@ -36,7 +36,6 @@ input {
     }
 }
 
-
 input:not(.invalid)+img+.error {
     visibility: hidden;
 }
@@ -65,6 +64,7 @@ input:not(.invalid)+img+.error {
 }
 
 .dialog-left {
+    position: relative;
     background-color: $col-bg-secondary;
     color: $col-font-secondary;
     padding: 66px 48px;
@@ -202,7 +202,6 @@ input:not(.invalid)+img+.error {
     }
 }
 
-
 .error {
     min-height: 16px;
     font-size: 12px;
@@ -214,12 +213,21 @@ input:not(.invalid)+img+.error {
     height: 16px;
 }
 
+.mobile-close {
+    display: none;
+}
+
 .close-button {
     background: transparent;
     border: none;
     cursor: pointer;
-    padding: 8px;
     border-radius: 50%;
+    width: 30px;
+    height: 30px;
+    border-radius: 50%;
+    display: flex;
+    align-items: center;
+    justify-content: center;
     transition: background-color 0.2s ease;
 
     img {
@@ -318,6 +326,7 @@ input:not(.invalid)+img+.error {
 
     img {
         transition: opacity 0.3s ease;
+        object-fit: contain;
     }
 }
 
@@ -407,14 +416,38 @@ input:not(.invalid)+img+.error {
 
 @media screen and (max-width: 1000px) {
 
-    .close-button {
+    .dialog-right .close-icon {
         display: none;
     }
 
-    .close-icon {
-        width: 100%;
+    .dialog-left .mobile-close {
         display: flex;
-        justify-content: flex-end;
+        position: absolute;
+        top: 24px;
+        right: 24px;
+
+        button {
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+
+            img {
+                width: 14px;
+                height: 14px;
+                pointer-events: none;
+            }
+
+            &:hover {
+                background-color: $col-ref-highlight;
+            }
+        }
     }
 
     .buttons {
@@ -541,13 +574,12 @@ input:not(.invalid)+img+.error {
 }
 
 @media only screen and (max-width: 375px) and (max-height: 667px) {
+
     .dialog-content {
         width: 100vw;
         max-width: 375px;
         border-radius: 35px !important;
     }
-
-
 
     .dialog-left {
         border-radius: 35px 35px 0 0;
