@@ -14,4 +14,13 @@ $queryBreak1: 1400px;
 $queryBreak2: 1000px;
 
 /* assets */
-$commonButton1: 10px /*example*/
+$commonButton1: 10px;
+/*example*/
+
+$h2-font-sizes-media: (
+    "iphone-se": 31px,
+);
+
+$span-font-sizes-media: (
+    "iphone-se": 13px,
+);

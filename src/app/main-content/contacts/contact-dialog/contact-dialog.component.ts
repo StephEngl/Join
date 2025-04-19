@@ -22,7 +22,8 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     'spasti', 'nutte', 'depp', 'trottel', 'versager', 'mongo', 'vollidiot', 'huso', 'hurenkind',
     'schwachkopf', 'drecksack', 'arsch', 'blödmann', 'klappspaten', 'pisser', 'krüppel', 'verrückt',
     'missgeburt', 'abfall', 'abschaum', 'dumm', 'hirnlos', 'nullnummer', 'irre', 'psychopath',
-    'arschgeige', 'geistesgestört', 'freak', 'honk', 'atze', 'nazi', 'hitler', 'hitlergruß'
+    'arschgeige', 'geistesgestört', 'freak', 'honk', 'atze', 'nazi', 'hitler', 'hitlergruß', 'nigger', 'zigeuner', 'kackhaufen',
+    'fotze', 'weichei', 'feigling', 'taubstumm'
   ];
 
   @Output() cancel = new EventEmitter<void>();

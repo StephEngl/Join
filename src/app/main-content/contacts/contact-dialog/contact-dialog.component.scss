@@ -1,5 +1,5 @@
-@import './../../../../assets/styles/mixins.scss';
 @import './../../../../assets/styles/variables.scss';
+@import './../../../../assets/styles/mixins.scss';
 
 form {
     display: flex;
@@ -15,7 +15,7 @@ input {
     font-weight: 400;
     line-height: 120%;
     border-radius: 10px;
-    border: 1px solid $col-font-inactive;
+    border: 1px solid $col-font-grey;
     width: 100%;
     height: 50px;
     padding: 13px 21px;
@@ -26,7 +26,7 @@ input {
     }
 
     &::placeholder {
-        color: $col-shadow-black;
+        color: $col-font-grey;
         opacity: 0.7;
     }
 
@@ -38,6 +38,10 @@ input {
 
 input:not(.invalid)+img+.error {
     visibility: hidden;
+}
+
+.logo {
+    margin-bottom: 20px;
 }
 
 .dialog-overlay {
@@ -75,6 +79,16 @@ input:not(.invalid)+img+.error {
     justify-content: center;
     gap: 16px;
 
+
+    h2 {
+        font-family: 'Inter', sans-serif;
+        font-size: 61px;
+        font-weight: 700;
+        line-height: 120%;
+        color: $col-font-secondary;
+        margin: 0;
+    }
+
     span {
         font-family: "Inter", sans-serif;
         font-weight: 300;
@@ -86,13 +100,14 @@ input:not(.invalid)+img+.error {
     img {
         width: 55.6px;
         height: 66.48px;
+
     }
 }
 
 .dialog-right {
     @include dFlex(flex-start, center, 32px, relative);
     flex-direction: column;
-    background-color: $col-white;
+    background-color: $col-font-secondary;
     color: $col-dialog-right;
     padding: 66px 50px;
     width: 934px;
@@ -108,7 +123,7 @@ input:not(.invalid)+img+.error {
         width: 128px;
         height: 128px;
         border-radius: 50%;
-        background-color: white;
+        background-color: $col-font-secondary;
         border: 1px solid $col-shadow-black;
         display: flex;
         align-items: center;
@@ -120,7 +135,7 @@ input:not(.invalid)+img+.error {
         width: 120px;
         height: 120px;
         border-radius: 50%;
-        background-color: $col-background-grey;
+        background-color: $col-font-dropdown;
         display: flex;
         align-items: center;
         justify-content: center;
@@ -145,7 +160,7 @@ input:not(.invalid)+img+.error {
     width: 120px;
     height: 120px;
     border-radius: 50%;
-    background-color: $col-background-grey;
+    background-color: $col-font-dropdown;
 
     img {
         width: 48px;
@@ -291,6 +306,7 @@ input:not(.invalid)+img+.error {
     }
 }
 
+
 .button-delete {
     @include btn($col-font-secondary, $col-bg-secondary, $col-font-secondary);
     border: 1px solid $col-bg-secondary;
@@ -332,7 +348,7 @@ input:not(.invalid)+img+.error {
 
 .button-create.disabled,
 .button-create.checkmark {
-    background-color: $col-background-button;
+    background-color: $col-font-dropdown;
     cursor: not-allowed;
 
     img {
@@ -373,7 +389,7 @@ input:not(.invalid)+img+.error {
 }
 
 .button-save.disabled {
-    background-color: $col-background-button;
+    background-color: $col-font-inactive;
     color: rgba(0, 0, 0, 0.3);
     cursor: not-allowed;
 
@@ -399,6 +415,51 @@ input:not(.invalid)+img+.error {
     }
 }
 
+@media screen and (max-width: 1470px) {
+
+    .dialog-left {
+        gap: 6px;
+
+        h2 {
+            font-size: 50px;
+        }
+
+        span {
+            font-size: 24px;
+        }
+    }
+}
+
+@media screen and (max-width: 1340px) {
+
+    .dialog-left {
+        gap: 5px;
+
+        h2 {
+            font-size: 40px;
+        }
+
+        span {
+            font-size: 17px;
+        }
+    }
+}
+
+@media screen and (max-width: 1050px) {
+
+    .dialog-left {
+        gap: 4px;
+
+        h2 {
+            font-size: 30px;
+        }
+
+        span {
+            font-size: 13px;
+        }
+    }
+}
+
 @media screen and (max-width: 1400px) {
 
     .dialog-content {
@@ -416,8 +477,41 @@ input:not(.invalid)+img+.error {
 
 @media screen and (max-width: 1000px) {
 
+    .button-cancel {
+        display: none;
+    }
+
+    .button-delete {
+        width: 99px;
+        height: 51px;
+    }
+
+    .button-create {
+        width: 202px;
+        height: 51px;
+        margin-top: 15px;
+    }
+
+    .button-save {
+        width: 99px;
+        height: 51px;
+    }
+
     .dialog-right .close-icon {
         display: none;
+    }
+
+    .dialog-left {
+        height: 60%;
+        width: 100%;
+        border-radius: 35px 35px 0 0;
+        padding: 66px 24px 66px 24px;
+        display: flex;
+        gap: 4px;
+
+        img.logo {
+            display: none;
+        }
     }
 
     .dialog-left .mobile-close {
@@ -454,10 +548,6 @@ input:not(.invalid)+img+.error {
         justify-content: center;
     }
 
-    .button-cancel {
-        display: none;
-    }
-
     .dialog-content {
         max-height: calc(100dvh - 1px);
         height: calc(100vh - 50px - 30px);
@@ -468,22 +558,9 @@ input:not(.invalid)+img+.error {
         overflow: visible;
     }
 
-    .dialog-left {
-        width: 100%;
-        border-radius: 35px 35px 0 0;
-        padding: 48px 24px 24px 24px;
-        display: flex;
-        gap: 8px;
-
-        img.logo {
-            display: none;
-        }
-    }
-
     .dialog-right {
         width: 100%;
         border-radius: 0 0 35px 35px;
-        padding: 40px 24px 70px 24px;
         position: relative;
     }
 
@@ -492,10 +569,11 @@ input:not(.invalid)+img+.error {
         gap: 24px;
         align-items: center;
         max-width: 100%;
+        margin-top: 30px;
 
         .profile-ring {
             position: absolute;
-            top: -140px;
+            top: -160px;
             left: 50%;
             transform: translateX(-50%);
         }
@@ -505,7 +583,7 @@ input:not(.invalid)+img+.error {
             left: 50%;
             transform: translateX(-50%);
             border-radius: 50%;
-            background-color: $col-background-grey;
+            background-color: $col-font-inactive;
             display: flex;
             justify-content: center;
             align-items: center;
@@ -563,7 +641,7 @@ input:not(.invalid)+img+.error {
 
         img {
             position: absolute;
-            top: 38%;
+            top: 43%;
             right: 18px;
             transform: translateY(-50%);
             width: 24px;
@@ -571,19 +649,24 @@ input:not(.invalid)+img+.error {
             pointer-events: none;
         }
     }
+
 }
 
-@media only screen and (max-width: 375px) and (max-height: 667px) {
+@include media("iphone-se") {
+
+    @include h2Typo("iphone-se");
+    @include spanTypo("iphone-se");
 
     .dialog-content {
         width: 100vw;
         max-width: 375px;
-        border-radius: 35px !important;
+        border-radius: 35px;
     }
 
     .dialog-left {
         border-radius: 35px 35px 0 0;
         padding: 24px;
+        gap: 2px;
     }
 
     .dialog-right {
@@ -591,25 +674,26 @@ input:not(.invalid)+img+.error {
         border-radius: 0 0 35px 35px;
     }
 
-    .profile-ring {
-        width: 112px;
-        height: 112px;
-        top: -200px;
-    }
-
-    .profile-placeholder {
-        width: 104px;
-        height: 104px;
-
-        svg {
-            width: 48px;
-            height: 48px;
-        }
-    }
-
     .form-wrapper {
         padding-top: 32px;
         gap: 16px;
+
+        .profile-ring {
+            position: absolute;
+            top: -115px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .profile-placeholder {
+            width: 120px;
+            height: 120px;
+
+            svg {
+                width: 48px;
+                height: 48px;
+            }
+        }
     }
 
     .input-wrapper input {
@@ -625,13 +709,5 @@ input:not(.invalid)+img+.error {
 
     .close-button {
         padding: 4px;
-    }
-
-    .dialog-left h2 {
-        font-size: 28px;
-    }
-
-    .dialog-left span {
-        font-size: 18px;
     }
 }
