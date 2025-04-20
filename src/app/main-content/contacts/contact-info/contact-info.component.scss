@@ -4,11 +4,13 @@
     @include dFlex(center, flex-start, 20px);
     flex-direction: column;
     margin-top: 50px;
+
     >p:first-child {
         margin-bottom: 30px;
         font-weight: 300;
         font-size: 1.5rem;
     }
+
     >p {
         font-weight: 600;
     }
@@ -28,16 +30,20 @@
 .btn-container {
     @include dFlex(flex-start, center, 10px);
     margin-top: 10px;
+
     >button {
         @include dFlex(center, center, 5px);
         background-color: transparent;
         cursor: pointer;
+
         &:hover {
             color: $col-ref-highlight;
+
             >img {
                 src: url('./../../../../assets/icons/kanban/close.svg');
             }
         }
+
         >img {
             height: 18px;
         }
@@ -76,15 +82,19 @@
         flex-direction: column;
         gap: 6px;
     }
+
     .btn-container {
         display: none;
     }
+
     .contact-icon-big {
         @include contactIcon(80px, 30px, -3px);
     }
+
     .v-line {
         display: none;
     }
+
     .h-line {
         display: block;
     }
@@ -94,6 +104,7 @@
     .contact-hero {
         margin-top: 20px;
     }
+
     .contact-info {
         @include dFlex(center, flex-start, 5px);
         margin-top: 20px;

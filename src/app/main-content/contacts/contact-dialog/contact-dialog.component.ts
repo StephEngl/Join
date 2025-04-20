@@ -5,7 +5,6 @@ import { ContactInterface } from '../../../interfaces/contact.interface';
 import { ContactsService } from '../../../services/contacts.service';
 import { NgForm } from '@angular/forms';
 
-
 @Component({
   selector: 'app-contact-dialog',
   standalone: true,
@@ -13,6 +12,7 @@ import { NgForm } from '@angular/forms';
   templateUrl: './contact-dialog.component.html',
   styleUrls: ['./contact-dialog.component.scss'],
 })
+
 export class ContactDialogComponent implements OnInit, OnDestroy {
 
   readonly contactsService = inject(ContactsService);
@@ -208,8 +208,40 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     }
   }
 
+  validateLive(field: 'name' | 'mail', form: NgForm): void {
+    if (field === 'name') {
+      this.validateNameLive(form);
+    }
+    if (field === 'mail') {
+      this.validateMailLive();
+    }
+  }
+
+  validateNameLive(form: NgForm): void {
+    if (!this.validNameCharacters(this.contactData.name)) {
+      form.controls['name']?.setErrors({ invalidCharacters: true });
+    } else if (!this.valideFullName(this.contactData.name)) {
+      form.controls['name']?.setErrors({ invalidFullName: true });
+    } else if (this.blackListName(this.contactData.name)) {
+      form.controls['name']?.setErrors({ forbiddenWord: true });
+    } else {
+      form.controls['name']?.setErrors(null);
+    }
+    this.nameExists = this.contactsService.contacts.some(
+      (contact, i) => i !== this.contactIndex &&
+        contact.name.toLowerCase() === this.contactData.name.toLowerCase()
+    );
+  }
+
+  validateMailLive(): void {
+    this.mailExists = this.contactsService.contacts.some(
+      (contact, i) => i !== this.contactIndex &&
+        contact.mail.toLowerCase() === this.contactData.mail.toLowerCase()
+    );
+  }
+
   get isCreateDisabled(): boolean {
-    return !this.isAllFilled;
+    return !this.isFormValid;
   }
 
   get isCheckmarkVisible(): boolean {
@@ -217,14 +249,19 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
       .filter(val => val.trim()).length === 2;
   }
 
-  get isAllFilled(): boolean {
-    const { name, mail, phone } = this.contactData;
-    return !!name.trim() && !!mail.trim() && !!phone.trim();
-  }
-
   get isEdited(): boolean {
     return this.contactData.name !== this.originalData.name ||
       this.contactData.mail !== this.originalData.mail ||
       this.contactData.phone !== this.originalData.phone;
+  }
+
+  get isFormValid(): boolean {
+    const nameValid = this.validNameCharacters(this.contactData.name) &&
+      this.valideFullName(this.contactData.name) &&
+      !this.blackListName(this.contactData.name) &&
+      !this.nameExists;
+    const mailValid = !!this.contactData.mail.trim() && !this.mailExists;
+    const phoneValid = !!this.contactData.phone.trim();
+    return nameValid && mailValid && phoneValid;
   }
 }

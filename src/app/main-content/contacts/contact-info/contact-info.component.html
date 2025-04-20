@@ -21,7 +21,7 @@
                         alt="">
                     <p>Edit</p>
                 </button>
-                <button (click)="deleteContact(contactIndex)" (mouseenter)="btnDelete = true"
+                <button (click)="triggerDelete(contactIndex!)" (mouseenter)="btnDelete = true"
                     (mouseleave)="btnDelete = false">
                     <img class="contact-menu-icon"
                         [src]="btnDelete ? './assets/icons/kanban/delete_active.svg' : './assets/icons/kanban/delete.svg'"

@@ -13,13 +13,14 @@ import { SignalsService } from '../../../services/signals.service';
 export class ContactInfoComponent {
   contactsService = inject(ContactsService);
   signalService = inject(SignalsService);
-  @Input()contactIndex: number | undefined;
+  @Input() contactIndex: number | undefined;
   @Input() isClicked: boolean = false;
-  @Output()showDialog = new EventEmitter<boolean>();
-  @Output()editIndex = new EventEmitter<number>();
-  @Output()closeContactInfo = new EventEmitter<boolean>();
-  @Output()editContactData = new EventEmitter<{
-    id: string; 
+  @Output() showDialog = new EventEmitter<boolean>();
+  @Output() editIndex = new EventEmitter<number>();
+  @Output() closeContactInfo = new EventEmitter<boolean>();
+  @Output() deleteContactWithToast = new EventEmitter<number>();
+  @Output() editContactData = new EventEmitter<{
+    id: string;
     name: string;
     mail: string;
     phone: string
@@ -30,7 +31,7 @@ export class ContactInfoComponent {
   ngOnInit() {
     this.signalService.checkScreenSize();
   }
-  
+
   @HostListener('window:resize', [])
   onWindowResize() {
     this.signalService.checkScreenSize();
@@ -42,7 +43,7 @@ export class ContactInfoComponent {
       try {
         await this.contactsService.deleteContact(contact.id);
         this.closeContactInfo.emit(true)
-        
+
       } catch (error) {
         console.error('Error deleting contact:', error);
       }
@@ -61,6 +62,10 @@ export class ContactInfoComponent {
         phone: contact.phone
       });
     }
+  }
+
+  triggerDelete(index: number): void {
+    this.deleteContactWithToast.emit(index);
   }
 
 }
