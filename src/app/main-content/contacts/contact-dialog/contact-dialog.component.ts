@@ -16,15 +16,6 @@ import { NgForm } from '@angular/forms';
 export class ContactDialogComponent implements OnInit, OnDestroy {
 
   readonly contactsService = inject(ContactsService);
-  readonly nameBlacklist = [
-    'arschloch', 'hurensohn', 'idiot', 'dummkopf', 'wichser', 'hure', 'schlampe',
-    'ficker', 'miststück', 'penner', 'spast', 'bastard', 'scheißkerl', 'scheisse', 'verpisser',
-    'spasti', 'nutte', 'depp', 'trottel', 'versager', 'mongo', 'vollidiot', 'huso', 'hurenkind',
-    'schwachkopf', 'drecksack', 'arsch', 'blödmann', 'klappspaten', 'pisser', 'krüppel', 'verrückt',
-    'missgeburt', 'abfall', 'abschaum', 'dumm', 'hirnlos', 'nullnummer', 'irre', 'psychopath',
-    'arschgeige', 'geistesgestört', 'freak', 'honk', 'atze', 'nazi', 'hitler', 'hitlergruß', 'nigger', 'zigeuner', 'kackhaufen',
-    'fotze', 'weichei', 'feigling', 'taubstumm'
-  ];
 
   @Output() cancel = new EventEmitter<void>();
   @Output() create = new EventEmitter<void>();
@@ -98,17 +89,9 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
       form.controls['name']?.setErrors({ invalidFullName: true });
       return false;
     }
-    if (this.blackListName(name)) {
-      form.controls['name']?.setErrors({ forbiddenWord: true });
-      return false;
-    }
     return true;
   }
 
-  blackListName(name: string): boolean {
-    const lower = name.toLowerCase();
-    return this.nameBlacklist.some(entry => lower.includes(entry));
-  }
 
   valideFullName(name: string): boolean {
     const parts = name.trim().split(/\s+/);
@@ -222,8 +205,6 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
       form.controls['name']?.setErrors({ invalidCharacters: true });
     } else if (!this.valideFullName(this.contactData.name)) {
       form.controls['name']?.setErrors({ invalidFullName: true });
-    } else if (this.blackListName(this.contactData.name)) {
-      form.controls['name']?.setErrors({ forbiddenWord: true });
     } else {
       form.controls['name']?.setErrors(null);
     }
@@ -258,7 +239,6 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   get isFormValid(): boolean {
     const nameValid = this.validNameCharacters(this.contactData.name) &&
       this.valideFullName(this.contactData.name) &&
-      !this.blackListName(this.contactData.name) &&
       !this.nameExists;
     const mailValid = !!this.contactData.mail.trim() && !this.mailExists;
     const phoneValid = !!this.contactData.phone.trim();
