@@ -229,7 +229,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
       !this.mailExists;
     const phoneValid = /^\+49[\s\d\-]{5,}$/.test(this.contactData.phone.trim());
     const validFields = [nameValid, mailValid, phoneValid].filter(valide => valide === true).length;
-    return validFields === 2;
+    return validFields === 3;
   }
 
   get isEdited(): boolean {
