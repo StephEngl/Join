@@ -83,11 +83,9 @@ export class ContactsService implements OnDestroy {
       const storedDate = stampSnap.exists() ? stampSnap.data()['currentDay'] : null;
   
       if (storedDate !== currentDate) {
-        console.log('detected new Day, resetted Contacts to Dummy Data.');
         await this.runReset();
         await this.updateDayStamp(docRef, currentDate);
       } else {
-        console.log('no reset, current Day active.');
       }
     } catch (err) {
       console.error('Error reading current timestamp:', err);
