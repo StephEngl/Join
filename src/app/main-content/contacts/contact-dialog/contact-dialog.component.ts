@@ -108,7 +108,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   }
 
   focusNumbers(): void {
-    if (!this.contactData.phone || this.contactData.phone.trim() === '') {
+    if (!this.contactData.phone.startsWith('+49')) {
       this.contactData.phone = '+49 ';
     }
   }
@@ -120,29 +120,25 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   }
 
   onlyNumbers(event: KeyboardEvent): void {
-    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab'];
+    const allowedKeys = ['Backspace', 'ArrowLeft', 'ArrowRight', 'Tab', ' ', '-', '/'];
     const input = event.target as HTMLInputElement;
-    if (allowedKeys.includes(event.key)) return;
-    const currentValue = input.value;
-    const cursorPosition = input.selectionStart || 0;
-    if (!/^\d$/.test(event.key) || (cursorPosition < 4 && currentValue.startsWith('+49'))) {
+    const key = event.key;
+    if (allowedKeys.includes(key)) return;
+    if (key === '+') {
+      this.handlePlusSignInput(event, input);
+      return;
+    }
+    const isDigit = /^\d$/.test(key);
+    if (!isDigit) {
       event.preventDefault();
     }
   }
 
-  noDeleteNumb(event: KeyboardEvent): void {
-    const input = event.target as HTMLInputElement;
-    const cursorPos = input.selectionStart || 0;
-    const prefix = '+49 ';
-    if (
-      (event.key === 'Backspace' && cursorPos <= prefix.length) ||
-      (event.key === 'Delete' && cursorPos < prefix.length)
-    ) {
-      event.preventDefault();
-    }
-    if (!input.value.startsWith(prefix)) {
-      input.value = prefix + input.value.replace(/^\+?49\s?/, '');
-      this.contactData.phone = input.value;
+  handlePlusSignInput(event: KeyboardEvent, input: HTMLInputElement): void {
+    const cursorPosition = input.selectionStart || 0;
+    const alreadyHasPlus = input.value.includes('+');
+    const isAtStart = cursorPosition === 0;
+    if (!isAtStart || alreadyHasPlus) {
       event.preventDefault();
     }
   }
@@ -231,7 +227,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     const mailValid = !!this.contactData.mail.trim() &&
       /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(this.contactData.mail) &&
       !this.mailExists;
-    const phoneValid = /^\+49\s\d{3,}$/.test(this.contactData.phone.trim());
+    const phoneValid = /^\+49[\s\d\-]{5,}$/.test(this.contactData.phone.trim());
     const validFields = [nameValid, mailValid, phoneValid].filter(valide => valide === true).length;
     return validFields === 2;
   }
@@ -240,20 +236,16 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     return this.contactData.name !== this.originalData.name ||
       this.contactData.mail !== this.originalData.mail ||
       this.contactData.phone !== this.originalData.phone;
-  } 
+  }
 
   get isFormValid(): boolean {
     const nameValid = this.validNameCharacters(this.contactData.name) &&
       this.valideFullName(this.contactData.name) &&
       !this.nameExists;
-
     const mailValid = !!this.contactData.mail.trim() &&
       /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(this.contactData.mail) &&
       !this.mailExists;
-
-    const phoneValid = /^\+49\s\d{3,}$/.test(this.contactData.phone.trim());
-
+    const phoneValid = /^(\+|00)?\d[\d\s\/\-]{4,}$/.test(this.contactData.phone.trim());
     return nameValid && mailValid && phoneValid;
   }
-
 }

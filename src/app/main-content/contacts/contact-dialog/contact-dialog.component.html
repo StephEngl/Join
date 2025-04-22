@@ -89,15 +89,13 @@
                     </div>
                     <div class="input-wrapper">
                         <input type="tel" name="phone" placeholder="Phone" required [(ngModel)]="contactData.phone"
-                            #phone="ngModel" (keydown)="noDeleteNumb($event)" (focus)="focusNumbers()"
-                            (blur)="resetNumb()" pattern="^\+49\s\d{3,}$" inputmode="numeric"
+                            #phone="ngModel" (focus)="focusNumbers()" (blur)="resetNumb()"
+                            pattern="^(\+|00)?\d[\d\s\/\-]{4,}$" inputmode="numeric"
                             [class.invalid]="phone.invalid && phone.touched" (keypress)="onlyNumbers($event)" />
                         <img src="assets/icons/contacts/contact_phone.svg" alt="Phone Icon" />
                         <span class="error">
                             @if (phone.touched && phone.errors?.['required']) {
                             Please enter your phone number!
-                            } @else if (phone.touched && phone.errors?.['pattern']) {
-                            Phone number must start with +49 followed by at least 3 digits!
                             } @else {
                             &nbsp;
                             }
