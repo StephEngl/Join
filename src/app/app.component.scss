@@ -62,6 +62,12 @@ app-header {
 
 @media (pointer: coarse) and (orientation: landscape) {
   .orientation-lock {
-    display: none !important;
+    display: none;
+  }
+}
+
+@media (pointer: fine) {
+  .orientation-lock {
+    display: none;
   }
 }
