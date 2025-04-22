@@ -2,7 +2,7 @@
 
 .navbar-icon-link-background-container {
   @include dFlex(center, center);
-  width: 230px;
+  width: $navbar-width;
   height: 48px;
   cursor: pointer;
   transition: background-color 0.3s ease;

@@ -1,10 +1,11 @@
 @import "../../../assets/styles/mixins.scss";
 
+
 /** ----------DESKTOP---------- **/
 .navbar-section-desktop {
   @include dFlex(space-around, center);
   flex-direction: column;
-  width: 230px;
+  width: $navbar-width;
   height: 100dvh;
   background-color: $col-bg-secondary;
 
@@ -48,7 +49,7 @@
 
     .privacy-policy-background-container,
     .legal-notice-background-container {
-      width: 230px;
+      width: $navbar-width;
       height: 48px;
       display: flex;
       justify-content: center;
@@ -67,7 +68,7 @@
 
     .link-container {
       @include dFlex(flex-start, center);
-      width: 230px;
+      width: $navbar-width;
       height: auto;
       cursor: pointer;
 
