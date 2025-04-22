@@ -9,8 +9,8 @@ export class DummyContactsService {
 
   dummyContacts: { name: string, mail: string, phone: string }[] = [
     {
-      name: "John Doe",
-      mail: "john.doe@example.com",
+      name: "Aaron Doe",
+      mail: "aaron.doe@example.com",
       phone: "+49 160 1234567"
     },
     {
