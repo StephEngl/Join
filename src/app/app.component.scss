@@ -3,7 +3,6 @@
 
 .page-content {
   display: flex;
-
   @media (max-width: 1400px) {
     flex-direction: column-reverse;
   }

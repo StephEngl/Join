@@ -40,7 +40,7 @@
     @include dFlex(center, center);
 
     p {
-      font-family: 'Open Sans';
+      font-family: 'Inter';
       font-weight: 400;
       font-size: 1rem;
       line-height: 120%;
@@ -94,9 +94,7 @@
 @media (max-width: 650px) {
   .navbar-icon-link-container {
     width: 100%;
-    flex-direction: column;
-    justify-content: center;
-    align-items: center;
+    @include dFlex(center, center);
     gap: 4px;
 
     .icon-container {
