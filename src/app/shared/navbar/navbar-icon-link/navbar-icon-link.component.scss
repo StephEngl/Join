@@ -40,10 +40,6 @@
     @include dFlex(center, center);
 
     p {
-      font-family: 'Open Sans';
-      font-weight: 400;
-      font-size: 1rem;
-      line-height: 120%;
       text-decoration: none;
       color: $col-font-dropdown;
       font-size: 1rem;
@@ -68,6 +64,14 @@
     &.active {
       background-color: $col-ref-active-nav;
       border-radius: 8px;
+    }
+  }
+  .link-container {
+    p {
+      font-family: 'Open Sans';
+      font-weight: 400;
+      font-size: 1rem;
+      line-height: 120%;
     }
   }
 
