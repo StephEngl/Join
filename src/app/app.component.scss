@@ -28,3 +28,18 @@ app-header {
   z-index: 1;
   width: 100%;
 }
+
+.orientation-lock {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.9);
+  color: white;
+  z-index: 9999;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  font-size: 1.4rem;
+  text-align: center;
+  pointer-events: all;
+  user-select: none;
+}

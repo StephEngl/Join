@@ -9,4 +9,19 @@ import { Component } from '@angular/core';
 })
 export class LegalNoticeComponent {
 
+  isPortrait = false;
+
+  ngOnInit() {
+    this.checkOrientation();
+    window.addEventListener('resize', this.checkOrientation.bind(this));
+  }
+
+  ngOnDestroy() {
+    window.removeEventListener('resize', this.checkOrientation.bind(this));
+  }
+
+  checkOrientation() {
+    this.isPortrait = window.innerHeight > window.innerWidth;
+  }
+  
 }

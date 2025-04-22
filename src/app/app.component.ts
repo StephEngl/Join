@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, HostListener } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./shared/header/header.component";
 import { NavbarComponent } from "./shared/navbar/navbar.component";
@@ -15,4 +15,20 @@ export class AppComponent{
 
   constructor() {}
 
+  isMobileLandscape = false;
+
+  @HostListener('window:resize')
+  onResize() {
+    this.checkOrientation();
+  }
+
+  ngOnInit() {
+    this.checkOrientation();
+  }
+
+  private checkOrientation(): void {
+    const isMobile = window.innerWidth <= 1024; // oder navigator.userAgent für feineres Matching
+    const isLandscape = window.innerWidth > window.innerHeight;
+    this.isMobileLandscape = isMobile && isLandscape;
+  }
 }
