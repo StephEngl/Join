@@ -99,6 +99,7 @@
   .navbar-icon-link-container {
     width: 100%;
     @include dFlex(center, center);
+    flex-direction: column;
     gap: 4px;
 
     .icon-container {

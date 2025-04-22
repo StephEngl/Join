@@ -55,13 +55,13 @@ app-header {
 
 @media (pointer: coarse) and (orientation: portrait) {  
   .orientation-lock {
-    display: flex;
+    display: none;
   }
 }
 
 @media (pointer: coarse) and (orientation: landscape) {
   .orientation-lock {
-    display: none;
+    display: flex;
   }
 }
 
