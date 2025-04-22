@@ -14,6 +14,7 @@
     (requestDelete)="deleteContact(activeContactIndex!)"
     (delete)="onContactDeleted()"
     (error)="onContactError()"
+    (newContactIndex)="handleNewContact($event)"
     [contactName]="editName"
     [contactMail]="editMail"
     [contactPhone]="editPhone"

@@ -81,6 +81,10 @@ export class ContactsComponent {
     this.contactClicked = !event;
   }
 
+  handleNewContact(event: number) {
+    this.showContactInfo(event);
+  }
+
   newContact() {
     this.contactClicked = false;
     this.activeContactIndex = undefined;

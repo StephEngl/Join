@@ -23,6 +23,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   @Output() delete = new EventEmitter<void>();
   @Output() error = new EventEmitter<void>();
   @Output() requestDelete = new EventEmitter<void>();
+  @Output() newContactIndex = new EventEmitter<number>();
 
   @Input() contactName?: string;
   @Input() contactMail?: string;
@@ -161,10 +162,18 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     this.contactData.name = this.contactData.name.charAt(0).toUpperCase() + this.contactData.name.slice(1);
     this.contactsService.addContact(this.contactData)
       .then(() => {
+        this.emitNewContactIndex();
         this.create.emit();
         this.onCancel();
       })
       .catch(() => this.error.emit());
+  }
+
+  emitNewContactIndex() {
+    const index = this.contactsService.contacts.findIndex(
+      contact => contact.name === this.contactData.name
+    );
+    this.newContactIndex.emit(index);
   }
 
   async editContact(index: number) {
