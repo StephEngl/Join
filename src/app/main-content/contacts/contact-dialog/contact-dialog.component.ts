@@ -92,7 +92,6 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     return true;
   }
 
-
   valideFullName(name: string): boolean {
     const parts = name.trim().split(/\s+/);
     return parts.length >= 2 && parts.every(part => part.length >= 2);
