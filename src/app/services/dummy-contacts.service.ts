@@ -9,24 +9,24 @@ export class DummyContactsService {
 
   dummyContacts: { name: string, mail: string, phone: string }[] = [
     {
-      name: "Aaron Doe",
-      mail: "aaron.doe@example.com",
+      name: "Aaron Dorsten",
+      mail: "aaron.do@web.com",
       phone: "+49 160 1234567"
     },
     {
-      name: "Jane Smith",
-      mail: "jane.smith@example.com",
+      name: "Janet Sichel",
+      mail: "janet.sichel@web.com",
       phone: "+49 151 9876543"
     },
     {
-      name: "Bob Johnson",
-      mail: "bob.johnson@example.com",
+      name: "Benno Hahmann",
+      mail: "hahmann.benno@web.com",
       phone: "+49 157 4567890"
     },
     {
-      name: "Emily Carter",
-      mail: "emily.carter@example.com",
-      phone: "+44 7521 654987"
+      name: "Emilia Kartel",
+      mail: "emilia.kartel@welt.de",
+      phone: "+49 7521 654987"
     },
     {
       name: "Leonie Löwenhaupt",
