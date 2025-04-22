@@ -225,22 +225,35 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   }
 
   get isCheckmarkVisible(): boolean {
-    return [this.contactData.name, this.contactData.mail, this.contactData.phone]
-      .filter(val => val.trim()).length === 2;
+    const nameValid = this.validNameCharacters(this.contactData.name) &&
+      this.valideFullName(this.contactData.name) &&
+      !this.nameExists;
+    const mailValid = !!this.contactData.mail.trim() &&
+      /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(this.contactData.mail) &&
+      !this.mailExists;
+    const phoneValid = /^\+49\s\d{3,}$/.test(this.contactData.phone.trim());
+    const validFields = [nameValid, mailValid, phoneValid].filter(valide => valide === true).length;
+    return validFields === 2;
   }
 
   get isEdited(): boolean {
     return this.contactData.name !== this.originalData.name ||
       this.contactData.mail !== this.originalData.mail ||
       this.contactData.phone !== this.originalData.phone;
-  }
+  } 
 
   get isFormValid(): boolean {
     const nameValid = this.validNameCharacters(this.contactData.name) &&
       this.valideFullName(this.contactData.name) &&
       !this.nameExists;
-    const mailValid = !!this.contactData.mail.trim() && !this.mailExists;
-    const phoneValid = !!this.contactData.phone.trim();
+
+    const mailValid = !!this.contactData.mail.trim() &&
+      /^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$/.test(this.contactData.mail) &&
+      !this.mailExists;
+
+    const phoneValid = /^\+49\s\d{3,}$/.test(this.contactData.phone.trim());
+
     return nameValid && mailValid && phoneValid;
   }
+
 }
