@@ -318,6 +318,8 @@ input:not(.invalid)+img+.error {
     font-size: 60px;
     color: $col-font-secondary;
     letter-spacing: -5px;
+    letter-spacing: -8px;
+    transform: translateX(-3px);
 }
 
 .button-create:not(.disabled):not(.checkmark):hover,
