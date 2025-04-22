@@ -327,9 +327,16 @@
         }
     }
 
+    .contact-initials {
+        font-size: 40px;
+        letter-spacing: -5px;
+        transform: translateX(-2px);
+    }
+
     .button-create {
         width: 200px;
         height: 40px;
+        gap: 5px;
     }
 
     .buttons {
