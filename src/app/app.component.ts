@@ -27,7 +27,7 @@ export class AppComponent{
   }
 
   private checkOrientation(): void {
-    const isMobile = window.innerWidth <= 1024; // oder navigator.userAgent für feineres Matching
+    const isMobile = window.innerWidth <= 1024;
     const isLandscape = window.innerWidth > window.innerHeight;
     this.isMobileLandscape = isMobile && isLandscape;
   }

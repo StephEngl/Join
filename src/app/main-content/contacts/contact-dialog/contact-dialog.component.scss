@@ -48,7 +48,7 @@ input:not(.invalid)+img+.error {
     @include dFlex(center, center, 0, fixed);
     inset: 0;
     background: $col-shadow-black;
-    z-index: 9999;
+    z-index: 99;
 }
 
 .dialog-content {
@@ -621,8 +621,7 @@ input:not(.invalid)+img+.error {
         border-radius: 10px;
         border: 1px solid $col-font-inactive;
         width: 100%;
-        height: 41px;
-        padding: 13px 21px;
+        flex: 1;
         transition: border-color 0.3s ease;
 
         &.invalid {
@@ -704,7 +703,7 @@ input:not(.invalid)+img+.error {
         }
     }
 }
-
+/* 
 @include media("iphone-se") {
 
     @include h2Typo("iphone-se");
@@ -772,3 +771,4 @@ input:not(.invalid)+img+.error {
         padding: 4px;
     }
 }
+    */
