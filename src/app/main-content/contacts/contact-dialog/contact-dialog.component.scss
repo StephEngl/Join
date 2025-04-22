@@ -80,6 +80,7 @@ input:not(.invalid)+img+.error {
     gap: 16px;
 
 
+
     h2 {
         font-family: 'Inter', sans-serif;
         font-size: 61px;
@@ -509,6 +510,8 @@ input:not(.invalid)+img+.error {
         padding: 66px 24px 66px 24px;
         display: flex;
         gap: 4px;
+        margin-top: 60px;
+
 
         h2 {
             font-size: 50px;
@@ -571,7 +574,9 @@ input:not(.invalid)+img+.error {
         width: 100%;
         border-radius: 0 0 35px 35px;
         position: relative;
-        padding: 50px 50px;
+        padding: 10px 50px;
+        padding-bottom: 5px;
+        margin-bottom: 45px
     }
 
     .form-wrapper {
@@ -586,7 +591,7 @@ input:not(.invalid)+img+.error {
             width: 110px;
             height: 110px;
             position: absolute;
-            top: -138px;
+            top: -100px;
             left: 50%;
             transform: translateX(-50%);
 
@@ -615,7 +620,7 @@ input:not(.invalid)+img+.error {
         display: flex;
         flex-direction: column;
         gap: 8px;
-        width: 100%;
+        width: 120%;
         max-width: 400px;
     }
 
