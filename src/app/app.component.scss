@@ -1,4 +1,4 @@
-@import "../assets/styles/colors.scss";
+@import "../assets/styles/mixins.scss";
 @import "../assets/styles/variables.scss";
 
 .page-content {
@@ -30,16 +30,38 @@ app-header {
 }
 
 .orientation-lock {
-  position: fixed;
-  inset: 0;
-  background: rgba(0, 0, 0, 0.9);
-  color: white;
-  z-index: 9999;
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  font-size: 1.4rem;
+  @include dFlex(center, center, 20px, absolute);
+  flex-direction: column;
+  padding: 20px;
   text-align: center;
-  pointer-events: all;
-  user-select: none;
+  color: $col-bg-secondary;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 100;
+  background-color: $col-bg-main;
+  >img:last-child {
+    animation: rotateImage 4s infinite ease-in-out;
+  }
+
+}
+
+@keyframes rotateImage {
+  0% { transform: rotate(0deg); opacity: 0; }
+  10% { opacity: 1; }
+  90% { opacity: 1; }
+  100% { transform: rotate(90deg); opacity: 0; }
+}
+
+@media (pointer: coarse) and (orientation: portrait) {  
+  .orientation-lock {
+    display: flex;
+  }
+}
+
+@media (pointer: coarse) and (orientation: landscape) {
+  .orientation-lock {
+    display: none !important;
+  }
 }

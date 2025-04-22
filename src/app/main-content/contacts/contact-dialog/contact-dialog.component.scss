@@ -48,7 +48,7 @@ input:not(.invalid)+img+.error {
     @include dFlex(center, center, 0, fixed);
     inset: 0;
     background: $col-shadow-black;
-    z-index: 9999;
+    z-index: 99;
 }
 
 .dialog-content {
@@ -491,7 +491,6 @@ input:not(.invalid)+img+.error {
     .button-create {
         width: 202px;
         height: 51px;
-        margin-top: 15px;
     }
 
     .button-save {
@@ -572,6 +571,7 @@ input:not(.invalid)+img+.error {
         width: 100%;
         border-radius: 0 0 35px 35px;
         position: relative;
+        padding: 50px 50px;
     }
 
     .form-wrapper {
@@ -581,14 +581,20 @@ input:not(.invalid)+img+.error {
         max-width: 100%;
         margin-top: 30px;
 
+
         .profile-ring {
+            width: 110px;
+            height: 110px;
             position: absolute;
-            top: -160px;
+            top: -138px;
             left: 50%;
             transform: translateX(-50%);
+
         }
 
         .profile-placeholder {
+            width: 105px;
+            height: 105px;
             position: absolute;
             left: 50%;
             transform: translateX(-50%);
@@ -598,9 +604,9 @@ input:not(.invalid)+img+.error {
             justify-content: center;
             align-items: center;
 
-            img {
-                width: 48px;
-                height: 48px;
+            svg {
+                width: 50px;
+                height: 50px;
             }
         }
     }
@@ -621,8 +627,7 @@ input:not(.invalid)+img+.error {
         border-radius: 10px;
         border: 1px solid $col-font-inactive;
         width: 100%;
-        height: 41px;
-        padding: 13px 21px;
+        flex: 1;
         transition: border-color 0.3s ease;
 
         &.invalid {
@@ -642,11 +647,12 @@ input:not(.invalid)+img+.error {
 
     .input-wrapper {
         position: relative;
-        height: 50px;
+        height: 40px;
         margin-top: 8px;
 
         input {
             padding-right: 48px;
+            height: 35px;
         }
 
         img {
@@ -705,62 +711,70 @@ input:not(.invalid)+img+.error {
     }
 }
 
-@include media("iphone-se") {
+// @include media("iphone-se") {
 
-    @include h2Typo("iphone-se");
-    @include spanTypo("iphone-se");
+//     @include h2Typo("iphone-se");
+//     @include spanTypo("iphone-se");
 
-    .dialog-content {
-        width: 100vw;
-        max-width: 375px;
-        border-radius: 35px;
-    }
+//     .dialog-content {
+//         width: 100vw;
+//         max-width: 375px;
+//         border-radius: 35px;
+//     }
 
-    .dialog-left {
-        border-radius: 35px 35px 0 0;
-        padding: 24px;
-        gap: 2px;
-    }
+//     .dialog-left {
+//         height: 40%;
+//         border-radius: 35px 35px 0 0;
+//         padding: 24px;
+//         gap: 2px;
+//     }
 
-    .dialog-right {
-        padding: 24px;
-        border-radius: 0 0 35px 35px;
-    }
+//     .dialog-right {
+//         padding: 24px;
+//         border-radius: 0 0 35px 35px;
+//     }
 
-    .form-wrapper {
-        padding-top: 32px;
-        gap: 16px;
+//     .form-wrapper {
+//         padding-top: 15px;
+//         gap: 16px;
 
-        .profile-ring {
-            position: absolute;
-            top: -115px;
-            left: 50%;
-            transform: translateX(-50%);
-        }
+//         .profile-ring {
+//             width: 110px;
+//             height: 110px;
+//             position: absolute;
+//             top: -115px;
+//             left: 50%;
+//             transform: translateX(-50%);
+//             aspect-ratio: 1 / 1;
+//         }
 
-        .profile-placeholder {
-            width: 120px;
-            height: 120px;
+//         .profile-placeholder {
+//             width: 105px;
+//             height: 105px;
+//             aspect-ratio: 1 / 1;
 
-            svg {
-                width: 48px;
-                height: 48px;
-            }
-        }
-    }
+//             svg {
+//                 width: 48px;
+//                 height: 48px;
+//             }
+//         }
+//     }
 
-    .input-wrapper input {
-        font-size: 10px;
-        height: 44px;
-    }
+//     .input-wrapper {
+//         height: 39px;
+//     }
 
-    .button-create {
-        font-size: 16px;
-        height: 48px;
-        width: 100%;
-    }
+//     .input-wrapper input {
+//         font-size: 10px;
+//         height: 34px;
+//     }
 
-    .close-button {
-        padding: 4px;
-    }
-}
+//     .button-create {
+//         font-size: 16px;
+//         height: 48px;
+//     }
+
+//     .close-button {
+//         padding: 4px;
+//     }
+// }
