@@ -4,10 +4,10 @@
         <div class="dialog-left">
             <div class="mobile-close">
                 <button (click)="onOverlayClick()" class="close-button">
-                    <img src="../../../../assets/icons/kanban/close_white.svg" alt="Close Icon" />
+                    <img src="./assets/icons/kanban/close_white.svg" alt="Close Icon" />
                 </button>
             </div>
-            <img src="../../../../assets/icons/navbar/logo.svg" alt="Join Logo" class="logo" />
+            <img src="./assets/icons/navbar/logo.svg" alt="Join Logo" class="logo" />
             @if (contactName) {
             <h2>Edit contact</h2>
             <div class="underline"></div>
@@ -20,7 +20,7 @@
         <div class="dialog-right">
             <div class="close-icon">
                 <button (click)="onOverlayClick()" class="close-button">
-                    <img src="assets/icons/kanban/close.svg" alt="Close Icon" />
+                    <img src="./assets/icons/kanban/close.svg" alt="Close Icon" />
                 </button>
             </div>
             <div class="form-wrapper">
@@ -54,7 +54,7 @@
                         <input type="text" placeholder="Name" [(ngModel)]="contactData.name" name="name" required
                             (ngModelChange)="validateLive('name', contactForm)" #name="ngModel"
                             [class.invalid]="name.invalid && name.touched || nameExists" />
-                        <img src="assets/icons/contacts/contact_name.svg" alt="Name Icon" />
+                        <img src="./assets/icons/contacts/contact_name.svg" alt="Name Icon" />
                         <span class="error">
                             @if (name.touched && name.invalid && name.errors?.['required']) {
                             Please enter your name!
@@ -92,7 +92,7 @@
                             #phone="ngModel" (focus)="focusNumbers()" (blur)="resetNumb()"
                             pattern="^(\+|00)?\d[\d\s\/\-]{4,}$" inputmode="numeric"
                             [class.invalid]="phone.invalid && phone.touched" (keypress)="onlyNumbers($event)" />
-                        <img src="assets/icons/contacts/contact_phone.svg" alt="Phone Icon" />
+                        <img src="./assets/icons/contacts/contact_phone.svg" alt="Phone Icon" />
                         <span class="error">
                             @if (phone.touched && phone.errors?.['required']) {
                             Please enter your phone number!

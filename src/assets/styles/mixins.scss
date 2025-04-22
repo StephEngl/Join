@@ -74,24 +74,3 @@
         }
     }
 }
-
-@mixin h2Typo($mobileMediaName) {
-    $font-size: map-get($h2-font-sizes-media, $mobileMediaName);
-
-    @include media($mobileMediaName) {
-        .dialog-left h2 {
-            font-size: $font-size;
-        }
-    }
-}
-
-@mixin spanTypo($mobileMediaName) {
-    $font-size: map-get($span-font-sizes-media, $mobileMediaName);
-
-    @include media($mobileMediaName) {
-        .dialog-left span {
-            font-size: $font-size;
-        }
-    }
-
-}

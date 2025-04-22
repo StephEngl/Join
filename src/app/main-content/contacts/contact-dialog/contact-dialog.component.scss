@@ -717,70 +717,28 @@ input:not(.invalid)+img+.error {
     }
 }
 
-// @include media("iphone-se") {
+@include media("iphone-se") {
 
-//     @include h2Typo("iphone-se");
-//     @include spanTypo("iphone-se");
+    .buttons {
+        margin-top: 0;
+        margin-bottom: 5px;
+    }
 
-//     .dialog-content {
-//         width: 100vw;
-//         max-width: 375px;
-//         border-radius: 35px;
-//     }
+    form {
+        margin-top: 0;
+    }
 
-//     .dialog-left {
-//         height: 40%;
-//         border-radius: 35px 35px 0 0;
-//         padding: 24px;
-//         gap: 2px;
-//     }
+    .form-wrapper {
 
-//     .dialog-right {
-//         padding: 24px;
-//         border-radius: 0 0 35px 35px;
-//     }
+        .profile-ring {
+            width: 100px;
+            height: 100px;
+        }
 
-//     .form-wrapper {
-//         padding-top: 15px;
-//         gap: 16px;
+        .profile-placeholder {
+            width: 95px;
+            height: 95px;
+        }
+    }
 
-//         .profile-ring {
-//             width: 110px;
-//             height: 110px;
-//             position: absolute;
-//             top: -115px;
-//             left: 50%;
-//             transform: translateX(-50%);
-//             aspect-ratio: 1 / 1;
-//         }
-
-//         .profile-placeholder {
-//             width: 105px;
-//             height: 105px;
-//             aspect-ratio: 1 / 1;
-
-//             svg {
-//                 width: 48px;
-//                 height: 48px;
-//             }
-//         }
-//     }
-
-//     .input-wrapper {
-//         height: 39px;
-//     }
-
-//     .input-wrapper input {
-//         font-size: 10px;
-//         height: 34px;
-//     }
-
-//     .button-create {
-//         font-size: 16px;
-//         height: 48px;
-//     }
-
-//     .close-button {
-//         padding: 4px;
-//     }
-// }
+}
