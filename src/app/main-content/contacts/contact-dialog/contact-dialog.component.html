@@ -74,7 +74,7 @@
                             pattern="^[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}$"
                             (ngModelChange)="validateLive('mail', contactForm)" email #mail="ngModel"
                             [class.invalid]="mail.invalid && mail.touched || mailExists" />
-                        <img src="assets/icons/contacts/contact_mail.svg" alt="Mail Icon" />
+                        <img src="./assets/icons/contacts/contact_mail.svg" alt="Mail Icon" />
                         <span class="error">
                             @if (mail.touched && mail.errors?.['required']) {
                             Please enter your email address!

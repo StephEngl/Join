@@ -10,7 +10,7 @@ import { NgForm } from '@angular/forms';
   standalone: true,
   imports: [FormsModule, CommonModule],
   templateUrl: './contact-dialog.component.html',
-  styleUrls: ['./contact-dialog.component.scss'],
+  styleUrls: ['./contact-dialog.component.scss', 'contact-dialog-media.component.scss'],
 })
 
 export class ContactDialogComponent implements OnInit, OnDestroy {

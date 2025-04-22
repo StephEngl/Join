@@ -1,0 +1,352 @@
+@import './../../../../assets/styles/variables.scss';
+@import './../../../../assets/styles/mixins.scss';
+
+@media screen and (max-width: 1470px) {
+
+    .dialog-left {
+        gap: 6px;
+
+        h2 {
+            font-size: 50px;
+        }
+
+        span {
+            font-size: 22px;
+        }
+    }
+}
+
+@media screen and (max-width: 1340px) {
+
+    .dialog-left {
+        gap: 5px;
+
+        h2 {
+            font-size: 39px;
+        }
+
+        span {
+            font-size: 17px;
+        }
+    }
+}
+
+@media screen and (max-width: 1050px) {
+
+    .dialog-left {
+        gap: 4px;
+
+        h2 {
+            font-size: 30px;
+        }
+
+        span {
+            font-size: 13px;
+        }
+    }
+}
+
+@media screen and (max-width: 1400px) {
+
+    .dialog-content {
+        transform: translateY(100vw);
+    }
+
+    .dialog-content.animate-in {
+        transform: translateY(0);
+    }
+
+    .dialog-content.animate-out {
+        transform: translateY(100vw);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+
+    .button-cancel {
+        display: none;
+    }
+
+    .button-delete {
+        width: 99px;
+        height: 51px;
+    }
+
+    .button-create {
+        width: 202px;
+        height: 51px;
+    }
+
+    .button-save {
+        width: 107px;
+        height: 51px;
+    }
+
+    .dialog-right .close-icon {
+        display: none;
+    }
+
+    .dialog-left {
+        height: 60%;
+        width: 100%;
+        border-radius: 35px 35px 0 0;
+        padding: 66px 24px 66px 24px;
+        display: flex;
+        gap: 4px;
+        margin-top: 60px;
+
+        h2 {
+            font-size: 50px;
+        }
+
+        span {
+            font-size: 22px;
+        }
+
+        img.logo {
+            display: none;
+        }
+    }
+
+    .dialog-left .mobile-close {
+        display: flex;
+        position: absolute;
+        top: 24px;
+        right: 24px;
+
+        button {
+            width: 30px;
+            height: 30px;
+            background: transparent;
+            border: none;
+            border-radius: 50%;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: background-color 0.2s ease;
+
+            img {
+                width: 14px;
+                height: 14px;
+                pointer-events: none;
+            }
+
+            &:hover {
+                background-color: $col-ref-highlight;
+            }
+        }
+    }
+
+    .buttons {
+        justify-content: center;
+    }
+
+    .dialog-content {
+        max-height: calc(100dvh - 1px);
+        height: calc(100vh - 50px - 30px);
+        flex-direction: column;
+        width: 100%;
+        max-width: 500px;
+        border-radius: 35px;
+        overflow: visible;
+    }
+
+    .dialog-right {
+        width: 100%;
+        border-radius: 0 0 35px 35px;
+        position: relative;
+        padding: 10px 50px;
+        padding-bottom: 5px;
+        margin-bottom: 45px
+    }
+
+    .form-wrapper {
+        flex-direction: column;
+        gap: 24px;
+        align-items: center;
+        max-width: 100%;
+        margin-top: 30px;
+
+        .profile-ring {
+            width: 110px;
+            height: 110px;
+            position: absolute;
+            top: -100px;
+            left: 50%;
+            transform: translateX(-50%);
+        }
+
+        .profile-placeholder {
+            width: 105px;
+            height: 105px;
+            position: absolute;
+            left: 50%;
+            transform: translateX(-50%);
+            border-radius: 50%;
+            background-color: $col-font-dropdown;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+
+            svg {
+                width: 50px;
+                height: 50px;
+            }
+        }
+    }
+
+    form {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        width: 120%;
+        max-width: 400px;
+        margin-top: 15px;
+    }
+
+    input {
+        font-family: 'Inter', sans-serif;
+        font-size: 18px;
+        font-weight: 400;
+        line-height: 120%;
+        border-radius: 10px;
+        border: 1px solid $col-font-inactive;
+        width: 100%;
+        flex: 1;
+        transition: border-color 0.3s ease;
+
+        &.invalid {
+            border-color: $col-error-red;
+        }
+
+        &::placeholder {
+            color: $col-shadow-black;
+            opacity: 0.7;
+        }
+
+        &:focus {
+            outline: none;
+            border-color: $col-ref-highlight;
+        }
+    }
+
+    .input-wrapper {
+        position: relative;
+        height: 40px;
+        margin-top: 8px;
+
+        input {
+            padding-right: 48px;
+            height: 35px;
+        }
+
+        img {
+            position: absolute;
+            top: 43%;
+            right: 18px;
+            transform: translateY(-50%);
+            width: 24px;
+            height: 24px;
+            pointer-events: none;
+        }
+    }
+}
+
+@media screen and (max-width: 480px) {
+
+    input {
+        font-size: 12px;
+        padding: 10px 10px;
+    }
+
+    .error {
+        font-size: 7px;
+    }
+
+    .dialog-left {
+        h2 {
+            font-size: 40px;
+        }
+
+        span {
+            font-size: 18px;
+        }
+    }
+}
+
+@media screen and (max-width: 380px) {
+
+    .buttons {
+        gap: 15px;
+    }
+
+    input {
+        font-size: 10px;
+    }
+
+    .dialog-left {
+        h2 {
+            font-size: 30px;
+        }
+
+        span {
+            font-size: 13px;
+        }
+    }
+}
+
+@include media("iphone-se") {
+
+    .dialog-left {
+        height: 45%;
+        padding: 20px 24px 24px 24px;
+        gap: 0;
+
+        h2 {
+            font-size: 34px;
+        }
+
+        span {
+            font-size: 14px;
+        }
+    }
+
+    .dialog-left .mobile-close {
+        top: 25px;
+        right: 25px;
+
+        button {
+            width: 26px;
+            height: 26px;
+
+            img {
+                width: 12px;
+                height: 12px;
+            }
+        }
+    }
+
+    .buttons {
+        margin-top: 15px;
+        margin-bottom: 5px;
+    }
+
+    form {
+        margin-top: 15px;
+    }
+
+    .form-wrapper {
+
+        .profile-ring {
+            width: 90px;
+            height: 90px;
+            top: -85px;
+        }
+
+        .profile-placeholder {
+            width: 85px;
+            height: 85px;
+        }
+    }
+}
