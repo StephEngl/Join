@@ -1,9 +1,12 @@
 @for (task of tasksService.tasks ; track task) {
-    {{ task.title }}
-    {{ task.description }}
-    {{ task.dueDate | date:'dd.MM.yyyy' }}
+    <div>
+        <p>{{ task.title }}</p>
+        <p>{{ task.description }}</p>
+        <p>{{ task.dueDate | date:'dd.MM.yyyy' }}</p>
+    </div>
+
     @for (assignee of task.assignedTo; track assignee) {
-        {{ nameInitials(assignee.contactId) }}
+        <p>{{ nameInitials(assignee.contactId) }}</p>
     }
 }
 
