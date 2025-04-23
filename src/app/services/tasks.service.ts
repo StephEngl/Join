@@ -26,8 +26,6 @@ export class TasksService {
         this.tasks = [];
         snapshot.forEach((element) => {
           const contact = element.data();
-          console.log(element.data());
-          
           this.tasks.push(this.setTaskObject(element.id, contact));
           console.log(this.tasks);
         });
@@ -53,6 +51,15 @@ export class TasksService {
         subTasks: taskData.subTasks || [],
         assignedTo: taskData.assignedTo || [],
       };
+    }
+
+    async addTask(task: TaskInterface): Promise<void | DocumentReference> {
+      try {
+        const taskRef = await addDoc(this.getTasksRef(), task);
+        return taskRef;
+      } catch (err) {
+        console.error(err);
+      }
     }
 
 }

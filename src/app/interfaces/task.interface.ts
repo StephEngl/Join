@@ -7,6 +7,6 @@ export interface TaskInterface {
     category: string;
     dueDate: Date;
     priority: string;
-    subTasks: string[];
-    assignedTo: string[];
+    subTasks: any[];
+    assignedTo: any[];
 }

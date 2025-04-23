@@ -4,8 +4,6 @@ import { TasksService } from '../../services/tasks.service';
 import { TaskFirebaseTempComponent } from './task-firebase-temp/task-firebase-temp.component';
 import { TaskComponent } from './task/task.component';
 
-
-
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -22,5 +20,5 @@ export class BoardComponent {
   doneBoard = [{ id: 4 }];
 
   tasksService = inject(TasksService);
-
+  
 }

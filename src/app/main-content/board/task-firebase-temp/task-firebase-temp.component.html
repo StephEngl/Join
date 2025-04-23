@@ -2,4 +2,10 @@
     {{ task.title }}
     {{ task.description }}
     {{ task.dueDate | date:'dd.MM.yyyy' }}
-} 
+    @for (assignee of task.assignedTo; track assignee) {
+        {{ nameInitials(assignee.contactId) }}
+    }
+}
+
+
+<button (click)="createContact()">Create</button>
