@@ -1,6 +1,6 @@
 @import "../../../assets/styles/mixins.scss";
 
-.task-info {
+.task-info-section {
     @include dFlex(center, center);
     width: 100%;
     height: auto;
