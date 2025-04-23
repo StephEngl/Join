@@ -1,1 +1,22 @@
-<p>task works!</p>
+<li class="task-card">
+    <div class="task-category">User Story</div>
+
+    <div class="task-title">Contact Form & Imprint</div>
+    <div class="task-description">Create a contact form and imprint page…</div>
+
+    <div class="task-progress">
+        <div class="bar-bg">
+            <div class="bar-fill" [style.width.%]="progressPercentage"></div>
+        </div>
+        <span class="subtask-text">{{ doneSubtasks }}/{{ totalSubtasks }} Subtasks</span>
+    </div>
+
+    <div class="task-footer">
+        <div class="avatars">
+            <span class="avatar" style="background-color: #a020f0;">AS</span>
+            <span class="avatar" style="background-color: #ff69b4;">DE</span>
+            <span class="avatar" style="background-color: #ffb300;">EF</span>
+        </div>
+        <!-- <img/> -->
+    </div>
+</li>

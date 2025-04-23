@@ -1,0 +1,8 @@
+@import "../../../assets/styles/mixins.scss";
+
+.task-dialog {
+    @include dFlex(center, center);
+    width: 100%;
+    height: auto;
+    border-radius: 1rem;
+}

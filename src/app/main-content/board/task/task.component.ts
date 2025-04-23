@@ -3,10 +3,14 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-task',
   standalone: true,
-  imports: [],
   templateUrl: './task.component.html',
-  styleUrl: './task.component.scss'
+  styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
+  totalSubtasks = 2;
+  doneSubtasks = 1;
 
+  get progressPercentage(): number {
+    return (this.doneSubtasks / this.totalSubtasks) * 100;
+  }
 }

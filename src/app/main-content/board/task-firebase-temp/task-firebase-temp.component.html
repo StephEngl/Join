@@ -1,0 +1,5 @@
+@for (task of tasksService.tasks ; track task) {
+    {{ task.title }}
+    {{ task.description }}
+    {{ task.dueDate | date:'dd.MM.yyyy' }}
+} 
