@@ -10,6 +10,7 @@
     <div class="contact-hero">
         <div class="contact-icon-big" [style.backgroundColor]="contactsService.contacts[contactIndex].color">
             {{ contactsService.contacts[contactIndex].name.charAt(0).toUpperCase() }}
+            {{ contactsService.lastInitial(contactIndex) }}
         </div>
         <div class="contact-menu">
             <h3>{{ contactsService.contacts[contactIndex].name }}</h3>
