@@ -4,20 +4,17 @@ import { FormsModule } from '@angular/forms';
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [
-    FormsModule
-  ],
+  imports: [FormsModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss',
 })
 export class AddTaskComponent {
   today: string = new Date().toISOString().split('T')[0];
-
+  isEdited = false;
+  isFormValid = false;
   subtaskText = '';
 
-  clearForm() {
-    
-  }
+  clearForm() {}
 
   onInputChange() {
     // Optional: Validierung oder weitere Logik

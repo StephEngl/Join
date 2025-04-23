@@ -2,6 +2,9 @@
 @import "../../../assets/styles/variables.scss";
 
 section {
+  display: flex;
+  flex-direction: column;
+  height: calc(100vh - 96px);
   max-width: $appMaxWidth;
   padding: 110px 100px;
 
@@ -31,7 +34,8 @@ section {
 }
 
 .forms-container {
-    @include dFlex($jc: center, $ai: flex-start, $gap: 50px);
+  @include dFlex($jc: center, $ai: flex-start, $gap: 50px);
+  flex-grow: 1;
 
   input,
   select,
@@ -95,4 +99,9 @@ section {
   padding: 2px 6px;
   line-height: 1;
   transition: color 0.2s;
+}
+
+.footnote {
+  display: flex;
+  justify-content: space-between;
 }
