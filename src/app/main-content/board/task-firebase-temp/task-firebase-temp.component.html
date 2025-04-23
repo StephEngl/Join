@@ -1,11 +1,28 @@
-@for (task of tasksService.tasks ; track task) {
-    {{ task.title }}
-    {{ task.description }}
-    {{ task.dueDate | date:'dd.MM.yyyy' }}
-    @for (assignee of task.assignedTo; track assignee) {
-        {{ nameInitials(assignee.contactId) }}
-    }
-}
 
+<section>
+    @for (category of taskCategories; track category) {
+        <div class="task-category">
+            <p>{{ category.label }}</p>
+        
+            @if (tasksByCategory(category.taskType).length > 0) {
+            @for (task of tasksByCategory(category.taskType); track task) {
+                <div class="single-task">
+                <p>{{ task.title }}</p>
+                <p>{{ task.description }}</p>
+                <p>{{ task.dueDate | date:'dd.MM.yyyy' }}</p>
+        
+                <div>
+                    @for (assignee of task.assignedTo; track assignee) {
+                    <p>{{ nameInitials(assignee.contactId) }}</p>
+                    }
+                </div>
+                </div>
+            }
+            } @else {
+            <p>No entries</p>
+            }
+        </div>
+    }
+</section>
 
 <button (click)="createContact()">Create</button>

@@ -1,5 +1,3 @@
-import { Data } from "@angular/router";
-
 export interface TaskInterface {
     id?: string;
     title: string;
@@ -7,6 +5,7 @@ export interface TaskInterface {
     category: string;
     dueDate: Date;
     priority: string;
+    taskType: "toDo" | "done" | "inProgress" | "feedback";
     subTasks: any[];
     assignedTo: any[];
 }

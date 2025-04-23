@@ -14,6 +14,17 @@ import { ContactsService } from '../../../services/contacts.service';
 export class TaskFirebaseTempComponent {
   tasksService = inject(TasksService);
   contactsService = inject(ContactsService);
+  taskCategories: { taskType: string; label: string }[] = [
+    { taskType: 'toDo', label: 'To Do' },
+    { taskType: 'inProgress', label: 'In Progress' },
+    { taskType: 'feedback', label: 'Await Feedback' },
+    { taskType: 'done', label: 'Done' }
+  ];
+
+
+  tasksByCategory(category: string): TaskInterface[] {
+    return this.tasksService.tasks.filter(task => task.taskType === category);
+  }
 
   createContact() {
     const task: TaskInterface = {
@@ -23,6 +34,7 @@ export class TaskFirebaseTempComponent {
       dueDate: new Date('2025-05-01'),
       priority: 'high',
       subTasks: ['Header layout bauen', 'Farbschema wählen'],
+      taskType: 'done',
       assignedTo: [
         { contactId: '0ynBkOGNOyokozUqJiED' },
         { contactId: 'i0jenjourf0WRSr9S8eA' }
@@ -40,6 +52,5 @@ export class TaskFirebaseTempComponent {
     const surNameLetter = lastWord.charAt(0).toUpperCase()
     return preNameLetter + surNameLetter;
   }
-}
 
-// assignedTo.find(contact => contact.contactId === id)
+}

@@ -1,0 +1,11 @@
+section {
+    display:flex;
+    gap: 30px;
+}
+.test {
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    background-color: lightgrey;
+    padding: 10px;
+}
