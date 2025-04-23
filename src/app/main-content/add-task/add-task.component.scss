@@ -1,0 +1,98 @@
+@import "../../../assets/styles/mixins.scss";
+@import "../../../assets/styles/variables.scss";
+
+section {
+  max-width: $appMaxWidth;
+  padding: 110px 100px;
+
+  h2 {
+    padding-bottom: 50px;
+  }
+
+  p {
+    font-size: 20px;
+  }
+
+  span {
+    color: $col-task-urgent;
+  }
+
+  button {
+    border: 1px solid $col-font-grey;
+    border-radius: 10px;
+    padding: 16px 10px;
+    background-color: white;
+    font-size: 20px;
+
+    img {
+      width: 20px;
+    }
+  }
+}
+
+.forms-container {
+    @include dFlex($jc: center, $ai: flex-start, $gap: 50px);
+
+  input,
+  select,
+  textarea {
+    width: 440px;
+    border: 1px solid $col-font-grey;
+    border-radius: 10px;
+    padding: 12px 20px;
+    color: $col-font-grey;
+  }
+
+  textarea {
+    height: 120px;
+  }
+}
+
+.task-overview-form,
+.task-details {
+  @include dFlex($jc: center, $ai: flex-start, $gap: 16px);
+  flex-direction: column;
+
+  .form-group {
+    @include dFlex($jc: center, $ai: flex-start, $gap: 8px);
+    flex-direction: column;
+  }
+}
+
+.task-details {
+  border-left: 1px solid #ccc;
+  padding-left: 50px;
+
+  .priority-buttons {
+    @include dFlex($jc: center, $ai: flex-start, $gap: 16px);
+  }
+}
+
+.subtask-input .subtask-input-wrapper {
+  position: relative;
+  display: flex;
+  align-items: center;
+}
+
+.subtask-input .form-control {
+  width: 100%;
+  padding-right: 70px; /* Platz für die Buttons, ggf. anpassen */
+}
+
+.subtask-input .input-icons {
+  position: absolute;
+  right: 8px;
+  display: flex;
+  gap: 4px;
+}
+
+.subtask-input .icon-btn {
+  cursor: pointer;
+  background: none;
+  border: none;
+  color: #888;
+  font-size: 1.2em;
+  padding: 2px 6px;
+  line-height: 1;
+  transition: color 0.2s;
+}
