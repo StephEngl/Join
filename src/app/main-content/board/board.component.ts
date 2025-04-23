@@ -14,5 +14,5 @@ import { TaskFirebaseTempComponent } from './task-firebase-temp/task-firebase-te
 export class BoardComponent {
 
   tasksService = inject(TasksService);
-
+  
 }
