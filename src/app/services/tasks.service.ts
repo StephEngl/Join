@@ -5,7 +5,6 @@ import { Firestore, collection, doc, onSnapshot, addDoc, updateDoc, deleteDoc, g
 @Injectable({
   providedIn: 'root'
 })
-
 export class TasksService {
   firestore: Firestore = inject(Firestore);
   tasks: TaskInterface[] = [];
@@ -41,28 +40,28 @@ export class TasksService {
     return collection(this.firestore, 'tasks');
   }
 
-  setTaskObject(id:string, taskData: any): TaskInterface {
-    return {
-      id: id,
-      title: taskData.title || '',
-      description: taskData.description || '',
-      category: taskData.category || '',
-      dueDate: taskData.dueDate?.toDate?.() || new Date(),
-      priority: taskData.priority || '',
-      taskType: taskData.taskType || 'toDo',
-      subTasks: taskData.subTasks || [],
-      assignedTo: taskData.assignedTo || [],
-    };
-  }
-
-  async addTask(task: TaskInterface): Promise<void | DocumentReference> {
-    try {
-      const taskRef = await addDoc(this.getTasksRef(), task);
-      return taskRef;
-    } catch (err) {
-      console.error(err);
+    setTaskObject(id:string, taskData: any): TaskInterface {
+      return {
+        id: id,
+        title: taskData.title || '',
+        description: taskData.description || '',
+        category: taskData.category || '',
+        dueDate: taskData.dueDate?.toDate?.() || new Date(),
+        priority: taskData.priority || '',
+        subTasks: taskData.subTasks || [],
+        assignedTo: taskData.assignedTo || [],
+        taskType: taskData.taskType || '' // thats was me Jon :)
+      };
     }
-  }
+
+    async addTask(task: TaskInterface): Promise<void | DocumentReference> {
+      try {
+        const taskRef = await addDoc(this.getTasksRef(), task);
+        return taskRef;
+      } catch (err) {
+        console.error(err);
+      }
+    }
 
 }
 

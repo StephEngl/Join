@@ -3,6 +3,8 @@ import { CommonModule } from '@angular/common';
 import { TasksService } from '../../services/tasks.service';
 import { TaskFirebaseTempComponent } from './task-firebase-temp/task-firebase-temp.component';
 import { TaskComponent } from './task/task.component';
+import { TaskInterface } from '../../interfaces/task.interface';
+
 
 @Component({
   selector: 'app-board',
@@ -13,12 +15,22 @@ import { TaskComponent } from './task/task.component';
 })
 export class BoardComponent {
 
-// FIXME: Vorläufige Lösung Array
-  todoBoard = [{ id: 1 }];
-  inProgressBoard = [{ id: 2 }];
-  awaitFeedbackBoard = [{ id: 3 }];
-  doneBoard = [{ id: 4 }];
+  boardColumns = [
+    { key: 'toDo', title: 'To do' },
+    { key: 'inProgress', title: 'In progress' },
+    { key: 'feedback', title: 'Await feedback' },
+    { key: 'done', title: 'Done' }
+  ];
+  
+  //hier wird das task array gefiltert die zu den jeweiligen spalten gehören und filtert das Taskarray nach dem taskType
+  createBoardTask(status: string): TaskInterface[] {
+    return this.tasksService.tasks.filter(task => task.taskType === status);
+  }
+  
+  
+  
+
 
   tasksService = inject(TasksService);
-  
+
 }
