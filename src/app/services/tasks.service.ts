@@ -21,14 +21,15 @@ export class TasksService {
   }
 
   subTasksList() {
-    const q = query(this.getContactsRef(), orderBy('priority'));
+    const q = query(this.getTasksRef(), orderBy('priority'));
     return onSnapshot(q, (snapshot) => {
         this.tasks = [];
         snapshot.forEach((element) => {
           const contact = element.data();
           console.log(element.data());
           
-          this.tasks.push(this.setContactObject(element.id, contact));
+          this.tasks.push(this.setTaskObject(element.id, contact));
+          console.log(this.tasks);
         });
       },
       (error) => {
@@ -37,11 +38,11 @@ export class TasksService {
     );
   }
 
-  getContactsRef() {
+  getTasksRef() {
     return collection(this.firestore, 'tasks');
   }
 
-    setContactObject(id:string, taskData: any): TaskInterface {
+    setTaskObject(id:string, taskData: any): TaskInterface {
       return {
         id: id,
         title: taskData.title || '',
