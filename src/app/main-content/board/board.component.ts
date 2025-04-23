@@ -15,5 +15,5 @@ import { TaskComponent } from './task/task.component';
 export class BoardComponent {
 
   tasksService = inject(TasksService);
-
+  
 }
