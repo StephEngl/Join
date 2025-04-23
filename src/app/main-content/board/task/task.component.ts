@@ -1,4 +1,4 @@
-import { Component } from '@angular/core';
+import { Component, Input } from '@angular/core';
 
 @Component({
   selector: 'app-task',
@@ -7,10 +7,5 @@ import { Component } from '@angular/core';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
-  totalSubtasks = 2;
-  doneSubtasks = 1;
 
-  get progressPercentage(): number {
-    return (this.doneSubtasks / this.totalSubtasks) * 100;
-  }
 }
