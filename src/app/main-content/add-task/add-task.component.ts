@@ -16,6 +16,11 @@ export class AddTaskComponent {
 
   clearForm() {}
 
+  onSubmit() {
+    console.log("Läuft");
+    
+  }
+
   onInputChange() {
     // Optional: Validierung oder weitere Logik
   }

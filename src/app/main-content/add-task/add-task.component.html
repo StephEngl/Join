@@ -1,8 +1,8 @@
 <section>
   <h2>Add Task</h2>
-  <div class="forms-container">
-    <div class="task-overview">
-      <form class="task-overview-form">
+  <form class="task-form" (ngSubmit)="onSubmit()">
+    <div class="task-form-wrapper">
+      <div class="task-overview">
         <div class="form-group">
           <label for="title">Title <span>*</span></label>
           <input
@@ -34,141 +34,145 @@
             [min]="today"
           />
         </div>
-      </form>
-    </div>
-
-    <div class="task-details">
-      <label>Priority</label>
-      <div class="priority-buttons">
-        <button type="button">
-          Urgent
-          <img src="./assets/icons/kanban/prio_urgent.svg" alt="Urgent" />
-        </button>
-        <button type="button">
-          Medium
-          <img src="./assets/icons/kanban/prio_middle.svg" alt="Medium" />
-        </button>
-        <button type="button">
-          Low <img src="./assets/icons/kanban/prio_low.svg" alt="Low" />
-        </button>
       </div>
 
-      <div class="form-group">
-        <label for="assigned-to">Assigned to</label>
-        <select id="assigned-to" name="assignedTo" class="form-control">
-          <option value="" disabled selected>Select contacts to assign</option>
-          <option value="one">First option</option>
-          <option value="two">Second option</option>
-        </select>
-      </div>
+      <div class="vertical-divider"></div>
 
-      <div class="form-group">
-        <label for="category">Category <span>*</span></label>
-        <select id="category" name="category" class="form-control">
-          <option value="" disabled selected>Select task category</option>
-          <option value="one">Technical Task</option>
-          <option value="two">User Story</option>
-        </select>
-      </div>
+      <div class="task-details">
+        <label>Priority</label>
+        <div class="priority-buttons">
+          <button type="button">
+            Urgent
+            <img src="./assets/icons/kanban/prio_urgent.svg" alt="Urgent" />
+          </button>
+          <button type="button">
+            Medium
+            <img src="./assets/icons/kanban/prio_middle.svg" alt="Medium" />
+          </button>
+          <button type="button">
+            Low <img src="./assets/icons/kanban/prio_low.svg" alt="Low" />
+          </button>
+        </div>
 
-      <div class="form-group subtask-input">
-        <label for="subtask">Subtasks</label>
-        <div class="subtask-input-wrapper">
-          <input
-            id="subtask"
-            name="subtask"
-            type="text"
-            class="form-control"
-            placeholder="Add new subtask"
-            [(ngModel)]="subtaskText"
-            (input)="onInputChange()"
-            (keyup.enter)="addSubtask()"
-            #subtaskInput
-          />
-          <span class="input-icons">
-            @if (!subtaskText) {
-            <button
-              type="button"
-              class="icon-btn"
-              (click)="focusInput(subtaskInput)"
-              title="Add"
-            >
-              +
-            </button>
-            } @else {
-            <button
-              type="button"
-              class="icon-btn"
-              (click)="clearSubtask()"
-              title="Clear"
-            >
-              <img
-                src="../../../assets/icons/kanban/close.svg"
-                alt="Checkmark"
-              />
-            </button>
-            <span>|</span>
-            <button
-              type="button"
-              class="icon-btn"
-              (click)="addSubtask()"
-              title="Add"
-            >
-              <img
-                src="../../../assets/icons/kanban/check.svg"
-                alt="Checkmark"
-              />
-            </button>
-            }
-          </span>
+        <div class="form-group">
+          <label for="assigned-to">Assigned to</label>
+          <select id="assigned-to" name="assignedTo" class="form-control">
+            <option value="" disabled selected>
+              Select contacts to assign
+            </option>
+            <option value="one">First option</option>
+            <option value="two">Second option</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label for="category">Category <span>*</span></label>
+          <select id="category" name="category" class="form-control">
+            <option value="" disabled selected>Select task category</option>
+            <option value="one">Technical Task</option>
+            <option value="two">User Story</option>
+          </select>
+        </div>
+
+        <div class="form-group subtask-input">
+          <label for="subtask">Subtasks</label>
+          <div class="subtask-input-wrapper">
+            <input
+              id="subtask"
+              name="subtask"
+              type="text"
+              class="form-control"
+              placeholder="Add new subtask"
+              [(ngModel)]="subtaskText"
+              (input)="onInputChange()"
+              (keyup.enter)="addSubtask()"
+              #subtaskInput
+            />
+            <span class="input-icons">
+              @if (!subtaskText) {
+              <button
+                type="button"
+                class="icon-btn"
+                (click)="focusInput(subtaskInput)"
+                title="Add"
+              >
+                +
+              </button>
+              } @else {
+              <button
+                type="button"
+                class="icon-btn"
+                (click)="clearSubtask()"
+                title="Clear"
+              >
+                <img
+                  src="../../../assets/icons/kanban/close.svg"
+                  alt="Checkmark"
+                />
+              </button>
+              <span>|</span>
+              <button
+                type="button"
+                class="icon-btn"
+                (click)="addSubtask()"
+                title="Add"
+              >
+                <img
+                  src="../../../assets/icons/kanban/check.svg"
+                  alt="Checkmark"
+                />
+              </button>
+              }
+            </span>
+          </div>
         </div>
       </div>
     </div>
-  </div>
 
-  <div class="footnote">
-    <p><span>*</span> This field is required</p>
+    <div class="footnote">
+      <p><span>*</span> This field is required</p>
 
-    <div class="button-wrapper">
-      <button class="button-cancel" type="button" (click)="clearForm()">
-        Cancel
-        <svg
-          class="icon-cancel"
-          width="14"
-          height="14"
-          viewBox="0 0 14 14"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M7.14434 8.40005L2.24434 13.3C2.061 13.4834 1.82767 13.575 1.54434 13.575C1.261 13.575 1.02767 13.4834 0.844336 13.3C0.661003 13.1167 0.569336 12.8834 0.569336 12.6C0.569336 12.3167 0.661003 12.0834 0.844336 11.9L5.74434 7.00005L0.844336 2.10005C0.661003 1.91672 0.569336 1.68338 0.569336 1.40005C0.569336 1.11672 0.661003 0.883382 0.844336 0.700049C1.02767 0.516715 1.261 0.425049 1.54434 0.425049C1.82767 0.425049 2.061 0.516715 2.24434 0.700049L7.14434 5.60005L12.0443 0.700049C12.2277 0.516715 12.461 0.425049 12.7443 0.425049C13.0277 0.425049 13.261 0.516715 13.4443 0.700049C13.6277 0.883382 13.7193 1.11672 13.7193 1.40005C13.7193 1.68338 13.6277 1.91672 13.4443 2.10005L8.54434 7.00005L13.4443 11.9C13.6277 12.0834 13.7193 12.3167 13.7193 12.6C13.7193 12.8834 13.6277 13.1167 13.4443 13.3C13.261 13.4834 13.0277 13.575 12.7443 13.575C12.461 13.575 12.2277 13.4834 12.0443 13.3L7.14434 8.40005Z"
-            fill="#2A3647"
-          />
-        </svg>
-      </button>
-      <button
-        class="button-save"
-        type="submit"
-        [disabled]="!isEdited || !isFormValid"
-      >
-        Create Task @if (isEdited && isFormValid) {
-        <svg
-          class="icon-done"
-          width="38"
-          height="30"
-          viewBox="0 0 38 30"
-          fill="none"
-          xmlns="http://www.w3.org/2000/svg"
-        >
-          <path
-            d="M4.02832 15.0001L15.2571 26.0662L33.9717 3.93408"
-            stroke="currentColor"
-            stroke-width="7"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          />
-        </svg>
-        }
-      </button>
+      <div class="button-wrapper">
+        <button class="button-cancel" type="button" (click)="clearForm()">
+          Cancel
+          <svg
+            class="icon-cancel"
+            width="14"
+            height="14"
+            viewBox="0 0 14 14"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M7.14434 8.40005L2.24434 13.3C2.061 13.4834 1.82767 13.575 1.54434 13.575C1.261 13.575 1.02767 13.4834 0.844336 13.3C0.661003 13.1167 0.569336 12.8834 0.569336 12.6C0.569336 12.3167 0.661003 12.0834 0.844336 11.9L5.74434 7.00005L0.844336 2.10005C0.661003 1.91672 0.569336 1.68338 0.569336 1.40005C0.569336 1.11672 0.661003 0.883382 0.844336 0.700049C1.02767 0.516715 1.261 0.425049 1.54434 0.425049C1.82767 0.425049 2.061 0.516715 2.24434 0.700049L7.14434 5.60005L12.0443 0.700049C12.2277 0.516715 12.461 0.425049 12.7443 0.425049C13.0277 0.425049 13.261 0.516715 13.4443 0.700049C13.6277 0.883382 13.7193 1.11672 13.7193 1.40005C13.7193 1.68338 13.6277 1.91672 13.4443 2.10005L8.54434 7.00005L13.4443 11.9C13.6277 12.0834 13.7193 12.3167 13.7193 12.6C13.7193 12.8834 13.6277 13.1167 13.4443 13.3C13.261 13.4834 13.0277 13.575 12.7443 13.575C12.461 13.575 12.2277 13.4834 12.0443 13.3L7.14434 8.40005Z"
+              fill="#2A3647"
+            />
+          </svg>
+        </button>
+        <button
+          class="button-save"
+          type="submit"
+          >
+          <!-- [disabled]="!isEdited || !isFormValid" -->
+          Create Task @if (isEdited && isFormValid) {
+          <svg
+            class="icon-done"
+            width="38"
+            height="30"
+            viewBox="0 0 38 30"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg"
+          >
+            <path
+              d="M4.02832 15.0001L15.2571 26.0662L33.9717 3.93408"
+              stroke="currentColor"
+              stroke-width="7"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+            />
+          </svg>
+          }
+        </button>
+      </div>
     </div>
-  </div>
+  </form>
 </section>

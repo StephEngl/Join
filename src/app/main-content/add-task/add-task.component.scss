@@ -5,7 +5,7 @@ section {
   display: flex;
   flex-direction: column;
   height: calc(100vh - 96px);
-  max-width: $appMaxWidth;
+  max-width: $queryBreak1;
   padding: 110px 100px;
 
   h2 {
@@ -31,20 +31,33 @@ section {
       width: 20px;
     }
   }
+
+  form {
+    display: flex;
+    flex-direction: column;
+    height: 100%;
+  }
 }
 
-.forms-container {
-  @include dFlex($jc: center, $ai: flex-start, $gap: 50px);
+.task-form-wrapper {
+  @include dFlex($jc: space-between, $ai: flex-start, $gap: 50px);
   flex-grow: 1;
 
-  input,
-  select,
-  textarea {
+  input[type="text"],
+  input[type="date"],
+  textarea,
+  select {
     width: 440px;
     border: 1px solid $col-font-grey;
     border-radius: 10px;
     padding: 12px 20px;
     color: $col-font-grey;
+    resize: none;
+
+    &:focus {
+        outline: none;
+        border-color: $col-font-inactive;
+    }
   }
 
   textarea {
@@ -52,7 +65,7 @@ section {
   }
 }
 
-.task-overview-form,
+.task-overview,
 .task-details {
   @include dFlex($jc: center, $ai: flex-start, $gap: 16px);
   flex-direction: column;
@@ -63,9 +76,13 @@ section {
   }
 }
 
+.vertical-divider {
+    width: 1px;
+    height: 360px;
+    background-color: $col-font-dropdown;
+}
+
 .task-details {
-  border-left: 1px solid #ccc;
-  padding-left: 50px;
 
   .priority-buttons {
     @include dFlex($jc: center, $ai: flex-start, $gap: 16px);
