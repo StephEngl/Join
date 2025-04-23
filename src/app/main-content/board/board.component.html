@@ -1,6 +1,99 @@
-<p>board works!</p>
-<!-- 4 Listen <ul> mit inhalt task components => <li> -->
+<section class="board-section">
 
+    <div class="board-header">
+
+        <h1>Board</h1>
+
+        <div class="search-add-container">
+            <input type="text" placeholder="Find Task" />
+            <button class="add-task-btn">Add Task</button>
+        </div>
+
+    </div>
+
+    <div class="board">
+
+        <div class="board-column board-to-do">
+
+            <div class="board-column-header">
+                <h3>To do</h3>
+                <button class="mini-button-add-board"><img src="./assets/icons/kanban/add.svg"></button>
+            </div>
+
+            <ul>
+                @for (board of todoBoard; track board.id) {
+                <li><app-task></app-task></li>
+                }
+            </ul>
+
+        </div>
+
+        <div class="board-column board-in-progress">
+
+            <div class="board-column-header">
+                <h3>In progress</h3>
+                <button class="mini-button-add-board"><img src="./assets/icons/kanban/add.svg"></button>
+            </div>
+
+            <ul>
+                @for (board of inProgressBoard; track board.id) {
+                <li><app-task></app-task></li>
+                }
+            </ul>
+
+        </div>
+
+        <div class="board-column board-await-feedback">
+
+            <div class="board-column-header">
+                <h3>Await feedback</h3>
+                <button class="mini-button-add-board"><img src="./assets/icons/kanban/add.svg"></button>
+            </div>
+
+            <ul>
+                @for (board of awaitFeedbackBoard; track board.id) {
+                <li><app-task></app-task></li>
+                }
+            </ul>
+
+            <ul>
+                @for (board of awaitFeedbackBoard; track board.id) {
+                <li><app-task></app-task></li>
+                }
+            </ul>
+
+        </div>
+
+        <div class="board-column board-done">
+
+            <div class="board-column-header">
+                <h3>Done</h3>
+                <button class="mini-button-add-board"><img src="./assets/icons/kanban/add.svg"></button>
+            </div>
+
+            <ul>
+                @for (board of doneBoard; track board.id) {
+                <li><app-task></app-task></li>
+                }
+            </ul>
+
+            <ul>
+                @for (board of doneBoard; track board.id) {
+                <li><app-task></app-task></li>
+                }
+            </ul>
+
+            <ul>
+                @for (board of doneBoard; track board.id) {
+                <li><app-task></app-task></li>
+                }
+            </ul>
+
+        </div>
+
+    </div>
+
+</section>
 
 <!-- temp Code, do not delete  -->
 <app-task-firebase-temp></app-task-firebase-temp>
