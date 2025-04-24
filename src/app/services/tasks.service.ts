@@ -40,6 +40,10 @@ export class TasksService {
     return collection(this.firestore, 'tasks');
   }
 
+  getSingleDocRef(docId: string) {
+    return doc(collection(this.firestore, 'tasks'), docId);
+  }
+
     setTaskObject(id:string, taskData: any): TaskInterface {
       return {
         id: id,
@@ -63,6 +67,42 @@ export class TasksService {
       }
     }
 
+    async deleteTask(docId: string) {
+      try {
+        await deleteDoc(this.getSingleDocRef(docId));
+      } catch (err) {
+        console.error(err);
+      }
+    }
+
+
+
+  async updateTask(task: TaskInterface) {
+    if (task.id) {
+      try {
+        let docRef = this.getSingleDocRef(task.id);
+        await updateDoc(docRef, this.getCleanJson(task));
+      } catch (err) {
+        console.error(err);
+      }
+    }
+  }
+
+  getCleanJson(task: TaskInterface) {
+    return     {
+      title: task.title,
+      description: task.description,
+      category: task.category,
+      dueDate: task.dueDate,
+      priority: task.priority,
+      subTasks: task.subTasks,
+      taskType: task.taskType,
+      assignedTo: task.assignedTo,
+    };
+  }
+
+
+  
 }
 
 

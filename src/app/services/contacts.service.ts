@@ -19,13 +19,17 @@ import {
   DocumentReference,
 } from '@angular/fire/firestore';
 import { DummyContactsService } from './dummy-contacts.service';
+import { DummyTasksService } from './dummy-tasks.service';
+import { TasksService } from './tasks.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactsService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
-  dummyContacts = inject(DummyContactsService)
+  // dummyContacts = inject(DummyContactsService);
+  // dummyTasks = inject(DummyTasksService);
+  // taskService = inject(TasksService);
   contacts: ContactInterface[] = [];
   contactColors: string[] = [
     '#FF7A00',
@@ -48,62 +52,12 @@ export class ContactsService implements OnDestroy {
 
   constructor() {
     this.unsubscribeContact = this.subContactsList();
-    setTimeout(() => {
-      this.checkAndResetIfNeeded();
-    }, 1000);
-
   }
 
   ngOnDestroy() {
     if (this.unsubscribeContact) {
       this.unsubscribeContact();
     }
-  }
-
-  deleteAllEntries() {
-    this.contacts.forEach((contact) => {
-      if (contact.id) {
-        this.deleteContact(contact.id).then(() => {
-        });
-      }
-    });
-  }
-
-  runReset() {
-    this.deleteAllEntries();
-    this.createDummyEntries();
-  }
-
-  async checkAndResetIfNeeded() {
-    const currentDate = this.getTodayDateString();
-    const docRef = doc(this.firestore, 'timeStamp', 'currentDayStamp');
-  
-    try {
-      const stampSnap = await getDoc(docRef);
-      const storedDate = stampSnap.exists() ? stampSnap.data()['currentDay'] : null;
-  
-      if (storedDate !== currentDate) {
-        await this.runReset();
-        await this.updateDayStamp(docRef, currentDate);
-      } else {
-      }
-    } catch (err) {
-      console.error('Error reading current timestamp:', err);
-    }
-  }
-  
-  getTodayDateString(): string {
-    return new Date().toISOString().split('T')[0];
-  }
-  
-  async updateDayStamp(docRef: DocumentReference, date: string) {
-    await setDoc(docRef, { currentDay: date });
-  }
-
-  createDummyEntries() {
-    this.dummyContacts.dummyContacts.forEach((contact) => {
-      this.addContact(contact);
-    });
   }
 
   async addContact(

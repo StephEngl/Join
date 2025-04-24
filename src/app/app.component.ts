@@ -1,7 +1,8 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { HeaderComponent } from "./shared/header/header.component";
 import { NavbarComponent } from "./shared/navbar/navbar.component";
+import { DailyResetService } from './services/daily-reset.service';
 
 @Component({
   selector: 'app-root',
@@ -12,7 +13,13 @@ import { NavbarComponent } from "./shared/navbar/navbar.component";
 })
 export class AppComponent {
   title = 'join';
+  dailyReset = inject(DailyResetService);
 
-  constructor() { }
+  constructor() {
+    setTimeout(() => {
+      this.dailyReset.checkAndResetIfNeeded();
+    }, 1000);
+
+  }
 
 }

@@ -1,19 +1,27 @@
-import { Component } from '@angular/core';
+import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
+import { CommonModule } from '@angular/common';
+import { TaskInterface } from '../../../../interfaces/task.interface';
 import { TaskDialogComponent } from '../task-dialog.component';
 
 @Component({
-  selector: 'app-task-info',
-  standalone: true,
-  imports: [TaskDialogComponent],
-  templateUrl: './task-info.component.html',
-  styleUrl: './task-info.component.scss'
+    selector: 'app-task-info',
+    standalone: true,
+    imports: [CommonModule, TaskDialogComponent],
+    templateUrl: './task-info.component.html',
+    styleUrls: ['./task-info.component.scss']
 })
 export class TaskInfoComponent {
-  
-  constructor(private dialog: MatDialog) {}
+    @Input() task!: TaskInterface;
+    @Output() close = new EventEmitter<void>();
 
-  openEditTaskDialog() {
-    this.dialog.open(TaskDialogComponent);
-  }
+    taskInfo_closeDialog(): void {
+        this.close.emit();
+    }
+
+    constructor(private dialog: MatDialog) {}
+
+    openEditTaskDialog() {
+        this.dialog.open(TaskDialogComponent);
+    }
 }
