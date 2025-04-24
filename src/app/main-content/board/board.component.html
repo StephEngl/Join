@@ -1,9 +1,6 @@
 <section class="board-section">
-
     <div class="board-header">
-
         <h1>Board</h1>
-
         <div class="search-add-container">
             <input type="text" placeholder="Find Task" />
             <button class="add-task-btn">Add Task<svg width="15" height="14" viewBox="0 0 15 14" fill="none"
@@ -14,99 +11,26 @@
                 </svg></button>
         </div>
     </div>
-
     <div class="board">
-
-        <div class="board-column board-to-do">
-
+        @for (column of boardColumns; track column.title) {
+        <div class="board-column">
             <div class="board-column-header">
-                <h3>To do</h3>
-                <button class="mini-button-add-board"><img src="./assets/icons/kanban/add.svg"></button>
+                <h3>{{ column.title }}</h3>
+                <button class="mini-button-add-board">
+                    <img src="./assets/icons/kanban/add.svg" />
+                </button>
             </div>
-
-            <!-- // TODO: Drag-and-Drop für Tasks aktivieren -->
-            <!-- //FIXME: add to do board -->
-
             <ul>
-                <li class="no-tasks">No tasks To do</li>
-                @if (todoBoard.length === 0) {
-                <li class="no-tasks">No tasks To do</li>
+                @if (createBoardTask(column.key).length === 0) {
+                <li class="no-tasks">No tasks {{ column.title }}</li>
                 } @else {
-                @for (board of todoBoard; track board.id) {
-                <li><app-task></app-task></li>
-                }
-                }
-            </ul>
-
-        </div>
-
-        <div class="board-column board-in-progress">
-
-            <div class="board-column-header">
-                <h3>In progress</h3>
-                <button class="mini-button-add-board"><img src="./assets/icons/kanban/add.svg"></button>
-            </div>
-
-            <!-- // TODO: Drag-and-Drop für Tasks aktivieren -->
-            <!-- //FIXME: add in progress board -->
-
-            <ul>
-                <li class="no-tasks">No tasks In Progress</li>
-                @if (inProgressBoard.length === 0) {
-                <li class="no-tasks">No tasks To do</li>
-                } @else {
-                @for (board of inProgressBoard; track board.id) {
-                <li><app-task></app-task></li>
-                }
-                }
-            </ul>
-
-        </div>
-
-        <div class="board-column board-await-feedback">
-
-            <div class="board-column-header">
-                <h3>Await feedback</h3>
-                <button class="mini-button-add-board"><img src="./assets/icons/kanban/add.svg"></button>
-            </div>
-
-            <!-- // TODO: Drag-and-Drop für Tasks aktivieren -->
-            <!-- //FIXME: add await feedback board -->
-
-            <ul>
-                <li class="no-tasks">No tasks Await feedback</li>
-                @if (awaitFeedbackBoard.length === 0) {
-                <li class="no-tasks">No tasks To do</li>
-                } @else {
-                @for (board of awaitFeedbackBoard; track board.id) {
-                <li><app-task></app-task></li>
-                }
-                }
-            </ul>
-
-        </div>
-
-        <div class="board-column board-done">
-
-            <div class="board-column-header">
-                <h3>Done</h3>
-                <button class="mini-button-add-board"><img src="./assets/icons/kanban/add.svg"></button>
-            </div>
-
-            <!-- // TODO: Drag-and-Drop für Tasks aktivieren -->
-            <!-- //FIXME: add done board -->
-
-            <ul>
-                <li class="no-tasks">No tasks Done</li>
-                @if (doneBoard.length === 0) {
-                <li class="no-tasks">No tasks To do</li>
-                } @else {
-                @for (board of doneBoard; track board.id) {
+                @for (task of createBoardTask(column.key); track task.id) {
                 <li><app-task></app-task></li>
                 }
                 }
             </ul>
         </div>
+        }
     </div>
 </section>
 

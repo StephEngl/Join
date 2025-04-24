@@ -14,13 +14,12 @@ import { ContactsService } from '../../../services/contacts.service';
 export class TaskFirebaseTempComponent {
   tasksService = inject(TasksService);
   contactsService = inject(ContactsService);
-  taskCategories: { taskType: string; label: string }[] = [
-    { taskType: 'toDo', label: 'To Do' },
+  taskCategories = [
+    { taskType: 'toDo', label: 'ToDo' },
     { taskType: 'inProgress', label: 'In Progress' },
     { taskType: 'feedback', label: 'Await Feedback' },
     { taskType: 'done', label: 'Done' }
   ];
-
 
   tasksByCategory(category: string): TaskInterface[] {
     return this.tasksService.tasks.filter(task => task.taskType === category);
@@ -34,23 +33,21 @@ export class TaskFirebaseTempComponent {
       dueDate: new Date('2025-05-01'),
       priority: 'high',
       subTasks: ['Header layout bauen', 'Farbschema wählen'],
-      taskType: 'done', //d
+      taskType: 'done',
       assignedTo: [
         { contactId: '0ynBkOGNOyokozUqJiED' },
         { contactId: 'i0jenjourf0WRSr9S8eA' }
-      ]
+      ],
     };
-    this.tasksService.addTask(task)
+    this.tasksService.addTask(task);
   }
-
 
   nameInitials(id: string | undefined) {
     const contact = this.contactsService.contacts.find(c => c.id === id);
-    const parts = contact?.name.trim().split(' ');
-    const preNameLetter = contact?.name.charAt(0).toUpperCase() || '';
-    const lastWord = parts?.at(-1) || '';
-    const surNameLetter = lastWord.charAt(0).toUpperCase()
-    return preNameLetter + surNameLetter;
+    const parts = contact?.name.trim().split(' ') || [];
+    const nameLetter1 = contact?.name.charAt(0).toUpperCase() || '';
+    const lastName = parts?.at(-1) || '';
+    const lastNameLetter = lastName.charAt(0).toUpperCase();
+    return nameLetter1 + lastNameLetter;
   }
-
 }
