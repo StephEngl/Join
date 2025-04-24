@@ -10,9 +10,10 @@ import { TaskDialogComponent } from '../task-dialog.component';
   styleUrl: './task-info.component.scss'
 })
 export class TaskInfoComponent {
+  
   constructor(private dialog: MatDialog) {}
 
-  openTaskDialog() {
+  openEditTaskDialog() {
     this.dialog.open(TaskDialogComponent);
   }
 }
