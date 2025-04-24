@@ -2,6 +2,7 @@
 @import "../../../assets/styles/variables.scss";
 
 section {
+  container-type: inline-size;
   display: flex;
   flex-direction: column;
   height: calc(100vh - 96px);
@@ -20,9 +21,10 @@ section {
     color: $col-task-urgent;
   }
 
-  button {
+  .priority-button {
     border: 1px solid $col-font-grey;
     border-radius: 10px;
+    width: 136px;
     padding: 16px 10px;
     background-color: white;
     font-size: 20px;
@@ -36,6 +38,25 @@ section {
     display: flex;
     flex-direction: column;
     height: 100%;
+  }
+
+  @media (max-width: 660px) {
+    padding: 20px !important;
+
+    h2 {
+      padding-bottom: 24px !important;
+    }
+
+    .priority-button {
+      width: 120px;
+      padding: 10px;
+      font-size: 16px;
+      text-align: center;
+
+      img {
+        width: 16px;
+      }
+    }
   }
 }
 
@@ -67,7 +88,7 @@ section {
 
 .task-overview,
 .task-details {
-  @include dFlex($jc: center, $ai: flex-start, $gap: 16px);
+  @include dFlex($jc: center, $ai: flex-start, $gap: 32px);
   flex-direction: column;
 
   .form-group {
@@ -78,13 +99,18 @@ section {
 
 .vertical-divider {
   width: 1px;
-  height: 360px;
+  height: 420px;
   background-color: $col-font-dropdown;
+
+  @container (max-width: 1200px) {
+    display: none;
+  }
 }
 
 .task-details {
-  .priority-buttons {
-    @include dFlex($jc: center, $ai: flex-start, $gap: 16px);
+  .priority-buttons-wrapper {
+    @include dFlex($jc: space-between, $ai: flex-start, $gap: 16px);
+    width: 100%;
   }
 
   .subtask-input {
@@ -117,6 +143,24 @@ section {
       transition: color 0.2s;
     }
   }
+
+  @media (max-width: 400px) {
+    .priority-buttons-wrapper {
+      gap: 0;
+
+      .priority-button {
+        width: 100px;
+      }
+    }
+  }
+
+  @media (max-width: 350px) {
+    .priority-buttons-wrapper {
+      .priority-button {
+        padding: 10px 0;
+      }
+    }
+  }
 }
 
 .footnote {
@@ -138,21 +182,27 @@ section {
 
   .task-form-wrapper {
     align-items: center;
-  }
-
-  .vertical-divider {
-    display: none;
-  }
-
-  .task-form-wrapper {
     flex-direction: column;
+    gap: 32px;
+  }
+
+  // .vertical-divider {
+  //   display: none;
+  // }
+
+  h2 {
+    width: 440px;
+    margin: 0 auto;
+    text-align: left;
   }
 }
 
-@media (max-width: 660px) {
-  section {
-    padding: 20px;
-    // align-items: center;
-
+@media (max-width: 500px) {
+  .task-overview,
+  .task-details,
+  .form-group,
+  .form-control,
+  h2 {
+    width: 100% !important;
   }
 }
