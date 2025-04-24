@@ -25,7 +25,7 @@ import {
 })
 export class BoardComponent {
   tasksService = inject(TasksService);
-  boardColumns = [
+  boardColumns: {taskStatus: string; title: string}[] = [
     { taskStatus: 'toDo', title: 'To do' },
     { taskStatus: 'inProgress', title: 'In progress' },
     { taskStatus: 'feedback', title: 'Await feedback' },
