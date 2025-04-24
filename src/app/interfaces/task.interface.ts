@@ -6,7 +6,7 @@ export interface TaskInterface {
     description: string;
     category: string;
     dueDate: Date;
-    priority: string;
+    priority: "critical" | "medium" | "trivial";
     taskType: "toDo" | "done" | "inProgress" | "feedback"; // bleibt
     subTasks: any[];
     assignedTo: any[];

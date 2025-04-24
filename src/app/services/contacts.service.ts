@@ -204,4 +204,9 @@ export class ContactsService implements OnDestroy {
     return nameLetter1 + lastNameLetter;
   }
 
+  contactColor(id: string | undefined) {
+    const contact = this.contacts.find(c => c.id === id);
+    return contact?.color;
+  }  
+
 }

@@ -14,13 +14,10 @@
         <div class="task-footer">
             <div class="avatars">
                 @for (contact of taskData.assignedTo; track contact) {
-                    <span class="avatar" style="background-color: #a020f0;">
+                    <span class="avatar" [style.backgroundColor]="this.contactsService.contactColor(contact.contactId)">
                         {{this.contactsService.nameInitials(contact.contactId)}}
                     </span>
                 }
-                <span class="avatar" style="background-color: #a020f0;">AS</span>
-                <span class="avatar" style="background-color: #ff69b4;">DE</span>
-                <span class="avatar" style="background-color: #ffb300;">EF</span>
             </div>
             <!-- <img/> -->
         </div>

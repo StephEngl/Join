@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { TasksService } from '../../../services/tasks.service';
 import { TaskInterface } from '../../../interfaces/task.interface';
 import { ContactsService } from '../../../services/contacts.service';
+import { DummyTasksService } from '../../../services/dummy-tasks.service';
 
 @Component({
   selector: 'app-task-firebase-temp',
@@ -14,6 +15,7 @@ import { ContactsService } from '../../../services/contacts.service';
 export class TaskFirebaseTempComponent {
   tasksService = inject(TasksService);
   contactsService = inject(ContactsService);
+  dummyTaskService = inject(DummyTasksService);
   taskCategories = [
     { taskType: 'toDo', label: 'ToDo' },
     { taskType: 'inProgress', label: 'In Progress' },
@@ -26,20 +28,9 @@ export class TaskFirebaseTempComponent {
   }
 
   createContact() {
-    const task: TaskInterface = {
-      title: 'Design Landing Page',
-      description: 'Erstelle eine erste Version der Landing Page',
-      category: 'Design',
-      dueDate: new Date('2025-05-01'),
-      priority: 'high',
-      subTasks: ['Header layout bauen', 'Farbschema wählen'],
-      taskType: 'done',
-      assignedTo: [
-        { contactId: '0ynBkOGNOyokozUqJiED' },
-        { contactId: 'i0jenjourf0WRSr9S8eA' }
-      ],
-    };
-    this.tasksService.addTask(task);
+    this.dummyTaskService.dummyTasks.forEach((task) => {
+      this.tasksService.addTask(task);
+    })
   }
 
   nameInitials(id: string | undefined) {
@@ -50,4 +41,5 @@ export class TaskFirebaseTempComponent {
     const lastNameLetter = lastName.charAt(0).toUpperCase();
     return nameLetter1 + lastNameLetter;
   }
+
 }
