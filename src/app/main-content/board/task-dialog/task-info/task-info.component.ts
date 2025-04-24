@@ -1,27 +1,50 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { MatDialog } from '@angular/material/dialog';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskInterface } from '../../../../interfaces/task.interface';
-import { TaskDialogComponent } from '../task-dialog.component';
+import { TasksService } from '../../../../services/tasks.service';
+import { MatDialogRef } from '@angular/material/dialog';
+import { Router } from '@angular/router';
 
 @Component({
     selector: 'app-task-info',
     standalone: true,
-    imports: [CommonModule, TaskDialogComponent],
+    imports: [CommonModule],
     templateUrl: './task-info.component.html',
     styleUrls: ['./task-info.component.scss']
 })
 export class TaskInfoComponent {
     @Input() task!: TaskInterface;
-    @Output() close = new EventEmitter<void>();
 
-    taskInfo_closeDialog(): void {
-        this.close.emit();
+    constructor(
+        private tasksService: TasksService,
+        private dialogRef: MatDialogRef<TaskInfoComponent>,
+        private router: Router
+    ) {}
+
+    closeDialog(): void {
+        this.dialogRef.close();
+        this.router.navigate(['/board']);
     }
 
-    constructor(private dialog: MatDialog) {}
+    deleteTask(): void {
+        if (this.task?.id) {
+            this.tasksService.deleteTask(this.task.id).then(() => {
+                this.dialogRef.close();
+                this.router.navigate(['/board']);
+            });
+        }
+    }
 
-    openEditTaskDialog() {
-        this.dialog.open(TaskDialogComponent);
+    editTask(updatedData: Partial<TaskInterface>): void {
+        if (this.task?.id) {
+            const updatedTask: TaskInterface = {
+                ...this.task,
+                ...updatedData
+            };
+            this.tasksService.updateTask(updatedTask).then(() => {
+                this.dialogRef.close(updatedTask);
+                this.router.navigate(['/board']);
+            });
+        }
     }
 }

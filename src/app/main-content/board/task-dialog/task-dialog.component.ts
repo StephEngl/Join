@@ -1,30 +1,23 @@
-import { Component, OnInit } from '@angular/core';
-import { ActivatedRoute } from '@angular/router';
+import { Component, Input } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskInterface } from '../../../interfaces/task.interface';
-import { TasksService } from '../../../services/tasks.service';
 import { TaskInfoComponent } from './task-info/task-info.component';
 import { AddTaskComponent } from '../../add-task/add-task.component';
+import { TasksService } from '../../../services/tasks.service';
 
 @Component({
     selector: 'app-task-dialog',
     standalone: true,
+    imports: [CommonModule, TaskInfoComponent, AddTaskComponent],
     templateUrl: './task-dialog.component.html',
-    styleUrls: ['./task-dialog.component.scss'],
-    imports: [CommonModule, TaskInfoComponent, AddTaskComponent]
+    styleUrls: ['./task-dialog.component.scss']
 })
-export class TaskDialogComponent implements OnInit {
-    task!: TaskInterface;
+export class TaskDialogComponent {
+    @Input() task!: TaskInterface;
 
-    constructor(
-        private route: ActivatedRoute,
-        private tasksService: TasksService
-    ) {}
+    constructor(private tasksService: TasksService) {}
 
-    ngOnInit(): void {
-        const taskId = this.route.snapshot.paramMap.get('id');
-        if (taskId) {
-            this.task = this.tasksService.getTaskById(taskId);
-        }
+    updateTaskInDialog(updatedTask: TaskInterface): void {
+        this.tasksService.updateTask(updatedTask);
     }
 }
