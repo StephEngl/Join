@@ -1,13 +1,11 @@
-import { Data } from "@angular/router";
-
 export interface TaskInterface {
     id?: string;
     title: string;
     description: string;
     category: string;
     dueDate: Date;
-    priority: "critical" | "medium" | "trivial";
-    taskType: "toDo" | "done" | "inProgress" | "feedback"; // bleibt
+    priority: "urgent" | "medium" | "low"; // edit firebase and services to this
+    taskType: "toDo" | "done" | "inProgress" | "feedback"; 
     subTasks: any[];
     assignedTo: any[];
 }
