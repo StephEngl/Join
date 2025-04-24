@@ -21,10 +21,10 @@
                 </button>
             </div>
             <ul>
-                @if (createBoardTask(column.key).length === 0) {
+                @if (filterTasksByCategory(column.key).length === 0) {
                 <li class="no-tasks">No tasks {{ column.title }}</li>
                 } @else {
-                @for (task of createBoardTask(column.key); track task.id) {
+                @for (task of filterTasksByCategory(column.key); track task.id) {
                 <li><app-task></app-task></li>
                 }
                 }
@@ -35,4 +35,4 @@
 </section>
 
 <!-- temp Code, do not delete  -->
-<app-task-firebase-temp></app-task-firebase-temp>
+<!-- <app-task-firebase-temp></app-task-firebase-temp> -->

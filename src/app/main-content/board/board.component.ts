@@ -14,7 +14,7 @@ import { TaskInterface } from '../../interfaces/task.interface';
   styleUrls: ['./board.component.scss']
 })
 export class BoardComponent {
-
+  tasksService = inject(TasksService);
   boardColumns = [
     { key: 'toDo', title: 'To do' },
     { key: 'inProgress', title: 'In progress' },
@@ -22,8 +22,8 @@ export class BoardComponent {
     { key: 'done', title: 'Done' }
   ];
   
-  //hier wird das task array gefiltert die zu den jeweiligen spalten gehören und filtert das Taskarray nach dem taskType
-  createBoardTask(status: string): TaskInterface[] {
+  //filtering tasks to columns by taskType
+  filterTasksByCategory(status: string): TaskInterface[] {
     return this.tasksService.tasks.filter(task => task.taskType === status);
   }
   
@@ -31,6 +31,5 @@ export class BoardComponent {
   
 
 
-  tasksService = inject(TasksService);
 
 }

@@ -21,7 +21,7 @@ export class TaskFirebaseTempComponent {
     { taskType: 'done', label: 'Done' }
   ];
 
-  tasksByCategory(category: string): TaskInterface[] {
+  filterTasksByCategory(category: string): TaskInterface[] {
     return this.tasksService.tasks.filter(task => task.taskType === category);
   }
 

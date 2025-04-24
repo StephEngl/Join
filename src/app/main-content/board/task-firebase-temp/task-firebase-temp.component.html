@@ -4,8 +4,8 @@
         <div class="task-category">
             <p>{{ category.label }}</p>
         
-            @if (tasksByCategory(category.taskType).length > 0) {
-            @for (task of tasksByCategory(category.taskType); track task) {
+            @if (filterTasksByCategory(category.taskType).length > 0) {
+            @for (task of filterTasksByCategory(category.taskType); track task) {
                 <div class="single-task">
                 <p>{{ task.title }}</p>
                 <p>{{ task.description }}</p>
