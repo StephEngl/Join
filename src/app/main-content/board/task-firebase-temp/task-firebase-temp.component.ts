@@ -34,7 +34,7 @@ export class TaskFirebaseTempComponent {
       dueDate: new Date('2025-05-01'),
       priority: 'high',
       subTasks: ['Header layout bauen', 'Farbschema wählen'],
-      taskType: 'done',
+      taskType: 'done', //d
       assignedTo: [
         { contactId: '0ynBkOGNOyokozUqJiED' },
         { contactId: 'i0jenjourf0WRSr9S8eA' }

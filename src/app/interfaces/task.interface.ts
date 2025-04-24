@@ -5,7 +5,7 @@ export interface TaskInterface {
     category: string;
     dueDate: Date;
     priority: string;
-    taskType: "toDo" | "done" | "inProgress" | "feedback";
+    taskType: "toDo" | "done" | "inProgress" | "feedback"; // bleibt
     subTasks: any[];
     assignedTo: any[];
 }
