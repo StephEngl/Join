@@ -27,7 +27,7 @@ export class TasksService {
         snapshot.forEach((element) => {
           const contact = element.data();
           this.tasks.push(this.setTaskObject(element.id, contact));
-          console.log(this.tasks);
+          // console.log(this.tasks);
         });
       },
       (error) => {
@@ -44,38 +44,36 @@ export class TasksService {
     return doc(collection(this.firestore, 'tasks'), docId);
   }
 
-    setTaskObject(id:string, taskData: any): TaskInterface {
-      return {
-        id: id,
-        title: taskData.title || '',
-        description: taskData.description || '',
-        category: taskData.category || '',
-        dueDate: taskData.dueDate?.toDate?.() || new Date(),
-        priority: taskData.priority || '',
-        taskType: taskData.taskType || 'toDo',
-        subTasks: taskData.subTasks || [],
-        assignedTo: taskData.assignedTo || [],
-      };
+  setTaskObject(id:string, taskData: any): TaskInterface {
+    return {
+      id: id,
+      title: taskData.title || '',
+      description: taskData.description || '',
+      category: taskData.category || '',
+      dueDate: taskData.dueDate?.toDate?.() || new Date(),
+      priority: taskData.priority || '',
+      taskType: taskData.taskType || 'toDo',
+      subTasks: taskData.subTasks || [],
+      assignedTo: taskData.assignedTo || [],
+    };
+  }
+
+  async addTask(task: TaskInterface): Promise<void | DocumentReference> {
+    try {
+      const taskRef = await addDoc(this.getTasksRef(), task);
+      return taskRef;
+    } catch (err) {
+      console.error(err);
     }
+  }
 
-    async addTask(task: TaskInterface): Promise<void | DocumentReference> {
-      try {
-        const taskRef = await addDoc(this.getTasksRef(), task);
-        return taskRef;
-      } catch (err) {
-        console.error(err);
-      }
+  async deleteTask(docId: string) {
+    try {
+      await deleteDoc(this.getSingleDocRef(docId));
+    } catch (err) {
+      console.error(err);
     }
-
-    async deleteTask(docId: string) {
-      try {
-        await deleteDoc(this.getSingleDocRef(docId));
-      } catch (err) {
-        console.error(err);
-      }
-    }
-
-
+  }
 
   async updateTask(task: TaskInterface) {
     if (task.id) {

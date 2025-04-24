@@ -2,10 +2,18 @@ section {
     display:flex;
     gap: 30px;
 }
-.test {
+.task-category {
     display: flex;
     flex-direction: column;
-    gap: 20px;
-    background-color: lightgrey;
+    gap: 30px;
+    background-color: green;
+    padding: 15px;
+}
+
+.single-task {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+    background-color: grey;
     padding: 10px;
 }

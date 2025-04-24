@@ -13,7 +13,15 @@
     </div>
     <div class="board">
         @for (column of boardColumns; track column.title) {
-        <div class="board-column">
+        <div
+            class="board-column"
+            class="task-category"
+            cdkDropList
+            [id]="column.taskStatus"
+            [cdkDropListData]="filterTasksByCategory(column.taskStatus)"
+            [cdkDropListConnectedTo]="connectedDropLists"
+            (cdkDropListDropped)="drop($event)"
+        >
             <div class="board-column-header">
                 <h3>{{ column.title }}</h3>
                 <button class="mini-button-add-board">
@@ -21,11 +29,11 @@
                 </button>
             </div>
             <ul>
-                @if (filterTasksByCategory(column.key).length === 0) {
+                @if (filterTasksByCategory(column.taskStatus).length === 0) {
                     <li class="no-tasks">No tasks {{ column.title }}</li>
                 } @else {
-                    @for (task of filterTasksByCategory(column.key); track task.id) {
-                        <li><app-task [taskData]="task"></app-task></li>
+                    @for (task of filterTasksByCategory(column.taskStatus); track task.id) {
+                        <li><app-task [taskData]="task" cdkDrag></app-task></li>
                     }
                 }
             </ul>
