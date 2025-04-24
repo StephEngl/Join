@@ -1,5 +1,7 @@
-import { Component } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
   selector: 'app-add-task',
@@ -13,12 +15,29 @@ export class AddTaskComponent {
   isEdited = false;
   isFormValid = false;
   subtaskText = '';
+  @Input() forceMobile = false;
+
+  constructor(
+    private breakpointObserver: BreakpointObserver,
+    @Inject(MAT_DIALOG_DATA) public data: any
+  ) {
+    if (data && data.forceMobile) {
+      this.forceMobile = data.forceMobile;
+    }
+  }
+
+  get isMobile(): boolean {
+    // Wenn forceMobile gesetzt ist, immer mobile Variante anzeigen
+    return (
+      this.forceMobile ||
+      this.breakpointObserver.isMatched('(max-width: 450px)')
+    );
+  }
 
   clearForm() {}
 
   onSubmit() {
-    console.log("Läuft");
-    
+    console.log('Läuft');
   }
 
   onInputChange() {
