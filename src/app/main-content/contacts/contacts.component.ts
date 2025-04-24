@@ -6,6 +6,8 @@ import { ContactInterface } from '../../interfaces/contact.interface';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { SignalsService } from '../../services/signals.service';
 import { DummyContactsService } from '../../services/dummy-contacts.service';
+import { ToastService } from '../../shared/toast/toast.service';
+
 
 @Component({
   selector: 'app-contacts',
@@ -16,14 +18,11 @@ import { DummyContactsService } from '../../services/dummy-contacts.service';
 })
 
 export class ContactsComponent {
+  toastService = inject(ToastService);
   contactsService = inject(ContactsService);
   signalService = inject(SignalsService);
   showDialog = false;
   showBtnMenu = false;
-  toastVisible = false;
-  showToast = false;
-  toastMessage: string = '';
-  toastType: 'create' | 'update' | 'delete' | 'error' = 'create';
   sortedContacts: ContactInterface[] = [];
   firstLetters: string[] = [];
   activeContactIndex: number | undefined;
@@ -137,42 +136,26 @@ export class ContactsComponent {
     this.contactClicked = false;
   }
 
-
   toggleDialog() {
     this.showDialog = !this.showDialog;
   }
 
   onContactCreated() {
-    this.toastMessage = 'Contact successfully created';
-    this.toastType = 'create';
-    this.triggerToast();
+    this.toastService.triggerToast('Contact successfully created', 'create');
   }
 
+
   onContactUpdated() {
-    this.toastMessage = 'Changes saved';
-    this.toastType = 'update';
-    this.triggerToast();
+    this.toastService.triggerToast('Changes saved', 'update');
   }
 
   onContactDeleted() {
-    this.toastMessage = 'Contact deleted';
-    this.toastType = 'delete';
-    this.triggerToast();
-  }
-
-
-  triggerToast() {
-    this.showToast = true;
-    setTimeout(() => this.toastVisible = true, 10);
-    setTimeout(() => this.toastVisible = false, 2000);
-    setTimeout(() => this.showToast = false, 2500);
+    this.toastService.triggerToast('Contact deleted', 'delete');
   }
 
   onContactError() {
     this.showDialog = false;
-    this.toastMessage = 'Something went wrong';
-    this.toastType = 'error';
-    this.triggerToast();
+    this.toastService.triggerToast('Something went wrong', 'error');
   }
 
 }

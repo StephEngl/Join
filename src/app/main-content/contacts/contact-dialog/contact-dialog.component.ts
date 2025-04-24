@@ -17,11 +17,11 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
 
   readonly contactsService = inject(ContactsService);
 
-  @Output() cancel = new EventEmitter<void>();
-  @Output() create = new EventEmitter<void>();
-  @Output() update = new EventEmitter<void>();
-  @Output() delete = new EventEmitter<void>();
-  @Output() error = new EventEmitter<void>();
+  @Output() cancelToast = new EventEmitter<void>();
+  @Output() createToast = new EventEmitter<void>();
+  @Output() updateToast = new EventEmitter<void>();
+  @Output() deleteToast = new EventEmitter<void>();
+  @Output() errorToast = new EventEmitter<void>();
   @Output() requestDelete = new EventEmitter<void>();
   @Output() newContactIndex = new EventEmitter<number>();
 
@@ -61,7 +61,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   onCancel(): void {
     this.animateIn = false;
     this.animateOut = true;
-    setTimeout(() => this.cancel.emit(), 400);
+    setTimeout(() => this.cancelToast.emit(), 400);
   }
 
   onOverlayClick(): void {
@@ -77,7 +77,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     }
     if (!this.validateName(this.contactData.name, form)) return;
     this.resetValidation();
-    if (this.doubleCheckData(index)) return;
+    if (this.doubleCheckDataContact(index)) return;
     index === undefined ? this.createNewContact() : this.editContact(index);
   }
 
@@ -144,7 +144,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     }
   }
 
-  doubleCheckData(index?: number): boolean {
+  doubleCheckDataContact(index?: number): boolean {
     const double = this.contactsService.contacts.find((contact, i) => i !== index && (
       contact.name.toLowerCase() === this.contactData.name.toLowerCase() ||
       contact.mail.toLowerCase() === this.contactData.mail.toLowerCase()
@@ -163,10 +163,10 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     this.contactsService.addContact(this.contactData)
       .then(() => {
         this.emitNewContactIndex();
-        this.create.emit();
+        this.createToast.emit();
         this.onCancel();
       })
-      .catch(() => this.error.emit());
+      .catch(() => this.errorToast.emit());
   }
 
   emitNewContactIndex() {
@@ -183,15 +183,15 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
       try {
         contact.name = contact.name.charAt(0).toUpperCase() + contact.name.slice(1);
         await this.contactsService.updateContact(contact);
-        this.create.emit();
-        this.update.emit();
+        this.createToast.emit();
+        this.updateToast.emit();
         this.onCancel();
       } catch (error) {
         console.error('Fehler beim Aktualisieren:', error);
-        this.error.emit();
+        this.errorToast.emit();
       }
     } else {
-      this.error.emit();
+      this.errorToast.emit();
     }
   }
 

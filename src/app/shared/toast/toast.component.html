@@ -1,0 +1,5 @@
+@if (isToastOpen$ | async) {
+<div class="toast" [ngClass]="[(isToastAnimated$ | async) ? 'show' : '', toastType$ | async]">
+    {{ toastMessage$ | async }}
+</div>
+}
