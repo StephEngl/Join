@@ -1,5 +1,79 @@
 <section class="task-info-section">
-    <!-- Button zum Öffnen des Task-Dialogs für das Edit Task -->
-    <button (click)="openEditTaskDialog()">Edit</button>
+    <div class="task-info-top-container">
+        <div class="task-info-category">
+            {{ task.category }}
+        </div>
+        <div class="task-info-close" (click)="taskInfo_closeInfo()">&#10005;</div>
+    </div>
 
+    <div class="task-info-header-container">
+        <h2>{{ task.title }}</h2>
+    </div>
+
+    <div class="task-info-description-container">
+        <p>{{ task.description }}</p>
+    </div>
+
+    <div class="task-info-due-date-container">
+        <div class="task-info-due-date-txt">Due date:</div>
+        <div class="task-info-due-date-output">{{ task.dueDate | date: 'yyyy-MM-dd' }}</div>
+    </div>
+
+    <div class="task-info-priority-container">
+        <div class="task-info-priority-txt">Priority:</div>
+        <div class="task-info-priority-output">
+            <span>{{ task.priority }}</span>
+            @if (task.priority === 'urgent') {
+                <img src="assets/icons/kanban/prio_urgent.svg" alt="Urgent" />
+            }
+            @if (task.priority === 'medium') {
+                <img src="assets/icons/kanban/prio_middle.svg" alt="Medium" />
+            }
+            @if (task.priority === 'low') {
+                <img src="assets/icons/kanban/prio_low.svg" alt="Low" />
+            }
+        </div>
+    </div>
+
+    <div class="task-info-assigned-to-container">
+        <div class="task-info-assignet-to-txt">Assigned To:</div>
+        <div class="task-info-assigned-to-output">
+            @for (let person of task.assignedTo; track person.id) {
+                <div class="assigned-person">
+                    <span class="initials">{{ person.initials }}</span>
+                    <span class="name">{{ person.name }}</span>
+                </div>
+            }
+        </div>
+    </div>
+
+    <div class="task-info-subtastks-container">
+        <div class="task-info-subtasks-header">Subtasks:</div>
+        <div class="task-info-subtask-list">
+            @for (let subtask of task.subTasks; track subtask.name) {
+                <div class="task-info-subtask-item">
+                    <input type="checkbox" [checked]="subtask.completed" disabled />
+                    <span [class.completed]="subtask.completed">{{ subtask.name }}</span>
+                </div>
+            }
+        </div>
+    </div>
+    <div class="task-info-delete-edit-container">
+        <div class="task-info-delete-container">
+            <div class="task-info-delete-img">
+                <img src="src/assets/icons/kanban/delete.svg" alt="">
+            </div>
+            <div class="task-info-delete-txt-container">
+                <span class="task-info-delete-txt">Delete</span>
+            </div>
+        </div>
+        <div class="task-info-edit-container" (click)="openEditTaskDialog()">
+            <div class="task-info-edit-img">
+                <img src="src/assets/icons/kanban/edit.svg" alt="">
+            </div>
+            <div class="task-info-edit-txt-container">
+                <span class="task-info-edit-txt">Edit</span>
+            </div>
+        </div>
+    </div>
 </section>

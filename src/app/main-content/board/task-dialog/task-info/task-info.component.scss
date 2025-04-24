@@ -6,3 +6,68 @@
     height: auto;
     border-radius: 1rem;
 }
+
+.task-dialog-top-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: 1rem;
+}
+
+.task-dialog-category {
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    color: white;
+    font-weight: 600;
+    font-size: 1rem;
+}
+
+.task-dialog-close {
+    font-size: 1.5rem;
+    cursor: pointer;
+}
+
+.task-dialog-header-container h2 {
+    font-size: clamp(2.25rem, 2.1rem + 1vw, 2.9375rem);
+    font-weight: 600;
+    margin-bottom: 1rem;
+}
+
+.task-dialog-description-container p {
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    font-size: 1.25rem;
+    line-height: 120%;
+    color: black;
+    margin-bottom: 1rem;
+}
+
+.task-dialog-due-date-container,
+.task-dialog-priority-container,
+.task-dialog-assigned-to-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 1rem;
+}
+
+.task-dialog-subtasks-header {
+    font-weight: 600;
+    margin-bottom: 0.5rem;
+}
+
+.task-dialog-subtask-list {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+}
+
+.task-dialog-subtask-item {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+}
+
+.task-dialog-subtask-item .completed {
+    text-decoration: line-through;
+    color: gray;
+}
