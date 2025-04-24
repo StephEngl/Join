@@ -16,10 +16,10 @@ import { TaskInterface } from '../../interfaces/task.interface';
 export class BoardComponent {
   tasksService = inject(TasksService);
   boardColumns = [
-    { key: 'toDo', title: 'To do' },
-    { key: 'inProgress', title: 'In progress' },
-    { key: 'feedback', title: 'Await feedback' },
-    { key: 'done', title: 'Done' }
+    { taskStatus: 'toDo', title: 'To do' },
+    { taskStatus: 'inProgress', title: 'In progress' },
+    { taskStatus: 'feedback', title: 'Await feedback' },
+    { taskStatus: 'done', title: 'Done' }
   ];
   
   //filtering tasks to columns by taskType

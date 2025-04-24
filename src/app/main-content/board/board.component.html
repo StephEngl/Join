@@ -21,10 +21,10 @@
                 </button>
             </div>
             <ul>
-                @if (filterTasksByCategory(column.key).length === 0) {
+                @if (filterTasksByCategory(column.taskStatus).length === 0) {
                     <li class="no-tasks">No tasks {{ column.title }}</li>
                 } @else {
-                    @for (task of filterTasksByCategory(column.key); track task.id) {
+                    @for (task of filterTasksByCategory(column.taskStatus); track task.id) {
                         <li><app-task [taskData]="task"></app-task></li>
                     }
                 }
