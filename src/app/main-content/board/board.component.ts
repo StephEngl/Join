@@ -32,9 +32,14 @@ export class BoardComponent {
     { taskStatus: 'done', title: 'Done' }
   ];
   
-  //filtering tasks to columns by taskType
+  //tasks filtered by taskType & sorted by Priority
   filterTasksByCategory(status: string): TaskInterface[] {
-    return this.tasksService.tasks.filter(task => task.taskType === status);
+    return this.tasksService.tasks
+      .filter(task => task.taskType === status)
+      .sort((a, b) => {
+        const priorityOrder = { 'urgent': 1, 'medium': 2, 'low': 3 };
+        return priorityOrder[a.priority] - priorityOrder[b.priority];
+      });
   }
   
   // extracting each taskStatus from boardColumns
