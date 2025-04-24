@@ -27,7 +27,7 @@ export class TasksService {
         snapshot.forEach((element) => {
           const contact = element.data();
           this.tasks.push(this.setTaskObject(element.id, contact));
-          console.log(this.tasks);
+          // console.log(this.tasks);
         });
       },
       (error) => {
@@ -74,8 +74,6 @@ export class TasksService {
       console.error(err);
     }
   }
-
-
 
   async updateTask(task: TaskInterface) {
     if (task.id) {
