@@ -195,4 +195,13 @@ export class ContactsService implements OnDestroy {
     return lastWord.charAt(0).toUpperCase();
   }
 
+  nameInitials(id: string | undefined) {
+    const contact = this.contacts.find(c => c.id === id);
+    const parts = contact?.name.trim().split(' ') || [];
+    const nameLetter1 = contact?.name.charAt(0).toUpperCase() || '';
+    const lastName = parts?.at(-1) || '';
+    const lastNameLetter = lastName.charAt(0).toUpperCase();
+    return nameLetter1 + lastNameLetter;
+  }
+
 }

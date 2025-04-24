@@ -22,11 +22,11 @@
             </div>
             <ul>
                 @if (filterTasksByCategory(column.key).length === 0) {
-                <li class="no-tasks">No tasks {{ column.title }}</li>
+                    <li class="no-tasks">No tasks {{ column.title }}</li>
                 } @else {
-                @for (task of filterTasksByCategory(column.key); track task.id) {
-                <li><app-task></app-task></li>
-                }
+                    @for (task of filterTasksByCategory(column.key); track task.id) {
+                        <li><app-task [taskData]="task"></app-task></li>
+                    }
                 }
             </ul>
         </div>
@@ -35,4 +35,4 @@
 </section>
 
 <!-- temp Code, do not delete  -->
-<!-- <app-task-firebase-temp></app-task-firebase-temp> -->
+<app-task-firebase-temp></app-task-firebase-temp>

@@ -1,4 +1,6 @@
-import { Component, Input } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
+import { TaskInterface } from '../../../interfaces/task.interface';
+import { ContactsService } from '../../../services/contacts.service';
 
 @Component({
   selector: 'app-task',
@@ -7,5 +9,6 @@ import { Component, Input } from '@angular/core';
   styleUrls: ['./task.component.scss']
 })
 export class TaskComponent {
-
+  contactsService = inject(ContactsService);
+  @Input() taskData!: TaskInterface;
 }

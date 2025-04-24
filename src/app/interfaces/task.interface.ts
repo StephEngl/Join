@@ -10,5 +10,4 @@ export interface TaskInterface {
     taskType: "toDo" | "done" | "inProgress" | "feedback"; // bleibt
     subTasks: any[];
     assignedTo: any[];
-
 }
