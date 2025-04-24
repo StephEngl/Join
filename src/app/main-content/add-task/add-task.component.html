@@ -62,8 +62,11 @@
             <option value="" disabled selected>
               Select contacts to assign
             </option>
-            <option value="one">First option</option>
-            <option value="two">Second option</option>
+            <!-- show all current contacts -->
+            @for (contact of contactsService.contacts; track contact) {
+              <option value="{{ contact.id }}">{{ contact.name }}</option>;
+            }
+            <!-- show all current contacts -->
           </select>
         </div>
 

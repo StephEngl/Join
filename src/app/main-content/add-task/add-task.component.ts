@@ -1,6 +1,7 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
+import { ContactsService } from '../../services/contacts.service';
 
 @Component({
   selector: 'app-add-task',
@@ -11,6 +12,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 })
 export class AddTaskComponent {
   today: string = new Date().toISOString().split('T')[0];
+  contactsService = inject(ContactsService);
   isEdited = false;
   isFormValid = false;
   subtaskText = '';

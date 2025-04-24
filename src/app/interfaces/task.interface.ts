@@ -2,9 +2,9 @@ export interface TaskInterface {
     id?: string;
     title: string;
     description: string;
-    category: string;
+    category: "Technical Task" | "User Story";
     dueDate: Date;
-    priority: "urgent" | "medium" | "low"; // edit firebase and services to this
+    priority: "urgent" | "medium" | "low";
     taskType: "toDo" | "done" | "inProgress" | "feedback"; 
     subTasks: any[];
     assignedTo: any[];
