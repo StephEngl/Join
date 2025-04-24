@@ -30,24 +30,28 @@ import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 })
 export class BoardComponent {
     tasksService = inject(TasksService);
-
-    /* Inject Angular Material Dialog */
-    private dialog = inject(MatDialog);
-
-    boardColumns = [
+    boardColumns: {taskStatus: string; title: string}[] = [
         { taskStatus: 'toDo', title: 'To do' },
         { taskStatus: 'inProgress', title: 'In progress' },
         { taskStatus: 'feedback', title: 'Await feedback' },
         { taskStatus: 'done', title: 'Done' }
     ];
-
-    /* Filters all tasks by their status to populate board columns */
+    
+    //tasks filtered by taskType & sorted by Priority
     filterTasksByCategory(status: string): TaskInterface[] {
-        return this.tasksService.tasks.filter(task => task.taskType === status);
+        return this.tasksService.tasks
+        .filter(task => task.taskType === status)
+        .sort((a, b) => {
+            const priorityOrder = { 'urgent': 1, 'medium': 2, 'low': 3 };
+            return priorityOrder[a.priority] - priorityOrder[b.priority];
+        });
     }
-
-    /* List of connected droppable zones for drag & drop */
+    
+    // extracting each taskStatus from boardColumns
     connectedDropLists = this.boardColumns.map(col => col.taskStatus);
+
+    /* Inject Angular Material Dialog */
+    private dialog = inject(MatDialog);
 
     /* Handles the drag & drop logic and updates Firebase */
     drop(event: CdkDragDrop<TaskInterface[]>) {
