@@ -67,6 +67,7 @@ section {
 
   input[type="text"],
   input[type="date"],
+  input[type="search"],
   textarea,
   select {
     width: 440px;
@@ -222,7 +223,11 @@ section {
   display: flex;
   flex-direction: column;
   width: 100%;
-  background-color: red;
+
+}
+
+.choose-contact {
+  z-index: 21;
 }
 
 .toggle-assignee-list{
@@ -234,20 +239,30 @@ section {
   }
 }
 
-.choose-contact {
-  width: 100%;
-}
-
-.example-accordion-item-header {
-  display: flex;
-  justify-content: space-between;
-}
 .assignee-list {
-  @include dFlex(center, flex-start, 0, absolute);
+  @include dFlex(flex-start, flex-start, 10px, absolute);
   flex-direction: column;
   list-style-type: none;
-  background-color: green;
+  height: 170px;
+  background-color: white;;
+  overflow-y: auto;
   width: 100%;
   z-index: 20;
-  bottom: 32px;
+  padding: 15px;
+  border-radius: 0 0 16px 16px;
+}
+
+.contact-initials {
+  @include dFlex(center, center);
+  @include contactIcon(25px, 10px, 0);
+  padding: 15px;
+}
+
+.single-contact {
+  @include dFlex(center, center, 10px);
+}
+
+.contact-wrapper {
+  @include dFlex(space-between, center);
+  width: 100%;
 }

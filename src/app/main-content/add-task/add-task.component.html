@@ -55,29 +55,43 @@
           </div>
         </div>
 
-        <cdk-accordion class="assignee-list-container">
-          <label for="assigned-to">Assigned to</label>
-          <cdk-accordion-item #accordionItem="cdkAccordionItem" >
-            <span class="toggle-assignee-list" (click)="accordionItem.toggle()">
-              <input
-                type="search"
-                class="choose-contact"
+        <div class="form-group">
+          <cdk-accordion class="assignee-list-container">
+            <label for="assigned-to">Assigned to</label>
+            <cdk-accordion-item #accordionItem="cdkAccordionItem" >
+              <span class="toggle-assignee-list" (click)="accordionItem.toggle()">
+                <input
+                  type="search"
+                  class="choose-contact"
+                >
+                <p>{{ accordionItem.expanded ? 'opened' : 'closed' }}</p>
+              </span>
+              @if(accordionItem.expanded) {
+              <ul
+                class="assignee-list"
+                role="region"
+                [style.display]="accordionItem.expanded ? '' : 'none'"
               >
-              <p>{{ accordionItem.expanded ? 'opened' : 'closed' }}</p>
-            </span>
-            @if(accordionItem.expanded) {
-            <ul
-              class="assignee-list"
-              role="region"
-              [style.display]="accordionItem.expanded ? '' : 'none'"
-            >
-            @for (contact of contactsService.contacts; track contact) {
-              <li>{{ contact.name }}</li>
-            }
-          </ul>
-            }
-          </cdk-accordion-item>
-        </cdk-accordion>
+              @for (contact of contactsService.contacts; track contact) {
+                <li class="contact-wrapper">
+                  <div class="single-contact">
+                    <div class="contact-initials" [style.backgroundColor]="contactsService.contactColor(contact.id)">
+                      {{ contactsService.nameInitials(contact.id) }}
+                    </div>
+                    <p>{{ contact.name }}</p>
+                  </div>
+                  <input 
+                  type="checkbox" 
+                  [value]="contact.id" 
+                  name="assignedTo" 
+                  [id]="'assigned-to-' + contact.id">
+              </li>
+              }
+            </ul>
+              }
+            </cdk-accordion-item>
+          </cdk-accordion>
+      </div>
         <!-- <div class="form-group">
           <label for="assigned-to">Assigned to</label>
           <select id="assigned-to" name="assignedTo" class="form-control">
