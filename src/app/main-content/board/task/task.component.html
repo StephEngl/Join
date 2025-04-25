@@ -25,10 +25,12 @@
 
         <div class="task-footer">
             <div class="avatars">
-                @for (contact of taskData.assignedTo; track contact) {
-                    <span class="avatar" [style.backgroundColor]="this.contactsService.contactColor(contact.contactId)">
-                        {{this.contactsService.nameInitials(contact.contactId)}}
-                    </span>
+                @for (contact of taskData.assignedTo; track contact.contactId; let index = $index) {
+                    @if (isContactAssigned(contact.contactId)) {
+                        <span class="avatar" [style.backgroundColor]="contactsService.contactColor(contact.contactId)">
+                            {{ contactsService.nameInitials(contact.contactId) }}
+                        </span>
+                    }
                 }
             </div>
             <!-- <img/> -->

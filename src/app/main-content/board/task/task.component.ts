@@ -14,4 +14,8 @@ export class TaskComponent {
   @Input() searchRequest: string = "";
   @Output() searchedTitle: EventEmitter<string> = new EventEmitter();
 
+
+  isContactAssigned(contactId: string): boolean {
+    return this.contactsService.contacts.some(c => c.id === contactId);
+  }
 }

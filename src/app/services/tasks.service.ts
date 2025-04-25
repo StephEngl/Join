@@ -44,6 +44,7 @@ export class TasksService implements OnDestroy {
                 this.tasks = [];
                 snapshot.forEach((element) => {
                     const task = element.data();
+                    //console.log(task); // do not delete, toggled to check Data
                     this.tasks.push(this.setTaskObject(element.id, task));
                 });
             },

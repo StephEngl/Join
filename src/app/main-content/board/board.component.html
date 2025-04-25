@@ -25,7 +25,7 @@
                         <img src="./assets/icons/kanban/add.svg" />
                     </button>
                 </div>
-                <ul>
+                <ul><!--overflow Y für ul-->
                     @if (filterTasksByCategory(column.taskStatus).length === 0) {
                         <li class="no-tasks">No tasks {{ column.title }}</li>
                     } @else {
