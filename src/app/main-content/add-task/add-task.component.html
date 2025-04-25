@@ -58,7 +58,7 @@
           </div>
 
           <div class="form-group">
-            <cdk-accordion class="assignee-list-container" id="assigned-to">
+            <cdk-accordion class="assignee-list-container form-group" id="assigned-to">
               <label for="assigned-to">Assigned to</label>
               <cdk-accordion-item #accordionItem="cdkAccordionItem">
                 <span
@@ -67,7 +67,7 @@
                 >
                   <input
                     type="search"
-                    class="choose-contact"
+                    class="choose-contact form-control"
                     placeholder="Select Contacts to assign"
                     (input)="searchContact($event)"
                   />
