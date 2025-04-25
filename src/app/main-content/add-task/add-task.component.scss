@@ -54,6 +54,7 @@
 
   input[type="text"],
   input[type="date"],
+  input[type="search"],
   textarea,
   select {
     width: 440px;
@@ -215,4 +216,54 @@
       }
     }
   }
+}
+
+/* right side add task component */
+
+.assignee-list-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+
+}
+
+.choose-contact {
+  z-index: 21;
+}
+
+.toggle-assignee-list{
+  display: flex;
+  position: relative;
+  >p {
+    position: absolute;
+    right: 0;
+  }
+}
+
+.assignee-list {
+  @include dFlex(flex-start, flex-start, 10px, absolute);
+  flex-direction: column;
+  list-style-type: none;
+  height: 170px;
+  background-color: white;;
+  overflow-y: auto;
+  width: 100%;
+  z-index: 20;
+  padding: 15px;
+  border-radius: 0 0 16px 16px;
+}
+
+.contact-initials {
+  @include dFlex(center, center);
+  @include contactIcon(25px, 10px, 0);
+  padding: 15px;
+}
+
+.single-contact {
+  @include dFlex(center, center, 10px);
+}
+
+.contact-wrapper {
+  @include dFlex(space-between, center);
+  width: 100%;
 }
