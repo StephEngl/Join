@@ -69,6 +69,7 @@
                     type="search"
                     class="choose-contact"
                     placeholder="Select Contacts to assign"
+                    (input)="searchContact($event)"
                   />
                   <img
                     src="./assets/icons/kanban/drop_down_open.svg"
@@ -84,7 +85,7 @@
                   role="region"
                   [style.display]="accordionItem.expanded ? '' : 'none'"
                 >
-                  @for (contact of contactsService.contacts; track contact; let
+                  @for (contact of filteredContacts(); track contact; let
                   index = $index) {
                   <li class="contact-wrapper">
                     <div class="single-contact">

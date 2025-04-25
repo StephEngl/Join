@@ -18,6 +18,7 @@ export class AddTaskComponent {
   isFormValid = false;
   subtaskText = '';
   assignedTo: any[] = [];
+  searchedContactName: string = '';
   priorityButtons: {imgSrc: string, priority: string} [] = [
     { imgSrc: './assets/icons/kanban/prio_urgent.svg', priority:'Urgent' },
     { imgSrc: './assets/icons/kanban/prio_middle.svg', priority:'Medium'},
@@ -61,7 +62,6 @@ export class AddTaskComponent {
   }
 
   /* "right" side of add task component: methods & functions, e.g. priority, assigned to, ...*/
-
   setPriority(p: string) {
     console.log(p);
   }
@@ -73,6 +73,17 @@ export class AddTaskComponent {
       this.assignedTo = this.assignedTo.filter(id => id !== contactId);
     }
     console.log(this.assignedTo);
+  }
+
+  searchContact(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchedContactName = value;
+  }
+
+  filteredContacts() {
+    return this.contactsService.contacts.filter(contact => 
+      contact.name.toLowerCase().includes(this.searchedContactName.toLowerCase())
+    );
   }
 
 }
