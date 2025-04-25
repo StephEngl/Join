@@ -1,5 +1,5 @@
-<section class="task-card"
-    [style.display]="taskData.title.toLowerCase().includes(searchRequest.toLowerCase()) ? 'block' : 'none'">
+<li class="task-card"
+    [style.display]="taskData.title.toLowerCase().includes(searchRequest.toLowerCase()) ? 'flex' : 'none'">
     <div class="task-category">{{taskData.category}}</div>
 
     <div class="task-title">{{taskData.title}}</div>
@@ -13,14 +13,14 @@
     </div>
 
     <!-- test section, can be deleted -->
-    <section>
+    <!-- <section>
         <p>{{taskData.priority}}</p>
         @for (subtask of taskData.subTasks; track subtask) {
             <div class="subtask">
                 {{subtask}}
             </div>
         }
-    </section>
+    </section> -->
     <!-- test section, can be deleted -->
 
         <div class="task-footer">
@@ -33,4 +33,4 @@
             </div>
             <!-- <img/> -->
         </div>
-    </section>
+    </li>
