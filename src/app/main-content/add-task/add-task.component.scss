@@ -215,3 +215,39 @@ section {
     width: 100% !important;
   }
 }
+
+/* right side add task component */
+
+.assignee-list-container {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  background-color: red;
+}
+
+.toggle-assignee-list{
+  display: flex;
+  position: relative;
+  >p {
+    position: absolute;
+    right: 0;
+  }
+}
+
+.choose-contact {
+  width: 100%;
+}
+
+.example-accordion-item-header {
+  display: flex;
+  justify-content: space-between;
+}
+.assignee-list {
+  @include dFlex(center, flex-start, 0, absolute);
+  flex-direction: column;
+  list-style-type: none;
+  background-color: green;
+  width: 100%;
+  z-index: 20;
+  bottom: 32px;
+}

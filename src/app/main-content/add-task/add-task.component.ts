@@ -2,11 +2,12 @@ import { Component, Input, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ContactsService } from '../../services/contacts.service';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CdkAccordionModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss',
 })
