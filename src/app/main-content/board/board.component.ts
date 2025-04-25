@@ -4,17 +4,15 @@ import { TasksService } from '../../services/tasks.service';
 import { TaskFirebaseTempComponent } from './task-firebase-temp/task-firebase-temp.component';
 import { TaskComponent } from './task/task.component';
 import { TaskInterface } from '../../interfaces/task.interface';
+import { MatDialog } from '@angular/material/dialog';
+import { TaskDialogComponent } from './task-dialog/task-dialog.component';
+import { FormsModule } from '@angular/forms';
 import {
     CdkDragDrop,
     moveItemInArray,
     transferArrayItem,
     DragDropModule
 } from '@angular/cdk/drag-drop';
-
-/* Import for Angular Material Dialog */
-import { MatDialog } from '@angular/material/dialog';
-/* Import the standalone dialog component */
-import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 
 @Component({
     selector: 'app-board',
@@ -23,13 +21,15 @@ import { TaskDialogComponent } from './task-dialog/task-dialog.component';
         CommonModule,
         TaskFirebaseTempComponent,
         TaskComponent,
-        DragDropModule
+        DragDropModule,
+        FormsModule
     ],
     templateUrl: './board.component.html',
     styleUrls: ['./board.component.scss']
 })
 export class BoardComponent {
     tasksService = inject(TasksService);
+    searchText: string = "";
     boardColumns: {taskStatus: string; title: string}[] = [
         { taskStatus: 'toDo', title: 'To do' },
         { taskStatus: 'inProgress', title: 'In progress' },
@@ -37,7 +37,7 @@ export class BoardComponent {
         { taskStatus: 'done', title: 'Done' }
     ];
     
-    //tasks filtered by taskType & sorted by Priority
+    // tasks filtered by taskType & sorted by Priority
     filterTasksByCategory(status: string): TaskInterface[] {
         return this.tasksService.tasks
         .filter(task => task.taskType === status)
@@ -79,4 +79,6 @@ export class BoardComponent {
             panelClass: 'task-dialog-overlay'
         });
     }
+
+
 }

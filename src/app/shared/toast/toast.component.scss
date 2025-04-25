@@ -1,0 +1,58 @@
+@import './../../../assets/styles/mixins.scss';
+@import './../../../assets/styles/variables.scss';
+
+.toast {
+    @include dFlex(center, center, 0, fixed);
+    top: 80vh;
+    left: 60%;
+    width: 325px;
+    height: 75px;
+    transform: translateX(100vw);
+    background-color: $col-bg-secondary;
+    color: white;
+    padding: 12px 24px;
+    border-radius: 20px;
+    font-size: 20px;
+    z-index: 99;
+    box-shadow: 0 0 4px 0 rgba(0, 0, 0, 0.15);
+    transition: transform 0.5s ease, opacity 0.3s ease;
+    opacity: 0;
+    pointer-events: none;
+
+    &.show {
+        transform: translateX(-50%);
+        opacity: 1;
+    }
+
+    &.create {
+        background-color: $col-bg-secondary;
+    }
+
+    &.update {
+        background-color: $col-bg-secondary;
+    }
+
+    &.delete {
+        color: white;
+        background-color: $col-bg-secondary;
+    }
+
+    &.error {
+        background-color: #E74C3C;
+    }
+}
+
+@media screen and (max-width: 1400px) {
+
+    .toast {
+        bottom: 0;
+        left: 50%;
+        top: auto;
+        transform: translate(-50%, 100%);
+        transition: transform 0.5s ease, opacity 0.3s ease;
+
+        &.show {
+            transform: translate(-50%, -150px);
+        }
+    }
+}

@@ -2,7 +2,7 @@
     <div class="board-header">
         <h1>Board</h1>
         <div class="search-add-container">
-            <input type="text" placeholder="Find Task" />
+            <input [(ngModel)]="searchText" type="search" id="site-search" placeholder="Find Task"/>
             <button class="add-task-btn">
                 Add Task
                 <!-- SVG omitted for brevity -->
@@ -32,7 +32,12 @@
                         @for (task of filterTasksByCategory(column.taskStatus); track task.id) {
                             <!-- Clicking the task opens the task-dialog -->
                             <li (click)="openTaskDialog(task)">
-                                <app-task [taskData]="task" cdkDrag></app-task>
+                                <app-task
+                                    [taskData]="task"
+                                    [searchRequest]="searchText"
+                                    cdkDrag
+                                >
+                                </app-task>
                             </li>
                         }
                     }

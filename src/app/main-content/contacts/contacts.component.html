@@ -1,24 +1,8 @@
-@if (showToast) {
-<div
-    class="toast"
-    [ngClass]="[toastVisible ? 'show' : '', toastType]">
-    {{ toastMessage }}
-</div>
-}
-
 @if (showDialog) {
-<app-contact-dialog
-    (cancel)="toggleDialog()"
-    (create)="onContactCreated()"
-    (update)="onContactUpdated()"
-    (requestDelete)="deleteContact(activeContactIndex!)"
-    (delete)="onContactDeleted()"
-    (error)="onContactError()"
-    (newContactIndex)="handleNewContact($event)"
-    [contactName]="editName"
-    [contactMail]="editMail"
-    [contactPhone]="editPhone"
-    [contactIndex]="activeContactIndex">
+<app-contact-dialog (cancelToast)="toggleDialog()" (createToast)="onContactCreated()" (updateToast)="onContactUpdated()"
+    (requestDelete)="deleteContact(activeContactIndex!)" (deleteToast)="onContactDeleted()" (errorToast)="onContactError()"
+    (newContactIndex)="handleNewContact($event)" [contactName]="editName" [contactMail]="editMail"
+    [contactPhone]="editPhone" [contactIndex]="activeContactIndex">
 </app-contact-dialog>
 }
 
@@ -28,88 +12,63 @@
             <p>Add new contact</p>
             <img src="./assets/icons/contacts/new_contact.svg" alt="">
         </button>
-
         <ul>
             @for (letter of groupContactsByFirstLetter(); track letter) {
             <li class="letter-category">
                 <p>{{ letter }}</p>
                 @for (contact of contactsService.contacts; track contact; let index = $index) {
-                    @if (letter === contact.name.charAt(0).toUpperCase() &&contact.name != undefined) {
-                    <section
-                        class="single-contact" (click)="showContactInfo(index)"
-                        (click)="signalService.isMobile() ? showInfos() :  undefined"
-                        [style.backgroundColor]="activeContactIndex === index && contactClicked ? '#2A3647' : ''"
-                        [style.color]="activeContactIndex === index && contactClicked ? 'white' : ''"
-                    >
-                        <div
-                            class="contact-icon-small"
-                            [style.backgroundColor]="contact.color"
-                            [style.border]="activeContactIndex === index && contactClicked ? '2px solid white' : ''"
-                        >
-                            {{contact.name.charAt(0).toUpperCase()}}
-                            {{ contactsService.lastInitial(index) }}
-                        </div>
-                        <div>
-                            <p>{{ contact.name }}</p>
-                            <a>{{ contact.mail }}</a>
-                        </div>
-                    </section>
-                    }
+                @if (letter === contact.name.charAt(0).toUpperCase() &&contact.name != undefined) {
+                <section class="single-contact" (click)="showContactInfo(index)"
+                    (click)="signalService.isMobile() ? showInfos() :  undefined"
+                    [style.backgroundColor]="activeContactIndex === index && contactClicked ? '#2A3647' : ''"
+                    [style.color]="activeContactIndex === index && contactClicked ? 'white' : ''">
+                    <div class="contact-icon-small" [style.backgroundColor]="contact.color"
+                        [style.border]="activeContactIndex === index && contactClicked ? '2px solid white' : ''">
+                        {{contact.name.charAt(0).toUpperCase()}}
+                        {{ contactsService.lastInitial(index) }}
+                    </div>
+                    <div>
+                        <p>{{ contact.name }}</p>
+                        <a>{{ contact.mail }}</a>
+                    </div>
+                </section>
+                }
                 }
             </li>
             }
         </ul>
     </div>
-
-    <div class="contact-infos"
-        [style.opacity]="signalService.isMobile() && !signalService.isInfoShown ? '0': '1'"
-        [style.transform]="signalService.isInfoShown() && signalService.isMobile() || signalService.isDesktop() ? 'translateX(0)': 'translateX(100%)'"
-    >
-        <app-contact-info
-            [isClicked]="contactClicked"
-            [contactIndex]="activeContactIndex"
-            (editContactData)="handleContactData($event)"
-            (showDialog)="handleStatusDialog($event)"
-            (editContactIndex)="handleEditIndex($event)"
-            (closeContactInfo)="handleCloseContactInfo($event)"
-            (deleteContactWithToast)="deleteContact($event)"
-        ></app-contact-info>
+    <div class="contact-infos" [style.opacity]="signalService.isMobile() && !signalService.isInfoShown ? '0': '1'"
+        [style.transform]="signalService.isInfoShown() && signalService.isMobile() || signalService.isDesktop() ? 'translateX(0)': 'translateX(100%)'">
+        <app-contact-info [isClicked]="contactClicked" [contactIndex]="activeContactIndex"
+            (editContactData)="handleContactData($event)" (showDialog)="handleStatusDialog($event)"
+            (editContactIndex)="handleEditIndex($event)" (closeContactInfo)="handleCloseContactInfo($event)"
+            (deleteContactWithToast)="deleteContact($event)"></app-contact-info>
     </div>
     <button class="mobile-button"
         (click)="this.signalService.isInfoShown() && activeContactIndex !=  undefined ? toggleBtnMenu() : newContact()"
-        (click)="$event.stopPropagation()"
-    >
+        (click)="$event.stopPropagation()">
         <img src="" alt=""
-            [src]="this.signalService.isInfoShown() ? './assets/icons/contacts/contact_menu.svg' : './assets/icons/contacts/new_contact.svg'"
-        >
+            [src]="this.signalService.isInfoShown() ? './assets/icons/contacts/contact_menu.svg' : './assets/icons/contacts/new_contact.svg'">
     </button>
-    <div class="button-menu"
-        [style.opacity]="showBtnMenu ? '1': '0'"
-        [style.transform]="showBtnMenu ? 'translateX(0)': 'translateX(100%)'"
-        (click)="$event.stopPropagation()"
-    >
-        <button
-            (click)="activeContactIndex != undefined ? editContact(activeContactIndex) :  undefined"
-            (mouseenter)="btnEdit = true"
-            (mouseleave)="btnEdit = false"
-        >
+    <div class="button-menu" [style.opacity]="showBtnMenu ? '1': '0'"
+        [style.transform]="showBtnMenu ? 'translateX(0)': 'translateX(100%)'" (click)="$event.stopPropagation()">
+        <button (click)="activeContactIndex != undefined ? editContact(activeContactIndex) :  undefined"
+            (mouseenter)="btnEdit = true" (mouseleave)="btnEdit = false">
             <img class="contact-menu-icon"
                 [src]="btnEdit ? './assets/icons/kanban/edit_active.svg' : './assets/icons/kanban/edit.svg'" alt="">
             <p [style.color]="btnEdit ? '#29ABE2' : '#0b0e13'">Edit</p>
         </button>
         <button (click)="activeContactIndex != undefined ? deleteContact(activeContactIndex) :  undefined"
-            (mouseenter)="btnDelete = true" (mouseleave)="btnDelete = false"
-        >
+            (mouseenter)="btnDelete = true" (mouseleave)="btnDelete = false">
             <img class="contact-menu-icon"
                 [src]="btnDelete ? './assets/icons/kanban/delete_active.svg' : './assets/icons/kanban/delete.svg'"
-                alt=""
-            >
+                alt="">
             <p [style.color]="btnDelete ? '#29ABE2' : '#0b0e13'">Delete</p>
         </button>
     </div>
     <img class="close-info-btn" src="./assets/icons/contacts/arrow_back.svg" alt=""
         [style.opacity]="signalService.isMobile() && contactClicked ? '1' : '0'"
         [style.transform]="signalService.isMobile() && contactClicked ? 'translateY(0)' : 'translateY(-100%)'"
-        (click)="closeContactInfo()"
-    >
+        (click)="closeContactInfo()">
 </section>
