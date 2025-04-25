@@ -26,7 +26,7 @@
         <div class="task-footer">
             <div class="avatars">
                 @for (contact of taskData.assignedTo; track contact.contactId; let index = $index) {
-                    @if (isContactAssigned(contact.contactId)) {
+                    @if (doesContactExist(contact.contactId)) {
                         <span class="avatar" [style.backgroundColor]="contactsService.contactColor(contact.contactId)">
                             {{ contactsService.nameInitials(contact.contactId) }}
                         </span>
