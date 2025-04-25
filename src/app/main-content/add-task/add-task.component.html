@@ -56,15 +56,18 @@
         </div>
 
         <div class="form-group">
-          <cdk-accordion class="assignee-list-container">
+          <cdk-accordion class="assignee-list-container" id="assigned-to">
             <label for="assigned-to">Assigned to</label>
             <cdk-accordion-item #accordionItem="cdkAccordionItem" >
               <span class="toggle-assignee-list" (click)="accordionItem.toggle()">
                 <input
                   type="search"
                   class="choose-contact"
+                  placeholder="Select Contacts to assign"
                 >
-                <p>{{ accordionItem.expanded ? 'opened' : 'closed' }}</p>
+                <img src="./assets/icons/kanban/drop_down_open.svg" alt=""
+                  [style.transform]="accordionItem.expanded ? 'rotate(180deg)' : 'rotate(0deg)'"
+                >
               </span>
               @if(accordionItem.expanded) {
               <ul
@@ -72,7 +75,7 @@
                 role="region"
                 [style.display]="accordionItem.expanded ? '' : 'none'"
               >
-              @for (contact of contactsService.contacts; track contact) {
+              @for (contact of contactsService.contacts; track contact; let index = $index) {
                 <li class="contact-wrapper">
                   <div class="single-contact">
                     <div class="contact-initials" [style.backgroundColor]="contactsService.contactColor(contact.id)">
@@ -80,18 +83,27 @@
                     </div>
                     <p>{{ contact.name }}</p>
                   </div>
-                  <input 
-                  type="checkbox" 
-                  [value]="contact.id" 
-                  name="assignedTo" 
-                  [id]="'assigned-to-' + contact.id">
+                  <input
+                  type="checkbox"
+                  [value]="contact.id"
+                  [checked]="assignedTo.includes(contact.id)"
+                  (change)="toggleAssignment(contact.id)"
+                >
               </li>
               }
             </ul>
               }
             </cdk-accordion-item>
           </cdk-accordion>
+          <div class="assigned-contacts">
+            @for (contact of assignedTo; track contact) {
+              <div class="contact-initials" [style.backgroundColor]="contactsService.contactColor(contact)">
+                {{ contactsService.nameInitials(contact) }}
+              </div>
+            }
+          </div>
       </div>
+
         <!-- <div class="form-group">
           <label for="assigned-to">Assigned to</label>
           <select id="assigned-to" name="assignedTo" class="form-control">
