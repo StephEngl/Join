@@ -1,6 +1,12 @@
 @import './../../../assets/styles/variables.scss';
 @import './../../../assets/styles/mixins.scss';
 
+.board-section {
+    height: calc(100vh - 80px);
+    overflow-y: auto;
+    padding-bottom: 80px;
+}
+
 .board-header {
     display: flex;
     justify-content: space-between;
@@ -55,8 +61,6 @@
             width: 32px;
             height: 32px;
         }
-
-
     }
 }
 
@@ -78,13 +82,28 @@ add-task-btn-respo {
 
 .board {
     display: flex;
-    gap: 24px;
-    padding-left: 64px;
-    padding-right: 64px;
-    max-width: 1440px;
-    margin: 0 auto;
+    flex-direction: row;
     align-items: flex-start;
-    // border: 1px solid blue;
+    gap: 24px;
+    padding: 0 64px;
+    min-height: fit-content;
+    height: auto;    
+    overflow-x: auto;
+    overflow-y: hidden;
+    scroll-behavior: smooth;
+    justify-content: flex-start;
+
+    scrollbar-width: thin;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+        height: 8px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: #ccc;
+        border-radius: 4px;
+    }
 }
 
 .mini-button-add-board {
@@ -105,6 +124,7 @@ add-task-btn-respo {
 }
 
 .board-column {
+    flex: 0 0 252px;
     display: flex;
     flex-direction: column;
     align-items: center;
@@ -127,7 +147,6 @@ add-task-btn-respo {
         margin: 0;
         list-style: none;
 
-        /* optional: Scrollbar-Styling */
         scrollbar-width: none;
         -ms-overflow-style: none;
 
@@ -138,11 +157,8 @@ add-task-btn-respo {
         &::-webkit-scrollbar-thumb {
             display: none;
         }
-
     }
-
 }
-
 
 .board-column-header {
     display: flex;
@@ -211,7 +227,6 @@ app-task {
     .board {
         display: flex;
         flex-direction: column;
-
     }
 
     .board-column {
@@ -233,7 +248,6 @@ app-task {
             margin: 0;
             list-style: none;
 
-            /* optional: Scrollbar-Styling */
             scrollbar-width: none;
             -ms-overflow-style: none;
 
@@ -244,11 +258,8 @@ app-task {
             &::-webkit-scrollbar-thumb {
                 display: none;
             }
-
         }
-
     }
-
 }
 
 @media screen and (max-width: 830px) {
@@ -263,10 +274,7 @@ app-task {
     }
 
     .search-input-container {
-
         width: 100%;
-
-        input {}
     }
 
     .add-task-btn-respo {
@@ -275,7 +283,6 @@ app-task {
         width: 24px;
     }
 }
-
 
 @media screen and (max-width: 550px) {
 
@@ -289,25 +296,14 @@ app-task {
     }
 
     .board-column {
+        width: 100%;
+
         ul {
-            flex-direction: row; // ❗️Von Spalten zu Zeilenansicht
-            overflow-x: auto; // ❗️Horizontal scrollen
+            flex-direction: row;
+            overflow-x: auto;
             overflow-y: hidden;
-            max-height: none; // ❗️Damit nichts abgeschnitten wird
-            width: 100%;
+            max-height: none;
             scroll-behavior: smooth;
-
-            /* Scrollbar ausblenden */
-            scrollbar-width: none;
-            -ms-overflow-style: none;
-
-            &::-webkit-scrollbar {
-                display: none;
-            }
-
-            &::-webkit-scrollbar-thumb {
-                display: none;
-            }
         }
     }
 }
