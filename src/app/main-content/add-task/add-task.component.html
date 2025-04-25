@@ -37,23 +37,22 @@
       </div>
 
       <div class="vertical-divider"></div>
-
+<!-- right side of add task component start -->
       <div class="task-details">
         <div class="form-group">
           <label>Priority</label>
-        <div class="priority-buttons-wrapper">
-          <button class="priority-button" type="button">
-            Urgent
-            <img src="./assets/icons/kanban/prio_urgent.svg" alt="Urgent" />
-          </button>
-          <button class="priority-button" type="button">
-            Medium
-            <img src="./assets/icons/kanban/prio_middle.svg" alt="Medium" />
-          </button>
-          <button class="priority-button" type="button">
-            Low <img src="./assets/icons/kanban/prio_low.svg" alt="Low" />
-          </button>
-        </div>
+          <div class="priority-buttons-wrapper">
+            @for(prioBtn of priorityButtons; track prioBtn) {
+              <button
+                class="priority-button"
+                type="button"
+                (click)="setPriority(prioBtn.priority)"
+              >
+                {{prioBtn.priority}}
+                <img [src]="prioBtn.imgSrc" [alt]="prioBtn.priority"/>
+              </button>
+            }
+          </div>
         </div>
 
         <div class="form-group">
@@ -133,6 +132,8 @@
         </div>
       </div>
     </div>
+
+    <!-- right side of add task component end -->
 
     <div class="footnote">
       <p><span>*</span> This field is required</p>
