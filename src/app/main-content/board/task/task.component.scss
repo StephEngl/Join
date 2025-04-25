@@ -79,3 +79,12 @@
         }
     }
 }
+
+@media screen and (max-width: 550px) {
+
+    .task-card {
+        height: 250px;
+        width: 250px;
+    }
+
+}

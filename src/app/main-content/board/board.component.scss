@@ -4,22 +4,76 @@
 .board-header {
     display: flex;
     justify-content: space-between;
-    align-items: center;
-    border: 1px solid red;
+    // align-items: center;
+    // border: 1px solid red;
     margin: 0 64px;
     padding: 32px 0 24px 0;
+    max-width: 1440px;
 }
 
 .search-add-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
+    gap: 32px;
+}
+
+.search-input-container {
+    display: flex;
+    align-items: center;
+    border: 1px solid #d1d1d1;
+    border-radius: 10px;
+    padding: 8px 12px;
+    background-color: #fff;
+    width: 312px;
+    height: 48px;
+
+    input {
+        border: none;
+        outline: none;
+        flex: 1;
+        font-size: 16px;
+        color: #2A3647;
+        background-color: transparent;
+
+        &::placeholder {
+            color: #bfbfbf;
+        }
+    }
+
+    .search-icon {
+        width: 18px;
+        height: 18px;
+        margin-left: 8px;
+        border-left: 1px solid #ccc;
+        padding-left: 8px;
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        img {
+            width: 32px;
+            height: 32px;
+        }
+
+
+    }
+}
+
+.title-button {
+    display: flex;
+    justify-content: space-between;
+    align-items: center
 }
 
 .add-task-btn {
     @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
     height: 48px;
     width: 160px;
+}
+
+add-task-btn-respo {
+    display: none;
 }
 
 .board {
@@ -30,7 +84,7 @@
     max-width: 1440px;
     margin: 0 auto;
     align-items: flex-start;
-    border: 1px solid blue;
+    // border: 1px solid blue;
 }
 
 .mini-button-add-board {
@@ -51,24 +105,44 @@
 }
 
 .board-column {
-    width: 252px;
-    border-radius: 16px;
     display: flex;
     flex-direction: column;
     align-items: center;
-    gap: 24px;
-    min-height: 300px;
-    border: 1px solid green;
+    width: 252px;
+    // border-radius: 16px;
+    // min-height: 300px;
+    // max-height: 450px;
+    // border: 1px solid green;
+    overflow: hidden;
 
     ul {
-        list-style: none;
-        padding: 0;
-        margin: 0;
+        flex: 1;
+        overflow-y: auto;
+        max-height: 500px;
+        width: 100%;
         display: flex;
         flex-direction: column;
         gap: 16px;
+        padding: 0;
+        margin: 0;
+        list-style: none;
+
+        /* optional: Scrollbar-Styling */
+        scrollbar-width: none;
+        -ms-overflow-style: none;
+
+        &::-webkit-scrollbar {
+            display: none;
+        }
+
+        &::-webkit-scrollbar-thumb {
+            display: none;
+        }
+
     }
+
 }
+
 
 .board-column-header {
     display: flex;
@@ -77,7 +151,8 @@
     gap: 8px;
     padding-left: 3px;
     padding-right: 3px;
-    width: 244px;
+    width: 100%;
+    margin-bottom: 15px;
 
     h3 {
         font-size: 20px;
@@ -96,7 +171,6 @@
     padding: 12px;
     border-radius: 12px;
     border: 2px dashed #ccc;
-    margin-top: 8px;
 }
 
 /* Drag & Drop Animation */
@@ -112,8 +186,8 @@ app-task {
     box-sizing: border-box;
     border-radius: 16px;
     box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-                0 8px 10px 1px rgba(0, 0, 0, 0.14),
-                0 3px 14px 2px rgba(0, 0, 0, 0.12);
+        0 8px 10px 1px rgba(0, 0, 0, 0.14),
+        0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .cdk-drag-placeholder {
@@ -130,4 +204,110 @@ app-task {
 
 .example-list.cdk-drop-list-dragging .example-box:not(.cdk-drag-placeholder) {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
+}
+
+@media screen and (max-width: 950px) {
+
+    .board {
+        display: flex;
+        flex-direction: column;
+
+    }
+
+    .board-column {
+        display: flex;
+        width: 100%;
+        // border-radius: 16px;
+        max-height: 450px;
+        // border: 1px solid green;
+        overflow: hidden;
+
+        ul {
+            flex: 1;
+            overflow-x: auto;
+            max-height: 500px;
+            width: 100%;
+            display: flex;
+            gap: 16px;
+            padding: 0;
+            margin: 0;
+            list-style: none;
+
+            /* optional: Scrollbar-Styling */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                display: none;
+            }
+
+        }
+
+    }
+
+}
+
+@media screen and (max-width: 830px) {
+
+    .board-header {
+        display: flex;
+        flex-direction: column;
+    }
+
+    .add-task-btn {
+        display: none;
+    }
+
+    .search-input-container {
+
+        width: 100%;
+
+        input {}
+    }
+
+    .add-task-btn-respo {
+        @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
+        height: 24px;
+        width: 24px;
+    }
+}
+
+
+@media screen and (max-width: 550px) {
+
+    .no-tasks {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+        height: 51px;
+    }
+
+    .board-column {
+        ul {
+            flex-direction: row; // ❗️Von Spalten zu Zeilenansicht
+            overflow-x: auto; // ❗️Horizontal scrollen
+            overflow-y: hidden;
+            max-height: none; // ❗️Damit nichts abgeschnitten wird
+            width: 100%;
+            scroll-behavior: smooth;
+
+            /* Scrollbar ausblenden */
+            scrollbar-width: none;
+            -ms-overflow-style: none;
+
+            &::-webkit-scrollbar {
+                display: none;
+            }
+
+            &::-webkit-scrollbar-thumb {
+                display: none;
+            }
+        }
+    }
 }
