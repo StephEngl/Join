@@ -2,11 +2,12 @@ import { Component, Input, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ContactsService } from '../../services/contacts.service';
+import {CdkAccordionModule} from '@angular/cdk/accordion';
 
 @Component({
   selector: 'app-add-task',
   standalone: true,
-  imports: [FormsModule],
+  imports: [FormsModule, CdkAccordionModule],
   templateUrl: './add-task.component.html',
   styleUrl: './add-task.component.scss',
 })
@@ -16,6 +17,12 @@ export class AddTaskComponent {
   isEdited = false;
   isFormValid = false;
   subtaskText = '';
+  assignedTo: any[] = [];
+  priorityButtons: {imgSrc: string, priority: string} [] = [
+    { imgSrc: './assets/icons/kanban/prio_urgent.svg', priority:'Urgent' },
+    { imgSrc: './assets/icons/kanban/prio_middle.svg', priority:'Medium'},
+    { imgSrc: './assets/icons/kanban/prio_low.svg', priority:'Low'}
+  ];
   @Input() forceMobile = false;
 
   constructor(private breakpointObserver: BreakpointObserver) {}
@@ -52,4 +59,20 @@ export class AddTaskComponent {
   focusInput(input: HTMLInputElement) {
     input.focus();
   }
+
+  /* "right" side of add task component: methods & functions, e.g. priority, assigned to, ...*/
+
+  setPriority(p: string) {
+    console.log(p);
+  }
+
+  toggleAssignment(contactId: any) {
+    if (!this.assignedTo.includes(contactId)) {
+      this.assignedTo.push(contactId);
+    } else {
+      this.assignedTo = this.assignedTo.filter(id => id !== contactId);
+    }
+    console.log(this.assignedTo);
+  }
+
 }
