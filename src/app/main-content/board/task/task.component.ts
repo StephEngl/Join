@@ -1,4 +1,4 @@
-import { Component, inject, Input } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
 import { TaskInterface } from '../../../interfaces/task.interface';
 import { ContactsService } from '../../../services/contacts.service';
 
@@ -11,4 +11,7 @@ import { ContactsService } from '../../../services/contacts.service';
 export class TaskComponent {
   contactsService = inject(ContactsService);
   @Input() taskData!: TaskInterface;
+  @Input() searchRequest: string = "";
+  @Output() searchedTitle: EventEmitter<string> = new EventEmitter();
+
 }
