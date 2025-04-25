@@ -69,7 +69,7 @@
                     type="search"
                     class="choose-contact form-control"
                     placeholder="Select Contacts to assign"
-                    (input)="searchContact($event)"
+                    (input)="searchContact($event); accordionItem.open()"
                   />
                   <img
                     src="./assets/icons/kanban/drop_down_open.svg"
@@ -87,24 +87,22 @@
                 >
                   @for (contact of filteredContacts(); track contact; let
                   index = $index) {
-                  <li class="contact-wrapper">
+                  <li class="contact-wrapper" (click)="toggleAssignedContacts(contact.id)"
+                    [style.backgroundColor]="assignedTo.includes(contact.id) ? '#091931' : ''"
+                  >
                     <div class="single-contact">
                       <div
                         class="contact-initials"
-                        [style.backgroundColor]="
-                          contactsService.contactColor(contact.id)
-                        "
+                        [style.backgroundColor]="contactsService.contactColor(contact.id)"
+                        [style.border]="assignedTo.includes(contact.id) ? '2px solid white' : ''"
                       >
                         {{ contactsService.nameInitials(contact.id) }}
                       </div>
-                      <p>{{ contact.name }}</p>
+                      <p [style.color]="assignedTo.includes(contact.id) ? 'white' : ''">
+                        {{ contact.name }}
+                      </p>
                     </div>
-                    <input
-                      type="checkbox"
-                      [value]="contact.id"
-                      [checked]="assignedTo.includes(contact.id)"
-                      (change)="toggleAssignedContacts(contact.id)"
-                    />
+                    <img [src]="assignedTo.includes(contact.id) ? './assets/icons/kanban/checkbox_checked.svg': './assets/icons/kanban/checkbox_unchecked.svg' ">
                   </li>
                   }
                 </ul>

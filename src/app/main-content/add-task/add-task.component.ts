@@ -75,6 +75,12 @@ export class AddTaskComponent {
     console.log(this.assignedTo);
   }
 
+  contactSelected() {
+    this.assignedTo.forEach((contact)=> {
+      const exists = this.contactsService.contacts.some(c => c.id === contact);
+    })
+  }
+
   searchContact(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.searchedContactName = value;
