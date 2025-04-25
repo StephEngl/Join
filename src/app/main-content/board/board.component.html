@@ -1,8 +1,19 @@
 <section class="board-section">
     <div class="board-header">
+        <div class="title-button">
         <h1>Board</h1>
+        <button class="add-task-btn-respo">
+            <!-- SVG omitted for brevity -->
+        </button>
+        </div>
         <div class="search-add-container">
-            <input [(ngModel)]="searchText" type="search" id="site-search" placeholder="Find Task"/>
+            <div class="search-input-container">
+                <input [(ngModel)]="searchText" type="search" placeholder="Find Task" />
+                <div class="search-icon">
+                    <img src="./assets/icons/kanban/search.png" alt="Search Icon" />
+                </div>
+            </div>
+
             <button class="add-task-btn">
                 Add Task
                 <!-- SVG omitted for brevity -->
@@ -11,38 +22,29 @@
     </div>
     <div class="board">
         @for (column of boardColumns; track column.title) {
-            <div
-                class="board-column"
-                cdkDropList
-                [id]="column.taskStatus"
-                [cdkDropListData]="filterTasksByCategory(column.taskStatus)"
-                [cdkDropListConnectedTo]="connectedDropLists"
-                (cdkDropListDropped)="drop($event)"
-            >
-                <div class="board-column-header">
-                    <h3>{{ column.title }}</h3>
-                    <button class="mini-button-add-board">
-                        <img src="./assets/icons/kanban/add.svg" />
-                    </button>
-                </div>
-                <ul><!--overflow Y für ul-->
-                    @if (filterTasksByCategory(column.taskStatus).length === 0) {
-                        <li class="no-tasks">No tasks {{ column.title }}</li>
-                    } @else {
-                        @for (task of filterTasksByCategory(column.taskStatus); track task.id) {
-                            <!-- Clicking the task opens the task-dialog -->
-                            <li (click)="openTaskDialog(task)">
-                                <app-task
-                                    [taskData]="task"
-                                    [searchRequest]="searchText"
-                                    cdkDrag
-                                >
-                                </app-task>
-                            </li>
-                        }
-                    }
-                </ul>
+        <div class="board-column" cdkDropList [id]="column.taskStatus"
+            [cdkDropListData]="filterTasksByCategory(column.taskStatus)" [cdkDropListConnectedTo]="connectedDropLists"
+            (cdkDropListDropped)="drop($event)">
+            <div class="board-column-header">
+                <h3>{{ column.title }}</h3>
+                <button class="mini-button-add-board">
+                    <img src="./assets/icons/kanban/add.svg" />
+                </button>
             </div>
+            <ul><!--overflow Y für ul-->
+                @if (filterTasksByCategory(column.taskStatus).length === 0) {
+                <li class="no-tasks">No tasks {{ column.title }}</li>
+                } @else {
+                @for (task of filterTasksByCategory(column.taskStatus); track task.id) {
+                <!-- Clicking the task opens the task-dialog -->
+                <li (click)="openTaskDialog(task)">
+                    <app-task [taskData]="task" [searchRequest]="searchText" cdkDrag>
+                    </app-task>
+                </li>
+                }
+                }
+            </ul>
+        </div>
         }
     </div>
 </section>

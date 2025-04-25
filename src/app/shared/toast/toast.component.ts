@@ -12,7 +12,7 @@ import { ToastService } from './toast.service';
 export class ToastComponent {
   toastMessage$ = this.toastService.toastMessage$;
   toastType$ = this.toastService.toastType$;
-  isToastAnimated$= this.toastService.isToastAnimated$;
+  isToastAnimated$ = this.toastService.isToastAnimated$;
   isToastOpen$ = this.toastService.isToastOpen$;
 
   constructor(private toastService: ToastService) { }

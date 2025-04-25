@@ -22,7 +22,6 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   @Output() updateToast = new EventEmitter<void>();
   @Output() deleteToast = new EventEmitter<void>();
   @Output() errorToast = new EventEmitter<void>();
-  @Output() requestDelete = new EventEmitter<void>();
   @Output() newContactIndex = new EventEmitter<number>();
 
   @Input() contactName?: string;
@@ -54,7 +53,6 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   }
 
   onDelete(): void {
-    this.requestDelete.emit();
     this.onCancel();
   }
 

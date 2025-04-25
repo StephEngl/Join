@@ -3,10 +3,10 @@ import { BehaviorSubject } from 'rxjs';
 
 @Injectable({ providedIn: 'root' })
 export class ToastService {
-    toastMessage$    = new BehaviorSubject<string>('');
-    toastType$       = new BehaviorSubject<'create' | 'update' | 'delete' | 'error'>('create');
-    isToastOpen$       = new BehaviorSubject<boolean>(false);
-    isToastAnimated$   = new BehaviorSubject<boolean>(false);
+    toastMessage$ = new BehaviorSubject<string>('');
+    toastType$ = new BehaviorSubject<'create' | 'update' | 'delete' | 'error'>('create');
+    isToastOpen$ = new BehaviorSubject<boolean>(false);
+    isToastAnimated$ = new BehaviorSubject<boolean>(false);
     
     triggerToast(message: string, type: 'create' | 'update' | 'delete' | 'error') {
         this.toastMessage$.next(message);
