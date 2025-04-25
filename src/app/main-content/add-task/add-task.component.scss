@@ -1,5 +1,6 @@
 @import "../../../assets/styles/mixins.scss";
 @import "../../../assets/styles/variables.scss";
+@import "../../../assets/fonts/fonts.scss";
 
 section {
   container-type: inline-size;
@@ -79,11 +80,19 @@ section {
       outline: none;
       border-color: $col-font-inactive;
     }
+
+    &::placeholder {
+      font-family: 'Inter', sans-serif;
+      font-size: 20px;
+      color: $col-font-inactive;
+      opacity: 1; // for Firefox
+    }
   }
 
   textarea {
     height: 120px;
   }
+
 }
 
 .task-overview,
@@ -102,9 +111,9 @@ section {
   height: 420px;
   background-color: $col-font-dropdown;
 
-  @container (max-width: 1200px) {
-    display: none;
-  }
+  // @container (max-width: 1200px) {
+  //   display: none;
+  // }
 }
 
 .task-details {
@@ -186,9 +195,9 @@ section {
     gap: 32px;
   }
 
-  // .vertical-divider {
-  //   display: none;
-  // }
+  .vertical-divider {
+    display: none;
+  }
 
   h2 {
     width: 440px;
