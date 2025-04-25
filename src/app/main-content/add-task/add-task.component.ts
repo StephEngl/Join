@@ -66,7 +66,7 @@ export class AddTaskComponent {
     console.log(p);
   }
 
-  toggleAssignment(contactId: any) {
+  toggleAssignedContacts(contactId: any) {
     if (!this.assignedTo.includes(contactId)) {
       this.assignedTo.push(contactId);
     } else {
