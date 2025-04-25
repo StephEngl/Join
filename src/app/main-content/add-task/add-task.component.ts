@@ -17,6 +17,7 @@ export class AddTaskComponent {
   isEdited = false;
   isFormValid = false;
   subtaskText = '';
+  assignedTo: any[] = [];
   priorityButtons: {imgSrc: string, priority: string} [] = [
     { imgSrc: './assets/icons/kanban/prio_urgent.svg', priority:'Urgent' },
     { imgSrc: './assets/icons/kanban/prio_middle.svg', priority:'Medium'},
@@ -63,6 +64,15 @@ export class AddTaskComponent {
 
   setPriority(p: string) {
     console.log(p);
+  }
+
+  toggleAssignment(contactId: any) {
+    if (!this.assignedTo.includes(contactId)) {
+      this.assignedTo.push(contactId);
+    } else {
+      this.assignedTo = this.assignedTo.filter(id => id !== contactId);
+    }
+    console.log(this.assignedTo);
   }
 
 }

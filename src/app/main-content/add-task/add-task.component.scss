@@ -35,9 +35,14 @@
     padding: 16px 10px;
     background-color: white;
     font-size: 20px;
+    cursor: pointer;
+    transition: all 0.3s ease;
 
     img {
       width: 20px;
+    }
+    &:hover {
+      box-shadow: 0px 4px 4px $col-shadow-background;
     }
   }
 
@@ -232,11 +237,17 @@
 }
 
 .toggle-assignee-list{
-  display: flex;
   position: relative;
-  >p {
+  height: 100%;
+  >img {
     position: absolute;
-    right: 0;
+    padding: 0;
+    top: 5px;
+    right: 10px;
+    width: 12px;
+    height: 12px;
+    color: black;
+    transition: all 0.3s ease;
   }
 }
 
@@ -266,4 +277,8 @@
 .contact-wrapper {
   @include dFlex(space-between, center);
   width: 100%;
+}
+
+.assigned-contacts {
+  @include dFlex(flex-start, flex-start, 5px);
 }
