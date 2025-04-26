@@ -58,17 +58,17 @@
           </div>
 
           <div class="form-group">
-            <cdk-accordion class="assignee-list-container form-group" id="assigned-to">
+            <cdk-accordion class="dropdown-list-container form-group" id="assigned-to">
               <label for="assigned-to">Assigned to</label>
               <cdk-accordion-item #accordionItem="cdkAccordionItem">
                 <span
-                  class="toggle-assignee-list"
-                  (click)="accordionItem.toggle()"
+                  class="toggle-dropdown-list"
+                  (click)="accordionItem.toggle(); categoryAccordionItem.close()"
                 >
                   <input
                     type="search"
                     [class]="accordionItem.expanded ? 'drop-down-active' : ''"
-                    placeholder="Select Contacts to assign"
+                    [placeholder]="accordionItem.expanded ? 'Search...':'Select Contacts to assign'"
                     (input)="searchContact($event); accordionItem.open()"
                   />
                   <img
@@ -81,7 +81,7 @@
                 </span>
                 @if(accordionItem.expanded) {
                 <ul
-                  class="assignee-list"
+                  class="dropdown-list"
                   role="region"
                   [style.display]="accordionItem.expanded ? '' : 'none'"
                 >
@@ -122,12 +122,42 @@
           </div>
 
           <div class="form-group">
-            <label for="category">Category <span>*</span></label>
-            <select id="category" name="category" class="form-control">
-              <option value="" disabled selected>Select task category</option>
-              <option value="one">Technical Task</option>
-              <option value="two">User Story</option>
-            </select>
+            <cdk-accordion class="dropdown-list-container form-group" id="category">
+              <label for="category">Category <span>*</span></label>
+              <cdk-accordion-item #categoryAccordionItem="cdkAccordionItem">
+                <span
+                  class="toggle-dropdown-list"
+                  (click)="categoryAccordionItem.toggle(); accordionItem.close()"
+                >
+                  <input
+                    type="search"
+                    [class]="categoryAccordionItem.expanded ? 'drop-down-active' : ''"
+                    [placeholder]="categoryAccordionItem.expanded ? 'Search...':'Select task category'"
+                    (input)="searchCategory($event); categoryAccordionItem.open()"
+                  />
+                  <img
+                    src="./assets/icons/kanban/drop_down_open.svg"
+                    alt=""
+                    [style.transform]="
+                      categoryAccordionItem.expanded ? 'rotate(180deg)' : 'rotate(0deg)'
+                    "
+                  />
+                </span>
+                @if(categoryAccordionItem.expanded) {
+                <ul
+                  class="dropdown-list"
+                  role="region"
+                  [style.display]="categoryAccordionItem.expanded ? '' : 'none'"
+                >
+                  @for (category of filteredCategories(); track category; let index = $index) {
+                    <li class="category-wrapper">
+                      <p>{{ category }}</p>
+                    </li>
+                  }
+                  </ul>
+                }
+              </cdk-accordion-item>
+            </cdk-accordion>
           </div>
 
           <div class="form-group subtask-input">

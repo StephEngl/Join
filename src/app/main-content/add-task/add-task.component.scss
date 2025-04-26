@@ -165,7 +165,7 @@
 
 /* right side add task component */
 
-.assignee-list-container {
+.dropdown-list-container {
   display: flex;
   flex-direction: column;
   width: 100%;
@@ -176,7 +176,7 @@
   border-bottom: none !important; 
 }
 
-.toggle-assignee-list {
+.toggle-dropdown-list {
   position: relative;
   height: 100%;
   > img {
@@ -191,7 +191,7 @@
   }
 }
 
-.assignee-list {
+.dropdown-list {
   @include dropDownList();
 }
 
@@ -210,7 +210,8 @@
   @include dFlex(center, center, 10px);
 }
 
-.contact-wrapper {
+.contact-wrapper,
+.category-wrapper {
   @include dFlex(space-between, center);
   width: 100%;
   padding: 10px;

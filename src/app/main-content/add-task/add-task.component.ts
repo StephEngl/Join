@@ -19,6 +19,10 @@ export class AddTaskComponent {
   subtaskText = '';
   assignedTo: any[] = [];
   searchedContactName: string = '';
+  searchedCategoryName: string = '';
+  taskCategories: string[] = [
+    'Technical Task', 'User Story'
+  ];
   priorityButtons: {
     imgInactive: string,
     imgActive: string,
@@ -117,9 +121,20 @@ export class AddTaskComponent {
     this.searchedContactName = value;
   }
 
+  searchCategory(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchedCategoryName = value;
+  }
+
   filteredContacts() {
     return this.contactsService.contacts.filter(contact => 
       contact.name.toLowerCase().includes(this.searchedContactName.toLowerCase())
+    );
+  }
+
+  filteredCategories() {
+    return this.taskCategories.filter(category => 
+      category.toLowerCase().includes(this.searchedCategoryName.toLowerCase())
     );
   }
 
