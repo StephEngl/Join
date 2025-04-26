@@ -85,14 +85,16 @@ export class AddTaskComponent {
   }
 
   /* "right" side of add task component: methods & functions, e.g. priority, assigned to, ...*/
-  setPriority(index: number, p: string) {
+  setPriority(index: number, prioOutput: string) {
+    this.resetOtherBtnStatuses(index);
+    this.priorityButtons[index].btnActive = !this.priorityButtons[index].btnActive;
+  }
+
+  resetOtherBtnStatuses(index: number) {
     this.priorityButtons.forEach((btn) => {
       if (this.priorityButtons.indexOf(btn) === index) return;
       btn.btnActive = false;
     });
-    this.priorityButtons[index].btnActive = !this.priorityButtons[index].btnActive;
-    console.log(this.priorityButtons[index].btnActive);
-    console.log(p);
   }
 
   toggleAssignedContacts(contactId: any) {
