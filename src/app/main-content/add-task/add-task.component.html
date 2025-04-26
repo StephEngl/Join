@@ -67,7 +67,7 @@
                 >
                   <input
                     type="search"
-                    class="choose-contact form-control"
+                    [class]="accordionItem.expanded ? 'drop-down-active' : ''"
                     placeholder="Select Contacts to assign"
                     (input)="searchContact($event); accordionItem.open()"
                   />

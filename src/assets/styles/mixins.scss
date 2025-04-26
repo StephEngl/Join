@@ -26,6 +26,37 @@
     letter-spacing: $letterSpacing;
 }
 
+@mixin dropDownList($maxHeight: 180px) {
+    @include dFlex(flex-start, flex-start, 2px, absolute);
+    flex-direction: column;
+    list-style-type: none;
+    max-height: $maxHeight;
+    background-color: white;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 4;
+    border: 1px solid $col-font-inactive;
+    border-top: 1px solid $col-font-grey;
+    border-radius: 0 0 16px 16px;
+    padding: 5px;
+    filter: drop-shadow(0px 4px 2px $col-shadow-background);
+
+    &::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $col-shadow-background;
+        border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+        border-radius: 0 0 16px 16px;
+        margin: 0 0 10px 0;
+    }
+}
+
 @mixin vLine() {
     height: 60px;
     width: 3px;
