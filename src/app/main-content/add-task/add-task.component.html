@@ -43,17 +43,17 @@
           <div class="form-group">
             <label>Priority</label>
             <div class="priority-buttons-wrapper">
-              <button class="priority-button" type="button">
-                Urgent
-                <img src="./assets/icons/kanban/prio_urgent.svg" alt="Urgent" />
-              </button>
-              <button class="priority-button" type="button">
-                Medium
-                <img src="./assets/icons/kanban/prio_middle.svg" alt="Medium" />
-              </button>
-              <button class="priority-button" type="button">
-                Low <img src="./assets/icons/kanban/prio_low.svg" alt="Low" />
-              </button>
+              @for(prioBtn of priorityButtons; track prioBtn; let index = $index) {
+                <button 
+                  class = "priority-button"
+                  [class]="prioBtn.btnActive ? 'btnActive' : 'btnInActive'"
+                  [style.backgroundColor]="prioBtn.btnActive ? prioBtn.colorActive : 'white'"
+                  (click)="setPriority(index, prioBtn.priority)"
+                >
+                  {{prioBtn.priority}}
+                  <img [src]="prioBtn.btnActive ? prioBtn.imgActive : prioBtn.imgInactive" [alt]="prioBtn.priority"/>
+                </button>
+              }
             </div>
           </div>
 

@@ -19,10 +19,33 @@ export class AddTaskComponent {
   subtaskText = '';
   assignedTo: any[] = [];
   searchedContactName: string = '';
-  priorityButtons: {imgSrc: string, priority: string} [] = [
-    { imgSrc: './assets/icons/kanban/prio_urgent.svg', priority:'Urgent' },
-    { imgSrc: './assets/icons/kanban/prio_middle.svg', priority:'Medium'},
-    { imgSrc: './assets/icons/kanban/prio_low.svg', priority:'Low'}
+  priorityButtons: {
+    imgInactive: string,
+    imgActive: string,
+    colorActive: string;
+    priority: string,
+    btnActive: boolean } [] = [
+    { 
+      imgInactive: './assets/icons/kanban/prio_urgent.svg',
+      imgActive:"./assets/icons/kanban/prio_urgent_white.svg",
+      colorActive: "#FF3D00",
+      priority:'Urgent',
+      btnActive: false
+    },
+    { 
+      imgInactive: './assets/icons/kanban/prio_medium.svg',
+      imgActive:"./assets/icons/kanban/prio_medium_white.svg",
+      colorActive: "#FFA800",
+      priority:'Medium',
+      btnActive: false
+    },
+    {
+      imgInactive: './assets/icons/kanban/prio_low.svg',
+      imgActive:"./assets/icons/kanban/prio_low_white.svg",
+      colorActive: "#7AE229",
+      priority:'Low',
+      btnActive: false
+    }
   ];
   @Input() forceMobile = false;
 
@@ -62,7 +85,13 @@ export class AddTaskComponent {
   }
 
   /* "right" side of add task component: methods & functions, e.g. priority, assigned to, ...*/
-  setPriority(p: string) {
+  setPriority(index: number, p: string) {
+    this.priorityButtons.forEach((btn) => {
+      if (this.priorityButtons.indexOf(btn) === index) return;
+      btn.btnActive = false;
+    });
+    this.priorityButtons[index].btnActive = !this.priorityButtons[index].btnActive;
+    console.log(this.priorityButtons[index].btnActive);
     console.log(p);
   }
 
