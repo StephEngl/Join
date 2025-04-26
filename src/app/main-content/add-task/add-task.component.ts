@@ -3,6 +3,7 @@ import { FormsModule } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ContactsService } from '../../services/contacts.service';
 import {CdkAccordionModule} from '@angular/cdk/accordion';
+import { TaskInterface } from '../../interfaces/task.interface';
 
 @Component({
   selector: 'app-add-task',
@@ -52,6 +53,7 @@ export class AddTaskComponent {
     }
   ];
   @Input() forceMobile = false;
+  @Input() task!: TaskInterface;
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 

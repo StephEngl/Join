@@ -4,20 +4,43 @@ import { TaskInterface } from '../../../interfaces/task.interface';
 import { TaskInfoComponent } from './task-info/task-info.component';
 import { AddTaskComponent } from '../../add-task/add-task.component';
 import { TasksService } from '../../../services/tasks.service';
+import { MatDialogRef } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-task-dialog',
-    standalone: true,
-    imports: [CommonModule, TaskInfoComponent, AddTaskComponent],
     templateUrl: './task-dialog.component.html',
-    styleUrls: ['./task-dialog.component.scss']
+    styleUrls: ['./task-dialog.component.scss'],
+    standalone: true,
+    imports: [
+        CommonModule,
+        TaskInfoComponent,
+        AddTaskComponent
+    ]
 })
 export class TaskDialogComponent {
+
     @Input() task!: TaskInterface;
 
-    constructor(private tasksService: TasksService) {}
+    constructor(private tasksService: TasksService, private dialogRef: MatDialogRef<TaskDialogComponent>) {}
 
-    updateTaskInDialog(updatedTask: TaskInterface): void {
-        this.tasksService.updateTask(updatedTask);
+    showTaskInfo: boolean = true;
+
+    onEditTask(): void {
+        this.showTaskInfo = false;
+    }
+
+    onCancelEditTask(): void {
+        this.showTaskInfo = true;
+    }
+
+    closeDialog(): void {
+        this.dialogRef.close();
+    }
+
+    async deleteTask(): Promise<void> {
+        if (this.task && this.task.id) {
+            await this.tasksService.deleteTask(this.task.id);
+            this.closeDialog();
+        }
     }
 }

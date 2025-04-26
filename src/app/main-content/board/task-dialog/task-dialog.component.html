@@ -1,4 +1,17 @@
-<div class="task-dialog-container">
-    <app-task-info [task]="task"></app-task-info>
-    <app-add-task [forceMobile]="true"></app-add-task>
+<div class="task-dialog-section">
+    <div class="task-dialog-container">
+
+        @if (showTaskInfo) {
+            <app-task-info
+                [task]="task"
+                (editTask)="onEditTask()">
+            </app-task-info>
+        } @else {
+            <app-add-task
+                [task]="task"
+                (cancelEditTask)="onCancelEditTask()">
+            </app-add-task>
+        }
+
+    </div>
 </div>

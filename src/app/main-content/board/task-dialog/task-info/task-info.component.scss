@@ -1,23 +1,28 @@
 @import "../../../../../assets/styles/mixins.scss";
-
 .task-info-section {
     @include dFlex(center, center);
+    flex-direction: column;
     width: 100%;
-    height: auto;
+    max-width: 600px;
+    padding: 2rem;
+    background: white;
     border-radius: 1rem;
+    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+    gap: 1.5rem;
 }
 
 .task-info-top-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    margin-bottom: 1rem;
+    width: 100%;
 }
 
 .task-info-category {
     padding: 0.5rem 1rem;
     border-radius: 8px;
     color: white;
+    background-color: #4A90E2; /* Beispiel-Hintergrundfarbe */
     font-weight: 600;
     font-size: 1rem;
 }
@@ -31,15 +36,17 @@
     font-size: clamp(2.25rem, 2.1rem + 1vw, 2.9375rem);
     font-weight: 600;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 .task-info-description-container p {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 1.25rem;
-    line-height: 120%;
+    line-height: 1.5;
     color: black;
     margin-bottom: 1rem;
+    text-align: center;
 }
 
 .task-info-due-date-container,
@@ -47,7 +54,15 @@
 .task-info-assigned-to-container {
     display: flex;
     justify-content: space-between;
+    align-items: center;
+    width: 100%;
     margin-bottom: 1rem;
+}
+
+.task-info-due-date-txt,
+.task-info-priority-txt,
+.task-info-assigned-to-txt {
+    font-weight: 600;
 }
 
 .task-info-subtasks-header {
@@ -59,6 +74,7 @@
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
+    width: 100%;
 }
 
 .task-info-subtask-item {
@@ -70,4 +86,37 @@
 .task-info-subtask-item .completed {
     text-decoration: line-through;
     color: gray;
+}
+
+.task-info-delete-edit-container {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+    margin-top: 1rem;
+}
+
+.task-info-delete-container,
+.task-info-edit-container {
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    cursor: pointer;
+    padding: 0.5rem 1rem;
+    border-radius: 8px;
+    transition: background-color 0.2s ease-in-out;
+}
+
+.task-info-delete-container:hover {
+    background-color: rgba(255, 0, 0, 0.1);
+}
+
+.task-info-edit-container:hover {
+    background-color: rgba(0, 128, 0, 0.1);
+}
+
+.task-info-delete-img img,
+.task-info-edit-img img {
+    width: 24px;
+    height: 24px;
 }
