@@ -21,7 +21,7 @@ export class TaskInfoComponent {
         private router: Router
     ) {}
 
-    closeDialog(): void {
+    closeInfo(): void {
         this.dialogRef.close();
         this.router.navigate(['/board']);
     }

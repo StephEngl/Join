@@ -1,7 +1,5 @@
 @import "../../../../../assets/styles/mixins.scss";
 
-
-
 .task-info-section {
     @include dFlex(center, center);
     width: 100%;
@@ -9,14 +7,14 @@
     border-radius: 1rem;
 }
 
-.task-dialog-top-container {
+.task-info-top-container {
     display: flex;
     justify-content: space-between;
     align-items: center;
     margin-bottom: 1rem;
 }
 
-.task-dialog-category {
+.task-info-category {
     padding: 0.5rem 1rem;
     border-radius: 8px;
     color: white;
@@ -24,18 +22,18 @@
     font-size: 1rem;
 }
 
-.task-dialog-close {
+.task-info-close {
     font-size: 1.5rem;
     cursor: pointer;
 }
 
-.task-dialog-header-container h2 {
+.task-info-header-container h2 {
     font-size: clamp(2.25rem, 2.1rem + 1vw, 2.9375rem);
     font-weight: 600;
     margin-bottom: 1rem;
 }
 
-.task-dialog-description-container p {
+.task-info-description-container p {
     font-family: 'Inter', sans-serif;
     font-weight: 400;
     font-size: 1.25rem;
@@ -44,32 +42,32 @@
     margin-bottom: 1rem;
 }
 
-.task-dialog-due-date-container,
-.task-dialog-priority-container,
-.task-dialog-assigned-to-container {
+.task-info-due-date-container,
+.task-info-priority-container,
+.task-info-assigned-to-container {
     display: flex;
     justify-content: space-between;
     margin-bottom: 1rem;
 }
 
-.task-dialog-subtasks-header {
+.task-info-subtasks-header {
     font-weight: 600;
     margin-bottom: 0.5rem;
 }
 
-.task-dialog-subtask-list {
+.task-info-subtask-list {
     display: flex;
     flex-direction: column;
     gap: 0.5rem;
 }
 
-.task-dialog-subtask-item {
+.task-info-subtask-item {
     display: flex;
     align-items: center;
     gap: 0.5rem;
 }
 
-.task-dialog-subtask-item .completed {
+.task-info-subtask-item .completed {
     text-decoration: line-through;
     color: gray;
 }
