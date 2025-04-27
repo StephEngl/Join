@@ -19,7 +19,7 @@ import { MatDialogRef } from '@angular/material/dialog';
 })
 export class TaskDialogComponent {
 
-    @Input() task!: TaskInterface;
+    @Input() taskDataDialog!: TaskInterface;
 
     constructor(private tasksService: TasksService, private dialogRef: MatDialogRef<TaskDialogComponent>) {}
 
@@ -38,8 +38,8 @@ export class TaskDialogComponent {
     }
 
     async deleteTask(): Promise<void> {
-        if (this.task && this.task.id) {
-            await this.tasksService.deleteTask(this.task.id);
+        if (this.taskDataDialog && this.taskDataDialog.id) {
+            await this.tasksService.deleteTask(this.taskDataDialog.id);
             this.closeDialog();
         }
     }

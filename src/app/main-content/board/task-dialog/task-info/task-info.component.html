@@ -1,7 +1,7 @@
 <section class="task-info-section">
     <div class="task-info-top-container">
         <div class="task-info-category">
-            {{ task.category }}
+            {{ taskDataDialogInfo.category }}
         </div>
         <div class="task-info-close" (click)="closeDialog()">
             &#10005;
@@ -9,23 +9,23 @@
     </div>
 
     <div class="task-info-header-container">
-        <h2>{{ task.title }}</h2>
+        <h2>{{ taskDataDialogInfo.title }}</h2>
     </div>
 
     <div class="task-info-description-container">
-        <p>{{ task.description }}</p>
+        <p>{{ taskDataDialogInfo.description }}</p>
     </div>
 
     <div class="task-info-due-date-container">
         <div class="task-info-due-date-txt">Due date:</div>
-        <div class="task-info-due-date-output">{{ task.dueDate | date: 'yyyy-MM-dd' }}</div>
+        <div class="task-info-due-date-output">{{ taskDataDialogInfo.dueDate | date: 'yyyy-MM-dd' }}</div>
     </div>
 
     <div class="task-info-priority-container">
         <div class="task-info-priority-txt">Priority:</div>
         <div class="task-info-priority-output">
-            <span>{{ task.priority }}</span>
-            @switch (task.priority) {
+            <span>{{ taskDataDialogInfo.priority }}</span>
+            @switch (taskDataDialogInfo.priority) {
                 @case ('urgent') {
                     <img src="assets/icons/kanban/prio_urgent.svg" alt="urgent" />
                 }
@@ -42,7 +42,7 @@
     <div class="task-info-assigned-to-container">
         <div class="task-info-assigned-to-txt">Assigned To:</div>
         <div class="task-info-assigned-to-output">
-            @for (person of task.assignedTo; track person.id) {
+            @for (person of taskDataDialogInfo.assignedTo; track person.id) {
                 <div class="assigned-person">
                     <span class="initials">{{ person.initials }}</span>
                     <span class="name">{{ person.name }}</span>
@@ -54,7 +54,7 @@
     <div class="task-info-subtasks-container">
         <div class="task-info-subtasks-header">Subtasks:</div>
         <div class="task-info-subtask-list">
-            @for (subtask of task.subTasks; track subtask.name) {
+            @for (subtask of taskDataDialogInfo.subTasks; track subtask.name) {
                 <div class="task-info-subtask-item">
                     <input type="checkbox" [checked]="subtask.completed" disabled />
                     <span [class.completed]="subtask.completed">{{ subtask.name }}</span>

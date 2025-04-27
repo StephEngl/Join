@@ -71,9 +71,9 @@ export class BoardComponent {
     }
 
     /* Opens the task dialog as an overlay and passes the clicked task as data */
-    openTaskDialog(task: TaskInterface): void {
+    openTaskDialog(taskData: TaskInterface): void {
         this.dialog.open(TaskDialogComponent, {
-            data: task,
+            data: taskData,
             width: '700px',
             maxHeight: '90vh',
             panelClass: 'task-dialog-overlay'

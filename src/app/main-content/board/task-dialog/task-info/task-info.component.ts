@@ -15,7 +15,7 @@ import { TaskDialogComponent } from '../task-dialog.component';
 })
 export class TaskInfoComponent {
 
-    @Input() task!: TaskInterface;
+    @Input() taskDataDialogInfo!: TaskInterface;
     @Output() editTask = new EventEmitter<void>();
 
     constructor(
@@ -29,8 +29,8 @@ export class TaskInfoComponent {
     }
 
     async deleteTask(): Promise<void> {
-        if (this.task && this.task.id) {
-            await this.tasksService.deleteTask(this.task.id);
+        if (this.taskDataDialogInfo && this.taskDataDialogInfo.id) {
+            await this.tasksService.deleteTask(this.taskDataDialogInfo.id);
             this.closeDialog();
         }
     }

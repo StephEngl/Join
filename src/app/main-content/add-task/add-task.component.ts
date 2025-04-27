@@ -53,7 +53,7 @@ export class AddTaskComponent {
     }
   ];
   @Input() forceMobile = false;
-  @Input() task!: TaskInterface;
+  @Input() taskData!: TaskInterface;
 
   constructor(private breakpointObserver: BreakpointObserver) {}
 

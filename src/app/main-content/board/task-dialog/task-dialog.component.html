@@ -3,12 +3,12 @@
 
         @if (showTaskInfo) {
             <app-task-info
-                [task]="task"
+                [taskDataDialogInfo]="taskDataDialog"
                 (editTask)="onEditTask()">
             </app-task-info>
         } @else {
             <app-add-task
-                [task]="task"
+                [taskData]="taskDataDialog"
                 (cancelEditTask)="onCancelEditTask()">
             </app-add-task>
         }
