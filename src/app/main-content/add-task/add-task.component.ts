@@ -1,4 +1,4 @@
-import { Component, Input, inject, HostListener, ViewChild } from '@angular/core';
+import { Component, Input, inject, HostListener, ViewChild, ElementRef } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ContactsService } from '../../services/contacts.service';
@@ -15,6 +15,8 @@ import { TaskInterface } from '../../interfaces/task.interface';
 export class AddTaskComponent {
   @ViewChild('accordionItem')accordionItem!: CdkAccordionItem;
   @ViewChild('categoryAccordionItem')categoryAccordionItem!: CdkAccordionItem;
+  @ViewChild('inputFieldSubTask') inputFieldSubTaskRef!: ElementRef;
+  inputField: string = "";
   today: string = new Date().toISOString().split('T')[0];
   contactsService = inject(ContactsService);
   mouseX: number = 0;
@@ -22,6 +24,7 @@ export class AddTaskComponent {
   isEdited = false;
   isFormValid = false;
   subtaskText = '';
+  subtasksContainer: {text: string, isEditing: boolean, isHovered: boolean}[] = [];
   assignedTo: any[] = [];
   searchedContactName: string = '';
   searchedCategoryName: string = '';
@@ -87,14 +90,37 @@ export class AddTaskComponent {
   }
 
   addSubtask() {
+    const subtask = {text : this.subtaskText, isEditing : false, isHovered : false}
     if (this.subtaskText.trim()) {
-      // Hier Subtask zur Liste hinzufügen
+      this.subtasksContainer.push(subtask)
       this.subtaskText = '';
     }
   }
 
   clearSubtask() {
     this.subtaskText = '';
+  }
+
+  editSubtask(subtask: any) {
+    subtask.isEditing = true;
+    this.inputField = subtask.text;
+    setTimeout(() => {
+      this.inputFieldSubTaskRef.nativeElement.focus();
+    }, 0); 
+  }
+  
+
+  editCheckSubtask(subtask: any) {
+    const index = this.subtasksContainer.indexOf(subtask);
+    this.subtasksContainer[index].text = this.inputField;
+    subtask.isEditing = false;
+  }
+
+  deleteSubtask(subtask: any) {
+    const index = this.subtasksContainer.indexOf(subtask);
+    if (index !== -1) {
+      this.subtasksContainer.splice(index, 1);
+    }
   }
 
   focusInput(input: HTMLInputElement) {

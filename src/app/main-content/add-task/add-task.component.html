@@ -129,7 +129,7 @@
             
               @if (hoveredContact) {
                 <div
-                  class="contactNameInfo"
+                  class="contact-name-info"
                   [style.backgroundColor]="contactsService.contactColor(hoveredContact)"
                   [style.left.px]="mouseX"
                   [style.top.px]="mouseY"
@@ -193,6 +193,7 @@
           <div class="form-group subtask-input">
             <label for="subtask">Subtasks</label>
             <div class="subtask-input-wrapper">
+
               <input
                 id="subtask"
                 name="subtask"
@@ -204,42 +205,54 @@
                 (keyup.enter)="addSubtask()"
                 #subtaskInput
               />
-              <span class="input-icons">
-                @if (!subtaskText) {
-                <button
-                  type="button"
-                  class="icon-btn"
-                  (click)="focusInput(subtaskInput)"
-                  title="Add"
+
+              <div class="subtask-icons">
+                <img
+                  [src]="subtaskText ? './assets/icons/kanban/close.svg':'./assets/icons/kanban/add.svg'"
+                  (click)="subtaskText ? clearSubtask(): focusInput(subtaskInput)"
+                  alt=""
                 >
-                  +
-                </button>
-                } @else {
-                <button
-                  type="button"
-                  class="icon-btn"
-                  (click)="clearSubtask()"
-                  title="Clear"
-                >
-                  <img
-                    src="../../../assets/icons/kanban/close.svg"
-                    alt="Checkmark"
-                  />
-                </button>
-                <span>|</span>
-                <button
-                  type="button"
-                  class="icon-btn"
-                  (click)="addSubtask()"
-                  title="Add"
-                >
-                  <img
-                    src="../../../assets/icons/kanban/check.svg"
-                    alt="Checkmark"
-                  />
-                </button>
+                @if (subtaskText) {
+                  <div class="v-line">|</div>
+                  <img [src]="'./assets/icons/kanban/check.svg'" (click)="addSubtask()" alt="checkBtn">
                 }
-              </span>
+              </div>
+
+              <ul class="subtask-container">
+                @for (subtask of subtasksContainer; track subtask) {
+                  <li class="subtask-item"
+                    (mouseenter)="subtask.isHovered=true"
+                    (mouseleave)="subtask.isHovered=false"
+                    [style.backgroundColor]="subtask.isHovered ? '#e8e8e8':''">
+
+                    @if (!subtask.isEditing) {
+                      <p>• {{ subtask.text }}</p>
+                    } @else {
+                      <input 
+                      [(ngModel)]="inputField"
+                      name="subtaskText"
+                      [value]="subtask.text"
+                      (keydown.enter)="subtask.isEditing = false"
+                      class="subtask-edit-input"
+                      #inputFieldSubTask
+                      />
+                    }
+
+                    <div class="subtask-item-icons" [style.display]="subtask.isHovered ? 'flex':'none'">
+                      @if (!subtask.isEditing) {
+                        <img [src]="'./assets/icons/kanban/edit.svg'" (click)="editSubtask(subtask)" alt="Edit">
+                        <div class="v-line">|</div>
+                        <img [src]="'./assets/icons/kanban/delete.svg'" (click)="deleteSubtask(subtask)" alt="Edit">
+                      } @else {
+                        <img [src]="'./assets/icons/kanban/check.svg'" (click)="editCheckSubtask(subtask)" alt="Edit">
+                        <div class="v-line">|</div>
+                        <img [src]="'./assets/icons/kanban/delete.svg'" (click)="deleteSubtask(subtask)" alt="Edit">
+                      }
+                    </div>
+
+                  </li>
+                }
+              </ul>
             </div>
           </div>
         </div>

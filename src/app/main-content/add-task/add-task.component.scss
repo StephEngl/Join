@@ -132,9 +132,9 @@
       }
 
       .input-icons {
+        @include dFlex(center, center);
         position: absolute;
-        right: 8px;
-        display: flex;
+        right: 28px;
         gap: 4px;
       }
 
@@ -229,11 +229,54 @@
   }
 }
 
-.contactNameInfo {
+.contact-name-info {
   position: fixed;
   padding: 6px 10px;
   border-radius: 6px;
   z-index: 1000;
+}
+
+.subtask-icons {
+  @include dFlex(center, center, 6px, absolute);
+  right: 12px;
+  top: 28px;
+  height: 40px;
+  >img:hover {
+    cursor: pointer;
+  }
+}
+
+.subtask-container {
+  max-height: 100px;
+  overflow-y: auto;
+  padding: 5px 0;
+  list-style-type: disc;
+}
+
+.subtask-item {
+  @include dFlex(space-between, center);
+  border-radius: 8px;
+  width: 100%;
+  padding: 4px 6px;
+  &:hover {
+    cursor: pointer;
+  }
+  >p,
+  >input {
+    flex: 1;
+    border: none;
+    background-color: transparent;
+    font-size: 1rem;
+    font-weight: 300;
+    color: $col-font-main;
+  }
+  >input:focus {
+    outline: none;
+  }
+}
+
+.subtask-item-icons {
+  @include dFlex(center, center, 6px)
 }
 
 // Container Queries
