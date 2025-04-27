@@ -15,6 +15,8 @@ import { TaskInterface } from '../../interfaces/task.interface';
 export class AddTaskComponent {
   today: string = new Date().toISOString().split('T')[0];
   contactsService = inject(ContactsService);
+  mouseX: number = 0;
+  mouseY: number = 0;
   isEdited = false;
   isFormValid = false;
   subtaskText = '';
@@ -138,6 +140,26 @@ export class AddTaskComponent {
     return this.taskCategories.filter(category => 
       category.toLowerCase().includes(this.searchedCategoryName.toLowerCase())
     );
+  }
+
+  hoveredContact: any = undefined;
+
+  startContactHover(contact: any) {
+    this.hoveredContact = contact;
+  }
+  
+  moveContactHover(event: MouseEvent) {
+    this.mouseX = event.clientX + 10;
+    this.mouseY = event.clientY + 10;
+  }
+  
+  endContactHover() {
+    this.hoveredContact = undefined;
+  }
+
+  removeAssignedContact(contactId: string): void {
+    this.assignedTo = this.assignedTo.filter(id => id !== contactId);
+    this.hoveredContact = undefined;
   }
 
 }

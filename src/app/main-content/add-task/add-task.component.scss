@@ -224,6 +224,16 @@
 
 .assigned-contacts {
   @include dFlex(flex-start, flex-start, 5px);
+  .contact-initials {
+    cursor: pointer;
+  }
+}
+
+.contactNameInfo {
+  position: fixed;
+  padding: 6px 10px;
+  border-radius: 6px;
+  z-index: 1000;
 }
 
 // Container Queries

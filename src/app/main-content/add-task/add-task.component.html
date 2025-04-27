@@ -111,12 +111,27 @@
             </cdk-accordion>
             <div class="assigned-contacts">
               @for (contact of assignedTo; track contact) {
-              <div
-                class="contact-initials"
-                [style.backgroundColor]="contactsService.contactColor(contact)"
-              >
-                {{ contactsService.nameInitials(contact) }}
-              </div>
+                <div
+                  class="contact-initials"
+                  [style.backgroundColor]="contactsService.contactColor(contact)"
+                  (mouseenter)="startContactHover(contact)"
+                  (mousemove)="moveContactHover($event)"
+                  (mouseleave)="endContactHover()"
+                  (click)="removeAssignedContact(hoveredContact)"
+                >
+                  {{ contactsService.nameInitials(contact) }}
+                </div>
+              }
+            
+              @if (hoveredContact) {
+                <div
+                  class="contactNameInfo"
+                  [style.backgroundColor]="contactsService.contactColor(hoveredContact)"
+                  [style.left.px]="mouseX"
+                  [style.top.px]="mouseY"
+                >
+                  {{ contactsService.contactName(hoveredContact) }}
+                </div>
               }
             </div>
           </div>
