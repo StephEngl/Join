@@ -58,7 +58,11 @@
           </div>
 
           <div class="form-group">
-            <cdk-accordion class="dropdown-list-container form-group" id="assigned-to">
+            <cdk-accordion
+              class="dropdown-list-container form-group"
+              id="assigned-to"
+              (click)="$event.stopPropagation()"
+            >
               <label for="assigned-to">Assigned to</label>
               <cdk-accordion-item #accordionItem="cdkAccordionItem">
                 <span
@@ -137,7 +141,11 @@
           </div>
 
           <div class="form-group">
-            <cdk-accordion class="dropdown-list-container form-group" id="category">
+            <cdk-accordion
+              class="dropdown-list-container form-group"
+              id="category"
+              (click)="$event.stopPropagation()"
+            >
               <label for="category">Category <span>*</span></label>
               <cdk-accordion-item #categoryAccordionItem="cdkAccordionItem">
                 <span

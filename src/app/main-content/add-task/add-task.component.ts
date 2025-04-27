@@ -1,8 +1,8 @@
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, inject, HostListener, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { ContactsService } from '../../services/contacts.service';
-import {CdkAccordionModule} from '@angular/cdk/accordion';
+import {CdkAccordionItem, CdkAccordionModule} from '@angular/cdk/accordion';
 import { TaskInterface } from '../../interfaces/task.interface';
 
 @Component({
@@ -13,6 +13,8 @@ import { TaskInterface } from '../../interfaces/task.interface';
   styleUrl: './add-task.component.scss',
 })
 export class AddTaskComponent {
+  @ViewChild('accordionItem')accordionItem!: CdkAccordionItem;
+  @ViewChild('categoryAccordionItem')categoryAccordionItem!: CdkAccordionItem;
   today: string = new Date().toISOString().split('T')[0];
   contactsService = inject(ContactsService);
   mouseX: number = 0;
@@ -65,6 +67,12 @@ export class AddTaskComponent {
       this.forceMobile ||
       this.breakpointObserver.isMatched('(max-width: 450px)')
     );
+  }
+
+  @HostListener('document:click')
+  closeDropdownLists(): void {
+    this.accordionItem.close();
+    this.categoryAccordionItem.close()
   }
 
   clearForm() {}
