@@ -12,9 +12,10 @@
         <h2>{{ taskDataDialogInfo.title }}</h2>
     </div>
 
-    <div class="task-info-build-txt">
+    <!-- needed anymore?  -->
+    <!-- <div class="task-info-build-txt">
         <p>Build start page with recipe recommendation.</p>
-    </div>
+    </div> -->
 
     <div class="task-info-description-container">
         <p>{{ taskDataDialogInfo.description }}</p>
@@ -34,7 +35,7 @@
                     <img src="assets/icons/kanban/prio_urgent.svg" alt="urgent" />
                 }
                 @case ('medium') {
-                    <img src="assets/icons/kanban/prio_middle.svg" alt="Medium" />
+                    <img src="assets/icons/kanban/prio_medium.svg" alt="Medium" />
                 }
                 @case ('low') {
                     <img src="assets/icons/kanban/prio_low.svg" alt="low" />
@@ -46,10 +47,14 @@
     <div class="task-info-assigned-to-container">
         <div class="task-info-assigned-to-txt">Assigned To:</div>
         <div class="task-info-assigned-to-output">
-            @for (person of taskDataDialogInfo.assignedTo; track person.id) {
+            @for (person of taskDataDialogInfo.assignedTo; track person.contactId) {
                 <div class="assigned-person">
-                    <span class="initials">{{ person.initials }}</span>
-                    <span class="name">{{ person.name }}</span>
+                    <span class="initials"
+                        [style.backgroundColor]="contactsService.contactColor(person.contactId)"
+                    >
+                    {{ contactsService.nameInitials(person.contactId) }}
+                    </span>
+                    <span class="name">{{ contactsService.contactName(person.contactId) }}</span>
                 </div>
             }
         </div>

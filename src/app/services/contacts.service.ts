@@ -161,6 +161,11 @@ export class ContactsService implements OnDestroy {
   contactColor(id: string | undefined) {
     const contact = this.contacts.find(c => c.id === id);
     return contact?.color;
-  }  
+  }
+  
+  contactName(id: string | undefined) {
+    const contact = this.contacts.find(c => c.id === id);
+    return contact?.name;
+  }
 
 }

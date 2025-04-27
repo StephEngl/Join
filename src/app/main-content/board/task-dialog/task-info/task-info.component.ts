@@ -1,10 +1,11 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskInterface } from '../../../../interfaces/task.interface';
 import { TasksService } from '../../../../services/tasks.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { Router } from '@angular/router';
 import { TaskDialogComponent } from '../task-dialog.component';
+import { ContactsService } from '../../../../services/contacts.service';
 
 @Component({
     selector: 'app-task-info',
@@ -15,6 +16,7 @@ import { TaskDialogComponent } from '../task-dialog.component';
 })
 export class TaskInfoComponent {
 
+    contactsService = inject(ContactsService);
     @Input() taskDataDialogInfo!: TaskInterface;
     @Output() editTask = new EventEmitter<void>();
 

@@ -1,10 +1,11 @@
-import { Component, Input } from '@angular/core';
+import { Component, Input, Inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskInterface } from '../../../interfaces/task.interface';
 import { TaskInfoComponent } from './task-info/task-info.component';
 import { AddTaskComponent } from '../../add-task/add-task.component';
 import { TasksService } from '../../../services/tasks.service';
 import { MatDialogRef } from '@angular/material/dialog';
+import { MAT_DIALOG_DATA } from '@angular/material/dialog';
 
 @Component({
     selector: 'app-task-dialog',
@@ -21,7 +22,10 @@ export class TaskDialogComponent {
 
     @Input() taskDataDialog!: TaskInterface;
 
-    constructor(private tasksService: TasksService, private dialogRef: MatDialogRef<TaskDialogComponent>) {}
+    constructor(private tasksService: TasksService,
+                private dialogRef: MatDialogRef<TaskDialogComponent>,
+                @Inject(MAT_DIALOG_DATA) public data: TaskInterface
+            ) {}
 
     showTaskInfo: boolean = true;
 
