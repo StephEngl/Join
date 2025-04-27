@@ -4,8 +4,9 @@
     flex-direction: column;
     width: 100%;
     max-width: 600px;
+    height: auto;
     padding: 2rem;
-    background: white;
+    background: #FFFFFF;
     border-radius: 1rem;
     box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
     gap: 1.5rem;
@@ -20,11 +21,13 @@
 
 .task-info-category {
     padding: 0.5rem 1rem;
-    border-radius: 8px;
+    border-radius: 0.5rem;
     color: white;
-    background-color: #4A90E2; /* Beispiel-Hintergrundfarbe */
-    font-weight: 600;
-    font-size: 1rem;
+    background: #003cff;
+    font-weight: 400;
+    font-size: clamp(1rem, 1.2rem + 0.5vw, 1.4375rem);
+    padding: 4px 8px;
+
 }
 
 .task-info-close {
@@ -32,11 +35,22 @@
     cursor: pointer;
 }
 
-.task-info-header-container h2 {
-    font-size: clamp(2.25rem, 2.1rem + 1vw, 2.9375rem);
-    font-weight: 600;
+.task-info-header-container {
+    width: 100%;
+    height: auto;
+    display: flex;
+    font-size: clamp(2.25rem, 1.5rem + 2vw, 3.8125rem);
+    font-weight: 700;
+    line-height: 120%;
     margin-bottom: 1rem;
-    text-align: center;
+    
+}
+
+.task-info-build-txt {
+    font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
+    font-weight: 400;
+    line-height: 120%;
+
 }
 
 .task-info-description-container p {
@@ -53,16 +67,18 @@
 .task-info-priority-container,
 .task-info-assigned-to-container {
     display: flex;
-    justify-content: space-between;
+    justify-content: flex-start;
     align-items: center;
     width: 100%;
     margin-bottom: 1rem;
 }
 
-.task-info-due-date-txt,
 .task-info-priority-txt,
-.task-info-assigned-to-txt {
-    font-weight: 600;
+.task-info-assigned-to-txt,
+.task-info-due-date-txt {
+    font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
+    font-weight: 400;
+    line-height: 120%;
 }
 
 .task-info-subtasks-header {

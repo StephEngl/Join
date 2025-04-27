@@ -12,6 +12,10 @@
         <h2>{{ task.title }}</h2>
     </div>
 
+    <div class="task-info-build-txt">
+        <p>Build start page with recipe recommendation.</p>
+    </div>
+
     <div class="task-info-description-container">
         <p>{{ task.description }}</p>
     </div>
@@ -66,14 +70,14 @@
     <div class="task-info-delete-edit-container">
         <div class="task-info-delete-container" (click)="deleteTask()">
             <div class="task-info-delete-img">
-                <img src="assets/icons/delete.svg" alt="Delete Task" />
+                <img src="assets/icons/kanban/delete.svg" alt="Delete Task" />
             </div>
             <div class="task-info-delete-txt">Delete</div>
         </div>
 
         <div class="task-info-edit-container" (click)="onEditTask()">
             <div class="task-info-edit-img">
-                <img src="assets/icons/edit.svg" alt="Edit Task" />
+                <img src="/assets/icons/kanban/edit.svg" alt="Edit Task" />
             </div>
             <div class="task-info-edit-txt">Edit</div>
         </div>
