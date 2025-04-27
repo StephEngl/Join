@@ -63,10 +63,10 @@
     <div class="task-info-subtasks-container">
         <div class="task-info-subtasks-header">Subtasks:</div>
         <div class="task-info-subtask-list">
-            @for (subtask of taskDataDialogInfo.subTasks; track subtask.name) {
+            @for (subtask of taskDataDialogInfo.subTasks; track subtask) {
                 <div class="task-info-subtask-item">
                     <input type="checkbox" [checked]="subtask.completed" disabled />
-                    <span [class.completed]="subtask.completed">{{ subtask.name }}</span>
+                    <span [class.completed]="subtask.completed">{{ subtask }}</span>
                 </div>
             }
         </div>
