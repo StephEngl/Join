@@ -28,6 +28,7 @@ export class AddTaskComponent {
   taskCategories: string[] = [
     'Technical Task', 'User Story'
   ];
+  selectedCategory: string = '';
   priorityButtons: {
     imgInactive: string,
     imgActive: string,
@@ -168,6 +169,11 @@ export class AddTaskComponent {
   removeAssignedContact(contactId: string): void {
     this.assignedTo = this.assignedTo.filter(id => id !== contactId);
     this.hoveredContact = undefined;
+  }
+
+  setCategory(index: number) {
+    this.selectedCategory= '';
+    this.selectedCategory = this.taskCategories[index];
   }
 
 }

@@ -155,7 +155,9 @@
                   <input
                     type="search"
                     [class]="categoryAccordionItem.expanded ? 'drop-down-active' : ''"
-                    [placeholder]="categoryAccordionItem.expanded ? 'Search...':'Select task category'"
+                    [placeholder]="categoryAccordionItem.expanded ?
+                      (selectedCategory ? selectedCategory:'Search...') :
+                      (selectedCategory ? selectedCategory:'Select task category')"
                     (input)="searchCategory($event); categoryAccordionItem.open()"
                   />
                   <img
@@ -173,7 +175,12 @@
                   [style.display]="categoryAccordionItem.expanded ? '' : 'none'"
                 >
                   @for (category of filteredCategories(); track category; let index = $index) {
-                    <li class="category-wrapper">
+                    <li
+                      class="category-wrapper"
+                      (click)="setCategory(index)"
+                      [style.backgroundColor]="selectedCategory === taskCategories[index] ? '#091931':''"
+                      [style.color]="selectedCategory === taskCategories[index] ? 'white':''"
+                    >
                       <p>{{ category }}</p>
                     </li>
                   }
