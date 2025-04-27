@@ -178,8 +178,8 @@
                     <li
                       class="category-wrapper"
                       (click)="setCategory(index)"
-                      [style.backgroundColor]="selectedCategory === taskCategories[index] ? '#091931':''"
-                      [style.color]="selectedCategory === taskCategories[index] ? 'white':''"
+                      [style.backgroundColor]="selectedCategory === filteredCategories()[index] ? '#091931':''"
+                      [style.color]="selectedCategory === filteredCategories()[index] ? 'white':''"
                     >
                       <p>{{ category }}</p>
                     </li>

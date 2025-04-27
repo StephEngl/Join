@@ -172,8 +172,8 @@ export class AddTaskComponent {
   }
 
   setCategory(index: number) {
-    this.selectedCategory= '';
-    this.selectedCategory = this.taskCategories[index];
+    this.selectedCategory = this.filteredCategories()[index];
+    this.closeDropdownLists();
   }
 
 }
