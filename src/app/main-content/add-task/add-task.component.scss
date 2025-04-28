@@ -280,7 +280,6 @@
 }
 
 // Container Queries
-@media (max-width: 1400px) {
   @container task-section (max-width: 1200px) {
     .task-section-content {
       height: calc(100vh - 96px - 80px);
@@ -358,4 +357,3 @@
       }
     }
   }
-}
