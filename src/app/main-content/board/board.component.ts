@@ -74,11 +74,9 @@ export class BoardComponent {
     openTaskDialog(taskData: TaskInterface): void {
         this.dialog.open(TaskDialogComponent, {
             data: taskData,
-            width: '700px',
-            maxHeight: '90vh',
+            width: '525px',
+            height: '90vh',
             panelClass: 'task-dialog-overlay'
         });
     }
-
-
 }
