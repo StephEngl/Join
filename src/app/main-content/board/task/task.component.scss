@@ -63,18 +63,22 @@
 
         .assignedContacts {
             display: flex;
-            gap: 4px;
 
             .assignedContact {
-                width: 24px;
-                height: 24px;
+                width: 32px;
+                height: 32px;
                 border-radius: 50%;
-                font-size: 10px;
-                font-weight: 600;
+                font-size: 12px;
+                font-weight: 400;
                 color: white;
                 display: flex;
                 align-items: center;
                 justify-content: center;
+                border: 1px solid white;
+                margin-left: -6px;
+                &:first-child {
+                    margin-left: 0;
+                }
             }
         }
 
@@ -82,6 +86,7 @@
             width: 18px;
         }
     }
+
 }
 
 @media screen and (max-width: 550px) {
