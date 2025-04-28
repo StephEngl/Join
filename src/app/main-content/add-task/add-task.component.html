@@ -60,7 +60,7 @@
             </div>
           </div>
 
-          <div class="form-group">
+          <div>
             <cdk-accordion
               class="dropdown-list-container form-group"
               id="assigned-to"
@@ -74,6 +74,7 @@
                 >
                   <input
                     type="search"
+                    class="form-control"
                     [class]="accordionItem.expanded ? 'drop-down-active' : ''"
                     [placeholder]="accordionItem.expanded ? 'Search...':'Select Contacts to assign'"
                     (input)="searchContact($event); accordionItem.open()"
@@ -150,13 +151,14 @@
               (click)="$event.stopPropagation()"
             >
               <label for="category">Category <span>*</span></label>
-              <cdk-accordion-item #categoryAccordionItem="cdkAccordionItem">
+              <cdk-accordion-item class="form-control" #categoryAccordionItem="cdkAccordionItem">
                 <span
                   class="toggle-dropdown-list"
                   (click)="categoryAccordionItem.toggle(); accordionItem.close()"
                 >
                   <input
                     type="search"
+                    class="form-control"
                     [class]="categoryAccordionItem.expanded ? 'drop-down-active' : ''"
                     [placeholder]="categoryAccordionItem.expanded ?
                       (selectedCategory ? selectedCategory:'Search...') :
