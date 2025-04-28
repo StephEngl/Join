@@ -26,6 +26,7 @@
             (cdkDropListDropped)="drop($event)">
             <div class="board-column-header">
                 <h3>{{ column.title }}</h3>
+                @if (column.title !== 'Done') {
                 <button class="mini-button-add-board">
                     <!-- <img src="./assets/icons/kanban/add.svg" /> -->
                     <!-- um im hover auf das $col-ref-highlight im fill wechseln zu können. Andere idee oder möglichkeit?? -->
@@ -35,6 +36,7 @@
                             fill="currentcolor" />
                     </svg>
                 </button>
+                }
             </div>
             <ul><!--overflow Y für ul-->
                 @if (filterTasksByCategory(column.taskStatus).length === 0) {
