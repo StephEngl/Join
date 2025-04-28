@@ -62,6 +62,10 @@ html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
 
 
-.task-dialog-overlay .mat-mdc-dialog-container {
-  border-radius: 30px;
+.mat-mdc-dialog-container .mdc-dialog__surface {
+  border-radius: 30px !important;
+
+  @media (max-width: 700px) {
+    width: 90% !important;
+  }
 }
