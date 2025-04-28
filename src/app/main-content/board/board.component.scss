@@ -1,12 +1,6 @@
 @import './../../../assets/styles/variables.scss';
 @import './../../../assets/styles/mixins.scss';
 
-.board-section {
-    height: calc(100vh - 80px);
-    overflow-y: auto;
-    padding-bottom: 80px;
-}
-
 .board-header {
     display: flex;
     justify-content: space-between;

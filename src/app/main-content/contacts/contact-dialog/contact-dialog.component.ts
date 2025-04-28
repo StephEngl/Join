@@ -23,6 +23,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   @Output() deleteToast = new EventEmitter<void>();
   @Output() errorToast = new EventEmitter<void>();
   @Output() newContactIndex = new EventEmitter<number>();
+  @Output() confirmDelete = new EventEmitter<void>();
 
   @Input() contactName?: string;
   @Input() contactMail?: string;
@@ -53,7 +54,7 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
   }
 
   onDelete(): void {
-    this.onCancel();
+    this.confirmDelete.emit();
   }
 
   onCancel(): void {
@@ -255,4 +256,5 @@ export class ContactDialogComponent implements OnInit, OnDestroy {
     const phoneValid = /^(\+|00)?\d[\d\s\/\-]{4,}$/.test(this.contactData.phone.trim());
     return nameValid && mailValid && phoneValid;
   }
+
 }

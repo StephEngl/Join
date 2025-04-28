@@ -9,28 +9,26 @@
 
     <div class="task-progress">
         @if (allubtasks(taskData.id!).length > 0 ){
-            <div class="progress-bar">
-                <div
-                    class="progress-fill"
-                    [style.width.%]="filteredSubtasks(taskData.id!).length / allubtasks(taskData.id!).length * 100 ">
-                </div>
+        <div class="progress-bar">
+            <div class="progress-fill"
+                [style.width.%]="filteredSubtasks(taskData.id!).length / allubtasks(taskData.id!).length * 100 ">
             </div>
-            <div class="progress">
-                <p>{{ filteredSubtasks(taskData.id!).length }}/{{ allubtasks(taskData.id!).length }} Subtasks</p>
-            </div>
+        </div>
+        <div class="progress">
+            <p>{{ filteredSubtasks(taskData.id!).length }}/{{ allubtasks(taskData.id!).length }} Subtasks</p>
+        </div>
         }
     </div>
-
-        <div class="task-footer">
-            <div class="assignedContacts">
-                @for (contact of taskData.assignedTo; track contact.contactId; let index = $index) {
-                    @if (doesContactExist(contact.contactId)) {
-                        <span class="assignedContact" [style.backgroundColor]="contactsService.contactColor(contact.contactId)">
-                            {{ contactsService.nameInitials(contact.contactId) }}
-                        </span>
-                    }
-                }
-            </div>
-            <img [src]="'./assets/icons/kanban/prio_'+ taskData.priority +'.svg'" alt="">
+    <div class="task-footer">
+        <div class="assignedContacts">
+            @for (contact of taskData.assignedTo; track contact.contactId; let index = $index) {
+            @if (doesContactExist(contact.contactId)) {
+            <span class="assignedContact" [style.backgroundColor]="contactsService.contactColor(contact.contactId)">
+                {{ contactsService.nameInitials(contact.contactId) }}
+            </span>
+            }
+            }
         </div>
-    </li>
+        <img [src]="'./assets/icons/kanban/prio_'+ taskData.priority +'.svg'" alt="">
+    </div>
+</li>

@@ -7,8 +7,6 @@ import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { SignalsService } from '../../services/signals.service';
 import { DummyContactsService } from '../../services/dummy-contacts.service';
 import { ToastService } from '../../shared/toast/toast.service';
-
-
 @Component({
   selector: 'app-contacts',
   standalone: true,
@@ -156,6 +154,13 @@ export class ContactsComponent {
   onContactError() {
     this.showDialog = false;
     this.toastService.triggerToast('Something went wrong', 'error');
+  }
+
+  deleteContactFromDialog(): void {
+    this.showDialog = false;
+    if (this.activeContactIndex !== undefined) {
+      this.deleteContact(this.activeContactIndex);
+    }
   }
 
 }
