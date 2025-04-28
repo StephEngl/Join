@@ -39,6 +39,9 @@ export class BoardComponent {
     { taskStatus: 'done', title: 'Done' },
   ];
 
+  btnAddHover = false;
+  hoveredColumn: string = '';
+
   // tasks filtered by taskType & sorted by Priority
   filterTasksByCategory(status: string): TaskInterface[] {
     return this.tasksService.tasks
