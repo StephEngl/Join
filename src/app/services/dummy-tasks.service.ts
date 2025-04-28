@@ -15,13 +15,17 @@ export class DummyTasksService {
       category: 'Technical Task',
       dueDate: new Date(this.today),
       priority: 'urgent',
-      subTasks: ['HTML Struktur', 'Form Validation', 'Routing einbauen'],
+      subTasks: [
+        { text: 'HTML Struktur', isChecked: true },
+        { text: 'Form Validation', isChecked: false },
+        { text: 'Routing einbauen', isChecked: false }
+      ],
       taskType: 'toDo',
       assignedTo: [
-        { contactId : "0" },
-        { contactId : "3" },
-        { contactId : "5" },
-        { contactId : "7" }
+        { contactId: "0" },
+        { contactId: "3" },
+        { contactId: "5" },
+        { contactId: "7" }
       ]
     },
     {
@@ -30,12 +34,16 @@ export class DummyTasksService {
       category: 'User Story',
       dueDate: new Date(this.today),
       priority: 'medium',
-      subTasks: ['Mobil testen', 'Tablet testen', 'Desktop testen'],
+      subTasks: [
+        { text: 'Mobil testen', isChecked: false },
+        { text: 'Tablet testen', isChecked: false },
+        { text: 'Desktop testen', isChecked: false }
+      ],
       taskType: 'inProgress',
       assignedTo: [
-        { contactId : "2" },
-        { contactId : "5" },
-        { contactId : "8" }
+        { contactId: "2" },
+        { contactId: "5" },
+        { contactId: "8" }
       ]
     },
     {
@@ -44,11 +52,14 @@ export class DummyTasksService {
       category: 'User Story',
       dueDate: new Date(this.today),
       priority: 'low',
-      subTasks: ['Farbpalette analysieren', 'Accessibility prüfen'],
+      subTasks: [
+        { text: 'Farbpalette analysieren', isChecked: false },
+        { text: 'Accessibility prüfen', isChecked: false }
+      ],
       taskType: 'feedback',
       assignedTo: [
-        { contactId : "2" },
-        { contactId : "4" }
+        { contactId: "2" },
+        { contactId: "4" }
       ]
     },
     {
@@ -57,13 +68,17 @@ export class DummyTasksService {
       category: 'Technical Task',
       dueDate: new Date(this.today),
       priority: 'urgent',
-      subTasks: ['Webpack analysiert', 'Chunks reduziert', 'Assets optimiert'],
+      subTasks: [
+        { text: 'Webpack analysiert', isChecked: false },
+        { text: 'Chunks reduziert', isChecked: false },
+        { text: 'Assets optimiert', isChecked: false }
+      ],
       taskType: 'done',
       assignedTo: [
-        { contactId : "0" },
-        { contactId : "1" },
-        { contactId : "3" },
-        { contactId : "4" }
+        { contactId: "0" },
+        { contactId: "1" },
+        { contactId: "3" },
+        { contactId: "4" }
       ]
     },
     {
@@ -72,12 +87,16 @@ export class DummyTasksService {
       category: 'User Story',
       dueDate: new Date(this.today),
       priority: 'medium',
-      subTasks: ['Formular bauen', 'Image Upload', 'Live-Vorschau'],
+      subTasks: [
+        { text: 'Formular bauen', isChecked: false },
+        { text: 'Image Upload', isChecked: false },
+        { text: 'Live-Vorschau', isChecked: false }
+      ],
       taskType: 'toDo',
       assignedTo: [
-        { contactId : "1" },
-        { contactId : "7" },
-        { contactId : "9" }
+        { contactId: "1" },
+        { contactId: "7" },
+        { contactId: "9" }
       ]
     },
     {
@@ -86,16 +105,22 @@ export class DummyTasksService {
       category: 'Technical Task',
       dueDate: new Date(this.today),
       priority: 'urgent',
-      subTasks: ['AuthService', 'UserService', 'NotificationService'],
+      subTasks: [
+        { text: 'AuthService', isChecked: false },
+        { text: 'UserService', isChecked: false },
+        { text: 'NotificationService', isChecked: false }
+      ],
       taskType: 'inProgress',
       assignedTo: [
-        { contactId : "2" },
-        { contactId : "4" },
-        { contactId : "6" },
-        { contactId : "9" }
+        { contactId: "2" },
+        { contactId: "4" },
+        { contactId: "6" },
+        { contactId: "9" }
       ]
     }
   ];
+  
+  
   
 
 

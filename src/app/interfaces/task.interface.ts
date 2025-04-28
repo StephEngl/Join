@@ -6,6 +6,6 @@ export interface TaskInterface {
     dueDate: Date;
     priority: "urgent" | "medium" | "low";
     taskType: "toDo" | "done" | "inProgress" | "feedback"; 
-    subTasks: any[];
+    subTasks: any[]; 
     assignedTo: any[];
 }

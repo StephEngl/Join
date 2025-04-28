@@ -4,6 +4,7 @@ import { BreakpointObserver } from '@angular/cdk/layout';
 import { ContactsService } from '../../services/contacts.service';
 import {CdkAccordionItem, CdkAccordionModule} from '@angular/cdk/accordion';
 import { TaskInterface } from '../../interfaces/task.interface';
+import { TasksService } from '../../services/tasks.service';
 
 @Component({
   selector: 'app-add-task',
@@ -16,22 +17,26 @@ export class AddTaskComponent {
   @ViewChild('accordionItem')accordionItem!: CdkAccordionItem;
   @ViewChild('categoryAccordionItem')categoryAccordionItem!: CdkAccordionItem;
   @ViewChild('inputFieldSubTask') inputFieldSubTaskRef!: ElementRef;
-  inputField: string = "";
+  inputFieldSubT: string = "";
   today: string = new Date().toISOString().split('T')[0];
   contactsService = inject(ContactsService);
+  tasksService = inject(TasksService);
   mouseX: number = 0;
   mouseY: number = 0;
   isEdited = false;
   isFormValid = false;
+  inputTaskTitle: string = '';
+  inputTaskDescription: string = '';
+  inputTaskDueDate: Date = new Date();
   subtaskText = '';
-  subtasksContainer: {text: string, isEditing: boolean, isHovered: boolean}[] = [];
+  subtasksContainer: {text: string, isEditing: boolean, isHovered: boolean, isChecked: boolean}[] = [];
   assignedTo: any[] = [];
   searchedContactName: string = '';
   searchedCategoryName: string = '';
-  taskCategories: string[] = [
+  taskCategories: any[] = [
     'Technical Task', 'User Story'
   ];
-  selectedCategory: string = '';
+  selectedCategory: string = "";
   priorityButtons: {
     imgInactive: string,
     imgActive: string,
@@ -82,7 +87,25 @@ export class AddTaskComponent {
   clearForm() {}
 
   onSubmit() {
-    console.log('Läuft');
+    if (this.selectedCategory === "") return console.log("alles ausfüllen");
+    console.log(this.inputTaskTitle);
+    console.log(this.inputTaskDescription);
+    console.log(this.inputTaskDueDate);
+    console.log(this.selectedCategory);
+    console.log(this.assignedTo);
+    const subtasksForForm = this.subtasksContainer.map(subtask => ({
+      text: subtask.text,
+      isChecked: subtask.isChecked
+    }));
+    console.log(subtasksForForm);
+    
+    const activeBtn = this.priorityButtons.filter((btnStatus) => btnStatus.btnActive);
+    let activePriority = "Medium";
+    if (activeBtn.length > 0) {
+      activePriority = activeBtn[0].priority;
+    }
+    console.log(activePriority);
+    
   }
 
   onInputChange() {
@@ -90,7 +113,7 @@ export class AddTaskComponent {
   }
 
   addSubtask() {
-    const subtask = {text : this.subtaskText, isEditing : false, isHovered : false}
+    const subtask = {text : this.subtaskText, isEditing : false, isHovered : false, isChecked: false}
     if (this.subtaskText.trim()) {
       this.subtasksContainer.push(subtask)
       this.subtaskText = '';
@@ -103,16 +126,15 @@ export class AddTaskComponent {
 
   editSubtask(subtask: any) {
     subtask.isEditing = true;
-    this.inputField = subtask.text;
+    this.inputFieldSubT = subtask.text;
     setTimeout(() => {
       this.inputFieldSubTaskRef.nativeElement.focus();
     }, 0); 
   }
   
-
   editCheckSubtask(subtask: any) {
     const index = this.subtasksContainer.indexOf(subtask);
-    this.subtasksContainer[index].text = this.inputField;
+    this.subtasksContainer[index].text = this.inputFieldSubT;
     subtask.isEditing = false;
   }
 
@@ -141,18 +163,23 @@ export class AddTaskComponent {
   }
 
   toggleAssignedContacts(contactId: any) {
-    if (!this.assignedTo.includes(contactId)) {
-      this.assignedTo.push(contactId);
+    const exists = this.assignedTo.some(contact => contact.contactId === contactId);
+    if (!exists) {
+      this.assignedTo.push({ contactId });
     } else {
-      this.assignedTo = this.assignedTo.filter(id => id !== contactId);
+      this.assignedTo = this.assignedTo.filter(contact => contact.contactId !== contactId);
     }
     console.log(this.assignedTo);
   }
 
   contactSelected() {
-    this.assignedTo.forEach((contact)=> {
-      const exists = this.contactsService.contacts.some(c => c.id === contact);
-    })
+    this.assignedTo.forEach((contact) => {
+      const exists = this.contactsService.contacts.some(c => c.id === contact.contactId);
+    });
+  }
+
+  isContactAssigned(contactId: any): boolean {
+    return this.assignedTo.some(a => a.contactId === contactId);
   }
 
   searchContact(event: Event) {
@@ -201,5 +228,7 @@ export class AddTaskComponent {
     this.selectedCategory = this.filteredCategories()[index];
     this.closeDropdownLists();
   }
+
+
 
 }
