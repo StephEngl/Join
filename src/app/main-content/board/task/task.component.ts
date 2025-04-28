@@ -15,7 +15,7 @@ export class TaskComponent {
   @Input() taskData!: TaskInterface;
   @Input() searchRequest: string = "";
   @Output() searchedTitle: EventEmitter<string> = new EventEmitter();
-  
+
   doesContactExist(contactId: string): boolean {
     return this.contactsService.contacts.some(c => c.id === contactId);
   }

@@ -35,7 +35,7 @@
                 </button>
                 }
             </div>
-            <ul><!--overflow Y für ul-->
+            <ul>
                 @if (filterTasksByCategory(column.taskStatus).length === 0) {
                 <li class="no-tasks">No tasks {{ column.title }}</li>
                 } @else {
