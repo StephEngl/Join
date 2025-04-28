@@ -1,8 +1,7 @@
 @if (showDialog) {
 <app-contact-dialog (cancelToast)="toggleDialog()" (createToast)="onContactCreated()" (updateToast)="onContactUpdated()"
-    (requestDelete)="deleteContact(activeContactIndex!)" (deleteToast)="onContactDeleted()" (errorToast)="onContactError()"
-    (newContactIndex)="handleNewContact($event)" [contactName]="editName" [contactMail]="editMail"
-    [contactPhone]="editPhone" [contactIndex]="activeContactIndex">
+    (deleteToast)="onContactDeleted()" (errorToast)="onContactError()" (newContactIndex)="handleNewContact($event)"
+    [contactName]="editName" [contactMail]="editMail" [contactPhone]="editPhone" [contactIndex]="activeContactIndex">
 </app-contact-dialog>
 }
 
