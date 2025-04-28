@@ -60,3 +60,8 @@ button {
 
 html, body { height: 100%; }
 body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
+
+
+.task-dialog-overlay .mat-mdc-dialog-container {
+  border-radius: 30px;
+}
