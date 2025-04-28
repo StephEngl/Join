@@ -17,7 +17,7 @@ export class DummyTasksService {
       priority: 'urgent',
       subTasks: [
         { text: 'HTML Struktur', isChecked: true },
-        { text: 'Form Validation', isChecked: false },
+        { text: 'Form Validation', isChecked: true },
         { text: 'Routing einbauen', isChecked: false }
       ],
       taskType: 'toDo',
@@ -37,7 +37,7 @@ export class DummyTasksService {
       subTasks: [
         { text: 'Mobil testen', isChecked: false },
         { text: 'Tablet testen', isChecked: false },
-        { text: 'Desktop testen', isChecked: false }
+        { text: 'Desktop testen', isChecked: true }
       ],
       taskType: 'inProgress',
       assignedTo: [
@@ -53,7 +53,7 @@ export class DummyTasksService {
       dueDate: new Date(this.today),
       priority: 'low',
       subTasks: [
-        { text: 'Farbpalette analysieren', isChecked: false },
+        { text: 'Farbpalette analysieren', isChecked: true },
         { text: 'Accessibility prüfen', isChecked: false }
       ],
       taskType: 'feedback',
@@ -69,8 +69,8 @@ export class DummyTasksService {
       dueDate: new Date(this.today),
       priority: 'urgent',
       subTasks: [
-        { text: 'Webpack analysiert', isChecked: false },
-        { text: 'Chunks reduziert', isChecked: false },
+        { text: 'Webpack analysiert', isChecked: true },
+        { text: 'Chunks reduziert', isChecked: true },
         { text: 'Assets optimiert', isChecked: false }
       ],
       taskType: 'done',
@@ -88,9 +88,9 @@ export class DummyTasksService {
       dueDate: new Date(this.today),
       priority: 'medium',
       subTasks: [
-        { text: 'Formular bauen', isChecked: false },
-        { text: 'Image Upload', isChecked: false },
-        { text: 'Live-Vorschau', isChecked: false }
+        { text: 'Formular bauen', isChecked: true },
+        { text: 'Image Upload', isChecked: true },
+        { text: 'Live-Vorschau', isChecked: true }
       ],
       taskType: 'toDo',
       assignedTo: [
