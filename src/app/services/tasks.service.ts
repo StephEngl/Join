@@ -128,6 +128,17 @@ export class TasksService implements OnDestroy {
         }
     }
 
+    async updateSubTaskStatus(task: TaskInterface) {
+        if (task.id) {
+            try {
+                let docRef = this.getSingleDocRef(task.id);
+                await updateDoc(docRef, this.getCleanJson(task));
+            } catch (err) {
+                console.error(err);
+            }
+        }
+    }
+
     /**
      * Returns a task object without ID to use for Firestore updates.
      * @param task - TaskInterface object.

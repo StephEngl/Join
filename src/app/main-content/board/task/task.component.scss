@@ -1,3 +1,5 @@
+@import './../../../../assets/styles/mixins.scss';
+
 .task-card {
     background: white;
     padding: 16px;
@@ -11,7 +13,6 @@
         font-size: 12px;
         font-weight: 600;
         padding: 4px 8px;
-        background: #003cff;
         color: white;
         border-radius: 8px;
         width: fit-content;
@@ -32,23 +33,26 @@
         display: flex;
         align-items: center;
         gap: 8px;
-
-        .bar-bg {
-            background: #e0e0e0;
+        .progress-bar {
+            position: relative;
+            border-radius: 10px;
+            flex: 1;
             height: 6px;
-            width: 100px;
-            border-radius: 4px;
-
-            .bar-fill {
-                height: 6px;
-                background: #2962ff;
-                border-radius: 4px;
+            background-color: $col-font-grey;
+            .progress-fill {
+                position: absolute;
+                border-radius: 10px;
+                left: 0;
+                top: 0;
+                background-color: $col-bg-subtaskbar;
+                height: 100%;
             }
         }
-
-        .subtask-text {
-            font-size: 12px;
-            color: #444;
+        .progress {
+            width: 70px;
+            >p {
+                font-size: 12px;
+            }
         }
     }
 
