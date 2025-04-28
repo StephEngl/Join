@@ -1,27 +1,25 @@
 <li class="task-card"
     [style.display]="taskData.title.toLowerCase().includes(searchRequest.toLowerCase()) || taskData.description.toLowerCase().includes(searchRequest.toLowerCase()) ? 'flex' : 'none'">
-    <div class="task-category">{{taskData.category}}</div>
+    <div class="task-category" [style.backgroundColor]="taskData.category === 'User Story' ? '#003cff':'#1FD7C1'">
+        {{taskData.category}}
+    </div>
 
     <div class="task-title">{{taskData.title}}</div>
     <div class="task-description">{{taskData.description}}</div>
 
     <div class="task-progress">
-        <!-- <div class="bar-bg">
-            <div class="bar-fill" [style.width.%]="progressPercentage"></div>
-        </div>
-        <span class="subtask-text">{{ doneSubtasks }}/{{ totalSubtasks }} Subtasks</span> -->
-    </div>
-
-    <!-- test section, can be deleted -->
-    <!-- <section>
-        <p>{{taskData.priority}}</p>
-        @for (subtask of taskData.subTasks; track subtask) {
-            <div class="subtask">
-                {{subtask}}
+        @if (allubtasks(taskData.id!).length > 0 ){
+            <div class="progress-bar">
+                <div
+                    class="progress-fill"
+                    [style.width.%]="filteredSubtasks(taskData.id!).length / allubtasks(taskData.id!).length * 100 ">
+                </div>
+            </div>
+            <div class="progress">
+                <p>{{ filteredSubtasks(taskData.id!).length }}/{{ allubtasks(taskData.id!).length }} Subtasks</p>
             </div>
         }
-    </section> -->
-    <!-- test section, can be deleted -->
+    </div>
 
         <div class="task-footer">
             <div class="assignedContacts">

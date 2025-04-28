@@ -76,7 +76,7 @@
     width: 160px;
 }
 
-add-task-btn-respo {
+.add-task-btn-respo {
     display: none;
 }
 
@@ -87,7 +87,7 @@ add-task-btn-respo {
     gap: 24px;
     padding: 0 64px;
     min-height: fit-content;
-    height: auto;    
+    height: auto;
     overflow-x: auto;
     overflow-y: hidden;
     scroll-behavior: smooth;
@@ -110,16 +110,24 @@ add-task-btn-respo {
     display: flex;
     justify-content: center;
     align-items: center;
-    background-color: none;
     background: none;
-    border: 2px solid #2A3647;
+    border: 2px solid $col-bg-secondary;
     height: 24px;
     width: 24px;
     border-radius: 8px;
+    color: #2A3647;
+    transition: all 0.2s ease;
 
-    img {
-        width: 8px;
-        height: 8px;
+    svg {
+        width: 12px;
+        height: 12px;
+        flex-shrink: 0;
+    }
+
+    &:hover {
+        cursor: pointer;
+        border: 2px solid $col-ref-highlight;
+        color: $col-ref-highlight;
     }
 }
 
@@ -164,7 +172,6 @@ add-task-btn-respo {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    gap: 8px;
     padding-left: 3px;
     padding-right: 3px;
     width: 100%;
@@ -281,6 +288,7 @@ app-task {
         @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
         height: 24px;
         width: 24px;
+        justify-content: center;
     }
 }
 
