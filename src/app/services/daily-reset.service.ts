@@ -56,6 +56,9 @@ export class DailyResetService {
     this.dummyTasks.dummyTasks.forEach((task) => {
       this.taskService.addTask(task);
     });
+    console.log("logadfaeg");
+    
+    console.log(this.dummyTasks.dummyTasks);
   }
 
   setDummyAssignees() {

@@ -7,6 +7,7 @@
           <div class="form-group">
             <label for="title">Title <span>*</span></label>
             <input
+              [(ngModel)]="inputTaskTitle"
               id="title"
               name="title"
               type="text"
@@ -18,6 +19,7 @@
           <div class="form-group">
             <label for="description">Description</label>
             <textarea
+              [(ngModel)]="inputTaskDescription"
               id="description"
               name="description"
               class="form-control"
@@ -28,6 +30,7 @@
           <div class="form-group">
             <label for="due-date">Due date <span>*</span></label>
             <input
+              [(ngModel)]="inputTaskDueDate"
               id="due-date"
               name="dueDate"
               type="date"
@@ -48,7 +51,7 @@
                   class = "priority-button"
                   [class]="prioBtn.btnActive ? 'btnActive' : 'btnInActive'"
                   [style.backgroundColor]="prioBtn.btnActive ? prioBtn.colorActive : 'white'"
-                  (click)="setPriority(index, prioBtn.priority)"
+                  (click)="setPriority(index, prioBtn.priority); $event.preventDefault()"
                 >
                   {{prioBtn.priority}}
                   <img [src]="prioBtn.btnActive ? prioBtn.imgActive : prioBtn.imgInactive" [alt]="prioBtn.priority"/>
@@ -92,21 +95,21 @@
                   @for (contact of filteredContacts(); track contact; let
                   index = $index) {
                   <li class="contact-wrapper" (click)="toggleAssignedContacts(contact.id)"
-                    [style.backgroundColor]="assignedTo.includes(contact.id) ? '#091931' : ''"
+                    [style.backgroundColor]="isContactAssigned(contact.id) ? '#091931' : ''"
                   >
                     <div class="single-contact">
                       <div
                         class="contact-initials"
                         [style.backgroundColor]="contactsService.contactColor(contact.id)"
-                        [style.border]="assignedTo.includes(contact.id) ? '2px solid white' : ''"
+                        [style.border]="isContactAssigned(contact.id) ? '2px solid white' : ''"
                       >
                         {{ contactsService.nameInitials(contact.id) }}
                       </div>
-                      <p [style.color]="assignedTo.includes(contact.id) ? 'white' : ''">
+                      <p [style.color]="isContactAssigned(contact.id) ? 'white' : ''">
                         {{ contact.name }}
                       </p>
                     </div>
-                    <img [src]="assignedTo.includes(contact.id) ? './assets/icons/kanban/checkbox_checked.svg': './assets/icons/kanban/checkbox_unchecked.svg' ">
+                    <img [src]="isContactAssigned(contact.id) ? './assets/icons/kanban/checkbox_checked.svg': './assets/icons/kanban/checkbox_unchecked.svg' ">
                   </li>
                   }
                 </ul>
@@ -114,16 +117,16 @@
               </cdk-accordion-item>
             </cdk-accordion>
             <div class="assigned-contacts">
-              @for (contact of assignedTo; track contact) {
+              @for (contact of assignedTo; track contact.contactId) {
                 <div
                   class="contact-initials"
-                  [style.backgroundColor]="contactsService.contactColor(contact)"
-                  (mouseenter)="startContactHover(contact)"
+                  [style.backgroundColor]="contactsService.contactColor(contact.contactId)"
+                  (mouseenter)="startContactHover(contact.contactId)"
                   (mousemove)="moveContactHover($event)"
                   (mouseleave)="endContactHover()"
                   (click)="removeAssignedContact(hoveredContact)"
                 >
-                  {{ contactsService.nameInitials(contact) }}
+                  {{ contactsService.nameInitials(contact.contactId) }}
                 </div>
               }
             
@@ -229,7 +232,7 @@
                       <p>• {{ subtask.text }}</p>
                     } @else {
                       <input 
-                      [(ngModel)]="inputField"
+                      [(ngModel)]="inputFieldSubT"
                       name="subtaskText"
                       [value]="subtask.text"
                       (keydown.enter)="subtask.isEditing = false"
