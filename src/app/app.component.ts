@@ -20,7 +20,6 @@ export class AppComponent {
     setTimeout(() => {
       this.dailyReset.checkAndResetIfNeeded();
     }, 1000);
-
   }
 
 }
