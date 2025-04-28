@@ -36,12 +36,12 @@ export class AddTaskComponent {
   taskCategories: any[] = [
     'Technical Task', 'User Story'
   ];
-  selectedCategory: string = "";
+  selectedCategory: "Technical Task" | "User Story" | undefined = undefined;
   priorityButtons: {
     imgInactive: string,
     imgActive: string,
     colorActive: string;
-    priority: string,
+    priority: "Urgent" | "Medium" | "Low", 
     btnActive: boolean } [] = [
     { 
       imgInactive: './assets/icons/kanban/prio_urgent.svg',
@@ -87,25 +87,32 @@ export class AddTaskComponent {
   clearForm() {}
 
   onSubmit() {
-    if (this.selectedCategory === "") return console.log("alles ausfüllen");
-    console.log(this.inputTaskTitle);
-    console.log(this.inputTaskDescription);
-    console.log(this.inputTaskDueDate);
-    console.log(this.selectedCategory);
-    console.log(this.assignedTo);
+    if (this.selectedCategory === undefined) return console.log("simple validation, you can only submit after setting category");
+    this.tasksService.addTask(this.currentFormData());
+    this.clearForm();
+  }
+
+  currentFormData() {
     const subtasksForForm = this.subtasksContainer.map(subtask => ({
       text: subtask.text,
       isChecked: subtask.isChecked
     }));
-    console.log(subtasksForForm);
-    
     const activeBtn = this.priorityButtons.filter((btnStatus) => btnStatus.btnActive);
-    let activePriority = "Medium";
+    let activePriority = "medium";
     if (activeBtn.length > 0) {
       activePriority = activeBtn[0].priority;
     }
-    console.log(activePriority);
-    
+    const submittedTask: TaskInterface = {
+      title: this.inputTaskTitle,
+      description: this.inputTaskDescription,
+      dueDate: this.inputTaskDueDate,
+      assignedTo: this.assignedTo,
+      subTasks: subtasksForForm,
+      priority: activePriority.toLowerCase() as 'urgent' | 'medium' | 'low',
+      category: this.selectedCategory,
+      taskType: "toDo"
+    };
+    return submittedTask;
   }
 
   onInputChange() {
