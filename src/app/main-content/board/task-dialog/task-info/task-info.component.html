@@ -26,13 +26,13 @@
                 <span>{{ taskDataDialogInfo.priority }}</span>
                 @switch (taskDataDialogInfo.priority) {
                     @case ('urgent') {
-                        <img src="assets/icons/kanban/prio_urgent.svg" alt="urgent" />
+                        <img class="task-info-priority-img" src="assets/icons/kanban/prio_urgent.svg" alt="urgent" />
                     }
                     @case ('medium') {
-                        <img src="assets/icons/kanban/prio_medium.svg" alt="Medium" />
+                        <img class="task-info-priority-img" src="assets/icons/kanban/prio_medium.svg" alt="Medium" />
                     }
                     @case ('low') {
-                        <img src="assets/icons/kanban/prio_low.svg" alt="low" />
+                        <img class="task-info-priority-img" src="assets/icons/kanban/prio_low.svg" alt="low" />
                     }
                 }
             </div>
