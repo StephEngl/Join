@@ -1,4 +1,4 @@
-<!-- <div class="task-details">
+<div class="task-details">
   <div class="form-group">
     <label>Priority</label>
     <div class="priority-buttons-wrapper">
@@ -9,7 +9,7 @@
         [style.backgroundColor]="
           prioBtn.btnActive ? prioBtn.colorActive : 'white'
         "
-        (click)="setPriority(index, prioBtn.priority); $event.preventDefault()"
+        (click)="setPriority(index); $event.preventDefault()"
       >
         {{ prioBtn.priority }}
         <img
@@ -21,7 +21,7 @@
     </div>
   </div>
 
-  <div>
+  <!-- <div>
     <cdk-accordion
       class="dropdown-list-container form-group"
       id="assigned-to"
@@ -119,9 +119,9 @@
       </div>
       }
     </div>
-  </div>
+  </div> -->
 
-  <div class="form-group">
+  <!-- <div class="form-group">
     <cdk-accordion
       class="dropdown-list-container form-group"
       id="category"
@@ -184,9 +184,9 @@
         }
       </cdk-accordion-item>
     </cdk-accordion>
-  </div>
+  </div> -->
 
-  <div class="form-group subtask-input">
+  <!-- <div class="form-group subtask-input">
     <label for="subtask">Subtasks</label>
     <div class="subtask-input-wrapper">
       <input
@@ -276,5 +276,5 @@
         }
       </ul>
     </div>
-  </div>
-</div> -->
+  </div> -->
+</div>

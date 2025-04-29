@@ -84,9 +84,9 @@ export class AddTaskComponent {
   ];
   @Input() taskData!: TaskInterface;
 
-  onDueDateChanged(date: Date | null) {
-    this.inputTaskDueDate = date ?? new Date();
-  }
+  // onDueDateChanged(date: Date | null) {
+  //   this.inputTaskDueDate = date ?? new Date();
+  // }
 
 
   @HostListener('document:click')
@@ -177,11 +177,11 @@ export class AddTaskComponent {
     input.focus();
   }
 
-  setPriority(index: number, prioOutput: string) {
-    this.resetOtherBtnStatuses(index);
-    this.priorityButtons[index].btnActive =
-      !this.priorityButtons[index].btnActive;
-  }
+  // setPriority(index: number, prioOutput: string) {
+  //   this.resetOtherBtnStatuses(index);
+  //   this.priorityButtons[index].btnActive =
+  //     !this.priorityButtons[index].btnActive;
+  // }
 
   resetOtherBtnStatuses(index: number) {
     this.priorityButtons.forEach((btn) => {
