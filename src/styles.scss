@@ -64,13 +64,31 @@ button {
 
 .mat-mdc-dialog-container .mdc-dialog__surface {
   border-radius: 30px !important;
+  padding: 0 !important;
 
   // @media (max-width: 700px) {
   //   width: 90% !important;
   // }
 }
 
+.mat-mdc-dialog-content {
+  overflow: hidden !important; // Scrollbar ausblenden
+  max-height: none !important; // Maximale Höhe aufheben (optional)
+}
+
 .add-task-dialog-responsive {
   padding: 0;
   max-height: 870px;
+}
+
+/* Für Webkit-Browser (Chrome, Safari, Opera) */
+.mat-mdc-dialog-content,
+.mdc-dialog__content {
+  scrollbar-width: none;          /* Firefox */
+  -ms-overflow-style: none;       /* IE und Edge */
+}
+
+.mat-mdc-dialog-content::-webkit-scrollbar,
+.mdc-dialog__content::-webkit-scrollbar {
+  display: none;                  /* Chrome, Safari, Opera */
 }
