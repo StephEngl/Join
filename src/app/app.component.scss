@@ -3,6 +3,7 @@
 
 .page-content {
   display: flex;
+  overlay: hidden;
   @media (max-width: 1400px) {
     flex-direction: column-reverse;
   }
@@ -53,7 +54,7 @@ app-header {
   100% { transform: rotate(0deg); opacity: 0; }
 }
 
-@media (pointer: coarse) and (orientation: portrait) {  
+@media (pointer: coarse) and (orientation: portrait) {
   .orientation-lock {
     display: none;
   }

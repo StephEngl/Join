@@ -1,7 +1,24 @@
 @import './../../../assets/styles/variables.scss';
 @import './../../../assets/styles/mixins.scss';
 
+
+* {
+    outline: 1px solid red;
+  }
+
+
+
+.board-section {
+
+    outline: 2px solid purple;
+    height: 50%;
+    display: flex;
+    flex-direction: column;
+}
+
+
 .board-header {
+    flex-shrink: 0;
     display: flex;
     justify-content: space-between;
     margin: 0 64px;
@@ -73,24 +90,26 @@
 }
 
 .board {
+
+    outline: 2px dashed lime;
+
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     gap: 24px;
     padding: 0 64px;
-    min-height: fit-content;
-    height: auto;
-    overflow-x: auto;
-    overflow-y: hidden;
-    scroll-behavior: smooth;
+    // min-height: fit-content;
+    // height: auto;
+    // overflow-x: auto;
+    // overflow-y: hidden;
     justify-content: flex-start;
 
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+    // scrollbar-width: none;
+    // -ms-overflow-style: none;
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
+    // &::-webkit-scrollbar {
+    //     display: none;
+    // }
 }
 
 .mini-button-add-board {
@@ -118,14 +137,19 @@
 }
 
 .board-column {
+outline: 1px solid green;
+
     flex: 0 0 252px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 252px;
-    overflow: hidden;
-    max-height: 65vh;
+
+    overflow-x: hidden;
     overflow-y: auto;
+
+    max-height: 400px;
+    height: 400px;
 
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -145,6 +169,8 @@
         margin: 0;
         list-style: none;
 
+        scroll-padding-bottom: 240px;
+
         scrollbar-width: none;
         -ms-overflow-style: none;
 
@@ -157,6 +183,59 @@
         }
     }
 }
+
+// .board-column {
+//     outline: 2px solid blue;
+
+//     flex: 0 0 252px;
+//     display: flex;
+//     flex-direction: column;
+//     align-items: center;
+//     // width: 252px;
+
+//     // height: 50%;            // Füllt die Höhe des übergeordneten Bereichs
+//     // max-height: 100%;        // Begrenze auf Eltern-Container
+//     // overflow-y: auto;        // Scrollbar NUR hier!
+//     // overflow-x: hidden;
+//     // min-height: 0;
+
+
+//   // Wichtig!
+//   flex-grow: 1;
+//   min-height: 0;
+
+//   height: 50%;
+
+//   // Scrollbar nur hier
+//   overflow-y: hidden;
+//   overflow-x: auto;
+
+//     // height: 50%;
+//     // overflow: hidden;
+//     // max-height: 50%;
+//     // padding-bottom: 240px;
+
+//     ul {
+//         outline: 1px solid orange;
+
+//         flex: 1;
+//         width: 100%;
+//         display: flex;
+//         flex-direction: column;
+//         gap: 16px;
+//         padding: 0;
+//         margin: 0;
+//         list-style: none;
+
+//         // scroll-padding-bottom: 240px;
+
+//         // overflow-y: auto;
+//         // overflow-x: hidden;
+
+//         // scrollbar-width: none;
+//         // -ms-overflow-style: none;
+//     }
+// }
 
 .board-column-header {
     display: flex;
@@ -227,75 +306,83 @@ app-task {
 
 @media screen and (max-width: 1400px) {
 
-    .board-column {
-        max-height: 65vh;
-    }
+    // .board-section {
+    //     position: unset;
+    //     overflow-x: hidden;
+    //     overflow-y: hidden
+    // }
+
+    // .board-column {
+    //     max-height: 100vh;
+    //     padding-bottom: 300px;
+    // }
 }
 
 @media screen and (max-width: 830px) {
-    .board-header {
-        display: flex;
-        flex-direction: column;
-        margin: 0 16px;
-    }
 
-    .add-task-btn {
-        display: none;
-    }
+    // .board-header {
+    //     display: flex;
+    //     flex-direction: column;
+    //     margin: 0 16px;
+    // }
 
-    .search-input-container {
-        width: 100%;
-    }
+    // .add-task-btn {
+    //     display: none;
+    // }
 
-    .add-task-btn-respo {
-        @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
-        height: 24px;
-        width: 24px;
-        justify-content: center;
-    }
+    // .search-input-container {
+    //     width: 100%;
+    // }
 
-    .no-tasks {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        width: 100%;
-    }
+    // .add-task-btn-respo {
+    //     @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
+    //     height: 24px;
+    //     width: 24px;
+    //     justify-content: center;
+    // }
 
-    .board {
-        flex-direction: column;
-        padding: 0 16px;
-        height: auto;
-        min-height: 180vh;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+    // .no-tasks {
+    //     display: flex;
+    //     justify-content: center;
+    //     align-items: center;
+    //     text-align: center;
+    //     width: 100%;
+    // }
 
-        &::-webkit-scrollbar {
-            display: none;
-        }
-    }
+    // .board {
+    //     flex-direction: column;
+    //     padding: 0 16px;
+    //     height: auto;
+    //     min-height: 180vh;
+    //     scrollbar-width: none;
+    //     -ms-overflow-style: none;
 
-    .board-column {
-        width: 100%;
-        flex: 0 0 auto;
+    //     &::-webkit-scrollbar {
+    //         display: none;
+    //     }
+    // }
 
-        ul {
-            display: flex;
-            flex-direction: row;
-            overflow-x: auto;
-            overflow-y: hidden;
-            max-height: none;
-            gap: 16px;
-            padding-bottom: 16px;
+    // .board-column {
+    //     width: 100%;
+    //     flex: 0 0 auto;
 
-            li {
-                flex: 0 0 auto;
-            }
+    //     ul {
+    //         display: flex;
+    //         flex-direction: row;
+    //         // overflow-x: auto;
+    //         // overflow-y: hidden;
+    //         max-height: none;
+    //         gap: 16px;
+    //         padding-bottom: 16px;
 
-            app-task {
-                width: 250px;
-                height: auto;
-            }
-        }
-    }
+    //         li {
+    //             flex: 0 0 auto;
+    //         }
+
+    //         app-task {
+    //             width: 250px;
+    //             height: auto;
+    //         }
+    //     }
+    // }
 }
