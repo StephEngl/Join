@@ -1,7 +1,22 @@
 @import './../../../assets/styles/variables.scss';
 @import './../../../assets/styles/mixins.scss';
 
+
+* {
+    outline: 1px solid red;
+}
+
+.board-section {
+
+    outline: 2px solid blue;
+
+    height: 99%;
+    display: flex;
+    flex-direction: column;
+}
+
 .board-header {
+    flex-shrink: 0;
     display: flex;
     justify-content: space-between;
     margin: 0 64px;
@@ -73,17 +88,18 @@
 }
 
 .board {
+
+    outline: 2px dashed lime;
+
     display: flex;
     flex-direction: row;
     align-items: flex-start;
     gap: 24px;
     padding: 0 64px;
-    min-height: fit-content;
-    height: auto;
     overflow-x: auto;
     overflow-y: hidden;
-    scroll-behavior: smooth;
     justify-content: flex-start;
+    height: 68dvh;
 
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -118,14 +134,19 @@
 }
 
 .board-column {
+
+    outline: 1px solid green;
+
     flex: 0 0 252px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 252px;
-    overflow: hidden;
-    max-height: 65vh;
+
+    overflow-x: hidden;
     overflow-y: auto;
+
+    height: 100%;
 
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -144,6 +165,8 @@
         padding: 0;
         margin: 0;
         list-style: none;
+
+        scroll-padding-bottom: 240px;
 
         scrollbar-width: none;
         -ms-overflow-style: none;
@@ -225,14 +248,8 @@ app-task {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-@media screen and (max-width: 1400px) {
-
-    .board-column {
-        max-height: 65vh;
-    }
-}
-
 @media screen and (max-width: 830px) {
+
     .board-header {
         display: flex;
         flex-direction: column;
@@ -265,8 +282,11 @@ app-task {
     .board {
         flex-direction: column;
         padding: 0 16px;
-        height: auto;
-        min-height: 180vh;
+        height: calc(100dvh + 500px); // Fix for mobile viewport issues
+
+        overflow-x: hidden;
+        overflow-y: auto;
+
         scrollbar-width: none;
         -ms-overflow-style: none;
 
@@ -278,6 +298,7 @@ app-task {
     .board-column {
         width: 100%;
         flex: 0 0 auto;
+        height: auto;
 
         ul {
             display: flex;
@@ -286,7 +307,6 @@ app-task {
             overflow-y: hidden;
             max-height: none;
             gap: 16px;
-            padding-bottom: 16px;
 
             li {
                 flex: 0 0 auto;

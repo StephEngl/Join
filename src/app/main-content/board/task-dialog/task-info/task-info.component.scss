@@ -3,190 +3,206 @@
 @import "../../../../../assets/fonts/fonts.scss";
 
 .task-info-section {
-    container-type: inline-size;
-    container-name: task-section;
-    max-width: $queryBreak1;
-    display: flex;
+    @include dFlex(center, center, 1rem);
     width: 100%;
     height: auto;
-    padding: 2rem;
     background: #FFFFFF;
-    border-radius: 1rem;
-    box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
-    gap: 1rem;
+    overflow: auto;
+    &::-webkit-scrollbar {
+        display: none;
+    }
+    -ms-overflow-style: none; 
+    scrollbar-width: none; 
+    font-family: 'Inter', sans-serif;
 
     .task-info-container {
         display: flex;
+        width: 100%;
         justify-content: center;
         flex-direction: column;
-        gap: 1rem;
+        padding: 2rem;
 
         .task-info-top-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            @include dFlex(space-between, center);
             width: 100%;
-        
+            padding-top: 0rem;
+            padding-bottom: 0.8rem;
+
             .task-info-category {
-                padding: 0.5rem 1rem;
+                padding: 4px 8px;
                 border-radius: 0.5rem;
                 color: white;
                 background: #003cff;
                 font-weight: 400;
                 font-size: clamp(1rem, 1.2rem + 0.5vw, 1.4375rem);
-                padding: 4px 8px;
-            
             }
-        
+
             .task-info-close {
                 font-size: 1.5rem;
                 cursor: pointer;
             }
         }
-        
+
         .task-info-header-container {
             width: 100%;
             height: auto;
-            display: flex;
-        
+            padding-top: 0.8rem;
+            padding-bottom: 0.8rem;
+            gap: 1rem;
+            @include dFlex(flex-start, center);
+
             h2 {
-            font-weight: 700;
-            line-height: 120%;
-            margin-bottom: 1rem;
+                font-weight: 700;
+                line-height: 120%;
+                padding-top: 0.8rem;
+                padding-bottom: 0.8rem;
             }
         }
-        
+
         .task-info-build-txt {
             display: flex;
-        
+
             .task-info-description-container {
-                display: flex;
-                justify-content: flex-start;
-                text-align: left;
-            
+                @include dFlex(center, flex-start);
+
                 p {
                     font-family: 'Inter', sans-serif;
                     font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
                     font-weight: 400;
                     line-height: 120%;
                     color: black;
-                    margin-bottom: 1rem;
-                    text-align: center;
+                    padding-top: 0.8rem;
+                    padding-bottom: 0.8rem;
+                    text-align: left;
                 }
             }
         }
-        
+
         .task-info-due-date-container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
+            @include dFlex(flex-start, center);
             width: 100%;
-            margin-bottom: 1rem;
-        
+            padding-top: 0.8rem;
+            padding-bottom: 0.8rem;
+
             .task-info-due-date-txt {
-                display: flex;
-                align-items: flex-start;
+                @include dFlex(flex-start, center);
                 font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
                 font-weight: 400;
                 line-height: 120%;
                 gap: 1rem;
             }
-            
+
             .task-info-due-date-output {
                 display: flex;
+                width: 100%;
+                padding-left: 34px;
             }
         }
-        
+
         .task-info-priority-container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
+            @include dFlex(flex-start, center);
             width: 100%;
-            margin-bottom: 1rem;
-        
+            padding-top: 0.8rem;
+            padding-bottom: 0.8rem;
+
             .task-info-priority-txt {
-                display: flex;
-                align-items: flex-start;
+                @include dFlex(flex-start, center);
                 font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
                 font-weight: 400;
                 line-height: 120%;
                 gap: 1rem;
             }
-            
+
             .task-info-priority-output {
                 display: flex;
+                padding-left: 48px;
                 gap: 1rem;
-        
+
                 span {
                     display: flex;
                 }
-        
+
                 .task-info-priority-img {
                     display: flex;
                 }
             }
         }
-        
+
         .task-info-assigned-to-container {
-            display: flex;
-            justify-content: flex-start;
-            align-items: center;
+            @include dFlex(space-between, flex-start);
+            flex-direction: column;
             width: 100%;
-            margin-bottom: 1rem;
-        
+            padding-top: 0.8rem;
+            padding-bottom: 0.8rem;
+            gap: 1rem;
+
             .task-info-assigned-to-txt {
-                display: flex;
-                align-items: flex-start;
+                @include dFlex(flex-start, center);
                 font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
                 font-weight: 400;
                 line-height: 120%;
                 gap: 1rem;
             }
-        
+
             .task-info-assigned-to-output {
                 display: flex;
-                @include contactIcon(25px, 10px, 0);
+                flex-direction: column;
                 border: 2px solid transparent;
-                padding: 15px;
-        
+                gap: 0.5rem;
+                padding: 1rem;
+
                 .assigned-person {
-                    display: flex;
-                
+                    @include dFlex(flex-start, center);
+
                     .initials {
-                        display: flex;
+                        @include contactIcon(50px, 24px, 0);
                     }
-                
+
                     .name {
                         display: flex;
+                        font-family: 'Open Sans';
+                        padding-left: 1rem;
                     }
                 }
             }
         }
-        
+
         .task-info-subtasks-container {
             display: flex;
-        
+            flex-direction: column;
+
             .task-info-subtasks-header {
-                display: flex;
-                font-weight: 600;
-                margin-bottom: 0.5rem;
+                font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
+                font-weight: 400;
+                line-height: 120%;
+                gap: 1rem;
             }
-        
+
             .task-info-subtask-list {
                 display: flex;
                 flex-direction: column;
-                gap: 0.5rem;
+                gap: 0.8rem;
                 width: 100%;
-        
+                padding-left: 1rem;
+                padding-top: 0.8rem;
+                padding-bottom: 0.8rem;
+
                 .task-info-subtask-item {
-                    display: flex;
-                    align-items: center;
-                    gap: 0.5rem;
-                
+                    @include dFlex(flex-start, center);
+
+
+                    span {
+                        font-family: "Inter", sans-serif;
+                        font-weight: 400;
+                        font-size: 1rem;
+                        line-height: 120%;
+                        padding-left: 1rem;
+                    }
+
                     .checkbox {
                         display: flex;
                     }
-                
+
                     .completed {
                         text-decoration: line-through;
                         color: gray;
@@ -194,69 +210,120 @@
                 }
             }
         }
-        
+
         .task-info-delete-edit-container {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
+            @include dFlex(flex-end, center);
             width: 100%;
             margin-top: 1rem;
-        
+
             .task-info-delete-container {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                cursor: pointer;
-                padding: 0.5rem 1rem;
-                border-radius: 8px;
-                transition: background-color 0.2s ease-in-out;
-            
-                :hover {
-                    background-color: rgba(255, 0, 0, 0.1);
-                }
-            
+                @include btn(transparent, black, rgba(255, 0, 0, 0.1));
+
                 .task-info-delete-img {
                     display: flex;
-            
+
                     img {
                         display: flex;
                     }
                 }
-        
+
                 .task-info-delete-txt {
                     display: flex;
+                    font-size: 1rem;
                 }
             }
-        
+
             .task-info-edit-container {
-                display: flex;
-                align-items: center;
-                gap: 0.5rem;
-                cursor: pointer;
-                padding: 0.5rem 1rem;
-                border-radius: 8px;
-                transition: background-color 0.2s ease-in-out;
-            
-                :hover {
-                    background-color: rgba(0, 128, 0, 0.1);
-                }
-        
+                @include btn(transparent, black, rgba(0, 128, 0, 0.1));
+
                 .task-info-edit-img {
                     display: flex;
-                    
+
                     img {
                         width: 24px;
                         height: 24px;
                     }
                 }
-        
+
                 .task-info-edit-txt {
                     display: flex;
+                    font-size: 1rem;
                 }
             }
         }
     }
 }
 
+@media  (max-width: 620px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2.75rem;
+        }
+    }
+}
 
+@media  (max-width: 530px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2.6rem;
+        }
+    }
+}
 
+@media  (max-width: 490px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2.5rem;
+        }
+    }
+}
+
+@media  (max-width: 460px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2.25rem;
+        }
+    }
+}
+
+@media  (max-width: 410px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2rem;
+        }
+    }
+
+    .task-info-due-date-output {
+        padding-left: 	2.125rem;
+    }
+    
+    .task-info-priority-output {
+        padding-left: 3rem;
+    }
+}
+
+@media  (max-width: 370px) {
+    .task-info-header-container {
+        h2 {
+        font-size: 1.7rem;
+        }
+    }
+
+    .task-info-due-date-output {
+        padding-left: 30px;
+    }
+    
+    .task-info-priority-output {
+        padding-left: 44px;
+    }
+}
+
+@media  (max-width: 340px) {
+    .task-info-due-date-output {
+        padding-left: 26px;
+    }
+
+    .task-info-priority-output {
+        padding-left: 40px;
+    }
+}
