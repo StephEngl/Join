@@ -4,7 +4,7 @@ import { TasksService } from '../../services/tasks.service';
 import { TaskFirebaseTempComponent } from './task-firebase-temp/task-firebase-temp.component';
 import { TaskComponent } from './task/task.component';
 import { TaskInterface } from '../../interfaces/task.interface';
-import { MatDialog } from '@angular/material/dialog';
+import { MatDialog,MatDialogRef } from '@angular/material/dialog';
 import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 import { FormsModule } from '@angular/forms';
 import {
@@ -14,6 +14,8 @@ import {
   DragDropModule,
 } from '@angular/cdk/drag-drop';
 import { AddTaskComponent } from '../add-task/add-task.component';
+import { BreakpointObserver } from '@angular/cdk/layout';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-board',
@@ -40,6 +42,10 @@ export class BoardComponent {
 
   btnAddHover = false;
   hoveredColumn: string = '';
+  private dialogRef: MatDialogRef<AddTaskComponent> | null = null;
+  private breakpointSub: Subscription | null = null;
+
+  constructor(private dialog: MatDialog, private breakpointObserver: BreakpointObserver) {}
 
   // tasks filtered by taskType & sorted by Priority
   filterTasksByCategory(status: string): TaskInterface[] {
@@ -54,8 +60,8 @@ export class BoardComponent {
   // extracting each taskStatus from boardColumns
   connectedDropLists = this.boardColumns.map((col) => col.taskStatus);
 
-  /* Inject Angular Material Dialog */
-  private dialog = inject(MatDialog);
+  // /* Inject Angular Material Dialog */
+  // private dialog = inject(MatDialog);
 
   /* Handles the drag & drop logic and updates Firebase */
   drop(event: CdkDragDrop<TaskInterface[]>) {
@@ -83,16 +89,37 @@ export class BoardComponent {
     this.dialog.open(TaskDialogComponent, {
       data: taskData,
       width: '525px',
-      height: '90vh',
+      maxHeight: '90vW',
       panelClass: 'task-dialog-overlay',
     });
   }
 
   openAddTaskDialog(): void {
-    this.dialog.open(AddTaskComponent, {
+    this.dialogRef = this.dialog.open(AddTaskComponent, {
       width: '1116px',
+      maxWidth: '80vw',
       panelClass: 'add-task-dialog-responsive',
-      // data: {...}   // Optional: Daten an die Komponente übergeben
+    });
+
+    // Breakpoint-Observable abonnieren
+    this.breakpointSub = this.breakpointObserver
+      .observe('(max-width: 550px)')
+      .subscribe(result => {
+        if (this.dialogRef) {
+          if (result.matches) {
+            this.dialogRef.updateSize('98vw');
+          } else {
+            this.dialogRef.updateSize('1116px');
+          }
+        }
+      });
+
+    // Nach dem Schließen des Dialogs das Abo aufräumen
+    this.dialogRef.afterClosed().subscribe(() => {
+      if (this.breakpointSub) {
+        this.breakpointSub.unsubscribe();
+        this.breakpointSub = null;
+      }
     });
   }
 }
