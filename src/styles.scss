@@ -74,3 +74,13 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding: 0;
   max-height: 870px;
 }
+
+// Do not delete!!! Styling for date field in add task!!!
+html {
+  --mdc-filled-text-field-container-shape: 10px;
+  --mdc-filled-text-field-container-color: #fff;
+  --mdc-filled-text-field-input-text-color: #6e6e6e;
+  --mdc-filled-text-field-input-text-font: "Inter", sans-serif;
+  --mdc-filled-text-field-input-text-size: 20px;
+  --mdc-filled-text-field-input-padding: 12px 20px;
+}
