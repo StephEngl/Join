@@ -5,17 +5,11 @@ import {
   collection,
   doc,
   onSnapshot,
-  collectionData,
   addDoc,
   updateDoc,
   deleteDoc,
-  getDocs,
   query,
-  where,
   orderBy,
-  limit,
-  getDoc,
-  setDoc,
   DocumentReference,
 } from '@angular/fire/firestore';
 import { DummyContactsService } from './dummy-contacts.service';
@@ -27,9 +21,6 @@ import { TasksService } from './tasks.service';
 })
 export class ContactsService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
-  // dummyContacts = inject(DummyContactsService);
-  // dummyTasks = inject(DummyTasksService);
-  // taskService = inject(TasksService);
   contacts: ContactInterface[] = [];
   contactColors: string[] = [
     '#FF7A00',
