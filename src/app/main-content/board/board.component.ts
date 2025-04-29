@@ -23,7 +23,6 @@ import { AddTaskComponent } from '../add-task/add-task.component';
     TaskFirebaseTempComponent,
     TaskComponent,
     DragDropModule,
-    AddTaskComponent,
     FormsModule,
   ],
   templateUrl: './board.component.html',
