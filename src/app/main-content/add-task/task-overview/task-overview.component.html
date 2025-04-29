@@ -1,0 +1,57 @@
+<!-- <div class="task-overview"> -->
+  <div class="form-group">
+    <label for="title">Title <span>*</span></label>
+    <input
+      [ngModel]="taskTitle"
+      (ngModelChange)="taskTitleChange.emit($event)"
+      id="title"
+      name="title"
+      type="text"
+      class="form-control"
+      placeholder="Enter a title"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="description">Description</label>
+    <textarea
+      [ngModel]="taskDescription"
+      (ngModelChange)="taskDescriptionChange.emit($event)"
+      id="description"
+      name="description"
+      class="form-control"
+      placeholder="Enter a description"
+    ></textarea>
+  </div>
+
+  <div class="form-group">
+    <label for="due-date">Due date <span>*</span></label>
+    <input
+      [ngModel]="taskDueDate"
+      (ngModelChange)="onDueDateChange($event)"
+      id="due-date"
+      name="dueDate"
+      type="date"
+      class="form-control"
+      [min]="today"
+    />
+  </div>
+
+  <div class="form-group">
+    <label for="due-date">Due date <span>*</span></label>
+    <mat-form-field appearance="fill" class="mat-form-custom">
+      <input
+        matInput
+        [matDatepicker]="picker"
+        [ngModel]="taskDueDate"
+        (ngModelChange)="onDueDateChange($event)"
+        placeholder="dd/mm/yyyy"
+        id="due-date"
+        name="dueDate"
+        [min]="minDate"
+      />
+      <mat-datepicker-toggle matSuffix [for]="picker"></mat-datepicker-toggle>
+      <mat-datepicker #picker></mat-datepicker>
+    </mat-form-field>
+  </div>
+<!-- </div> -->
