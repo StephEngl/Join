@@ -7,11 +7,8 @@ span {
 }
 
 :host {
-  display: flex;
+  @include dFlex($ai: flex-start, $jc: center, $gap: 32px);
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 32px;
 }
 
 :host .form-group {
@@ -47,61 +44,6 @@ span {
 
 :host textarea {
   height: 120px;
-}
-
-// Material Design Date Style
-
-:host ::ng-deep .mat-form-custom .mat-form-field-flex {
-    border: 1px solid $col-font-grey;
-    border-radius: 10px;
-    padding: 0 20px;
-    background: white;
-    height: 48px;
-    align-items: center;
-    transition: border-color 0.3s;
-  }
-
-.mat-form-custom {
-  width: 440px;
-  // Entferne das Material-typische Underline
-  .mat-form-field-underline {
-    display: none;
-  }
-  // Passe das äußere Feld an
-  .mat-form-field-flex {
-    border: 1px solid $col-font-grey !important;
-    border-radius: 10px;
-    padding: 0 20px;
-    background: white;
-    height: 48px; // gleiche Höhe wie andere Inputs
-    align-items: center;
-    transition: border-color 0.3s;
-  }
-  // Fokus-Styling wie bei den anderen Inputs
-  .mat-form-field-flex:focus-within {
-    border-color: $col-font-inactive;
-    box-shadow: none;
-    outline: none;
-  }
-  // Das Input selbst
-  .mat-input-element {
-    font-size: 20px;
-    color: $col-font-grey;
-    padding: 12px 0;
-    font-family: "Inter", sans-serif;
-    background: transparent;
-  }
-  // Platzhalter wie bei anderen Inputs
-  .mat-input-element::placeholder {
-    font-family: "Inter", sans-serif;
-    font-size: 20px;
-    color: $col-font-inactive;
-    opacity: 1;
-  }
-  // Datepicker-Icon
-  .mat-form-field-suffix {
-    margin-right: 4px;
-  }
 }
 
 @container task-section (max-width: 500px) {

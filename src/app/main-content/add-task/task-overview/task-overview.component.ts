@@ -26,6 +26,7 @@ export class TaskOverviewComponent {
   @Input() taskDescription: string = '';
   @Output() taskDescriptionChange = new EventEmitter<string>();
 
+  @Input() today: string = new Date().toISOString().split('T')[0];
   @Input() taskDueDate: Date | null = null;
   @Output() taskDueDateChange = new EventEmitter<Date | null>();
   @Input() minDate: Date = new Date();

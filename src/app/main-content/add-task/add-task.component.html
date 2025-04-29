@@ -3,7 +3,7 @@
     <h2>Add Task</h2>
     <form class="task-form" (ngSubmit)="onSubmit()">
       <div class="task-form-wrapper">
-        <div class="task-overview">
+        <!-- <div class="task-overview">
           <div class="form-group">
             <label for="title">Title <span>*</span></label>
             <input
@@ -38,7 +38,14 @@
               [min]="today"
             />
           </div>
-        </div>
+        </div> -->
+        <app-task-overview
+        [(taskDueDate)]="inputTaskDueDate"
+        [today]="today"
+        [(taskTitle)]="inputTaskTitle"
+        [(taskDescription)]="inputTaskDescription"
+        >
+        </app-task-overview>
 
         <div class="vertical-divider"></div>
 
@@ -261,6 +268,7 @@
             </div>
           </div>
         </div>
+        <app-task-details></app-task-details>
       </div>
 
       <div class="footnote">
