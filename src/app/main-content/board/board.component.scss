@@ -4,18 +4,16 @@
 
 * {
     outline: 1px solid red;
-  }
-
-
+}
 
 .board-section {
 
-    outline: 2px solid purple;
-    height: 50%;
+    outline: 2px solid blue;
+
+    height: 99%;
     display: flex;
     flex-direction: column;
 }
-
 
 .board-header {
     flex-shrink: 0;
@@ -98,18 +96,17 @@
     align-items: flex-start;
     gap: 24px;
     padding: 0 64px;
-    // min-height: fit-content;
-    // height: auto;
-    // overflow-x: auto;
-    // overflow-y: hidden;
+    overflow-x: auto;
+    overflow-y: hidden;
     justify-content: flex-start;
+    height: 68dvh;
 
-    // scrollbar-width: none;
-    // -ms-overflow-style: none;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
 
-    // &::-webkit-scrollbar {
-    //     display: none;
-    // }
+    &::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 .mini-button-add-board {
@@ -137,7 +134,8 @@
 }
 
 .board-column {
-outline: 1px solid green;
+
+    outline: 1px solid green;
 
     flex: 0 0 252px;
     display: flex;
@@ -148,8 +146,7 @@ outline: 1px solid green;
     overflow-x: hidden;
     overflow-y: auto;
 
-    max-height: 400px;
-    height: 400px;
+    height: 100%;
 
     scrollbar-width: none;
     -ms-overflow-style: none;
@@ -183,59 +180,6 @@ outline: 1px solid green;
         }
     }
 }
-
-// .board-column {
-//     outline: 2px solid blue;
-
-//     flex: 0 0 252px;
-//     display: flex;
-//     flex-direction: column;
-//     align-items: center;
-//     // width: 252px;
-
-//     // height: 50%;            // Füllt die Höhe des übergeordneten Bereichs
-//     // max-height: 100%;        // Begrenze auf Eltern-Container
-//     // overflow-y: auto;        // Scrollbar NUR hier!
-//     // overflow-x: hidden;
-//     // min-height: 0;
-
-
-//   // Wichtig!
-//   flex-grow: 1;
-//   min-height: 0;
-
-//   height: 50%;
-
-//   // Scrollbar nur hier
-//   overflow-y: hidden;
-//   overflow-x: auto;
-
-//     // height: 50%;
-//     // overflow: hidden;
-//     // max-height: 50%;
-//     // padding-bottom: 240px;
-
-//     ul {
-//         outline: 1px solid orange;
-
-//         flex: 1;
-//         width: 100%;
-//         display: flex;
-//         flex-direction: column;
-//         gap: 16px;
-//         padding: 0;
-//         margin: 0;
-//         list-style: none;
-
-//         // scroll-padding-bottom: 240px;
-
-//         // overflow-y: auto;
-//         // overflow-x: hidden;
-
-//         // scrollbar-width: none;
-//         // -ms-overflow-style: none;
-//     }
-// }
 
 .board-column-header {
     display: flex;
@@ -304,85 +248,74 @@ app-task {
     transition: transform 250ms cubic-bezier(0, 0, 0.2, 1);
 }
 
-@media screen and (max-width: 1400px) {
-
-    // .board-section {
-    //     position: unset;
-    //     overflow-x: hidden;
-    //     overflow-y: hidden
-    // }
-
-    // .board-column {
-    //     max-height: 100vh;
-    //     padding-bottom: 300px;
-    // }
-}
-
 @media screen and (max-width: 830px) {
 
-    // .board-header {
-    //     display: flex;
-    //     flex-direction: column;
-    //     margin: 0 16px;
-    // }
+    .board-header {
+        display: flex;
+        flex-direction: column;
+        margin: 0 16px;
+    }
 
-    // .add-task-btn {
-    //     display: none;
-    // }
+    .add-task-btn {
+        display: none;
+    }
 
-    // .search-input-container {
-    //     width: 100%;
-    // }
+    .search-input-container {
+        width: 100%;
+    }
 
-    // .add-task-btn-respo {
-    //     @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
-    //     height: 24px;
-    //     width: 24px;
-    //     justify-content: center;
-    // }
+    .add-task-btn-respo {
+        @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
+        height: 24px;
+        width: 24px;
+        justify-content: center;
+    }
 
-    // .no-tasks {
-    //     display: flex;
-    //     justify-content: center;
-    //     align-items: center;
-    //     text-align: center;
-    //     width: 100%;
-    // }
+    .no-tasks {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        width: 100%;
+    }
 
-    // .board {
-    //     flex-direction: column;
-    //     padding: 0 16px;
-    //     height: auto;
-    //     min-height: 180vh;
-    //     scrollbar-width: none;
-    //     -ms-overflow-style: none;
+    .board {
+        flex-direction: column;
+        padding: 0 16px;
+        height: calc(100dvh + 500px); // Fix for mobile viewport issues
 
-    //     &::-webkit-scrollbar {
-    //         display: none;
-    //     }
-    // }
+        overflow-x: hidden;
+        overflow-y: auto;
 
-    // .board-column {
-    //     width: 100%;
-    //     flex: 0 0 auto;
+        scrollbar-width: none;
+        -ms-overflow-style: none;
 
-    //     ul {
-    //         display: flex;
-    //         flex-direction: row;
-    //         // overflow-x: auto;
-    //         // overflow-y: hidden;
-    //         max-height: none;
-    //         gap: 16px;
-    //         padding-bottom: 16px;
+        &::-webkit-scrollbar {
+            display: none;
+        }
+    }
 
-    //         li {
-    //             flex: 0 0 auto;
-    //         }
+    .board-column {
+        width: 100%;
+        flex: 0 0 auto;
+        height: auto;
 
-    //         app-task {
-    //             width: 250px;
-    //             height: auto;
-    //         }
-    //     }
-    // }
+        ul {
+            display: flex;
+            flex-direction: row;
+            overflow-x: auto;
+            overflow-y: hidden;
+            max-height: none;
+            gap: 16px;
+
+            li {
+                flex: 0 0 auto;
+            }
+
+            app-task {
+                width: 250px;
+                height: auto;
+            }
+        }
+    }
 }
