@@ -3,9 +3,6 @@
 @import "../../../../../assets/fonts/fonts.scss";
 
 .task-info-section {
-    container-type: inline-size;
-    container-name: task-section;
-    max-width: $queryBreak1;
     @include dFlex(center, center, 1rem);
     width: 100%;
     height: auto;
@@ -23,7 +20,7 @@
         width: 100%;
         justify-content: center;
         flex-direction: column;
-        padding: 2.5rem;
+        padding: 2rem;
 
         .task-info-top-container {
             @include dFlex(space-between, center);
@@ -97,6 +94,7 @@
 
             .task-info-due-date-output {
                 display: flex;
+                width: 100%;
                 padding-left: 34px;
             }
         }
@@ -162,6 +160,7 @@
 
                     .name {
                         display: flex;
+                        font-family: 'Open Sans';
                         padding-left: 1rem;
                     }
                 }
@@ -230,6 +229,7 @@
 
                 .task-info-delete-txt {
                     display: flex;
+                    font-size: 1rem;
                 }
             }
 
@@ -247,8 +247,83 @@
 
                 .task-info-edit-txt {
                     display: flex;
+                    font-size: 1rem;
                 }
             }
         }
+    }
+}
+
+@media  (max-width: 620px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2.75rem;
+        }
+    }
+}
+
+@media  (max-width: 530px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2.6rem;
+        }
+    }
+}
+
+@media  (max-width: 490px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2.5rem;
+        }
+    }
+}
+
+@media  (max-width: 460px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2.25rem;
+        }
+    }
+}
+
+@media  (max-width: 410px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2rem;
+        }
+    }
+
+    .task-info-due-date-output {
+        padding-left: 	2.125rem;
+    }
+    
+    .task-info-priority-output {
+        padding-left: 3rem;
+    }
+}
+
+@media  (max-width: 370px) {
+    .task-info-header-container {
+        h2 {
+        font-size: 1.7rem;
+        }
+    }
+
+    .task-info-due-date-output {
+        padding-left: 30px;
+    }
+    
+    .task-info-priority-output {
+        padding-left: 44px;
+    }
+}
+
+@media  (max-width: 340px) {
+    .task-info-due-date-output {
+        padding-left: 26px;
+    }
+
+    .task-info-priority-output {
+        padding-left: 40px;
     }
 }
