@@ -4,7 +4,7 @@ import { TasksService } from '../../services/tasks.service';
 import { TaskFirebaseTempComponent } from './task-firebase-temp/task-firebase-temp.component';
 import { TaskComponent } from './task/task.component';
 import { TaskInterface } from '../../interfaces/task.interface';
-import { MatDialog,MatDialogRef } from '@angular/material/dialog';
+import { MatDialog, MatDialogRef } from '@angular/material/dialog';
 import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 import { FormsModule } from '@angular/forms';
 import {
@@ -43,11 +43,12 @@ export class BoardComponent {
   ];
 
   btnAddHover = false;
+
   hoveredColumn: string = '';
   private dialogRef: MatDialogRef<AddTaskComponent> | null = null;
   private breakpointSub: Subscription | null = null;
 
-  constructor(private dialog: MatDialog, private breakpointObserver: BreakpointObserver) {}
+  constructor(private dialog: MatDialog, private breakpointObserver: BreakpointObserver) { }
 
   // tasks filtered by taskType & sorted by Priority
   filterTasksByCategory(status: string): TaskInterface[] {
@@ -125,4 +126,40 @@ export class BoardComponent {
       }
     });
   }
+
+  onTaskListScrollShadow(taskList: HTMLElement) {
+    const boardColumn = taskList.closest('.board-column');
+    if (!boardColumn) return;
+    const scrollTop = taskList.scrollTop;
+    const scrollHeight = taskList.scrollHeight;
+    const offsetHeight = taskList.offsetHeight;
+    if (scrollTop > 0) {
+      boardColumn.classList.add('scrolled-top');
+    } else {
+      boardColumn.classList.remove('scrolled-top');
+    }
+    if (scrollTop + offsetHeight < scrollHeight - 1) {
+      boardColumn.classList.add('scrolled-bottom');
+    } else {
+      boardColumn.classList.remove('scrolled-bottom');
+    }
+  }
+
+  onTaskListScrollShadowMobile(taskList: HTMLElement) {
+    const scrollLeft = taskList.scrollLeft;
+    const scrollWidth = taskList.scrollWidth;
+    const offsetWidth = taskList.offsetWidth;
+    if (scrollLeft > 0) {
+      taskList.classList.add('scrolled-left');
+    } else {
+      taskList.classList.remove('scrolled-left');
+    }
+    if (scrollLeft + offsetWidth < scrollWidth - 1) {
+      taskList.classList.add('scrolled-right');
+    } else {
+      taskList.classList.remove('scrolled-right');
+    }
+  }
+
+
 }

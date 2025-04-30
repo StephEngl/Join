@@ -21,14 +21,17 @@
     </div>
     <div class="task-footer">
         <div class="assignedContacts">
-            @for (contact of taskData.assignedTo; track contact.contactId; let index = $index) {
-            @if (doesContactExist(contact.contactId)) {
+            @for (contact of showLimitedContact(); track contact.contactId) {
             <span class="assignedContact" [style.backgroundColor]="contactsService.contactColor(contact.contactId)">
                 {{ contactsService.nameInitials(contact.contactId) }}
             </span>
             }
+            @if (overflowCount() > 0) {
+            <span class="assignedContact overflow-indicator">
+                +{{ overflowCount() }}
+            </span>
             }
         </div>
-        <img [src]="'./assets/icons/kanban/prio_'+ taskData.priority +'.svg'" alt="">
+        <img [src]="'./assets/icons/kanban/prio_' + taskData.priority + '.svg'" alt="">
     </div>
 </li>
