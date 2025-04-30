@@ -101,41 +101,53 @@ export class AddTaskComponent {
   clearForm() {}
 
   onSubmit() {
-    if (this.taskDataService.selectedCategory === undefined)
-      return console.log(
-        'simple validation, you can only submit after setting category'
-      );
-    this.tasksService.addTask(this.currentFormData());
+    if (!this.taskDataService.selectedCategory) {
+      return console.log('simple validation, you can only submit after setting category');
+    }
+  
+    const isEdit = this.taskDataService.editModeActive;
+  
+    const task = {
+      ...this.currentFormData(),
+      ...(isEdit && {
+        id: this.taskData.id,
+        taskType: this.taskData.taskType,
+      }),
+    };
+  
+    isEdit
+      ? this.tasksService.updateTask(task)
+      : this.tasksService.addTask(task);
+  
     this.clearForm();
   }
+  
 
   /* "right" side of add task component: methods & functions, e.g. priority, assigned to, ...*/
-  currentFormData() {
-    const subtasksForForm = this.taskDataService.subtasksContainer.map((subtask) => ({
-      text: subtask.text,
-      isChecked: subtask.isChecked,
-    }));
-    const activeBtn = this.taskDataService.priorityButtons.filter(
-      (btnStatus) => btnStatus.btnActive
-    );
-    let activePriority = 'medium';
-    if (activeBtn.length > 0) {
-      activePriority = activeBtn[0].priority;
-    }
-    const submittedTask: TaskInterface = {
-      title: this.inputTaskTitle,
-      description: this.inputTaskDescription,
-      dueDate: this.inputTaskDueDate,
-      assignedTo: this.taskDataService.assignedTo,
-      subTasks: subtasksForForm,
-      priority: activePriority.toLowerCase() as 'urgent' | 'medium' | 'low',
-      category: this.taskDataService.selectedCategory,
-      taskType: 'toDo',
-    };
-    console.log(this.inputTaskDueDate);
-    
-    return submittedTask;
-  }
+currentFormData(): Omit<TaskInterface, 'id'> {
+  const subtasksForForm = this.taskDataService.subtasksContainer.map((subtask) => ({
+    text: subtask.text,
+    isChecked: subtask.isChecked,
+  }));
+
+  const activeBtn = this.taskDataService.priorityButtons.find(
+    (btnStatus) => btnStatus.btnActive
+  );
+
+  const submittedTask: TaskInterface = {
+    title: this.inputTaskTitle,
+    description: this.inputTaskDescription,
+    dueDate: this.inputTaskDueDate,
+    assignedTo: this.taskDataService.assignedTo,
+    subTasks: subtasksForForm,
+    priority: (activeBtn?.priority.toLowerCase() || 'medium') as 'urgent' | 'medium' | 'low',
+    category: this.taskDataService.selectedCategory,
+    taskType: 'toDo',
+  };
+
+  return submittedTask;
+}
+
   
   onInputChange() {
     // Optional: Validierung oder weitere Logik
