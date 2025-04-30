@@ -33,14 +33,15 @@ export class TaskDetailsComponent {
   searchedContactName: string = '';
   subtaskText: string = '';
   inputFieldSubT: string = '';
+  hoveredContact: any = undefined;
   @ViewChild('accordionItem') accordionItem!: CdkAccordionItem;
   @ViewChild('categoryAccordionItem') categoryAccordionItem!: CdkAccordionItem;
   @ViewChild('inputFieldSubTask') inputFieldSubTaskRef!: ElementRef;
 
-
   ngOnInit() {
     this.setPriorityInEditMode();
     this.setAssignedContactsInEditMode();
+    this.setCategoryInEditMode();
   }
   
   searchContact(event: Event) {
@@ -101,8 +102,6 @@ export class TaskDetailsComponent {
     return this.taskData.assignedTo.some((a) => a.contactId === contactId);
   }
 
-  hoveredContact: any = undefined;
-
   startContactHover(contact: any) {
     this.hoveredContact = contact;
   }
@@ -137,6 +136,14 @@ export class TaskDetailsComponent {
   setCategory(index: number) {
     this.taskData.selectedCategory = this.filteredCategories()[index];
     //this.closeDropdownLists();  => emited & Hostlistener
+  }
+
+  setCategoryInEditMode(): void {
+    if (!this.taskData.editModeActive) {
+      this.taskData.selectedCategory = undefined;
+      return;
+    }
+    this.taskData.selectedCategory = this.taskDataInput.category || undefined;
   }
 
   addSubtask() {
