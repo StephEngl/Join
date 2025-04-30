@@ -16,6 +16,7 @@ export class TaskComponent {
   @Input() searchRequest: string = "";
   @Output() searchedTitle: EventEmitter<string> = new EventEmitter();
 
+
   doesContactExist(contactId: string): boolean {
     return this.contactsService.contacts.some(c => c.id === contactId);
   }
@@ -29,4 +30,19 @@ export class TaskComponent {
     const taskRef = this.tasksService.tasks.find(task => task.id === taskDataId);
     return taskRef!.subTasks.filter(subtask => subtask.isChecked == true);
   }
+
+  //filtert ob der Kontakt existiert und begrenzt die Anzeige auf maximaml 4 Kontakte
+  showLimitedContact(): TaskInterface['assignedTo'] {
+    return this.taskData.assignedTo
+      .filter(c => this.doesContactExist(c.contactId))
+      .slice(0, 4);
+  }
+
+  // rechnet wieviele zusätzliche kontakte angezeigt werden müssen in Zahlen
+  overflowCount(): number {
+    const validContacts = this.taskData.assignedTo
+      .filter(c => this.doesContactExist(c.contactId));
+    return validContacts.length > 4 ? validContacts.length - 4 : 0;
+  }
+
 }

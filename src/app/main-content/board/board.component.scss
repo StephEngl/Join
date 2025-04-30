@@ -1,15 +1,7 @@
 @import './../../../assets/styles/variables.scss';
 @import './../../../assets/styles/mixins.scss';
 
-
-// * {
-//     outline: 1px solid red;
-// }
-
 .board-section {
-
-    // outline: 2px solid blue;
-
     height: 99%;
     display: flex;
     flex-direction: column;
@@ -89,9 +81,6 @@
 }
 
 .board {
-
-    // outline: 2px dashed lime;
-
     display: flex;
     flex-direction: row;
     align-items: flex-start;
@@ -100,8 +89,7 @@
     overflow-x: auto;
     overflow-y: hidden;
     justify-content: flex-start;
-    height: 68dvh;
-
+    height: 70dvh;
     scrollbar-width: none;
     -ms-overflow-style: none;
 
@@ -135,20 +123,15 @@
 }
 
 .board-column {
-
-    // outline: 1px solid green;
-
+    position: relative;
     flex: 0 0 250px;
     display: flex;
     flex-direction: column;
     align-items: center;
     width: 250px;
-
+    height: 100%;
     overflow-x: hidden;
     overflow-y: auto;
-
-    height: 100%;
-
     scrollbar-width: none;
     -ms-overflow-style: none;
 
@@ -166,9 +149,7 @@
         padding: 0;
         margin: 0;
         list-style: none;
-
         scroll-padding-bottom: 240px;
-
         scrollbar-width: none;
         -ms-overflow-style: none;
 
@@ -179,6 +160,37 @@
         &::-webkit-scrollbar-thumb {
             display: none;
         }
+    }
+
+    &::before,
+    &::after {
+        content: '';
+        position: absolute;
+        left: 0;
+        width: 100%;
+        height: 16px;
+        pointer-events: none;
+        z-index: 2;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+    }
+
+    &::before {
+        top: 39px;
+        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.08), transparent);
+    }
+
+    &::after {
+        bottom: 0;
+        background: linear-gradient(to top, rgba(0, 0, 0, 0.08), transparent);
+    }
+
+    &.scrolled-top::before {
+        opacity: 1;
+    }
+
+    &.scrolled-bottom::after {
+        opacity: 1;
     }
 }
 
@@ -245,7 +257,29 @@ app-task {
     border: 2px dashed #ccc;
 }
 
+@media screen and (max-width: 1440px) {
+
+    .board {
+        padding: 0 32px;
+    }
+
+    .board-header {
+        margin: 0 32px;
+        padding: 16px 0 12px 0;
+    }
+}
+
 @media screen and (max-width: 830px) {
+
+    .board-section {
+        position: fixed;
+        top: $header-height;
+        width: 100%;
+        height: calc(100% - 200px);
+        display: flex;
+        flex-direction: column;
+        z-index: 0;
+    }
 
     .board-header {
         display: flex;
@@ -279,11 +313,8 @@ app-task {
     .board {
         flex-direction: column;
         padding: 0 16px;
-        height: calc(100dvh + 500px); // Fix for mobile viewport issues
-
         overflow-x: hidden;
         overflow-y: auto;
-
         scrollbar-width: none;
         -ms-overflow-style: none;
 
@@ -293,6 +324,7 @@ app-task {
     }
 
     .board-column {
+        position: relative;
         width: 100%;
         flex: 0 0 auto;
         height: auto;
@@ -304,6 +336,37 @@ app-task {
             overflow-y: hidden;
             max-height: none;
             gap: 16px;
+
+            &::before,
+            &::after {
+                content: '';
+                position: absolute;
+                top: 39px;
+                bottom: 0;
+                width: 16px;
+                pointer-events: none;
+                z-index: 2;
+                opacity: 0;
+                transition: opacity 0.2s ease;
+            }
+
+            &::before {
+                left: 0;
+                background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
+            }
+
+            &::after {
+                right: 0;
+                background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
+            }
+
+            &.scrolled-left::before {
+                opacity: 1;
+            }
+
+            &.scrolled-right::after {
+                opacity: 1;
+            }
 
             li {
                 flex: 0 0 auto;
