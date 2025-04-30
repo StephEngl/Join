@@ -93,8 +93,9 @@ export class AddTaskComponent {
 
   @HostListener('document:click')
   closeDropdownLists(): void {
-    this.accordionItem.close();
-    this.categoryAccordionItem.close();
+    //move it to task-details
+    //this.accordionItem.close();
+    //this.categoryAccordionItem.close();
   }
 
   clearForm() {}
