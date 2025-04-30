@@ -95,7 +95,7 @@
             .task-info-due-date-output {
                 display: flex;
                 width: 100%;
-                padding-left: 34px;
+                padding-left: 46px;
             }
         }
 
@@ -254,10 +254,35 @@
     }
 }
 
-@media  (max-width: 620px) {
+@media  (max-width: 630px) {
     .task-info-header-container {
         H2 {
-        font-size: 2.75rem;
+        font-size: 2.7rem;
+        }
+    }
+}
+
+@media  (max-width: 590px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2.65rem;
+        }
+    }
+}
+
+
+@media  (max-width: 570px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2.55rem;
+        }
+    }
+}
+
+@media  (max-width: 550px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 2.45rem;
         }
     }
 }
@@ -265,20 +290,12 @@
 @media  (max-width: 530px) {
     .task-info-header-container {
         H2 {
-        font-size: 2.6rem;
+        font-size: 2.35rem;
         }
     }
 }
 
-@media  (max-width: 490px) {
-    .task-info-header-container {
-        H2 {
-        font-size: 2.5rem;
-        }
-    }
-}
-
-@media  (max-width: 460px) {
+@media  (max-width: 510px) {
     .task-info-header-container {
         H2 {
         font-size: 2.25rem;
@@ -286,35 +303,51 @@
     }
 }
 
-@media  (max-width: 410px) {
+@media  (max-width: 500px) {
     .task-info-header-container {
         H2 {
-        font-size: 2rem;
+        font-size: 2.15rem;
         }
-    }
-
-    .task-info-due-date-output {
-        padding-left: 	2.125rem;
-    }
-    
-    .task-info-priority-output {
-        padding-left: 3rem;
     }
 }
 
-@media  (max-width: 370px) {
+@media  (max-width: 470px) {
     .task-info-header-container {
-        h2 {
-        font-size: 1.7rem;
+        H2 {
+        font-size: 2.05rem;
         }
     }
+}
 
-    .task-info-due-date-output {
-        padding-left: 30px;
+@media  (max-width: 450px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 1.95rem;
+        }
     }
-    
-    .task-info-priority-output {
-        padding-left: 44px;
+}
+
+@media  (max-width: 430px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 1.85rem;
+        }
+    }
+}
+
+@media  (max-width: 410px) {
+    .task-info-header-container {
+        H2 {
+        font-size: 1.75rem;
+        }
+    }
+}
+
+@media  (max-width: 390px) {
+    .task-info-header-container {
+        h2 {
+        font-size: 1.65rem;
+        }
     }
 }
 
