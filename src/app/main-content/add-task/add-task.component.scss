@@ -24,10 +24,6 @@
     font-size: 20px;
   }
 
-  span {
-    color: $col-task-urgent;
-  }
-
   form {
     display: flex;
     flex-direction: column;
@@ -38,46 +34,6 @@
 .task-form-wrapper {
   @include dFlex($jc: space-between, $ai: flex-start);
   flex-grow: 1;
-
-  input[type="text"],
-  input[type="date"],
-  input[type="search"],
-  textarea,
-  select {
-    width: 440px;
-    border: 1px solid $col-font-grey;
-    border-radius: 10px;
-    padding: 12px 20px;
-    color: $col-font-grey;
-    resize: none;
-
-    &:focus {
-      outline: none;
-      border-color: $col-font-inactive;
-    }
-
-    &::placeholder {
-      font-family: "Inter", sans-serif;
-      font-size: 20px;
-      color: $col-font-inactive;
-      opacity: 1; // for Firefox
-    }
-  }
-
-  textarea {
-    height: 120px;
-  }
-}
-
-.task-overview,
-.task-details {
-  @include dFlex($jc: center, $ai: flex-start, $gap: 32px);
-  flex-direction: column;
-
-  .form-group {
-    @include dFlex($jc: center, $ai: flex-start, $gap: 8px);
-    flex-direction: column;
-  }
 }
 
 .vertical-divider {
@@ -86,70 +42,9 @@
   background-color: $col-font-dropdown;
 }
 
-.priority-button {
-  border-radius: 10px;
-  width: 136px;
-  padding: 16px 10px;
-  font-size: 20px;
-  cursor: pointer;
-  transition: all 0.3s ease;
-
-  img {
-    width: 20px;
-  }
-}
-
-.btnActive {
-  color: white;
-  border: 1px solid transparent;
-}
-
-.btnInActive {
-  border: 1px solid $col-font-grey;
-  background-color: white;
-  &:hover {
-    box-shadow: 0px 4px 4px $col-shadow-black;
-  }
-}
-
 .task-details {
-  .priority-buttons-wrapper {
-    @include dFlex($jc: space-between, $ai: flex-start, $gap: 16px);
-    width: 100%;
-
-    .subtask-input {
-      .subtask-input-wrapper {
-        position: relative;
-        display: flex;
-        align-items: center;
-      }
-
-      .form-control {
-        width: 100%;
-        padding-right: 70px;
-        position: relative;
-        z-index: 1;
-      }
-
-      .input-icons {
-        @include dFlex(center, center);
-        position: absolute;
-        right: 28px;
-        gap: 4px;
-      }
-
-      .icon-btn {
-        cursor: pointer;
-        background: none;
-        border: none;
-        color: #888;
-        font-size: 1.2em;
-        padding: 2px 6px;
-        line-height: 1;
-        transition: color 0.2s;
-      }
-    }
-  }
+  @include dFlex($jc: center, $ai: flex-start, $gap: 32px);
+  flex-direction: column;
 }
 
 .footnote {
@@ -331,7 +226,7 @@
   }
 }
 
-@container (max-width: 500px) {
+@container task-section (max-width: 500px) {
   .task-overview,
   .task-details,
   .form-group,
