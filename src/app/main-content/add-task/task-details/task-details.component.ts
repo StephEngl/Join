@@ -71,4 +71,26 @@ export class TaskDetailsComponent {
     this.priorityButtons.forEach((btn, i) => btn.btnActive = i === index ? !btn.btnActive : false);
     this.priorityButtonsChange.emit(this.priorityButtons);
   }
+
+  // edit mit service not sorted yet
+  @ViewChild('accordionItem') accordionItem!: CdkAccordionItem;
+  @ViewChild('categoryAccordionItem') categoryAccordionItem!: CdkAccordionItem;
+
+  searchedContactName: string = '';
+
+  searchContact(event: Event) {
+    const value = (event.target as HTMLInputElement).value;
+    this.searchedContactName = value;
+  }
+
+  // filteredContacts() {
+  //   return this.contactsService.contacts.filter((contact) =>
+  //     contact.name
+  //       .toLowerCase()
+  //       .includes(this.searchedContactName.toLowerCase())
+  //   );
+  // }
+
+
+
 }

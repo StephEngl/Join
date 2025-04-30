@@ -7,7 +7,7 @@
         class="priority-button"
         [class]="prioBtn.btnActive ? 'btnActive' : 'btnInActive'"
         [style.backgroundColor]="
-          prioBtn.btnActive ? prioBtn.colorActive : 'white'
+        prioBtn.btnActive ? prioBtn.colorActive : 'white'
         "
         (click)="setPriority(index); $event.preventDefault()"
       >
@@ -94,6 +94,7 @@
         }
       </cdk-accordion-item>
     </cdk-accordion>
+    <--
     <div class="assigned-contacts">
       @for (contact of assignedTo; track contact.contactId) {
       <div
