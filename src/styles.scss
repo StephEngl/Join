@@ -56,6 +56,7 @@ ul {
 
 button {
   border: none;
+  cursor: pointer;
 }
 
 html, body { height: 100%; }
@@ -67,12 +68,12 @@ body { margin: 0; font-family: Roboto, "Helvetica Neue", sans-serif; }
   padding: 0 !important;
 }
 
-// ::ng-deep .task-dialog-overlay .mat-mdc-dialog-content {
-//   max-height: 90vh !important;
-// }
+::ng-deep .task-dialog-overlay .mat-mdc-dialog-content {
+  max-height: 90vh !important;
+}
 
 .mat-mdc-dialog-content {
-  // max-width: 96vw !important;
+  max-width: 96vw !important;
   overflow: hidden !important;
   max-height: none !important; // Maximale Höhe aufheben (optional)
 }
