@@ -74,15 +74,19 @@ export class TaskDetailsComponent {
     this.taskData.priorityButtons.forEach((btn, i) => btn.btnActive = i === index ? !btn.btnActive : false);
   }
 
-  // edit mit service not sorted yet
+  // data from service single-task-data 
+  // Work in Progress from here
   mouseX: number = 0;
   mouseY: number = 0;
   contactsService = inject(ContactsService);
   taskData = inject(SingleTaskDataService);
   searchedCategoryName: string = '';
   searchedContactName: string = '';
+  subtaskText: string = '';
+  inputFieldSubT: string = '';
   @ViewChild('accordionItem') accordionItem!: CdkAccordionItem;
   @ViewChild('categoryAccordionItem') categoryAccordionItem!: CdkAccordionItem;
+  @ViewChild('inputFieldSubTask') inputFieldSubTaskRef!: ElementRef;
 
   searchContact(event: Event) {
     const value = (event.target as HTMLInputElement).value;
@@ -148,9 +152,49 @@ export class TaskDetailsComponent {
 
   setCategory(index: number) {
     this.taskData.selectedCategory = this.filteredCategories()[index];
-    //this.closeDropdownLists();
+    //this.closeDropdownLists();  => emited & Hostlistener
   }
 
-  
+  addSubtask() {
+    const subtask = {
+      text: this.subtaskText,
+      isEditing: false,
+      isHovered: false,
+      isChecked: false,
+    };
+    if (this.subtaskText.trim()) {
+      this.taskData.subtasksContainer.push(subtask);
+      this.subtaskText = '';
+    }
+  }
+
+  clearSubtask() {
+    this.subtaskText = '';
+  }
+
+  editSubtask(subtask: any) {
+    subtask.isEditing = true;
+    this.inputFieldSubT = subtask.text;
+    setTimeout(() => {
+      this.inputFieldSubTaskRef.nativeElement.focus();
+    }, 0);
+  }
+
+  focusInput(input: HTMLInputElement) {
+    input.focus();
+  }
+
+  deleteSubtask(subtask: any) {
+    const index = this.taskData.subtasksContainer.indexOf(subtask);
+    if (index !== -1) {
+      this.taskData.subtasksContainer.splice(index, 1);
+    }
+  }
+
+  editCheckSubtask(subtask: any) {
+    const index = this.taskData.subtasksContainer.indexOf(subtask);
+    this.taskData.subtasksContainer[index].text = this.inputFieldSubT;
+    subtask.isEditing = false;
+  }
 
 }
