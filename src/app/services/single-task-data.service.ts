@@ -54,4 +54,8 @@ export class SingleTaskDataService {
     ];
     editModeActive: boolean = false;
     currentTaskId: string = "";
+
+    resetAllPrioBtns() {
+      this.priorityButtons.forEach((p) => (p.btnActive = false));
+    }
 }

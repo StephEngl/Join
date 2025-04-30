@@ -3,6 +3,8 @@ import {
   Input,
   Output,
   EventEmitter,
+  OnInit,
+  OnChanges,
   ViewChild,
   ElementRef,
   inject
@@ -35,6 +37,10 @@ export class TaskDetailsComponent {
   @ViewChild('categoryAccordionItem') categoryAccordionItem!: CdkAccordionItem;
   @ViewChild('inputFieldSubTask') inputFieldSubTaskRef!: ElementRef;
 
+
+  ngOnInit() {
+    this.setPriorityInEditMode();
+  }
   searchContact(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.searchedContactName = value;
@@ -48,9 +54,21 @@ export class TaskDetailsComponent {
     );
   }
 
+  setPriorityInEditMode(): void {
+    if (!this.taskData.editModeActive) {
+      this.taskData.priorityButtons.forEach(btn => btn.btnActive = false);
+    } else {
+      const index = this.taskData.priorityButtons.findIndex(
+        btn => btn.priority.toLowerCase() === this.taskDataInput.priority.toLowerCase()
+      );
+      if (index !== -1) {
+        this.setPriority(index);
+      }
+    }
+  }
+
   setPriority(index: number) {
     this.taskData.priorityButtons.forEach((btn, i) => btn.btnActive = i === index);
-    this.taskDataInput.priority = this.taskData.priorityButtons[index].priority.toLowerCase() as 'urgent' | 'medium' | 'low';
   }
 
   toggleAssignedContacts(contactId: any) {
