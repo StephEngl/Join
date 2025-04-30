@@ -52,4 +52,6 @@ export class SingleTaskDataService {
         btnActive: false,
       },
     ];
+    editModeActive: boolean = false;
+    currentTaskId: string = "";
 }

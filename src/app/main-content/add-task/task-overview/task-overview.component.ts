@@ -1,9 +1,11 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output } from '@angular/core';
+import { Component, EventEmitter, Input, Output, inject } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { MatDatepickerModule } from '@angular/material/datepicker';
 import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
+import { SingleTaskDataService } from '../../../services/single-task-data.service';
+import { TaskInterface } from '../../../interfaces/task.interface';
 
 @Component({
   selector: 'app-task-overview',
@@ -20,6 +22,10 @@ import { MatNativeDateModule } from '@angular/material/core';
   styleUrl: './task-overview.component.scss',
 })
 export class TaskOverviewComponent {
+  @Input() taskData!: TaskInterface;
+  taskDataService = inject(SingleTaskDataService);
+  @Input() currentTaskId: string = '';
+
   @Input() taskTitle: string = '';
   @Output() taskTitleChange = new EventEmitter<string>();
 

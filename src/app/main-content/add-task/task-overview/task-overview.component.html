@@ -2,13 +2,13 @@
   <div class="form-group">
     <label for="title">Title <span>*</span></label>
     <input
-      [ngModel]="taskTitle"
+      [ngModel]="taskDataService.editModeActive ? taskData.title : taskTitle"
       (ngModelChange)="taskTitleChange.emit($event)"
       id="title"
       name="title"
       type="text"
       class="form-control"
-      placeholder="Enter a title"
+      [placeholder]="taskDataService.editModeActive ? taskData.title : 'Enter a title'"
     />
   </div>
 

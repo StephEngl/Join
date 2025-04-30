@@ -6,7 +6,7 @@
             </app-task-info>
         } @else {
             <app-add-task
-                [taskData]="taskDataDialog"
+                [taskData]="data"
                 (cancelEditTask)="onCancelEditTask()">
             </app-add-task>
         }

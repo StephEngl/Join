@@ -1,4 +1,4 @@
-import { Component, Input, Inject } from '@angular/core';
+import { Component, Input, Inject, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskInterface } from '../../../interfaces/task.interface';
 import { TaskInfoComponent } from './task-info/task-info.component';
@@ -6,6 +6,7 @@ import { AddTaskComponent } from '../../add-task/add-task.component';
 import { TasksService } from '../../../services/tasks.service';
 import { MatDialogRef } from '@angular/material/dialog';
 import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SingleTaskDataService } from '../../../services/single-task-data.service';
 
 @Component({
     selector: 'app-task-dialog',
@@ -18,8 +19,9 @@ import { MAT_DIALOG_DATA } from '@angular/material/dialog';
         AddTaskComponent
     ]
 })
-export class TaskDialogComponent {
+export class TaskDialogComponent { 
 
+    taskDataService = inject(SingleTaskDataService);
     @Input() taskDataDialog!: TaskInterface;
 
     constructor(private tasksService: TasksService,
@@ -30,7 +32,10 @@ export class TaskDialogComponent {
     showTaskInfo: boolean = true;
 
     onEditTask(): void {
-        this.showTaskInfo = false;
+        this.taskDataService.editModeActive = true;
+        setTimeout(() => {
+            this.showTaskInfo = false;
+        }, 10);
     }
 
     onCancelEditTask(): void {
