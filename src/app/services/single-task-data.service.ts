@@ -23,6 +23,7 @@ export class SingleTaskDataService {
       isChecked: boolean;
     }[] = [];
     assignedTo: any[] = [];
+    taskCategories: any[] = ['Technical Task', 'User Story'];
     selectedCategory: 'Technical Task' | 'User Story' | undefined = undefined;
     priorityButtons: {
       imgInactive: string;

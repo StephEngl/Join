@@ -2,7 +2,7 @@
   <div class="form-group">
     <label>Priority</label>
     <div class="priority-buttons-wrapper">
-      @for(prioBtn of priorityButtons; track prioBtn; let index = $index) {
+      @for(prioBtn of taskData.priorityButtons; track prioBtn; let index = $index) {
       <button
         class="priority-button"
         [class]="prioBtn.btnActive ? 'btnActive' : 'btnInActive'"
@@ -20,8 +20,8 @@
       }
     </div>
   </div>
-
-  <!-- <div>
+  
+  <div>
     <cdk-accordion
       class="dropdown-list-container form-group"
       id="assigned-to"
@@ -94,9 +94,10 @@
         }
       </cdk-accordion-item>
     </cdk-accordion>
-    <--
+
+
     <div class="assigned-contacts">
-      @for (contact of assignedTo; track contact.contactId) {
+      @for (contact of taskData.assignedTo; track contact.contactId) {
       <div
         class="contact-initials"
         [style.backgroundColor]="
@@ -120,9 +121,9 @@
       </div>
       }
     </div>
-  </div> -->
+  </div>
 
-  <!-- <div class="form-group">
+  <div class="form-group">
     <cdk-accordion
       class="dropdown-list-container form-group"
       id="category"
@@ -143,11 +144,11 @@
             [class]="categoryAccordionItem.expanded ? 'drop-down-active' : ''"
             [placeholder]="
               categoryAccordionItem.expanded
-                ? selectedCategory
-                  ? selectedCategory
+                ? taskData.selectedCategory
+                  ? taskData.selectedCategory
                   : 'Search...'
-                : selectedCategory
-                ? selectedCategory
+                : taskData.selectedCategory
+                ? taskData.selectedCategory
                 : 'Select task category'
             "
             (input)="searchCategory($event); categoryAccordionItem.open()"
@@ -172,10 +173,10 @@
             class="category-wrapper"
             (click)="setCategory(index)"
             [style.backgroundColor]="
-              selectedCategory === filteredCategories()[index] ? '#091931' : ''
+              taskData.selectedCategory === filteredCategories()[index] ? '#091931' : ''
             "
             [style.color]="
-              selectedCategory === filteredCategories()[index] ? 'white' : ''
+              taskData.selectedCategory === filteredCategories()[index] ? 'white' : ''
             "
           >
             <p>{{ category }}</p>
@@ -185,7 +186,7 @@
         }
       </cdk-accordion-item>
     </cdk-accordion>
-  </div> -->
+  </div>
 
   <!-- <div class="form-group subtask-input">
     <label for="subtask">Subtasks</label>
