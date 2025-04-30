@@ -1,14 +1,4 @@
-import {
-  Component,
-  Input,
-  Output,
-  EventEmitter,
-  OnInit,
-  OnChanges,
-  ViewChild,
-  ElementRef,
-  inject
-} from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, inject } from '@angular/core';
 import { CdkAccordionItem, CdkAccordionModule } from '@angular/cdk/accordion';
 import { FormsModule } from '@angular/forms';
 import { ContactsService } from '../../../services/contacts.service';
@@ -42,6 +32,7 @@ export class TaskDetailsComponent {
     this.setPriorityInEditMode();
     this.setAssignedContactsInEditMode();
     this.setCategoryInEditMode();
+    this.setSubtasksInEditMode();
   }
   
   searchContact(event: Event) {
@@ -169,6 +160,19 @@ export class TaskDetailsComponent {
     setTimeout(() => {
       this.inputFieldSubTaskRef.nativeElement.focus();
     }, 0);
+  }
+
+  setSubtasksInEditMode(): void {
+    if (!this.taskData.editModeActive) {
+      this.taskData.subtasksContainer = [];
+      return;
+    }
+    this.taskData.subtasksContainer = this.taskDataInput.subTasks?.map(subtask => ({
+      text: subtask.text,
+      isEditing: false,
+      isHovered: false,
+      isChecked: subtask.isChecked ?? false
+    })) || [];
   }
 
   focusInput(input: HTMLInputElement) {
