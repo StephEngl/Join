@@ -35,13 +35,13 @@
                 </button>
                 }
             </div>
-            <ul>
+            <ul class="task-list">
                 @if (filterTasksByCategory(column.taskStatus).length === 0) {
                 <li class="no-tasks">No tasks {{ column.title }}</li>
                 } @else {
                 @for (task of filterTasksByCategory(column.taskStatus); track task.id) {
                 <!-- Clicking the task opens the task-dialog -->
-                <li (click)="openTaskDialog(task)">
+                <li (click)="openTaskDialog(task)" >
                     <app-task [taskData]="task" [searchRequest]="searchText" cdkDrag>
                     </app-task>
                 </li>
