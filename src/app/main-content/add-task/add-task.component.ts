@@ -28,6 +28,7 @@ import { SingleTaskDataService } from '../../services/single-task-data.service';
   styleUrl: './add-task.component.scss',
 })
 export class AddTaskComponent {
+
   @ViewChild('accordionItem') accordionItem!: CdkAccordionItem;
   @ViewChild('categoryAccordionItem') categoryAccordionItem!: CdkAccordionItem;
   @ViewChild('inputFieldSubTask') inputFieldSubTaskRef!: ElementRef;
@@ -41,7 +42,7 @@ export class AddTaskComponent {
   isFormValid = false;
   inputTaskTitle: string = '';
   inputTaskDescription: string = '';
-  inputTaskDueDate: Date  | null = null;
+  inputTaskDueDate: Date | null = null;
   today: string = new Date().toISOString().split('T')[0];
   subtaskText = '';
   subtasksContainer: {
@@ -90,7 +91,6 @@ export class AddTaskComponent {
   //   this.inputTaskDueDate = date ?? new Date();
   // }
 
-
   @HostListener('document:click')
   closeDropdownLists(): void {
     //move it to task-details
@@ -98,7 +98,8 @@ export class AddTaskComponent {
     //this.categoryAccordionItem.close();
   }
 
-  clearForm() {}
+  clearForm() {
+  }
 
   onSubmit() {
     if (this.taskDataService.selectedCategory === undefined)
@@ -111,10 +112,12 @@ export class AddTaskComponent {
 
   /* "right" side of add task component: methods & functions, e.g. priority, assigned to, ...*/
   currentFormData() {
-    const subtasksForForm = this.taskDataService.subtasksContainer.map((subtask) => ({
-      text: subtask.text,
-      isChecked: subtask.isChecked,
-    }));
+    const subtasksForForm = this.taskDataService.subtasksContainer.map(
+      (subtask) => ({
+        text: subtask.text,
+        isChecked: subtask.isChecked,
+      })
+    );
     const activeBtn = this.taskDataService.priorityButtons.filter(
       (btnStatus) => btnStatus.btnActive
     );
@@ -133,10 +136,10 @@ export class AddTaskComponent {
       taskType: 'toDo',
     };
     console.log(this.inputTaskDueDate);
-    
+
     return submittedTask;
   }
-  
+
   onInputChange() {
     // Optional: Validierung oder weitere Logik
   }
