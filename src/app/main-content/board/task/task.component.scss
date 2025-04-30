@@ -7,12 +7,19 @@
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
     display: flex;
     flex-direction: column;
-    justify-content:space-between;
+    justify-content: space-between;
     gap: 12px;
     width: 250px;
     height: auto;
     min-height: 180px;
     flex-shrink: 0;
+    transition: transform 0.2s ease, box-shadow 0.2s ease;
+    transform-origin: center;
+
+    &:hover {
+        transform: scale(0.96);
+        box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+    }
 
     .task-category {
         font-size: 12px;
@@ -92,13 +99,11 @@
             }
 
             .overflow-indicator {
-                background-color: #d1d1d1; // neutrale Farbe
+                background-color: #d1d1d1;
                 color: #2A3647;
                 font-weight: 600;
             }
         }
-
-
 
         .priority-icon {
             width: 18px;
