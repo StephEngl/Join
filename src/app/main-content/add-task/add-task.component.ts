@@ -132,6 +132,8 @@ export class AddTaskComponent {
       category: this.taskDataService.selectedCategory,
       taskType: 'toDo',
     };
+    console.log(this.inputTaskDueDate);
+    
     return submittedTask;
   }
   

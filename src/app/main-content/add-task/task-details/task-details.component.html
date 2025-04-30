@@ -6,15 +6,15 @@
     {
     <button
       class="priority-button"
-      [class]="prioBtn.btnActive ? 'btnActive' : 'btnInActive'"
+      [class]="prioBtn.btnActive || prioBtn.priority.toLowerCase() === taskDataInput.priority ? 'btnActive' : 'btnInActive'"
       [style.backgroundColor]="
-        prioBtn.btnActive ? prioBtn.colorActive : 'white'
+        prioBtn.btnActive || prioBtn.priority.toLowerCase() === taskDataInput.priority ? prioBtn.colorActive : 'white'
       "
       (click)="setPriority(index); $event.preventDefault()"
     >
       {{ prioBtn.priority }}
       <img
-        [src]="prioBtn.btnActive ? prioBtn.imgActive : prioBtn.imgInactive"
+        [src]="prioBtn.btnActive || prioBtn.priority.toLowerCase() === taskDataInput.priority ? prioBtn.imgActive : prioBtn.imgInactive"
         [alt]="prioBtn.priority"
       />
     </button>

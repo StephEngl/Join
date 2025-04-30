@@ -1,5 +1,6 @@
-import { Component, Input, Output, EventEmitter } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { RouterModule } from '@angular/router';
+import { SingleTaskDataService } from '../../../services/single-task-data.service';
 
 @Component({
     selector: 'app-navbar-icon-link',
@@ -8,7 +9,8 @@ import { RouterModule } from '@angular/router';
     templateUrl: './navbar-icon-link.component.html',
     styleUrl: './navbar-icon-link.component.scss'
 })
-export class NavbarIconLinkComponent {
+export class NavbarIconLinkComponent {  
+    taskDataService = inject(SingleTaskDataService);
     @Input() iconUnclicked!: string;
     @Input() iconClicked!: string;
     @Input() route!: string;
@@ -19,6 +21,7 @@ export class NavbarIconLinkComponent {
 
     onClick() {
         this.activate.emit(this.route);
+        this.taskDataService.editModeActive = false;
     }
 
     get currentIcon(): string {

@@ -11,6 +11,7 @@ import { CdkAccordionItem, CdkAccordionModule } from '@angular/cdk/accordion';
 import { FormsModule } from '@angular/forms';
 import { ContactsService } from '../../../services/contacts.service';
 import { SingleTaskDataService } from '../../../services/single-task-data.service';
+import { TaskInterface } from '../../../interfaces/task.interface';
 
 @Component({
   selector: 'app-task-details',
@@ -21,7 +22,7 @@ import { SingleTaskDataService } from '../../../services/single-task-data.servic
   styleUrl: './task-details.component.scss',
 })
 export class TaskDetailsComponent {
-
+  @Input() taskDataInput!: TaskInterface
   mouseX: number = 0;
   mouseY: number = 0;
   contactsService = inject(ContactsService);
@@ -48,7 +49,8 @@ export class TaskDetailsComponent {
   }
 
   setPriority(index: number) {
-    this.taskData.priorityButtons.forEach((btn, i) => btn.btnActive = i === index ? !btn.btnActive : false);
+    this.taskData.priorityButtons.forEach((btn, i) => btn.btnActive = i === index);
+    this.taskDataInput.priority = this.taskData.priorityButtons[index].priority.toLowerCase() as 'urgent' | 'medium' | 'low';
   }
 
   toggleAssignedContacts(contactId: any) {

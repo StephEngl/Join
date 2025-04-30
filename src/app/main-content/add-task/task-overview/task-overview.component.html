@@ -15,7 +15,7 @@
   <div class="form-group">
     <label for="description">Description</label>
     <textarea
-      [ngModel]="taskDescription"
+      [ngModel]="taskDataService.editModeActive ? taskData.description :taskDescription"
       (ngModelChange)="taskDescriptionChange.emit($event)"
       id="description"
       name="description"
@@ -27,7 +27,7 @@
   <div class="form-group">
     <label for="due-date">Due date <span>*</span></label>
     <input
-      [ngModel]="taskDueDate"
+      [ngModel]="taskDataService.editModeActive ? formatDate(taskData.dueDate) : formatDate(taskDueDate)"
       (ngModelChange)="onDueDateChange($event)"
       id="due-date"
       name="dueDate"

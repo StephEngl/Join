@@ -37,8 +37,13 @@ export class TaskOverviewComponent {
   @Output() taskDueDateChange = new EventEmitter<Date | null>();
   @Input() minDate: Date = new Date();
 
-  onDueDateChange(date: Date | null) {
+  onDueDateChange(dateString: string | null) {
+    const date = dateString ? new Date(dateString) : null;
     this.taskDueDateChange.emit(date);
+  }
+
+  formatDate(date: Date | null): string | null {
+    return date ? date.toISOString().split('T')[0] : null;
   }
 
   validateForm(): boolean {

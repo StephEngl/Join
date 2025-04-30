@@ -33,6 +33,7 @@ export class TaskDialogComponent {
 
     onEditTask(): void {
         this.taskDataService.editModeActive = true;
+        console.log(this.taskDataService.editModeActive);
         setTimeout(() => {
             this.showTaskInfo = false;
         }, 10);
@@ -40,10 +41,15 @@ export class TaskDialogComponent {
 
     onCancelEditTask(): void {
         this.showTaskInfo = true;
+        this.taskDataService.editModeActive = false;
+        console.log(this.taskDataService.editModeActive);
+        
     }
 
     closeDialog(): void {
         this.dialogRef.close();
+        this.taskDataService.editModeActive = false;
+        console.log(this.taskDataService.editModeActive);
     }
 
     async deleteTask(): Promise<void> {
