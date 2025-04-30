@@ -40,7 +40,9 @@ export class TaskDetailsComponent {
 
   ngOnInit() {
     this.setPriorityInEditMode();
+    this.setAssignedContactsInEditMode();
   }
+  
   searchContact(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.searchedContactName = value;
@@ -65,6 +67,16 @@ export class TaskDetailsComponent {
         this.setPriority(index);
       }
     }
+  }
+
+  setAssignedContactsInEditMode(): void {
+    if (!this.taskData.editModeActive) {
+      this.taskData.assignedTo = []
+      return;
+    } 
+    this.taskData.assignedTo = this.taskDataInput.assignedTo?.map(contact => ({
+      contactId: contact.contactId,
+    })) || [];
   }
 
   setPriority(index: number) {
