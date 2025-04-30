@@ -6,8 +6,6 @@ import { Injectable } from '@angular/core';
 export class SingleTaskDataService {
 
   constructor() { }
-
-
     inputFieldSubT: string = '';
     mouseX: number = 0;
     mouseY: number = 0;

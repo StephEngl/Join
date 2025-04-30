@@ -13,6 +13,7 @@ import { TaskInterface } from '../../interfaces/task.interface';
 import { TasksService } from '../../services/tasks.service';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { TaskOverviewComponent } from './task-overview/task-overview.component';
+import { SingleTaskDataService } from '../../services/single-task-data.service';
 
 @Component({
   selector: 'app-add-task',
@@ -33,6 +34,7 @@ export class AddTaskComponent {
   inputFieldSubT: string = '';
   contactsService = inject(ContactsService);
   tasksService = inject(TasksService);
+  taskDataService = inject(SingleTaskDataService);
   mouseX: number = 0;
   mouseY: number = 0;
   isEdited = false;
@@ -98,7 +100,7 @@ export class AddTaskComponent {
   clearForm() {}
 
   onSubmit() {
-    if (this.selectedCategory === undefined)
+    if (this.taskDataService.selectedCategory === undefined)
       return console.log(
         'simple validation, you can only submit after setting category'
       );
@@ -108,11 +110,11 @@ export class AddTaskComponent {
 
   /* "right" side of add task component: methods & functions, e.g. priority, assigned to, ...*/
   currentFormData() {
-    const subtasksForForm = this.subtasksContainer.map((subtask) => ({
+    const subtasksForForm = this.taskDataService.subtasksContainer.map((subtask) => ({
       text: subtask.text,
       isChecked: subtask.isChecked,
     }));
-    const activeBtn = this.priorityButtons.filter(
+    const activeBtn = this.taskDataService.priorityButtons.filter(
       (btnStatus) => btnStatus.btnActive
     );
     let activePriority = 'medium';
@@ -123,10 +125,10 @@ export class AddTaskComponent {
       title: this.inputTaskTitle,
       description: this.inputTaskDescription,
       dueDate: this.inputTaskDueDate,
-      assignedTo: this.assignedTo,
+      assignedTo: this.taskDataService.assignedTo,
       subTasks: subtasksForForm,
       priority: activePriority.toLowerCase() as 'urgent' | 'medium' | 'low',
-      category: this.selectedCategory,
+      category: this.taskDataService.selectedCategory,
       taskType: 'toDo',
     };
     return submittedTask;
