@@ -16,6 +16,7 @@ import {
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { BreakpointObserver } from '@angular/cdk/layout';
 import { Subscription } from 'rxjs';
+import { SingleTaskDataService } from '../../services/single-task-data.service';
 
 @Component({
   selector: 'app-board',
@@ -32,6 +33,7 @@ import { Subscription } from 'rxjs';
 })
 export class BoardComponent {
   tasksService = inject(TasksService);
+  singleTaskDataService = inject(SingleTaskDataService);
   searchText: string = '';
   boardColumns: { taskStatus: string; title: string }[] = [
     { taskStatus: 'toDo', title: 'To do' },
@@ -95,6 +97,7 @@ export class BoardComponent {
   }
 
   openAddTaskDialog(): void {
+    this.singleTaskDataService.editModeActive = false; // needed to trigger add-task form
     this.dialogRef = this.dialog.open(AddTaskComponent, {
       width: '1116px',
       maxWidth: '80vw',
