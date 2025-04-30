@@ -2,13 +2,13 @@
 @import './../../../assets/styles/mixins.scss';
 
 
-* {
-    outline: 1px solid red;
-}
+// * {
+//     outline: 1px solid red;
+// }
 
 .board-section {
 
-    outline: 2px solid blue;
+    // outline: 2px solid blue;
 
     height: 99%;
     display: flex;
@@ -74,7 +74,8 @@
 .title-button {
     display: flex;
     justify-content: space-between;
-    align-items: center
+    align-items: center;
+    margin-bottom: 25px;
 }
 
 .add-task-btn {
@@ -89,7 +90,7 @@
 
 .board {
 
-    outline: 2px dashed lime;
+    // outline: 2px dashed lime;
 
     display: flex;
     flex-direction: row;
@@ -135,7 +136,7 @@
 
 .board-column {
 
-    outline: 1px solid green;
+    // outline: 1px solid green;
 
     flex: 0 0 252px;
     display: flex;
