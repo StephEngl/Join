@@ -133,6 +133,7 @@
     overflow-y: auto;
     scrollbar-width: none;
     -ms-overflow-style: none;
+    padding-top: 20px;
 
     &::-webkit-scrollbar {
         display: none;
@@ -260,12 +261,15 @@ app-task {
 }
 
 .cdk-drag-placeholder {
-    opacity: 1;
+    opacity: 0.4;
+    margin-bottom: 20px;
 }
 
 .cdk-drop-list-receiving {
     border: 2px dashed #ccc;
+    border-radius: 16px;
 }
+
 
 @media screen and (max-width: 1440px) {
 
