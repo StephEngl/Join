@@ -1,11 +1,11 @@
-import { Component, Input, Inject, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskInterface } from '../../../interfaces/task.interface';
 import { TaskInfoComponent } from './task-info/task-info.component';
 import { AddTaskComponent } from '../../add-task/add-task.component';
 import { TasksService } from '../../../services/tasks.service';
-import { MatDialogRef } from '@angular/material/dialog';
-import { MAT_DIALOG_DATA } from '@angular/material/dialog';
+// import { MatDialogRef } from '@angular/material/dialog'; /* Removed: using manual close */
+// import { MAT_DIALOG_DATA } from '@angular/material/dialog'; /* Removed: using manual input */
 import { SingleTaskDataService } from '../../../services/single-task-data.service';
 
 @Component({
@@ -19,21 +19,23 @@ import { SingleTaskDataService } from '../../../services/single-task-data.servic
         AddTaskComponent
     ]
 })
-export class TaskDialogComponent { 
+export class TaskDialogComponent {
 
     taskDataService = inject(SingleTaskDataService);
     @Input() taskDataDialog!: TaskInterface;
 
-    constructor(private tasksService: TasksService,
-                private dialogRef: MatDialogRef<TaskDialogComponent>,
-                @Inject(MAT_DIALOG_DATA) public data: TaskInterface
-            ) {}
+@Output() close = new EventEmitter<void>(); // ❗️ hinzugefügt
+
+    constructor(
+        private tasksService: TasksService,
+        // private dialogRef: MatDialogRef<TaskDialogComponent>,  /* Commented out */
+        // @Inject(MAT_DIALOG_DATA) public data: TaskInterface     /* Commented out */
+    ) {}
 
     showTaskInfo: boolean = true;
 
     onEditTask(): void {
         this.taskDataService.editModeActive = true;
-        console.log(this.taskDataService.editModeActive);
         setTimeout(() => {
             this.showTaskInfo = false;
         }, 10);
@@ -42,14 +44,12 @@ export class TaskDialogComponent {
     onCancelEditTask(): void {
         this.showTaskInfo = true;
         this.taskDataService.editModeActive = false;
-        console.log(this.taskDataService.editModeActive);
-        
     }
 
+    /* Replaced: this.dialogRef.close() */
     closeDialog(): void {
-        this.dialogRef.close();
+        this.close.emit(); // ❗️ statt dialogRef.close()
         this.taskDataService.editModeActive = false;
-        console.log(this.taskDataService.editModeActive);
     }
 
     async deleteTask(): Promise<void> {

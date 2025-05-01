@@ -8,11 +8,13 @@
     height: auto;
     background: #FFFFFF;
     overflow: auto;
+
     &::-webkit-scrollbar {
         display: none;
     }
-    -ms-overflow-style: none; 
-    scrollbar-width: none; 
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
     font-family: 'Inter', sans-serif;
 
     .task-info-container {
@@ -190,7 +192,6 @@
                 .task-info-subtask-item {
                     @include dFlex(flex-start, center);
 
-
                     span {
                         font-family: "Inter", sans-serif;
                         font-weight: 400;
@@ -254,104 +255,103 @@
     }
 }
 
-@media  (max-width: 630px) {
-    .task-info-header-container {
-        H2 {
-        font-size: 2.7rem;
-        }
-    }
-}
-
-@media  (max-width: 590px) {
-    .task-info-header-container {
-        H2 {
-        font-size: 2.65rem;
-        }
-    }
-}
-
-
-@media  (max-width: 570px) {
-    .task-info-header-container {
-        H2 {
-        font-size: 2.55rem;
-        }
-    }
-}
-
-@media  (max-width: 550px) {
-    .task-info-header-container {
-        H2 {
-        font-size: 2.45rem;
-        }
-    }
-}
-
-@media  (max-width: 530px) {
-    .task-info-header-container {
-        H2 {
-        font-size: 2.35rem;
-        }
-    }
-}
-
-@media  (max-width: 510px) {
-    .task-info-header-container {
-        H2 {
-        font-size: 2.25rem;
-        }
-    }
-}
-
-@media  (max-width: 500px) {
-    .task-info-header-container {
-        H2 {
-        font-size: 2.15rem;
-        }
-    }
-}
-
-@media  (max-width: 470px) {
-    .task-info-header-container {
-        H2 {
-        font-size: 2.05rem;
-        }
-    }
-}
-
-@media  (max-width: 450px) {
-    .task-info-header-container {
-        H2 {
-        font-size: 1.95rem;
-        }
-    }
-}
-
-@media  (max-width: 430px) {
-    .task-info-header-container {
-        H2 {
-        font-size: 1.85rem;
-        }
-    }
-}
-
-@media  (max-width: 410px) {
-    .task-info-header-container {
-        H2 {
-        font-size: 1.75rem;
-        }
-    }
-}
-
-@media  (max-width: 390px) {
+@media (max-width: 630px) {
     .task-info-header-container {
         h2 {
-        font-size: 1.65rem;
+            font-size: 2.7rem;
         }
     }
 }
 
-@media  (max-width: 340px) {
+@media (max-width: 590px) {
+    .task-info-header-container {
+        h2 {
+            font-size: 2.65rem;
+        }
+    }
+}
+
+@media (max-width: 570px) {
+    .task-info-header-container {
+        h2 {
+            font-size: 2.55rem;
+        }
+    }
+}
+
+@media (max-width: 550px) {
+    .task-info-header-container {
+        h2 {
+            font-size: 2.45rem;
+        }
+    }
+}
+
+@media (max-width: 530px) {
+    .task-info-header-container {
+        h2 {
+            font-size: 2.35rem;
+        }
+    }
+}
+
+@media (max-width: 510px) {
+    .task-info-header-container {
+        h2 {
+            font-size: 2.25rem;
+        }
+    }
+}
+
+@media (max-width: 500px) {
+    .task-info-header-container {
+        h2 {
+            font-size: 2.15rem;
+        }
+    }
+}
+
+@media (max-width: 470px) {
+    .task-info-header-container {
+        h2 {
+            font-size: 2.05rem;
+        }
+    }
+}
+
+@media (max-width: 450px) {
+    .task-info-header-container {
+        h2 {
+            font-size: 1.95rem;
+        }
+    }
+}
+
+@media (max-width: 430px) {
+    .task-info-header-container {
+        h2 {
+            font-size: 1.85rem;
+        }
+    }
+}
+
+@media (max-width: 410px) {
+    .task-info-header-container {
+        h2 {
+            font-size: 1.75rem;
+        }
+    }
+}
+
+@media (max-width: 390px) {
+    .task-info-header-container {
+        h2 {
+            font-size: 1.65rem;
+        }
+    }
+}
+
+@media (max-width: 340px) {
     .task-info-due-date-output {
         padding-left: 26px;
     }

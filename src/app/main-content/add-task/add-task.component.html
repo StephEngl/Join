@@ -1,5 +1,54 @@
 <section class="task-section">
   <div class="task-section-content">
+      <h2>Add Task</h2>
+
+      <form class="task-form" (ngSubmit)="onSubmit()">
+          <div class="task-form-wrapper">
+              <app-task-overview
+                  [(taskDueDate)]="inputTaskDueDate"
+                  [today]="today"
+                  [(taskTitle)]="inputTaskTitle"
+                  [(taskDescription)]="inputTaskDescription"
+                  [taskData]="taskData">
+              </app-task-overview>
+
+              <div class="vertical-divider"></div>
+
+              <app-task-details class="task-details"
+                  (inputChange)="onInputChange()"
+                  [taskDataInput]="taskData">
+              </app-task-details>
+          </div>
+
+          <div class="footnote">
+              <p><span>*</span> This field is required</p>
+
+              <div class="button-wrapper">
+                  <button class="button-cancel"
+                          type="button"
+                          (click)="cancelEditTask.emit()">
+                      <!-- Modified: now emits @Output to parent (task-dialog.component) -->
+                      Cancel
+                      <span class="icon"></span>
+                  </button>
+
+                  <button class="button-save" type="submit">
+                      @if (taskDataService.editModeActive) {
+                          Update Task
+                      } @else {
+                          Create Task
+                      }
+                      <img src="../../../assets/icons/kanban/check_white.svg" />
+                  </button>
+              </div>
+          </div>
+      </form>
+  </div>
+</section>
+
+
+<!-- <section class="task-section">
+  <div class="task-section-content">
     <h2>Add Task</h2>
     <form class="task-form" (ngSubmit)="onSubmit()">
       <div class="task-form-wrapper">
@@ -30,8 +79,8 @@
             <span class="icon"></span>
           </button>
           <button class="button-save" type="submit">
-            <!-- [disabled]="!isEdited || !isFormValid" -->
-            @if (taskDataService.editModeActive) {
+            [disabled]="!isEdited || !isFormValid" -->
+            <!-- @if (taskDataService.editModeActive) {
               Update Task
             } @else { 
               Create Task
@@ -42,4 +91,4 @@
       </div>
     </form>
   </div>
-</section>
+</section> -->

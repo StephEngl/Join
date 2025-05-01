@@ -1,13 +1,15 @@
 <div class="task-dialog-section">
-        @if (showTaskInfo) {
-            <app-task-info
-                [taskDataDialogInfo]="data"
-                (editTask)="onEditTask()">
-            </app-task-info>
-        } @else {
-            <app-add-task
-                [taskData]="data"
-                (cancelEditTask)="onCancelEditTask()">
-            </app-add-task>
-        }
+    @if (showTaskInfo) {
+        <app-task-info
+        [taskDataDialogInfo]="taskDataDialog"
+        (editTask)="onEditTask()"
+        (close)="closeDialog()"> <!-- ❗️Hinzugefügt -->
+    </app-task-info>
+    
+    } @else {
+        <app-add-task
+            [taskData]="taskDataDialog"
+            (cancelEditTask)="onCancelEditTask()">
+        </app-add-task>
+    }
 </div>
