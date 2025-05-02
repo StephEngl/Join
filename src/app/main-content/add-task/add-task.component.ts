@@ -50,7 +50,7 @@ export class AddTaskComponent {
   isFormValid = false;
   inputTaskTitle: string = '';
   inputTaskDescription: string = '';
-  inputTaskDueDate: Date | null = null;
+  inputTaskDueDate: Date = new Date();
   today: string = new Date().toISOString().split('T')[0];
   subtaskText = '';
   subtasksContainer: {
@@ -98,13 +98,14 @@ export class AddTaskComponent {
 
   @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
 
-  clearForm() { }
+  clearForm() {
+    this.taskDataService.clearData();
+  }
 
   onSubmit() {
     if (!this.taskDataService.selectedCategory) {
       return console.log('simple validation, you can only submit after setting category');
     }
-
     const isEdit = this.taskDataService.editModeActive;
 
     const task = {
@@ -118,6 +119,15 @@ export class AddTaskComponent {
     // hier der toaster eingebaut mit einem wechsel von add-task zu board :)
     if (isEdit) {
       this.tasksService.updateTask(task);
+      this.toastService.triggerToast(
+        'Task updated on board',
+        'create',
+        'assets/icons/navbar/board.svg'
+      );
+      
+      setTimeout(() => {
+        this.router.navigate(['/board']);
+      }, 1000);
     } else {
       this.tasksService.addTask(task);
       this.toastService.triggerToast(
@@ -125,6 +135,7 @@ export class AddTaskComponent {
         'create',
         'assets/icons/navbar/board.svg'
       );
+      
       setTimeout(() => {
         this.router.navigate(['/board']);
       }, 1000);
@@ -157,9 +168,6 @@ export class AddTaskComponent {
     return submittedTask;
   }
 
-  onInputChange() {
-    // Optional: Validierung oder weitere Logik
-  }
 
   addSubtask() {
     const subtask = {
