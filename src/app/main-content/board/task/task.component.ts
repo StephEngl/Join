@@ -14,8 +14,8 @@ export class TaskComponent {
   tasksService = inject(TasksService);
   @Input() taskData!: TaskInterface;
   @Input() searchRequest: string = "";
+  @Input() searchTrigger: boolean = false;
   @Output() searchedTitle: EventEmitter<string> = new EventEmitter();
-
 
   doesContactExist(contactId: string): boolean {
     return this.contactsService.contacts.some(c => c.id === contactId);
@@ -44,5 +44,6 @@ export class TaskComponent {
       .filter(c => this.doesContactExist(c.contactId));
     return validContacts.length > 4 ? validContacts.length - 4 : 0;
   }
+
 
 }

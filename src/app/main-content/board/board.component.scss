@@ -167,10 +167,6 @@
             margin: 8px 0;
         }
 
-        >li:first-child {
-            margin-top: 16px;
-        }
-
         >li:last-child {
             margin-bottom: 16px;
         }
@@ -227,21 +223,7 @@
 }
 
 .no-tasks {
-    background-color: #e8e8e8;
-    color: #999;
-    font-size: 14px;
-    width: calc(100% - 20px);
-    font-weight: 500;
-    text-align: center;
-    padding: 8px 12px;
-    border-radius: 12px;
-    border: 2px dashed #ccc;
-    height: auto;
-    min-height: 45px;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    white-space: nowrap;
+    @include noTaskOrMatches();
 }
 
 /* Drag & Drop Animation */

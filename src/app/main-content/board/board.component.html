@@ -49,8 +49,8 @@
                     #taskList
                     (scroll)="onTaskListScrollShadow(taskList)"
                     (scroll)="onTaskListScrollShadowMobile(taskList)">
-
-                    @if (filterTasksByCategory(column.taskStatus).length === 0) {
+                    
+                    @if (filterTasksByCategory(column.taskStatus).length === 0 || !hasSearchResults(column.taskStatus, searchText)) {
                         <li class="no-tasks">No tasks {{ column.title }}</li>
                     } @else {
                         @for (task of filterTasksByCategory(column.taskStatus); track task.id) {
@@ -58,6 +58,7 @@
                                 <app-task
                                     [taskData]="task"
                                     [searchRequest]="searchText"
+                                    [searchTrigger]="searchActive"
                                     cdkDrag>
                                 </app-task>
                             </li>
