@@ -107,10 +107,6 @@ export class BoardComponent {
         this.selectedTask = null;
     }
 
-    toggleDialog() {}
-
-    onTaskCreated() {}
-
     openAddTaskDialog(): void {
         this.showTaskDialog = true;
         this.showAddTaskDialog = true;
@@ -118,12 +114,7 @@ export class BoardComponent {
         console.log("hello");
         // this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';
 
-        /* this.dialogRef = this.dialog.open(AddTaskComponent, { */
-        /*     width: '1116px', */
-        /*     maxWidth: '80vw', */
-        /*     panelClass: 'add-task-dialog-responsive', */
-        /* }); */
-    }
+      }
 
     onTaskListScrollShadow(taskList: HTMLElement) {
         const boardColumn = taskList.closest('.board-column');
