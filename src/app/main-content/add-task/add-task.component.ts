@@ -98,6 +98,7 @@ export class AddTaskComponent {
 
   @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
   @Output() taskUpdated = new EventEmitter<void>();
+  @Output() taskCreated = new EventEmitter<void>();
 
   clearForm() {
     this.taskDataService.clearData();
@@ -134,6 +135,7 @@ export class AddTaskComponent {
       'create',
       'assets/icons/navbar/board.svg'
     );
+    this.taskCreated.emit();
     setTimeout(() => {
       this.router.navigate(['/board']);
     }, 1000);
@@ -149,7 +151,7 @@ export class AddTaskComponent {
     const activeBtn = this.taskDataService.priorityButtons.find(
       (btnStatus) => btnStatus.btnActive
     );
-    
+
     const submittedTask: TaskInterface = {
       title: this.inputTaskTitle,
       description: this.inputTaskDescription,
