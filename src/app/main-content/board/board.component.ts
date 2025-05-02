@@ -37,6 +37,7 @@ export class BoardComponent {
     searchText: string = '';
 
     showTaskDialog: boolean = false;
+    showAddTaskDialog: boolean = false;
     selectedTask: TaskInterface | null = null;
 
     boardColumns: { taskStatus: string; title: string }[] = [
@@ -101,6 +102,7 @@ export class BoardComponent {
 
     openAddTaskDialog(): void {
         this.showTaskDialog = true;
+        this.showAddTaskDialog = true;
         this.singleTaskDataService.editModeActive = false;
         console.log("hello");
         // this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';
