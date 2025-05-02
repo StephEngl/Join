@@ -1,15 +1,6 @@
 <div class="task-dialog-section">
-  @if (dialogType === 'add') {
-  <app-add-task (cancelEditTask)="close.emit()"></app-add-task>
-  } @else if (taskDataDialog) {
+  @if (showTaskInfo) {
   <app-task-info
-    [taskDataDialogInfo]="taskDataDialog"
-    (editTask)="onEditTask()"
-    (close)="close.emit()"
-  >
-  </app-task-info>
-  } 
-  <!-- <app-task-info
     [taskDataDialogInfo]="taskDataDialog"
     (editTask)="onEditTask()"
     (close)="closeDialog()"
@@ -22,5 +13,5 @@
     (cancelEditTask)="onCancelEditTask()"
   >
   </app-add-task>
-  } -->
+  }
 </div>

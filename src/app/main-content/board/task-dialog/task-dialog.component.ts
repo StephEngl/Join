@@ -15,7 +15,7 @@ import { SingleTaskDataService } from '../../../services/single-task-data.servic
 })
 export class TaskDialogComponent {
   taskDataService = inject(SingleTaskDataService);
-  @Input() taskDataDialog?: TaskInterface | null;
+  @Input() taskDataDialog!: TaskInterface;
   @Input() dialogType: 'add' | 'info' = 'info';
   @Output() close = new EventEmitter<void>();
 
