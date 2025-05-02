@@ -95,6 +95,7 @@ export class BoardComponent {
   openTaskDialog(taskData: TaskInterface): void {
     this.selectedTask = taskData;
     this.showTaskDialog = true;
+    this.showAddTaskDialog = false;
   }
 
 
@@ -114,6 +115,7 @@ addTaskWithStatus(taskStatus: string){
 
   closeTaskDialog(): void {
     this.showTaskDialog = false;
+    this.showAddTaskDialog = false;
     this.selectedTask = null;
   }
 

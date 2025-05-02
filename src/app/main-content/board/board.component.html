@@ -1,24 +1,24 @@
 <section class="board-section">
-    <div class="board-header">
-        <div class="title-button">
-            <h1>Board</h1>
-            <button class="add-task-btn-respo" (click)="openAddTaskDialog()">
-                <img src="./assets/icons/kanban/add_white.svg" alt="Add Icon" />
-            </button>
-        </div>
-        <div class="search-add-container">
-            <div class="search-input-container">
-                <input [(ngModel)]="searchText" type="search" placeholder="Find Task" />
-                <div class="search-icon">
-                    <img src="./assets/icons/kanban/search.png" alt="Search Icon" />
-                </div>
-            </div>
-            <button class="add-task-btn" (click)="openAddTaskDialog()">
-                Add Task
-                <img src="./assets/icons/kanban/add_white.svg" alt="Add Icon" />
-            </button>
-        </div>
+  <div class="board-header">
+    <div class="title-button">
+      <h1>Board</h1>
+      <button class="add-task-btn-respo" (click)="openAddTaskDialog()">
+        <img src="./assets/icons/kanban/add_white.svg" alt="Add Icon" />
+      </button>
     </div>
+    <div class="search-add-container">
+      <div class="search-input-container">
+        <input [(ngModel)]="searchText" type="search" placeholder="Find Task" />
+        <div class="search-icon">
+          <img src="./assets/icons/kanban/search.png" alt="Search Icon" />
+        </div>
+      </div>
+      <button class="add-task-btn" (click)="openAddTaskDialog()">
+        Add Task
+        <img src="./assets/icons/kanban/add_white.svg" alt="Add Icon" />
+      </button>
+    </div>
+  </div>
 
     <div class="board" #boardContainer>
         @for (column of boardColumns; track column.title) {
@@ -45,37 +45,41 @@
                     }
                 </div>
 
-                <ul class="task-list"
-                    #taskList
-                    (scroll)="onTaskListScrollShadow(taskList)"
-                    (scroll)="onTaskListScrollShadowMobile(taskList)">
-                    
-                    @if (filterTasksByCategory(column.taskStatus).length === 0 || !hasSearchResults(column.taskStatus, searchText)) {
-                        <li class="no-tasks">No tasks {{ column.title }}</li>
-                    } @else {
-                        @for (task of filterTasksByCategory(column.taskStatus); track task.id) {
-                            <li (click)="openTaskDialog(task)">
-                                <app-task
-                                    [taskData]="task"
-                                    [searchRequest]="searchText"
-                                    [searchTrigger]="searchActive"
-                                    cdkDrag>
-                                </app-task>
-                            </li>
-                        }
-                    }
-                </ul>
-            </div>
-        }
+      <ul
+        class="task-list"
+        #taskList
+        (scroll)="onTaskListScrollShadow(taskList)"
+        (scroll)="onTaskListScrollShadowMobile(taskList)"
+      >
+        @if (filterTasksByCategory(column.taskStatus).length === 0 ||
+        !hasSearchResults(column.taskStatus, searchText)) {
+        <li class="no-tasks">No tasks {{ column.title }}</li>
+        } @else { @for (task of filterTasksByCategory(column.taskStatus); track
+        task.id) {
+        <li (click)="openTaskDialog(task)">
+          <app-task
+            [taskData]="task"
+            [searchRequest]="searchText"
+            [searchTrigger]="searchActive"
+            cdkDrag
+          >
+          </app-task>
+        </li>
+        } }
+      </ul>
     </div>
+    }
+  </div>
 </section>
 
 <!-- Neuer manueller Task-Dialog, ersetzt früheres MatDialog.open(...) -->
 @if (showTaskDialog && selectedTask) {
-    <app-task-dialog
-        [taskDataDialog]="selectedTask"
-        (close)="closeTaskDialog()">
-    </app-task-dialog>
+<app-task-dialog
+  [taskDataDialog]="selectedTask"
+  [dialogType]="'info'"
+  (close)="closeTaskDialog()"
+>
+</app-task-dialog>
 } @else if (showAddTaskDialog) {
     <div class="add-task-wrapper">
         <app-add-task></app-add-task>

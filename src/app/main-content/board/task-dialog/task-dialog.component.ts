@@ -6,7 +6,6 @@ import { AddTaskComponent } from '../../add-task/add-task.component';
 import { TasksService } from '../../../services/tasks.service';
 import { SingleTaskDataService } from '../../../services/single-task-data.service';
 
-
 @Component({
   selector: 'app-task-dialog',
   templateUrl: './task-dialog.component.html',
@@ -17,14 +16,12 @@ import { SingleTaskDataService } from '../../../services/single-task-data.servic
 export class TaskDialogComponent {
   taskDataService = inject(SingleTaskDataService);
   @Input() taskDataDialog!: TaskInterface;
-
+  @Input() dialogType: 'add' | 'info' = 'info';
   @Output() close = new EventEmitter<void>();
 
   constructor(private tasksService: TasksService) {}
 
   showTaskInfo: boolean = true;
-
-
 
   onEditTask(): void {
     this.taskDataService.editModeActive = true;
