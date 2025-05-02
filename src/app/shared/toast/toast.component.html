@@ -1,5 +1,8 @@
 @if (isToastOpen$ | async) {
 <div class="toast" [ngClass]="[(isToastAnimated$ | async) ? 'show' : '', toastType$ | async]">
-    {{ toastMessage$ | async }}
+    <span>{{ toastMessage$ | async }}</span>
+    @if ((toastIcon$ | async) !== '') {
+    <img [src]="toastIcon$ | async" alt="Toast Icon" class="toast-icon" />
+    }
 </div>
 }
