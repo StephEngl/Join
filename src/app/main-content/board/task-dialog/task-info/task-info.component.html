@@ -33,18 +33,18 @@
                 @switch (taskDataDialogInfo.priority) {
                     @case ('urgent') {
                         <img class="task-info-priority-img"
-                             src="assets/icons/kanban/prio_urgent.svg"
-                             alt="urgent" />
+                            src="assets/icons/kanban/prio_urgent.svg"
+                            alt="urgent" />
                     }
                     @case ('medium') {
                         <img class="task-info-priority-img"
-                             src="assets/icons/kanban/prio_medium.svg"
-                             alt="Medium" />
+                            src="assets/icons/kanban/prio_medium.svg"
+                            alt="Medium" />
                     }
                     @case ('low') {
                         <img class="task-info-priority-img"
-                             src="assets/icons/kanban/prio_low.svg"
-                             alt="low" />
+                            src="assets/icons/kanban/prio_low.svg"
+                            alt="low" />
                     }
                 }
             </div>
@@ -56,7 +56,7 @@
                 @for (person of taskDataDialogInfo.assignedTo; track person.contactId) {
                     <div class="assigned-person">
                         <span class="initials"
-                              [style.backgroundColor]="contactsService.contactColor(person.contactId)">
+                            [style.backgroundColor]="contactsService.contactColor(person.contactId)">
                             {{ contactsService.nameInitials(person.contactId) }}
                         </span>
                         <span class="name">

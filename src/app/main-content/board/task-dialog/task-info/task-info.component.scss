@@ -7,8 +7,9 @@
     width: 100%;
     height: auto;
     background: #FFFFFF;
+    border-radius: 1rem;
     overflow: auto;
-
+    max-width: $queryBreak1;
     &::-webkit-scrollbar {
         display: none;
     }
@@ -83,11 +84,13 @@
         .task-info-due-date-container {
             @include dFlex(flex-start, center);
             width: 100%;
+            padding-left: 0.5rem;
             padding-top: 0.8rem;
             padding-bottom: 0.8rem;
 
             .task-info-due-date-txt {
                 @include dFlex(flex-start, center);
+                width: 100px;
                 font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
                 font-weight: 400;
                 line-height: 120%;
@@ -96,19 +99,21 @@
 
             .task-info-due-date-output {
                 display: flex;
-                width: 100%;
-                padding-left: 46px;
+                padding-left: 48px;
+                gap: 1rem;
             }
         }
 
         .task-info-priority-container {
             @include dFlex(flex-start, center);
             width: 100%;
+            padding-left: 0.5rem;
             padding-top: 0.8rem;
             padding-bottom: 0.8rem;
 
             .task-info-priority-txt {
                 @include dFlex(flex-start, center);
+                width: 100px;
                 font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
                 font-weight: 400;
                 line-height: 120%;
@@ -254,6 +259,15 @@
         }
     }
 }
+
+@media (min-width: 630px) {
+    .task-info-header-container {
+        h2 {
+            font-size: 3rem;
+        }
+    }
+}
+
 
 @media (max-width: 630px) {
     .task-info-header-container {
