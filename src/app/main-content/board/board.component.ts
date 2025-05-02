@@ -108,7 +108,6 @@ export class BoardComponent {
     }
 
     openAddTaskDialog(): void {
-        this.showTaskDialog = true;
         this.showAddTaskDialog = true;
         this.singleTaskDataService.editModeActive = false;
         console.log("hello");
