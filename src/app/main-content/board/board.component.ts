@@ -35,15 +35,16 @@ export class BoardComponent {
     tasksService = inject(TasksService);
     singleTaskDataService = inject(SingleTaskDataService);
     searchText: string = '';
+    searchActive: boolean = false;
 
     showTaskDialog: boolean = false;
     selectedTask: TaskInterface | null = null;
 
     boardColumns: { taskStatus: string; title: string }[] = [
         { taskStatus: 'toDo', title: 'To do' },
-        { taskStatus: 'inProgress', title: 'In progress' },
-        { taskStatus: 'feedback', title: 'Await feedback' },
-        { taskStatus: 'done', title: 'Done' },
+        { taskStatus: 'inProgress', title: 'In progress'},
+        { taskStatus: 'feedback', title: 'Await feedback'},
+        { taskStatus: 'done', title: 'Done'},
     ];
 
     btnAddHover = false;
@@ -61,6 +62,16 @@ export class BoardComponent {
                 const priorityOrder = { urgent: 1, medium: 2, low: 3 };
                 return priorityOrder[a.priority] - priorityOrder[b.priority];
             });
+    }
+
+    hasSearchResults(status: string, searchText: string): boolean {
+        const search = searchText.toLowerCase();
+        return this.tasksService.tasks
+            .filter(task => task.taskType === status)
+            .some(task =>
+                task.title.toLowerCase().includes(search) ||
+                task.description.toLowerCase().includes(search)
+            );
     }
 
     connectedDropLists = this.boardColumns.map((col) => col.taskStatus);
@@ -142,4 +153,12 @@ export class BoardComponent {
             taskList.classList.remove('scrolled-right');
         }
     }
+
+    triggerSearch() {
+        this.searchActive = true;
+        setTimeout(() => {
+            this.searchActive = false;
+        }, 50);
+    }
+
 }
