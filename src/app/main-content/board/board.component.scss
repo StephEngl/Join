@@ -146,7 +146,7 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        gap: 16px;
+        // gap: 16px;
         padding: 0;
         margin: 0;
         list-style: none;
@@ -161,7 +161,9 @@
         &::-webkit-scrollbar-thumb {
             display: none;
         }
-
+        >li {
+            margin: 8px 0;
+        }
         >li:first-child {
             margin-top: 16px;
         }
@@ -257,15 +259,24 @@ app-task {
 }
 
 .cdk-drop-list-disabled {
-    opacity: 0.7;
+    border: 2px dashed #ccc;
+    border-radius: 16px;
 }
 
 .cdk-drag-placeholder {
-    opacity: 0.4;
-    margin-bottom: 20px;
+    position: relative;
+    visibility: hidden;
 }
 
-.cdk-drop-list-receiving {
+.cdk-drag-placeholder::before {
+    margin: -8px 0;
+    content: '';
+    position: absolute;
+    visibility: visible;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
     border: 2px dashed #ccc;
     border-radius: 16px;
 }

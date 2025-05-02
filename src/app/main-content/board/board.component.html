@@ -75,4 +75,6 @@
         [taskDataDialog]="selectedTask"
         (close)="closeTaskDialog()">
     </app-task-dialog>
+} @else if (showTaskDialog && !selectedTask) {
+    <!-- include add task as dialog -->
 }

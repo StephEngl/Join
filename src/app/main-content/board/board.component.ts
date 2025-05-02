@@ -26,6 +26,7 @@ import { SingleTaskDataService } from '../../services/single-task-data.service';
         TaskDialogComponent,
         DragDropModule,
         FormsModule,
+        AddTaskComponent
     ],
     templateUrl: './board.component.html',
     styleUrls: ['./board.component.scss'],
@@ -95,6 +96,7 @@ export class BoardComponent {
     }
 
     openAddTaskDialog(): void {
+        this.showTaskDialog = true;
         this.singleTaskDataService.editModeActive = false;
         console.log("hello");
         // this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';

@@ -24,6 +24,7 @@
               <p><span>*</span> This field is required</p>
 
               <div class="button-wrapper">
+                @if (!taskDataService.editModeActive) {
                   <button class="button-cancel"
                           type="button"
                           (click)="cancelEditTask.emit()">
@@ -31,10 +32,11 @@
                       Cancel
                       <span class="icon"></span>
                   </button>
+                }
 
                   <button class="button-save" type="submit">
                       @if (taskDataService.editModeActive) {
-                          Update Task
+                          OK <!-- toggled if edit mode active -->
                       } @else {
                           Create Task
                       }
