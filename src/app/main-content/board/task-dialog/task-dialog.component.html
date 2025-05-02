@@ -5,11 +5,8 @@
     (editTask)="onEditTask()"
     (close)="closeDialog()"
   >
-    <!-- ❗️Hinzugefügt -->
   </app-task-info>
 
-  } @else if (showAddTaskDialog) {
-  <app-add-task></app-add-task>
   } @else {
   <app-add-task
     [taskData]="taskDataDialog"
