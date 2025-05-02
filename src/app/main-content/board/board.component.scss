@@ -161,9 +161,11 @@
         &::-webkit-scrollbar-thumb {
             display: none;
         }
+        
         >li {
             margin: 8px 0;
         }
+
         >li:first-child {
             margin-top: 16px;
         }

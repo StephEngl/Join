@@ -93,13 +93,6 @@ export class AddTaskComponent {
 
   @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
 
-  @HostListener('document:click')
-  closeDropdownLists(): void {
-    // move it to task-details
-    // this.accordionItem.close();
-    // this.categoryAccordionItem.close();
-  }
-
   clearForm() {}
 
   onSubmit() {
@@ -279,7 +272,6 @@ export class AddTaskComponent {
 
   setCategory(index: number) {
     this.selectedCategory = this.filteredCategories()[index];
-    this.closeDropdownLists();
   }
 }
 

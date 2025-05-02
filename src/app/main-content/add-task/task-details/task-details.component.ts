@@ -1,4 +1,4 @@
-import { Component, Input, ViewChild, ElementRef, inject } from '@angular/core';
+import { Component, Input, ViewChild, ElementRef, inject, HostListener } from '@angular/core';
 import { CdkAccordionItem, CdkAccordionModule } from '@angular/cdk/accordion';
 import { FormsModule } from '@angular/forms';
 import { ContactsService } from '../../../services/contacts.service';
@@ -33,6 +33,12 @@ export class TaskDetailsComponent {
     this.setAssignedContactsInEditMode();
     this.setCategoryInEditMode();
     this.setSubtasksInEditMode();
+  }
+
+  @HostListener('document:click')
+  closeDropdownLists(): void {
+    this.accordionItem.close();
+    this.categoryAccordionItem.close();
   }
   
   searchContact(event: Event) {
