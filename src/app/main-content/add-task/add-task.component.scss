@@ -137,46 +137,23 @@
     h2 {
       padding-bottom: 24px !important;
     }
-
-    .form-group {
-      width: 440px;
-    }
-
-    .priority-buttons-wrapper {
-      gap: 0;
-    }
-
-    .priority-button {
-      width: 120px;
-      padding: 10px;
-    }
   }
 }
 
 @container task-section (max-width: 500px) {
   .task-overview,
   .task-details,
-  .form-group,
-  .form-control,
   h2 {
     width: 100% !important;
   }
 }
 
-@container task-section (max-width: 400px) {
-  .priority-buttons-wrapper {
-    gap: 4px !important;
-  }
-
-  .priority-button {
-    font-size: 16px;
-  }
-}
-
 @container task-section (max-width: 360px) {
-  .priority-buttons-wrapper {
-    .priority-button {
-      padding: 10px 0;
-    }
+  .task-section-content {
+    padding: 12px !important;
+  }
+
+  .form-control {
+    padding: 12px 12px !important;
   }
 }

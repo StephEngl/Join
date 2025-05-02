@@ -36,7 +36,7 @@ span {
 
   &::placeholder {
     font-family: "Inter", sans-serif;
-    font-size: 20px;
+    font-size: 1rem;
     color: $col-font-inactive;
     opacity: 1;
   }
@@ -52,5 +52,11 @@ span {
   :host .form-control,
   :host h2 {
     width: 100% !important;
+  }
+}
+
+@container task-section (max-width: 360px) {
+  .form-control {
+    padding: 12px 12px !important;
   }
 }

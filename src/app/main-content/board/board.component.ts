@@ -106,12 +106,16 @@ export class BoardComponent {
         this.selectedTask = null;
     }
 
+    toggleDialog() {}
+
+    onTaskCreated() {}
+
     openAddTaskDialog(): void {
         this.showTaskDialog = true;
         this.singleTaskDataService.editModeActive = false;
         console.log("hello");
         // this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';
-        
+
         /* this.dialogRef = this.dialog.open(AddTaskComponent, { */
         /*     width: '1116px', */
         /*     maxWidth: '80vw', */

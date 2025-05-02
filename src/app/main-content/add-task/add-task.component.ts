@@ -16,6 +16,8 @@ import { TasksService } from '../../services/tasks.service';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { TaskOverviewComponent } from './task-overview/task-overview.component';
 import { SingleTaskDataService } from '../../services/single-task-data.service';
+import { ToastService } from '../../shared/toast/toast.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-add-task',
@@ -30,6 +32,9 @@ import { SingleTaskDataService } from '../../services/single-task-data.service';
   styleUrl: './add-task.component.scss',
 })
 export class AddTaskComponent {
+
+  constructor(private toastService: ToastService, private router: Router) { }
+
   @ViewChild('accordionItem') accordionItem!: CdkAccordionItem;
   @ViewChild('categoryAccordionItem') categoryAccordionItem!: CdkAccordionItem;
   @ViewChild('inputFieldSubTask') inputFieldSubTaskRef!: ElementRef;
@@ -66,34 +71,34 @@ export class AddTaskComponent {
     priority: 'Urgent' | 'Medium' | 'Low';
     btnActive: boolean;
   }[] = [
-    {
-      imgInactive: './assets/icons/kanban/prio_urgent.svg',
-      imgActive: './assets/icons/kanban/prio_urgent_white.svg',
-      colorActive: '#FF3D00',
-      priority: 'Urgent',
-      btnActive: false,
-    },
-    {
-      imgInactive: './assets/icons/kanban/prio_medium.svg',
-      imgActive: './assets/icons/kanban/prio_medium_white.svg',
-      colorActive: '#FFA800',
-      priority: 'Medium',
-      btnActive: false,
-    },
-    {
-      imgInactive: './assets/icons/kanban/prio_low.svg',
-      imgActive: './assets/icons/kanban/prio_low_white.svg',
-      colorActive: '#7AE229',
-      priority: 'Low',
-      btnActive: false,
-    },
-  ];
+      {
+        imgInactive: './assets/icons/kanban/prio_urgent.svg',
+        imgActive: './assets/icons/kanban/prio_urgent_white.svg',
+        colorActive: '#FF3D00',
+        priority: 'Urgent',
+        btnActive: false,
+      },
+      {
+        imgInactive: './assets/icons/kanban/prio_medium.svg',
+        imgActive: './assets/icons/kanban/prio_medium_white.svg',
+        colorActive: '#FFA800',
+        priority: 'Medium',
+        btnActive: false,
+      },
+      {
+        imgInactive: './assets/icons/kanban/prio_low.svg',
+        imgActive: './assets/icons/kanban/prio_low_white.svg',
+        colorActive: '#7AE229',
+        priority: 'Low',
+        btnActive: false,
+      },
+    ];
 
   @Input() taskData!: TaskInterface;
 
   @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
 
-  clearForm() {}
+  clearForm() { }
 
   onSubmit() {
     if (!this.taskDataService.selectedCategory) {
@@ -110,9 +115,20 @@ export class AddTaskComponent {
       }),
     };
 
-    isEdit
-      ? this.tasksService.updateTask(task)
-      : this.tasksService.addTask(task);
+    // hier der toaster eingebaut mit einem wechsel von add-task zu board :)
+    if (isEdit) {
+      this.tasksService.updateTask(task);
+    } else {
+      this.tasksService.addTask(task);
+      this.toastService.triggerToast(
+        'Task added to board',
+        'create',
+        'assets/icons/navbar/board.svg'
+      );
+      setTimeout(() => {
+        this.router.navigate(['/board']);
+      }, 1000);
+    }
 
     this.clearForm();
   }
@@ -382,9 +398,9 @@ export class AddTaskComponent {
 //     if (!this.taskDataService.selectedCategory) {
 //       return console.log('simple validation, you can only submit after setting category');
 //     }
-  
+
 //     const isEdit = this.taskDataService.editModeActive;
-  
+
 //     const task = {
 //       ...this.currentFormData(),
 //       ...(isEdit && {
@@ -392,14 +408,14 @@ export class AddTaskComponent {
 //         taskType: this.taskData.taskType,
 //       }),
 //     };
-  
+
 //     isEdit
 //       ? this.tasksService.updateTask(task)
 //       : this.tasksService.addTask(task);
-  
+
 //     this.clearForm();
 //   }
-  
+
 
 //   /* "right" side of add task component: methods & functions, e.g. priority, assigned to, ...*/
 // currentFormData(): Omit<TaskInterface, 'id'> {
@@ -426,7 +442,7 @@ export class AddTaskComponent {
 //   return submittedTask;
 // }
 
-  
+
 //   onInputChange() {
 //     // Optional: Validierung oder weitere Logik
 //   }

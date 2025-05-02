@@ -19,6 +19,12 @@
     opacity: 0;
     pointer-events: none;
 
+    .toast-icon {
+        width: 24px;
+        height: 24px;
+        margin-left: 12px;
+    }
+
     &.show {
         transform: translateX(-50%);
         opacity: 1;

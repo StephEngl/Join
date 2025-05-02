@@ -14,6 +14,7 @@ export class ToastComponent {
   toastType$ = this.toastService.toastType$;
   isToastAnimated$ = this.toastService.isToastAnimated$;
   isToastOpen$ = this.toastService.isToastOpen$;
+  toastIcon$ = this.toastService.toastIcon$;
 
   constructor(private toastService: ToastService) { }
 }

@@ -89,7 +89,8 @@
     overflow-x: auto;
     overflow-y: hidden;
     justify-content: flex-start;
-    height: 70dvh;
+    height: calc(100dvh - 300px);
+
     scrollbar-width: none;
     -ms-overflow-style: none;
 

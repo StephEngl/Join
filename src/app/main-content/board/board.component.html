@@ -28,9 +28,9 @@
                 [cdkDropListData]="filterTasksByCategory(column.taskStatus)"
                 [cdkDropListConnectedTo]="connectedDropLists"
                 (cdkDropListDropped)="drop($event)">
-                    
+
                 <div class="board-column-header">
-                    
+
                     <h3>{{ column.title }}</h3>
                     @if (column.title !== 'Done') {
                         <button class="mini-button-add-board"
@@ -76,6 +76,4 @@
         [taskDataDialog]="selectedTask"
         (close)="closeTaskDialog()">
     </app-task-dialog>
-} @else if (showTaskDialog && !selectedTask) {
-    <!-- include add task as dialog -->
 }
