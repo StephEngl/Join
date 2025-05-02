@@ -54,8 +54,7 @@ export class SingleTaskDataService {
         },
     ];
 
-    editModeActive: boolean = false; /* Added: used to control edit mode in manual dialog (TaskDialogComponent) */
-
+    editModeActive: boolean = false;
     taskStatus: 'toDo' | 'inProgress' | 'feedback' = 'toDo';
 
     resetAllPrioBtns() {

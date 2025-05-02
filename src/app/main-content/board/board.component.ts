@@ -1,7 +1,6 @@
 import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TasksService } from '../../services/tasks.service';
-import { TaskFirebaseTempComponent } from './task-firebase-temp/task-firebase-temp.component';
 import { TaskComponent } from './task/task.component';
 import { TaskInterface } from '../../interfaces/task.interface';
 /* import { MatDialog, MatDialogRef } from '@angular/material/dialog'; */ /* Removed: switched to manual task dialog */
@@ -23,7 +22,6 @@ import { SingleTaskDataService } from '../../services/single-task-data.service';
     standalone: true,
     imports: [
         CommonModule,
-        TaskFirebaseTempComponent,
         TaskComponent,
         TaskDialogComponent,
         DragDropModule,
@@ -98,6 +96,9 @@ export class BoardComponent {
 
     openAddTaskDialog(): void {
         this.singleTaskDataService.editModeActive = false;
+        console.log("hello");
+        // this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';
+        
         /* this.dialogRef = this.dialog.open(AddTaskComponent, { */
         /*     width: '1116px', */
         /*     maxWidth: '80vw', */
@@ -111,6 +112,7 @@ export class BoardComponent {
         const scrollTop = taskList.scrollTop;
         const scrollHeight = taskList.scrollHeight;
         const offsetHeight = taskList.offsetHeight;
+
         if (scrollTop > 0) {
             boardColumn.classList.add('scrolled-top');
         } else {

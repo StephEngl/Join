@@ -35,7 +35,8 @@
                     @if (column.title !== 'Done') {
                         <button class="mini-button-add-board"
                                 (mouseenter)="hoveredColumn = column.title"
-                                (mouseleave)="hoveredColumn = ''">
+                                (mouseleave)="hoveredColumn = ''"
+                                (click)="openAddTaskDialog()">
                             <img [src]="hoveredColumn === column.title
                                         ? './assets/icons/kanban/add_plus_blue.png'
                                         : './assets/icons/kanban/add.svg'"
@@ -67,9 +68,6 @@
         }
     </div>
 </section>
-
-<!-- temp Code, do not delete -->
-<app-task-firebase-temp></app-task-firebase-temp>
 
 <!-- Neuer manueller Task-Dialog, ersetzt früheres MatDialog.open(...) -->
 @if (showTaskDialog && selectedTask) {

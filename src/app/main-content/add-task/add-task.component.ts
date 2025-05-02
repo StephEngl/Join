@@ -142,7 +142,7 @@ export class AddTaskComponent {
       subTasks: subtasksForForm,
       priority: (activeBtn?.priority.toLowerCase() || 'medium') as 'urgent' | 'medium' | 'low',
       category: this.taskDataService.selectedCategory,
-      taskType: 'toDo',
+      taskType: this.taskDataService.taskStatus,
     };
 
     return submittedTask;
