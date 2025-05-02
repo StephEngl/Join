@@ -22,31 +22,33 @@ import { TaskInterface } from '../../../interfaces/task.interface';
   styleUrl: './task-overview.component.scss',
 })
 export class TaskOverviewComponent {
-  @Input() taskData!: TaskInterface;
-  taskDataService = inject(SingleTaskDataService);
-  @Input() currentTaskId: string = '';
+ @Input() taskData!: TaskInterface;
+@Input() today: string = new Date().toISOString().split('T')[0];
 
-  @Input() taskTitle: string = '';
-  @Output() taskTitleChange = new EventEmitter<string>();
+// Zweiwegebindung ([(...)]): Input + Output
+@Input() taskTitle: string = '';
+@Output() taskTitleChange = new EventEmitter<string>();
 
-  @Input() taskDescription: string = '';
-  @Output() taskDescriptionChange = new EventEmitter<string>();
+@Input() taskDescription: string = '';
+@Output() taskDescriptionChange = new EventEmitter<string>();
 
-  @Input() today: string = new Date().toISOString().split('T')[0];
-  @Input() taskDueDate: Date | null = null;
-  @Output() taskDueDateChange = new EventEmitter<Date | null>();
-  @Input() minDate: Date = new Date();
+@Input() taskDueDate: Date | null = null;
+@Output() taskDueDateChange = new EventEmitter<Date | null>();
 
-  onDueDateChange(dateString: string | null) {
-    const date = dateString ? new Date(dateString) : null;
-    this.taskDueDateChange.emit(date);
+taskDataService = inject(SingleTaskDataService);
+
+ngOnInit() {
+  if (this.taskDataService.editModeActive && this.taskData) {
+    this.taskTitleChange.emit(this.taskData.title);
+    this.taskDescriptionChange.emit(this.taskData.description);
+    this.taskDueDateChange.emit(this.taskData.dueDate ? new Date(this.taskData.dueDate) : null);
   }
+}
 
-  formatDate(date: Date | null): string | null {
-    return date ? date.toISOString().split('T')[0] : null;
-  }
+formatDate(date: Date | string | null): string {
+  if (!date) return '';
+  const d = typeof date === 'string' ? new Date(date) : date;
+  return d.toISOString().split('T')[0];
+}
 
-  validateForm(): boolean {
-    return !!this.taskTitle && !!this.taskDueDate;
-  }
 }
