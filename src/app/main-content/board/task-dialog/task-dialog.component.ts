@@ -30,7 +30,7 @@ export class TaskDialogComponent {
     }, 10);
   }
 
-  onCancelEditTask(): void {
+  taskEdited(): void {
     this.showTaskInfo = true;
     this.taskDataService.editModeActive = false;
   }

@@ -8,9 +8,12 @@
   </app-task-info>
 
   } @else {
+    <div class="task-edit-close" (click)="closeDialog()">
+      &#10005;
+  </div>
   <app-add-task
     [taskData]="taskDataDialog"
-    (cancelEditTask)="onCancelEditTask()"
+    (cancelEditTask)="taskEdited()"
   >
   </app-add-task>
   }

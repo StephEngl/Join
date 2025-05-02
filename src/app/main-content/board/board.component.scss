@@ -1,404 +1,428 @@
-@import './../../../assets/styles/variables.scss';
-@import './../../../assets/styles/mixins.scss';
+@import "./../../../assets/styles/variables.scss";
+@import "./../../../assets/styles/mixins.scss";
 
 .board-section {
-    height: 99%;
-    display: flex;
-    flex-direction: column;
+  height: 99%;
+  display: flex;
+  flex-direction: column;
 }
 
 .board-header {
-    flex-shrink: 0;
-    display: flex;
-    justify-content: space-between;
-    margin: 0 64px;
-    padding: 32px 0 24px 0;
-    max-width: 1440px;
+  flex-shrink: 0;
+  display: flex;
+  justify-content: space-between;
+  margin: 0 64px;
+  padding: 32px 0 24px 0;
+  max-width: 1440px;
 }
 
 .search-add-container {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    gap: 32px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 32px;
 }
 
 .search-input-container {
+  display: flex;
+  align-items: center;
+  border: 1px solid #d1d1d1;
+  border-radius: 10px;
+  padding: 8px 12px;
+  background-color: #fff;
+  width: 312px;
+  height: 48px;
+
+  input {
+    border: none;
+    outline: none;
+    flex: 1;
+    font-size: 16px;
+    color: #2a3647;
+    background-color: transparent;
+
+    &::placeholder {
+      color: #bfbfbf;
+    }
+  }
+
+  .search-icon {
+    width: 18px;
+    height: 18px;
+    margin-left: 8px;
+    border-left: 1px solid #ccc;
+    padding-left: 8px;
     display: flex;
     align-items: center;
-    border: 1px solid #d1d1d1;
-    border-radius: 10px;
-    padding: 8px 12px;
-    background-color: #fff;
-    width: 312px;
-    height: 48px;
+    justify-content: center;
 
-    input {
-        border: none;
-        outline: none;
-        flex: 1;
-        font-size: 16px;
-        color: #2A3647;
-        background-color: transparent;
-
-        &::placeholder {
-            color: #bfbfbf;
-        }
+    img {
+      width: 32px;
+      height: 32px;
     }
-
-    .search-icon {
-        width: 18px;
-        height: 18px;
-        margin-left: 8px;
-        border-left: 1px solid #ccc;
-        padding-left: 8px;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-
-        img {
-            width: 32px;
-            height: 32px;
-        }
-    }
+  }
 }
 
 .title-button {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    margin-bottom: 25px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 25px;
 }
 
 .add-task-btn {
-    @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
-    height: 48px;
-    width: 160px;
+  @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
+  height: 48px;
+  width: 160px;
 }
 
 .add-task-btn-respo {
-    display: none;
+  display: none;
 }
 
 .board {
-    display: flex;
-    flex-direction: row;
-    align-items: flex-start;
-    gap: 6px;
-    padding: 0 64px;
-    overflow-x: auto;
-    overflow-y: hidden;
-    justify-content: flex-start;
-    height: calc(100dvh - 300px);
+  display: flex;
+  flex-direction: row;
+  align-items: flex-start;
+  gap: 6px;
+  padding: 0 64px;
+  overflow-x: auto;
+  overflow-y: hidden;
+  justify-content: flex-start;
+  height: calc(100dvh - 300px);
 
-    scrollbar-width: none;
-    -ms-overflow-style: none;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
+  &::-webkit-scrollbar {
+    display: none;
+  }
 }
 
 .mini-button-add-board {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    background: none;
-    border: 2px solid $col-bg-secondary;
-    height: 24px;
-    width: 24px;
-    border-radius: 8px;
-    color: #2A3647;
-    transition: all 0.2s ease;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: none;
+  border: 2px solid $col-bg-secondary;
+  height: 24px;
+  width: 24px;
+  border-radius: 8px;
+  color: #2a3647;
+  transition: all 0.2s ease;
 
-    img {
-        width: 12px;
-        height: 12px;
-    }
+  img {
+    width: 12px;
+    height: 12px;
+  }
 
-    &:hover {
-        cursor: pointer;
-        border: 2px solid $col-ref-highlight;
-        color: $col-ref-highlight;
-    }
+  &:hover {
+    cursor: pointer;
+    border: 2px solid $col-ref-highlight;
+    color: $col-ref-highlight;
+  }
 }
 
 .board-column {
-    position: relative;
-    flex: 0 0 280px;
+  position: relative;
+  flex: 0 0 280px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  height: 100%;
+  overflow-x: hidden;
+  overflow-y: auto;
+  scrollbar-width: none;
+  -ms-overflow-style: none;
+  padding-top: 20px;
+
+  &::-webkit-scrollbar {
+    display: none;
+  }
+
+  ul {
+    flex: initial;
+    overflow-y: auto;
+    width: 100%;
     display: flex;
     flex-direction: column;
     align-items: center;
-    height: 100%;
-    overflow-x: hidden;
-    overflow-y: auto;
+    // gap: 16px;
+    padding: 0;
+    margin: 0;
+    list-style: none;
+    scroll-padding-bottom: 240px;
     scrollbar-width: none;
     -ms-overflow-style: none;
-    padding-top: 20px;
 
     &::-webkit-scrollbar {
-        display: none;
+      display: none;
     }
 
-    ul {
-        flex: initial;
-        overflow-y: auto;
-        width: 100%;
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        // gap: 16px;
-        padding: 0;
-        margin: 0;
-        list-style: none;
-        scroll-padding-bottom: 240px;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
-
-        &::-webkit-scrollbar {
-            display: none;
-        }
-
-        &::-webkit-scrollbar-thumb {
-            display: none;
-        }
-
-        >li {
-            margin: 8px 0;
-        }
-
+    &::-webkit-scrollbar-thumb {
+      display: none;
     }
 
-    &::before,
-    &::after {
-        content: '';
-        position: absolute;
-        left: 50%;
-        transform: translateX(-50%);
-        width: calc(100% - 30px);
-        height: 16px;
-        pointer-events: none;
-        z-index: 2;
-        opacity: 0;
-        transition: opacity 0.2s ease;
+    > li {
+      margin: 8px 0;
     }
+  }
 
-    &::before {
-        top: 49px;
-        background: linear-gradient(to bottom, rgba(0, 0, 0, 0.08), transparent);
-    }
+  &::before,
+  &::after {
+    content: "";
+    position: absolute;
+    left: 50%;
+    transform: translateX(-50%);
+    width: calc(100% - 30px);
+    height: 16px;
+    pointer-events: none;
+    z-index: 2;
+    opacity: 0;
+    transition: opacity 0.2s ease;
+  }
 
-    &::after {
-        bottom: 0;
-        background: linear-gradient(to top, rgba(0, 0, 0, 0.08), transparent);
-    }
+  &::before {
+    top: 49px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.08), transparent);
+  }
 
-    &.scrolled-top::before {
-        opacity: 1;
-    }
+  &::after {
+    bottom: 0;
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.08), transparent);
+  }
 
-    &.scrolled-bottom::after {
-        opacity: 1;
-    }
+  &.scrolled-top::before {
+    opacity: 1;
+  }
+
+  &.scrolled-bottom::after {
+    opacity: 1;
+  }
 }
 
 .board-column-header {
-    display: flex;
-    justify-content: space-between;
-    align-items: center;
-    padding-left: 3px;
-    padding-right: 3px;
-    width: calc(100% - 20px);
-    margin-bottom: 5px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-left: 3px;
+  padding-right: 3px;
+  width: calc(100% - 20px);
+  margin-bottom: 5px;
 
-    h3 {
-        font-size: 20px;
-        font-weight: 700;
-        line-height: 120%;
-        letter-spacing: 0;
-    }
+  h3 {
+    font-size: 20px;
+    font-weight: 700;
+    line-height: 120%;
+    letter-spacing: 0;
+  }
 }
 
 .no-tasks {
-    @include noTaskOrMatches();
+  @include noTaskOrMatches();
 }
 
 /* Drag & Drop Animation */
 app-task {
-    cursor: pointer;
+  cursor: pointer;
 }
 
 .cdk-drag {
-    transition: transform 0.2s linear;
+  transition: transform 0.2s linear;
 }
 
 .cdk-drag-preview {
-    box-sizing: border-box;
-    border-radius: 16px;
-    box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
-        0 8px 10px 1px rgba(0, 0, 0, 0.14),
-        0 3px 14px 2px rgba(0, 0, 0, 0.12);
+  box-sizing: border-box;
+  border-radius: 16px;
+  box-shadow: 0 5px 5px -3px rgba(0, 0, 0, 0.2),
+    0 8px 10px 1px rgba(0, 0, 0, 0.14), 0 3px 14px 2px rgba(0, 0, 0, 0.12);
 }
 
 .cdk-drop-list-disabled {
-    border: 2px dashed #ccc;
-    border-radius: 16px;
+  border: 2px dashed #ccc;
+  border-radius: 16px;
 }
 
 .cdk-drag-placeholder {
-    position: relative;
-    visibility: hidden;
+  position: relative;
+  visibility: hidden;
 }
 
 .cdk-drag-placeholder::before {
-    margin: -8px 0;
-    content: '';
-    position: absolute;
-    visibility: visible;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    border: 2px dashed #ccc;
-    border-radius: 16px;
+  margin: -8px 0;
+  content: "";
+  position: absolute;
+  visibility: visible;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  border: 2px dashed #ccc;
+  border-radius: 16px;
 }
 
 // please adjust position & width here
-.add-task-wrapper {
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: white;
-    z-index: 999;
-} 
+.overlay-container {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background: transparent;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  z-index: 99;
+}
 
+.add-task-wrapper {
+  background: white;
+  border-radius: 30px;
+  max-width: 1116px;
+  width: 100%;
+  box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
+  margin: 80px 24px 70px 24px;
+}
 
 @media screen and (max-width: 1440px) {
+  .board {
+    padding: 0 32px;
+  }
 
-    .board {
-        padding: 0 32px;
-    }
-
-    .board-header {
-        margin: 0 32px;
-        padding: 16px 0 12px 0;
-    }
+  .board-header {
+    margin: 0 32px;
+    padding: 16px 0 12px 0;
+  }
 }
 
 @media screen and (max-width: 830px) {
+  .board-section {
+    position: fixed;
+    top: $header-height;
+    width: 100%;
+    height: calc(100% - 200px);
+    display: flex;
+    flex-direction: column;
+    z-index: 0;
+  }
 
-    .board-section {
-        position: fixed;
-        top: $header-height;
-        width: 100%;
-        height: calc(100% - 200px);
-        display: flex;
-        flex-direction: column;
-        z-index: 0;
+  .board-header {
+    display: flex;
+    flex-direction: column;
+    margin: 0 16px;
+  }
+
+  .add-task-btn {
+    display: none;
+  }
+
+  .search-input-container {
+    width: 100%;
+  }
+
+  .add-task-btn-respo {
+    @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
+    height: 24px;
+    width: 24px;
+    justify-content: center;
+  }
+
+  .no-tasks {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    text-align: center;
+    width: 100%;
+  }
+
+  .board {
+    flex-direction: column;
+    padding: 0 16px;
+    overflow-x: hidden;
+    overflow-y: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+
+    &::-webkit-scrollbar {
+      display: none;
     }
+  }
 
-    .board-header {
-        display: flex;
-        flex-direction: column;
-        margin: 0 16px;
-    }
+  .board-column {
+    position: relative;
+    width: 100%;
+    flex: 0 0 auto;
+    height: auto;
 
-    .add-task-btn {
-        display: none;
-    }
+    ul {
+      display: flex;
+      flex-direction: row;
+      align-items: flex-start;
+      overflow-x: auto;
+      overflow-y: hidden;
+      max-height: none;
+      gap: 16px;
 
-    .search-input-container {
-        width: 100%;
-    }
+      &::before,
+      &::after {
+        content: "";
+        position: absolute;
+        top: 39px;
+        bottom: 20px;
+        width: 16px;
+        pointer-events: none;
+        z-index: 2;
+        opacity: 0;
+        transition: opacity 0.2s ease;
+      }
 
-    .add-task-btn-respo {
-        @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
-        height: 24px;
-        width: 24px;
-        justify-content: center;
-    }
+      &::before {
+        left: 0;
+        background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
+      }
 
-    .no-tasks {
-        display: flex;
-        justify-content: center;
-        align-items: center;
-        text-align: center;
-        width: 100%;
-    }
+      &::after {
+        right: 0;
+        background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
+      }
 
-    .board {
-        flex-direction: column;
-        padding: 0 16px;
-        overflow-x: hidden;
-        overflow-y: auto;
-        scrollbar-width: none;
-        -ms-overflow-style: none;
+      &.scrolled-left::before {
+        opacity: 1;
+      }
 
-        &::-webkit-scrollbar {
-            display: none;
-        }
-    }
+      &.scrolled-right::after {
+        opacity: 1;
+      }
 
-    .board-column {
-        position: relative;
-        width: 100%;
+      li {
         flex: 0 0 auto;
+        margin: 20px 0;
+      }
+
+      app-task {
+        width: 250px;
         height: auto;
-
-        ul {
-            display: flex;
-            flex-direction: row;
-            align-items: flex-start;
-            overflow-x: auto;
-            overflow-y: hidden;
-            max-height: none;
-            gap: 16px;
-
-            &::before,
-            &::after {
-                content: '';
-                position: absolute;
-                top: 39px;
-                bottom: 20px;
-                width: 16px;
-                pointer-events: none;
-                z-index: 2;
-                opacity: 0;
-                transition: opacity 0.2s ease;
-            }
-
-            &::before {
-                left: 0;
-                background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
-            }
-
-            &::after {
-                right: 0;
-                background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
-            }
-
-            &.scrolled-left::before {
-                opacity: 1;
-            }
-
-            &.scrolled-right::after {
-                opacity: 1;
-            }
-
-            li {
-                flex: 0 0 auto;
-                margin: 20px 0;
-            }
-
-            app-task {
-                width: 250px;
-                height: auto;
-            }
-        }
+      }
     }
-    .board-column-header {
-        margin-bottom: 0;
+  }
+  .board-column-header {
+    margin-bottom: 0;
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .overlay-container {
+    position: relative;
+    top: auto;
+    left: auto;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+
+    .add-task-wrapper {
+        border-radius: 0;
+        height: 100%;
+        margin: 0;
     }
+  }
 }
