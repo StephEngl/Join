@@ -95,6 +95,10 @@ export class BoardComponent {
         this.selectedTask = null;
     }
 
+    toggleDialog() {}
+
+    onTaskCreated() {}
+
     openAddTaskDialog(): void {
         this.showTaskDialog = true;
         this.singleTaskDataService.editModeActive = false;

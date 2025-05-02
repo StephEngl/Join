@@ -77,4 +77,12 @@
     </app-task-dialog>
 } @else if (showTaskDialog && !selectedTask) {
     <!-- include add task as dialog -->
+    <app-task-dialog (cancelToast)="toggleDialog()" (createToast)="onTaskCreated()"
+        >
+    </app-task-dialog>
+    <!-- <app-task-dialog (cancelToast)="toggleDialog()" (createToast)="onContactCreated()" (updateToast)="onContactUpdated()"
+        (confirmDelete)="deleteContactFromDialog()" (deleteToast)="onContactDeleted()" (errorToast)="onContactError()"
+        (newContactIndex)="handleNewContact($event)" [contactName]="editName" [contactMail]="editMail"
+        [contactPhone]="editPhone" [contactIndex]="activeContactIndex">
+    </app-task-dialog> -->
 }
