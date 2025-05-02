@@ -97,6 +97,7 @@ export class AddTaskComponent {
   @Input() taskData!: TaskInterface;
 
   @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
+  @Output() taskUpdated = new EventEmitter<void>();
 
   clearForm() {
     this.taskDataService.clearData();
@@ -107,7 +108,6 @@ export class AddTaskComponent {
       return console.log('simple validation, you can only submit after setting category');
     }
     const isEdit = this.taskDataService.editModeActive;
-
     const task = {
       ...this.currentFormData(),
       ...(isEdit && {
@@ -115,34 +115,29 @@ export class AddTaskComponent {
         taskType: this.taskData.taskType,
       }),
     };
-
-    // hier der toaster eingebaut mit einem wechsel von add-task zu board :)
-    if (isEdit) {
-      this.tasksService.updateTask(task);
-      this.toastService.triggerToast(
-        'Task updated on board',
-        'create',
-        'assets/icons/navbar/board.svg'
-      );
-      
-      setTimeout(() => {
-        this.router.navigate(['/board']);
-      }, 1000);
-    } else {
-      this.tasksService.addTask(task);
-      this.toastService.triggerToast(
-        'Task added to board',
-        'create',
-        'assets/icons/navbar/board.svg'
-      );
-      
-      setTimeout(() => {
-        this.router.navigate(['/board']);
-      }, 1000);
-      this.clearForm();
-    }
-
-
+    isEdit ? this.submitEdit(task) : this.submitCreate(task);
+  }
+  // toaster für update mit dialog schließen
+  submitEdit(task: TaskInterface) {
+    this.tasksService.updateTask(task);
+    this.toastService.triggerToast(
+      'Task updated',
+      'update',
+    );
+    this.taskUpdated.emit();
+  }
+  // toaster für create mit wechsel zum board und felder zurücksetzen
+  submitCreate(task: TaskInterface) {
+    this.tasksService.addTask(task);
+    this.toastService.triggerToast(
+      'Task added to board',
+      'create',
+      'assets/icons/navbar/board.svg'
+    );
+    setTimeout(() => {
+      this.router.navigate(['/board']);
+    }, 1000);
+    this.clearForm();
   }
 
   currentFormData(): Omit<TaskInterface, 'id'> {
@@ -154,7 +149,7 @@ export class AddTaskComponent {
     const activeBtn = this.taskDataService.priorityButtons.find(
       (btnStatus) => btnStatus.btnActive
     );
-
+    
     const submittedTask: TaskInterface = {
       title: this.inputTaskTitle,
       description: this.inputTaskDescription,
@@ -165,10 +160,8 @@ export class AddTaskComponent {
       category: this.taskDataService.selectedCategory,
       taskType: this.taskDataService.taskStatus,
     };
-
     return submittedTask;
   }
-
 
   addSubtask() {
     const subtask = {

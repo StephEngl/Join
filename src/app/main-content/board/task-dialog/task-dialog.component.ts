@@ -19,7 +19,7 @@ export class TaskDialogComponent {
   @Input() dialogType: 'add' | 'info' = 'info';
   @Output() close = new EventEmitter<void>();
 
-  constructor(private tasksService: TasksService) {}
+  constructor(private tasksService: TasksService) { }
 
   showTaskInfo: boolean = true;
 
@@ -33,6 +33,7 @@ export class TaskDialogComponent {
   taskEdited(): void {
     this.showTaskInfo = true;
     this.taskDataService.editModeActive = false;
+    this.closeDialog();
   }
 
   /* Replaced: this.dialogRef.close() */
@@ -47,6 +48,4 @@ export class TaskDialogComponent {
       this.closeDialog();
     }
   }
-
-  
 }
