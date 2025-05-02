@@ -20,36 +20,30 @@
     </div>
   </div>
 
-  <div class="board" #boardContainer>
-    @for (column of boardColumns; track column.title) {
-    <div
-      class="board-column"
-      cdkDropList
-      [id]="column.taskStatus"
-      [cdkDropListData]="filterTasksByCategory(column.taskStatus)"
-      [cdkDropListConnectedTo]="connectedDropLists"
-      (cdkDropListDropped)="drop($event)"
-    >
-      <div class="board-column-header">
-        <h3>{{ column.title }}</h3>
-        @if (column.title !== 'Done') {
-        <button
-          class="mini-button-add-board"
-          (mouseenter)="hoveredColumn = column.title"
-          (mouseleave)="hoveredColumn = ''"
-          (click)="openAddTaskDialog()"
-        >
-          <img
-            [src]="
-              hoveredColumn === column.title
-                ? './assets/icons/kanban/add_plus_blue.png'
-                : './assets/icons/kanban/add.svg'
-            "
-            alt="Add"
-          />
-        </button>
-        }
-      </div>
+    <div class="board" #boardContainer>
+        @for (column of boardColumns; track column.title) {
+            <div class="board-column"
+                cdkDropList
+                [id]="column.taskStatus"
+                [cdkDropListData]="filterTasksByCategory(column.taskStatus)"
+                [cdkDropListConnectedTo]="connectedDropLists"
+                (cdkDropListDropped)="drop($event)">
+
+                <div class="board-column-header">
+
+                    <h3>{{ column.title }}</h3>
+                    @if (column.title !== 'Done') {
+                        <button class="mini-button-add-board"
+                                (mouseenter)="hoveredColumn = column.title"
+                                (mouseleave)="hoveredColumn = ''"
+                                (click)="addTaskWithStatus(column.taskStatus)">
+                            <img [src]="hoveredColumn === column.title
+                                        ? './assets/icons/kanban/add_plus_blue.png'
+                                        : './assets/icons/kanban/add.svg'"
+                                alt="Add" />
+                        </button>
+                    }
+                </div>
 
       <ul
         class="task-list"
@@ -87,6 +81,7 @@
 >
 </app-task-dialog>
 } @else if (showAddTaskDialog) {
-<app-task-dialog [dialogType]="'add'" (close)="closeTaskDialog()">
-</app-task-dialog>
+    <div class="add-task-wrapper">
+        <app-add-task></app-add-task>
+    </div>
 }

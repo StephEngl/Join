@@ -25,7 +25,7 @@
 
     .task-dialog-section {
         width: 525px;
-        height: auto; /* Changed: allow dialog to size by content */
+        height: 100%; /* Changed: allow dialog to size by content */
         background: #fff; /* Added: visible dialog box */
         border-radius: 12px; /* Added */
         box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2); /* Added */

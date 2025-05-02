@@ -5,11 +5,16 @@
 .task-info-section {
     @include dFlex(center, center, 1rem);
     width: 100%;
-    height: auto;
+    height: 90dvh;
+    margin: 0;
+    padding-top: 2rem;
+    padding-left: 2rem;
+    padding-right: 2rem;
     background: #FFFFFF;
     border-radius: 1rem;
     overflow: auto;
     max-width: $queryBreak1;
+    
     &::-webkit-scrollbar {
         display: none;
     }
@@ -21,239 +26,283 @@
     .task-info-container {
         display: flex;
         width: 100%;
+        max-width: $queryBreak1;
+        height: 100%;
         justify-content: center;
         flex-direction: column;
-        padding: 2rem;
-
-        .task-info-top-container {
-            @include dFlex(space-between, center);
-            width: 100%;
-            padding-top: 0rem;
-            padding-bottom: 0.8rem;
-
-            .task-info-category {
-                padding: 4px 8px;
-                border-radius: 0.5rem;
-                color: white;
-                background: #003cff;
-                font-weight: 400;
-                font-size: clamp(1rem, 1.2rem + 0.5vw, 1.4375rem);
-            }
-
-            .task-info-close {
-                font-size: 1.5rem;
-                cursor: pointer;
-            }
-        }
 
         .task-info-header-container {
-            width: 100%;
-            height: auto;
-            padding-top: 0.8rem;
-            padding-bottom: 0.8rem;
-            gap: 1rem;
-            @include dFlex(flex-start, center);
-
-            h2 {
-                font-weight: 700;
-                line-height: 120%;
+            position: sticky;
+            top: 0;
+            z-index: 2;
+            background-color: white; 
+            
+            .task-info-top-container {
+                @include dFlex(space-between, center);
+                width: 100%;
+                padding-top: 0rem;
+                padding-bottom: 0.8rem;
+    
+                .task-info-category {
+                    padding: 4px 8px;
+                    border-radius: 0.5rem;
+                    color: white;
+                    background: #003cff;
+                    font-weight: 400;
+                    font-size: clamp(1rem, 1.2rem + 0.5vw, 1.4375rem);
+                }
+    
+                .task-info-close {
+                    font-size: 1.5rem;
+                    cursor: pointer;
+                }
+            }
+    
+            .task-info-header-txt {
+                width: 100%;
+                height: auto;
                 padding-top: 0.8rem;
                 padding-bottom: 0.8rem;
+                gap: 1rem;
+                @include dFlex(flex-start, center);
+    
+                h2 {
+                    width: 100%;
+                    overflow-wrap: break-word;  
+                    font-weight: 700;
+                    line-height: 120%;
+                    padding-top: 0.8rem;
+                    padding-bottom: 0.8rem;
+                }
             }
         }
+        
 
-        .task-info-build-txt {
-            display: flex;
+        .task-info-content-container {
+            flex-grow: 1;
+            overflow-y: scroll;
+            overflow-x: hidden;
+            min-height: 0;
+            position: relative;
+            padding: 1rem;
 
-            .task-info-description-container {
-                @include dFlex(center, flex-start);
+            &::-webkit-scrollbar {
+                width: 8px;
+            }
+    
+            &::-webkit-scrollbar-track {
+                background: transparent;
+            }
+    
+            &::-webkit-scrollbar-thumb {
+                background-color: rgba(0, 0, 0, 0.3);
+                border-radius: 4px;
+                border: 3px solid transparent; 
+                background-clip: content-box;
+            }
+    
+            scrollbar-width: thin;
+            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+            z-index: 3;
 
-                p {
-                    font-family: 'Inter', sans-serif;
+            .task-info-build-txt {
+                display: flex;
+    
+                .task-info-description-container {
+                    @include dFlex(center, flex-start);
+    
+                    p {
+                        font-family: 'Inter', sans-serif;
+                        font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
+                        font-weight: 400;
+                        line-height: 120%;
+                        color: black;
+                        padding-top: 0.8rem;
+                        padding-bottom: 0.8rem;
+                        text-align: left;
+                    }
+                }
+            }
+    
+            .task-info-due-date-container {
+                @include dFlex(flex-start, center);
+                width: 100%;
+                padding-top: 0.8rem;
+                padding-bottom: 0.8rem;
+    
+                .task-info-due-date-txt {
+                    @include dFlex(flex-start, center);
+                    width: 100px;
                     font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
                     font-weight: 400;
                     line-height: 120%;
-                    color: black;
-                    padding-top: 0.8rem;
-                    padding-bottom: 0.8rem;
-                    text-align: left;
+                    gap: 1rem;
                 }
-            }
-        }
-
-        .task-info-due-date-container {
-            @include dFlex(flex-start, center);
-            width: 100%;
-            padding-left: 0.5rem;
-            padding-top: 0.8rem;
-            padding-bottom: 0.8rem;
-
-            .task-info-due-date-txt {
-                @include dFlex(flex-start, center);
-                width: 100px;
-                font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
-                font-weight: 400;
-                line-height: 120%;
-                gap: 1rem;
-            }
-
-            .task-info-due-date-output {
-                display: flex;
-                padding-left: 48px;
-                gap: 1rem;
-            }
-        }
-
-        .task-info-priority-container {
-            @include dFlex(flex-start, center);
-            width: 100%;
-            padding-left: 0.5rem;
-            padding-top: 0.8rem;
-            padding-bottom: 0.8rem;
-
-            .task-info-priority-txt {
-                @include dFlex(flex-start, center);
-                width: 100px;
-                font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
-                font-weight: 400;
-                line-height: 120%;
-                gap: 1rem;
-            }
-
-            .task-info-priority-output {
-                display: flex;
-                padding-left: 48px;
-                gap: 1rem;
-
-                span {
+    
+                .task-info-due-date-output {
                     display: flex;
-                }
-
-                .task-info-priority-img {
-                    display: flex;
+                    padding-left: 48px;
+                    gap: 1rem;
                 }
             }
-        }
-
-        .task-info-assigned-to-container {
-            @include dFlex(space-between, flex-start);
-            flex-direction: column;
-            width: 100%;
-            padding-top: 0.8rem;
-            padding-bottom: 0.8rem;
-            gap: 1rem;
-
-            .task-info-assigned-to-txt {
+    
+            .task-info-priority-container {
                 @include dFlex(flex-start, center);
-                font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
-                font-weight: 400;
-                line-height: 120%;
-                gap: 1rem;
-            }
-
-            .task-info-assigned-to-output {
-                display: flex;
-                flex-direction: column;
-                border: 2px solid transparent;
-                gap: 0.5rem;
-                padding: 1rem;
-
-                .assigned-person {
-                    @include dFlex(flex-start, center);
-
-                    .initials {
-                        @include contactIcon(50px, 24px, 0);
-                    }
-
-                    .name {
-                        display: flex;
-                        font-family: 'Open Sans';
-                        padding-left: 1rem;
-                    }
-                }
-            }
-        }
-
-        .task-info-subtasks-container {
-            display: flex;
-            flex-direction: column;
-
-            .task-info-subtasks-header {
-                font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
-                font-weight: 400;
-                line-height: 120%;
-                gap: 1rem;
-            }
-
-            .task-info-subtask-list {
-                display: flex;
-                flex-direction: column;
-                gap: 0.8rem;
                 width: 100%;
-                padding-left: 1rem;
                 padding-top: 0.8rem;
                 padding-bottom: 0.8rem;
-
-                .task-info-subtask-item {
+    
+                .task-info-priority-txt {
                     @include dFlex(flex-start, center);
-
+                    width: 100px;
+                    font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
+                    font-weight: 400;
+                    line-height: 120%;
+                    gap: 1rem;
+                }
+    
+                .task-info-priority-output {
+                    display: flex;
+                    padding-left: 48px;
+                    gap: 1rem;
+    
                     span {
-                        font-family: "Inter", sans-serif;
-                        font-weight: 400;
-                        font-size: 1rem;
-                        line-height: 120%;
-                        padding-left: 1rem;
-                    }
-
-                    .checkbox {
                         display: flex;
                     }
-
-                    .completed {
-                        text-decoration: line-through;
-                        color: gray;
+    
+                    .task-info-priority-img {
+                        display: flex;
+                    }
+                }
+            }
+    
+            .task-info-assigned-to-container {
+                @include dFlex(space-between, flex-start);
+                flex-direction: column;
+                width: 100%;
+                padding-top: 0.8rem;
+                padding-bottom: 0.8rem;
+                gap: 1rem;
+    
+                .task-info-assigned-to-txt {
+                    @include dFlex(flex-start, center);
+                    font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
+                    font-weight: 400;
+                    line-height: 120%;
+                    gap: 1rem;
+                }
+    
+                .task-info-assigned-to-output {
+                    display: flex;
+                    flex-direction: column;
+                    border: 2px solid transparent;
+                    gap: 0.5rem;
+                    padding: 1rem;
+    
+                    .assigned-person {
+                        @include dFlex(flex-start, center);
+    
+                        .initials {
+                            @include contactIcon(50px, 24px, 0);
+                        }
+    
+                        .name {
+                            display: flex;
+                            font-family: 'Open Sans';
+                            padding-left: 1rem;
+                        }
+                    }
+                }
+            }
+    
+            .task-info-subtasks-container {
+                display: flex;
+                flex-direction: column;
+    
+                .task-info-subtasks-header {
+                    font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
+                    font-weight: 400;
+                    line-height: 120%;
+                    gap: 1rem;
+                }
+    
+                .task-info-subtask-list {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 0.8rem;
+                    width: 100%;
+                    padding-left: 1rem;
+                    padding-top: 0.8rem;
+                    padding-bottom: 0.8rem;
+    
+                    .task-info-subtask-item {
+                        @include dFlex(flex-start, center);
+    
+                        span {
+                            font-family: "Inter", sans-serif;
+                            font-weight: 400;
+                            font-size: 1rem;
+                            line-height: 120%;
+                            padding-left: 1rem;
+                        }
+    
+                        .checkbox {
+                            display: flex;
+                        }
+    
+                        .completed {
+                            text-decoration: line-through;
+                            color: gray;
+                        }
                     }
                 }
             }
         }
 
-        .task-info-delete-edit-container {
-            @include dFlex(flex-end, center);
-            width: 100%;
-            margin-top: 1rem;
+        .task-info-footer-container {
+            position: sticky;
+            bottom: 0;
+            z-index: 2;
+            background: white;
 
-            .task-info-delete-container {
-                @include btn(transparent, black, rgba(255, 0, 0, 0.1));
-
-                .task-info-delete-img {
-                    display: flex;
-
-                    img {
+            .task-info-delete-edit-container {
+                @include dFlex(flex-end, center);
+                width: 100%;
+                margin-top: 1rem;
+    
+                .task-info-delete-container {
+                    @include btn(transparent, black, rgba(255, 0, 0, 0.1));
+    
+                    .task-info-delete-img {
                         display: flex;
+    
+                        img {
+                            display: flex;
+                        }
+                    }
+    
+                    .task-info-delete-txt {
+                        display: flex;
+                        font-size: 1rem;
                     }
                 }
-
-                .task-info-delete-txt {
-                    display: flex;
-                    font-size: 1rem;
-                }
-            }
-
-            .task-info-edit-container {
-                @include btn(transparent, black, rgba(0, 128, 0, 0.1));
-
-                .task-info-edit-img {
-                    display: flex;
-
-                    img {
-                        width: 24px;
-                        height: 24px;
+    
+                .task-info-edit-container {
+                    @include btn(transparent, black, rgba(0, 128, 0, 0.1));
+    
+                    .task-info-edit-img {
+                        display: flex;
+    
+                        img {
+                            width: 24px;
+                            height: 24px;
+                        }
                     }
-                }
-
-                .task-info-edit-txt {
-                    display: flex;
-                    font-size: 1rem;
+    
+                    .task-info-edit-txt {
+                        display: flex;
+                        font-size: 1rem;
+                    }
                 }
             }
         }

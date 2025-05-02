@@ -5,7 +5,6 @@ import { TaskInfoComponent } from './task-info/task-info.component';
 import { AddTaskComponent } from '../../add-task/add-task.component';
 import { TasksService } from '../../../services/tasks.service';
 import { SingleTaskDataService } from '../../../services/single-task-data.service';
-import { TaskDialogService } from '../../../services/task-dialog.service';
 
 @Component({
   selector: 'app-task-dialog',
@@ -23,9 +22,6 @@ export class TaskDialogComponent {
   constructor(private tasksService: TasksService) {}
 
   showTaskInfo: boolean = true;
-  taskDialogService = new TaskDialogService;
-  showAddTaskDialog = this.taskDialogService.showAddTaskDialog;
-
 
   onEditTask(): void {
     this.taskDataService.editModeActive = true;

@@ -25,6 +25,7 @@ import { SingleTaskDataService } from '../../services/single-task-data.service';
     TaskDialogComponent,
     DragDropModule,
     FormsModule,
+    AddTaskComponent
   ],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
@@ -97,18 +98,27 @@ export class BoardComponent {
     this.showAddTaskDialog = false;
   }
 
+
+  openAddTaskDialog(): void {
+    this.showTaskDialog = true;
+    this.showAddTaskDialog = true;
+    this.singleTaskDataService.editModeActive = false;
+}
+
+addTaskWithStatus(taskStatus: string){
+    this.showTaskDialog = true;
+    this.showAddTaskDialog = true;
+    this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';
+    this.singleTaskDataService.editModeActive = false;
+}
+
+
   closeTaskDialog(): void {
     this.showTaskDialog = false;
     this.showAddTaskDialog = false;
     this.selectedTask = null;
   }
 
-  openAddTaskDialog(): void {
-    this.selectedTask = null;
-    this.showAddTaskDialog = true;
-    this.showTaskDialog = false;
-    // this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';
-  }
 
   onTaskListScrollShadow(taskList: HTMLElement) {
     const boardColumn = taskList.closest('.board-column');
@@ -145,10 +155,12 @@ export class BoardComponent {
     }
   }
 
-  triggerSearch() {
-    this.searchActive = true;
-    setTimeout(() => {
-      this.searchActive = false;
-    }, 50);
-  }
+
+    triggerSearch() {
+        this.searchActive = true;
+        setTimeout(() => {
+            this.searchActive = false;
+        }, 50);
+    }
+
 }
