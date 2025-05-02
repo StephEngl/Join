@@ -94,17 +94,19 @@ export class BoardComponent {
   openTaskDialog(taskData: TaskInterface): void {
     this.selectedTask = taskData;
     this.showTaskDialog = true;
+    this.showAddTaskDialog = false;
   }
 
   closeTaskDialog(): void {
     this.showTaskDialog = false;
+    this.showAddTaskDialog = false;
     this.selectedTask = null;
   }
 
   openAddTaskDialog(): void {
+    this.selectedTask = null;
     this.showAddTaskDialog = true;
-    this.singleTaskDataService.editModeActive = false;
-    console.log(this.showAddTaskDialog);
+    this.showTaskDialog = false;
     // this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';
   }
 

@@ -1,14 +1,25 @@
 <div class="task-dialog-section">
-  @if (showTaskInfo) {
+  @if (dialogType === 'add') {
+  <app-add-task (cancelEditTask)="close.emit()"></app-add-task>
+  } @else if (taskDataDialog) {
   <app-task-info
+    [taskDataDialogInfo]="taskDataDialog"
+    (editTask)="onEditTask()"
+    (close)="close.emit()"
+  >
+  </app-task-info>
+  } @else {
+  <p>Nichts ausgewählt</p>
+  }
+  <!-- <app-task-info
     [taskDataDialogInfo]="taskDataDialog"
     (editTask)="onEditTask()"
     (close)="closeDialog()"
   >
     <!-- ❗️Hinzugefügt -->
-  </app-task-info>
+  <!-- </app-task-info> -->
 
-  } @else if (showAddTaskDialog) {
+  <!-- } @else if (showAddTaskDialog) {
   <app-add-task></app-add-task>
   } @else {
   <app-add-task
@@ -16,5 +27,5 @@
     (cancelEditTask)="onCancelEditTask()"
   >
   </app-add-task>
-  }
+  } -->
 </div>
