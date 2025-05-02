@@ -105,19 +105,29 @@ export class AddTaskComponent {
   }
 
   onSubmit() {
-    if (!this.taskDataService.selectedCategory) {
-      return console.log('simple validation, you can only submit after setting category');
+    const categorySelected = this.taskDataService.selectedCategory;
+    const isEditMode = this.taskDataService.editModeActive;
+  
+    if (!categorySelected) {
+      console.log('Simple validation: you can only submit after setting a category.');
+      return;
     }
-    const isEdit = this.taskDataService.editModeActive;
-    const task = {
-      ...this.currentFormData(),
-      ...(isEdit && {
-        id: this.taskData.id,
-        taskType: this.taskData.taskType,
-      }),
-    };
-    isEdit ? this.submitEdit(task) : this.submitCreate(task);
+  
+    const baseTaskData = this.currentFormData();
+    const editTaskData = isEditMode ? {
+          id: this.taskData.id,
+          taskType: this.taskData.taskType,
+        } : {};
+  
+    const task = { ...baseTaskData, ...editTaskData };
+  
+    if (isEditMode) {
+      this.submitEdit(task);
+    } else {
+      this.submitCreate(task);
+    }
   }
+
   // toaster für update mit dialog schließen
   submitEdit(task: TaskInterface) {
     this.tasksService.updateTask(task);
@@ -127,6 +137,7 @@ export class AddTaskComponent {
     );
     this.taskUpdated.emit();
   }
+
   // toaster für create mit wechsel zum board und felder zurücksetzen
   submitCreate(task: TaskInterface) {
     this.tasksService.addTask(task);
