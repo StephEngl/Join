@@ -22,7 +22,7 @@ import { TaskInterface } from '../../../interfaces/task.interface';
   styleUrl: './task-overview.component.scss',
 })
 export class TaskOverviewComponent {
- @Input() taskData!: TaskInterface;
+@Input() taskData!: TaskInterface;
 @Input() today: string = new Date().toISOString().split('T')[0];
 
 // Zweiwegebindung ([(...)]): Input + Output
@@ -41,7 +41,8 @@ ngOnInit() {
   if (this.taskDataService.editModeActive && this.taskData) {
     this.taskTitleChange.emit(this.taskData.title);
     this.taskDescriptionChange.emit(this.taskData.description);
-    this.taskDueDateChange.emit(this.taskData.dueDate ? new Date(this.taskData.dueDate) : null);
+    console.log(this.taskDueDate);
+    
   }
 }
 
@@ -51,4 +52,13 @@ formatDate(date: Date | string | null): string {
   return d.toISOString().split('T')[0];
 }
 
+  // DO NOT DELETE, THIS IS USED
+  // onDueDateChange(dateString: string | null) {
+  //   const date = dateString ? new Date(dateString) : null;
+  //   this.taskDueDateChange.emit(date);
+  // }
+
+  // formatDate(date: Date | null): string | null {
+  //   return date ? date.toISOString().split('T')[0] : null;
+  // }
 }
