@@ -39,9 +39,10 @@ taskDataService = inject(SingleTaskDataService);
 
 ngOnInit() {
   if (this.taskDataService.editModeActive && this.taskData) {
-    this.taskTitle = this.taskData.title;
-    this.taskDescription = this.taskData.description;
-    this.taskDueDate = this.taskData.dueDate ? new Date(this.taskData.dueDate) : new Date();
+    this.taskTitleChange.emit(this.taskData.title);
+    this.taskDescriptionChange.emit(this.taskData.description);
+    console.log(this.taskDueDate);
+    
   }
 }
 
@@ -51,18 +52,13 @@ formatDate(date: Date | string | null): string {
   return d.toISOString().split('T')[0];
 }
 
-// @Input() taskData!: TaskInterface;
-// taskDataService = inject(SingleTaskDataService);
-// @Input() currentTaskId: string = '';
+  // DO NOT DELETE, THIS IS USED
+  // onDueDateChange(dateString: string | null) {
+  //   const date = dateString ? new Date(dateString) : null;
+  //   this.taskDueDateChange.emit(date);
+  // }
 
-// @Input() taskTitle: string = '';
-// @Output() taskTitleChange = new EventEmitter<string>();
-
-// @Input() taskDescription: string = '';
-// @Output() taskDescriptionChange = new EventEmitter<string>();
-
-// @Input() today: string = new Date().toISOString().split('T')[0];
-// @Input() taskDueDate: Date | null = null;
-// @Output() taskDueDateChange = new EventEmitter<Date | null>();
-// @Input() minDate: Date = new Date();
+  // formatDate(date: Date | null): string | null {
+  //   return date ? date.toISOString().split('T')[0] : null;
+  // }
 }

@@ -139,9 +139,10 @@ export class AddTaskComponent {
       setTimeout(() => {
         this.router.navigate(['/board']);
       }, 1000);
+      this.clearForm();
     }
 
-    this.clearForm();
+
   }
 
   currentFormData(): Omit<TaskInterface, 'id'> {
