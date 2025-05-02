@@ -1,11 +1,10 @@
-<li class="task-card">
+<li class="task-card"
+    [style.display]="taskData.title.toLowerCase().includes(searchRequest.toLowerCase()) || taskData.description.toLowerCase().includes(searchRequest.toLowerCase()) ? 'flex' : 'none'">
     <div class="task-category" [style.backgroundColor]="taskData.category === 'User Story' ? '#003cff':'#1FD7C1'">
         {{taskData.category}}
     </div>
-
     <div class="task-title">{{taskData.title}}</div>
     <div class="task-description">{{taskData.description}}</div>
-
     <div class="task-progress">
         @if (allubtasks(taskData.id!).length > 0 ){
         <div class="progress-bar">

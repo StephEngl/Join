@@ -98,20 +98,18 @@ export class BoardComponent {
     this.showAddTaskDialog = false;
   }
 
-
   openAddTaskDialog(): void {
     this.showTaskDialog = true;
     this.showAddTaskDialog = true;
     this.singleTaskDataService.editModeActive = false;
-}
+  }
 
-addTaskWithStatus(taskStatus: string){
+  addTaskWithStatus(taskStatus: string) {
     this.showTaskDialog = true;
     this.showAddTaskDialog = true;
     this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';
     this.singleTaskDataService.editModeActive = false;
-}
-
+  }
 
   closeTaskDialog(): void {
     this.showTaskDialog = false;
@@ -119,14 +117,12 @@ addTaskWithStatus(taskStatus: string){
     this.selectedTask = null;
   }
 
-
   onTaskListScrollShadow(taskList: HTMLElement) {
     const boardColumn = taskList.closest('.board-column');
     if (!boardColumn) return;
     const scrollTop = taskList.scrollTop;
     const scrollHeight = taskList.scrollHeight;
     const offsetHeight = taskList.offsetHeight;
-
     if (scrollTop > 0) {
       boardColumn.classList.add('scrolled-top');
     } else {
@@ -155,12 +151,10 @@ addTaskWithStatus(taskStatus: string){
     }
   }
 
-
-    triggerSearch() {
-        this.searchActive = true;
-        setTimeout(() => {
-            this.searchActive = false;
-        }, 50);
-    }
-
+  triggerSearch() {
+    this.searchActive = true;
+    setTimeout(() => {
+      this.searchActive = false;
+    }, 50);
+  }
 }
