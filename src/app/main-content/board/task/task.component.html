@@ -1,6 +1,4 @@
-
-<li class="task-card"
-    [style.display]="(taskData.title.toLowerCase().includes(searchRequest.toLowerCase()) || taskData.description.toLowerCase().includes(searchRequest.toLowerCase())) ? 'flex' : 'none'">
+<li class="task-card">
     <div class="task-category" [style.backgroundColor]="taskData.category === 'User Story' ? '#003cff':'#1FD7C1'">
         {{taskData.category}}
     </div>
