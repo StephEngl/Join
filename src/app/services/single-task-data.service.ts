@@ -60,4 +60,16 @@ export class SingleTaskDataService {
     resetAllPrioBtns() {
         this.priorityButtons.forEach((p) => (p.btnActive = false));
     }
+
+    clearData() {
+        this.inputTaskTitle = '';
+        this.inputTaskDescription = '';
+        this.inputTaskDueDate = null;
+        this.subtaskText = '';
+        this.subtasksContainer = [];
+        this.assignedTo = [];
+        this.resetAllPrioBtns();
+        this.selectedCategory = undefined;
+    }
+
 }

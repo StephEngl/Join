@@ -36,7 +36,7 @@
                         <button class="mini-button-add-board"
                                 (mouseenter)="hoveredColumn = column.title"
                                 (mouseleave)="hoveredColumn = ''"
-                                (click)="openAddTaskDialog()">
+                                (click)="addTaskWithStatus(column.taskStatus)">
                             <img [src]="hoveredColumn === column.title
                                         ? './assets/icons/kanban/add_plus_blue.png'
                                         : './assets/icons/kanban/add.svg'"
@@ -77,7 +77,7 @@
         (close)="closeTaskDialog()">
     </app-task-dialog>
 } @else if (showAddTaskDialog) {
-    <app-task-dialog>
-        
-    </app-task-dialog>
+    <div class="add-task-wrapper">
+        <app-add-task></app-add-task>
+    </div>
 }

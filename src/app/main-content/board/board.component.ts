@@ -111,10 +111,14 @@ export class BoardComponent {
         this.showTaskDialog = true;
         this.showAddTaskDialog = true;
         this.singleTaskDataService.editModeActive = false;
-        console.log("hello");
-        // this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';
+    }
 
-      }
+    addTaskWithStatus(taskStatus: string){
+        this.showTaskDialog = true;
+        this.showAddTaskDialog = true;
+        this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';
+        this.singleTaskDataService.editModeActive = false;
+    }
 
     onTaskListScrollShadow(taskList: HTMLElement) {
         const boardColumn = taskList.closest('.board-column');
