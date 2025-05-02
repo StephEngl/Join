@@ -6,7 +6,12 @@
         (close)="closeDialog()"> <!-- ❗️Hinzugefügt -->
     </app-task-info>
     
-    } @else {
+    } 
+    <!-- @else if (showAddTaskDialog) {
+        <app-add-task></app-add-task>
+    } -->
+    
+    @else {
         <app-add-task
             [taskData]="taskDataDialog"
             (cancelEditTask)="onCancelEditTask()">
