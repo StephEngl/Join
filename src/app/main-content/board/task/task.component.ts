@@ -45,5 +45,4 @@ export class TaskComponent {
     return validContacts.length > 4 ? validContacts.length - 4 : 0;
   }
 
-
 }
