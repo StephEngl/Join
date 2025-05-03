@@ -32,20 +32,19 @@
     >
 
       <div class="board-column-header">
-
         <h3>{{ column.title }}</h3>
         @if (column.title !== 'Done') {
-        <button
-          class="mini-button-add-board"
-          (mouseenter)="hoveredColumn = column.title"
-          (mouseleave)="hoveredColumn = ''"
-          (click)="addTaskWithStatus(column.taskStatus)"
-        >
-          <img [src]="hoveredColumn === column.title
-            ? './assets/icons/kanban/add_plus_blue.png'
-            : './assets/icons/kanban/add.svg'" alt="Add"
+          <button
+            class="mini-button-add-board"
+            (mouseenter)="hoveredColumn = column.title"
+            (mouseleave)="hoveredColumn = ''"
+            (click)="addTaskWithStatus(column.taskStatus)"
           >
-        </button>
+            <img [src]="hoveredColumn === column.title
+              ? './assets/icons/kanban/add_plus_blue.png'
+              : './assets/icons/kanban/add.svg'" alt="Add"
+            >
+          </button>
         }
       </div>
 
@@ -79,10 +78,10 @@
 </section>
 
 @if (showTaskDialog && selectedTask) {
-<app-task-dialog
-  [taskDataDialog]="selectedTask"
-  [dialogType]="'info'"
-  (close)="closeTaskDialog()"
->
-</app-task-dialog>
+  <app-task-dialog
+    [taskDataDialog]="selectedTask"
+    [dialogType]="'info'"
+    (close)="closeTaskDialog()"
+  >
+  </app-task-dialog>
 }

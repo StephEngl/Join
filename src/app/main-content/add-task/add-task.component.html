@@ -7,9 +7,6 @@
     <form class="task-form" (ngSubmit)="onSubmit()">
       <div class="task-form-wrapper">
         <app-task-overview 
-          [(taskDueDate)]="inputTaskDueDate"
-          [today]="today" [(taskTitle)]="inputTaskTitle"
-          [(taskDescription)]="inputTaskDescription"
           [taskData]="taskData">
         </app-task-overview>
 

@@ -8,8 +8,6 @@ export class SingleTaskDataService {
     constructor() { }
 
     inputFieldSubT: string = '';
-    mouseX: number = 0;
-    mouseY: number = 0;
     inputTaskTitle: string = '';
     inputTaskDescription: string = '';
     inputTaskDueDate: Date  | null = null;

@@ -46,59 +46,24 @@ export class AddTaskComponent {
 
   mouseX: number = 0;
   mouseY: number = 0;
+  hoveredContact: any = undefined;
+
   isEdited = false;
   isFormValid = false;
-  inputTaskTitle: string = '';
-  inputTaskDescription: string = '';
-  inputTaskDueDate: Date = new Date();
-  today: string = new Date().toISOString().split('T')[0];
-  subtaskText = '';
-  subtasksContainer: {
-    text: string;
-    isEditing: boolean;
-    isHovered: boolean;
-    isChecked: boolean;
-  }[] = [];
-  assignedTo: any[] = [];
+  
   searchedContactName: string = '';
   searchedCategoryName: string = '';
-  taskCategories: any[] = ['Technical Task', 'User Story'];
-  selectedCategory: 'Technical Task' | 'User Story' | undefined = undefined;
-  priorityButtons: {
-    imgInactive: string;
-    imgActive: string;
-    colorActive: string;
-    priority: 'Urgent' | 'Medium' | 'Low';
-    btnActive: boolean;
-  }[] = [
-      {
-        imgInactive: './assets/icons/kanban/prio_urgent.svg',
-        imgActive: './assets/icons/kanban/prio_urgent_white.svg',
-        colorActive: '#FF3D00',
-        priority: 'Urgent',
-        btnActive: false,
-      },
-      {
-        imgInactive: './assets/icons/kanban/prio_medium.svg',
-        imgActive: './assets/icons/kanban/prio_medium_white.svg',
-        colorActive: '#FFA800',
-        priority: 'Medium',
-        btnActive: false,
-      },
-      {
-        imgInactive: './assets/icons/kanban/prio_low.svg',
-        imgActive: './assets/icons/kanban/prio_low_white.svg',
-        colorActive: '#7AE229',
-        priority: 'Low',
-        btnActive: false,
-      },
-    ];
 
   @Input() taskData!: TaskInterface;
-
   @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
   @Output() taskUpdated = new EventEmitter<void>();
   @Output() taskCreated = new EventEmitter<void>();
+
+  ngOnInit() {
+    if(!this.taskDataService.editModeActive) {
+      this.clearForm();
+    }
+  }
 
   clearForm() {
     this.taskDataService.clearData();
@@ -107,20 +72,13 @@ export class AddTaskComponent {
   onSubmit() {
     const categorySelected = this.taskDataService.selectedCategory;
     const isEditMode = this.taskDataService.editModeActive;
-  
+    const task = this.getAllTaskData();
+
     if (!categorySelected) {
-      console.log('Simple validation: you can only submit after setting a category.');
+      // Error Toast here
       return;
     }
-  
-    const baseTaskData = this.currentFormData();
-    const editTaskData = isEditMode ? {
-          id: this.taskData.id,
-          taskType: this.taskData.taskType,
-        } : {};
-  
-    const task = { ...baseTaskData, ...editTaskData };
-  
+
     if (isEditMode) {
       this.submitEdit(task);
     } else {
@@ -128,7 +86,18 @@ export class AddTaskComponent {
     }
   }
 
-  // toaster für update mit dialog schließen
+  getAllTaskData() {
+    const isEditMode = this.taskDataService.editModeActive;
+    const baseTaskData = this.currentTaskData();
+    const editTaskData = isEditMode ? {
+          id: this.taskData.id,
+          taskType: this.taskData.taskType,
+        } : {};
+        
+    const task = { ...baseTaskData, ...editTaskData };
+    return task;
+  }
+
   submitEdit(task: TaskInterface) {
     this.tasksService.updateTask(task);
     this.toastService.triggerToast(
@@ -138,7 +107,6 @@ export class AddTaskComponent {
     this.taskUpdated.emit();
   }
 
-  // toaster für create mit wechsel zum board und felder zurücksetzen
   submitCreate(task: TaskInterface) {
     this.tasksService.addTask(task);
     this.toastService.triggerToast(
@@ -153,7 +121,7 @@ export class AddTaskComponent {
     this.clearForm();
   }
 
-  currentFormData(): Omit<TaskInterface, 'id'> {
+  currentTaskData(): Omit<TaskInterface, 'id'> {
     const subtasksForForm = this.taskDataService.subtasksContainer.map((subtask) => ({
       text: subtask.text,
       isChecked: subtask.isChecked,
@@ -164,9 +132,9 @@ export class AddTaskComponent {
     );
 
     const submittedTask: TaskInterface = {
-      title: this.inputTaskTitle,
-      description: this.inputTaskDescription,
-      dueDate: this.inputTaskDueDate,
+      title: this.taskDataService.inputTaskTitle,
+      description: this.taskDataService.inputTaskDescription,
+      dueDate: this.taskDataService.inputTaskDueDate,
       assignedTo: this.taskDataService.assignedTo,
       subTasks: subtasksForForm,
       priority: (activeBtn?.priority.toLowerCase() || 'medium') as 'urgent' | 'medium' | 'low',
@@ -178,19 +146,19 @@ export class AddTaskComponent {
 
   addSubtask() {
     const subtask = {
-      text: this.subtaskText,
+      text: this.taskDataService.subtaskText,
       isEditing: false,
       isHovered: false,
       isChecked: false,
     };
-    if (this.subtaskText.trim()) {
-      this.subtasksContainer.push(subtask);
-      this.subtaskText = '';
+    if (this.taskDataService.subtaskText.trim()) {
+      this.taskDataService.subtasksContainer.push(subtask);
+      this.taskDataService.subtaskText = '';
     }
   }
 
   clearSubtask() {
-    this.subtaskText = '';
+    this.taskDataService.subtaskText = '';
   }
 
   editSubtask(subtask: any) {
@@ -202,15 +170,15 @@ export class AddTaskComponent {
   }
 
   editCheckSubtask(subtask: any) {
-    const index = this.subtasksContainer.indexOf(subtask);
-    this.subtasksContainer[index].text = this.inputFieldSubT;
+    const index = this.taskDataService.subtasksContainer.indexOf(subtask);
+    this.taskDataService.subtasksContainer[index].text = this.inputFieldSubT;
     subtask.isEditing = false;
   }
 
   deleteSubtask(subtask: any) {
-    const index = this.subtasksContainer.indexOf(subtask);
+    const index = this.taskDataService.subtasksContainer.indexOf(subtask);
     if (index !== -1) {
-      this.subtasksContainer.splice(index, 1);
+      this.taskDataService.subtasksContainer.splice(index, 1);
     }
   }
 
@@ -220,41 +188,34 @@ export class AddTaskComponent {
 
   setPriority(index: number, prioOutput: string) {
     this.resetOtherBtnStatuses(index);
-    this.priorityButtons[index].btnActive =
-      !this.priorityButtons[index].btnActive;
+    this.taskDataService.priorityButtons[index].btnActive =
+      !this.taskDataService.priorityButtons[index].btnActive;
   }
 
   resetOtherBtnStatuses(index: number) {
-    this.priorityButtons.forEach((btn) => {
-      if (this.priorityButtons.indexOf(btn) === index) return;
+    this.taskDataService.priorityButtons.forEach((btn) => {
+      if (this.taskDataService.priorityButtons.indexOf(btn) === index) return;
       btn.btnActive = false;
     });
   }
 
   toggleAssignedContacts(contactId: any) {
-    const exists = this.assignedTo.some(
-      (contact) => contact.contactId === contactId
-    );
+    const exists = this.taskDataService.assignedTo.some((contact) => contact.contactId === contactId);
     if (!exists) {
-      this.assignedTo.push({ contactId });
+      this.taskDataService.assignedTo.push({ contactId });
     } else {
-      this.assignedTo = this.assignedTo.filter(
-        (contact) => contact.contactId !== contactId
-      );
+      this.taskDataService.assignedTo = this.taskDataService.assignedTo.filter((contact) => contact.contactId !== contactId);
     }
-    console.log(this.assignedTo);
   }
 
   contactSelected() {
-    this.assignedTo.forEach((contact) => {
-      const exists = this.contactsService.contacts.some(
-        (c) => c.id === contact.contactId
-      );
+    this.taskDataService.assignedTo.forEach((contact) => {
+      const exists = this.contactsService.contacts.some((c) => c.id === contact.contactId);
     });
   }
 
   isContactAssigned(contactId: any): boolean {
-    return this.assignedTo.some((a) => a.contactId === contactId);
+    return this.taskDataService.assignedTo.some((a) => a.contactId === contactId);
   }
 
   searchContact(event: Event) {
@@ -276,12 +237,10 @@ export class AddTaskComponent {
   }
 
   filteredCategories() {
-    return this.taskCategories.filter((category) =>
+    return this.taskDataService.taskCategories.filter((category) =>
       category.toLowerCase().includes(this.searchedCategoryName.toLowerCase())
     );
   }
-
-  hoveredContact: any = undefined;
 
   startContactHover(contact: any) {
     this.hoveredContact = contact;
@@ -297,11 +256,11 @@ export class AddTaskComponent {
   }
 
   removeAssignedContact(contactId: string): void {
-    this.assignedTo = this.assignedTo.filter((id) => id !== contactId);
+    this.taskDataService.assignedTo = this.taskDataService.assignedTo.filter((id) => id !== contactId);
     this.hoveredContact = undefined;
   }
 
   setCategory(index: number) {
-    this.selectedCategory = this.filteredCategories()[index];
+    this.taskDataService.selectedCategory = this.filteredCategories()[index];
   }
 }
