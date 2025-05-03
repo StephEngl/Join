@@ -6,13 +6,18 @@
 
     <form class="task-form" (ngSubmit)="onSubmit()">
       <div class="task-form-wrapper">
-        <app-task-overview [(taskDueDate)]="inputTaskDueDate" [today]="today" [(taskTitle)]="inputTaskTitle"
-          [(taskDescription)]="inputTaskDescription" [taskData]="taskData">
+        <app-task-overview 
+          [(taskDueDate)]="inputTaskDueDate"
+          [today]="today" [(taskTitle)]="inputTaskTitle"
+          [(taskDescription)]="inputTaskDescription"
+          [taskData]="taskData">
         </app-task-overview>
 
         <div class="vertical-divider"></div>
 
-        <app-task-details class="task-details" [taskDataInput]="taskData">
+        <app-task-details
+          class="task-details"
+          [taskDataInput]="taskData">
         </app-task-details>
       </div>
 
@@ -21,15 +26,17 @@
 
         <div class="button-wrapper">
           @if (!taskDataService.editModeActive) {
-          <button class="button-cancel" type="button" (click)="cancelEditTask.emit()">
-            <!-- Modified: now emits @Output to parent (task-dialog.component) -->
+          <button
+            class="button-cancel"
+            type="button"
+            (click)="cancelEditTask.emit()"
+          >
             Cancel
             <span class="icon"></span>
           </button>
           }
           <button class="button-save" type="submit">
             @if (taskDataService.editModeActive) { OK
-            <!-- toggled if edit mode active -->
             } @else { Create Task }
             <img src="../../../assets/icons/kanban/check_white.svg" />
           </button>

@@ -22,35 +22,55 @@
 
   <div class="board" #boardContainer>
     @for (column of boardColumns; track column.title) {
-    <div class="board-column" cdkDropList [id]="column.taskStatus"
-      [cdkDropListData]="filterTasksByCategory(column.taskStatus)" [cdkDropListConnectedTo]="connectedDropLists"
-      (cdkDropListDropped)="drop($event)">
+    <div
+      class="board-column"
+      cdkDropList
+      [id]="column.taskStatus"
+      [cdkDropListData]="filterTasksByCategory(column.taskStatus)"
+      [cdkDropListConnectedTo]="connectedDropLists"
+      (cdkDropListDropped)="drop($event)"
+    >
 
       <div class="board-column-header">
 
         <h3>{{ column.title }}</h3>
         @if (column.title !== 'Done') {
-        <button class="mini-button-add-board" (mouseenter)="hoveredColumn = column.title"
-          (mouseleave)="hoveredColumn = ''" (click)="addTaskWithStatus(column.taskStatus)">
+        <button
+          class="mini-button-add-board"
+          (mouseenter)="hoveredColumn = column.title"
+          (mouseleave)="hoveredColumn = ''"
+          (click)="addTaskWithStatus(column.taskStatus)"
+        >
           <img [src]="hoveredColumn === column.title
-                                        ? './assets/icons/kanban/add_plus_blue.png'
-                                        : './assets/icons/kanban/add.svg'" alt="Add" />
+            ? './assets/icons/kanban/add_plus_blue.png'
+            : './assets/icons/kanban/add.svg'" alt="Add"
+          >
         </button>
         }
       </div>
 
-      <ul class="task-list" #taskList (scroll)="onTaskListScrollShadow(taskList)"
-        (scroll)="onTaskListScrollShadowMobile(taskList)">
-        @if (filterTasksByCategory(column.taskStatus).length === 0 ||
-        !hasSearchResults(column.taskStatus, searchText)) {
-        <li class="no-tasks">No tasks {{ column.title }}</li>
-        } @else { @for (task of filterTasksByCategory(column.taskStatus); track task.id) {
-        @if (task.title.toLowerCase().includes(searchText.toLowerCase()) ||
-        task.description.toLowerCase().includes(searchText.toLowerCase())) {
-        <li (click)="openTaskDialog(task)">
-          <app-task [taskData]="task" [searchRequest]="searchText" [searchTrigger]="searchActive" cdkDrag></app-task>
-        </li>
-        }}
+      <ul
+        class="task-list"
+        #taskList
+        (scroll)="onTaskListScrollShadow(taskList)"
+        (scroll)="onTaskListScrollShadowMobile(taskList)"
+      >
+        @if (filterTasksByCategory(column.taskStatus).length === 0 || !hasSearchResults(column.taskStatus, searchText)) {
+          <li class="no-tasks">No tasks {{ column.title }}</li>
+        } @else {
+          @for (task of filterTasksByCategory(column.taskStatus); track task.id) {
+            @if (task.title.toLowerCase().includes(searchText.toLowerCase()) || task.description.toLowerCase().includes(searchText.toLowerCase())) {
+              <li (click)="openTaskDialog(task)">
+                <app-task
+                  [taskData]="task"
+                  [searchRequest]="searchText"
+                  [searchTrigger]="searchActive"
+                  cdkDrag
+                >
+                </app-task>
+              </li>
+            }
+          }
         }
       </ul>
     </div>
@@ -58,9 +78,12 @@
   </div>
 </section>
 
-<!-- Neuer manueller Task-Dialog, ersetzt früheres MatDialog.open(...) -->
 @if (showTaskDialog && selectedTask) {
-<app-task-dialog [taskDataDialog]="selectedTask" [dialogType]="'info'" (close)="closeTaskDialog()">
+<app-task-dialog
+  [taskDataDialog]="selectedTask"
+  [dialogType]="'info'"
+  (close)="closeTaskDialog()"
+>
 </app-task-dialog>
 } @else if (showAddTaskDialog) {
 <div class="overlay-container">
