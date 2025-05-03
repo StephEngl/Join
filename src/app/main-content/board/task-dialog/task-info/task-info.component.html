@@ -2,7 +2,10 @@
     <div class="task-info-container">
         <div class="task-info-header-container">
             <div class="task-info-top-container">
-                <div class="task-info-category">
+                <div class="task-info-category"
+                    [style.backgroundColor]="taskDataDialogInfo.category === 'User Story'
+                    ? '#003cff':'#1FD7C1'"
+                    >
                     {{ taskDataDialogInfo.category }}
                 </div>
                 <div class="task-info-close" (click)="closeDialog()">
