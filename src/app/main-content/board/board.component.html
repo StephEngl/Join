@@ -6,6 +6,7 @@
         <img src="./assets/icons/kanban/add_white.svg" alt="Add Icon" />
       </button>
     </div>
+
     <div class="search-add-container">
       <div class="search-input-container">
         <input [(ngModel)]="searchText" type="search" placeholder="Find Task" />
@@ -30,7 +31,6 @@
       [cdkDropListConnectedTo]="connectedDropLists"
       (cdkDropListDropped)="drop($event)"
     >
-
       <div class="board-column-header">
         <h3>{{ column.title }}</h3>
         @if (column.title !== 'Done') {

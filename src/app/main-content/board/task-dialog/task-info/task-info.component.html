@@ -71,9 +71,14 @@
             <div class="task-info-subtasks-container">
                 <div class="task-info-subtasks-header">Subtasks:</div>
                 <div class="task-info-subtask-list">
-                    @for (subtask of taskDataDialogInfo.subTasks; track subtask) {
+                    @for (subtask of taskDataDialogInfo.subTasks; track subtask.id) {
                         <div class="task-info-subtask-item">
-                            <input type="checkbox" [checked]="subtask.completed" disabled />
+                            <input
+                            type="checkbox"
+                            [(ngModel)]="subtask.isChecked"
+                            (change)="checkSubTask()"
+                            [id]="'checkbox-' + subtask.id"
+                            />
                             <span [class.completed]="subtask.completed">
                                 {{ subtask.text }}
                             </span>
