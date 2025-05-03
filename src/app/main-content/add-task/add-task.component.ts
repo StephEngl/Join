@@ -8,7 +8,7 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
-import { FormsModule } from '@angular/forms';
+import { FormsModule, NgModel } from '@angular/forms';
 import { ContactsService } from '../../services/contacts.service';
 import { CdkAccordionItem, CdkAccordionModule } from '@angular/cdk/accordion';
 import { TaskInterface } from '../../interfaces/task.interface';
@@ -65,25 +65,22 @@ export class AddTaskComponent {
     }
   }
 
-  clearForm() {
-    this.taskDataService.clearData();
-  }
-
   onSubmit() {
-    const categorySelected = this.taskDataService.selectedCategory;
     const isEditMode = this.taskDataService.editModeActive;
     const task = this.getAllTaskData();
-
-    if (!categorySelected || this.taskDataService.inputTaskTitle.length < 3) {
-      // Error Toast here
-      return;
-    }
-
     if (isEditMode) {
       this.submitEdit(task);
     } else {
       this.submitCreate(task);
     }
+  }
+
+  get formInvalid() {
+    return this.isFormInvalid();
+  }
+
+  isFormInvalid(): boolean {
+    return !this.taskDataService.selectedCategory || this.taskDataService.inputTaskTitle.length < 3;
   }
 
   getAllTaskData() {
@@ -93,7 +90,6 @@ export class AddTaskComponent {
           id: this.taskData.id,
           taskType: this.taskData.taskType,
         } : {};
-        
     const task = { ...baseTaskData, ...editTaskData };
     return task;
   }
@@ -117,8 +113,12 @@ export class AddTaskComponent {
     this.taskCreated.emit();
     setTimeout(() => {
       this.router.navigate(['/board']);
+      this.clearForm();
     }, 1000);
-    this.clearForm();
+  }
+  
+  clearForm() {
+    this.taskDataService.clearData();
   }
 
   currentTaskData(): Omit<TaskInterface, 'id'> {

@@ -2,8 +2,13 @@
 @import "../../../../assets/styles/variables.scss";
 @import "../../../../assets/fonts/fonts.scss";
 
-span {
+span,
+.validation-alert  {
   color: $col-task-urgent;
+}
+
+.validation-alert {
+  font-size: 14px;
 }
 
 :host {

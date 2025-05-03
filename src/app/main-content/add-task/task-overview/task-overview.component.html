@@ -1,8 +1,9 @@
 <div class="form-group">
   <label for="title">Title <span>*</span></label>
   <input
-  [ngModel]="taskDataService.inputTaskTitle"
-  (ngModelChange)="taskDataService.inputTaskTitle = $event"
+    [ngModel]="taskDataService.inputTaskTitle"
+    (ngModelChange)="taskDataService.inputTaskTitle = $event"
+    #titleInput="ngModel"
     id="title"
     name="title"
     type="text"
@@ -10,8 +11,12 @@
     placeholder="Enter a title"
     minlength="3"
     maxlength="50"
+    pattern="^(?=[A-Za-z0-9])[\w\d\s.,:;!?()\-\&quot;%&amp;@#+*/]{3,50}$"
     required
   />
+  @if (!titleInput.valid &&  titleInput.touched) {
+    <p class="validation-alert">Title must be at least 3 letters</p>
+  }
 </div>
 
 <div class="form-group">
@@ -19,12 +24,16 @@
   <textarea
     [ngModel]="taskDataService.inputTaskDescription"
     (ngModelChange)="taskDataService.inputTaskDescription = $event"
+    #descriptionInput="ngModel"
     id="description"
     name="description"
     class="form-control"
     placeholder="Enter a description"
-    maxlength="300"
+    pattern="^(?=[A-Za-z0-9])[\w\d\s.,:;!?()\-\&quot;%&amp;@#+*/]{3,300}$"
   ></textarea>
+  @if (!descriptionInput.valid &&  descriptionInput.touched) {
+    <p class="validation-alert">Title must be at least 3 letters</p>
+  }
 </div>
 
 <div class="form-group">
@@ -32,10 +41,15 @@
   <input
     [ngModel]="formatDate(taskDataService.inputTaskDueDate)"
     (ngModelChange)="onDueDateChange($event)"
+    #dateInput="ngModel"
     id="due-date"
     name="dueDate"
     type="date"
     class="form-control"
     [min]="today"
+    required
   />
+  @if (!dateInput.valid && dateInput.touched) {
+    <p class="validation-alert">no due Date set</p>
+  }
 </div>

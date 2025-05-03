@@ -20,15 +20,20 @@
     padding-bottom: 50px;
   }
 
-  // p {
-  //   font-size: 20px;
-  // }
+  .disabled {
+    pointer-events: none;
+    background-color: $col-font-inactive !important;
+  }
 
   form {
     display: flex;
     flex-direction: column;
     height: 100%;
   }
+}
+
+span {
+  color: $col-task-urgent;
 }
 
 .task-form-wrapper {
