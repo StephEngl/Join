@@ -65,8 +65,7 @@
                   [searchRequest]="searchText"
                   [searchTrigger]="searchActive"
                   cdkDrag
-                >
-                </app-task>
+                ></app-task>
               </li>
             }
           }
@@ -79,9 +78,13 @@
 
 @if (showTaskDialog && selectedTask) {
   <app-task-dialog
-    [taskDataDialog]="selectedTask"
-    [dialogType]="'info'"
-    (close)="closeTaskDialog()"
-  >
+      [taskDataDialog]="selectedTask"
+      (close)="closeTaskDialog()">
   </app-task-dialog>
+} @else if (showAddTaskDialog) {
+  <div class="overlay-container">
+    <div class="add-task-wrapper">
+      <app-add-task></app-add-task>
+    </div>
+  </div>
 }

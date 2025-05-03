@@ -7,9 +7,7 @@
     <button
       class="priority-button"
       [class]="prioBtn.btnActive ? 'btnActive' : 'btnInActive'"
-      [style.backgroundColor]="
-        prioBtn.btnActive ? prioBtn.colorActive : 'white'
-      "
+      [style.backgroundColor]="prioBtn.btnActive ? prioBtn.colorActive : 'white'"
       (click)="setPriority(index); $event.preventDefault()"
     >
       {{ prioBtn.priority }}
@@ -23,6 +21,7 @@
 </div>
 
 <div class="form-group">
+
   <cdk-accordion
     class="dropdown-list-container form-group"
     id="assigned-to"
@@ -30,6 +29,7 @@
   >
     <label for="assigned-to">Assigned to</label>
     <cdk-accordion-item class="form-control" #accordionItem="cdkAccordionItem">
+
       <span
         class="toggle-dropdown-list"
         (click)="accordionItem.toggle(); categoryAccordionItem.close()"
@@ -38,9 +38,7 @@
           type="search"
           class="form-control"
           [class]="accordionItem.expanded ? 'drop-down-active' : ''"
-          [placeholder]="
-            accordionItem.expanded ? 'Search...' : 'Select Contacts to assign'
-          "
+          [placeholder]="accordionItem.expanded ? 'Search...' : 'Select Contacts to assign'"
           (input)="searchContact($event); accordionItem.open()"
         />
         <img
@@ -51,70 +49,67 @@
           "
         />
       </span>
+
       @if(accordionItem.expanded) {
-      <ul
-        class="dropdown-list"
-        role="region"
-        [style.display]="accordionItem.expanded ? '' : 'none'"
-      >
-        @for (contact of filteredContacts(); track contact; let index = $index)
-        {
-        <li
-          class="contact-wrapper"
-          (click)="toggleAssignedContacts(contact.id)"
-          [style.backgroundColor]="
-            isContactAssigned(contact.id) ? '#091931' : ''
-          "
+        <ul
+          class="dropdown-list"
+          role="region"
+          [style.display]="accordionItem.expanded ? '' : 'none'"
         >
-          <div class="single-contact">
-            <div
-              class="contact-initials"
-              [style.backgroundColor]="contactsService.contactColor(contact.id)"
-              [style.border]="
-                isContactAssigned(contact.id) ? '2px solid white' : ''
-              "
+          @for (contact of filteredContacts(); track contact; let index = $index)
+          {
+            <li
+              class="contact-wrapper"
+              (click)="toggleAssignedContacts(contact.id)"
+              [style.backgroundColor]="isContactAssigned(contact.id) ? '#091931' : ''"
             >
-              {{ contactsService.nameInitials(contact.id) }}
-            </div>
-            <p [style.color]="isContactAssigned(contact.id) ? 'white' : ''">
-              {{ contact.name }}
-            </p>
-          </div>
-          <img
-            [src]="
-              isContactAssigned(contact.id)
-                ? './assets/icons/kanban/checkbox_checked.svg'
-                : './assets/icons/kanban/checkbox_unchecked.svg'
-            "
-          />
-        </li>
-        }
-      </ul>
+              <div class="single-contact">
+                <div
+                  class="contact-initials"
+                  [style.backgroundColor]="contactsService.contactColor(contact.id)"
+                  [style.border]="isContactAssigned(contact.id) ? '2px solid white' : ''"
+                >
+                  {{ contactsService.nameInitials(contact.id) }}
+                </div>
+                <p [style.color]="isContactAssigned(contact.id) ? 'white' : ''">
+                  {{ contact.name }}
+                </p>
+              </div>
+              <img
+                [src]="isContactAssigned(contact.id)
+                  ? './assets/icons/kanban/checkbox_checked.svg'
+                  : './assets/icons/kanban/checkbox_unchecked.svg'"
+              />
+            </li>
+          }
+        </ul>
       }
+
     </cdk-accordion-item>
   </cdk-accordion>
 
   <div class="assigned-contacts">
+
     @for (contact of taskData.assignedTo; track contact.contactId) {
-    <div
-      class="contact-initials"
-      [style.backgroundColor]="contactsService.contactColor(contact.contactId)"
-      (mouseenter)="startContactHover(contact.contactId)"
-      (mousemove)="moveContactHover($event)"
-      (mouseleave)="endContactHover()"
-      (click)="removeAssignedContact(hoveredContact)"
-    >
-      {{ contactsService.nameInitials(contact.contactId) }}
-    </div>
+      <div
+        class="contact-initials"
+        [style.backgroundColor]="contactsService.contactColor(contact.contactId)"
+        (mouseenter)="startContactHover(contact.contactId)"
+        (mousemove)="moveContactHover($event)"
+        (mouseleave)="endContactHover()"
+        (click)="removeAssignedContact(hoveredContact)"
+      >
+        {{ contactsService.nameInitials(contact.contactId) }}
+      </div>
     } @if (hoveredContact) {
-    <div
-      class="contact-name-info"
-      [style.backgroundColor]="contactsService.contactColor(hoveredContact)"
-      [style.left.px]="mouseX"
-      [style.top.px]="mouseY"
-    >
-      {{ contactsService.contactName(hoveredContact) }}
-    </div>
+      <div
+        class="contact-name-info"
+        [style.backgroundColor]="contactsService.contactColor(hoveredContact)"
+        [style.left.px]="mouseX"
+        [style.top.px]="mouseY"
+      >
+        {{ contactsService.contactName(hoveredContact) }}
+      </div>
     }
   </div>
 </div>
@@ -144,9 +139,8 @@
                 ? taskData.selectedCategory
                 : 'Search...'
               : taskData.selectedCategory
-              ? taskData.selectedCategory
-              : 'Select task category'
-          "
+                ? taskData.selectedCategory
+                : 'Select task category'"
           (input)="searchCategory($event); categoryAccordionItem.open()"
         />
         <img

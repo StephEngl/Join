@@ -74,7 +74,7 @@ export class AddTaskComponent {
     const isEditMode = this.taskDataService.editModeActive;
     const task = this.getAllTaskData();
 
-    if (!categorySelected) {
+    if (!categorySelected || this.taskDataService.inputTaskTitle.length < 3) {
       // Error Toast here
       return;
     }
