@@ -1,14 +1,19 @@
 @import "./../../../assets/styles/variables.scss";
 @import "./../../../assets/styles/mixins.scss";
 
+// TODO: SCSS @mixin dFlex anpassen
+
 .board-section {
-  @include dFlex(none, none);
+  @include dFlex(null, null);
+  //display: flex;
   flex-direction: column;
   height: 100%;
 }
 
 .board-header {
-  @include dFlex(space-between, none);
+  @include dFlex(space-between, null);
+  //display: flex;
+  //justify-content: space-between;
   margin: 0 64px;
   padding: 32px 0 24px 0;
   max-width: 1440px;
@@ -19,7 +24,9 @@
 }
 
 .search-input-container {
-  @include dFlex(none, center);
+  @include dFlex(null, center);
+  //display: flex;
+  //align-items: center;
   height: 48px;
   width: 312px;
   border: 1px solid #d1d1d1;
@@ -42,6 +49,9 @@
 
   .search-icon {
     @include dFlex(center, center);
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
     height: 18px;
     width: 18px;
     margin-left: 8px;
@@ -57,11 +67,10 @@
 
 .title-button {
   @include dFlex(space-between, center);
-  margin-bottom: 25px;
 }
 
 .add-task-btn {
-  @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
+  @include btn();
   height: 48px;
   width: 160px;
 }
@@ -72,6 +81,10 @@
 
 .board {
   @include dFlex(flex-start, flex-start, 6px);
+  //display: flex;
+  //justify-content: flex-start;
+  //align-items: flex-start;
+  //gap: 6px;
   flex-direction: row;
   height: calc(100dvh - 350px);
   padding: 0 64px;
@@ -87,6 +100,9 @@
 
 .mini-button-add-board {
   @include dFlex(center, center);
+  //display: flex;
+  //justify-content: center;
+  //align-items: center;
   height: 24px;
   width: 24px;
   background: none;
@@ -108,7 +124,10 @@
 }
 
 .board-column {
-  @include dFlex(none, center, 0, relative);
+  @include dFlex(null, center, null);
+  //display: flex;
+  //align-items: center;
+  //position: relative;
   flex-direction: column;
   height: 100%;
   flex: 0 0 280px;
@@ -116,14 +135,16 @@
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  padding-top: 20px;
+  // padding-top: 20px;
 
   &::-webkit-scrollbar {
     display: none;
   }
 
   ul {
-    @include dFlex(none, center);
+    @include dFlex(null, center);
+    //display: flex;
+    //align-items: center;
     width: 100%;
     flex: initial;
     overflow-y: auto;
@@ -151,7 +172,9 @@
   &::before,
   &::after {
     content: "";
-    @include dFlex(none, none, 0, absolute);
+    @include dFlex(null, null, 0, absolute);
+    //display: flex;
+    //position: absolute;
     left: 50%;
     height: 16px;
     width: calc(100% - 30px);
@@ -183,6 +206,9 @@
 
 .board-column-header {
   @include dFlex(space-between, center);
+  //display: flex;
+  //justify-content: space-between;
+  //align-items: center;
   width: calc(100% - 20px);
   padding-left: 3px;
   padding-right: 3px;
@@ -264,18 +290,25 @@ app-task {
 
 @media screen and (max-width: 830px) {
   .board-section {
-    @include dFlex(none, none, 0, fixed);
+    @include dFlex(null, null, null, fixed);
+    //display: flex;
     flex-direction: column;
-    top: $header-height;
     height: calc(100% - 200px);
     width: 100%;
+    //position: fixed;
+    top: $header-height;
     z-index: 0;
   }
 
   .board-header {
-    @include dFlex(none, none, 0);
+    @include dFlex(null, null);
+    //display: flex;
     flex-direction: column;
     margin: 0 16px;
+  }
+
+  .title-button {
+    margin-bottom: 25px;
   }
 
   .add-task-btn {
@@ -287,14 +320,19 @@ app-task {
   }
 
   .add-task-btn-respo {
-    @include btn($col-bg-secondary, $col-font-secondary, $col-ref-highlight);
-    @include dFlex(center, none);
+    @include btn();
+    @include dFlex(center, null);
+    //display: flex;
+    //justify-content: center;
     height: 24px;
     width: 24px;
   }
 
   .no-tasks {
     @include dFlex(center, center);
+    //display: flex;
+    //justify-content: center;
+    //align-items: center;
     width: 100%;
     text-align: center;
   }
@@ -313,13 +351,18 @@ app-task {
   }
 
   .board-column {
-    @include dFlex(none, none, 0, relative);
+    @include dFlex(null, null, null, relative);
+    //display: flex;
+    //position: relative;
     height: auto;
     width: 100%;
     flex: 0 0 auto;
 
     ul {
-      @include dFlex(none, flex-start, 16px);
+      @include dFlex(null, flex-start, 16px);
+      //display: flex;
+      //align-items: flex-start;
+      //gap: 16px;
       flex-direction: row;
       overflow-x: auto;
       overflow-y: hidden;
@@ -328,7 +371,9 @@ app-task {
       &::before,
       &::after {
         content: "";
-        @include dFlex(none, none, 0, absolute);
+        @include dFlex(null, null, null);
+        //display: flex;
+        //position: absolute;
         top: 39px;
         bottom: 20px;
         width: 16px;
@@ -357,7 +402,6 @@ app-task {
       }
 
       li {
-        flex: 0 0 auto;
         margin: 20px 0;
       }
 
@@ -372,7 +416,7 @@ app-task {
     margin-bottom: 0;
   }
 }
-
+// 2x media 830px?
 @media screen and (max-width: 830px) {
   .overlay-container {
     position: relative;

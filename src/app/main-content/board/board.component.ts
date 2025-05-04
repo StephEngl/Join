@@ -117,6 +117,9 @@ export class BoardComponent {
     this.selectedTask = null;
   }
 
+  // TODO: Das problem beheben mit dem Scroll-Schatten der Aufgabenliste
+  // FIXME: Der untere Schatten der Liste ist immer noch sichtbar, wenn keine Aufgaben vorhanden sind
+  // BUG: -
   onTaskListScrollShadow(taskList: HTMLElement) {
     const boardColumn = taskList.closest('.board-column');
     if (!boardColumn) return;
