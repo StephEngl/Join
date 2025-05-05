@@ -8,8 +8,8 @@
     height: 90dvh;
     margin: 0;
     padding-top: 2rem;
-    padding-left: 2rem;
-    padding-right: 2rem;
+    padding-left: 1.5rem;
+    padding-right: 1.5rem;
     background: #FFFFFF;
     border-radius: 1rem;
     overflow: auto;
@@ -83,7 +83,7 @@
             overflow-x: hidden;
             min-height: 0;
             position: relative;
-            padding: 1rem;
+            padding: 0.5rem;
 
             &::-webkit-scrollbar {
                 width: 8px;
@@ -140,7 +140,7 @@
     
                 .task-info-due-date-output {
                     display: flex;
-                    padding-left: 48px;
+                    padding-left: 40px;
                     gap: 1rem;
                 }
             }
@@ -162,7 +162,7 @@
     
                 .task-info-priority-output {
                     display: flex;
-                    padding-left: 48px;
+                    padding-left: 40px;
                     gap: 1rem;
     
                     span {
@@ -202,7 +202,7 @@
                         @include dFlex(flex-start, center);
     
                         .initials {
-                            @include contactIcon(50px, 24px, 0);
+                            @include contactIcon(42px, 12px, 0);
                         }
     
                         .name {
@@ -264,49 +264,105 @@
         }
 
         .task-info-footer-container {
-            position: sticky;
+            @include dFlex(flex-end, center, $position: sticky);
             bottom: 0;
             z-index: 2;
             background: white;
 
             .task-info-delete-edit-container {
-                @include dFlex(flex-end, center);
-                width: 100%;
-                margin-top: 1rem;
-    
+                @include dFlex(center, center);
+                width: 160px;
+                padding-top: 1rem;
+                padding-bottom: 1rem;
+                gap: 8px;
+
                 .task-info-delete-container {
-                    @include btn(transparent, black, rgba(255, 0, 0, 0.1));
-    
-                    .task-info-delete-img {
-                        display: flex;
-    
-                        img {
-                            display: flex;
-                        }
+                    @include dFlex(center, center);
+                    width: 95px;
+                    color: $col-bg-secondary;
+                    cursor: pointer;
+
+                    :hover {
+                        cursor: pointer;
                     }
     
-                    .task-info-delete-txt {
-                        display: flex;
+                    .task-info-delete-img {
+                        @include dFlex($jc: center, $ai: center);
+                        width: 24px;
+                        height: 24px;
+                        background-image: url('/assets/icons/kanban/delete.svg');
+                        background-size: 16px, 18px;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        transition: background-image 0.3s ease;
+                    }
+    
+                    .task-info-delete-txt {       
+                        display: flex;                 display: flex;
+                        align-items: center;
+                        justify-content: center;
                         font-size: 1rem;
                     }
                 }
+
+                .task-info-delete-container:hover 
+                .task-info-delete-txt {
+                    color: $col-ref-highlight;
+                    font-weight: bold;
+                }
+                
+                .task-info-delete-container:hover 
+                .task-info-delete-img {
+                    background-image: url('/assets/icons/kanban/delete_active.svg');
+                }
+
+                .task-info-between-delete-and-edit {
+                    @include dFlex($jc: center, $ai: center);
+                    width: 1rem;
+                    height: auto;
+                    color: $col-bg-secondary;
+                }
     
                 .task-info-edit-container {
-                    @include btn(transparent, black, rgba(0, 128, 0, 0.1));
+                    @include dFlex($jc: center, $ai: center);
+                    width: 70px;
+                    color: $col-bg-secondary;
+                    cursor: pointer;
+
+                    :hover {
+                        cursor: pointer;
+                    }
     
                     .task-info-edit-img {
                         display: flex;
-    
-                        img {
-                            width: 24px;
-                            height: 24px;
-                        }
+                        align-items: center;
+                        justify-content: center;
+                        width: 24px;
+                        height: 24px;
+                        background-image: url('/assets/icons/kanban/edit.svg');
+                        background-size: 16px, 18px;
+                        background-repeat: no-repeat;
+                        background-position: center;
+                        transition: background-image 0.3s ease;
                     }
     
                     .task-info-edit-txt {
                         display: flex;
+                        align-items: center;
+                        justify-content: center;
                         font-size: 1rem;
                     }
+                }
+
+                .task-info-edit-container:hover 
+                .task-info-edit-txt {
+                    color: $col-ref-highlight;
+                    font-weight: bold;
+                }
+                
+                .task-info-edit-container:hover 
+                .task-info-edit-img {
+                    background-image: url('/assets/icons/kanban/edit_active.svg');
                 }
             }
         }
@@ -429,10 +485,10 @@
 
 @media (max-width: 340px) {
     .task-info-due-date-output {
-        padding-left: 26px;
+        padding-left: 22px!important;
     }
 
     .task-info-priority-output {
-        padding-left: 40px;
+        padding-left: 22px!important;
     }
 }
