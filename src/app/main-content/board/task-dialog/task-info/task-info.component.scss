@@ -373,7 +373,6 @@
     }
 }
 
-
 @media (min-width: 630px) {
     .task-info-header-container {
         h2 {
@@ -489,13 +488,14 @@
     }
 }
 
-@media (min-height: 1001px) {
+@media (min-height: 1000px) {
+
     .task-info-section {
         height: 100%;
+    }
+
+    .task-info-container {
         max-height: 1400px;
     }
 
-    .task-info-content-container {
-        flex-grow: 0;
-    }
 }
