@@ -58,6 +58,7 @@ export class AddTaskComponent {
 
   // add-task status
   @Input() isEditTaskDialog: boolean = false;
+  @Input() isAddTaskDialog: boolean = false;
 
   @Input() taskData!: TaskInterface;
   @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
@@ -69,7 +70,7 @@ export class AddTaskComponent {
     if(!this.taskDataService.editModeActive) {
       this.clearForm();
     }
-    console.log(this.isEditTaskDialog);
+    console.log(this.isAddTaskDialog);
   }
 
   @HostListener('click')

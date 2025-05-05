@@ -1,7 +1,8 @@
 <section class="task-section">
   <div
     class="task-section-content"
-    [class]="isEditTaskDialog ? 'dummy-class' : ''"
+    [class]="isEditTaskDialog ? 'edit-dialog-class' : ''"
+    [class]="isAddTaskDialog ? 'add-dialog-class' : ''"
   >
     @if (!taskDataService.editModeActive) {
     <h2>Add Task</h2>

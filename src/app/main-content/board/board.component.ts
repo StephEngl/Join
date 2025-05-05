@@ -3,10 +3,14 @@ import { CommonModule } from '@angular/common';
 import { TasksService } from '../../services/tasks.service';
 import { TaskComponent } from './task/task.component';
 import { TaskInterface } from '../../interfaces/task.interface';
-/* import { MatDialog, MatDialogRef } from '@angular/material/dialog'; */ /* Removed: switched to manual task dialog */
 import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 import { FormsModule } from '@angular/forms';
-import { CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule } from '@angular/cdk/drag-drop';
+import {
+  CdkDragDrop,
+  moveItemInArray,
+  transferArrayItem,
+  DragDropModule,
+} from '@angular/cdk/drag-drop';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { Subscription } from 'rxjs';
 import { SingleTaskDataService } from '../../services/single-task-data.service';
@@ -21,7 +25,7 @@ import { ViewChildren, ElementRef, QueryList } from '@angular/core'; //neu hinzu
     TaskDialogComponent,
     DragDropModule,
     FormsModule,
-    AddTaskComponent
+    AddTaskComponent,
   ],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
@@ -31,9 +35,7 @@ import { ViewChildren, ElementRef, QueryList } from '@angular/core'; //neu hinzu
         style({ opacity: 0 }),
         animate('300ms ease-out', style({ opacity: 1 })),
       ]),
-      transition(':leave', [
-        animate('300ms ease-in', style({ opacity: 0 })),
-      ]),
+      transition(':leave', [animate('300ms ease-in', style({ opacity: 0 }))]),
     ]),
   ],
 })
@@ -45,6 +47,7 @@ export class BoardComponent {
 
   showTaskDialog: boolean = false;
   showAddTaskDialog: boolean = false;
+  isAddTaskDialog: boolean = false;
   selectedTask: TaskInterface | null = null;
 
   boardColumns: { taskStatus: string; title: string }[] = [
@@ -63,6 +66,7 @@ export class BoardComponent {
   closeTaskDialog(): void {
     this.showTaskDialog = false;
     this.showAddTaskDialog = false;
+    this.isAddTaskDialog = false;
     this.selectedTask = null;
   }
 
@@ -73,8 +77,8 @@ export class BoardComponent {
   @HostListener('window:resize')
   refreshScrollShadowsZoom() {
     setTimeout(() => {
-      this.taskLists.forEach((taskList) =>
-        this.onTaskListScrollShadow(taskList.nativeElement) // .nativeElement, weil onTaskListScrollShadow auf DOM-Eigenschaften wie offsetHeight zugreift. den sonst ohne nativeElement wäre scrollTop etc. nicht möglihc. ;)
+      this.taskLists.forEach(
+        (taskList) => this.onTaskListScrollShadow(taskList.nativeElement) // .nativeElement, weil onTaskListScrollShadow auf DOM-Eigenschaften wie offsetHeight zugreift. den sonst ohne nativeElement wäre scrollTop etc. nicht möglihc. ;)
       );
     }, 100);
   }
@@ -141,13 +145,18 @@ export class BoardComponent {
   openAddTaskDialog(): void {
     this.showTaskDialog = true;
     this.showAddTaskDialog = true;
+    this.isAddTaskDialog = true;
     this.singleTaskDataService.editModeActive = false;
   }
 
   addTaskWithStatus(taskStatus: string) {
     this.showTaskDialog = true;
     this.showAddTaskDialog = true;
-    this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';
+    this.isAddTaskDialog = true;
+    this.singleTaskDataService.taskStatus = taskStatus as
+      | 'toDo'
+      | 'inProgress'
+      | 'feedback';
     this.singleTaskDataService.editModeActive = false;
   }
 
