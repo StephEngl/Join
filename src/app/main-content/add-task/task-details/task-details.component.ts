@@ -78,7 +78,7 @@ export class TaskDetailsComponent {
       this.taskData.priorityButtons.forEach(btn => btn.btnActive = false);
     } else {
       const index = this.taskData.priorityButtons.findIndex(
-        btn => btn.priority.toLowerCase() === this.taskDataInput.priority.toLowerCase()
+        btn => btn.priority.toLowerCase() === this.tasksService.tasks[this.taskIndex()].priority.toLowerCase()
       );
       if (index !== -1) {
         this.setPriority(index);
@@ -91,7 +91,7 @@ export class TaskDetailsComponent {
       this.taskData.assignedTo = []
       return;
     } 
-    this.taskData.assignedTo = this.taskDataInput.assignedTo?.map(contact => ({
+    this.taskData.assignedTo = this.tasksService.tasks[this.taskIndex()].assignedTo?.map(contact => ({
       contactId: contact.contactId,
     })) || [];
   }
@@ -157,7 +157,7 @@ export class TaskDetailsComponent {
       this.taskData.selectedCategory = undefined;
       return;
     }
-    this.taskData.selectedCategory = this.taskDataInput.category || undefined;
+    this.taskData.selectedCategory = this.tasksService.tasks[this.taskIndex()].category || undefined;
   }
 
   addSubtask() {
@@ -190,7 +190,7 @@ export class TaskDetailsComponent {
       this.taskData.subtasksContainer = [];
       return;
     }
-    this.taskData.subtasksContainer = this.taskDataInput.subTasks?.map(subtask => ({
+    this.taskData.subtasksContainer = this.tasksService.tasks[this.taskIndex()].subTasks?.map(subtask => ({
       text: subtask.text,
       isEditing: false,
       isHovered: false,
