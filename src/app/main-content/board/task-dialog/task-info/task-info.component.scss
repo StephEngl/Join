@@ -236,6 +236,7 @@
     
                     .task-info-subtask-item {
                         @include dFlex(flex-start, center);
+                        cursor: pointer;
     
                         span {
                             font-family: "Inter", sans-serif;
@@ -363,6 +364,10 @@
             }
         }
     }
+}
+
+.subtask-checkbox {
+    display: none;
 }
 
 @media (min-width: 630px) {

@@ -181,6 +181,7 @@ textarea {
   list-style-type: disc;
   .subtask-text {
     word-break: break-word;
+    max-width: 440px;
   }
 }
 

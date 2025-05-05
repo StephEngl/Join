@@ -45,8 +45,7 @@
           src="./assets/icons/kanban/drop_down_open.svg"
           alt=""
           [style.transform]="
-            accordionItem.expanded ? 'rotate(180deg)' : 'rotate(0deg)'
-          "
+          accordionItem.expanded ? 'rotate(180deg)' : 'rotate(0deg)'"
         />
       </span>
 
@@ -190,6 +189,7 @@
       name="subtask"
       type="text"
       class="form-control"
+      maxlength="80"
       placeholder="Add new subtask"
       [(ngModel)]="subtaskText"
       (keyup.enter)="addSubtask()"
@@ -231,6 +231,7 @@
           [(ngModel)]="inputFieldSubT"
           name="subtaskText"
           [value]="subtask.text"
+          maxlength="80"
           (keydown.enter)="subtask.isEditing = false"
           class="subtask-edit-input"
           #inputFieldSubTask
