@@ -6,7 +6,7 @@ import { ContactInterface } from '../../interfaces/contact.interface';
 import { ContactInfoComponent } from './contact-info/contact-info.component';
 import { SignalsService } from '../../services/signals.service';
 import { DummyContactsService } from '../../services/dummy-contacts.service';
-import { ToastService } from '../../shared/toast/toast.service';
+import { ToastService } from '../../services/toast.service';
 @Component({
   selector: 'app-contacts',
   standalone: true,
