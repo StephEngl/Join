@@ -179,6 +179,9 @@ textarea {
   overflow-y: auto;
   padding: 5px 0;
   list-style-type: disc;
+  .subtask-text {
+    word-break: break-word;
+  }
 }
 
 .subtask-item {

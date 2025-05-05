@@ -60,11 +60,11 @@ app-header {
   }
 }
 
-@media (pointer: coarse) and (orientation: landscape) {
-  .orientation-lock {
-    display: flex;
-  }
-}
+// @media (pointer: coarse) and (orientation: landscape) {
+//   .orientation-lock {
+//     display: flex;
+//   }
+// }
 
 @media (pointer: fine) {
   .orientation-lock {

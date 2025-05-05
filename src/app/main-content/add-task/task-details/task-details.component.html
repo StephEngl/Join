@@ -225,7 +225,7 @@
         [style.backgroundColor]="subtask.isHovered ? '#e8e8e8' : ''"
       >
         @if (!subtask.isEditing) {
-        <p>• {{ subtask.text }}</p>
+        <p class="subtask-text">{{"• " + subtask.text }}</p>
         } @else {
         <input
           [(ngModel)]="inputFieldSubT"
