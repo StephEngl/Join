@@ -59,6 +59,7 @@ export class AddTaskComponent {
   @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
   @Output() taskUpdated = new EventEmitter<void>();
   @Output() taskCreated = new EventEmitter<void>();
+  @Output() closeDialog = new EventEmitter<boolean>();
 
   ngOnInit() {
     if(!this.taskDataService.editModeActive) {
@@ -263,5 +264,9 @@ export class AddTaskComponent {
 
   setCategory(index: number) {
     this.taskDataService.selectedCategory = this.filteredCategories()[index];
+  }
+
+  closeIfDialog() {
+    this.closeDialog.emit(true);
   }
 }

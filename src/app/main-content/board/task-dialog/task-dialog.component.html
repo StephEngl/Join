@@ -1,9 +1,11 @@
-<div class="task-dialog-section">
+<div class="task-dialog-section"
+(click)="closeDialog()">
   @if (showTaskInfo) {
   <app-task-info
     [taskDataDialogInfo]="taskDataDialog"
     (editTask)="onEditTask()"
     (close)="closeDialog()"
+    (click)="$event.stopPropagation()"
   >
   </app-task-info>
 
@@ -15,6 +17,7 @@
     [taskData]="taskDataDialog"
     (cancelEditTask)="taskEdited()"
     (taskUpdated)="taskEdited()"
+    (click)="$event.stopPropagation()"
   >
   </app-add-task>
   }

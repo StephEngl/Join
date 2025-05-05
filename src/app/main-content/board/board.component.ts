@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TasksService } from '../../services/tasks.service';
 import { TaskComponent } from './task/task.component';
@@ -49,6 +49,14 @@ export class BoardComponent {
 
   btnAddHover = false;
   hoveredColumn: string = '';
+
+  @HostListener('document:click')
+  closeTaskDialog(): void {
+    this.showTaskDialog = false;
+    this.showAddTaskDialog = false;
+    this.selectedTask = null;
+  }
+
 
   filterTasksByCategory(status: string): TaskInterface[] {
     return this.tasksService.tasks
@@ -109,12 +117,6 @@ export class BoardComponent {
     this.showAddTaskDialog = true;
     this.singleTaskDataService.taskStatus = taskStatus as 'toDo' | 'inProgress' | 'feedback';
     this.singleTaskDataService.editModeActive = false;
-  }
-
-  closeTaskDialog(): void {
-    this.showTaskDialog = false;
-    this.showAddTaskDialog = false;
-    this.selectedTask = null;
   }
 
   // TODO: Das problem beheben mit dem Scroll-Schatten der Aufgabenliste
