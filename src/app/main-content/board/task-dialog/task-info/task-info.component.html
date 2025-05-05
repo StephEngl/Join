@@ -82,7 +82,7 @@
                             (change)="checkSubTask()"
                             [id]="'checkbox-' + subtask.id"
                             />
-                            <span [class.completed]="subtask.completed">
+                            <span [class.completed]="subtask.isChecked">
                                 {{ subtask.text }}
                             </span>
                         </div>

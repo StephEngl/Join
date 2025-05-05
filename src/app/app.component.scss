@@ -31,6 +31,7 @@ app-header {
 
 .orientation-lock {
   @include dFlex(center, center, 20px, absolute);
+  display: none !important;
   flex-direction: column;
   padding: 20px;
   text-align: center;
@@ -60,11 +61,11 @@ app-header {
   }
 }
 
-@media (pointer: coarse) and (orientation: landscape) {
-  .orientation-lock {
-    display: flex;
-  }
-}
+// @media (pointer: coarse) and (orientation: landscape) {
+//   .orientation-lock {
+//     display: flex;
+//   }
+// }
 
 @media (pointer: fine) {
   .orientation-lock {
