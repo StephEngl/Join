@@ -239,6 +239,7 @@
                         cursor: pointer;
     
                         span {
+
                             font-family: "Inter", sans-serif;
                             font-weight: 400;
                             font-size: 1rem;
@@ -255,6 +256,10 @@
                         .completed {
                             text-decoration: line-through;
                             color: gray;
+                        }
+
+                        .subtask-checkbox {
+                            display: none;
                         }
                     }
                 }
@@ -368,9 +373,6 @@
     }
 }
 
-.subtask-checkbox {
-    display: none;
-}
 
 @media (min-width: 630px) {
     .task-info-header-container {
