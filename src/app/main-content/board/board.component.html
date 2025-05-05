@@ -85,7 +85,7 @@
   </app-task-dialog>
 } @else if (showAddTaskDialog) {
   <div class="overlay-container" [@slideInOut]>
-    <div class="add-task-wrapper">
+    <div class="add-task-wrapper" (click)="$event.stopPropagation()">
       <app-add-task (closeDialog)="showAddTaskDialog = false"></app-add-task>
     </div>
   </div>
