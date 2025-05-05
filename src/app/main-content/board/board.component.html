@@ -98,11 +98,14 @@
 </app-task-dialog>
 } @else if (showAddTaskDialog) {
 <div class="overlay-container" [@slideInOut]>
-  <div class="add-task-wrapper" (click)="$event.stopPropagation()">
-    <app-add-task
-      [isAddTaskDialog]="isAddTaskDialog"
-      (close)="showAddTaskDialog = false"
-    ></app-add-task>
+  <div class="overlay-content">
+    <div class="add-task-wrapper" (click)="$event.stopPropagation()">
+      <app-add-task
+        [isAddTaskDialog]="isAddTaskDialog"
+        (close)="showAddTaskDialog = false"
+      ></app-add-task>
+    </div>
   </div>
+
 </div>
 }
