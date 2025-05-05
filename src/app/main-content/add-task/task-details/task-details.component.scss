@@ -152,6 +152,7 @@ textarea {
 
 .assigned-contacts {
   @include dFlex(flex-start, flex-start, 5px);
+  flex-wrap: wrap;
   .contact-initials {
     cursor: pointer;
   }
