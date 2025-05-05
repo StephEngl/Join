@@ -259,7 +259,6 @@ app-task {
   border-radius: 16px;
 }
 
-// please adjust position & width here
 .overlay-container {
   position: fixed;
   top: 0;
@@ -271,6 +270,7 @@ app-task {
   align-items: flex-start;
   justify-content: center;
   z-index: 99;
+  max-width: 1920px;
 }
 
 .add-task-wrapper {
