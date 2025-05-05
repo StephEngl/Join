@@ -14,7 +14,8 @@ import { TaskInterface } from '../../../interfaces/task.interface';
   styleUrl: './task-details.component.scss',
 })
 export class TaskDetailsComponent {
-  @Input() taskDataInput!: TaskInterface
+  @Input() taskDataInput!: TaskInterface;
+  @Input() closeDropdownList: boolean = false;
   mouseX: number = 0;
   mouseY: number = 0;
   contactsService = inject(ContactsService);
@@ -35,7 +36,13 @@ export class TaskDetailsComponent {
     this.setSubtasksInEditMode();
   }
 
-  @HostListener('click')
+  ngOnChanges() {
+    if (this.closeDropdownList) {
+      this.closeDropdownLists();
+    }
+  }
+
+  @HostListener('document:click')
   closeDropdownLists(): void {
     this.accordionItem.close();
     this.categoryAccordionItem.close();
@@ -92,7 +99,6 @@ export class TaskDetailsComponent {
         (contact) => contact.contactId !== contactId
       );
     }
-    console.log(this.taskData.assignedTo);
   }
 
   isContactAssigned(contactId: any): boolean {
@@ -132,7 +138,6 @@ export class TaskDetailsComponent {
 
   setCategory(index: number) {
     this.taskData.selectedCategory = this.filteredCategories()[index];
-    //this.closeDropdownLists();  => emited & Hostlistener
   }
 
   setCategoryInEditMode(): void {

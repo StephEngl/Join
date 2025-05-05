@@ -44,6 +44,7 @@ export class AddTaskComponent {
   tasksService = inject(TasksService);
   taskDataService = inject(SingleTaskDataService);
   toastService = inject(ToastService);
+  closeDropdownList: boolean = false;
 
   mouseX: number = 0;
   mouseY: number = 0;
@@ -65,6 +66,14 @@ export class AddTaskComponent {
     if(!this.taskDataService.editModeActive) {
       this.clearForm();
     }
+  }
+
+  @HostListener('click')
+  closeDropDowns() {
+    this.closeDropdownList = true;
+    setTimeout(() => {
+      this.closeDropdownList = false;
+    }, 1);
   }
 
   onSubmit() {
