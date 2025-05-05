@@ -3,7 +3,7 @@
         <div class="task-info-header-container">
             <div class="task-info-top-container">
                 <div class="task-info-category"
-                    [style.backgroundColor]="taskDataDialogInfo.category === 'User Story'
+                    [style.backgroundColor]="tasksService.tasks[taskIndex()].category === 'User Story'
                     ? '#003cff':'#1FD7C1'"
                     >
                     {{ tasksService.tasks[taskIndex()].category }}
