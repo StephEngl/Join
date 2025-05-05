@@ -33,7 +33,7 @@ import { Router } from '@angular/router';
 })
 export class AddTaskComponent {
 
-  constructor(private toastService: ToastService, private router: Router) { }
+  constructor(private router: Router) { }
 
   @ViewChild('accordionItem') accordionItem!: CdkAccordionItem;
   @ViewChild('categoryAccordionItem') categoryAccordionItem!: CdkAccordionItem;
@@ -43,6 +43,7 @@ export class AddTaskComponent {
   contactsService = inject(ContactsService);
   tasksService = inject(TasksService);
   taskDataService = inject(SingleTaskDataService);
+  toastService = inject(ToastService);
 
   mouseX: number = 0;
   mouseY: number = 0;
