@@ -57,8 +57,7 @@ span {
 }
 
 .footnote {
-  @include dFlex($ai: flex-end, $jc: space-between);
-  padding: 24px 0;
+  @include dFlex($jc: space-between, $ai: center);
 
   .button-wrapper {
     display: flex;
@@ -100,7 +99,8 @@ span {
 
     .button-cancel,
     .button-save {
-      @include dFlex($ai: center, $jc: space-between);
+      display: flex;
+      justify-content: space-between;
       gap: 4px;
       font-size: 21px;
       padding: 16px;
@@ -170,30 +170,14 @@ span {
   h2 {
     width: 100% !important;
   }
-
-  .button-wrapper {
-    .button-cancel, .button-save {
-      font-size: 16px !important;
-    }
-  }
 }
-
-@container task-section (max-width: 450px) {
-  .footnote {
-    flex-direction: column-reverse;
-    gap: 16px;
-  }
-}
-
 
 @container task-section (max-width: 360px) {
   .task-section-content {
     padding: 12px !important;
   }
 
-  .button-wrapper {
-    button {
-      padding: 10px 0;
-    }
+  .form-control {
+    padding: 12px 12px !important;
   }
 }

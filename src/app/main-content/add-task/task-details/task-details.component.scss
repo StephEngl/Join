@@ -175,10 +175,11 @@ textarea {
 }
 
 .subtask-container {
+  width: 100%;
+  max-width: 440px;
   max-height: 100px;
   overflow-y: auto;
   padding: 5px 0;
-  list-style-type: disc;
   .subtask-text {
     word-break: break-word;
   }
@@ -208,6 +209,9 @@ textarea {
 
 .subtask-item-icons {
   @include dFlex(center, center, 6px);
+  >img:first-child {
+    padding-left: 10px;
+  }
 }
 
 @container task-section (max-width: 660px) {

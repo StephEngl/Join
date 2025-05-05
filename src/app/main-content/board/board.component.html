@@ -2,7 +2,7 @@
   <div class="board-header">
     <div class="title-button">
       <h1>Board</h1>
-      <button class="add-task-btn-respo" (click)="openAddTaskDialog()">
+      <button class="add-task-btn-respo" (click)="openAddTaskDialog(); $event.stopPropagation()">
         <img src="./assets/icons/kanban/add_white.svg" alt="Add Icon" />
       </button>
     </div>
@@ -15,7 +15,7 @@
           <img src="./assets/icons/kanban/search.png" alt="Search Icon" />
         </div>
       </div>
-      <button class="add-task-btn" (click)="openAddTaskDialog()">
+      <button class="add-task-btn" (click)="openAddTaskDialog(); $event.stopPropagation()">
         Add Task
         <img src="./assets/icons/kanban/add_white.svg" alt="Add Icon" />
       </button>
@@ -39,7 +39,7 @@
             class="mini-button-add-board"
             (mouseenter)="hoveredColumn = column.title"
             (mouseleave)="hoveredColumn = ''"
-            (click)="addTaskWithStatus(column.taskStatus)"
+            (click)="addTaskWithStatus(column.taskStatus); $event.stopPropagation()"
           >
             <img [src]="hoveredColumn === column.title
               ? './assets/icons/kanban/add_plus_blue.png'
@@ -60,7 +60,7 @@
         } @else {
           @for (task of filterTasksByCategory(column.taskStatus); track task.id) {
             @if (task.title.toLowerCase().includes(searchText.toLowerCase()) || task.description.toLowerCase().includes(searchText.toLowerCase())) {
-              <li (click)="openTaskDialog(task)">
+              <li (click)="openTaskDialog(task); $event.stopPropagation()">
                 <app-task
                   [taskData]="task"
                   [searchRequest]="searchText"
@@ -79,13 +79,14 @@
 
 @if (showTaskDialog && selectedTask) {
   <app-task-dialog
+      [@slideInOut]
       [taskDataDialog]="selectedTask"
       (close)="closeTaskDialog()">
   </app-task-dialog>
 } @else if (showAddTaskDialog) {
-  <div class="overlay-container">
-    <div class="add-task-wrapper">
-      <app-add-task></app-add-task>
+  <div class="overlay-container" [@slideInOut]>
+    <div class="add-task-wrapper" (click)="$event.stopPropagation()">
+      <app-add-task (closeDialog)="showAddTaskDialog = false"></app-add-task>
     </div>
   </div>
 }

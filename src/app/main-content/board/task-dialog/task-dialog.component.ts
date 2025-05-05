@@ -1,4 +1,4 @@
-import { Component, Input, Output, EventEmitter, inject } from '@angular/core';
+import { Component, Input, Output, EventEmitter, inject, HostListener } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskInterface } from '../../../interfaces/task.interface';
 import { TaskInfoComponent } from './task-info/task-info.component';
@@ -36,7 +36,9 @@ export class TaskDialogComponent {
     this.closeDialog();
   }
 
+
   /* Replaced: this.dialogRef.close() */
+  @HostListener('document:click')
   closeDialog(): void {
     this.close.emit();
     this.taskDataService.editModeActive = false;

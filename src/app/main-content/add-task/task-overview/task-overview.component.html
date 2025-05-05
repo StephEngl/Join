@@ -9,9 +9,9 @@
     type="text"
     class="form-control"
     placeholder="Enter a title"
-    minlength="3"
+    minlength="2"
     maxlength="50"
-    pattern="^[A-Za-z0-9ÄÖÜäöüß]{3}[A-Za-z0-9ÄÖÜäöüß\-_\s]*$"
+    pattern="^[^\s].{1,}$"
     required
   />
   @if (!titleInput.valid &&  titleInput.touched) {
@@ -29,7 +29,9 @@
     name="description"
     class="form-control"
     placeholder="Enter a description"
-    pattern="^[A-Za-z0-9ÄÖÜäöüß]{3}[A-Za-z0-9ÄÖÜäöüß\-_\s]*$"
+    minlength="2"
+    maxlength="300"
+    pattern="^[^\s].{1,}$"
   ></textarea>
   @if (!descriptionInput.valid &&  descriptionInput.touched) {
     <p class="validation-alert">Description must be at least 3 letters</p>

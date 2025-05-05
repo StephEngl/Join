@@ -44,6 +44,7 @@ export class AddTaskComponent {
   tasksService = inject(TasksService);
   taskDataService = inject(SingleTaskDataService);
   toastService = inject(ToastService);
+  closeDropdownList: boolean = false;
 
   mouseX: number = 0;
   mouseY: number = 0;
@@ -59,11 +60,20 @@ export class AddTaskComponent {
   @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
   @Output() taskUpdated = new EventEmitter<void>();
   @Output() taskCreated = new EventEmitter<void>();
+  @Output() closeDialog = new EventEmitter<boolean>();
 
   ngOnInit() {
     if(!this.taskDataService.editModeActive) {
       this.clearForm();
     }
+  }
+
+  @HostListener('click')
+  closeDropDowns() {
+    this.closeDropdownList = true;
+    setTimeout(() => {
+      this.closeDropdownList = false;
+    }, 1);
   }
 
   onSubmit() {
@@ -73,6 +83,7 @@ export class AddTaskComponent {
       this.submitEdit(task);
     } else {
       this.submitCreate(task);
+      this.closeIfDialog();
     }
   }
 
@@ -263,5 +274,9 @@ export class AddTaskComponent {
 
   setCategory(index: number) {
     this.taskDataService.selectedCategory = this.filteredCategories()[index];
+  }
+
+  closeIfDialog() {
+    this.closeDialog.emit(true);
   }
 }

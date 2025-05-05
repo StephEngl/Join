@@ -5,6 +5,7 @@ import { routes } from './app.routes';
 import { initializeApp, provideFirebaseApp } from '@angular/fire/app';
 import { getFirestore, provideFirestore } from '@angular/fire/firestore';
 import { provideAnimationsAsync } from '@angular/platform-browser/animations/async';
+import { provideAnimations } from '@angular/platform-browser/animations';
 import { MatDialogModule } from '@angular/material/dialog'; /* Required for Material Dialogs */
 
 export const appConfig: ApplicationConfig = {
@@ -29,8 +30,12 @@ export const appConfig: ApplicationConfig = {
 
         /* Enables animations (noop if disabled) */
         provideAnimationsAsync('noop'),
+        provideAnimations(),
 
         /* Provides Angular Material Dialog globally */
         importProvidersFrom(MatDialogModule)
+        
     ]
+
+    
 };
