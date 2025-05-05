@@ -74,6 +74,7 @@ export class AddTaskComponent {
       this.submitEdit(task);
     } else {
       this.submitCreate(task);
+      this.closeIfDialog();
     }
   }
 
@@ -268,6 +269,5 @@ export class AddTaskComponent {
 
   closeIfDialog() {
     this.closeDialog.emit(true);
-
   }
 }
