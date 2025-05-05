@@ -308,6 +308,11 @@
     }
 }
 
+// optional font size for h2 instead of queries
+// .task-info-header-container h2 {
+//     font-size: clamp(1.65rem, 2vw + 1rem, 3rem);
+// }
+
 @media (min-width: 630px) {
     .task-info-header-container {
         h2 {
