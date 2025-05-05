@@ -15,6 +15,7 @@ import { SingleTaskDataService } from '../../../services/single-task-data.servic
 })
 export class TaskDialogComponent {
   taskDataService = inject(SingleTaskDataService);
+
   @Input() taskDataDialog!: TaskInterface;
   @Input() dialogType: 'add' | 'info' = 'info';
   @Output() close = new EventEmitter<void>();
@@ -22,9 +23,11 @@ export class TaskDialogComponent {
   constructor(private tasksService: TasksService) { }
 
   showTaskInfo: boolean = true;
+  isEditTaskDialog: boolean = false;
 
   onEditTask(): void {
     this.taskDataService.editModeActive = true;
+    this.isEditTaskDialog = true;
     setTimeout(() => {
       this.showTaskInfo = false;
     }, 10);
@@ -33,15 +36,17 @@ export class TaskDialogComponent {
   taskEdited(): void {
     this.showTaskInfo = true;
     this.taskDataService.editModeActive = false;
-    this.closeDialog();
   }
 
 
   /* Replaced: this.dialogRef.close() */
-  @HostListener('document:click')
+  @HostListener('click')
   closeDialog(): void {
     this.close.emit();
     this.taskDataService.editModeActive = false;
+    this.isEditTaskDialog = false;
+    console.log(this.isEditTaskDialog);
+    
   }
 
   async deleteTask(): Promise<void> {

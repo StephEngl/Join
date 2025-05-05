@@ -56,6 +56,11 @@ export class AddTaskComponent {
   searchedContactName: string = '';
   searchedCategoryName: string = '';
 
+  // add-task status
+  @Input() isEditTaskDialog: boolean = false;
+
+  //ngOnInit () { taskData = taskDataService }
+
   @Input() taskData!: TaskInterface;
   @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
   @Output() taskUpdated = new EventEmitter<void>();
@@ -66,6 +71,8 @@ export class AddTaskComponent {
     if(!this.taskDataService.editModeActive) {
       this.clearForm();
     }
+    console.log(this.isEditTaskDialog);
+    
   }
 
   @HostListener('click')
@@ -112,7 +119,7 @@ export class AddTaskComponent {
       'Task updated',
       'update',
     );
-    this.taskUpdated.emit();
+    this.cancelEditTask.emit();
   }
 
   submitCreate(task: TaskInterface) {

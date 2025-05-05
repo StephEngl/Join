@@ -109,6 +109,11 @@ span {
   }
 }
 
+// temp class
+.dummy-class {
+  max-height: 800px; 
+}
+
 // Container Queries
 @media screen and (max-height: 900px) {
   .task-section-content {
@@ -198,3 +203,4 @@ span {
     }
   }
 }
+

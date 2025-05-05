@@ -1,4 +1,6 @@
-<section class="task-section">
+<section class="task-section"
+  [class]="isEditTaskDialog ? 'dummy-class':''"
+>
   <div class="task-section-content">
     @if (!taskDataService.editModeActive) {
     <h2>Add Task</h2>
@@ -28,7 +30,7 @@
           <button
             class="button-cancel"
             type="button"
-            (click)="cancelEditTask.emit(); closeIfDialog()"
+            (click)="closeIfDialog()"
             active=""
           >
             Cancel
