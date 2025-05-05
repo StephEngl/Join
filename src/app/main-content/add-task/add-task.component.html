@@ -20,7 +20,8 @@
         </app-task-details>
       </div>
 
-      <div class="footnote">
+      <div class="footnote"
+      [style.padding]="taskDataService.editModeActive ? '0 0 15px 0' :''">
         <p><span>*</span> This field is required</p>
 
         <div class="button-wrapper">
@@ -38,7 +39,8 @@
           <button class="button-save" type="submit"
             [class]="formInvalid ? 'disabled' : ''"
           >
-            @if (taskDataService.editModeActive) { OK
+            @if (taskDataService.editModeActive) { 
+              OK
             } @else {
               Create Task
               @if(!formInvalid) {
