@@ -6,15 +6,11 @@ import { TaskInterface } from '../../interfaces/task.interface';
 /* import { MatDialog, MatDialogRef } from '@angular/material/dialog'; */ /* Removed: switched to manual task dialog */
 import { TaskDialogComponent } from './task-dialog/task-dialog.component';
 import { FormsModule } from '@angular/forms';
-import {
-  CdkDragDrop,
-  moveItemInArray,
-  transferArrayItem,
-  DragDropModule,
-} from '@angular/cdk/drag-drop';
+import { CdkDragDrop, moveItemInArray, transferArrayItem, DragDropModule } from '@angular/cdk/drag-drop';
 import { AddTaskComponent } from '../add-task/add-task.component';
 import { Subscription } from 'rxjs';
 import { SingleTaskDataService } from '../../services/single-task-data.service';
+import { trigger, transition, style, animate } from '@angular/animations';
 
 @Component({
   selector: 'app-board',
@@ -29,6 +25,17 @@ import { SingleTaskDataService } from '../../services/single-task-data.service';
   ],
   templateUrl: './board.component.html',
   styleUrls: ['./board.component.scss'],
+  animations: [
+    trigger('slideInOut', [
+      transition(':enter', [
+        style({ opacity: 0 }),
+        animate('300ms ease-out', style({ opacity: 1 })),
+      ]),
+      transition(':leave', [
+        animate('300ms ease-in', style({ opacity: 0 })),
+      ]),
+    ]),
+  ],
 })
 export class BoardComponent {
   tasksService = inject(TasksService);

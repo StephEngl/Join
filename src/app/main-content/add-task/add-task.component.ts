@@ -268,5 +268,6 @@ export class AddTaskComponent {
 
   closeIfDialog() {
     this.closeDialog.emit(true);
+
   }
 }

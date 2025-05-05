@@ -79,11 +79,12 @@
 
 @if (showTaskDialog && selectedTask) {
   <app-task-dialog
+      [@slideInOut]
       [taskDataDialog]="selectedTask"
       (close)="closeTaskDialog()">
   </app-task-dialog>
 } @else if (showAddTaskDialog) {
-  <div class="overlay-container">
+  <div class="overlay-container" [@slideInOut]>
     <div class="add-task-wrapper">
       <app-add-task (closeDialog)="showAddTaskDialog = false"></app-add-task>
     </div>
