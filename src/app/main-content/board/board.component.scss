@@ -74,7 +74,7 @@
 .board {
   @include dFlex($jc: flex-start, $ai: flex-start, $gap: 6px);
   flex-direction: row;
-  height: calc(100dvh - 350px);
+  height: calc(100dvh - 250px);
   padding: 0 64px;
   overflow-x: auto;
   overflow-y: hidden;
@@ -266,6 +266,14 @@ app-task {
   margin: 80px 24px 70px 24px;
 }
 
+@media screen and (max-width: 1400px) {
+
+  .board {
+    height: calc(100dvh - 300px);
+  }
+
+}
+
 @media screen and (max-width: 830px) {
 
   .board-section {
@@ -386,6 +394,7 @@ app-task {
     margin-bottom: 0;
   }
 }
+
 // 2x media 830px?
 @media screen and (max-width: 830px) {
   .overlay-container {
