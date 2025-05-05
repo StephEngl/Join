@@ -1,8 +1,8 @@
 <div class="form-group">
   <label for="title">Title <span>*</span></label>
   <input
-    [ngModel]="tasksService.tasks[taskIndex()].title"
-    (ngModelChange)="tasksService.tasks[taskIndex()].title = $event"
+    [ngModel]="taskDataService.editModeActive ? tasksService.tasks[taskIndex()].title : taskDataService.inputTaskTitle"
+    (ngModelChange)="taskDataService.editModeActive ? tasksService.tasks[taskIndex()].title = $event:taskDataService.inputTaskTitle = $event"
     #titleInput="ngModel"
     id="title"
     name="title"
@@ -22,8 +22,8 @@
 <div class="form-group">
   <label for="description">Description</label>
   <textarea
-    [ngModel]="tasksService.tasks[taskIndex()].description"
-    (ngModelChange)="tasksService.tasks[taskIndex()].description = $event"
+    [ngModel]="taskDataService.editModeActive ? tasksService.tasks[taskIndex()].description : taskDataService.inputTaskDescription"
+    (ngModelChange)="taskDataService.editModeActive ? tasksService.tasks[taskIndex()].description = $event : taskDataService.inputTaskDescription = $event"
     #descriptionInput="ngModel"
     id="description"
     name="description"
@@ -41,8 +41,8 @@
 <div class="form-group">
   <label for="due-date">Due date <span>*</span></label>
   <input
-    [ngModel]="formatDate(tasksService.tasks[taskIndex()].dueDate)"
-    (ngModelChange)="onDueDateChange($event)"
+    [ngModel]="taskDataService.editModeActive ? formatDate(tasksService.tasks[taskIndex()].dueDate) : formatDate(taskDataService.inputTaskDueDate)"
+    (ngModelChange)="taskDataService.editModeActive ? onDueDateEditChange($event) : onDueDateChange($event)"
     #dateInput="ngModel"
     id="due-date"
     name="dueDate"

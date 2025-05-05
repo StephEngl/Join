@@ -51,8 +51,12 @@ export class TaskOverviewComponent {
       }
     }
 
-    onDueDateChange(value: string) {
+    onDueDateEditChange(value: string) {
       this.tasksService.tasks[this.taskIndex()].dueDate = new Date(value);
+    }
+
+    onDueDateChange(value: string) {
+      this.taskDataService.inputTaskDueDate = new Date(value);
     }
 
     formatDate(date: Date | null): string | null {
