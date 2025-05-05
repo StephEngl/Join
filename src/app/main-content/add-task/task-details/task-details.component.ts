@@ -4,6 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { ContactsService } from '../../../services/contacts.service';
 import { SingleTaskDataService } from '../../../services/single-task-data.service';
 import { TaskInterface } from '../../../interfaces/task.interface';
+import { TasksService } from '../../../services/tasks.service';
 
 @Component({
   selector: 'app-task-details',
@@ -20,6 +21,7 @@ export class TaskDetailsComponent {
   mouseY: number = 0;
   contactsService = inject(ContactsService);
   taskData = inject(SingleTaskDataService);
+  tasksService = inject(TasksService);
   searchedCategoryName: string = '';
   searchedContactName: string = '';
   subtaskText: string = '';
@@ -48,6 +50,16 @@ export class TaskDetailsComponent {
     this.categoryAccordionItem.close();
   }
   
+  taskIndex():number {
+    if(this.taskDataInput && this.taskDataInput.id) {
+        const index = this.tasksService.findIndexById(this.taskDataInput.id);
+        if (index !== -1) {
+            return index;
+        }
+    }
+    return -1;
+  }
+
   searchContact(event: Event) {
     const value = (event.target as HTMLInputElement).value;
     this.searchedContactName = value;

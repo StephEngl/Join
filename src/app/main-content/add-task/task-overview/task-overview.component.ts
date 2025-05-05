@@ -6,6 +6,7 @@ import { MatInputModule } from '@angular/material/input';
 import { MatNativeDateModule } from '@angular/material/core';
 import { SingleTaskDataService } from '../../../services/single-task-data.service';
 import { TaskInterface } from '../../../interfaces/task.interface';
+import { TasksService } from '../../../services/tasks.service';
 
 @Component({
   selector: 'app-task-overview',
@@ -23,12 +24,23 @@ import { TaskInterface } from '../../../interfaces/task.interface';
 })
 export class TaskOverviewComponent {
     taskDataService = inject(SingleTaskDataService);
+    tasksService = inject(TasksService)
     @Input() taskData!: TaskInterface;
     @Input() currentTaskId: string = '';
     @Input() today: string = new Date().toISOString().split('T')[0];
 
     ngOnInit() {
       this.setFormData();
+    }
+
+    taskIndex():number {
+      if(this.taskData && this.taskData.id) {
+          const index = this.tasksService.findIndexById(this.taskData.id);
+          if (index !== -1) {
+              return index;
+          }
+      }
+      return -1;
     }
 
     setFormData() {
@@ -40,7 +52,7 @@ export class TaskOverviewComponent {
     }
 
     onDueDateChange(value: string) {
-      this.taskDataService.inputTaskDueDate = new Date(value);
+      this.tasksService.tasks[this.taskIndex()].dueDate = new Date(value);
     }
 
     formatDate(date: Date | null): string | null {

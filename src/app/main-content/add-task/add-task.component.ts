@@ -59,8 +59,6 @@ export class AddTaskComponent {
   // add-task status
   @Input() isEditTaskDialog: boolean = false;
 
-  //ngOnInit () { taskData = taskDataService }
-
   @Input() taskData!: TaskInterface;
   @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
   @Output() taskUpdated = new EventEmitter<void>();

@@ -139,6 +139,20 @@ export class TasksService implements OnDestroy {
         }
     }
 
+    async deleteSubTask(task: TaskInterface, subTaskIndex: number) {
+        if (task.id && Array.isArray(task.subTasks)) {
+            try {
+                task.subTasks.splice(subTaskIndex, 1);
+                const docRef = this.getSingleDocRef(task.id);
+                await updateDoc(docRef, {
+                    subTasks: task.subTasks
+                });
+            } catch (err) {
+
+            }
+        }
+    }
+
     /**
      * Returns a task object without ID to use for Firestore updates.
      * @param task - TaskInterface object.
@@ -154,5 +168,9 @@ export class TasksService implements OnDestroy {
             taskType: task.taskType,
             assignedTo: task.assignedTo
         };
+    }
+
+    findIndexById(id: string): number {
+        return this.tasks.findIndex(task => task.id === id);
     }
 }

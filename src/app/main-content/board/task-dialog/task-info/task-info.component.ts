@@ -20,17 +20,27 @@ export class TaskInfoComponent {
     contactsService = inject(ContactsService);
     toastService = inject(ToastService);
     taskDataService = inject(SingleTaskDataService);
+    tasksService = inject(TasksService)
     @Input() taskDataDialogInfo!: TaskInterface;
     @Output() editTask = new EventEmitter<void>();
     @Output() close = new EventEmitter<void>();
 
     constructor(
-        private tasksService: TasksService,
         private router: Router
     ) {}
 
     onEditTask(): void {
         this.editTask.emit();
+    }
+
+    taskIndex():number {
+        if(this.taskDataDialogInfo && this.taskDataDialogInfo.id) {
+            const index = this.tasksService.findIndexById(this.taskDataDialogInfo.id);
+            if (index !== -1) {
+                return index;
+            }
+        }
+        return -1;
     }
 
     async deleteTask(): Promise<void> {
