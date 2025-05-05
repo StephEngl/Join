@@ -228,7 +228,7 @@ textarea {
     }
 
     .priority-buttons-wrapper {
-      gap: 0;
+      gap: 0 !important;
     }
 
     .priority-button {
@@ -247,7 +247,7 @@ textarea {
   }
 }
 
-@container task-section (max-width: 400px) {
+@container task-section (max-width: 450px) {
   .priority-buttons-wrapper {
     gap: 4px !important;
   }
