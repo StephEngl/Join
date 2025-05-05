@@ -244,8 +244,8 @@ input:not(.invalid)+img+.error {
     transition: background-color 0.2s ease;
 
     img {
-        width: 14px;
-        height: 14px;
+        width: 20px;
+        height: 20px;
         object-fit: contain;
     }
 
@@ -262,8 +262,8 @@ input:not(.invalid)+img+.error {
 }
 
 .close-icon img {
-    width: 14px;
-    height: 14px;
+    width: 20px;
+    height: 20px;
     object-fit: contain;
     cursor: pointer;
 }
@@ -273,11 +273,9 @@ input:not(.invalid)+img+.error {
     padding: 16px;
     border-radius: 10px;
     font-size: 21px;
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
 
     img {
         height: 14px;
-        transition: fill 0.3s ease;
     }
 }
 
@@ -296,7 +294,6 @@ input:not(.invalid)+img+.error {
     cursor: pointer;
     border: 2px solid $col-ref-highlight;
     color: $col-ref-highlight;
-    transform: scale(1.00) translateX(-1.01px);
     box-shadow: 0px 3px 5px $col-shadow-black;
 
     svg path {
@@ -305,11 +302,18 @@ input:not(.invalid)+img+.error {
 }
 
 .button-delete {
-    @include btn($col-font-secondary, $col-bg-secondary, $col-font-secondary);
+    @include btn($bg: $col-font-secondary, $color: $col-bg-secondary);
     border: 1px solid $col-bg-secondary;
     width: 126px;
     height: 55px;
-}
+
+    &:hover {
+      background-color: $col-font-secondary;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+  }
+
 
 .contact-initials {
     font-size: 60px;
@@ -325,7 +329,6 @@ input:not(.invalid)+img+.error {
     color: $col-font-secondary;
     cursor: pointer;
     box-shadow: 0px 3px 5px $col-shadow-black;
-    transform: scale(1.00) translateX(-1.01px);
 }
 
 .icon-done {
@@ -340,7 +343,6 @@ input:not(.invalid)+img+.error {
     height: 57px;
 
     img {
-        transition: opacity 0.3s ease;
         object-fit: contain;
     }
 }
@@ -377,7 +379,6 @@ input:not(.invalid)+img+.error {
     &:hover {
         background-color: $col-ref-highlight;
         box-shadow: 0px 3px 5px $col-shadow-black;
-        transform: scale(1.00) translateX(-1.01px);
     }
 }
 
@@ -385,7 +386,14 @@ input:not(.invalid)+img+.error {
     @include btn();
     width: 111px;
     height: 57px;
-}
+
+    &:hover {
+      background-color: $col-ref-highlight;
+      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+      cursor: pointer;
+    }
+  }
+
 
 .button-save.disabled {
     background-color: $col-font-inactive;
@@ -410,6 +418,5 @@ input:not(.invalid)+img+.error {
     &:hover {
         background-color: $col-ref-highlight;
         box-shadow: 0px 3px 5px $col-shadow-black;
-        transform: scale(1.00) translateX(-1.01px);
     }
 }

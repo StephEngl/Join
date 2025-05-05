@@ -70,6 +70,12 @@
   @include btn();
   height: 48px;
   width: 160px;
+
+  &:hover {
+    background-color: $col-ref-highlight;
+    box-shadow: 0 3px 5px $col-shadow-black;
+    cursor: pointer;
+  }
 }
 
 .add-task-btn-respo {
@@ -91,7 +97,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: rgba(0, 0, 0, 0.2);
+    background-color: $col-font-shadow-black;
     border-radius: 3px;
   }
 }
@@ -320,6 +326,12 @@ app-task {
     justify-content: center;
     height: 24px;
     width: 24px;
+
+    &:hover {
+      background-color: $col-ref-highlight;
+      box-shadow: 0 3px 5px $col-shadow-black;
+      cursor: pointer;
+    }
   }
 
   .no-tasks {
@@ -404,7 +416,6 @@ app-task {
     margin-bottom: 0;
   }
 }
-
 // 2x media 830px?
 @media screen and (max-width: 830px) {
   .overlay-container {
