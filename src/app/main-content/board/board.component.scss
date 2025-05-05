@@ -10,7 +10,7 @@
 .board-header {
   display: flex;
   justify-content: space-between;
-  margin: 0 64px;
+  margin: 0 16px;
   padding: 32px 0 24px 0;
   max-width: 1440px;
 }
@@ -75,7 +75,7 @@
   @include dFlex($jc: flex-start, $ai: flex-start, $gap: 6px);
   flex-direction: row;
   height: calc(100dvh - 250px);
-  padding: 0 64px;
+  padding: 0 16px;
   overflow-x: auto;
   overflow-y: hidden;
   scrollbar-width: none;
