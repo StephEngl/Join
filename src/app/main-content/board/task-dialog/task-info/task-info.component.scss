@@ -236,11 +236,6 @@
     
                     .task-info-subtask-item {
                         @include dFlex(flex-start, center);
-                        cursor: pointer;
-                        >img {
-                            height: 20px;
-                            width: 20px;
-                        }
     
                         span {
                             font-family: "Inter", sans-serif;
@@ -264,7 +259,8 @@
         }
 
         .task-info-footer-container {
-            @include dFlex(flex-end, center, $position: sticky);
+            @include dFlex(flex-end, center);
+            position: sticky;
             bottom: 0;
             z-index: 2;
             background: white;
@@ -368,15 +364,6 @@
         }
     }
 }
-
-.subtask-checkbox {
-    display: none;
-}
-
-// optional font size for h2 instead of queries
-// .task-info-header-container h2 {
-//     font-size: clamp(1.65rem, 2vw + 1rem, 3rem);
-// }
 
 @media (min-width: 630px) {
     .task-info-header-container {
