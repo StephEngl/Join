@@ -488,3 +488,13 @@
         padding-left: 22px!important;
     }
 }
+
+@media (min-height: 1001px) {
+    .task-info-section {
+        height: 100%;
+    }
+
+    .task-info-content-container {
+        flex-grow: 0;
+    }
+}
