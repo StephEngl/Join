@@ -4,16 +4,16 @@
 // TODO: SCSS @mixin dFlex anpassen
 
 .board-section {
-  @include dFlex(null, null);
-  //display: flex;
+  // @include dFlex(null, null);
+  display: flex;
   flex-direction: column;
   height: 100%;
 }
 
 .board-header {
-  @include dFlex(space-between, null);
-  //display: flex;
-  //justify-content: space-between;
+  // @include dFlex(space-between, null);
+  display: flex;
+  justify-content: space-between;
   margin: 0 64px;
   padding: 32px 0 24px 0;
   max-width: 1440px;
@@ -24,9 +24,9 @@
 }
 
 .search-input-container {
-  @include dFlex(null, center);
-  //display: flex;
-  //align-items: center;
+  // @include dFlex(null, center);
+  display: flex;
+  align-items: center;
   height: 48px;
   width: 312px;
   border: 1px solid #d1d1d1;
@@ -124,10 +124,10 @@
 }
 
 .board-column {
-  @include dFlex(null, center, null);
-  //display: flex;
-  //align-items: center;
-  //position: relative;
+  // @include dFlex(null, center, null);
+  display: flex;
+  align-items: center;
+  position: relative;
   flex-direction: column;
   height: 100%;
   flex: 0 0 280px;
@@ -142,9 +142,9 @@
   }
 
   ul {
-    @include dFlex(null, center);
-    //display: flex;
-    //align-items: center;
+    // @include dFlex($ai: center);
+    display: flex;
+    align-items: center;
     width: 100%;
     flex: initial;
     overflow-y: auto;
@@ -172,9 +172,9 @@
   &::before,
   &::after {
     content: "";
-    @include dFlex(null, null, 0, absolute);
-    //display: flex;
-    //position: absolute;
+    // @include dFlex(null, null, 0, absolute);
+    display: flex;
+    position: absolute;
     left: 50%;
     height: 16px;
     width: calc(100% - 30px);
@@ -290,19 +290,19 @@ app-task {
 
 @media screen and (max-width: 830px) {
   .board-section {
-    @include dFlex(null, null, null, fixed);
-    //display: flex;
+    // @include dFlex(null, null, null, fixed);
+    display: flex;
     flex-direction: column;
     height: calc(100% - 200px);
     width: 100%;
-    //position: fixed;
+    position: fixed;
     top: $header-height;
     z-index: 0;
   }
 
   .board-header {
-    @include dFlex(null, null);
-    //display: flex;
+    // @include dFlex(null, null);
+    display: flex;
     flex-direction: column;
     margin: 0 16px;
   }
@@ -321,9 +321,9 @@ app-task {
 
   .add-task-btn-respo {
     @include btn();
-    @include dFlex(center, null);
-    //display: flex;
-    //justify-content: center;
+    // @include dFlex(center, null);
+    display: flex;
+    justify-content: center;
     height: 24px;
     width: 24px;
   }
@@ -351,18 +351,18 @@ app-task {
   }
 
   .board-column {
-    @include dFlex(null, null, null, relative);
-    //display: flex;
-    //position: relative;
+    // @include dFlex(null, null, null, relative);
+    display: flex;
+    position: relative;
     height: auto;
     width: 100%;
     flex: 0 0 auto;
 
     ul {
-      @include dFlex(null, flex-start, 16px);
-      //display: flex;
-      //align-items: flex-start;
-      //gap: 16px;
+      // @include dFlex(null, flex-start, 16px);
+      display: flex;
+      align-items: flex-start;
+      gap: 16px;
       flex-direction: row;
       overflow-x: auto;
       overflow-y: hidden;
@@ -371,9 +371,9 @@ app-task {
       &::before,
       &::after {
         content: "";
-        @include dFlex(null, null, null);
-        //display: flex;
-        //position: absolute;
+        // @include dFlex(null, null, null);
+        display: flex;
+        position: absolute;
         top: 39px;
         bottom: 20px;
         width: 16px;
