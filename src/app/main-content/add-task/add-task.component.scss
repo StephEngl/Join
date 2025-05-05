@@ -32,10 +32,10 @@
     background-color: $col-font-inactive !important;
   }
 
-  form {
+  task-form {
     display: flex;
     flex-direction: column;
-    // height: 100%;
+    overflow-y: auto;
   }
 }
 
@@ -115,17 +115,20 @@ span {
   }
 }
 
-// temp class
-.dummy-class {
+// Dialog specific classes
+.edit-dialog-class {
   max-height: 1400px;
   height: 90dvh;
 }
 
+.add-dialog-class {
+  padding: 30px !important;
+}
+
 // Media/Container Queries
 @media screen and (min-height: 1200px) {
-  .dummy-class {
+  .edit-dialog-class {
       height: auto;
-      // max-height: 1400px;
   }
 }
 
@@ -142,9 +145,6 @@ span {
     // overflow-y: auto;
     padding: 20px 20px !important;
     scrollbar-width: none !important;
-    .task-form {
-      overflow-y: auto; // gamechanger?
-    }
   }
 
   @container task-section (max-width: 1200px) {
