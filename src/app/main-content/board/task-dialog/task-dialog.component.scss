@@ -32,10 +32,10 @@
     }
 
     .task-edit-close {
+        cursor: pointer;
         width: 100%;
-        display: flex;
-        justify-content: flex-end;
-        align-items: center;
+        @include dFlex($jc: flex-end, $ai: center);
+        padding: 20px 20px 0 20px;
     }
 
     @media (max-width: 700px) {
