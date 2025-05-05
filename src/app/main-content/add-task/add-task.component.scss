@@ -100,9 +100,7 @@ span {
 
     .button-cancel,
     .button-save {
-      display: flex;
-      justify-content: space-between;
-      gap: 4px;
+      @include dFlex($ai: center, $jc: space-between, $gap: 4px);
       font-size: 21px;
       padding: 16px;
       border-radius: 10px;
@@ -111,11 +109,12 @@ span {
 }
 
 // Container Queries
-@media screen and (max-height:900px) {
+@media screen and (max-height: 900px) {
   .task-section-content {
     padding: 20px 20px !important;
     overflow-y: auto;
-}}
+  }
+}
 
 @media screen and (max-width: 1400px) {
   .task-section-content {
@@ -134,7 +133,6 @@ span {
     }
   }
 }
-
 
 @container task-section (max-width: 1000px) {
   .task-form-wrapper {
@@ -171,6 +169,21 @@ span {
   h2 {
     width: 100% !important;
   }
+
+  .button-wrapper {
+    .button-cancel,
+    .button-save {
+      font-size: 16px !important;
+    }
+  }
+}
+
+@container task-section (max-width: 450px) {
+  .footnote {
+    flex-direction: column-reverse;
+    align-items: flex-end;
+    gap: 16px;
+  }
 }
 
 @container task-section (max-width: 360px) {
@@ -178,7 +191,9 @@ span {
     padding: 12px !important;
   }
 
-  .form-control {
-    padding: 12px 12px !important;
+  .button-wrapper {
+    button {
+      padding: 10px 0;
+    }
   }
 }
