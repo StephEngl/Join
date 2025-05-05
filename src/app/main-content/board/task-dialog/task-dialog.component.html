@@ -17,6 +17,7 @@
     (cancelEditTask)="taskEdited()"
     (taskUpdated)="taskEdited()"
     (click)="$event.stopPropagation()"
+    [isEditTaskDialog]="isEditTaskDialog"
   >
   </app-add-task>
   }

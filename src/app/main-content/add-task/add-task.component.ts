@@ -16,7 +16,7 @@ import { TasksService } from '../../services/tasks.service';
 import { TaskDetailsComponent } from './task-details/task-details.component';
 import { TaskOverviewComponent } from './task-overview/task-overview.component';
 import { SingleTaskDataService } from '../../services/single-task-data.service';
-import { ToastService } from '../../shared/toast/toast.service';
+import { ToastService } from '../../services/toast.service';
 import { Router } from '@angular/router';
 
 @Component({
@@ -52,9 +52,14 @@ export class AddTaskComponent {
 
   isEdited = false;
   isFormValid = false;
-  
+
   searchedContactName: string = '';
   searchedCategoryName: string = '';
+
+  // add-task status
+  @Input() isEditTaskDialog: boolean = false;
+
+  //ngOnInit () { taskData = taskDataService }
 
   @Input() taskData!: TaskInterface;
   @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
@@ -66,6 +71,8 @@ export class AddTaskComponent {
     if(!this.taskDataService.editModeActive) {
       this.clearForm();
     }
+    console.log(this.isEditTaskDialog);
+    
   }
 
   @HostListener('click')
@@ -112,7 +119,7 @@ export class AddTaskComponent {
       'Task updated',
       'update',
     );
-    this.taskUpdated.emit();
+    this.cancelEditTask.emit();
   }
 
   submitCreate(task: TaskInterface) {
@@ -128,7 +135,7 @@ export class AddTaskComponent {
       this.clearForm();
     }, 1000);
   }
-  
+
   clearForm() {
     this.taskDataService.clearData();
   }

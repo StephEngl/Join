@@ -5,7 +5,8 @@ import { TaskInterface } from '../../../../interfaces/task.interface';
 import { TasksService } from '../../../../services/tasks.service';
 import { Router } from '@angular/router';
 import { ContactsService } from '../../../../services/contacts.service';
-import { ToastService } from '../../../../shared/toast/toast.service';
+import { ToastService } from '../../../../services/toast.service';
+import { SingleTaskDataService } from '../../../../services/single-task-data.service';
 
 @Component({
     selector: 'app-task-info',
@@ -18,6 +19,7 @@ export class TaskInfoComponent {
 
     contactsService = inject(ContactsService);
     toastService = inject(ToastService);
+    taskDataService = inject(SingleTaskDataService);
     @Input() taskDataDialogInfo!: TaskInterface;
     @Output() editTask = new EventEmitter<void>();
     @Output() close = new EventEmitter<void>();
