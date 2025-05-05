@@ -54,6 +54,7 @@ span {
 
 .footnote {
   @include dFlex($ai: flex-end, $jc: space-between);
+  padding: 24px 0;
 
   .button-wrapper {
     display: flex;
