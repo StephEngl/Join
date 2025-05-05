@@ -1,17 +1,13 @@
 @import "./../../../assets/styles/variables.scss";
 @import "./../../../assets/styles/mixins.scss";
 
-// TODO: SCSS @mixin dFlex anpassen
-
 .board-section {
-  // @include dFlex(null, null);
   display: flex;
   flex-direction: column;
   height: 100%;
 }
 
 .board-header {
-  // @include dFlex(space-between, null);
   display: flex;
   justify-content: space-between;
   margin: 0 64px;
@@ -20,38 +16,34 @@
 }
 
 .search-add-container {
-  @include dFlex(space-between, center, 32px);
+  @include dFlex($jc: space-between, $ai: center, $gap: 32px);
 }
 
 .search-input-container {
-  // @include dFlex(null, center);
   display: flex;
   align-items: center;
   height: 48px;
   width: 312px;
-  border: 1px solid #d1d1d1;
+  border: 1px solid $col-font-grey;
   border-radius: 10px;
   padding: 8px 12px;
-  background-color: #fff;
+  background-color: $col-font-secondary;
 
   input {
     border: none;
     outline: none;
     flex: 1;
     font-size: 16px;
-    color: #2a3647;
+    color: $col-bg-secondary;
     background-color: transparent;
 
     &::placeholder {
-      color: #bfbfbf;
+      color: $col-font-inactive;
     }
   }
 
   .search-icon {
-    @include dFlex(center, center);
-    //display: flex;
-    //justify-content: center;
-    //align-items: center;
+    @include dFlex($jc: center, $ai: center);
     height: 18px;
     width: 18px;
     margin-left: 8px;
@@ -66,7 +58,7 @@
 }
 
 .title-button {
-  @include dFlex(space-between, center);
+  @include dFlex($jc: space-between, $ai: center);
 }
 
 .add-task-btn {
@@ -80,11 +72,7 @@
 }
 
 .board {
-  @include dFlex(flex-start, flex-start, 6px);
-  //display: flex;
-  //justify-content: flex-start;
-  //align-items: flex-start;
-  //gap: 6px;
+  @include dFlex($jc: flex-start, $ai: flex-start, $gap: 6px);
   flex-direction: row;
   height: calc(100dvh - 350px);
   padding: 0 64px;
@@ -99,16 +87,13 @@
 }
 
 .mini-button-add-board {
-  @include dFlex(center, center);
-  //display: flex;
-  //justify-content: center;
-  //align-items: center;
+  @include dFlex($jc: center, $ai: center);
   height: 24px;
   width: 24px;
   background: none;
   border: 2px solid $col-bg-secondary;
   border-radius: 8px;
-  color: #2a3647;
+  color: $col-bg-secondary;
   transition: all 0.2s ease;
 
   img {
@@ -124,7 +109,6 @@
 }
 
 .board-column {
-  // @include dFlex(null, center, null);
   display: flex;
   align-items: center;
   position: relative;
@@ -135,14 +119,12 @@
   overflow-y: auto;
   scrollbar-width: none;
   -ms-overflow-style: none;
-  // padding-top: 20px;
 
   &::-webkit-scrollbar {
     display: none;
   }
 
   ul {
-    // @include dFlex($ai: center);
     display: flex;
     align-items: center;
     width: 100%;
@@ -172,7 +154,6 @@
   &::before,
   &::after {
     content: "";
-    // @include dFlex(null, null, 0, absolute);
     display: flex;
     position: absolute;
     left: 50%;
@@ -205,10 +186,7 @@
 }
 
 .board-column-header {
-  @include dFlex(space-between, center);
-  //display: flex;
-  //justify-content: space-between;
-  //align-items: center;
+  @include dFlex($jc: space-between, $ai: center);
   width: calc(100% - 20px);
   padding-left: 3px;
   padding-right: 3px;
@@ -289,8 +267,8 @@ app-task {
 }
 
 @media screen and (max-width: 830px) {
+
   .board-section {
-    // @include dFlex(null, null, null, fixed);
     display: flex;
     flex-direction: column;
     height: calc(100% - 200px);
@@ -301,7 +279,6 @@ app-task {
   }
 
   .board-header {
-    // @include dFlex(null, null);
     display: flex;
     flex-direction: column;
     margin: 0 16px;
@@ -321,7 +298,6 @@ app-task {
 
   .add-task-btn-respo {
     @include btn();
-    // @include dFlex(center, null);
     display: flex;
     justify-content: center;
     height: 24px;
@@ -329,10 +305,7 @@ app-task {
   }
 
   .no-tasks {
-    @include dFlex(center, center);
-    //display: flex;
-    //justify-content: center;
-    //align-items: center;
+    @include dFlex($jc: center, $ai: center);
     width: 100%;
     text-align: center;
   }
@@ -351,7 +324,6 @@ app-task {
   }
 
   .board-column {
-    // @include dFlex(null, null, null, relative);
     display: flex;
     position: relative;
     height: auto;
@@ -359,7 +331,6 @@ app-task {
     flex: 0 0 auto;
 
     ul {
-      // @include dFlex(null, flex-start, 16px);
       display: flex;
       align-items: flex-start;
       gap: 16px;
@@ -371,7 +342,6 @@ app-task {
       &::before,
       &::after {
         content: "";
-        // @include dFlex(null, null, null);
         display: flex;
         position: absolute;
         top: 39px;
