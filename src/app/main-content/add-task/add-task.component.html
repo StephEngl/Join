@@ -1,9 +1,12 @@
-<section class="task-section"
-  [class]="isEditTaskDialog ? 'dummy-class':''"
->
-  <div class="task-section-content">
+<section class="task-section">
+  <div
+    class="task-section-content"
+    [class]="isEditTaskDialog ? 'dummy-class' : ''"
+  >
     @if (!taskDataService.editModeActive) {
     <h2>Add Task</h2>
+    } @else {
+    <div class="task-edit-close" (click)="closeIfDialog()">&#10005;</div>
     }
 
     <form class="task-form" (ngSubmit)="onSubmit()">
@@ -22,7 +25,10 @@
         </div>
       </div>
 
-      <div class="footnote" [style.padding]="taskDataService.editModeActive ? '15px 0 0 0' : ''">
+      <div
+        class="footnote"
+        [style.padding]="taskDataService.editModeActive ? '15px 0 0 0' : ''"
+      >
         <p><span>*</span> This field is required</p>
 
         <div class="button-wrapper">

@@ -7,7 +7,6 @@
   container-name: task-section;
   display: flex;
   max-width: $queryBreak1;
-  // height: calc(90dvh - 41px);
 
   .task-section-content {
     display: flex;
@@ -21,6 +20,13 @@
     padding-bottom: 50px;
   }
 
+  .task-edit-close {
+    cursor: pointer;
+    width: 100%;
+    @include dFlex($jc: flex-end, $ai: center);
+    padding: 0 0 20px;
+  }
+
   .disabled {
     pointer-events: none;
     background-color: $col-font-inactive !important;
@@ -29,7 +35,7 @@
   form {
     display: flex;
     flex-direction: column;
-    height: 100%;
+    // height: 100%;
   }
 }
 
@@ -111,10 +117,18 @@ span {
 
 // temp class
 .dummy-class {
-  max-height: 800px; 
+  max-height: 1400px;
+  height: 90dvh;
 }
 
-// Container Queries
+// Media/Container Queries
+@media screen and (min-height: 1200px) {
+  .dummy-class {
+      height: auto;
+      // max-height: 1400px;
+  }
+}
+
 @media screen and (max-height: 900px) {
   .task-section-content {
     padding: 20px 20px !important;
@@ -203,4 +217,3 @@ span {
     }
   }
 }
-
