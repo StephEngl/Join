@@ -70,7 +70,6 @@ export class AddTaskComponent {
       this.clearForm();
     }
     console.log(this.isEditTaskDialog);
-    
   }
 
   @HostListener('click')
@@ -283,5 +282,7 @@ export class AddTaskComponent {
 
   closeIfDialog() {
     this.close.emit();
+    console.log("test");
   }
+
 }
