@@ -57,7 +57,7 @@ export class BoardComponent {
   btnAddHover = false;
   hoveredColumn: string = '';
 
-  @HostListener('document:click')
+  @HostListener('click')
   closeTaskDialog(): void {
     this.showTaskDialog = false;
     this.showAddTaskDialog = false;

@@ -35,7 +35,7 @@ export class TaskDetailsComponent {
     this.setSubtasksInEditMode();
   }
 
-  @HostListener('document:click')
+  @HostListener('click')
   closeDropdownLists(): void {
     this.accordionItem.close();
     this.categoryAccordionItem.close();
