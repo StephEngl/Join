@@ -45,8 +45,6 @@ export class TaskDialogComponent {
     this.close.emit();
     this.taskDataService.editModeActive = false;
     this.isEditTaskDialog = false;
-    console.log(this.isEditTaskDialog);
-    
   }
 
   async deleteTask(): Promise<void> {
