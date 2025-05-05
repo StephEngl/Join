@@ -5,6 +5,7 @@ import { TaskInterface } from '../../../../interfaces/task.interface';
 import { TasksService } from '../../../../services/tasks.service';
 import { Router } from '@angular/router';
 import { ContactsService } from '../../../../services/contacts.service';
+import { ToastService } from '../../../../shared/toast/toast.service';
 
 @Component({
     selector: 'app-task-info',
@@ -16,6 +17,7 @@ import { ContactsService } from '../../../../services/contacts.service';
 export class TaskInfoComponent {
 
     contactsService = inject(ContactsService);
+    toastService = inject(ToastService);
     @Input() taskDataDialogInfo!: TaskInterface;
     @Output() editTask = new EventEmitter<void>();
     @Output() close = new EventEmitter<void>();
@@ -34,6 +36,11 @@ export class TaskInfoComponent {
             await this.tasksService.deleteTask(this.taskDataDialogInfo.id);
             this.closeDialog();
         }
+        this.toastService.triggerToast(
+            'Deleted from board',
+            'delete',
+            'assets/icons/navbar/board.svg'
+        );
     }
 
     async checkSubTask(): Promise<void> {
@@ -43,6 +50,6 @@ export class TaskInfoComponent {
     }
 
     closeDialog(): void {
-        this.close.emit(); // replaced dialogRef.close()
+        this.close.emit();
     }
 }
