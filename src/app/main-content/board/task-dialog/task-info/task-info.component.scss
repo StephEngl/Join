@@ -236,6 +236,11 @@
     
                     .task-info-subtask-item {
                         @include dFlex(flex-start, center);
+                        cursor: pointer;
+                        >img {
+                            height: 20px;
+                            width: 20px;
+                        }
     
                         span {
                             font-family: "Inter", sans-serif;
@@ -306,6 +311,10 @@
             }
         }
     }
+}
+
+.subtask-checkbox {
+    display: none;
 }
 
 // optional font size for h2 instead of queries
