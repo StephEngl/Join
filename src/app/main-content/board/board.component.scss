@@ -78,14 +78,13 @@
   padding: 0 16px;
   overflow-x: auto;
   overflow-y: hidden;
-  scrollbar-width: thin;
   -ms-overflow-style: auto;
 
-  ::-webkit-scrollbar {
+  &::-webkit-scrollbar {
     height: 6px;
   }
 
-  ::-webkit-scrollbar-thumb {
+  &::-webkit-scrollbar-thumb {
     background-color: rgba(0, 0, 0, 0.2);
     border-radius: 3px;
   }
@@ -163,7 +162,7 @@
     position: absolute;
     left: 50%;
     height: 16px;
-    width: calc(100% - 30px);
+    width: calc(100% - 25px);
     transform: translateX(-50%);
     pointer-events: none;
     z-index: 2;
@@ -172,13 +171,13 @@
   }
 
   &::before {
-    top: 49px;
-    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.08), transparent);
+    top: 28px;
+    background: linear-gradient(to bottom, rgba(0, 0, 0, 0.15), transparent);
   }
 
   &::after {
     bottom: 0;
-    background: linear-gradient(to top, rgba(0, 0, 0, 0.08), transparent);
+    background: linear-gradient(to top, rgba(0, 0, 0, 0.15), transparent);
   }
 
   &.scrolled-top::before {
@@ -367,12 +366,12 @@ app-task {
       }
 
       &::before {
-        left: 0;
+        left: 0px;
         background: linear-gradient(to right, rgba(0, 0, 0, 0.08), transparent);
       }
 
       &::after {
-        right: 0;
+        right: 0px;
         background: linear-gradient(to left, rgba(0, 0, 0, 0.08), transparent);
       }
 
