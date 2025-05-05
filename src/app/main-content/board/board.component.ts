@@ -11,7 +11,7 @@ import { AddTaskComponent } from '../add-task/add-task.component';
 import { Subscription } from 'rxjs';
 import { SingleTaskDataService } from '../../services/single-task-data.service';
 import { trigger, transition, style, animate } from '@angular/animations';
-
+import { ViewChildren, ElementRef, QueryList } from '@angular/core'; //neu hinzugefügt
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -57,6 +57,8 @@ export class BoardComponent {
   btnAddHover = false;
   hoveredColumn: string = '';
 
+  @ViewChildren('taskList') taskLists!: QueryList<ElementRef<HTMLElement>>;
+
   @HostListener('click')
   closeTaskDialog(): void {
     this.showTaskDialog = false;
@@ -64,6 +66,18 @@ export class BoardComponent {
     this.selectedTask = null;
   }
 
+  //TODO: Schatten nach Zoom verschwinden lassen (DOM neu rendern!)
+  //FIXME: -
+  //BUG: -
+  // Aktualisiert die Schatteneffekte der Task-Listen nach dem Fenster Zoom da Scrollhöhen ändern und Schatten sonst falsch angezeigt werden. :)
+  @HostListener('window:resize')
+  refreshScrollShadowsZoom() {
+    setTimeout(() => {
+      this.taskLists.forEach((taskList) =>
+        this.onTaskListScrollShadow(taskList.nativeElement) // .nativeElement, weil onTaskListScrollShadow auf DOM-Eigenschaften wie offsetHeight zugreift. den sonst ohne nativeElement wäre scrollTop etc. nicht möglihc. ;)
+      );
+    }, 100);
+  }
 
   filterTasksByCategory(status: string): TaskInterface[] {
     return this.tasksService.tasks
@@ -87,6 +101,9 @@ export class BoardComponent {
 
   connectedDropLists = this.boardColumns.map((col) => col.taskStatus);
 
+  //TODO: Scroll-Schatten der Aufgabenliste aktualisieren sonst verschwindet der Schatten nicht!
+  //FIXME: -
+  //BUG: -
   drop(event: CdkDragDrop<TaskInterface[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -105,7 +122,15 @@ export class BoardComponent {
         event.currentIndex
       );
     }
+
+    // hier neu hinzugefügt bzw. drop erweitert mit um den drop bzw. die funktion erneut zu "rendern", ansonsten wurde in dieser funktion drop() nix umgeschrieben :)
+    setTimeout(() => {
+      this.taskLists.forEach((listRef) => {
+        this.onTaskListScrollShadow(listRef.nativeElement); // beschreibung wie oben
+      });
+    }, 50);
   }
+  // vermerkt für mich... doppelte setTimeOut so wie oben evt. vereinheitlichen!
 
   openTaskDialog(taskData: TaskInterface): void {
     this.selectedTask = taskData;
@@ -126,8 +151,8 @@ export class BoardComponent {
     this.singleTaskDataService.editModeActive = false;
   }
 
-  // TODO: Das problem beheben mit dem Scroll-Schatten der Aufgabenliste
-  // FIXME: Der untere Schatten der Liste ist immer noch sichtbar, wenn keine Aufgaben vorhanden sind
+  // TODO: Das problem beheben mit dem Scroll-Schatten der Aufgabenliste wenn nix zu scrollen gibt
+  // FIXME: -
   // BUG: -
   onTaskListScrollShadow(taskList: HTMLElement) {
     const boardColumn = taskList.closest('.board-column');
@@ -140,13 +165,17 @@ export class BoardComponent {
     } else {
       boardColumn.classList.remove('scrolled-top');
     }
-    if (scrollTop + offsetHeight < scrollHeight - 1) {
+    // math.ceil rundet die zahlen immer auf... z.b. 1.7 wird zu 2 / .floor das gegenteil
+    if (Math.ceil(scrollTop + offsetHeight) < Math.floor(scrollHeight)) {
       boardColumn.classList.add('scrolled-bottom');
     } else {
       boardColumn.classList.remove('scrolled-bottom');
     }
   }
 
+  //TODO: Evt. auch ein .ceil...
+  //FIXME: -
+  //BUG: -
   onTaskListScrollShadowMobile(taskList: HTMLElement) {
     const scrollLeft = taskList.scrollLeft;
     const scrollWidth = taskList.scrollWidth;
