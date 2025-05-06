@@ -3,7 +3,7 @@
 @import "../../../../assets/fonts/fonts.scss";
 
 span,
-.validation-alert  {
+.validation-alert {
   color: $col-task-urgent;
 }
 
@@ -16,7 +16,7 @@ span,
   flex-direction: column;
 }
 
-:host .form-group {
+.form-group {
   display: flex;
   flex-direction: column;
   justify-content: center;
@@ -24,9 +24,9 @@ span,
   gap: 8px;
 }
 
-:host input[type="text"],
-:host input[type="date"],
-:host textarea {
+input[type="text"],
+input[type="date"],
+textarea {
   width: 440px;
   border: 1px solid $col-font-grey;
   border-radius: 10px;
@@ -49,15 +49,25 @@ span,
   }
 }
 
-:host textarea {
+textarea {
   height: 120px;
 }
 
+// cursor pointer at datepicker sideboard
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+input[type="date"]::-webkit-calendar-picker-indicator {
+  cursor: pointer;
+}
+
+// container queries
 @container task-section (max-width: 500px) {
   :host,
-  :host .form-group,
-  :host .form-control,
-  :host h2 {
+  .form-group,
+  .form-control,
+  h2 {
     width: 100% !important;
   }
 }
