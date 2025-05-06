@@ -14,6 +14,9 @@
     width: 100%;
     max-height: calc(100vh - 96px);
     padding: 110px 100px;
+    .task-form {
+      overflow-y: auto;
+    }
   }
 
   h2 {
@@ -154,6 +157,14 @@ span {
       padding: 20px 20px !important;
       scrollbar-width: none !important;
     }
+  }
+}
+
+@media screen and (max-width: 830px) {
+  .add-dialog-class {
+    position: absolute;
+    background-color: white;
+    top: 0;
   }
 }
 
