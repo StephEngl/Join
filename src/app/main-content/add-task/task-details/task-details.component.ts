@@ -32,10 +32,15 @@ export class TaskDetailsComponent {
   @ViewChild('inputFieldSubTask') inputFieldSubTaskRef!: ElementRef;
 
   ngOnInit() {
-    this.setPriorityInEditMode();
-    this.setAssignedContactsInEditMode();
-    this.setCategoryInEditMode();
-    this.setSubtasksInEditMode();
+    if (!this.taskData.editModeActive) {
+      this.taskData.priorityButtons[1].btnActive = true;
+    } else {
+      this.setPriorityInEditMode();
+      this.setAssignedContactsInEditMode();
+      this.setCategoryInEditMode();
+      this.setSubtasksInEditMode();
+    }
+
   }
 
   ngOnChanges() {
