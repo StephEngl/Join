@@ -44,6 +44,7 @@ export class BoardComponent {
   singleTaskDataService = inject(SingleTaskDataService);
   searchText: string = '';
   searchActive: boolean = false;
+  isMobile = 'ontouchstart' in window || window.innerWidth <= 830;
 
   showTaskDialog: boolean = false;
   showAddTaskDialog: boolean = false;
@@ -71,12 +72,21 @@ export class BoardComponent {
   }
 
   @HostListener('window:resize')
-  refreshScrollShadowsZoom() {
+  setDataOnWindowResize() {
+    this.checkIsMobile();
+    this.refreshShadow();
+  }
+
+  refreshShadow() {
     setTimeout(() => {
       this.taskLists.forEach(
         (taskList) => this.onTaskListScrollShadow(taskList.nativeElement)
       );
     }, 100);
+  }
+
+  checkIsMobile() {
+    this.isMobile = window.innerWidth <= 830;
   }
 
   filterTasksByCategory(status: string): TaskInterface[] {
