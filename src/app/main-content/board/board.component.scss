@@ -12,7 +12,7 @@
   justify-content: space-between;
   margin: 0 16px;
   padding: 32px 0 24px 0;
-  max-width: 1920px;
+  max-width: calc($appMaxWidth - $navbar-width );
 }
 
 .search-add-container {
@@ -156,7 +156,7 @@
       display: none;
     }
 
-    > li {
+    >li {
       margin: 8px 0;
     }
   }
@@ -288,6 +288,7 @@ app-task {
   .board {
     height: calc(100dvh - 300px);
   }
+
   .overlay-container {
     padding: 0 20px;
     align-items: center;
@@ -421,6 +422,7 @@ app-task {
     margin-bottom: 0;
   }
 }
+
 // 2x media 830px?
 @media screen and (max-width: 830px) {
   .overlay-container {
