@@ -10,7 +10,6 @@
   section {
     width: 100%;
     height: auto;
-    margin-top: 1050px;
     @include dFlex($jc: center, $ai: flex-start);
     flex-direction: column;
     padding: 3rem;

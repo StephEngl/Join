@@ -1,7 +1,45 @@
 @import "../../../assets/styles/mixins.scss";
-
+@import "../../../assets/styles/variables.scss";
+@import "../../../assets/fonts/fonts.scss";
 
 :host {
     display: flex;
     overflow-y: auto;
+  }
+
+  section {
+    width: 100%;
+    height: auto;
+    @include dFlex($jc: center, $ai: flex-start);
+    flex-direction: column;
+    padding: 3rem;
+  }
+
+  h2 {
+    width: 100%;
+    height: auto;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+  }
+
+  h4 {
+    width: 100%;
+    height: auto;
+    font-weight: bold;
+    padding-bottom: 0.5rem;
+  }
+
+  span {
+    color: $col-ref-highlight;
+    font-size: 1rem;
+  }
+
+  .paragraph {
+    @include dFlex(center, flex-start);
+    flex-direction: column;
+    @include appMaxWidth($padding: 1rem);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 120%;
+    padding-left: 0rem;
   }
