@@ -1,7 +1,7 @@
 @import "../../../../assets/styles/mixins.scss";
 
 :host {
- 
+
     position: fixed;
     top: 0; 
     left: 0; 
@@ -47,5 +47,5 @@
 }
 
 app-add-task {
-  width: 100%;
+    width: 100%;
 }
