@@ -39,10 +39,11 @@
           <button
             class="button-cancel"
             type="button"
-            (click)="closeIfDialog()"
+            (click)="closeIfDialog(); clearForm()"
             active=""
           >
-            Cancel
+            @if(!taskDataService.editModeActive && !isAddTaskDialog) { Clear }
+            @else { Cancel }
             <span class="icon"></span>
           </button>
           }
@@ -53,7 +54,7 @@
           >
             @if (taskDataService.editModeActive) { OK } @else { Create Task
             @if(!formInvalid) {
-            <img src="../../../assets/icons/kanban/check_white.svg" />
+            <img src="./assets/icons/kanban/check_white.svg" />
             } }
           </button>
         </div>

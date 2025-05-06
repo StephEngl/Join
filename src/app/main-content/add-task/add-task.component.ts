@@ -71,7 +71,6 @@ export class AddTaskComponent {
     if (!this.taskDataService.editModeActive) {
       this.clearForm();
     }
-    console.log(this.isAddTaskDialog);
   }
 
   @HostListener('click')
