@@ -15,7 +15,9 @@
     <form class="task-form" (ngSubmit)="onSubmit()">
       <div class="task-scroll-container">
         <div class="task-form-wrapper">
-          <app-task-overview [taskData]="taskData"> </app-task-overview>
+          <app-task-overview
+            [taskData]="taskData">
+          </app-task-overview>
 
           <div class="vertical-divider"></div>
 
@@ -39,7 +41,7 @@
           <button
             class="button-cancel"
             type="button"
-            (click)="closeIfDialog(); clearForm()"
+            (click)="closeIfDialog(); clearForm(); this.signalService.formCleared.set(true);"
             active=""
           >
             @if(!taskDataService.editModeActive && !isAddTaskDialog) { Clear }

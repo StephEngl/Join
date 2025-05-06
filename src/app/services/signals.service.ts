@@ -11,7 +11,10 @@ export class SignalsService {
 
   isMobile = signal<boolean>(false);
   isDesktop = signal<boolean>(false);
-  isInfoShown= signal<boolean>(false);
+  isInfoShown = signal<boolean>(false);
+  formCleared = signal<boolean>(false);
+  titleCleared = signal<boolean>(false);
+  dateCleared = signal<boolean>(false);
 
   checkScreenSize() {
     if (window.innerWidth <= 1000) {

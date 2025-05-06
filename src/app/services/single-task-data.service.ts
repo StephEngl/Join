@@ -57,6 +57,7 @@ export class SingleTaskDataService {
 
     resetAllPrioBtns() {
         this.priorityButtons.forEach((p) => (p.btnActive = false));
+        this.priorityButtons[1].btnActive = true;
     }
 
     clearData() {

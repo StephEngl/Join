@@ -19,6 +19,7 @@ import { TaskOverviewComponent } from './task-overview/task-overview.component';
 import { SingleTaskDataService } from '../../services/single-task-data.service';
 import { ToastService } from '../../services/toast.service';
 import { Router } from '@angular/router';
+import { SignalsService } from '../../services/signals.service';
 
 @Component({
   selector: 'app-add-task',
@@ -45,14 +46,15 @@ export class AddTaskComponent {
   tasksService = inject(TasksService);
   taskDataService = inject(SingleTaskDataService);
   toastService = inject(ToastService);
+  signalService = inject(SignalsService);
   closeDropdownList: boolean = false;
 
   mouseX: number = 0;
   mouseY: number = 0;
   hoveredContact: any = undefined;
 
-  isEdited = false;
-  isFormValid = false;
+  isEdited : boolean = false;
+  isFormValid : boolean = false;
 
   searchedContactName: string = '';
   searchedCategoryName: string = '';
