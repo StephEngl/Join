@@ -120,7 +120,7 @@ span {
 // Media/Container Queries
 @media screen and (min-height: 1200px) {
   .edit-dialog-class {
-      height: auto;
+    height: auto;
   }
 }
 
@@ -169,7 +169,8 @@ span {
     display: none;
   }
 
-  h2 {
+  h2,
+  .footnote {
     width: 440px;
     margin: 0 auto;
     text-align: left;
@@ -189,7 +190,8 @@ span {
 @container task-section (max-width: 500px) {
   .task-overview,
   .task-details,
-  h2 {
+  h2,
+  .footnote {
     width: 100% !important;
   }
 
@@ -205,7 +207,8 @@ span {
   .footnote {
     flex-direction: column-reverse;
     align-items: flex-end;
-    gap: 16px;
+    gap: 8px;
+    padding: 8px 0 0 0;
   }
 }
 
@@ -216,7 +219,7 @@ span {
 
   .button-wrapper {
     button {
-      padding: 10px 0;
+      padding: 10px !important;
     }
   }
 }
