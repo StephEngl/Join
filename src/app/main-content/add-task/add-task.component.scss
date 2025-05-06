@@ -51,7 +51,7 @@ span {
 }
 
 .task-form-wrapper {
-  @include dFlex($jc: space-between, $ai: flex-start);
+  @include dFlex($jc: space-around, $ai: flex-start);
 }
 
 .vertical-divider {
