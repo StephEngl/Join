@@ -1,16 +1,18 @@
-<!-- < class="task-card"
-    [style.display]="taskData.title.toLowerCase().includes(searchRequest.toLowerCase()) || taskData.description.toLowerCase().includes(searchRequest.toLowerCase()) ? 'flex' : 'none'"> -->
-<li class="task-card" (click)="onCardClick($event)">
+<li class="task-card" (click)="onCardClick($event); menuOpen = false">
     <div class="mobile-change-button-title">
         <div class="task-category" [style.backgroundColor]="taskData.category === 'User Story' ? '#003cff':'#1FD7C1'">
             {{taskData.category}}
         </div>
-        @if (!menuOpen) {
-        <button class="mobile-task-button dNone" (click)="toggleTaskMenu($event)">
-            ...
+
+        <button class="mobile-task-button dNone" (click)="toggleTaskMenu($event)"
+            [style.backgroundColor]="menuOpen
+                ? '#29ABE2'
+                : '#CDCDCD'"
+        >
+            <img src="./assets/icons/contacts/contact_menu.svg" alt="">
         </button>
-        } @else {
-        <div class="task-menu" (click)="$event.stopPropagation()">
+        @if (menuOpen) {
+        <div class="task-menu" (click)="$event.stopPropagation()" (mouseleave)="menuOpen = false">
             @for (column of otherColumns(); track column.taskStatus) {
             <button (click)="moveTaskTo(column.taskStatus)">
                 Move to "{{ column.title }}"

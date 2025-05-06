@@ -5,13 +5,19 @@
 }
 
 .mobile-task-button {
-    border-radius: 5px;
-    height: 20px;
-    width: 50px;
+    @include dFlex(center,center);
+    border-radius: 50%;
+    height: 25px;
+    width: 25px;
+    padding: 5px;
+    >img {
+        height: 100%;
+        width: 100%;
+    }
 
     &:hover {
         cursor: pointer;
-        background-color: rgb(206, 201, 201);
+        background-color: $col-ref-highlight !important;
     }
 }
 

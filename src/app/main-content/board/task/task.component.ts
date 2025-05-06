@@ -1,4 +1,4 @@
-import { Component, EventEmitter, inject, Input, Output } from '@angular/core';
+import { Component, EventEmitter, inject, Input, Output, HostListener } from '@angular/core';
 import { TaskInterface } from '../../../interfaces/task.interface';
 import { ContactsService } from '../../../services/contacts.service';
 import { TasksService } from '../../../services/tasks.service';
@@ -24,6 +24,11 @@ export class TaskComponent {
 
   menuOpen = false;
 
+  @HostListener('document:click')
+  onClickOutside() {
+      this.menuOpen = false;
+  }
+  
   doesContactExist(contactId: string): boolean {
     return this.contactsService.contacts.some(c => c.id === contactId);
   }
@@ -38,14 +43,12 @@ export class TaskComponent {
     return taskRef!.subTasks.filter(subtask => subtask.isChecked == true);
   }
 
-  //filtert ob der Kontakt existiert und begrenzt die Anzeige auf maximaml 4 Kontakte
   showLimitedContact(): TaskInterface['assignedTo'] {
     return this.taskData.assignedTo
       .filter(c => this.doesContactExist(c.contactId))
       .slice(0, 4);
   }
 
-  // rechnet wieviele zusätzliche kontakte angezeigt werden müssen in Zahlen
   overflowCount(): number {
     const validContacts = this.taskData.assignedTo
       .filter(c => this.doesContactExist(c.contactId));
