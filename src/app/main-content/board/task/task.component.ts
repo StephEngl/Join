@@ -12,10 +12,17 @@ import { TasksService } from '../../../services/tasks.service';
 export class TaskComponent {
   contactsService = inject(ContactsService);
   tasksService = inject(TasksService);
+
   @Input() taskData!: TaskInterface;
   @Input() searchRequest: string = "";
   @Input() searchTrigger: boolean = false;
+
   @Output() searchedTitle: EventEmitter<string> = new EventEmitter();
+  @Output() updateTaskType = new EventEmitter<{ id: string; newType: TaskInterface['taskType'] }>();
+
+  @Output() taskClicked = new EventEmitter<TaskInterface>();
+
+  menuOpen = false;
 
   doesContactExist(contactId: string): boolean {
     return this.contactsService.contacts.some(c => c.id === contactId);
@@ -43,6 +50,43 @@ export class TaskComponent {
     const validContacts = this.taskData.assignedTo
       .filter(c => this.doesContactExist(c.contactId));
     return validContacts.length > 4 ? validContacts.length - 4 : 0;
+  }
+
+  toggleTaskMenu(event: MouseEvent) {
+    event.stopPropagation();
+    this.menuOpen = !this.menuOpen;
+  }
+
+  moveTaskTo(newType: TaskInterface['taskType']) {
+    if (this.taskData.id) {
+      this.updateTaskType.emit({ id: this.taskData.id, newType });
+      this.menuOpen = false;
+    }
+    this.menuOpen = false;
+  }
+
+  otherColumns() {
+    const all: TaskInterface['taskType'][] = ['toDo', 'inProgress', 'feedback', 'done'];
+    return all
+      .filter((status) => status !== this.taskData.taskType)
+      .map((taskStatus) => {
+        const title = {
+          toDo: 'To do',
+          inProgress: 'In progress',
+          feedback: 'Await feedback',
+          done: 'Done',
+        }[taskStatus];
+        return { taskStatus, title };
+      });
+  }
+
+  onCardClick(event: MouseEvent) {
+    if (this.menuOpen) {
+      this.menuOpen = false;
+      event.stopPropagation();
+      return;
+    }
+    this.taskClicked.emit(this.taskData);
   }
 
 }

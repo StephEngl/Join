@@ -132,11 +132,10 @@ export class BoardComponent {
 
     setTimeout(() => {
       this.taskLists.forEach((listRef) => {
-        this.onTaskListScrollShadow(listRef.nativeElement); 
+        this.onTaskListScrollShadow(listRef.nativeElement);
       });
     }, 50);
   }
-
 
   openTaskDialog(taskData: TaskInterface): void {
     this.selectedTask = taskData;
@@ -200,4 +199,13 @@ export class BoardComponent {
       this.searchActive = false;
     }, 50);
   }
+
+  updateTaskColumn(event: { id: string; newType: TaskInterface['taskType'] }) {
+    const task = this.tasksService.tasks.find((t) => t.id === event.id);
+    if (task) {
+      task.taskType = event.newType;
+      this.tasksService.updateTask(task);
+    }
+  }
+
 }

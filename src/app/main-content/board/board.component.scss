@@ -377,7 +377,7 @@ app-task {
       overflow-y: auto;
       max-height: none;
 
-      scrollbar-width: thin; // Firefox
+      scrollbar-width: thin;
       scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
 
       &::-webkit-scrollbar {

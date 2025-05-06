@@ -76,6 +76,10 @@
                   [searchTrigger]="searchActive"
                   [cdkDragDisabled]="isMobile"
                   cdkDrag
+
+                  (updateTaskType)="updateTaskColumn($event)"
+                  (taskClicked)="openTaskDialog($event)"
+
                 ></app-task>
               </li>
             }

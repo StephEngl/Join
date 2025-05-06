@@ -1,5 +1,66 @@
 @import './../../../../assets/styles/mixins.scss';
 
+.mobile-change-button-title {
+    @include dFlex(space-between, center);
+}
+
+.mobile-task-button {
+    border-radius: 5px;
+    height: 20px;
+    width: 50px;
+
+    &:hover {
+        cursor: pointer;
+        background-color: rgb(206, 201, 201);
+    }
+}
+
+.dNone {
+    display: none;
+}
+
+.task-menu {
+    display: flex;
+    flex-direction: column;
+    position: absolute;
+    top: 30px;
+    right: 0;
+    background-color: rgb(249, 247, 247);
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+    border-radius: 8px;
+    padding: 8px 0;
+    z-index: 10;
+    min-width: 160px;
+    animation: fadeIn 0.2s ease-out;
+
+    button {
+        width: auto;
+        padding: 8px 16px;
+        background: none;
+        border: none;
+        font-size: 14px;
+        cursor: pointer;
+        white-space: nowrap;
+
+        &:hover {
+            background-color: #f0f0f0;
+            border-radius: 5px;
+        }
+    }
+}
+
+@keyframes fadeIn {
+    from {
+        opacity: 0;
+        transform: translateY(-4px);
+    }
+
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
 .task-card {
     background: white;
     padding: 12px;
@@ -109,5 +170,11 @@
         .priority-icon {
             width: 18px;
         }
+    }
+}
+
+@media screen and (max-width: 830px) {
+    .dNone {
+        display: block;
     }
 }

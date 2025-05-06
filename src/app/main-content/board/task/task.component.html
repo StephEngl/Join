@@ -1,7 +1,23 @@
-<li class="task-card"
-    [style.display]="taskData.title.toLowerCase().includes(searchRequest.toLowerCase()) || taskData.description.toLowerCase().includes(searchRequest.toLowerCase()) ? 'flex' : 'none'">
-    <div class="task-category" [style.backgroundColor]="taskData.category === 'User Story' ? '#003cff':'#1FD7C1'">
-        {{taskData.category}}
+<!-- < class="task-card"
+    [style.display]="taskData.title.toLowerCase().includes(searchRequest.toLowerCase()) || taskData.description.toLowerCase().includes(searchRequest.toLowerCase()) ? 'flex' : 'none'"> -->
+<li class="task-card" (click)="onCardClick($event)">
+    <div class="mobile-change-button-title">
+        <div class="task-category" [style.backgroundColor]="taskData.category === 'User Story' ? '#003cff':'#1FD7C1'">
+            {{taskData.category}}
+        </div>
+        @if (!menuOpen) {
+        <button class="mobile-task-button dNone" (click)="toggleTaskMenu($event)">
+            ...
+        </button>
+        } @else {
+        <div class="task-menu" (click)="$event.stopPropagation()">
+            @for (column of otherColumns(); track column.taskStatus) {
+            <button (click)="moveTaskTo(column.taskStatus)">
+                Move to "{{ column.title }}"
+            </button>
+            }
+        </div>
+        }
     </div>
     <div class="task-title">{{taskData.title}}</div>
     <div class="task-description">{{taskData.description}}</div>
