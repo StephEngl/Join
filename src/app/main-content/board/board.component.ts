@@ -201,7 +201,7 @@ export class BoardComponent {
   }
 
   updateTaskColumn(event: { id: string; newType: TaskInterface['taskType'] }) {
-    const task = this.tasksService.tasks.find((t) => t.id === event.id);
+    const task = this.tasksService.tasks.find((task) => task.id === event.id);
     if (task) {
       task.taskType = event.newType;
       this.tasksService.updateTask(task);
