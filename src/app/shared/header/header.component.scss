@@ -3,7 +3,8 @@
 
 .header-section-desktop {
   @include dFlex($ai: center, $jc: space-between);
-  max-width: $appMaxWidth;
+  // max-width: $appMaxWidth; /* old */
+  max-width: calc( $appMaxWidth - $navbar-width ) ;
   width: 100%;
   padding: 20px;
 

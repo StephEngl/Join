@@ -9,7 +9,7 @@
 
   section {
     width: 100%;
-    height: auto;
+    height: calc( 100% - ( 96px + 76px) );
     @include dFlex($jc: center, $ai: flex-start);
     flex-direction: column;
     padding: 3rem;
@@ -19,7 +19,7 @@
     width: 100%;
     height: auto;
     font-weight: bold;
-    padding-bottom: 0.5rem;
+    padding-bottom: 1rem;
   }
 
   h4 {
@@ -42,4 +42,12 @@
     font-weight: 400;
     line-height: 120%;
     padding-left: 0rem;
+  }
+
+  .adress {
+    @include dFlex(flex-start, center);
+    width: 100%;
+    height: auto;
+    padding-top: 1rem;
+    padding-left: 0px;
   }
