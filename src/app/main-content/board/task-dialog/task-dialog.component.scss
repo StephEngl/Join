@@ -1,44 +1,51 @@
 @import "../../../../assets/styles/mixins.scss";
 
 :host {
-  /* ✳️ Added: turn dialog into overlay above the board */
-  position: fixed; /* Added: float above content */
-  top: 0; /* Added */
-  left: 0; /* Added */
-  width: 100vw; /* Added: fullscreen */
-  height: 100vh; /* Added */
-  z-index: 98; /* Added: ensure visibility over board */
-  background-color: rgba(0, 0, 0, 0.4); /* Added: semi-transparent overlay */
-  display: flex;
-  align-items: flex-start;
-  justify-content: center;
-  padding-top: 5vh; /* Added: push dialog downward */
-  overflow-y: auto;
-  overflow: auto;
 
-  &::-webkit-scrollbar {
-    display: none;
-  }
+    position: fixed;
+    top: 0; 
+    left: 0; 
+    width: 100vw;
+    height: 100vh; 
+    z-index: 98;
+    background-color: rgba(0, 0, 0, 0.4); 
+    display: flex;
+    align-items: flex-start;
+    justify-content: center;
+    padding-top: 5vh; 
+    overflow-y: auto;
+    overflow: auto;
 
-  -ms-overflow-style: none;
-  scrollbar-width: none;
-
-  .task-dialog-section {
-    width: 525px;
-    background: #fff;
-    border-radius: 12px;
-    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
-  }
-
-  @media (max-width: 700px) {
-    .task-dialog-section {
-      width: 100%;
-      height: auto;
-      margin: 0 8px;
+    &::-webkit-scrollbar {
+        display: none;
     }
-  }
+
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+
+    .task-dialog-section {
+        width: 525px;
+        background: #fff;
+        border-radius: 12px;
+        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+    }
+
+    @media (max-width: 700px) {
+        .task-dialog-section {
+        width: 100%;
+        height: auto;
+        margin: 0 8px;
+        }
+    }
+
+    @media (min-width: 1920px) {
+        .task-dialog-section {
+            margin-left: calc( $appMaxWidth + $navbar-width - 100vw );
+
+    }
+}
 }
 
 app-add-task {
-  width: 100%;
+    width: 100%;
 }
