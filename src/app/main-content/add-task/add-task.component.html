@@ -41,7 +41,7 @@
           <button
             class="button-cancel"
             type="button"
-            (click)="closeIfDialog(); clearForm(); this.signalService.formCleared.set(true);"
+            (click)="closeIfDialog(); clearForm(); setFormResetSignals();"
             active=""
           >
             @if(!taskDataService.editModeActive && !isAddTaskDialog) { Clear }

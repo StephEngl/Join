@@ -12,10 +12,10 @@
     minlength="2"
     maxlength="50"
     pattern="^[^\s].{1,}$"
-    (click)="this.signalService.formCleared.set(false)"
+    (click)="this.signalService.titleCleared.set(false)"
     required
   />
-  @if (!titleInput.valid && titleInput.touched && !this.signalService.formCleared()) {
+  @if (!titleInput.valid && titleInput.touched && !this.signalService.titleCleared()) {
     <p class="validation-alert">The title must be at least 3 letters</p>
   }
 </div>
@@ -47,10 +47,10 @@
     type="date"
     class="form-control"
     [min]="today"
-    (click)="this.signalService.formCleared.set(false)"
+    (click)="this.signalService.dateCleared.set(false)"
     required
   />
-  @if (!dateInput.valid && dateInput.touched && !this.signalService.formCleared()) {
+  @if (!dateInput.valid && dateInput.touched && !this.signalService.dateCleared()) {
     <p class="validation-alert">No due date set</p>
   }
 </div>

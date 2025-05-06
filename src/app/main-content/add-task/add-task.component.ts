@@ -142,6 +142,11 @@ export class AddTaskComponent {
     this.taskDataService.clearData();
   }
 
+  setFormResetSignals() {
+    this.signalService.titleCleared.set(true);
+    this.signalService.dateCleared.set(true);
+  }
+
   currentTaskData(): Omit<TaskInterface, 'id'> {
     const subtasksForForm = this.taskDataService.subtasksContainer.map(
       (subtask) => ({
