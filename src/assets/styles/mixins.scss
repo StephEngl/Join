@@ -101,9 +101,9 @@
     color: $color;
 
     img {
-      height: 14px;
+        height: 14px;
     }
-  }
+}
 
 @mixin media($mobileMediaName) {
     @if $mobileMediaName =="iphone-se" {
