@@ -37,6 +37,13 @@
       margin: 0 8px;
     }
   }
+
+  @media (min-width: 1920px) {
+    .task-dialog-section {
+        margin-left: calc( $appMaxWidth + $navbar-width - 100vw );
+
+    }
+}
 }
 
 app-add-task {
