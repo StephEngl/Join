@@ -8,7 +8,7 @@
   }
 
   section {
-    width: 100%;
+    max-width: calc( $appMaxWidth - $navbar-width );
     height: calc( 100% - ( 96px + 76px) );
     @include dFlex($jc: center, $ai: flex-start);
     flex-direction: column;
