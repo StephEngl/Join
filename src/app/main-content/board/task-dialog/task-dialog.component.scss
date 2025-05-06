@@ -7,7 +7,7 @@
     left: 0; /* Added */
     width: 100vw; /* Added: fullscreen */
     height: 100vh; /* Added */
-    z-index: 1000; /* Added: ensure visibility over board */
+    z-index: 98; /* Added: ensure visibility over board */
     background-color: rgba(0, 0, 0, 0.4); /* Added: semi-transparent overlay */
     display: flex;
     align-items: flex-start;

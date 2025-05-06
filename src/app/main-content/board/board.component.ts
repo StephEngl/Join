@@ -153,10 +153,7 @@ export class BoardComponent {
     this.showTaskDialog = true;
     this.showAddTaskDialog = true;
     this.isAddTaskDialog = true;
-    this.singleTaskDataService.taskStatus = taskStatus as
-      | 'toDo'
-      | 'inProgress'
-      | 'feedback';
+    this.singleTaskDataService.taskStatus = taskStatus as | 'toDo' | 'inProgress' | 'feedback';
     this.singleTaskDataService.editModeActive = false;
   }
 

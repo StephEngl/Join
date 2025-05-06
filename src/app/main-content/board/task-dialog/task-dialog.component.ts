@@ -28,6 +28,7 @@ export class TaskDialogComponent {
   onEditTask(): void {
     this.taskDataService.editModeActive = true;
     this.isEditTaskDialog = true;
+    
     setTimeout(() => {
       this.showTaskInfo = false;
     }, 10);
@@ -36,6 +37,7 @@ export class TaskDialogComponent {
   taskEdited(): void {
     this.showTaskInfo = true;
     this.taskDataService.editModeActive = false;
+    this.isEditTaskDialog = false;
   }
 
 
