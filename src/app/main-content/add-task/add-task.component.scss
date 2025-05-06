@@ -35,7 +35,7 @@
     background-color: $col-font-inactive !important;
   }
 
-  task-form {
+  .task-form {
     display: flex;
     flex-direction: column;
     overflow-y: auto;
@@ -52,7 +52,6 @@ span {
 
 .task-form-wrapper {
   @include dFlex($jc: space-between, $ai: flex-start);
-  flex-grow: 1;
 }
 
 .vertical-divider {
@@ -120,7 +119,7 @@ span {
 
 // Dialog specific classes
 .edit-dialog-class {
-  max-height: 1400px;
+  max-height: 1400px !important;
   height: 90dvh;
 }
 

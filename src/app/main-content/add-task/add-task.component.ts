@@ -8,7 +8,8 @@ import {
   ViewChild,
   ElementRef,
 } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
+import { FormsModule } from '@angular/forms';
+import { CommonModule } from '@angular/common';
 import { ContactsService } from '../../services/contacts.service';
 import { CdkAccordionItem, CdkAccordionModule } from '@angular/cdk/accordion';
 import { TaskInterface } from '../../interfaces/task.interface';
@@ -24,6 +25,7 @@ import { Router } from '@angular/router';
   standalone: true,
   imports: [
     FormsModule,
+    CommonModule,
     CdkAccordionModule,
     TaskDetailsComponent,
     TaskOverviewComponent,
@@ -32,8 +34,7 @@ import { Router } from '@angular/router';
   styleUrl: './add-task.component.scss',
 })
 export class AddTaskComponent {
-
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   @ViewChild('accordionItem') accordionItem!: CdkAccordionItem;
   @ViewChild('categoryAccordionItem') categoryAccordionItem!: CdkAccordionItem;
@@ -67,7 +68,7 @@ export class AddTaskComponent {
   @Output() close = new EventEmitter<void>();
 
   ngOnInit() {
-    if(!this.taskDataService.editModeActive) {
+    if (!this.taskDataService.editModeActive) {
       this.clearForm();
     }
     console.log(this.isAddTaskDialog);
@@ -97,26 +98,28 @@ export class AddTaskComponent {
   }
 
   isFormInvalid(): boolean {
-    return !this.taskDataService.selectedCategory || this.taskDataService.inputTaskTitle.length < 3;
+    return (
+      !this.taskDataService.selectedCategory ||
+      this.taskDataService.inputTaskTitle.length < 3
+    );
   }
 
   getAllTaskData() {
     const isEditMode = this.taskDataService.editModeActive;
     const baseTaskData = this.currentTaskData();
-    const editTaskData = isEditMode ? {
+    const editTaskData = isEditMode
+      ? {
           id: this.taskData.id,
           taskType: this.taskData.taskType,
-        } : {};
+        }
+      : {};
     const task = { ...baseTaskData, ...editTaskData };
     return task;
   }
 
   submitEdit(task: TaskInterface) {
     this.tasksService.updateTask(task);
-    this.toastService.triggerToast(
-      'Task updated',
-      'update',
-    );
+    this.toastService.triggerToast('Task updated', 'update');
     this.cancelEditTask.emit();
   }
 
@@ -139,10 +142,12 @@ export class AddTaskComponent {
   }
 
   currentTaskData(): Omit<TaskInterface, 'id'> {
-    const subtasksForForm = this.taskDataService.subtasksContainer.map((subtask) => ({
-      text: subtask.text,
-      isChecked: subtask.isChecked,
-    }));
+    const subtasksForForm = this.taskDataService.subtasksContainer.map(
+      (subtask) => ({
+        text: subtask.text,
+        isChecked: subtask.isChecked,
+      })
+    );
 
     const activeBtn = this.taskDataService.priorityButtons.find(
       (btnStatus) => btnStatus.btnActive
@@ -154,7 +159,10 @@ export class AddTaskComponent {
       dueDate: this.taskDataService.inputTaskDueDate,
       assignedTo: this.taskDataService.assignedTo,
       subTasks: subtasksForForm,
-      priority: (activeBtn?.priority.toLowerCase() || 'medium') as 'urgent' | 'medium' | 'low',
+      priority: (activeBtn?.priority.toLowerCase() || 'medium') as
+        | 'urgent'
+        | 'medium'
+        | 'low',
       category: this.taskDataService.selectedCategory,
       taskType: this.taskDataService.taskStatus,
     };
@@ -217,22 +225,30 @@ export class AddTaskComponent {
   }
 
   toggleAssignedContacts(contactId: any) {
-    const exists = this.taskDataService.assignedTo.some((contact) => contact.contactId === contactId);
+    const exists = this.taskDataService.assignedTo.some(
+      (contact) => contact.contactId === contactId
+    );
     if (!exists) {
       this.taskDataService.assignedTo.push({ contactId });
     } else {
-      this.taskDataService.assignedTo = this.taskDataService.assignedTo.filter((contact) => contact.contactId !== contactId);
+      this.taskDataService.assignedTo = this.taskDataService.assignedTo.filter(
+        (contact) => contact.contactId !== contactId
+      );
     }
   }
 
   contactSelected() {
     this.taskDataService.assignedTo.forEach((contact) => {
-      const exists = this.contactsService.contacts.some((c) => c.id === contact.contactId);
+      const exists = this.contactsService.contacts.some(
+        (c) => c.id === contact.contactId
+      );
     });
   }
 
   isContactAssigned(contactId: any): boolean {
-    return this.taskDataService.assignedTo.some((a) => a.contactId === contactId);
+    return this.taskDataService.assignedTo.some(
+      (a) => a.contactId === contactId
+    );
   }
 
   searchContact(event: Event) {
@@ -273,7 +289,9 @@ export class AddTaskComponent {
   }
 
   removeAssignedContact(contactId: string): void {
-    this.taskDataService.assignedTo = this.taskDataService.assignedTo.filter((id) => id !== contactId);
+    this.taskDataService.assignedTo = this.taskDataService.assignedTo.filter(
+      (id) => id !== contactId
+    );
     this.hoveredContact = undefined;
   }
 
@@ -283,7 +301,5 @@ export class AddTaskComponent {
 
   closeIfDialog() {
     this.close.emit();
-    console.log("test");
   }
-
 }

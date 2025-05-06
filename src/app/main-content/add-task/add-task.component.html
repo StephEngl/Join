@@ -1,8 +1,10 @@
 <section class="task-section">
   <div
     class="task-section-content"
-    [class]="isEditTaskDialog ? 'edit-dialog-class' : ''"
-    [class]="isAddTaskDialog ? 'add-dialog-class' : ''"
+    [ngClass]="{
+      'edit-dialog-class': isEditTaskDialog,
+      'add-dialog-class': isAddTaskDialog
+    }"
   >
     @if (!taskDataService.editModeActive) {
     <h2>Add Task</h2>
