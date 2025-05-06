@@ -160,7 +160,7 @@
         $index) {
         <li
           class="category-wrapper"
-          (click)="setCategory(index)"
+          (click)="setCategory(index); categoryAccordionItem.close()"
           [style.backgroundColor]="
             taskData.selectedCategory === filteredCategories()[index]
               ? '#091931'
