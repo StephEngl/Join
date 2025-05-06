@@ -117,16 +117,6 @@ span {
   }
 }
 
-// Dialog specific classes
-.edit-dialog-class {
-  max-height: 1400px !important;
-  height: 90dvh;
-}
-
-.add-dialog-class {
-  padding: 30px !important;
-}
-
 // Media/Container Queries
 @media screen and (min-height: 1200px) {
   .edit-dialog-class {
@@ -229,4 +219,14 @@ span {
       padding: 10px 0;
     }
   }
+}
+
+// Dialog specific classes
+.edit-dialog-class {
+  max-height: 1400px !important;
+  height: 90dvh;
+}
+
+.add-dialog-class {
+  padding: 30px !important;
 }
