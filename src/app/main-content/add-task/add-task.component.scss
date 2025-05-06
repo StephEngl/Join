@@ -118,13 +118,7 @@ span {
 }
 
 // Media/Container Queries
-@media screen and (min-height: 1200px) {
-  .edit-dialog-class {
-    height: auto;
-  }
-}
-
-@media screen and (max-height: 900px) {
+@media screen and (max-height: 970px) {
   .task-section-content {
     padding: 20px 20px !important;
     overflow-y: auto;
@@ -228,6 +222,12 @@ span {
 .edit-dialog-class {
   max-height: 1400px !important;
   height: 90dvh;
+}
+
+@media screen and (min-height: 1200px) {
+  .edit-dialog-class {
+    height: auto;
+  }
 }
 
 .add-dialog-class {
