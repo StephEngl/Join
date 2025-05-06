@@ -52,12 +52,6 @@
       height: 32px;
       width: 32px;
       padding: 0;
-
-      &:hover {
-        cursor: pointer;
-        background: $col-bg-hovered-subtask;
-        border-radius: 50%;
-      }
     }
   }
 }
@@ -277,7 +271,7 @@ app-task {
   width: 1920px;
   max-width: 100vw;
   display: flex;
-  justify-content: center; 
+  justify-content: center;
 }
 
 .add-task-wrapper {
