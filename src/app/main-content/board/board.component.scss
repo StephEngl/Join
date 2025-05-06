@@ -374,8 +374,24 @@ app-task {
       gap: 16px;
       flex-direction: row;
       overflow-x: auto;
-      overflow-y: hidden;
+      overflow-y: auto;
       max-height: none;
+
+      scrollbar-width: thin; // Firefox
+      scrollbar-color: rgba(0, 0, 0, 0.3) transparent;
+
+      &::-webkit-scrollbar {
+        height: 6px;
+      }
+
+      &::-webkit-scrollbar-track {
+        background: transparent;
+      }
+
+      &::-webkit-scrollbar-thumb {
+        background-color: rgba(0, 0, 0, 0.3);
+        border-radius: 3px;
+      }
 
       &::before,
       &::after {
@@ -418,6 +434,7 @@ app-task {
   }
 
   .board-column-header {
+    margin-top: 5px;
     margin-bottom: 0;
   }
 }
