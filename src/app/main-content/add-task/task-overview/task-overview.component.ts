@@ -35,7 +35,7 @@ export class TaskOverviewComponent {
   ngOnInit() {
     this.setFormData();
   }
-  
+
   taskIndex():number {
     if(this.taskData && this.taskData.id) {
         const index = this.tasksService.findIndexById(this.taskData.id);
@@ -47,8 +47,6 @@ export class TaskOverviewComponent {
   }
 
   setFormData() {
-    console.log("test setformdata");
-    
     if(this.taskDataService.editModeActive) {
       this.taskDataService.inputTaskTitle = this.taskData.title;
       this.taskDataService.inputTaskDescription = this.taskData.description;
