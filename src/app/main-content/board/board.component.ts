@@ -15,7 +15,7 @@ import { AddTaskComponent } from '../add-task/add-task.component';
 import { Subscription } from 'rxjs';
 import { SingleTaskDataService } from '../../services/single-task-data.service';
 import { trigger, transition, style, animate } from '@angular/animations';
-import { ViewChildren, ElementRef, QueryList } from '@angular/core'; //neu hinzugefügt
+import { ViewChildren, ElementRef, QueryList } from '@angular/core';
 @Component({
   selector: 'app-board',
   standalone: true,
