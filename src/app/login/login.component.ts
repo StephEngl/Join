@@ -2,12 +2,12 @@ import { Component, inject } from '@angular/core';
 import { Router } from '@angular/router';
 import { SignalsService } from '../services/signals.service';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
-import { SignupDialogComponent } from './signup-dialog/signup-dialog.component';
+import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [LoginDialogComponent, SignupDialogComponent],
+  imports: [LoginDialogComponent, SignUpDialogComponent],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
