@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, updateProfile } from "@angular/fire/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, updateProfile, onAuthStateChanged } from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -16,16 +16,12 @@ export class AuthenticationService {
   createUser(email: string, password: string): Promise<any> {
     return createUserWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
-        // Erfolgreich registriert
         const user = userCredential.user;
-        // Hier kannst du weitere Aktionen durchführen
         return user;
       })
       .catch((error) => {
-        // Fehlerbehandlung
         const errorCode = error.code;
         const errorMessage = error.message;
-        // Fehler ggf. weiterwerfen oder behandeln
         throw error;
       });
   }
@@ -33,21 +29,17 @@ export class AuthenticationService {
   signInUser(email: string, password: string): Promise<any> {
     return signInWithEmailAndPassword(this.auth, email, password)
       .then((userCredential) => {
-        // Erfolgreich registriert
         const user = userCredential.user;
-        // Hier kannst du weitere Aktionen durchführen
         return user;
       })
       .catch((error) => {
-        // Fehlerbehandlung
         const errorCode = error.code;
         const errorMessage = error.message;
-        // Fehler ggf. weiterwerfen oder behandeln
         throw error;
       });
   }
 
-  updateProfileUser(displayName: string): Promise<void> {
+  updateProfileUser(): Promise<void> {
     if (this.auth.currentUser) {
       return updateProfile(this.auth.currentUser, {
         displayName: "Jane Q. User"
@@ -58,7 +50,18 @@ export class AuthenticationService {
     }
   }
 
-
+  onAuthStateChanged(): Promise<any> {
+    return new Promise((resolve) => {
+        onAuthStateChanged(this.auth, (user) => {
+            resolve(user);
+        });
+    }).then((user) => {
+        return user;
+    }).catch((error) => {
+        console.log('Fehler beim Auth-Status:', error);
+        return null;
+    });
+  }
 }
 
 
