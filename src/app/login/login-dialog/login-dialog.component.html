@@ -5,7 +5,17 @@
   </div>
   <form class="form-login">
     <div class="mail-input-wrapper">
-      <input type="text" id="email" name="email" placeholder="Email" />
+      <input
+        #email="ngModel"
+        [(ngModel)]="loginData.email"
+        type="text"
+        class="input"
+        id="mail"
+        name="email"
+        required
+        pattern="[a-zA-Z0-9._%+\-]+@[a-zA-Z0-9.\-]+\.[a-zA-Z]{2,}"
+        placeholder="Email"
+      />
       <div class="icon">
         <img
           src="./assets/icons/contacts/contact_mail.svg"

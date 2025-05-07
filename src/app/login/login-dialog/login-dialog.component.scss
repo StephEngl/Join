@@ -69,6 +69,10 @@
         color: $col-font-inactive;
         opacity: 1;
       }
+
+      &.ng-invalid.ng-touched {
+        border-color: #e44c36 !important;
+      }
     }
   }
 }
