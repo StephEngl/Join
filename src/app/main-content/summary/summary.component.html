@@ -9,20 +9,20 @@
   <section class="summary-section">
     <article class="summary-wrapper">
       <section class="summary-row">
-        <div class="summary-btn">
+        <div class="summary-btn" (click)="toBoard()">
           <span class="sum-icon">
               <img src="./assets/icons/kanban/edit_white.svg" alt="">
               <div class="task-count">
-                <h5>1</h5>
+                <h5>{{ tasksByType('toDo') }}</h5>
                 <p>To-Do</p>
               </div>
           </span>
         </div>
-        <div class="summary-btn">
+        <div class="summary-btn" (click)="toBoard()">
           <span class="sum-icon">
               <img src="./assets/icons/kanban/check_white.svg" alt="">
               <div class="task-count">
-                <h5>1</h5>
+                <h5>{{ tasksByType('done') }}</h5>
                 <p>Done</p>
               </div>
           </span>
@@ -30,11 +30,11 @@
       </section>
   
       <section class="summary-row">
-        <div class="summary-btn">
+        <div class="summary-btn" (click)="toBoard()">
           <span class="sum-icon">
-              <img src="./assets/icons/kanban/prio_urgent.svg" alt="">
+              <img src="./assets/icons/kanban/prio_urgent_white.svg" alt="" [style.backgroundColor]="'#FF3D00'">
               <div class="task-count">
-                <h5>1</h5>
+                <h5>{{ tasksByPriority('urgent') }}</h5>
                 <p>Urgent</p>
               </div>
           </span>
@@ -47,10 +47,10 @@
   
       <section class="summary-row">
         @for (category of taskColumns; track category) {
-          <div class="summary-btn">
+          <div class="summary-btn" (click)="toBoard()">
             <div class="task-count">
-              <h5>1</h5>
-              <p [innerHTML]="category"></p>
+              <h5>{{ category.taskCount }}</h5>
+              <p [innerHTML]="category.text"></p>
             </div>
           </div>
         }

@@ -101,4 +101,8 @@
     .h-line {
         display: block;
     }
+
+    .summary-welcome {
+        display: none; // will be absolute and none / flex toggled (animation on start)
+    }
 }
