@@ -1,19 +1,25 @@
-<div class="page-content">
-  
-  <app-navbar></app-navbar>
 
-  <div class="header-content">
-    <app-header></app-header>
-    <router-outlet />
+@if (signalService.dummyAuthStatus()) {
+  <div class="page-content">
+  
+    <app-navbar></app-navbar>
+  
+    <div class="header-content">
+      <app-header></app-header>
+      <router-outlet />
+    </div>
+  
+    <app-toast></app-toast>
+    
   </div>
-
-  <app-toast></app-toast>
   
-</div>
-
-<div class="orientation-lock">
-  <img src="./assets/icons/header/logo.svg" class="rotate-phone">
-  <p>Please rotate your device into portrait mode to use the app</p>
-  <img src="./assets/icons/general/mobile.png" class="rotate-phone">
-  <!-- <button (click)="dailyReset.runReset()">Reset and create dummy Data</button> -->
-</div>
+  <div class="orientation-lock">
+    <img src="./assets/icons/header/logo.svg" class="rotate-phone">
+    <p>Please rotate your device into portrait mode to use the app</p>
+    <img src="./assets/icons/general/mobile.png" class="rotate-phone">
+    <!-- <button (click)="dailyReset.runReset()">Reset and create dummy Data</button> -->
+  </div>
+  
+} @else {
+  <app-login></app-login>
+}
