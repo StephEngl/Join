@@ -1,18 +1,22 @@
 <section
-  class="logo-animated"
-  [style.width]="loginLogoWidth"
-  [style.height]="loginLogoHeight"
-  [style.backgroundColor]="loginBackgroundColor"
+    class="logo-animated"
+    [style.width]="loginLogoWidth"
+    [style.height]="loginLogoHeight"
+    [style.backgroundColor]="loginBackgroundColor"
 >
-  <img [src]="loginLogoImgSrc" alt="" />
-  <div class="login-header">
-    <div class="sign-up-wrapper">
-      <p>Not a Join User?</p>
-      <button>Sign up</button>
-    </div>
-  </div>
+    <img [src]="loginLogoImgSrc" alt="" />
+</section>
+
+<section class="login-header">
+    <p>Not a Join User?</p>
+    <button class="signup-btn">Sign up</button>
 </section>
 
 <app-login-dialog></app-login-dialog>
+
+<section class="login-footer">
+    <p (click)="toPrivacyPolicy()">Privacy policy</p>
+    <p (click)="toLegalNotice()">Legal notice</p>
+</section>
 
 <button class="temp-to-main" (click)="toMain()">to main</button>

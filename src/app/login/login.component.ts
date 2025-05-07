@@ -42,5 +42,14 @@ export class LoginComponent {
     }, 600);
   }
   
+  toPrivacyPolicy() {
+    this.signalService.dummyAuthStatus.set(true);
+    this.router.navigate(['/privacy-policy']);
+  }
+
+  toLegalNotice() {
+    this.signalService.dummyAuthStatus.set(true);
+    this.router.navigate(['/legal-notice']);
+  }
 
 }
