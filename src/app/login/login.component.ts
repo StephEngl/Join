@@ -42,5 +42,12 @@ export class LoginComponent {
     }, 600);
   }
   
+  toPrivacyPolicy() {
+    console.log("to privacy policy");
+  }
+
+  toLegalNotice() {
+    console.log("to legal notice");
+  }
 
 }

@@ -1,5 +1,6 @@
 @import  "../../assets/styles/mixins.scss";
 
+
 app-login-dialog {
     position: absolute;
     top: 50%;
@@ -28,11 +29,39 @@ app-login-dialog {
 
 .temp-to-main {
     position: absolute;
-    bottom: 100px;
+    bottom: 8vh;
     width: 100px;
     height: 50px;
     background-color: pink;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
+}
+
+.login-header {
+    @include dFlex(center, center, 15px, absolute);
+    padding: 15px;
+    top: 0;
+    right: 0;
+    >p {
+        font-weight: 400;
+    }
+    .signup-btn {
+        font-weight: 600;
+        padding: 15px 20px;
+        border-radius: 8px;
+        color: white;
+        background-color: $col-ref-active-nav;
+    }
+}
+
+.login-footer {
+    @include dFlex(center, center, 15px, absolute);
+    bottom: 5vh;
+    left: 50%;
+    transform: translateX(-50%);
+    >p {
+        cursor: pointer;
+        color: $col-font-inactive;
+    }
 }
