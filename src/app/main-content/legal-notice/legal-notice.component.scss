@@ -72,8 +72,6 @@
     }
   }
 
-
-
   .paragraph {
     @include dFlex($jc: center, $ai: flex-start);
     flex-direction: column;
@@ -91,10 +89,4 @@
     height: auto;
     padding-top: 1rem;
     padding-left: 0px;
-  }
-
-  @media (max-width: 1400px) {
-    .section-legal-noticen {
-      height: calc( 100% - ( 96px + 76px ) );
-    }
   }

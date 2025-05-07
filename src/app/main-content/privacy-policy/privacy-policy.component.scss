@@ -8,15 +8,21 @@
   height: auto;
   overflow-y: auto;
   @include dFlex($jc: center, $ai: flex-start);
-  padding: 3rem;
+  padding: 1rem;
   font-family: 'Inter', sans-serif;
   }
 
-  section {
+  .section-privacy-policy {
     max-width: calc( $appMaxWidth - $navbar-width );
     max-height: calc( 100% - ( 96px ) );
     flex-direction: column;
     padding: 1rem;
+  }
+
+  .header {
+    @include dFlex($jc: flex-start, $ai: center, $gap: 0px, $position: relative);
+    width: 100%;
+    height: auto;
   }
 
   h2 {
