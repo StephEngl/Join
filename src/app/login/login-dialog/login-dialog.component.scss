@@ -52,7 +52,7 @@
       width: 100%;
       border: 1px solid $col-font-grey;
       border-radius: 10px;
-      padding: 12px 20px;
+      padding: 12px 50px 12px 20px;
       color: $col-font-inactive;
       resize: none;
       font-family: "Inter", sans-serif;
@@ -145,6 +145,7 @@
 }
 
 @media screen and (max-width: 360px) {
-    .login-dialog {
-      padding: 8px;
-    }}
+  .login-dialog {
+    padding: 8px;
+  }
+}
