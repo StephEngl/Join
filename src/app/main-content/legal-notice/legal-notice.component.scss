@@ -26,12 +26,6 @@
     height: auto;
   }
 
-  p {
-    a {
-      color: $col-font-main;
-    }
-  }
-
   h2 {
     width: 100%;
     height: auto;
@@ -46,17 +40,43 @@
     padding-bottom: 0.5rem;
   }
 
-  .imprint {
-    padding-bottom: 1rem;
+  h3 {
+    padding: 1rem 1rem 1rem 0;
   }
+
 
   span {
     color: $col-ref-highlight;
     font-size: 1rem;
   }
 
+  .name-and-adresses {
+    @include dFlex($jc: center, $ai: flex-start, $gap: 1rem);
+    flex-direction: column;
+
+    .name-developers {
+      padding: 1rem 1rem 1rem 0;
+      a {
+        color: $col-font-main;
+      }
+    }
+
+    .paragraph-developer-akademie {
+      width: auto;
+      height: auto;
+      @include dFlex($jc: center, $ai: flex-start, $gap: 1rem);
+
+
+      a {
+        color: $col-font-main;
+      }
+    }
+  }
+
+
+
   .paragraph {
-    @include dFlex(center, flex-start);
+    @include dFlex($jc: center, $ai: flex-start);
     flex-direction: column;
     @include appMaxWidth($padding: 1rem);
     font-size: 1rem;
@@ -67,7 +87,7 @@
   }
 
   .adress {
-    @include dFlex(flex-start, center);
+    @include dFlex($jc: center, $ai: flex-start);
     width: 100%;
     height: auto;
     padding-top: 1rem;
