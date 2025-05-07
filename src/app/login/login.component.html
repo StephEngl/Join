@@ -1,2 +1,9 @@
-<p>login works!</p>
-<button (click)="toMain()">to main</button>
+<section class="logo-animated"
+    [style.width]="loginLogoWidth"
+    [style.height]="loginLogoHeight"
+    [style.backgroundColor]="loginBackgroundColor"
+>
+    <img [src]="loginLogoImgSrc" alt="">
+</section>
+<app-login-dialog></app-login-dialog>
+<button class="temp-to-main" (click)="toMain()">to main</button>
