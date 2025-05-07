@@ -1,0 +1,64 @@
+.sign-up-section {
+    @include dFlex($jc: center, $ai: center, $gap: 1rem);
+
+}
+
+
+.sign-up-header {
+    @include dFlex($jc: space-around, $ai: center);
+
+}
+
+
+.sign-up-header-left {
+
+
+}
+
+
+.sign-up-header-middle {
+    @include dFlex($jc: center, $ai: center);
+
+}
+
+
+.sign-up-header-right {
+
+
+}
+
+
+.sign-up-content {
+    @include dFlex($jc: center, $ai: center);
+
+}
+
+
+.sign-up-form-and-accept-container {
+    @include dFlex($jc: center, $ai: center);
+
+}
+
+
+.sign-up-form-container {
+
+    @include dFlex($jc: center, $ai: center);
+}
+
+
+.sign-up-accept-container {
+    @include dFlex($jc: center, $ai: center);
+
+}
+
+
+.sign-up-footer {
+    @include dFlex($jc: center, $ai: center);
+
+}
+
+
+.sign-up-button {
+    @include dFlex($jc: center, $ai: center);
+
+}
