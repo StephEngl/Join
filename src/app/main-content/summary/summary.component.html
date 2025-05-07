@@ -9,23 +9,59 @@
   <section class="summary-section">
     <article class="summary-wrapper">
       <section class="summary-row">
-        <p class="summary-icon">to-do</p>
-        <p class="summary-icon">done</p>
+        <div class="summary-btn">
+          <span class="sum-icon">
+              <img src="./assets/icons/kanban/edit_white.svg" alt="">
+              <div class="task-count">
+                <h5>1</h5>
+                <p>To-Do</p>
+              </div>
+          </span>
+        </div>
+        <div class="summary-btn">
+          <span class="sum-icon">
+              <img src="./assets/icons/kanban/check_white.svg" alt="">
+              <div class="task-count">
+                <h5>1</h5>
+                <p>Done</p>
+              </div>
+          </span>
+        </div>
       </section>
   
       <section class="summary-row">
-        <p class="summary-icon">urgent</p>
+        <div class="summary-btn">
+          <span class="sum-icon">
+              <img src="./assets/icons/kanban/prio_urgent.svg" alt="">
+              <div class="task-count">
+                <h5>1</h5>
+                <p>Urgent</p>
+              </div>
+          </span>
+          <p>|</p>
+          <span class="sum-icon">
+            <p>Date October 17,ff</p>
+          </span>
+        </div>
       </section>
   
       <section class="summary-row">
-        <p class="summary-icon">to-do</p>
-        <p class="summary-icon">done</p>
-        <p class="summary-icon">done</p>
+        @for (category of taskColumns; track category) {
+          <div class="summary-btn">
+            <div class="task-count">
+              <h5>1</h5>
+              <p [innerHTML]="category"></p>
+            </div>
+          </div>
+        }
       </section>
     </article>
   
     <aside class="summary-welcome">
-      <h4>Good morning "name"</h4>
+      <h4>
+        Good morning<br>
+        <span> "name"</span>
+      </h4>
     </aside>
   </section>
 

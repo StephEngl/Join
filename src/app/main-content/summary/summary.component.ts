@@ -9,4 +9,6 @@ import { Component } from '@angular/core';
 })
 export class SummaryComponent {
 
+
+  taskColumns: string[] = ['Tasks in<br>Board', 'Tasks In<br>Progress', 'Awaiting<br>Feedback'];
 }
