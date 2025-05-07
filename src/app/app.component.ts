@@ -27,7 +27,7 @@ export class AppComponent {
   }
   
   ngOnInit() {
-    this.signalService.dummyAuthStatus.set(true); // toggle to see main (true) / login (false)
+    this.signalService.dummyAuthStatus.set(false); // toggle to see main (true) / login (false)
   }
 
 }

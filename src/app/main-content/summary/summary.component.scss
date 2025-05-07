@@ -37,15 +37,43 @@
     height: 160px;
 }
 
-.summary-icon {
+.sum-icon {
+    @include dFlex(space-between, center);
+    flex: 1;
+    padding: 40px;
+    >img {
+        aspect-ratio: 1/1;
+        background-color: grey;
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        padding: 8px;
+    }
+}
+
+.summary-btn {
     flex: 1;
     @include dFlex(center, center);
     border-radius: 15px;
-    background-color: red;
+    background-color: white;
     height: 100%;
     &:hover {
         cursor: pointer;
-        background-color: green;
+        background-color: $col-ref-hover;
+        .task-count {
+            color: white;
+        }
+    }
+}
+
+.task-count {
+    @include dFlex(center, center);
+    flex-direction: column;
+    >h5 {
+        font-size: 2rem;
+    }
+    >p {
+        text-align: center;
     }
 }
 
@@ -72,5 +100,9 @@
 
     .h-line {
         display: block;
+    }
+
+    .summary-welcome {
+        display: none; // will be absolute and none / flex toggled (animation on start)
     }
 }
