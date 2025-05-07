@@ -2,70 +2,74 @@
 @import "../../../assets/styles/variables.scss";
 @import "../../../assets/fonts/fonts.scss";
 
-section {
-  width: 650px;
+.login-dialog {
+  width: 100%;
+  max-width: 650px;
   height: 450px;
   border-radius: 30px;
+  padding: 0 120px;
   display: flex;
   align-items: center;
   justify-content: center;
   gap: 36px;
   flex-direction: column;
   background-color: white;
-}
 
-.title-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  flex-direction: column;
+  .title-wrapper {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    flex-direction: column;
 
-  .login-underline {
-    width: 75%;
-    height: 1px;
-    border: 1px solid $col-ref-highlight;
-    margin-top: 16px;
+    .login-underline {
+      width: 75%;
+      height: 1px;
+      border: 1px solid $col-ref-highlight;
+      margin-top: 16px;
+    }
   }
 }
 
 .form-login {
+  width: 100%;
+  max-width: 440px;
   display: flex;
   gap: 32px;
   flex-direction: column;
 
-  input[type="text"] {
-    width: 440px;
-    border: 1px solid $col-font-grey;
-    border-radius: 10px;
-    padding: 12px 20px;
-    color: $col-font-inactive;
-    resize: none;
-    font-family: "Inter", sans-serif;
-    font-size: 1rem;
+  .mail-input-wrapper,
+  .password-input-wrapper {
+    display: flex;
+    position: relative;
 
-    &:focus {
-      outline: none;
-      border-color: $col-font-inactive;
+    .icon {
+      position: absolute;
+      right: 20px;
+      top: 12px;
     }
 
-    &::placeholder {
+    input[type="text"] {
+      width: 100%;
+      border: 1px solid $col-font-grey;
+      border-radius: 10px;
+      padding: 12px 20px;
+      color: $col-font-inactive;
+      resize: none;
       font-family: "Inter", sans-serif;
       font-size: 1rem;
-      color: $col-font-inactive;
-      opacity: 1;
+
+      &:focus {
+        outline: none;
+        border-color: $col-font-inactive;
+      }
+
+      &::placeholder {
+        font-family: "Inter", sans-serif;
+        font-size: 1rem;
+        color: $col-font-inactive;
+        opacity: 1;
+      }
     }
-  }
-}
-
-.mail-input-wrapper,
-.password-input-wrapper {
-  display: flex;
-  position: relative;
-
-  .icon {
-    position: absolute;
-    right: 20px;
-    top: 12px;
   }
 }
 
@@ -74,6 +78,15 @@ section {
   justify-content: center;
   align-items: center;
   gap: 36px;
+
+  .login-button,
+  .guest-button {
+    @include dFlex($ai: center, $jc: space-between, $gap: 4px);
+    font-size: 21px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 10px;
+  }
 
   .guest-button {
     background-color: $col-bg-main;
@@ -96,13 +109,42 @@ section {
       filter: drop-shadow(2px 4px 4px #a8a8a8);
     }
   }
+}
 
-  .login-button,
-  .guest-button {
-    @include dFlex($ai: center, $jc: space-between, $gap: 4px);
-    font-size: 21px;
-    font-weight: 700;
-    padding: 12px 24px;
-    border-radius: 10px;
+@media screen and (max-width: 700px) {
+  .login-dialog {
+    width: 400px;
+    height: 475px;
+    padding: 0 16px;
+  }
+
+  .form-login {
+    max-width: 360px;
   }
 }
+
+@media screen and (max-width: 440px) {
+  .login-dialog {
+    width: 100%;
+    max-height: 475px;
+    padding: 16px;
+  }
+
+  .login-button-wrapper {
+    flex-direction: column;
+    gap: 20px;
+
+    .login-button,
+    .guest-button {
+      width: 180px;
+      height: 50px;
+      font-size: 16px;
+      justify-content: center;
+    }
+  }
+}
+
+@media screen and (max-width: 360px) {
+    .login-dialog {
+      padding: 8px;
+    }}

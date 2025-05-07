@@ -7,6 +7,12 @@ app-login-dialog {
     left: 50%;
     transform: translate(-50%, -50%);
     z-index: 2;
+    width: 100vw;
+    height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: 16px; 
 }
 
 .logo-animated {
@@ -63,5 +69,12 @@ app-login-dialog {
     >p {
         cursor: pointer;
         color: $col-font-inactive;
+    }
+}
+
+// Media Queries
+@media screen and (max-width:360px) {
+    app-login-dialog {
+        padding: 8px
     }
 }
