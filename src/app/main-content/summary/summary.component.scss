@@ -5,7 +5,7 @@
     position: relative;
     max-width: calc($appMaxWidth - $navbar-width);
     height: calc(100vh - $header-height);
-    padding: 20px;
+    padding: 55px 0 0 55px;
 }
 
 .summary-header {
@@ -26,42 +26,76 @@
 }
 
 .summary-wrapper {
-    @include dFlex(center, space-between, 20px);
+    @include dFlex(center, space-between, 25px);
     flex-direction: column;
     flex: 2;
     max-width: 560px;
 }
 
 .summary-row {
-    @include dFlex(flex-start, center, 20px);
+    @include dFlex(flex-start, center, 25px);
     height: 160px;
 }
 
 .sum-icon {
-    @include dFlex(space-between, center);
+    @include dFlex(center, center, 10px);
     flex: 1;
     padding: 40px;
+
     >img {
         aspect-ratio: 1/1;
-        background-color: grey;
-        width: 50px;
-        height: 50px;
+        background-color: $col-bg-secondary;
+        width: 60px;
+        height: 60px;
         border-radius: 50%;
         padding: 8px;
     }
 }
 
+.icon-pencil {
+    height: 50px;
+    width: 50px;
+}
+
+.transform-right {
+    transform-origin: right center;
+}
+
+.transform-left {
+    transform-origin: left center;
+}
+
+.transform-center {
+    transform-origin: center center;
+}
+
+.transform-bottom {
+    transform-origin: left top;
+}
+
 .summary-btn {
     flex: 1;
     @include dFlex(center, center);
-    border-radius: 15px;
+    border-radius: 30px;
     background-color: white;
     height: 100%;
+    box-shadow: 0px 0px 10px $col-shadow-black;
+    transition: transform 0.2s ease, background-color 0.3s ease;
+
     &:hover {
         cursor: pointer;
         background-color: $col-ref-hover;
+        transform: scale(1.04);
+        box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.35);
+
         .task-count {
             color: white;
+        }
+
+        .sum-icon {
+            >img {
+                background-color: white;
+            }
         }
     }
 }
@@ -69,9 +103,11 @@
 .task-count {
     @include dFlex(center, center);
     flex-direction: column;
+
     >h5 {
-        font-size: 2rem;
+        font-size: 3rem;
     }
+
     >p {
         text-align: center;
     }
@@ -88,6 +124,20 @@
 }
 
 @media screen and (max-width: 1000px) {
+
+    .summary-btn {
+
+    }
+
+    .summary-main{
+        padding: 20px 20px 0 20px;
+    }
+
+    .summary-section {
+        display: flex;
+        flex-direction: column;
+    }
+
     .summary-header {
         @include dFlex(flex-start, flex-start);
         flex-direction: column;
@@ -102,7 +152,27 @@
         display: block;
     }
 
+    .transform-bottom {
+        transform-origin: center bottom;
+
+        // &:hover{
+        //     transform: scaleY(1.1);
+        // }
+    }
+
     .summary-welcome {
         display: none; // will be absolute and none / flex toggled (animation on start)
     }
 }
+
+// @media screen and (max-width: 830px) {
+//     .summary-main {
+//         padding: 20px 0 0 20px;
+//     }
+
+//     .summary-section {
+//         display: flex;
+//         flex-direction: column;
+//     }
+
+// }

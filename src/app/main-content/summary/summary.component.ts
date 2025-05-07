@@ -1,4 +1,5 @@
 import { Component, inject } from '@angular/core';
+import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TasksService } from '../../services/tasks.service';
 import { TaskInterface } from '../../interfaces/task.interface';
@@ -6,7 +7,7 @@ import { TaskInterface } from '../../interfaces/task.interface';
 @Component({
   selector: 'app-summary',
   standalone: true,
-  imports: [],
+  imports: [CommonModule],
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss'
 })
@@ -52,8 +53,8 @@ export class SummaryComponent {
   today: string = new Date().toISOString().split('T')[0]
 
   urgentTasksCount() {
-    const urgentTasksToday = this.tasksService.tasks.filter(task => 
-      task.priority === 'urgent' && 
+    const urgentTasksToday = this.tasksService.tasks.filter(task =>
+      task.priority === 'urgent' &&
       this.formatDate(task.dueDate) === this.today
     );
     return urgentTasksToday.length;
@@ -62,5 +63,5 @@ export class SummaryComponent {
   formatDate(date: Date | null): string | null {
     return date ? date.toISOString().split('T')[0] : null;
   }
-  
+
 }
