@@ -1,6 +1,8 @@
 @import "./../../../assets/styles/variables.scss";
 @import "./../../../assets/styles/mixins.scss";
 
+//TODO: add more style in media queries for mobile and tablet
+
 .summary-main {
     position: relative;
     max-width: calc($appMaxWidth - $navbar-width);
@@ -100,6 +102,18 @@
     }
 }
 
+.timeText{
+    font-size: 35px;
+    line-height: 120%;
+}
+
+.name {
+    font-size: 44px;
+    line-height: 120%;
+    color: $col-ref-highlight;
+    font-weight: 600
+}
+
 .task-count {
     @include dFlex(center, center);
     flex-direction: column;
@@ -125,9 +139,9 @@
 
 @media screen and (max-width: 1000px) {
 
-    .summary-btn {
+    // .summary-btn {
 
-    }
+    // }
 
     .summary-main{
         padding: 20px 20px 0 20px;

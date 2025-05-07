@@ -4,6 +4,9 @@ import { Router } from '@angular/router';
 import { TasksService } from '../../services/tasks.service';
 import { TaskInterface } from '../../interfaces/task.interface';
 
+//TODO: implent authentication service for user name ☺
+// import { AuthenticationService } from '../../services/authentication.service';
+
 @Component({
   selector: 'app-summary',
   standalone: true,
@@ -13,7 +16,11 @@ import { TaskInterface } from '../../interfaces/task.interface';
 })
 export class SummaryComponent {
 
+  // userName: string = 'Guest';
+
   constructor(private router: Router) {}
+
+  // constructor(private router: Router, private authService: AuthenticationService) {}
 
   tasksService = inject(TasksService);
   taskColumns: { text: string; taskCount: number }[] = [];
@@ -33,6 +40,11 @@ export class SummaryComponent {
         taskCount: this.tasksByType('feedback'),
       }
     ];
+
+    // this.authService.onAuthStateChanged().then(user => {
+    //   this.userName = user?.displayName || 'Guest';
+    // });
+
   }
 
   toBoard() {
@@ -63,5 +75,16 @@ export class SummaryComponent {
   formatDate(date: Date | null): string | null {
     return date ? date.toISOString().split('T')[0] : null;
   }
+
+  textChangeTime(): string {
+    const hour = new Date().getHours();
+    if (hour >= 5 && hour < 9) return 'Good morning';
+    if (hour >= 9 && hour < 11) return 'Good forenoon';
+    if (hour >= 11 && hour < 13) return 'Good midday';
+    if (hour >= 13 && hour < 17) return 'Good afternoon';
+    if (hour >= 17 && hour < 21) return 'Good evening';
+    return 'Good night';
+  }
+
 
 }

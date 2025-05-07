@@ -11,7 +11,8 @@
       <section class="summary-row">
         <div class="summary-btn transform-left" (click)="toBoard()">
           <span class="sum-icon">
-            <img class="icon-pencil" src="./assets/icons/kanban/edit_white.svg" alt="">
+            <!-- //TODO: Button img hover effect from blue to white -->
+            <img class="icon-pencil" src="./assets/icons/kanban/edit_white.svg" alt="icon edit">
             <div class="task-count">
               <h5>{{ tasksByType('toDo') }}</h5>
               <p>To-Do</p>
@@ -20,7 +21,8 @@
         </div>
         <div class="summary-btn transform-right" (click)="toBoard()">
           <span class="sum-icon">
-            <img src="./assets/icons/kanban/check_white.svg" alt="">
+            <!-- //TODO: Button img hover effect from blue to white -->
+            <img src="./assets/icons/kanban/check_white.svg" alt="icon check">
             <div class="task-count">
               <h5>{{ tasksByType('done') }}</h5>
               <p>Done</p>
@@ -50,15 +52,11 @@
 
       <section class="summary-row">
         @for (category of taskColumns; track category;let i = $index) {
-        <div class="summary-btn"
-
-        [ngClass]="{
+        <div class="summary-btn" [ngClass]="{
             'transform-left': i === 0,
             'transform-center': i === 1,
             'transform-right': i === 2
-          }"
-
-          (click)="toBoard()">
+          }" (click)="toBoard()">
           <div class="task-count">
             <h5>{{ category.taskCount }}</h5>
             <p [innerHTML]="category.text"></p>
@@ -70,8 +68,12 @@
 
     <aside class="summary-welcome">
       <h4>
-        Good morning<br>
-        <span> "name"</span>
+        <p class="timeText">{{ textChangeTime() }},<br>
+          <!-- //TODO: Add user name with firebase in the TS -->
+          <!-- <span class="name">{{ userName }}</span> -->
+          <span class="name">Patrick, Steffi & Jenny :)</span>
+        </p>
+
       </h4>
     </aside>
   </section>
