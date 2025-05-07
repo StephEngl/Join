@@ -3,16 +3,20 @@
 @import "../../../assets/fonts/fonts.scss";
 
 :host {
-    display: flex;
-    overflow-y: auto;
+  margin: 0;
+  width: 100%;
+  height: auto;
+  overflow-y: auto;
+  @include dFlex($jc: center, $ai: flex-start);
+  padding: 3rem;
+  font-family: 'Inter', sans-serif;
   }
 
   section {
     max-width: calc( $appMaxWidth - $navbar-width );
-    height: auto;
-    @include dFlex($jc: center, $ai: flex-start);
+    max-height: calc( 100% - ( 96px ) );
     flex-direction: column;
-    padding: 3rem;
+    padding: 1rem;
   }
 
   h2 {
@@ -31,6 +35,10 @@
 
   span {
     color: $col-ref-highlight;
+    font-size: 1rem;
+  }
+
+  p {
     font-size: 1rem;
   }
 
