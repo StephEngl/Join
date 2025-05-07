@@ -1,64 +1,17 @@
-.sign-up-section {
+@import "../../../assets/styles/mixins.scss";
+@import "../../../assets/styles/variables.scss";
+@import "../../../assets/fonts/fonts.scss";
+
+
+.sign-up-dialog-section {
     @include dFlex($jc: center, $ai: center, $gap: 1rem);
 
 }
 
 
-.sign-up-header {
-    @include dFlex($jc: space-around, $ai: center);
 
-}
-
-
-.sign-up-header-left {
-
-
-}
-
-
-.sign-up-header-middle {
-    @include dFlex($jc: center, $ai: center);
-
-}
-
-
-.sign-up-header-right {
-
-
-}
-
-
-.sign-up-content {
-    @include dFlex($jc: center, $ai: center);
-
-}
-
-
-.sign-up-form-and-accept-container {
-    @include dFlex($jc: center, $ai: center);
-
-}
-
-
-.sign-up-form-container {
-
-    @include dFlex($jc: center, $ai: center);
-}
-
-
-.sign-up-accept-container {
-    @include dFlex($jc: center, $ai: center);
-
-}
-
-
-.sign-up-footer {
-    @include dFlex($jc: center, $ai: center);
-
-}
-
-
-.sign-up-button {
-    @include dFlex($jc: center, $ai: center);
-
+@media (min-width: 1920px) {
+    .sign-up-section {
+        margin-left: calc( $appMaxWidth - 100vw );
+    }
 }
