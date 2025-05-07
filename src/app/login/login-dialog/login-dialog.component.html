@@ -1,10 +1,26 @@
 <section class="login-dialog">
-  <h2>Log in</h2>
+  <div class="title-wrapper">
+    <h1>Log in</h1>
+    <div class="login-underline"></div>
+  </div>
   <form class="form-login">
-    <input type="text" id="email" name="email" />
-    <input type="text" id="password" name="password"/>
+    <div class="mail-input-wrapper">
+      <input type="text" id="email" name="email" placeholder="Email" />
+      <div class="icon">
+        <img
+          src="./assets/icons/contacts/contact_mail.svg"
+          alt="Briefumschlag Icon"
+        />
+      </div>
+    </div>
+    <div class="password-input-wrapper">
+      <input type="text" id="password" name="password" placeholder="Password" />
+      <div class="icon">
+        <img src="./assets/icons/kanban/lock.svg" alt="Schloss Icon" />
+      </div>
+    </div>
 
-    <div class="login-button-wrappper">
+    <div class="login-button-wrapper">
       <button class="login-button">Log in</button>
       <button class="guest-button">Guest Log In</button>
     </div>

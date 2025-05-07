@@ -11,15 +11,98 @@ section {
   justify-content: center;
   gap: 36px;
   flex-direction: column;
-  background-color: green;
+  background-color: white;
+}
+
+.title-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+
+  .login-underline {
+    width: 75%;
+    height: 1px;
+    border: 1px solid $col-ref-highlight;
+    margin-top: 16px;
+  }
 }
 
 .form-login {
-  width: 440px;
   display: flex;
   gap: 32px;
   flex-direction: column;
 
-  input {
+  input[type="text"] {
+    width: 440px;
+    border: 1px solid $col-font-grey;
+    border-radius: 10px;
+    padding: 12px 20px;
+    color: $col-font-inactive;
+    resize: none;
+    font-family: "Inter", sans-serif;
+    font-size: 1rem;
+
+    &:focus {
+      outline: none;
+      border-color: $col-font-inactive;
+    }
+
+    &::placeholder {
+      font-family: "Inter", sans-serif;
+      font-size: 1rem;
+      color: $col-font-inactive;
+      opacity: 1;
+    }
+  }
+}
+
+.mail-input-wrapper,
+.password-input-wrapper {
+  display: flex;
+  position: relative;
+
+  .icon {
+    position: absolute;
+    right: 20px;
+    top: 12px;
+  }
+}
+
+.login-button-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 36px;
+
+  .guest-button {
+    background-color: $col-bg-main;
+    border: 1px solid $col-bg-secondary;
+
+    &:hover {
+      border-color: $col-ref-highlight;
+      color: $col-ref-highlight;
+      filter: drop-shadow(2px 4px 4px #a8a8a8);
+    }
+  }
+
+  .login-button {
+    background-color: $col-bg-secondary;
+    color: white;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: $col-ref-highlight;
+      filter: drop-shadow(2px 4px 4px #a8a8a8);
+    }
+  }
+
+  .login-button,
+  .guest-button {
+    @include dFlex($ai: center, $jc: space-between, $gap: 4px);
+    font-size: 21px;
+    font-weight: 700;
+    padding: 12px 24px;
+    border-radius: 10px;
   }
 }
