@@ -1,6 +1,6 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, updateProfile, onAuthStateChanged } from "@angular/fire/auth";
+import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, updateProfile, onAuthStateChanged, signOut } from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
@@ -52,15 +52,26 @@ export class AuthenticationService {
 
   onAuthStateChanged(): Promise<any> {
     return new Promise((resolve) => {
-        onAuthStateChanged(this.auth, (user) => {
-            resolve(user);
-        });
+      onAuthStateChanged(this.auth, (user) => {
+        resolve(user);
+      });
     }).then((user) => {
-        return user;
+      return user;
     }).catch((error) => {
-        console.log('Fehler beim Auth-Status:', error);
-        return null;
+      console.log('Auth status error:', error);
+      return null;
     });
+  }
+
+  signOutUser(): Promise<void> {
+    return signOut(this.auth)
+      .then(() => {
+        return;
+      })
+      .catch((error) => {
+        console.log('Sign out error:', error);
+        return;
+      });
   }
 }
 
