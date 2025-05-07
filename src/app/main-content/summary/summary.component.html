@@ -34,13 +34,16 @@
           <span class="sum-icon">
               <img src="./assets/icons/kanban/prio_urgent_white.svg" alt="" [style.backgroundColor]="'#FF3D00'">
               <div class="task-count">
-                <h5>{{ tasksByPriority('urgent') }}</h5>
+                <h5>{{ urgentTasksCount() }}</h5>
                 <p>Urgent</p>
               </div>
           </span>
           <p>|</p>
           <span class="sum-icon">
-            <p>Date October 17,ff</p>
+            <div>
+              <p>{{ today }}</p>
+              <p>Upcoming Deadline</p>
+            </div>
           </span>
         </div>
       </section>
