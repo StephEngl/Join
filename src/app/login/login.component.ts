@@ -43,11 +43,13 @@ export class LoginComponent {
   }
   
   toPrivacyPolicy() {
-    console.log("to privacy policy");
+    this.signalService.dummyAuthStatus.set(true);
+    this.router.navigate(['/privacy-policy']);
   }
 
   toLegalNotice() {
-    console.log("to legal notice");
+    this.signalService.dummyAuthStatus.set(true);
+    this.router.navigate(['/legal-notice']);
   }
 
 }

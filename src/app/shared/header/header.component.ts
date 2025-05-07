@@ -1,5 +1,6 @@
-import { Component, HostListener } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
+import { SignalsService } from '../../services/signals.service';
 
 @Component({
   selector: 'app-header',
@@ -9,6 +10,7 @@ import { RouterLink } from '@angular/router';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
+  signalService = inject(SignalsService)
   showDropdown = false;
   isDropdownOpen = false;
   dropdownVisible = false;

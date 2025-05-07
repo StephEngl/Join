@@ -2,9 +2,75 @@
 @import "./../../../assets/styles/mixins.scss";
 
 .summary-main {
-
+    position: relative;
+    max-width: calc($appMaxWidth - $navbar-width);
+    height: calc(100vh - $header-height);
+    padding: 20px;
 }
 
 .summary-header {
+    @include dFlex(flex-start, center);
+}
 
+.v-line {
+    @include vLine();
+}
+
+.h-line {
+    @include hLine();
+}
+
+.summary-section {
+    @include dFlex(flex-start, center, 40px);
+    margin-top: 40px;
+}
+
+.summary-wrapper {
+    @include dFlex(center, space-between, 20px);
+    flex-direction: column;
+    flex: 2;
+    max-width: 560px;
+}
+
+.summary-row {
+    @include dFlex(flex-start, center, 20px);
+    height: 160px;
+}
+
+.summary-icon {
+    flex: 1;
+    @include dFlex(center, center);
+    border-radius: 15px;
+    background-color: red;
+    height: 100%;
+    &:hover {
+        cursor: pointer;
+        background-color: green;
+    }
+}
+
+.summary-welcome {
+    flex: 1;
+}
+
+@media screen and (max-width: 1400px) {
+    .summary-main {
+        height: calc(100vh - $header-height - $nav-height-mobile);
+    }
+}
+
+@media screen and (max-width: 1000px) {
+    .summary-header {
+        @include dFlex(flex-start, flex-start);
+        flex-direction: column;
+        gap: 6px;
+    }
+
+    .v-line {
+        display: none;
+    }
+
+    .h-line {
+        display: block;
+    }
 }
