@@ -11,11 +11,15 @@
 
     <div class="sign-up-content">
         <div class="sign-up-form-and-accept-container">
-            <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+            <!-- Updated: (ngSubmit) now calls submitSignUp() -->
+            <form [formGroup]="signUpForm" (ngSubmit)="submitSignUp()">
                 <div class="sign-up-form-container">
                     <div class="form-field"><input type="text" formControlName="name" placeholder="Name" /><span class="form-icon">👤</span></div>
                     <div class="form-field"><input type="email" formControlName="email" placeholder="E-Mail" /><span class="form-icon">📧</span></div>
-                    <div class="form-field"><input [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Password" /><span class="form-icon clickable" (click)="hidePassword = !hidePassword">{{ hidePassword ? '🙈' : '👁️' }}</span></div>
+                    <div class="form-field">
+                        <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Password" />
+                        <span class="form-icon clickable" (click)="hidePassword = !hidePassword">{{ hidePassword ? '🙈' : '👁️' }}</span>
+                    </div>
                     <div class="form-field">
                         <input [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirm Password" />
                         <span class="form-icon clickable" (click)="hideConfirmPassword = !hideConfirmPassword">{{ hideConfirmPassword ? '🙈' : '👁️' }}</span>
@@ -33,6 +37,7 @@
                 </div>
 
                 <div class="sign-up-footer">
+                    <!-- Button now submits form via submitSignUp() -->
                     <button class="sign-up-button" type="submit" [disabled]="!acceptPolicy">Sign up</button>
                 </div>
             </form>

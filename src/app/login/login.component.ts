@@ -9,89 +9,108 @@ import { UsersService } from '../services/users.service';
 import { ContactsService } from '../services/contacts.service';
 
 @Component({
-  selector: 'app-login',
-  standalone: true,
-  imports: [LoginDialogComponent, SignUpDialogComponent, FormsModule],
-  templateUrl: './login.component.html',
-  styleUrl: './login.component.scss'
+    selector: 'app-login',
+    standalone: true,
+    imports: [LoginDialogComponent, SignUpDialogComponent, FormsModule],
+    templateUrl: './login.component.html',
+    styleUrl: './login.component.scss'
 })
 export class LoginComponent {
-  
-  signalService = inject(SignalsService);
-  authService = inject(AuthenticationService);
-  usersService = inject(UsersService);
-  contactsService = inject(ContactsService);
-  loginLogoHeight: string = "100%";
-  loginLogoWidth: string = "100%";
-  position: string = "50%";
-  loginBackgroundColor: string = "";
-  loginLogoImgSrc: string = "./assets/icons/header/logo.svg";
-  startAnimationTrigger: boolean = false;
 
-  constructor(private router: Router) {}
+    signalService = inject(SignalsService);
+    authService = inject(AuthenticationService);
+    usersService = inject(UsersService);
+    contactsService = inject(ContactsService);
+    loginLogoHeight: string = "100%";
+    loginLogoWidth: string = "100%";
+    position: string = "50%";
+    loginBackgroundColor: string = "";
+    loginLogoImgSrc: string = "./assets/icons/header/logo.svg";
+    startAnimationTrigger: boolean = false;
 
-  ngOnInit() {
-    this.startAnimation();
-  }
+    /* Controls visibility of sign-up dialog */
+    showSignUpDialog: boolean = false;
 
-  // DO NOT DELETE test variables & functions SIGN UP USER ->
-  // emailTemp: string = "";
-  // passwordTemp: string = "";
-  // nameTemp: string = "";
+    constructor(private router: Router) { }
 
-  // createUser() {
-  //   const user = {
-  //     name: this.nameTemp,
-  //     mail: this.emailTemp,
-  //     phone: '',
-  //   }
-
-  //   if (this.userAlreadyExists(this.emailTemp)) {
-  //     console.log("User already exists!");
-  //     return;
-  //   }
-  //   this.authService.createUser(this.emailTemp, this.passwordTemp, this.nameTemp);
-  //   this.usersService.addUser(user);
-  // }
-
-  // userAlreadyExists(mail: string): boolean {
-  //   return (
-  //     this.usersService.users.some(
-  //       user => user.mail.trim().toLowerCase() === mail.trim().toLowerCase()
-  //     )
-  //   );
-  // }
-  // <--  DO NOTE DELETE test variables & functions SIGN UP USER 
-
-  startAnimation() {
-    if (this.signalService.isMobile()) {
-      this.loginBackgroundColor = "#2A3647";
-      this.loginLogoImgSrc = "./assets/icons/header/logo_white.svg";
-    } else {
-      this.loginBackgroundColor = "#F6F7F8";
+    ngOnInit() {
+        this.startAnimation();
     }
-  
-    setTimeout(() => {
-      this.loginLogoImgSrc = "./assets/icons/header/logo.svg";
-      this.loginBackgroundColor = "transparent";
-      this.startAnimationTrigger = true;
-    }, 400);
-  }
 
-  toPrivacyPolicy() {
-      this.signalService.hideHrefs.set(true);
-      this.router.navigate(['/privacy-policy']);
-  }
+    /* DO NOT DELETE test variables & functions SIGN UP USER -> */
+    // emailTemp: string = "";
+    // passwordTemp: string = "";
+    // nameTemp: string = "";
 
-  toLegalNotice() {
-      this.signalService.hideHrefs.set(true);
-      this.router.navigate(['/legal-notice']);
-  }
+    // createUser() {
+    //   const user = {
+    //     name: this.nameTemp,
+    //     mail: this.emailTemp,
+    //     phone: '',
+    //   }
 
-  toSignUp() {
-      this.signalService.hideHrefs.set(true);
-      this.router.navigate(['/sign-up']);
-  }
+    //   if (this.userAlreadyExists(this.emailTemp)) {
+    //     console.log("User already exists!");
+    //     return;
+    //   }
+    //   this.authService.createUser(this.emailTemp, this.passwordTemp, this.nameTemp);
+    //   this.usersService.addUser(user);
+    // }
 
+    // userAlreadyExists(mail: string): boolean {
+    //   return (
+    //     this.usersService.users.some(
+    //       user => user.mail.trim().toLowerCase() === mail.trim().toLowerCase()
+    //     )
+    //   );
+    // }
+    /* <--  DO NOT DELETE test variables & functions SIGN UP USER */
 
+    startAnimation() {
+        if (this.signalService.isMobile()) {
+            this.loginBackgroundColor = "#2A3647";
+            this.loginLogoImgSrc = "./assets/icons/header/logo_white.svg";
+        } else {
+            this.loginBackgroundColor = "#F6F7F8";
+        }
+
+        setTimeout(() => {
+            this.loginLogoImgSrc = "./assets/icons/header/logo.svg";
+            this.loginBackgroundColor = "transparent";
+            this.startAnimationTrigger = true;
+        }, 400);
+    }
+
+    toPrivacyPolicy() {
+        this.signalService.hideHrefs.set(true);
+        this.router.navigate(['/privacy-policy']);
+    }
+
+    toLegalNotice() {
+        this.signalService.hideHrefs.set(true);
+        this.router.navigate(['/legal-notice']);
+    }
+
+    // /* OLD ROUTING VERSION */
+    // toSignUp() {
+    //     this.signalService.hideHrefs.set(true);
+    //     this.router.navigate(['/sign-up']);
+    // }
+
+    /* Opens the sign-up dialog inline (replaces app-login-dialog via @if) */
+    toSignUpDialog() {
+        this.signalService.hideHrefs.set(true);
+        this.showSignUpDialog = true;
+    }
+
+    /* Returns from sign-up to login dialog */
+    toLogin() {
+        this.showSignUpDialog = false;
+    }
+
+    /* Called from dialog when sign-up was successful */
+    onSignUpSuccess() {
+        alert('Sign up was successful'); /* Replace with toast service if needed */
+        this.toLogin();
+    }
 }
