@@ -2,10 +2,7 @@ import { Component, inject } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TasksService } from '../../services/tasks.service';
-import { TaskInterface } from '../../interfaces/task.interface';
-
-//TODO: implent authentication service for user name ☺
-// import { AuthenticationService } from '../../services/authentication.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-summary',
@@ -16,17 +13,52 @@ import { TaskInterface } from '../../interfaces/task.interface';
 })
 export class SummaryComponent {
 
-  // userName: string = 'Guest';
-
-  constructor(private router: Router) {}
-
-  // constructor(private router: Router, private authService: AuthenticationService) {}
+  constructor(private router: Router, private authService: AuthenticationService) {}
 
   tasksService = inject(TasksService);
-  taskColumns: { text: string; taskCount: number }[] = [];
+  taskOverviewBottom: { text: string; taskCount: number }[] = [];
+  userName: string | null = null;
+
+  taskOverviewTop: { 
+    type:string;
+    text: string; 
+    icon: string; 
+    iconHovered: string;
+    isHovered: boolean
+  }[] = [
+    {
+      type: 'toDo',
+      text: 'To-Do',
+      icon: './assets/icons/general/edit_white.svg',
+      iconHovered: './assets/icons/general/edit.svg',
+      isHovered: false
+    },
+    {
+      type: 'done',
+      text: 'Done',
+      icon: './assets/icons/general/check_white.svg',
+      iconHovered: './assets/icons/general/check.svg',
+      isHovered: false
+    }
+  ];
 
   ngOnInit() {
-    this.taskColumns = [
+    this.setOverviewDataBottom();
+    this.checkForAuth();
+  }
+
+  async checkForAuth() {
+    try {
+      const user = await this.authService.onAuthStateChanged();
+      this.userName = user?.displayName || 'Guest';
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      this.userName = 'Guest';
+    }
+  }
+
+  setOverviewDataBottom() {
+    this.taskOverviewBottom = [
       {
         text: 'Tasks in<br>Board',
         taskCount: this.tasksCount(),
@@ -40,11 +72,6 @@ export class SummaryComponent {
         taskCount: this.tasksByType('feedback'),
       }
     ];
-
-    // this.authService.onAuthStateChanged().then(user => {
-    //   this.userName = user?.displayName || 'Guest';
-    // });
-
   }
 
   toBoard() {

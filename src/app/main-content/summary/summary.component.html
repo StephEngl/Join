@@ -9,26 +9,17 @@
   <section class="summary-section">
     <article class="summary-wrapper">
       <section class="summary-row">
-        <div class="summary-btn transform-left" (click)="toBoard()">
-          <span class="sum-icon">
-            <!-- //TODO: Button img hover effect from blue to white -->
-            <img class="icon-pencil" src="./assets/icons/kanban/edit_white.svg" alt="icon edit">
-            <div class="task-count">
-              <h5>{{ tasksByType('toDo') }}</h5>
-              <p>To-Do</p>
-            </div>
-          </span>
-        </div>
-        <div class="summary-btn transform-right" (click)="toBoard()">
-          <span class="sum-icon">
-            <!-- //TODO: Button img hover effect from blue to white -->
-            <img src="./assets/icons/kanban/check_white.svg" alt="icon check">
-            <div class="task-count">
-              <h5>{{ tasksByType('done') }}</h5>
-              <p>Done</p>
-            </div>
-          </span>
-        </div>
+        @for (card of taskOverviewTop; track card) {
+          <div class="summary-btn" (click)="toBoard()" (mouseenter)="card.isHovered = true" (mouseleave)="card.isHovered = false;">
+            <span class="sum-icon">
+              <img [src]="card.isHovered ? card.iconHovered: card.icon" alt="icon edit">
+              <div class="task-count">
+                <h5>{{ tasksByType(card.type) }}</h5>
+                <p>{{ card.text }}</p>
+              </div>
+            </span>
+          </div>
+        }
       </section>
 
       <section class="summary-row">
@@ -51,7 +42,7 @@
       </section>
 
       <section class="summary-row">
-        @for (category of taskColumns; track category;let i = $index) {
+        @for (category of taskOverviewBottom; track category;let i = $index) {
         <div class="summary-btn" [ngClass]="{
             'transform-left': i === 0,
             'transform-center': i === 1,
@@ -70,8 +61,7 @@
       <h4>
         <p class="timeText">{{ textChangeTime() }},<br>
           <!-- //TODO: Add user name with firebase in the TS -->
-          <!-- <span class="name">{{ userName }}</span> -->
-          <span class="name">Patrick, Steffi & Jenny :)</span>
+          <span class="user-name">{{ userName }}</span>
         </p>
 
       </h4>
