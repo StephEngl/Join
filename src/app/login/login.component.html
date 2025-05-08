@@ -1,10 +1,13 @@
-<section
+<section class="start-animation">
+    <div
+        class="background-animated"
+        [style.backgroundColor]="loginBackgroundColor"
+    ></div>
+    <img
+    [src]="loginLogoImgSrc"
     class="logo-animated"
-    [style.width]="loginLogoWidth"
-    [style.height]="loginLogoHeight"
-    [style.backgroundColor]="loginBackgroundColor"
->
-    <img [src]="loginLogoImgSrc" alt="" />
+    [class.animate]="startAnimationTrigger"
+  />
 </section>
 
 <section class="login-header">
@@ -12,7 +15,9 @@
     <button class="signup-btn" (click)="toSignUp()">Sign up</button>
 </section>
 
+<!-- @if -->
 <app-login-dialog></app-login-dialog>
+<!-- app signup dialog standalone -->
 
 <section class="login-footer">
     <p (click)="toPrivacyPolicy()">Privacy policy</p>
