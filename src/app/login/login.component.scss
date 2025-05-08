@@ -79,6 +79,8 @@ app-login-dialog,
     bottom: 5vh;
     left: 50%;
     transform: translateX(-50%);
+    z-index: 5;
+    
     >p {
         cursor: pointer;
         color: $col-font-inactive;

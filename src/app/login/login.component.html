@@ -15,16 +15,17 @@
     <button class="signup-btn" (click)="toSignUp()">Sign up</button>
 </section>
 
-<!-- @if -->
-<app-login-dialog></app-login-dialog>
-<!-- app signup dialog standalone -->
 
 <section class="login-footer">
     <p (click)="toPrivacyPolicy()">Privacy policy</p>
     <p (click)="toLegalNotice()">Legal notice</p>
 </section>
 
+<!-- @if -->
+<app-login-dialog></app-login-dialog>
+<!-- app signup dialog standalone -->
 <!-- test login field -->
+
 <div class="test-login">
     <!-- <input type="email" placeholder="Email" [(ngModel)]="emailTemp" />
     <input type="password" placeholder="Password" [(ngModel)]="passwordTemp" />
