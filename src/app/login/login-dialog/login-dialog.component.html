@@ -40,11 +40,11 @@
         placeholder="Password"
       />
 
-      @if (!loginData.password) {
+      @if (!passwordInput) {
       <div class="icon">
         <img src="./assets/icons/kanban/lock.svg" alt="Schloss Icon" />
       </div>
-      } @if (loginData.password) {
+      } @if (passwordInput) {
       <div class="icon" (click)="togglePasswordVisibility()">
         <img
           [src]="
