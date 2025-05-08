@@ -4,11 +4,12 @@ import { SignalsService } from '../services/signals.service';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component';
 import { AuthenticationService } from '../services/authentication.service';
+import { FormsModule } from '@angular/forms';
 
 @Component({
   selector: 'app-login',
   standalone: true,
-  imports: [LoginDialogComponent, SignUpDialogComponent],
+  imports: [LoginDialogComponent, SignUpDialogComponent, FormsModule],
   templateUrl: './login.component.html',
   styleUrl: './login.component.scss'
 })
@@ -22,13 +23,14 @@ export class LoginComponent {
   loginBackgroundColor: string = "";
   loginLogoImgSrc: string = "./assets/icons/header/logo.svg";
   startAnimationTrigger: boolean = false;
+  emailTemp: string = "";
+  passwordTemp: string = "";
 
   constructor(private router: Router) {}
 
   ngOnInit() {
     this.startAnimation();
   }
-
 
   startAnimation() {
     if (this.signalService.isMobile()) {
@@ -42,11 +44,20 @@ export class LoginComponent {
       this.loginLogoImgSrc = "./assets/icons/header/logo.svg";
       this.loginBackgroundColor = "transparent";
       this.startAnimationTrigger = true;
-    }, 200);
+    }, 400);
   }
 
   toMain() {
     this.authService.login();
+  }
+
+  async testLogin() {
+    try {
+      await this.authService.signInUser(this.emailTemp, this.passwordTemp);
+      console.log('Login erfolgreich');
+    } catch (error) {
+      console.error('Login fehlgeschlagen:', error);
+    }
   }
 
   toPrivacyPolicy() {

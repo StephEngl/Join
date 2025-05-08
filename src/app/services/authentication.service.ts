@@ -1,4 +1,4 @@
-import { Injectable } from '@angular/core';
+import { Injectable, signal } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { Router } from '@angular/router';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, updateProfile, onAuthStateChanged, signOut } from "@angular/fire/auth";
@@ -7,33 +7,35 @@ import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Au
   providedIn: 'root'
 })
 export class AuthenticationService {
-  isAuthenticated: boolean = false;
+  isAuthenticated = signal<boolean>(false);
   private auth: Auth;
 
   constructor(private router: Router) {
     this.auth = getAuth();
+    this.checkAuthStatus(); 
   }
 
   // start test functions
   login(): void {
-    this.isAuthenticated = true;
+    this.isAuthenticated.set(true);
     this.router.navigate(['/summary']);
   }
 
   logout(): void {
-    this.isAuthenticated = false;
+    this.isAuthenticated.set(false);
     this.router.navigate(['/login']);
   }
 
   isLoggedIn(): boolean {
-    return this.isAuthenticated;
+    return this.isAuthenticated();
   }
   // end test functions
 
   async signInUser(email: string, password: string): Promise<any> {
     try {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
-      this.isAuthenticated = true;
+      this.router.navigate(['/summary']);
+      this.isAuthenticated.set(true);
       return userCredential.user;
     } catch (error) {
       throw error;
@@ -68,10 +70,22 @@ export class AuthenticationService {
   async signOutUser(): Promise<void> {
     try {
       await signOut(this.auth);
-      this.isAuthenticated = false;
+      this.isAuthenticated.set(false);
+      this.router.navigate(['/login']);
     } catch (error) {
       console.error('Sign out error:', error);
     }
+  }
+
+  checkAuthStatus() {
+    onAuthStateChanged(this.auth, (user) => {
+      if (user) {
+        this.isAuthenticated.set(true);
+        this.router.navigate(['/summary']);
+      } else {
+        this.isAuthenticated.set(false);
+      }
+    });
   }
   
   // createUser(email: string, password: string): Promise<any> {

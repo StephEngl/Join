@@ -37,17 +37,22 @@ app-login-dialog,
     }
 }
 
-// will be deleted after sprint is done // auth implemented
-.temp-to-main {
-    position: absolute;
+// will be deleted after sprint is done // auth implemented -->
+.test-login {
+    @include dFlex(center, center, 0, absolute);
+    flex-direction: column;
     bottom: 8vh;
-    width: 100px;
-    height: 50px;
-    background-color: pink;
     left: 50%;
     transform: translateX(-50%);
     z-index: 2;
+
+    .temp-to-main {
+        width: 100px;
+        height: 50px;
+        background-color: pink;
+    }
 }
+// <-- will be deleted after sprint is done // auth implemented
 
 .login-header {
     @include dFlex(center, center, 15px, absolute);

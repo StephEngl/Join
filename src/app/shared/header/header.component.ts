@@ -83,7 +83,7 @@ export class HeaderComponent {
   }
 
   logout() {
-    this.authService.logout();
+    this.authService.signOutUser();
     this.showLogoutPopup = false;
   }
 }
