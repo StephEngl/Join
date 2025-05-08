@@ -10,6 +10,7 @@ import { SignalsService } from './signals.service';
 export class AuthenticationService {
   isAuthenticated = signal<boolean>(false);
   signalService = inject(SignalsService);
+  activeUserName: string = '';
   private auth: Auth;
 
   constructor(private router: Router) {
@@ -110,6 +111,16 @@ export class AuthenticationService {
         this.isAuthenticated.set(false);
       }
     });
+  }
+
+  async showActiveUserName() {
+    try {
+      const user = await this.onAuthStateChanged();
+      this.activeUserName = user?.displayName || 'Guest';
+    } catch (error) {
+      console.error('Error fetching user:', error);
+      this.activeUserName = 'Guest';
+    }
   }
   
   // createUser(email: string, password: string): Promise<any> {

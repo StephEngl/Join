@@ -43,6 +43,11 @@ app-login-dialog {
 }
 
 // will be deleted after sprint is done // auth implemented -->
+    .test-login {
+        @include dFlex();
+        bottom: 10vh;
+        z-index: 4;
+    }
     .temp-to-main {
         position: absolute;
         bottom: 8vh;

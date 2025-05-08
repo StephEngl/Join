@@ -5,6 +5,8 @@ import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component';
 import { AuthenticationService } from '../services/authentication.service';
 import { FormsModule } from '@angular/forms';
+import { UsersService } from '../services/users.service';
+import { ContactsService } from '../services/contacts.service';
 
 @Component({
   selector: 'app-login',
@@ -17,6 +19,8 @@ export class LoginComponent {
   
   signalService = inject(SignalsService);
   authService = inject(AuthenticationService);
+  usersService = inject(UsersService);
+  contactsService = inject(ContactsService);
   loginLogoHeight: string = "100%";
   loginLogoWidth: string = "100%";
   position: string = "50%";
@@ -29,6 +33,35 @@ export class LoginComponent {
   ngOnInit() {
     this.startAnimation();
   }
+
+  // DO NOT DELETE test variables & functions SIGN UP USER ->
+  // emailTemp: string = "";
+  // passwordTemp: string = "";
+  // nameTemp: string = "";
+
+  // createUser() {
+  //   const user = {
+  //     name: this.nameTemp,
+  //     mail: this.emailTemp,
+  //     phone: '',
+  //   }
+
+  //   if (this.userAlreadyExists(this.emailTemp)) {
+  //     console.log("User already exists!");
+  //     return;
+  //   }
+  //   this.authService.createUser(this.emailTemp, this.passwordTemp, this.nameTemp);
+  //   this.usersService.addUser(user);
+  // }
+
+  // userAlreadyExists(mail: string): boolean {
+  //   return (
+  //     this.usersService.users.some(
+  //       user => user.mail.trim().toLowerCase() === mail.trim().toLowerCase()
+  //     )
+  //   );
+  // }
+  // <--  DO NOTE DELETE test variables & functions SIGN UP USER 
 
   startAnimation() {
     if (this.signalService.isMobile()) {
@@ -59,4 +92,6 @@ export class LoginComponent {
       this.signalService.hideHrefs.set(true);
       this.router.navigate(['/sign-up']);
   }
+
+
 }

@@ -13,9 +13,10 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class SummaryComponent {
 
-  constructor(private router: Router, private authService: AuthenticationService) { }
+  constructor(private router: Router) { }
 
   tasksService = inject(TasksService);
+  authService = inject(AuthenticationService);
   taskOverviewBottom: { text: string; taskCount: number }[] = [];
   userName: string | null = null;
 
@@ -44,18 +45,11 @@ export class SummaryComponent {
 
   ngOnInit() {
     this.setOverviewDataBottom();
-    this.checkForAuth();
+    this.authService.showActiveUserName();
   }
 
-  async checkForAuth() {
-    try {
-      const user = await this.authService.onAuthStateChanged();
-      this.userName = user?.displayName || 'Guest';
-    } catch (error) {
-      console.error('Error fetching user:', error);
-      this.userName = 'Guest';
-    }
-  }
+  // Moved to Authentication Service (global use)
+  // async showUserName() {}
 
   setOverviewDataBottom() {
     this.taskOverviewBottom = [
