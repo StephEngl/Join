@@ -9,8 +9,13 @@
   <section class="summary-section">
     <article class="summary-wrapper">
       <section class="summary-row">
-        @for (card of taskOverviewTop; track card) {
-          <div class="summary-btn" (click)="toBoard()" (mouseenter)="card.isHovered = true" (mouseleave)="card.isHovered = false;">
+        @for (card of taskOverviewTop; track card; let i = $index) {
+          <div class="summary-btn"
+          [class]="{
+            'transform-left': i === 0,
+            'transform-right': i === 1
+          }"
+          (click)="toBoard()" (mouseenter)="card.isHovered = true" (mouseleave)="card.isHovered = false;">
             <span class="sum-icon">
               <img [src]="card.isHovered ? card.iconHovered: card.icon" alt="icon edit">
               <div class="task-count">
@@ -23,7 +28,8 @@
       </section>
 
       <section class="summary-row">
-        <div class="summary-btn transform-bottom" (click)="toBoard()">
+
+        <!-- <div class="summary-btn transform-bottom" (click)="toBoard()">
           <span class="sum-icon">
             <img src="./assets/icons/kanban/prio_urgent_white.svg" alt="" [style.backgroundColor]="'#FF3D00'">
             <div class="task-count">
@@ -31,19 +37,41 @@
               <p>Urgent</p>
             </div>
           </span>
-          <p>|</p>
+          <span class="v-line-white"></span>
           <span class="sum-icon">
-            <div>
-              <p>{{ today }}</p>
+            <div class="task-count-sum-icon">
+              <p class="date-text">Dezember 16, 2025</p>
               <p>Upcoming Deadline</p>
             </div>
           </span>
+        </div> -->
+
+        <div class="summary-btn transform-bottom" (click)="toBoard()">
+          <div class="summary-middle-box">
+            <div class="left-half-summary-box">
+              <img src="./assets/icons/kanban/prio_urgent_white.svg" alt="" [style.backgroundColor]="'#FF3D00'">
+              <div class="task-count">
+                <h5>{{ urgentTasksCount() }}</h5>
+                <p>Urgent</p>
+              </div>
+            </div>
+
+            <div class="v-line-white"></div>
+
+            <div class="right-half-summary-box">
+              <p class="date-text">{{ today }}</p>
+              <!-- <p class="date-text">Dezember 24, 2025</p> -->
+              <p>Upcoming Deadline</p>
+            </div>
+          </div>
         </div>
+
+
       </section>
 
       <section class="summary-row">
         @for (category of taskOverviewBottom; track category;let i = $index) {
-        <div class="summary-btn" [ngClass]="{
+        <div class="summary-btn" [class]="{
             'transform-left': i === 0,
             'transform-center': i === 1,
             'transform-right': i === 2
@@ -60,7 +88,6 @@
     <aside class="summary-welcome">
       <h4>
         <p class="timeText">{{ textChangeTime() }},<br>
-          <!-- //TODO: Add user name with firebase in the TS -->
           <span class="user-name">{{ userName }}</span>
         </p>
 

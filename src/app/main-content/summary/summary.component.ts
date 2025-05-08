@@ -19,10 +19,10 @@ export class SummaryComponent {
   taskOverviewBottom: { text: string; taskCount: number }[] = [];
   userName: string | null = null;
 
-  taskOverviewTop: { 
+  taskOverviewTop: {
     type:string;
-    text: string; 
-    icon: string; 
+    text: string;
+    icon: string;
     iconHovered: string;
     isHovered: boolean
   }[] = [
@@ -89,7 +89,9 @@ export class SummaryComponent {
   tasksByPriority(priorityInput: string): number {
     return this.tasksService.tasks.filter(task => task.priority === priorityInput).length;
   }
-  today: string = new Date().toISOString().split('T')[0]
+
+  today: string = this.formatDate(new Date())!;
+  // today: string = new Date().toISOString().split('T')[0]
 
   urgentTasksCount() {
     const urgentTasksToday = this.tasksService.tasks.filter(task =>
@@ -99,9 +101,21 @@ export class SummaryComponent {
     return urgentTasksToday.length;
   }
 
+  // formatDate(date: Date | null): string | null {
+  //   return date ? date.toISOString().split('T')[0] : null;
+  // }
+
+  //FIXME: Date name full show Octotber XX, XXXX
+
   formatDate(date: Date | null): string | null {
-    return date ? date.toISOString().split('T')[0] : null;
+    if (!date) return null;
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }).format(date);
   }
+
 
   textChangeTime(): string {
     const hour = new Date().getHours();

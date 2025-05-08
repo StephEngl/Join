@@ -3,6 +3,36 @@
 
 //TODO: add more style in media queries for mobile and tablet
 
+
+
+.summary-middle-box {
+    @include dFlex($jc: space-around, $ai: center, $gap: 16px);
+    width: 100%;
+    padding: 0 45px;
+}
+
+.left-half-summary-box {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+
+    img {
+        background-color: $col-bg-secondary;
+        border-radius: 50%;
+        height: 55px;
+        width: 55px;
+        padding: 8px;
+        object-fit: contain;
+    }
+}
+
+.right-half-summary-box {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    // white-space: nowrap; blockiert responsive -.-
+}
+
 .summary-main {
     position: relative;
     max-width: calc($appMaxWidth - $navbar-width);
@@ -14,6 +44,10 @@
     @include dFlex(flex-start, center);
 }
 
+.v-line-white {
+    @include vLineWhiteBlack()
+}
+
 .v-line {
     @include vLine();
 }
@@ -23,7 +57,7 @@
 }
 
 .summary-section {
-    @include dFlex(flex-start, center, 40px);
+    @include dFlex(flex-start, center, 55px);
     margin-top: 40px;
 }
 
@@ -31,7 +65,8 @@
     @include dFlex(center, space-between, 25px);
     flex-direction: column;
     flex: 2;
-    max-width: 560px;
+    max-width: 500px;
+    max-height: 502px
 }
 
 .summary-row {
@@ -42,7 +77,6 @@
 .sum-icon {
     @include dFlex(center, center, 10px);
     flex: 1;
-    padding: 20px;
 
     >img {
         background-color: $col-bg-secondary;
@@ -54,24 +88,24 @@
         object-fit: contain;
         overflow: visible;
     }
+
 }
 
-// für was?
-// .transform-right {
-//     transform-origin: right center;
-// }
+.transform-right {
+    transform-origin: right center;
+}
 
-// .transform-left {
-//     transform-origin: left center;
-// }
+.transform-left {
+    transform-origin: left center;
+}
 
-// .transform-center {
-//     transform-origin: center center;
-// }
+.transform-center {
+    transform-origin: center center;
+}
 
-// .transform-bottom {
-//     transform-origin: left top;
-// }
+.transform-bottom {
+    transform-origin: left top;
+}
 
 .summary-btn {
     flex: 1;
@@ -79,7 +113,7 @@
     border-radius: 30px;
     background-color: white;
     height: 100%;
-    box-shadow: 0px 0px 10px $col-shadow-black;
+    box-shadow: 0px 0px 5px $col-shadow-black;
     transition: transform 0.2s ease, background-color 0.3s ease;
 
     &:hover {
@@ -97,10 +131,20 @@
                 background-color: white;
             }
         }
+
+        .right-half-summary-box {
+            color: white;
+        }
     }
 }
 
-.timeText{
+.date-text {
+    font-size: 21px;
+    line-height: 120%;
+    font-weight: 700;
+}
+
+.timeText {
     font-size: 35px;
     line-height: 120%;
 }
@@ -137,11 +181,7 @@
 
 @media screen and (max-width: 1000px) {
 
-    // .summary-btn {
-
-    // }
-
-    .summary-main{
+    .summary-main {
         padding: 20px 20px 0 20px;
     }
 
