@@ -1,17 +1,11 @@
-@import "../../../assets/styles/mixins.scss";
-@import "../../../assets/styles/variables.scss";
-@import "../../../assets/fonts/fonts.scss";
-
-
 .sign-up-dialog-section {
-    @include dFlex($jc: center, $ai: center, $gap: 1rem);
-
-}
-
-
-
-@media (min-width: 1920px) {
-    .sign-up-section {
-        margin-left: calc( $appMaxWidth - 100vw );
-    }
+    /* Outer wrapper for the dialog container */
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 32px;
+    background-color: white;
+    border-radius: 12px;
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
 }

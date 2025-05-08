@@ -7,6 +7,7 @@ import { PrivacyPolicyComponent } from './main-content/privacy-policy/privacy-po
 import { AddTaskComponent } from './main-content/add-task/add-task.component';
 import { BoardComponent } from './main-content/board/board.component';
 import { LoginComponent } from './login/login.component';
+import { SignUpDialogComponent } from './login/sign-up-dialog/sign-up-dialog.component';
 
 export const routes: Routes = [
     { path: '', component: LoginComponent },
@@ -15,6 +16,7 @@ export const routes: Routes = [
     { path: 'addtask', component: AddTaskComponent },
     { path: 'board', component: BoardComponent },
     { path: 'help', component: HelpComponent },
+    { path: 'sign-up', component: SignUpDialogComponent },
     { path: 'legal-notice', component: LegalNoticeComponent },
     { path: 'privacy-policy', component: PrivacyPolicyComponent }
 ];
