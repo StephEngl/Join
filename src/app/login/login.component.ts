@@ -19,6 +19,7 @@ export class LoginComponent {
   position: string = "50%";
   loginBackgroundColor: string = "";
   loginLogoImgSrc: string = "./assets/icons/header/logo.svg";
+  startAnimationTrigger: boolean = false;
 
   constructor(private router: Router) {}
 
@@ -26,7 +27,6 @@ export class LoginComponent {
     this.startAnimation();
   }
 
-  startAnimationTrigger = false;
 
   startAnimation() {
     if (this.signalService.isMobile()) {

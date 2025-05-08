@@ -16,7 +16,7 @@ app-login-dialog,
 .background-animated {
     pointer-events: none;
     z-index: 3;
-    transition:all 1s linear !important;
+    transition:all 1s linear;
 }
 
 .logo-animated {
@@ -27,8 +27,8 @@ app-login-dialog,
     width: 310px;
     height: 310px;
     transform: translate(-50%, -50%) scale(1);
-    transition: transform 1s ease, width 1s ease, height 1s ease;
-    z-index: 56;
+    transition: all 1s ease;
+    z-index: 4;
 
     &.animate {
         width: 120px;
@@ -37,6 +37,7 @@ app-login-dialog,
     }
 }
 
+// will be deleted after sprint is done // auth implemented
 .temp-to-main {
     position: absolute;
     bottom: 8vh;
