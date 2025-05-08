@@ -68,11 +68,11 @@
         class="login-button"
         type="submit"
         [disabled]="!email.valid || !password.valid"
-        (click)="testLogin()"
+        (click)="testLogin(this.emailInput, this.passwordInput)"
       >
         Log in
       </button>
-      <button class="guest-button">Guest Log In</button>
+      <button class="guest-button" (click)="adminLogin('admin@join.com', 'joinadmin')">Guest Log In</button>
     </div>
   </form>
 </section>

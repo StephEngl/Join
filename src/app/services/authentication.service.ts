@@ -83,8 +83,8 @@ export class AuthenticationService {
   checkAuthStatus() {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
-        this.isAuthenticated.set(true);
-        this.router.navigate(['/summary']);
+        this.isAuthenticated.set(true); 
+        this.router.navigate(['/summary']); // after refresh to summary
       } else {
         this.isAuthenticated.set(false);
       }

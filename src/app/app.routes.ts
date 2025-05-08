@@ -55,12 +55,7 @@ export const routes: Routes = [
             ),
         canActivate: [AuthGuard],
     },
-    {
-        path: 'help',
-        loadComponent: () =>
-            import('./main-content/help/help.component').then((m) => m.HelpComponent),
-        canActivate: [AuthGuard],
-    },
+    { path: 'help', component: HelpComponent },
     { path: 'legal-notice', component: LegalNoticeComponent },
     { path: 'privacy-policy', component: PrivacyPolicyComponent },
     {

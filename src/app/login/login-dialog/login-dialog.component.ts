@@ -35,10 +35,10 @@ export class LoginDialogComponent {
     }
   }
 
-  async testLogin() {
+  async testLogin(mail: string, password: string) {
     try {
       this.noUserFound = false;
-      await this.authService.signInUser(this.emailInput, this.passwordInput);
+      await this.authService.signInUser(mail, password);
       console.log('Login erfolgreich');
     } catch (error) {
       this.noUserFound = true;
@@ -48,4 +48,10 @@ export class LoginDialogComponent {
       console.error('Login fehlgeschlagen:', error);
     }
   }
+
+  async adminLogin(mail: string, password: string) {
+    this.noUserFound = false;
+    await this.authService.signInUser(mail, password);
+  }
+
 }
