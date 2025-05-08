@@ -1,7 +1,7 @@
 @import './colors.scss';
 @import './variables.scss';
 
-@mixin dFlex($jc, $ai, $gap: 0px, $position: relative) {
+@mixin dFlex($jc:center, $ai:center, $gap: 0px, $position: relative) {
     display: flex;
     justify-content: $jc;
     align-items: $ai;
