@@ -1,13 +1,15 @@
-import { Injectable, signal } from '@angular/core';
+import { Injectable, signal, inject } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { Router } from '@angular/router';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, updateProfile, onAuthStateChanged, signOut } from "@angular/fire/auth";
+import { SignalsService } from './signals.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   isAuthenticated = signal<boolean>(false);
+  signalService = inject(SignalsService);
   private auth: Auth;
 
   constructor(private router: Router) {
@@ -72,6 +74,7 @@ export class AuthenticationService {
       await signOut(this.auth);
       this.isAuthenticated.set(false);
       this.router.navigate(['/login']);
+      this.signalService.hideHrefs.set(false);
     } catch (error) {
       console.error('Sign out error:', error);
     }

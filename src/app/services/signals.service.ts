@@ -15,7 +15,7 @@ export class SignalsService {
   formCleared = signal<boolean>(false);
   titleCleared = signal<boolean>(false);
   dateCleared = signal<boolean>(false);
-  dummyAuthStatus = signal<boolean>(false);
+  hideHrefs = signal<boolean>(false);
 
 
   checkScreenSize() {

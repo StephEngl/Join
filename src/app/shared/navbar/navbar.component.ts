@@ -3,6 +3,7 @@ import { Router, NavigationEnd, RouterLink } from '@angular/router';
 import { filter } from 'rxjs/operators';
 import { NavbarIconLinkComponent } from './navbar-icon-link/navbar-icon-link.component';
 import { SignalsService } from '../../services/signals.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
     selector: 'app-navbar',
@@ -14,6 +15,7 @@ import { SignalsService } from '../../services/signals.service';
 export class NavbarComponent {
     activeLink: string = '';
     signalService = inject(SignalsService);
+    authService = inject(AuthenticationService);
 
     links = [
         {
@@ -63,5 +65,14 @@ export class NavbarComponent {
         }
         this.activeLink = route;
     }
+
+    toSummary() {
+        this.router.navigate(['/summary']);
+    };
+
+    backToLogin() {
+        this.signalService.hideHrefs.set(false);
+        this.router.navigate(['login']);
+    };
 
 }
