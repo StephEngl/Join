@@ -2,6 +2,7 @@ import { Component, HostListener, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SignalsService } from '../../services/signals.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-header',
@@ -19,6 +20,8 @@ export class HeaderComponent {
   showLogoutPopup = false;
   logoutPopupVisible = false;
   isWideScreen = window.innerWidth > 1920;
+
+  constructor(private router: Router) {}
 
   @HostListener('window:resize', ['$event'])
   onResize(event: any) {
@@ -86,4 +89,13 @@ export class HeaderComponent {
     this.authService.signOutUser();
     this.showLogoutPopup = false;
   }
+
+  toSummary() {
+    this.router.navigate(['/summary']);
+  };
+
+  backToLogin() {
+    this.signalService.hideHrefs.set(false);
+    this.router.navigate(['login']);
+  };
 }
