@@ -58,6 +58,7 @@ app-login-dialog {
         border-radius: 8px;
         color: white;
         background-color: $col-ref-active-nav;
+        z-index: 1000;
     }
 }
 
@@ -71,6 +72,7 @@ app-login-dialog {
         color: $col-font-inactive;
     }
 }
+
 
 // Media Queries
 @media screen and (max-width:360px) {

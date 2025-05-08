@@ -1,31 +1,41 @@
 <p>sign-up works!</p>
 <div class="sign-up-section">
     <div class="sign-up-header">
-        <div class="sign-up-header-left">
-            <div class="sign-up-arrow">
-            </div>
-        </div>
+        <div class="sign-up-header-left"><div class="sign-up-arrow"></div></div>
         <div class="sign-up-header-middle">
-            <div class="sign-up-header-txt">
-                <h2>Sign up</h2>
-            </div>
-            <div class="sign-up-header-underline">
-            </div>
+            <div class="sign-up-header-txt"><h2>Sign up</h2></div>
+            <div class="sign-up-header-underline"></div>
         </div>
-        <div class="sign-up-header-right">
-        </div>
+        <div class="sign-up-header-right"></div>
     </div>
+
     <div class="sign-up-content">
         <div class="sign-up-form-and-accept-container">
-            <div class="sign-up-form-container">
-            </div>
-            <div class="sign-up-accept-container">
-            </div>
+            <form [formGroup]="signUpForm" (ngSubmit)="onSignUp()">
+                <div class="sign-up-form-container">
+                    <div class="form-field"><input type="text" formControlName="name" placeholder="Name" /><span class="form-icon">👤</span></div>
+                    <div class="form-field"><input type="email" formControlName="email" placeholder="E-Mail" /><span class="form-icon">📧</span></div>
+                    <div class="form-field"><input [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Password" /><span class="form-icon clickable" (click)="hidePassword = !hidePassword">{{ hidePassword ? '🙈' : '👁️' }}</span></div>
+                    <div class="form-field">
+                        <input [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirm Password" />
+                        <span class="form-icon clickable" (click)="hideConfirmPassword = !hideConfirmPassword">{{ hideConfirmPassword ? '🙈' : '👁️' }}</span>
+                        <div class="error-message" *ngIf="signUpForm.hasError('passwordMismatch') && signUpForm.get('confirmPassword')?.touched">Passwords do not match.</div>
+                    </div>
+                    <div class="error-message" *ngIf="signUpErrorMessage">{{ signUpErrorMessage }}</div>
+                </div>
+
+                <div class="sign-up-accept-container">
+                    <label class="custom-checkbox">
+                        <input type="checkbox" [checked]="acceptPolicy" (change)="acceptPolicy = !acceptPolicy" />
+                        <span class="checkmark"></span>
+                        I accept the <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>.
+                    </label>
+                </div>
+
+                <div class="sign-up-footer">
+                    <button class="sign-up-button" type="submit" [disabled]="!acceptPolicy">Sign up</button>
+                </div>
+            </form>
         </div>
-    </div>
-    <div class="sign-up-footer">
-        <button class="sign-up-button">
-            Sign up
-        </button>
     </div>
 </div>
