@@ -1,21 +1,39 @@
 import { Injectable } from '@angular/core';
 import { initializeApp } from "firebase/app";
+import { Router } from '@angular/router';
 import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, updateProfile, onAuthStateChanged, signOut } from "@angular/fire/auth";
 
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
-
+  isAuthenticated: boolean = false;
   private auth: Auth;
 
-  constructor() {
+  constructor(private router: Router) {
     this.auth = getAuth();
   }
+
+  // start test functions
+  login(): void {
+    this.isAuthenticated = true;
+    this.router.navigate(['/summary']);
+  }
+
+  logout(): void {
+    this.isAuthenticated = false;
+    this.router.navigate(['/login']);
+  }
+
+  isLoggedIn(): boolean {
+    return this.isAuthenticated;
+  }
+  // end test functions
 
   async signInUser(email: string, password: string): Promise<any> {
     try {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+      this.isAuthenticated = true;
       return userCredential.user;
     } catch (error) {
       throw error;
@@ -50,6 +68,7 @@ export class AuthenticationService {
   async signOutUser(): Promise<void> {
     try {
       await signOut(this.auth);
+      this.isAuthenticated = false;
     } catch (error) {
       console.error('Sign out error:', error);
     }

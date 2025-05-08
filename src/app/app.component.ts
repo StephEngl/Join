@@ -6,6 +6,7 @@ import { DailyResetService } from './services/daily-reset.service';
 import { ToastComponent } from './shared/toast/toast.component';
 import { LoginComponent } from './login/login.component';
 import { SignalsService } from './services/signals.service';
+import { AuthenticationService } from './services/authentication.service';
 
 @Component({
   selector: 'app-root',
@@ -18,6 +19,7 @@ export class AppComponent {
   title = 'join';
   dailyReset = inject(DailyResetService);
   signalService = inject(SignalsService);
+  authService = inject(AuthenticationService);
 
 
   constructor() {
@@ -26,8 +28,5 @@ export class AppComponent {
     }, 1000);
   }
   
-  ngOnInit() {
-    this.signalService.dummyAuthStatus.set(false); // toggle to see main (true) / login (false)
-  }
 
 }

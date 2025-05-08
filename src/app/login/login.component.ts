@@ -3,6 +3,7 @@ import { Router } from '@angular/router';
 import { SignalsService } from '../services/signals.service';
 import { LoginDialogComponent } from './login-dialog/login-dialog.component';
 import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component';
+import { AuthenticationService } from '../services/authentication.service';
 
 @Component({
   selector: 'app-login',
@@ -14,6 +15,7 @@ import { SignUpDialogComponent } from './sign-up-dialog/sign-up-dialog.component
 export class LoginComponent {
   
   signalService = inject(SignalsService);
+  authService = inject(AuthenticationService);
   loginLogoHeight: string = "100%";
   loginLogoWidth: string = "100%";
   position: string = "50%";
@@ -44,8 +46,7 @@ export class LoginComponent {
   }
 
   toMain() {
-      this.signalService.dummyAuthStatus.set(true);
-      this.router.navigate(['/summary']);
+    this.authService.login();
   }
 
   toPrivacyPolicy() {

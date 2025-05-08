@@ -1,11 +1,14 @@
 
-@if (signalService.dummyAuthStatus()) {
+
   <div class="page-content">
-  
+    @if (authService.isLoggedIn()) {
     <app-navbar></app-navbar>
+    }
   
     <div class="header-content">
+      @if (authService.isLoggedIn()) {
       <app-header></app-header>
+      }
       <router-outlet />
     </div>
   
@@ -19,6 +22,3 @@
     <img src="./assets/icons/general/mobile.png" class="rotate-phone">
   </div>
   
-} @else {
-  <app-login></app-login>
-}
