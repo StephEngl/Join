@@ -8,14 +8,12 @@
   height: 450px;
   border-radius: 30px;
   padding: 0 120px;
-  @include dFlex($ai: center, $jc: center, $gap: 36px);
+  @include dFlex($gap: 36px);
   flex-direction: column;
   background-color: white;
 
   .title-wrapper {
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    @include dFlex();
     flex-direction: column;
 
     .login-underline {
@@ -30,8 +28,7 @@
 .form-login {
   width: 100%;
   max-width: 440px;
-  display: flex;
-  gap: 32px;
+  @include dFlex($gap: 32px);
   flex-direction: column;
 
   .mail-input-wrapper,
@@ -45,7 +42,8 @@
       top: 12px;
     }
 
-    input[type="text"] {
+    input[type="text"],
+    input[type="password"] {
       width: 100%;
       border: 1px solid $col-font-grey;
       border-radius: 10px;
@@ -72,17 +70,20 @@
       }
     }
   }
+
+  .error-message {
+    margin-top: -25px;
+    color: #e44c36;
+    font-size: 12px;
+  }
 }
 
 .login-button-wrapper {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  gap: 36px;
+  @include dFlex($gap: 36px);
 
   .login-button,
   .guest-button {
-    @include dFlex($ai: center, $jc: space-between, $gap: 4px);
+    @include dFlex($jc: space-between, $gap: 4px);
     font-size: 21px;
     font-weight: 700;
     padding: 12px 24px;
@@ -108,6 +109,11 @@
     &:hover {
       background-color: $col-ref-highlight;
       filter: drop-shadow(2px 4px 4px #a8a8a8);
+    }
+
+    &:disabled {
+      pointer-events: none;
+      background-color: $col-font-inactive;
     }
   }
 }
