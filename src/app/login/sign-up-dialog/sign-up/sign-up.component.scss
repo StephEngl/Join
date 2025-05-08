@@ -7,102 +7,109 @@
     width: 600px;
     height: auto;
     @include dFlex($jc: center, $ai: center, $gap: 1rem);
+    background-color: $col-font-secondary;
 
+    
+    .sign-up-header {
+        width: 100%;
+        height: auto;
+        @include dFlex($jc: space-between, $ai: center, $gap: 1rem);
+
+        
+        .sign-up-header-left {
+            width: 10%;
+            height: auto;
+            @include dFlex($jc: center, $ai: center);
+
+            
+            .sign-up-arrow {
+                width: 22px;
+                height: auto;
+                background-image: url('./assets/icons/sign-up/sign-up-arrow.svg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+
+                
+                &:hover {
+                    @include btn($bg: $col-bg-secondary, $color: $col-font-secondary);
+                    background-image: url('./assets/icons/sign-up/sign-up-arrow-active.svg');
+                }
+            }
+        }
+
+        
+        .sign-up-header-middle {
+            width: 80%;
+            height: auto;
+            @include dFlex($jc: center, $ai: center);
+
+            
+            .sign-up-header-txt {
+                @include dFlex($jc: center, $ai: center);
+            }
+
+            
+            .sign-up-header-underline {
+                width: 150px;
+                height: 2px;
+                background-color: $col-ref-highlight;
+            }
+        }
+
+        
+        .sign-up-header-right {
+            width: 10%;
+            height: auto;
+            @include dFlex($jc: center, $ai: center);
+        }
+    }
+
+    
+    .sign-up-content {
+        width: 100%;
+        height: auto;
+        @include dFlex($jc: center, $ai: center, $gap: 1rem);
+
+        
+        .sign-up-form-and-accept-container {
+            width: 100%;
+            height: auto;
+            @include dFlex($jc: center, $ai: center);
+
+            
+            .sign-up-form-container {
+                width: 100%;
+                height: auto;
+                @include dFlex($jc: center, $ai: center);
+            }
+
+            
+            .sign-up-accept-container {
+                width: 100%;
+                height: auto;
+                @include dFlex($jc: center, $ai: center);
+            }
+        }
+    }
+
+    
+    .sign-up-footer {
+        width: 100%;
+        height: auto;
+        @include dFlex($jc: center, $ai: center, $gap: 1rem);
+
+        
+        .sign-up-button {
+            @include dFlex($jc: center, $ai: center);
+            @include btn($bg: $col-bg-secondary, $color: $col-font-secondary);
+        }
+    }
 }
 
-.sign-up-header {
-    width: 100%;
-    height: auto;
-    @include dFlex($jc: center, $ai: center, $gap: 1rem);
-
-}
-
-.sign-up-header-left {
-    width: 100%;
-    height: auto;
-    @include dFlex($jc: center, $ai: center);
-
-}
-
-.sign-up-arrow {
-    background-image: url('./assets/icons/sign-up/sign-up-arrow.svg');
-    background-repeat: no-repeat;
-    background-size: contain;
-    background-position: center;
-
-}
-
-.sign-up-arrow:hover {
-    background-image: url('./assets/icons/sign-up/sign-up-arrow-active.svg');
-
-}
-
-.sign-up-header-middle {
-    width: 100%;
-    height: auto;
-    @include dFlex($jc: center, $ai: center);
-
-}
-
-.sign-up-header-txt {
-    @include dFlex($jc: center, $ai: center);
-}
-
-.sign-up-header-underline {
-    width: 150px;
-    height: 2px;
-    background-color: $col-ref-highlight;
-}
-
-.sign-up-header-right {
-    width: 100%;
-    height: auto;
-    @include dFlex($jc: center, $ai: center);
-
-}
-
-.sign-up-content {
-    width: 100%;
-    height: auto;
-    @include dFlex($jc: center, $ai: center, $gap: 1rem);
-
-}
-
-.sign-up-form-and-accept-container {
-    width: 100%;
-    height: auto;
-    @include dFlex($jc: center, $ai: center);
-
-}
-
-.sign-up-form-container {
-    width: 100%;
-    height: auto;
-    @include dFlex($jc: center, $ai: center);
-}
-
-.sign-up-accept-container {
-    width: 100%;
-    height: auto;
-    @include dFlex($jc: center, $ai: center);
-
-}
-
-.sign-up-footer {
-    width: 100%;
-    height: auto;
-    @include dFlex($jc: center, $ai: center, $gap: 1rem);
-
-}
-
-.sign-up-button {
-    @include dFlex($jc: center, $ai: center);
-    @include btn($bg: $col-bg-secondary, $color: $col-font-secondary)
-
-}
 
 @media (min-width: 1920px) {
     .sign-up-section {
-        margin-left: calc( $appMaxWidth - 100vw );
+        margin-left: calc($appMaxWidth - 100vw);
     }
 }
