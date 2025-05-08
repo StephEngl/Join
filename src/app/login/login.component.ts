@@ -22,7 +22,7 @@ export class LoginComponent {
 
   toMain() {
     this.signalService.dummyAuthStatus.set(true);
-    this.router.navigate(['/summary']);
+    this.router.navigate(['/summary']); //createUrlTree: hat rückgabewert vs. navigate:<void> kein Rückgabewert
   }
 
   ngOnInit() {
