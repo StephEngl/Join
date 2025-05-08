@@ -3,7 +3,6 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { UserInterface } from '../../interfaces/user.interface';
 import { AuthenticationService } from '../../services/authentication.service';
 
-
 @Component({
   selector: 'app-login-dialog',
   standalone: true,
@@ -15,8 +14,9 @@ export class LoginDialogComponent {
   authService = inject(AuthenticationService);
   formSubmitted = false;
   passwordVisible: Boolean = false;
-  emailTemp: string = "";
-  passwordTemp: string = "";
+  emailInput: string = '';
+  passwordInput: string = '';
+  noUserFound: Boolean = false;
 
   loginData: UserInterface = {
     email: '',
@@ -37,9 +37,14 @@ export class LoginDialogComponent {
 
   async testLogin() {
     try {
-      await this.authService.signInUser(this.emailTemp, this.passwordTemp);
+      this.noUserFound = false;
+      await this.authService.signInUser(this.emailInput, this.passwordInput);
       console.log('Login erfolgreich');
     } catch (error) {
+      this.noUserFound = true;
+      setTimeout(() => {
+        this.noUserFound = false;
+      }, 5000);
       console.error('Login fehlgeschlagen:', error);
     }
   }

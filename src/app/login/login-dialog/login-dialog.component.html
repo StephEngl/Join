@@ -11,7 +11,7 @@
     <div class="mail-input-wrapper">
       <input
         #email="ngModel"
-        [(ngModel)]="emailTemp"
+        [(ngModel)]="emailInput"
         type="text"
         class="input"
         id="mail"
@@ -30,7 +30,7 @@
     <div class="password-input-wrapper">
       <input
         #password="ngModel"
-        [(ngModel)]="passwordTemp"
+        [(ngModel)]="passwordInput"
         [type]="passwordVisible ? 'text' : 'password'"
         class="input"
         id="password"
@@ -57,7 +57,7 @@
       }
     </div>
 
-    @if (formSubmitted && (!email.valid || !password.valid)) {
+    @if ((formSubmitted && (!email.valid || !password.valid)) || noUserFound) {
     <span class="error-message"
       >Check your email and password. Please try again.</span>
     } @else 
