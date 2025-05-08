@@ -35,24 +35,40 @@ export class SignUpComponent {
 
     async submitSignUp(): Promise<void> {
         this.signUpErrorMessage = null;
-
+    
+        /* Prevent submission if form is invalid or checkbox not checked */
         if (!this.acceptPolicy || this.signUpForm.invalid) {
             this.signUpForm.markAllAsTouched();
+    
+            /* Check which part of the form is invalid and show a matching error */
+            if (this.signUpForm.get('name')?.invalid) {
+                this.signUpErrorMessage = 'Please enter your name.';
+            } else if (this.signUpForm.get('email')?.invalid) {
+                this.signUpErrorMessage = 'Please enter a valid email address.';
+            } else if (this.signUpForm.get('password')?.invalid) {
+                this.signUpErrorMessage = 'Password must be at least 8 characters long.';
+            } else if (this.signUpForm.hasError('passwordMismatch')) {
+                this.signUpErrorMessage = 'Passwords do not match.';
+            } else if (!this.acceptPolicy) {
+                this.signUpErrorMessage = 'Please accept the Privacy Policy.';
+            } else {
+                this.signUpErrorMessage = 'Please check your input.';
+            }
+    
             return;
         }
-
+    
         const { email, password } = this.signUpForm.value;
         try {
             const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
             await sendEmailVerification(userCredential.user);
-
-            /* Replaced alert with snackbar */
-            this.snackBar.open('Sign up was successful', 'OK', { duration: 3000 }); /* Toast instead of alert */
+            this.snackBar.open('Sign up was successful', 'OK', { duration: 3000 });
             this.signUpSuccess.emit();
         } catch (error: any) {
             this.signUpErrorMessage = this.getFirebaseErrorMessage(error);
         }
     }
+    
 
     passwordMatchValidator(form: AbstractControl): ValidationErrors | null {
         const p = form.get('password')?.value, c = form.get('confirmPassword')?.value;
@@ -65,9 +81,4 @@ export class SignUpComponent {
         if (error.code === 'auth/weak-password') return 'The password is too weak (minimum 6 characters).';
         return 'Registration failed. Please try again later.';
     }
-
-    // /* This method was used previously but is no longer needed */
-    // private onSignUpSuccess(): void {
-    //     console.log('Sign-up successful');
-    // }
 }
