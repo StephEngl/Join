@@ -1,18 +1,20 @@
 <div class="navbar-section-desktop">
-    <div class="navbar-icon-container">
-        <a routerLink="/"><img class="image" src="assets/icons/navbar/logo.svg" alt=""></a>
+    <div class="navbar-icon-container" (click)="authService.isLoggedIn() ? toSummary() : backToLogin() ">
+        <a><img class="image" src="assets/icons/navbar/logo.svg" alt=""></a>
     </div>
     <div class="navbar-components-container">
         <div class="links-alignement">
-            @for (link of links; track link.route) {
-                <app-navbar-icon-link
-                    [iconUnclicked]="link.iconUnclicked"
-                    [iconClicked]="link.iconClicked"
-                    [route]="link.route"
-                    [alt]="link.alt"
-                    [isActive]="activeLink === link.route"
-                    (activate)="setActiveLink(link.route)">
-                </app-navbar-icon-link>
+            @if (!signalService.hideHrefs() && authService.isLoggedIn()) {
+                @for (link of links; track link.route) {
+                    <app-navbar-icon-link
+                        [iconUnclicked]="link.iconUnclicked"
+                        [iconClicked]="link.iconClicked"
+                        [route]="link.route"
+                        [alt]="link.alt"
+                        [isActive]="activeLink === link.route"
+                        (activate)="setActiveLink(link.route)">
+                    </app-navbar-icon-link>
+                }
             }
         </div>
     </div>
@@ -33,16 +35,18 @@
     <div class="navbar-mobile-components-container">
         <div class="links-mobile-alignement">
             <div class="navbar-links-mobile">
-                @for (link of links; track link.route) {
-                    <app-navbar-icon-link
-                        [iconUnclicked]="link.iconUnclicked"
-                        [iconClicked]="link.iconClicked"
-                        [route]="link.route"
-                        [alt]="link.alt"
-                        [isActive]="activeLink === link.route"
-                        (activate)="setActiveLink(link.route)"
-                    >
-                    </app-navbar-icon-link>
+                @if (!signalService.hideHrefs() && authService.isLoggedIn()) {
+                    @for (link of links; track link.route) {
+                        <app-navbar-icon-link
+                            [iconUnclicked]="link.iconUnclicked"
+                            [iconClicked]="link.iconClicked"
+                            [route]="link.route"
+                            [alt]="link.alt"
+                            [isActive]="activeLink === link.route"
+                            (activate)="setActiveLink(link.route)"
+                        >
+                        </app-navbar-icon-link>
+                    }
                 }
             </div>
             <div class="privacy-and-legal-mobile">

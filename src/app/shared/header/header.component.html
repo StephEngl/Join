@@ -17,7 +17,9 @@
         <a (click)="toggleDropdown()" routerLink="/privacy-policy"
           >Privacy Policy</a
         >
-        <p (click)="toggleDropdown(); logout()">Log out</p>
+        @if(authService.isLoggedIn()) {
+          <p (click)="toggleDropdown(); logout()">Log out</p>
+        }
       </div>
     </div>
 

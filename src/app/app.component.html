@@ -1,12 +1,12 @@
 
 
   <div class="page-content">
-    @if (authService.isLoggedIn()) {
+    @if (authService.isLoggedIn() || signalService.hideHrefs()) {
     <app-navbar></app-navbar>
     }
   
     <div class="header-content">
-      @if (authService.isLoggedIn()) {
+      @if (authService.isLoggedIn() || signalService.hideHrefs()) {
       <app-header></app-header>
       }
       <router-outlet />

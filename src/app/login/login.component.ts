@@ -61,17 +61,17 @@ export class LoginComponent {
   // }
 
   toPrivacyPolicy() {
-      this.signalService.dummyAuthStatus.set(true);
+      this.signalService.hideHrefs.set(true);
       this.router.navigate(['/privacy-policy']);
   }
 
   toLegalNotice() {
-      this.signalService.dummyAuthStatus.set(true);
+      this.signalService.hideHrefs.set(true);
       this.router.navigate(['/legal-notice']);
   }
 
   toSignUp() {
-      this.signalService.dummyAuthStatus.set(true);
+      this.signalService.hideHrefs.set(true);
       this.router.navigate(['/sign-up']);
   }
 }

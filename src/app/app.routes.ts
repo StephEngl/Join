@@ -61,20 +61,8 @@ export const routes: Routes = [
             import('./main-content/help/help.component').then((m) => m.HelpComponent),
         canActivate: [AuthGuard],
     },
-    {
-        path: 'legal-notice',
-        loadComponent: () =>
-            import('./main-content/legal-notice/legal-notice.component').then(
-            (m) => m.LegalNoticeComponent
-            ),
-    },
-    {
-        path: 'privacy-policy',
-        loadComponent: () =>
-            import('./main-content/privacy-policy/privacy-policy.component').then(
-            (m) => m.PrivacyPolicyComponent
-            ),
-    },
+    { path: 'legal-notice', component: LegalNoticeComponent },
+    { path: 'privacy-policy', component: PrivacyPolicyComponent },
     {
         path: '',
         redirectTo: 'login',
