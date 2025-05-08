@@ -96,6 +96,10 @@
                             margin-top: 4px;
                             padding-left: 4px;
                         }
+
+                        &.invalid input {
+                            border-color: red;
+                        }
                     }
                 }
 

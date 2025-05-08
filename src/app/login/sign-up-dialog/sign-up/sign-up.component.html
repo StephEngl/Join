@@ -11,20 +11,30 @@
 
     <div class="sign-up-content">
         <div class="sign-up-form-and-accept-container">
-            <!-- Updated: (ngSubmit) now calls submitSignUp() -->
             <form [formGroup]="signUpForm" (ngSubmit)="submitSignUp()">
                 <div class="sign-up-form-container">
-                    <div class="form-field"><input type="text" formControlName="name" placeholder="Name" /><span class="form-icon">👤</span></div>
-                    <div class="form-field"><input type="email" formControlName="email" placeholder="E-Mail" /><span class="form-icon">📧</span></div>
-                    <div class="form-field">
+                    <!-- Add dynamic invalid styling via [ngClass] -->
+                    <div class="form-field" [ngClass]="{'invalid': signUpForm.get('name')?.invalid && signUpForm.get('name')?.touched}">
+                        <input type="text" formControlName="name" placeholder="Name" />
+                        <span class="form-icon">👤</span>
+                    </div>
+
+                    <div class="form-field" [ngClass]="{'invalid': signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched}">
+                        <input type="email" formControlName="email" placeholder="E-Mail" />
+                        <span class="form-icon">📧</span>
+                    </div>
+
+                    <div class="form-field" [ngClass]="{'invalid': signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched}">
                         <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Password" />
                         <span class="form-icon clickable" (click)="hidePassword = !hidePassword">{{ hidePassword ? '🙈' : '👁️' }}</span>
                     </div>
-                    <div class="form-field">
+
+                    <div class="form-field" [ngClass]="{'invalid': signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched}">
                         <input [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirm Password" />
                         <span class="form-icon clickable" (click)="hideConfirmPassword = !hideConfirmPassword">{{ hideConfirmPassword ? '🙈' : '👁️' }}</span>
                         <div class="error-message" *ngIf="signUpForm.hasError('passwordMismatch') && signUpForm.get('confirmPassword')?.touched">Passwords do not match.</div>
                     </div>
+
                     <div class="error-message" *ngIf="signUpErrorMessage">{{ signUpErrorMessage }}</div>
                 </div>
 
@@ -37,7 +47,6 @@
                 </div>
 
                 <div class="sign-up-footer">
-                    <!-- Button now submits form via submitSignUp() this sign up button send the datas of sign up-->
                     <button class="sign-up-button" type="submit" [disabled]="!acceptPolicy">Sign up</button>
                 </div>
             </form>

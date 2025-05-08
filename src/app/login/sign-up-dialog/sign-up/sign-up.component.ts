@@ -27,7 +27,8 @@ export class SignUpComponent {
         this.signUpForm = this.fb.group({
             name: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
-            password: ['', [Validators.required, Validators.minLength(6)]],
+             /* Use built-in Angular validator to ensure minimum password length */
+            password: ['', [Validators.required, Validators.minLength(8)]],
             confirmPassword: ['', Validators.required]
         }, { validators: this.passwordMatchValidator });
     }
