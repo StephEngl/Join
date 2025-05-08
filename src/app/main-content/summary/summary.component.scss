@@ -1,10 +1,6 @@
 @import "./../../../assets/styles/variables.scss";
 @import "./../../../assets/styles/mixins.scss";
 
-//TODO: add more style in media queries for mobile and tablet
-
-
-
 .summary-middle-box {
     @include dFlex($jc: space-around, $ai: center, $gap: 16px);
     width: 100%;
@@ -30,7 +26,6 @@
     display: flex;
     flex-direction: column;
     justify-content: center;
-    // white-space: nowrap; blockiert responsive -.-
 }
 
 .summary-main {
@@ -88,7 +83,6 @@
         object-fit: contain;
         overflow: visible;
     }
-
 }
 
 .transform-right {
@@ -161,7 +155,7 @@
     flex-direction: column;
 
     >h5 {
-        font-size: 3rem;
+        font-size: 48px;
     }
 
     >p {
@@ -206,10 +200,6 @@
 
     .transform-bottom {
         transform-origin: center bottom;
-
-        // &:hover{
-        //     transform: scaleY(1.1);
-        // }
     }
 
     .summary-welcome {
@@ -217,14 +207,91 @@
     }
 }
 
-// @media screen and (max-width: 830px) {
-//     .summary-main {
-//         padding: 20px 0 0 20px;
-//     }
+@media screen and (max-width: 550px) {
 
-//     .summary-section {
-//         display: flex;
-//         flex-direction: column;
-//     }
+    .summary-main {
+        padding: 10px 10px 0 15px;
+    }
 
-// }
+    .sum-icon {
+
+        >img {
+            height: 40px;
+            width: 40px;
+        }
+    }
+
+    .left-half-summary-box {
+        gap: 10px;
+
+        img {
+            height: 40px;
+            width: 40px;
+        }
+    }
+
+    .v-line-white {
+        height: 80px;
+    }
+
+    .right-half-summary-box {
+
+        >p {
+            font-size: 14px;
+        }
+    }
+
+    .task-count {
+
+        >h5 {
+            font-size: 35px;
+        }
+
+        >p {
+            font-size: 14px;
+        }
+    }
+
+    .summary-header {
+        gap: 0px
+    }
+
+    .summary-section {
+        gap: 15px;
+        margin-top: 5px;
+    }
+
+    .summary-wrapper {
+        gap: 15px;
+        max-height: 400px;
+    }
+
+    .summary-row {
+        gap: 15px;
+    }
+
+    .summary-middle-box {
+        padding: 0 25px;
+        gap: 0px;
+    }
+
+}
+
+@media screen and (max-width: 385px) {
+
+    .right-half-summary-box {
+        >p {
+            font-size: 12px;
+        }
+    }
+
+    .summary-wrapper {
+        gap: 10px;
+        max-height: 350px;
+    }
+
+    .summary-section {
+        gap: 10px;
+        margin-top: 2px;
+    }
+}

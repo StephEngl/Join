@@ -2,77 +2,77 @@
 @import "./variables.scss";
 
 @mixin dFlex($jc: center, $ai: center, $gap: 0px, $position: relative) {
-  display: flex;
-  justify-content: $jc;
-  align-items: $ai;
-  gap: $gap;
-  position: $position;
+    display: flex;
+    justify-content: $jc;
+    align-items: $ai;
+    gap: $gap;
+    position: $position;
 }
 
 @mixin appMaxWidth($padding: 30px) {
-  max-width: 1920px;
-  padding: $padding;
+    max-width: 1920px;
+    padding: $padding;
 }
 
 @mixin contactIcon($size: 50px, $fontSize: 24px, $letterSpacing: 0) {
-  @include dFlex(center, center);
-  width: $size;
-  height: $size;
-  min-width: $size;
-  font-size: $fontSize;
-  aspect-ratio: 1/1;
-  border-radius: 50%;
-  color: white;
-  letter-spacing: $letterSpacing;
+    @include dFlex(center, center);
+    width: $size;
+    height: $size;
+    min-width: $size;
+    font-size: $fontSize;
+    aspect-ratio: 1/1;
+    border-radius: 50%;
+    color: white;
+    letter-spacing: $letterSpacing;
 }
 
 @mixin noTaskOrMatches() {
-  background-color: #e8e8e8;
-  color: #999;
-  font-size: 14px;
-  width: calc(100% - 20px);
-  font-weight: 500;
-  text-align: center;
-  padding: 8px 12px;
-  border-radius: 12px;
-  border: 2px dashed #ccc;
-  height: auto;
-  min-height: 45px;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  white-space: nowrap;
+    background-color: #e8e8e8;
+    color: #999;
+    font-size: 14px;
+    width: calc(100% - 20px);
+    font-weight: 500;
+    text-align: center;
+    padding: 8px 12px;
+    border-radius: 12px;
+    border: 2px dashed #ccc;
+    height: auto;
+    min-height: 45px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    white-space: nowrap;
 }
 
 @mixin dropDownList($maxHeight: 180px) {
-  @include dFlex(flex-start, flex-start, 2px, absolute);
-  flex-direction: column;
-  list-style-type: none;
-  max-height: $maxHeight;
-  background-color: white;
-  overflow-y: auto;
-  width: 100%;
-  z-index: 4;
-  border: 1px solid $col-font-inactive;
-  border-top: 1px solid $col-font-grey;
-  border-radius: 0 0 16px 16px;
-  padding: 5px;
-  filter: drop-shadow(0px 4px 2px $col-shadow-black);
-
-  &::-webkit-scrollbar {
-    width: 3px;
-  }
-
-  &::-webkit-scrollbar-thumb {
-    background-color: $col-shadow-background;
-    border-radius: 8px;
-  }
-
-  &::-webkit-scrollbar-track {
-    background-color: transparent;
+    @include dFlex(flex-start, flex-start, 2px, absolute);
+    flex-direction: column;
+    list-style-type: none;
+    max-height: $maxHeight;
+    background-color: white;
+    overflow-y: auto;
+    width: 100%;
+    z-index: 4;
+    border: 1px solid $col-font-inactive;
+    border-top: 1px solid $col-font-grey;
     border-radius: 0 0 16px 16px;
-    margin: 0 0 10px 0;
-  }
+    padding: 5px;
+    filter: drop-shadow(0px 4px 2px $col-shadow-black);
+
+    &::-webkit-scrollbar {
+        width: 3px;
+    }
+
+    &::-webkit-scrollbar-thumb {
+        background-color: $col-shadow-background;
+        border-radius: 8px;
+    }
+
+    &::-webkit-scrollbar-track {
+        background-color: transparent;
+        border-radius: 0 0 16px 16px;
+        margin: 0 0 10px 0;
+    }
 }
 
 @mixin vLineWhiteBlack() {
@@ -84,39 +84,39 @@
 }
 
 @mixin vLine() {
-  height: 60px;
-  width: 3px;
-  margin: 0 20px;
-  background-color: $col-ref-highlight;
-  border-radius: 10px;
+    height: 60px;
+    width: 3px;
+    margin: 0 20px;
+    background-color: $col-ref-highlight;
+    border-radius: 10px;
 }
 
 @mixin hLine() {
-  display: none;
-  height: 3px;
-  width: 120px;
-  margin: 10px 0;
-  background-color: $col-ref-highlight;
-  border-radius: 10px;
+    display: none;
+    height: 3px;
+    width: 120px;
+    margin: 10px 0;
+    background-color: $col-ref-highlight;
+    border-radius: 10px;
 }
 
 @mixin btn($bg: $col-bg-secondary, $color: $col-font-secondary) {
-  @include dFlex(space-around, center);
-  border-radius: 10px;
-  padding: 16px;
-  font-size: 21px;
-  background-color: $bg;
-  color: $color;
+    @include dFlex(space-around, center);
+    border-radius: 10px;
+    padding: 16px;
+    font-size: 21px;
+    background-color: $bg;
+    color: $color;
 
-  img {
-    height: 14px;
-  }
+    img {
+        height: 14px;
+    }
 }
 
 @mixin media($mobileMediaName) {
-  @if $mobileMediaName == "iphone-se" {
-    @media only screen and (max-width: 375px) and (max-height: 667px) {
-      @content;
+    @if $mobileMediaName =="iphone-se" {
+        @media only screen and (max-width: 375px) and (max-height: 667px) {
+            @content;
+        }
     }
-  }
 }
