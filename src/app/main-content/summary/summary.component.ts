@@ -13,34 +13,34 @@ import { AuthenticationService } from '../../services/authentication.service';
 })
 export class SummaryComponent {
 
-  constructor(private router: Router, private authService: AuthenticationService) {}
+  constructor(private router: Router, private authService: AuthenticationService) { }
 
   tasksService = inject(TasksService);
   taskOverviewBottom: { text: string; taskCount: number }[] = [];
   userName: string | null = null;
 
   taskOverviewTop: {
-    type:string;
+    type: string;
     text: string;
     icon: string;
     iconHovered: string;
     isHovered: boolean
   }[] = [
-    {
-      type: 'toDo',
-      text: 'To-Do',
-      icon: './assets/icons/general/edit_white.svg',
-      iconHovered: './assets/icons/general/edit.svg',
-      isHovered: false
-    },
-    {
-      type: 'done',
-      text: 'Done',
-      icon: './assets/icons/general/check_white.svg',
-      iconHovered: './assets/icons/general/check.svg',
-      isHovered: false
-    }
-  ];
+      {
+        type: 'toDo',
+        text: 'To-Do',
+        icon: './assets/icons/general/edit_white.svg',
+        iconHovered: './assets/icons/general/edit.svg',
+        isHovered: false
+      },
+      {
+        type: 'done',
+        text: 'Done',
+        icon: './assets/icons/general/check_white.svg',
+        iconHovered: './assets/icons/general/check.svg',
+        isHovered: false
+      }
+    ];
 
   ngOnInit() {
     this.setOverviewDataBottom();
@@ -116,7 +116,6 @@ export class SummaryComponent {
     }).format(date);
   }
 
-
   textChangeTime(): string {
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 9) return 'Good morning';
@@ -126,6 +125,4 @@ export class SummaryComponent {
     if (hour >= 17 && hour < 21) return 'Good evening';
     return 'Good night';
   }
-
-
 }

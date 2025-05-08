@@ -10,20 +10,18 @@
     <article class="summary-wrapper">
       <section class="summary-row">
         @for (card of taskOverviewTop; track card; let i = $index) {
-          <div class="summary-btn"
-          [class]="{
+        <div class="summary-btn" [class]="{
             'transform-left': i === 0,
             'transform-right': i === 1
-          }"
-          (click)="toBoard()" (mouseenter)="card.isHovered = true" (mouseleave)="card.isHovered = false;">
-            <span class="sum-icon">
-              <img [src]="card.isHovered ? card.iconHovered: card.icon" alt="icon edit">
-              <div class="task-count">
-                <h5>{{ tasksByType(card.type) }}</h5>
-                <p>{{ card.text }}</p>
-              </div>
-            </span>
-          </div>
+          }" (click)="toBoard()" (mouseenter)="card.isHovered = true" (mouseleave)="card.isHovered = false;">
+          <span class="sum-icon">
+            <img [src]="card.isHovered ? card.iconHovered: card.icon" alt="icon edit">
+            <div class="task-count">
+              <h5>{{ tasksByType(card.type) }}</h5>
+              <p>{{ card.text }}</p>
+            </div>
+          </span>
+        </div>
         }
       </section>
 
@@ -55,12 +53,9 @@
                 <p>Urgent</p>
               </div>
             </div>
-
             <div class="v-line-white"></div>
-
             <div class="right-half-summary-box">
               <p class="date-text">{{ today }}</p>
-              <!-- <p class="date-text">Dezember 24, 2025</p> -->
               <p>Upcoming Deadline</p>
             </div>
           </div>
