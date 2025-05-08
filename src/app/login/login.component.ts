@@ -23,8 +23,8 @@ export class LoginComponent {
   loginBackgroundColor: string = "";
   loginLogoImgSrc: string = "./assets/icons/header/logo.svg";
   startAnimationTrigger: boolean = false;
-  emailTemp: string = "";
-  passwordTemp: string = "";
+  // emailTemp: string = "";
+  // passwordTemp: string = "";
 
   constructor(private router: Router) {}
 
@@ -51,14 +51,14 @@ export class LoginComponent {
     this.authService.login();
   }
 
-  async testLogin() {
-    try {
-      await this.authService.signInUser(this.emailTemp, this.passwordTemp);
-      console.log('Login erfolgreich');
-    } catch (error) {
-      console.error('Login fehlgeschlagen:', error);
-    }
-  }
+  // async testLogin() {
+  //   try {
+  //     await this.authService.signInUser(this.emailTemp, this.passwordTemp);
+  //     console.log('Login erfolgreich');
+  //   } catch (error) {
+  //     console.error('Login fehlgeschlagen:', error);
+  //   }
+  // }
 
   toPrivacyPolicy() {
       this.signalService.dummyAuthStatus.set(true);

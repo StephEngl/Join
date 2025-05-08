@@ -11,7 +11,7 @@
     <div class="mail-input-wrapper">
       <input
         #email="ngModel"
-        [(ngModel)]="loginData.email"
+        [(ngModel)]="emailTemp"
         type="text"
         class="input"
         id="mail"
@@ -30,7 +30,7 @@
     <div class="password-input-wrapper">
       <input
         #password="ngModel"
-        [(ngModel)]="loginData.password"
+        [(ngModel)]="passwordTemp"
         [type]="passwordVisible ? 'text' : 'password'"
         class="input"
         id="password"
@@ -68,6 +68,7 @@
         class="login-button"
         type="submit"
         [disabled]="!email.valid || !password.valid"
+        (click)="testLogin()"
       >
         Log in
       </button>
