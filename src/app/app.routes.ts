@@ -67,6 +67,7 @@ export const routes: Routes = [
             import('./main-content/legal-notice/legal-notice.component').then(
             (m) => m.LegalNoticeComponent
             ),
+        // canActivate: [AuthGuard],
     },
     {
         path: 'privacy-policy',
@@ -74,6 +75,7 @@ export const routes: Routes = [
             import('./main-content/privacy-policy/privacy-policy.component').then(
             (m) => m.PrivacyPolicyComponent
             ),
+        // canActivate: [AuthGuard],
     },
     {
         path: '',
