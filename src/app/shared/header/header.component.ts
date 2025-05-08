@@ -1,6 +1,7 @@
 import { Component, HostListener, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SignalsService } from '../../services/signals.service';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-header',
@@ -10,7 +11,8 @@ import { SignalsService } from '../../services/signals.service';
   styleUrl: './header.component.scss',
 })
 export class HeaderComponent {
-  signalService = inject(SignalsService)
+  signalService = inject(SignalsService);
+  authService = inject(AuthenticationService);
   showDropdown = false;
   isDropdownOpen = false;
   dropdownVisible = false;
@@ -81,7 +83,7 @@ export class HeaderComponent {
   }
 
   logout() {
-    // Logout-Logik
+    this.authService.logout();
     this.showLogoutPopup = false;
   }
 }
