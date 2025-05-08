@@ -33,6 +33,27 @@ export class AuthenticationService {
   }
   // end test functions
 
+  // await setDoc(doc(this.firestore, 'users', user.uid), {
+  //   name: name,
+  //   mail: email,
+  //   phone: 'no number set',
+  //   createdAt: new Date(),
+  // });
+
+
+  async createUser(email: string, password: string, name: string): Promise<any> {
+    try {
+      const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+      setTimeout(() => {
+        this.updateProfileUser(name);
+        this.router.navigate(['/login']);
+      }, 10);
+      return userCredential.user;
+    } catch (error) {
+      throw error;
+    }
+  }
+
   async signInUser(email: string, password: string): Promise<any> {
     try {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
@@ -44,14 +65,14 @@ export class AuthenticationService {
     }
   }
 
-  async updateProfileUser(): Promise<void> {
+  async updateProfileUser(name: string): Promise<void> {
     if (!this.auth.currentUser) {
       throw new Error('No user is currently logged in.');
     }
 
     try {
       await updateProfile(this.auth.currentUser, {
-        displayName: "Jane Q. User"
+        displayName: name
       });
     } catch (error) {
       throw error;

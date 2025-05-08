@@ -12,15 +12,14 @@ import {
   orderBy,
   DocumentReference,
 } from '@angular/fire/firestore';
-import { DummyContactsService } from './dummy-contacts.service';
-import { DummyTasksService } from './dummy-tasks.service';
-import { TasksService } from './tasks.service';
+import { UsersContactsService } from './users-contacts.service';
 
 @Injectable({
   providedIn: 'root',
 })
 export class ContactsService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
+  usersContactsService = inject(UsersContactsService);
   contacts: ContactInterface[] = [];
   contactColors: string[] = [
     '#FF7A00',
@@ -57,7 +56,7 @@ export class ContactsService implements OnDestroy {
     try {
       const contactWithColor = {
         ...contact,
-        color: this.getRandomColor(),
+        color: this.usersContactsService.getRandomColor(),
       };
       const contactRef = await addDoc(this.getContactsRef(), contactWithColor);
       return contactRef;
@@ -74,29 +73,15 @@ export class ContactsService implements OnDestroy {
     }
   }
 
-  getRandomColor(): string {
-    const randomIndex = Math.floor(Math.random() * this.contactColors.length);
-    return this.contactColors[randomIndex];
-  }
-
   async updateContact(contact: ContactInterface) {
     if (contact.id) {
       try {
         let docRef = this.getSingleDocRef(contact.id);
-        await updateDoc(docRef, this.getCleanJson(contact));
+        await updateDoc(docRef, this.usersContactsService.getCleanJson(contact));
       } catch (err) {
         console.error(err);
       }
     }
-  }
-
-  getCleanJson(contact: ContactInterface) {
-    return {
-      name: contact.name,
-      phone: contact.phone,
-      mail: contact.mail,
-      color: contact.color || this.getRandomColor(),
-    };
   }
 
   subContactsList() {
@@ -105,23 +90,13 @@ export class ContactsService implements OnDestroy {
         this.contacts = [];
         snapshot.forEach((element) => {
           const contact = element.data();
-          this.contacts.push(this.setContactObject(element.id, contact));
+          this.contacts.push(this.usersContactsService.setObjectData(element.id, contact));
         });
       },
       (error) => {
         console.error('Firestore Error', error.message);
       }
     );
-  }
-
-  setContactObject(id:string, obj: any): ContactInterface {
-    return {
-      id: id,
-      name: obj.name || '',
-      phone: obj.phone || '',
-      mail: obj.mail || '',
-      color: obj.color || this.getRandomColor(),
-    };
   }
 
   getContactsRef() {
@@ -132,6 +107,7 @@ export class ContactsService implements OnDestroy {
     return doc(collection(this.firestore, 'contacts'), docId);
   }
 
+  // move to user-contacts.service
   lastInitial(index: number): string {
     const contact = index != null ? this.contacts[index] : null;
     if (!contact || !contact.name) return '';
