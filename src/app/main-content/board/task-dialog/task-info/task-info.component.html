@@ -58,7 +58,7 @@
                 <div class="task-info-assigned-to-container">
                     <div class="task-info-assigned-to-txt">Assigned To:</div>
                     <div class="task-info-assigned-to-output">
-                        @for (person of taskDataDialogInfo.assignedTo; track person.contactId; let index = $index) {
+                        @for (person of tasksService.tasks[taskIndex()].assignedTo; track person.contactId; let index = $index) {
                             @if (contactsService.contactName(person.contactId)) {
                                 <div class="assigned-person">
                                     <span class="initials"
