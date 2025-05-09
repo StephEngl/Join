@@ -114,21 +114,26 @@ export class ContactsService implements OnDestroy {
   }
 
   subContactsList() {
-    const q = query(this.getContactsRef(), orderBy('name'));
-    return onSnapshot(q, (snapshot) => {
+    return onSnapshot(this.getContactsRef(), (snapshot) => {
         this.contacts = [];
         snapshot.forEach((element) => {
           const contact = element.data();
           this.contacts.push(this.usersContactsService.setObjectData(element.id, contact));
-          this.contacts = [...this.contacts, ...this.usersService.users]
+          const uniqueList = [...this.contacts, ...this.usersService.users]
           .filter((value, index, self) => index === self.findIndex((t) => t.id === value.id));
-          console.log(this.contacts);
+          this.sortUniqueList(uniqueList)
           
         });
       },
       (error) => {
         console.error('Firestore Error', error.message);
       }
+    );
+  }
+
+  sortUniqueList(array: ContactInterface[]) {
+    this.contacts = array.sort((a, b) =>
+      (a.name || '').localeCompare(b.name || '')
     );
   }
 

@@ -61,13 +61,7 @@ export class LoginComponent {
         this.signalService.hideHrefs.set(true);
         this.router.navigate(['/legal-notice']);
     }
-
-    // /* OLD ROUTING VERSION */
-    // toSignUp() {
-    //     this.signalService.hideHrefs.set(true);
-    //     this.router.navigate(['/sign-up']);
-    // }
-
+    
     /* Opens the sign-up dialog inline (replaces app-login-dialog via @if) */
     toSignUpDialog() {
         this.signalService.hideHrefs.set(true);
