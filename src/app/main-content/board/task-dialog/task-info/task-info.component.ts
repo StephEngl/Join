@@ -6,7 +6,7 @@ import { TasksService } from '../../../../services/tasks.service';
 import { Router } from '@angular/router';
 import { ContactsService } from '../../../../services/contacts.service';
 import { ToastService } from '../../../../services/toast.service';
-import { SingleTaskDataService } from '../../../../services/single-task-data.service';
+
 import { SignalsService } from '../../../../services/signals.service';
 
 @Component({
@@ -20,7 +20,7 @@ export class TaskInfoComponent {
 
     contactsService = inject(ContactsService);
     toastService = inject(ToastService);
-    taskDataService = inject(SingleTaskDataService);
+
     signalsService = inject(SignalsService);
     tasksService = inject(TasksService)
     @Input() taskDataDialogInfo!: TaskInterface;

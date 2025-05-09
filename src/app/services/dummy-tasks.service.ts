@@ -2,6 +2,12 @@ import { Injectable, inject } from '@angular/core';
 import { ContactsService } from './contacts.service';
 import { TaskInterface } from '../interfaces/task.interface';
 
+/**
+ * Service for managing and providing dummy task data for the application.
+ * 
+ * This service provides a set of predefined tasks, including their metadata and associated subtasks. 
+ * The tasks represent various work items in different stages of completion and are used for testing or development purposes.
+ */
 @Injectable({
   providedIn: 'root'
 })
@@ -119,9 +125,4 @@ export class DummyTasksService {
       ]
     }
   ];
-  
-  
-  
-
-
 }

@@ -15,11 +15,17 @@ import {
 import { SignalsService } from './signals.service';
 import { UsersService } from './users.service';
 
+/**
+ * Provides authentication functionality using Firebase Auth. This includes creating users, signing users in and out,
+ * updating user profiles, and managing the authentication state. The service also manages the current user's session
+ * and provides reactive signals for tracking login state and active user initials.
+ */
 @Injectable({
   providedIn: 'root'
 })
 export class AuthenticationService {
   isAuthenticated = signal<boolean>(false);
+  activeInitials = signal<string>('');
   signalService = inject(SignalsService);
   usersService = inject(UsersService);
   activeUserName: string = '';
@@ -30,21 +36,23 @@ export class AuthenticationService {
     this.checkAuthStatus(); 
   }
 
-  // start test functions
-  login(): void {
-    this.isAuthenticated.set(true);
-    this.router.navigate(['/summary']);
-  }
 
-  logout(): void {
-    this.isAuthenticated.set(false);
-    this.router.navigate(['/login']);
-  }
-
+  /**
+   * Returns whether the user is currently authenticated.
+   * @returns {boolean} True if the user is authenticated, otherwise false.
+   */
   isLoggedIn(): boolean {
     return this.isAuthenticated();
   }
 
+  /**
+   * Creates a new user account with the provided email, password, and name.
+   * @param email The email of the new user.
+   * @param password The password of the new user.
+   * @param name The name of the new user.
+   * @returns {Promise<UserCredential>} The user credential returned by Firebase after user creation.
+   * @throws {Error} Throws an error if the user creation fails.
+   */
   async createUser(email: string, password: string, name: string): Promise<UserCredential> {
     try {
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
@@ -56,6 +64,13 @@ export class AuthenticationService {
     }
   }
 
+  /**
+   * Signs in a user with the provided email and password.
+   * @param email The email of the user.
+   * @param password The password of the user.
+   * @returns {Promise<any>} The user object after successful sign-in.
+   * @throws {Error} Throws an error if the sign-in fails.
+   */
   async signInUser(email: string, password: string): Promise<any> {
     try {
       const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
@@ -67,6 +82,12 @@ export class AuthenticationService {
     }
   }
 
+  /**
+   * Updates the profile of the currently authenticated user with the new name.
+   * @param name The new name to set for the user.
+   * @returns {Promise<void>} Resolves when the profile update is complete.
+   * @throws {Error} Throws an error if the profile update fails.
+   */
   async updateProfileUser(name: string): Promise<void> {
     if (!this.auth.currentUser) {
       throw new Error('No user is currently logged in.');
@@ -81,6 +102,11 @@ export class AuthenticationService {
     }
   }
 
+  /**
+   * Observes the authentication state and returns the current user (if authenticated).
+   * @returns {Promise<any>} A promise resolving to the user object or null if not authenticated.
+   * @throws {Error} Throws an error if there's an issue while checking authentication state.
+   */
   async onAuthStateChanged(): Promise<any> {
     try {
       return await new Promise((resolve) => {
@@ -92,6 +118,11 @@ export class AuthenticationService {
     }
   }
 
+  /**
+   * Signs out the currently authenticated user and redirects to the login page.
+   * @returns {Promise<void>} Resolves when the user has been signed out.
+   * @throws {Error} Throws an error if the sign-out process fails.
+   */
   async signOutUser(): Promise<void> {
     try {
       await signOut(this.auth);
@@ -103,6 +134,10 @@ export class AuthenticationService {
     }
   }
 
+  /**
+   * Checks the current authentication status and navigates to
+   * the appropriate page based on the user's state.
+   */
   checkAuthStatus() {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
@@ -114,6 +149,10 @@ export class AuthenticationService {
     });
   }
 
+  /**
+   * Fetches the active user's name from the authentication state.
+   * @returns {Promise<void>} Resolves when the user's name has been retrieved.
+   */
   async showActiveUserName() {
     try {
       const user = await this.onAuthStateChanged();
@@ -124,8 +163,10 @@ export class AuthenticationService {
     }
   }
 
-  activeInitials = signal<string>('');
-
+  /**
+   * Sets the initials of the active user based on their display name.
+   * @returns {Promise<void>} Resolves when the user's initials have been set.
+   */
   async setActiveUserInitials() {
     try {
       const user = await this.onAuthStateChanged();
@@ -137,6 +178,11 @@ export class AuthenticationService {
     }
   }
 
+  /**
+   * Extracts and formats the initials from a user's display name.
+   * @param displayName The full display name of the user.
+   * @returns {string} The formatted initials.
+   */
   displayNameInitials(displayName: string | undefined) {
     if (!displayName) return '';
     const parts = displayName.trim().split(' ');
@@ -145,6 +191,11 @@ export class AuthenticationService {
     return firstLetter + lastLetter;
   }
 
+  /**
+   * Deletes the currently authenticated user account.
+   * @returns {Promise<void>} Resolves when the user account has been deleted.
+   * @throws {Error} Throws an error if deleting the user fails.
+   */
   async deleteUser(): Promise<void> {
     const user = this.auth.currentUser;
     if (!user) return;
@@ -156,7 +207,6 @@ export class AuthenticationService {
       console.error("Deleting active user failed", error);
     }
   }
-  
 }
 
 
