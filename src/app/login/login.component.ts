@@ -37,36 +37,6 @@ export class LoginComponent {
         this.startAnimation();
     }
 
-    /* DO NOT DELETE test variables & functions SIGN UP USER -> */
-    emailTemp: string = "";
-    passwordTemp: string = "";
-    nameTemp: string = "";
-
-    async createUser() {
-      const user = {
-        name: this.nameTemp,
-        mail: this.emailTemp,
-        phone: '',
-      }
-
-      if (this.userAlreadyExists(this.emailTemp)) {
-        console.log("User already exists!");
-        return;
-      }
-      const userCredential = await this.authService.createUser(this.emailTemp, this.passwordTemp, this.nameTemp);
-      const uid = userCredential.user.uid;
-      this.usersService.addUser(uid, user);
-    }
-
-    userAlreadyExists(mail: string): boolean {
-      return (
-        this.usersService.users.some(
-          user => user.mail.trim().toLowerCase() === mail.trim().toLowerCase()
-        )
-      );
-    }
-    /* <--  DO NOT DELETE test variables & functions SIGN UP USER */
-
     startAnimation() {
         if (this.signalService.isMobile()) {
             this.loginBackgroundColor = "#2A3647";

@@ -44,15 +44,6 @@ export class AuthenticationService {
   isLoggedIn(): boolean {
     return this.isAuthenticated();
   }
-  // end test functions
-
-  // await setDoc(doc(this.firestore, 'users', user.uid), {
-  //   name: name,
-  //   mail: email,
-  //   phone: 'no number set',
-  //   createdAt: new Date(),
-  // });
-
 
   async createUser(email: string, password: string, name: string): Promise<UserCredential> {
     try {

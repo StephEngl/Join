@@ -76,7 +76,6 @@ export class ContactsService implements OnDestroy {
   
     const userExists = this.usersService.users.some(user => user.id === docId);
     if (userExists && user.uid !== docId) {
-      console.log("You can only edit or delete your own account");
       return false;
     }
     return true;
@@ -141,7 +140,6 @@ export class ContactsService implements OnDestroy {
     return doc(collection(this.firestore, 'contacts'), docId);
   }
 
-  // move to user-contacts.service
   lastInitial(index: number): string {
     const contact = index != null ? this.contacts[index] : null;
     if (!contact || !contact.name) return '';
