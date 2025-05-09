@@ -3,27 +3,28 @@
 :host {
   display: flex;
   overflow-y: auto;
-}
 
-section {
-  @include appMaxWidth();
-}
+  section {
+    @include appMaxWidth();
+    max-width: 1690px;
 
-p {
-  padding: 16px 0;
-}
+    p {
+      padding: 16px 0;
+    }
 
-span {
-  color: $col-ref-highlight;
-}
+    span {
+      color: $col-ref-highlight;
+    }
 
-.help-list {
-  list-style-position: outside;
-  list-style-type: decimal;
-  padding-inline-start: 30px;
-}
+    .help-list {
+      list-style-position: outside;
+      list-style-type: decimal;
+      padding-inline-start: 30px;
+    }
 
-li::marker {
-    font-size: clamp(1.25rem, 1.15rem + 0.7vw, 1.6875rem);
-    font-weight: 300;
+    li::marker {
+      font-size: clamp(1.25rem, 1.15rem + 0.7vw, 1.6875rem);
+      font-weight: 300;
+    }
+  }
 }
