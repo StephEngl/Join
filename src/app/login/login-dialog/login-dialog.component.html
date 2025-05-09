@@ -60,8 +60,11 @@
     @if ((formSubmitted && (!email.valid || !password.valid)) || noUserFound) {
     <span class="error-message"
       >Check your email and password. Please try again.</span>
-    } @else 
-    { <span class="error-message"></span> }
+    } @else if (formSubmitted && noUserFound) {
+    <span class="error-message"> No user found. Please try again. </span>
+    } @else { 
+      <span class="error-message"></span> 
+    }
 
     <div class="login-button-wrapper">
       <button
@@ -72,7 +75,12 @@
       >
         Log in
       </button>
-      <button class="guest-button" (click)="adminLogin('admin@join.com', 'joinadmin')">Guest Log In</button>
+      <button
+        class="guest-button"
+        (click)="adminLogin('admin@join.com', 'joinadmin')"
+      >
+        Guest Log In
+      </button>
     </div>
   </form>
 </section>

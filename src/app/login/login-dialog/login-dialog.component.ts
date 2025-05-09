@@ -17,6 +17,7 @@ export class LoginDialogComponent {
   emailInput: string = '';
   passwordInput: string = '';
   noUserFound: Boolean = false;
+  isGuestLogin = false;
 
   loginData: UserInterface = {
     email: '',
@@ -28,10 +29,9 @@ export class LoginDialogComponent {
   }
 
   onSubmit(ngForm: NgForm) {
+    if (!this.isGuestLogin) {
     this.formSubmitted = true;
     console.log('Login bestätigt:', this.formSubmitted);
-
-    if (ngForm.submitted && ngForm.form.valid) {
     }
   }
 
@@ -50,8 +50,12 @@ export class LoginDialogComponent {
   }
 
   async adminLogin(mail: string, password: string) {
+    this.isGuestLogin = true;
     this.noUserFound = false;
+    // this.loginData.email = mail;
+    // this.loginData.password = password;
     await this.authService.signInUser(mail, password);
+    setTimeout(() => this.isGuestLogin = false, 100);
   }
 
 }
