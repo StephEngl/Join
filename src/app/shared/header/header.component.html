@@ -5,7 +5,9 @@
     <a routerLink="/help"
       ><img class="help-icon" src="./assets/icons/header/help.svg" alt=""
     /></a>
-    <button class="menu-button" (click)="onMenuButtonClick($event); $event.stopPropagation()">GU</button>
+    <button class="menu-button" 
+    (click)="onMenuButtonClick($event); $event.stopPropagation()"
+    >GU</button>
 
     @if (dropdownVisible) {
     <div class="dropdown-menu" [class.show]="showDropdown" (click)="$event.stopPropagation()">
