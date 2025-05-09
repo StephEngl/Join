@@ -5,15 +5,15 @@
         class="logo-animated"
         [class.animate]="startAnimationTrigger"
     />
-
-    <!-- Dynamically render either login or sign-up dialog -->
-    @if (!showSignUpDialog) {
-        <app-login-dialog />
-    } @else {
-        <!-- Sign-up dialog emits closeDialog and signUpSuccess -->
-        <app-sign-up-dialog (closeDialog)="toLogin()" (signUpSuccess)="onSignUpSuccess()" />
-    }
 </section>
+
+<!-- Dynamically render either login or sign-up dialog -->
+@if (!showSignUpDialog) {
+    <app-login-dialog />
+} @else {
+    <!-- Sign-up dialog emits closeDialog and signUpSuccess -->
+    <app-sign-up-dialog (closeDialog)="toLogin()" (signUpSuccess)="onSignUpSuccess()" />
+}
 
 <section class="login-header">
     <p>Not a Join User?</p>
@@ -21,11 +21,7 @@
     <!-- Changed function name to toSignUpDialog() to avoid overlap - this sign up button opens the sign-up dialog -->
     <button class="signup-btn" type="button" (click)="toSignUpDialog(); $event.stopPropagation()">Sign up</button>
 
-
 </section>
-
-<!-- app-login-dialog removed from static placement: now dynamically rendered via @if -->
-<!-- <app-login-dialog></app-login-dialog> /* Removed: now shown above dynamically */ -->
 
 <section class="login-footer">
     <p (click)="toPrivacyPolicy()">Privacy policy</p>
