@@ -7,84 +7,74 @@
   width: 100%;
   height: auto;
   overflow-y: auto;
-  @include dFlex($ai: flex-start);
-  padding: 1rem;
+  padding: 30px;
   font-family: "Inter", sans-serif;
   max-width: calc($appMaxWidth - $navbar-width);
   max-height: calc(100% - (96px));
 }
 
 .section-legal-notice {
-  flex-direction: column;
-  padding: 1rem;
-}
-
-.header {
-  @include dFlex($jc: flex-start);
-  width: 100%;
-  height: auto;
-}
-
-h2 {
-  width: 100%;
-  height: auto;
-  font-weight: bold;
-  padding-bottom: 1rem;
-}
-
-h4 {
-  width: 100%;
-  height: auto;
-  font-weight: bold;
-  padding-bottom: 0.5rem;
-}
-
-h3 {
-  padding: 1rem 1rem 1rem 0;
-}
-
-span {
-  color: $col-ref-highlight;
-  font-size: 1rem;
-}
-
-.name-and-adresses {
-  @include dFlex($ai: flex-start, $gap: 1rem);
-  flex-direction: column;
-
-  .name-developers {
-    padding: 1rem 1rem 1rem 0;
-    a {
-      color: $col-font-main;
-    }
-  }
-
-  .paragraph-developer-akademie {
-    width: auto;
+  h2 {
+    width: 100%;
     height: auto;
-    @include dFlex($ai: flex-start, $gap: 1rem);
+    font-weight: bold;
+    padding-bottom: 1rem;
+  }
 
-    a {
-      color: $col-font-main;
+  h4 {
+    width: 100%;
+    height: auto;
+    font-weight: bold;
+    padding-bottom: 1rem;
+  }
+
+  h3 {
+    padding: 1rem 1rem 1rem 0;
+  }
+
+  span {
+    color: $col-ref-highlight;
+    font-size: 1rem;
+  }
+
+  .name-and-adresses {
+    @include dFlex($ai: flex-start, $gap: 1rem);
+    flex-direction: column;
+
+    .name-developers {
+      padding: 1rem 1rem 1rem 0;
+      a {
+        color: $col-font-main;
+      }
+    }
+
+    .paragraph-developer-akademie {
+      width: auto;
+      height: auto;
+      @include dFlex($ai: flex-start, $gap: 1rem);
+
+      a {
+        color: $col-font-main;
+      }
     }
   }
-}
 
-.paragraph {
-  @include dFlex($ai: flex-start);
-  flex-direction: column;
-  @include appMaxWidth($padding: 1rem);
-  font-size: 1rem;
-  font-weight: 400;
-  line-height: 120%;
-  padding-left: 0rem;
-  cursor: auto;
-}
+  .paragraph {
+    @include dFlex($ai: flex-start);
+    flex-direction: column;
+    @include appMaxWidth($padding: 1rem);
+    font-size: 1rem;
+    font-weight: 400;
+    line-height: 120%;
+    padding-left: 0rem;
+    cursor: auto;
+  }
 
-.adress {
-  @include dFlex($ai: flex-start);
-  width: 100%;
-  height: auto;
-  padding-top: 1rem;
-  padding-left: 0px;
+  .adress {
+    @include dFlex($ai: flex-start);
+    width: 100%;
+    height: auto;
+    padding-top: 1rem;
+    padding-left: 0px;
+  }
 }
