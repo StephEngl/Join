@@ -6,6 +6,7 @@ import {
   doc,
   onSnapshot,
   addDoc,
+  setDoc,
   updateDoc,
   deleteDoc,
   query,
@@ -16,7 +17,7 @@ import { UsersContactsService } from './users-contacts.service';
 @Injectable({
   providedIn: 'root'
 })
-export class UsersService {
+export class UsersService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
   usersContactsService = inject(UsersContactsService);
   users: ContactInterface[] = [];
@@ -47,14 +48,15 @@ export class UsersService {
     );
   }
 
-  async addUser(user: ContactInterface): Promise<void | DocumentReference> {
+  async addUser(uid: string, user: ContactInterface): Promise<void | DocumentReference> {
     try {
       const userWithColor = {
         ...user,
         color: this.usersContactsService.getRandomColor(),
       };
-      const contactRef = await addDoc(this.getUsersRef(), userWithColor);
-      return contactRef;
+      const userRef = doc(this.getUsersRef(), uid);
+      await setDoc(userRef, userWithColor);
+      return userRef;
     } catch (err) {
       console.error(err);
     }
@@ -66,6 +68,20 @@ export class UsersService {
   
     getSingleUsersRef(docId: string) {
       return doc(collection(this.firestore, 'users'), docId);
+    }
+
+    nameInitials(id: string | undefined) {
+      const contact = this.users.find(c => c.id === id);
+      const parts = contact?.name.trim().split(' ') || [];
+      const nameLetter1 = contact?.name.charAt(0).toUpperCase() || '';
+      const lastName = parts?.at(-1) || '';
+      const lastNameLetter = lastName.charAt(0).toUpperCase();
+      return nameLetter1 + lastNameLetter;
+    }
+  
+    contactColor(id: string | undefined) {
+      const contact = this.users.find(c => c.id === id);
+      return contact?.color;
     }
 
 

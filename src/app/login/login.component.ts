@@ -38,32 +38,33 @@ export class LoginComponent {
     }
 
     /* DO NOT DELETE test variables & functions SIGN UP USER -> */
-    // emailTemp: string = "";
-    // passwordTemp: string = "";
-    // nameTemp: string = "";
+    emailTemp: string = "";
+    passwordTemp: string = "";
+    nameTemp: string = "";
 
-    // createUser() {
-    //   const user = {
-    //     name: this.nameTemp,
-    //     mail: this.emailTemp,
-    //     phone: '',
-    //   }
+    async createUser() {
+      const user = {
+        name: this.nameTemp,
+        mail: this.emailTemp,
+        phone: '',
+      }
 
-    //   if (this.userAlreadyExists(this.emailTemp)) {
-    //     console.log("User already exists!");
-    //     return;
-    //   }
-    //   this.authService.createUser(this.emailTemp, this.passwordTemp, this.nameTemp);
-    //   this.usersService.addUser(user);
-    // }
+      if (this.userAlreadyExists(this.emailTemp)) {
+        console.log("User already exists!");
+        return;
+      }
+      const userCredential = await this.authService.createUser(this.emailTemp, this.passwordTemp, this.nameTemp);
+      const uid = userCredential.user.uid;
+      this.usersService.addUser(uid, user);
+    }
 
-    // userAlreadyExists(mail: string): boolean {
-    //   return (
-    //     this.usersService.users.some(
-    //       user => user.mail.trim().toLowerCase() === mail.trim().toLowerCase()
-    //     )
-    //   );
-    // }
+    userAlreadyExists(mail: string): boolean {
+      return (
+        this.usersService.users.some(
+          user => user.mail.trim().toLowerCase() === mail.trim().toLowerCase()
+        )
+      );
+    }
     /* <--  DO NOT DELETE test variables & functions SIGN UP USER */
 
     startAnimation() {

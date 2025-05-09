@@ -1,4 +1,5 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
+import { getAuth } from "@angular/fire/auth"; 
 import { ContactInterface } from '../interfaces/contact.interface';
 import {
   Firestore,
@@ -13,6 +14,8 @@ import {
   DocumentReference,
 } from '@angular/fire/firestore';
 import { UsersContactsService } from './users-contacts.service';
+import { UsersService } from './users.service';
+import { AuthenticationService } from './authentication.service';
 
 @Injectable({
   providedIn: 'root',
@@ -20,6 +23,8 @@ import { UsersContactsService } from './users-contacts.service';
 export class ContactsService implements OnDestroy {
   firestore: Firestore = inject(Firestore);
   usersContactsService = inject(UsersContactsService);
+  usersService = inject(UsersService);
+  authService = inject(AuthenticationService);
   contacts: ContactInterface[] = [];
   contactColors: string[] = [
     '#FF7A00',
@@ -65,22 +70,47 @@ export class ContactsService implements OnDestroy {
     }
   }
 
+  canEditOrDeleteContact(docId: string): boolean {
+    const user = getAuth().currentUser;
+    if (!user || !docId) return false;
+  
+    const userExists = this.usersService.users.some(user => user.id === docId);
+    if (userExists && user.uid !== docId) {
+      console.log("You can only edit or delete your own account");
+      return false;
+    }
+    return true;
+  }
+
   async deleteContact(docId: string) {
+    if (!this.canEditOrDeleteContact(docId)) return;
+    const userExists = this.usersService.users.some(user => user.id === docId);
+    const docRef = userExists
+      ? this.usersService.getSingleUsersRef(docId) 
+      : this.getSingleDocRef(docId); 
+  
     try {
-      await deleteDoc(this.getSingleDocRef(docId));
+      await deleteDoc(docRef);
+      const user = getAuth().currentUser;
+      if (user && user.uid === docId) {
+        await this.authService.deleteUser();
+      }
     } catch (err) {
-      console.error(err);
+      console.error("Deleting failed", err);
     }
   }
 
   async updateContact(contact: ContactInterface) {
-    if (contact.id) {
-      try {
-        let docRef = this.getSingleDocRef(contact.id);
-        await updateDoc(docRef, this.usersContactsService.getCleanJson(contact));
-      } catch (err) {
-        console.error(err);
-      }
+  if (!contact.id || !this.canEditOrDeleteContact(contact.id)) return;
+    const userExists = this.usersService.users.some(user => user.id === contact.id);
+    const docRef = userExists
+      ? this.usersService.getSingleUsersRef(contact.id) 
+      : this.getSingleDocRef(contact.id);  
+  
+    try {
+      await updateDoc(docRef, this.usersContactsService.getCleanJson(contact));
+    } catch (err) {
+      console.error("Error during update:", err);
     }
   }
 
@@ -91,6 +121,10 @@ export class ContactsService implements OnDestroy {
         snapshot.forEach((element) => {
           const contact = element.data();
           this.contacts.push(this.usersContactsService.setObjectData(element.id, contact));
+          this.contacts = [...this.contacts, ...this.usersService.users]
+          .filter((value, index, self) => index === self.findIndex((t) => t.id === value.id));
+          console.log(this.contacts);
+          
         });
       },
       (error) => {
