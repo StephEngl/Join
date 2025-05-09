@@ -2,26 +2,14 @@
 @import "../../../../assets/styles/variables.scss";
 @import "../../../../assets/fonts/fonts.scss";
 
-span,
-.validation-alert {
-  color: $col-task-urgent;
-}
-
-.validation-alert {
-  font-size: 14px;
-}
-
 :host {
-  @include dFlex($ai: flex-start, $jc: center, $gap: 32px);
+  @include dFlex($ai: flex-start, $gap: 32px);
   flex-direction: column;
 }
 
 .form-group {
-  display: flex;
+  @include dFlex($ai: flex-start, $gap: 8px);
   flex-direction: column;
-  justify-content: center;
-  align-items: flex-start;
-  gap: 8px;
 }
 
 input[type="text"],
@@ -49,17 +37,22 @@ textarea {
   }
 }
 
-textarea {
-  height: 120px;
-}
-
 // cursor pointer at datepicker sideboard
 input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
 
-input[type="date"]::-webkit-calendar-picker-indicator {
-  cursor: pointer;
+textarea {
+  height: 120px;
+}
+
+span,
+.validation-alert {
+  color: $col-task-urgent;
+}
+
+.validation-alert {
+  font-size: 14px;
 }
 
 // container queries

@@ -1,9 +1,6 @@
 import { CommonModule } from '@angular/common';
-import { Component, EventEmitter, Input, Output, inject, ViewChild } from '@angular/core';
-import { FormsModule, NgModel } from '@angular/forms';
-import { MatDatepickerModule } from '@angular/material/datepicker';
-import { MatInputModule } from '@angular/material/input';
-import { MatNativeDateModule } from '@angular/material/core';
+import { Component, Input, inject } from '@angular/core';
+import { FormsModule } from '@angular/forms';
 import { SingleTaskDataService } from '../../../services/single-task-data.service';
 import { TaskInterface } from '../../../interfaces/task.interface';
 import { TasksService } from '../../../services/tasks.service';
@@ -15,9 +12,6 @@ import { SignalsService } from '../../../services/signals.service';
   imports: [
     FormsModule,
     CommonModule,
-    MatDatepickerModule,
-    MatInputModule,
-    MatNativeDateModule,
   ],
   host: { 'class': 'task-overview' },
   templateUrl: './task-overview.component.html',
@@ -29,7 +23,6 @@ export class TaskOverviewComponent {
   signalService = inject(SignalsService);
 
   @Input() taskData!: TaskInterface;
-  @Input() currentTaskId: string = '';
   @Input() today: string = new Date().toISOString().split('T')[0];
 
   ngOnInit() {
