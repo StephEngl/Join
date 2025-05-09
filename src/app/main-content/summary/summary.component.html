@@ -5,7 +5,6 @@
     <h4>Key Metrics at a Glance</h4>
     <span class="h-line"></span>
   </div>
-
   <section class="summary-section">
     <article class="summary-wrapper">
       <section class="summary-row">
@@ -24,9 +23,7 @@
         </div>
         }
       </section>
-
       <section class="summary-row">
-
         <div class="summary-btn transform-bottom" (click)="toBoard()">
           <div class="summary-middle-box">
             <div class="left-half-summary-box">
@@ -43,10 +40,7 @@
             </div>
           </div>
         </div>
-
-
       </section>
-
       <section class="summary-row">
         @for (category of taskOverviewBottom; track category;let i = $index) {
         <div class="summary-btn" [class]="{
@@ -56,13 +50,13 @@
           }" (click)="toBoard()">
           <div class="task-count">
             @if (i === 0) {
-              <h5>{{ tasksService.tasksCount() }}</h5>
+            <h5>{{ tasksService.tasksCount() }}</h5>
             }
             @if (i === 1) {
-              <h5>{{ tasksService.tasksByType('inProgress') }}</h5>
+            <h5>{{ tasksService.tasksByType('inProgress') }}</h5>
             }
             @if (i === 2) {
-              <h5>{{ tasksService.tasksByType('feedback') }}</h5>
+            <h5>{{ tasksService.tasksByType('feedback') }}</h5>
             }
             <p [innerHTML]="category.text"></p>
           </div>
@@ -70,15 +64,18 @@
         }
       </section>
     </article>
-
     <aside class="summary-welcome">
       <h4>
-        <p class="timeText">{{ textChangeTime() }},<br>
+        <p class="timeText">
+          {{ textChangeTime() }}
+          @if (authService.activeUserName !== 'Guest')
+          {,<br>
           <span class="user-name">{{ authService.activeUserName }}</span>
+          } @else {
+          <br>
+          }
         </p>
-
       </h4>
     </aside>
   </section>
-
 </section>
