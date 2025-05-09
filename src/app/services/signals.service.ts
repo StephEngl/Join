@@ -16,7 +16,7 @@ export class SignalsService {
   titleCleared = signal<boolean>(false);
   dateCleared = signal<boolean>(false);
   hideHrefs = signal<boolean>(false);
-  taskData = signal<any>('');
+  // taskData = signal<any>('');
 
 
   checkScreenSize() {

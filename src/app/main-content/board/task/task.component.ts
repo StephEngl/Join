@@ -31,11 +31,9 @@ export class TaskComponent {
       this.menuOpen = false;
   }
 
-  ngOnInit() {
-    this.signalsService.taskData.set(this.taskData);
-    console.log(this.signalsService.taskData());
-    
-  }
+  // ngOnInit() {
+  //   this.signalsService.taskData.set(this.taskData);
+  // }
   
   doesContactExist(contactId: string): boolean {
     return this.contactsService.contacts.some(c => c.id === contactId);
