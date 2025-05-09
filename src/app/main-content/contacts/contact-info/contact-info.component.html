@@ -15,7 +15,10 @@
         <div class="contact-menu">
             <h3>{{ contactsService.contacts[contactIndex].name }}</h3>
             <div class="btn-container">
-                <button (click)="editContact(contactIndex)" (mouseenter)="btnEdit = true"
+                @if (!contactsService.canEditOrDeleteContact(contactsService.contacts[contactIndex].id!)) {
+                    Require login to edit own user.
+                } @else {
+                    <button (click)="editContact(contactIndex)" (mouseenter)="btnEdit = true"
                     (mouseleave)="btnEdit = false">
                     <img class="contact-menu-icon"
                         [src]="btnEdit ? './assets/icons/kanban/edit_active.svg' : './assets/icons/kanban/edit.svg'"
@@ -29,6 +32,7 @@
                         alt="">
                     <p>Delete</p>
                 </button>
+                }
             </div>
         </div>
     </div>
