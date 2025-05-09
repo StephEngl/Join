@@ -16,6 +16,7 @@ import { Subscription } from 'rxjs';
 import { SingleTaskDataService } from '../../services/single-task-data.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ViewChildren, ElementRef, QueryList } from '@angular/core';
+
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -39,7 +40,9 @@ import { ViewChildren, ElementRef, QueryList } from '@angular/core';
     ]),
   ],
 })
+
 export class BoardComponent {
+
   tasksService = inject(TasksService);
   singleTaskDataService = inject(SingleTaskDataService);
   searchText: string = '';
@@ -78,11 +81,7 @@ export class BoardComponent {
   }
 
   refreshShadow() {
-    setTimeout(() => {
-      this.taskLists.forEach(
-        (taskList) => this.onTaskListScrollShadow(taskList.nativeElement)
-      );
-    }, 100);
+    this.updateAllScrollShadows(100);
   }
 
   checkIsMobile() {
@@ -129,12 +128,7 @@ export class BoardComponent {
         event.currentIndex
       );
     }
-
-    setTimeout(() => {
-      this.taskLists.forEach((listRef) => {
-        this.onTaskListScrollShadow(listRef.nativeElement);
-      });
-    }, 50);
+    this.updateAllScrollShadows(50);
   }
 
   openTaskDialog(taskData: TaskInterface): void {
@@ -169,7 +163,6 @@ export class BoardComponent {
     } else {
       boardColumn.classList.remove('scrolled-top');
     }
-    // math.ceil rounds number up
     if (Math.ceil(scrollTop + offsetHeight) < Math.floor(scrollHeight)) {
       boardColumn.classList.add('scrolled-bottom');
     } else {
@@ -206,6 +199,14 @@ export class BoardComponent {
       task.taskType = event.newType;
       this.tasksService.updateTask(task);
     }
+  }
+
+  updateAllScrollShadows(delay: number = 0): void {
+    setTimeout(() => {
+      this.taskLists.forEach((listRef) =>
+        this.onTaskListScrollShadow(listRef.nativeElement)
+      );
+    }, delay);
   }
 
 }
