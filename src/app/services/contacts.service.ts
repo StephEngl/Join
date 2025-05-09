@@ -7,6 +7,7 @@ import {
   doc,
   onSnapshot,
   addDoc,
+  getDocs,
   updateDoc,
   deleteDoc,
   query,
@@ -86,13 +87,10 @@ export class ContactsService implements OnDestroy {
   async deleteContact(docId: string) {
     if (!this.canEditOrDeleteContact(docId)) return;
     const userExists = this.usersService.users.some(user => user.id === docId);
-    const docRef = userExists
-      ? this.usersService.getSingleUsersRef(docId) 
-      : this.getSingleDocRef(docId); 
+    const docRef = userExists ? this.usersService.getSingleUsersRef(docId) : this.getSingleDocRef(docId); 
   
     try {
       await deleteDoc(docRef);
-      await this.tasksService.removeContactFromTasks(docId);
       const user = getAuth().currentUser;
       if (user && user.uid === docId) {
         await this.authService.deleteUser();
@@ -131,6 +129,23 @@ export class ContactsService implements OnDestroy {
     (error) => {
       console.error('Firestore Error', error.message);
     });
+  }
+
+  async loadContacts(): Promise<void> {
+    try {
+      const snapshot = await getDocs(this.getContactsRef());
+      const contacts: ContactInterface[] = [];
+  
+      snapshot.forEach((docSnap) => {
+        const contact = docSnap.data();
+        contacts.push(this.usersContactsService.setObjectData(docSnap.id, contact));
+      });
+      const combinedList = [...contacts, ...this.usersService.users];
+      const uniqueList = combinedList.filter((value, index, self) => index === self.findIndex((t) => t.id === value.id));
+      this.sortUniqueList(uniqueList);
+    } catch (error) {
+      console.error('Error loading contacts:', error);
+    }
   }
 
   sortUniqueList(array: ContactInterface[]) {
