@@ -1,4 +1,3 @@
-<!-- <div class="task-details"> -->
 <div class="form-group">
   <label>Priority</label>
   <div class="priority-buttons-wrapper">
@@ -90,6 +89,7 @@
   <div class="assigned-contacts">
 
     @for (contact of taskData.assignedTo; track contact.contactId) {
+      @if (contactsService.contactName(contact.contactId)) {
       <div
         class="contact-initials"
         [style.backgroundColor]="contactsService.contactColor(contact.contactId)"
@@ -100,6 +100,7 @@
       >
         {{ contactsService.nameInitials(contact.contactId) }}
       </div>
+    }
     } @if (hoveredContact) {
       <div
         class="contact-name-info"
@@ -273,4 +274,3 @@
     </ul>
   </div>
 </div>
-<!-- </div> -->

@@ -2,6 +2,7 @@ import { Component, EventEmitter, inject, Input, Output, HostListener } from '@a
 import { TaskInterface } from '../../../interfaces/task.interface';
 import { ContactsService } from '../../../services/contacts.service';
 import { TasksService } from '../../../services/tasks.service';
+import { SignalsService } from '../../../services/signals.service';
 
 @Component({
   selector: 'app-task',
@@ -12,6 +13,7 @@ import { TasksService } from '../../../services/tasks.service';
 export class TaskComponent {
   contactsService = inject(ContactsService);
   tasksService = inject(TasksService);
+  signalsService = inject(SignalsService);
 
   @Input() taskData!: TaskInterface;
   @Input() searchRequest: string = "";
@@ -27,6 +29,12 @@ export class TaskComponent {
   @HostListener('document:click')
   onClickOutside() {
       this.menuOpen = false;
+  }
+
+  ngOnInit() {
+    this.signalsService.taskData.set(this.taskData);
+    console.log(this.signalsService.taskData());
+    
   }
   
   doesContactExist(contactId: string): boolean {

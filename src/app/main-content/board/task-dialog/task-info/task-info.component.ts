@@ -7,6 +7,7 @@ import { Router } from '@angular/router';
 import { ContactsService } from '../../../../services/contacts.service';
 import { ToastService } from '../../../../services/toast.service';
 import { SingleTaskDataService } from '../../../../services/single-task-data.service';
+import { SignalsService } from '../../../../services/signals.service';
 
 @Component({
     selector: 'app-task-info',
@@ -20,6 +21,7 @@ export class TaskInfoComponent {
     contactsService = inject(ContactsService);
     toastService = inject(ToastService);
     taskDataService = inject(SingleTaskDataService);
+    signalsService = inject(SignalsService);
     tasksService = inject(TasksService)
     @Input() taskDataDialogInfo!: TaskInterface;
     @Output() editTask = new EventEmitter<void>();
@@ -27,7 +29,10 @@ export class TaskInfoComponent {
 
     constructor(
         private router: Router
-    ) {}
+    ) {
+
+    }
+
 
     onEditTask(): void {
         this.editTask.emit();
@@ -64,4 +69,15 @@ export class TaskInfoComponent {
     closeDialog(): void {
         this.close.emit();
     }
+
+    doesContactExist(contactId: string): boolean {
+        return this.contactsService.contacts.some(c => c.id === contactId);
+    }
+    
+    showLimitedContact(): TaskInterface['assignedTo'] {
+    return this.tasksService.tasks[this.taskIndex()].assignedTo
+        .filter(c => this.doesContactExist(c.contactId))
+        .slice(0, 4);
+    }
+
 }

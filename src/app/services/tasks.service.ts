@@ -172,4 +172,15 @@ export class TasksService implements OnDestroy {
     findIndexById(id: string): number {
         return this.tasks.findIndex(task => task.id === id);
     }
+
+    async removeContactFromTasks(contactId: string): Promise<void> {
+        const tasksToUpdate = this.tasks.filter(task =>
+            task.assignedTo?.includes(contactId)
+        );
+        
+        for (const task of tasksToUpdate) {
+            task.assignedTo = task.assignedTo?.filter(id => id !== contactId);
+            await this.updateTask(task);
+        }
+    }
 }

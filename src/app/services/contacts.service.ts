@@ -16,6 +16,7 @@ import {
 import { UsersContactsService } from './users-contacts.service';
 import { UsersService } from './users.service';
 import { AuthenticationService } from './authentication.service';
+import { TasksService } from './tasks.service';
 
 @Injectable({
   providedIn: 'root',
@@ -25,6 +26,7 @@ export class ContactsService implements OnDestroy {
   usersContactsService = inject(UsersContactsService);
   usersService = inject(UsersService);
   authService = inject(AuthenticationService);
+  tasksService = inject(TasksService);
   contacts: ContactInterface[] = [];
   contactColors: string[] = [
     '#FF7A00',
@@ -90,6 +92,7 @@ export class ContactsService implements OnDestroy {
   
     try {
       await deleteDoc(docRef);
+      await this.tasksService.removeContactFromTasks(docId);
       const user = getAuth().currentUser;
       if (user && user.uid === docId) {
         await this.authService.deleteUser();
@@ -115,20 +118,19 @@ export class ContactsService implements OnDestroy {
 
   subContactsList() {
     return onSnapshot(this.getContactsRef(), (snapshot) => {
-        this.contacts = [];
-        snapshot.forEach((element) => {
-          const contact = element.data();
-          this.contacts.push(this.usersContactsService.setObjectData(element.id, contact));
-          const uniqueList = [...this.contacts, ...this.usersService.users]
-          .filter((value, index, self) => index === self.findIndex((t) => t.id === value.id));
-          this.sortUniqueList(uniqueList)
-          
-        });
-      },
-      (error) => {
-        console.error('Firestore Error', error.message);
-      }
-    );
+      const firestoreContacts: ContactInterface[] = [];
+      snapshot.forEach((element) => {
+        const contact = element.data();
+        firestoreContacts.push(this.usersContactsService.setObjectData(element.id, contact));
+      });
+      const uniqueList = [...firestoreContacts, ...this.usersService.users]
+        .filter((value, index, self) => index === self.findIndex((t) => t.id === value.id));
+  
+      this.sortUniqueList(uniqueList);
+    },
+    (error) => {
+      console.error('Firestore Error', error.message);
+    });
   }
 
   sortUniqueList(array: ContactInterface[]) {
