@@ -151,7 +151,7 @@ export class AuthenticationService {
     try {
       await deleteUser(user);
       this.isAuthenticated.set(false);
-      this.router.navigate(['/login']);
+      this.router.navigate(['/login']).then(() => location.reload());
     } catch (error) {
       console.error("Deleting active user failed", error);
     }

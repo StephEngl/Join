@@ -7,6 +7,7 @@ import { Auth, createUserWithEmailAndPassword, sendEmailVerification } from '@an
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; /* Angular Material Toast */
 import { AuthenticationService } from '../../../services/authentication.service';
 import { UsersService } from '../../../services/users.service';
+import { SignalsService } from '../../../services/signals.service';
 
 @Component({
     selector: 'app-sign-up',
@@ -27,6 +28,7 @@ export class SignUpComponent {
     private snackBar = inject(MatSnackBar); /* Injecting Angular Toast service */
     authService = inject(AuthenticationService);
     usersService = inject (UsersService);
+    signalsService = inject(SignalsService);
 
     constructor(private fb: FormBuilder, private auth: Auth, private router: Router) {
         this.signUpForm = this.fb.group({
@@ -100,7 +102,9 @@ export class SignUpComponent {
         const uid = userCredential.user.uid;
         this.usersService.addUser(uid, user);
         await this.authService.setActiveUserInitials();
+        this.signalsService.hideHrefs.set(false);
         this.router.navigate(['/summary']);
+
     }
     //checks if email already exists
     userAlreadyExists(mail: string): boolean {

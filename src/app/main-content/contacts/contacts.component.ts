@@ -32,9 +32,18 @@ export class ContactsComponent {
   btnDelete: boolean = false;
   btnEdit: boolean = false;
 
-  ngOnInit() {
+  async ngOnInit() {
+    await this.loadContacts(); 
     this.signalService.checkScreenSize();
     this.groupContactsByFirstLetter();
+  }
+
+  async loadContacts() {
+    try {
+      await this.contactsService.loadContacts();
+    } catch (error) {
+      console.error('Fehler beim Laden der Kontakte:', error);
+    }
   }
 
   @HostListener('window:resize', [])
