@@ -41,7 +41,7 @@ export class HeaderComponent {
     this.closeDropdown();
   }
 
-  onGButtonClick(event: MouseEvent) {
+  onMenuButtonClick(event: MouseEvent) {
     event.stopPropagation();
     if (this.isWideScreen) {
       this.togglePopup();
