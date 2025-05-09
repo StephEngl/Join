@@ -53,8 +53,8 @@ export class AddTaskComponent {
   mouseY: number = 0;
   hoveredContact: any = undefined;
 
-  isEdited : boolean = false;
-  isFormValid : boolean = false;
+  isEdited: boolean = false;
+  isFormValid: boolean = false;
 
   searchedContactName: string = '';
   searchedCategoryName: string = '';
@@ -64,17 +64,23 @@ export class AddTaskComponent {
   @Input() isAddTaskDialog: boolean = false;
 
   @Input() taskData!: TaskInterface;
-  @Output() cancelEditTask = new EventEmitter<void>(); // Added: to notify parent component when editing is canceled
+  @Output() cancelEditTask = new EventEmitter<void>();
   @Output() taskUpdated = new EventEmitter<void>();
   @Output() taskCreated = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
 
+  /**
+   * Initializes the component and clears the form if not in edit mode.
+   */
   ngOnInit() {
     if (!this.taskDataService.editModeActive) {
       this.clearForm();
     }
   }
 
+  /**
+   * Closes dropdown lists on click.
+   */
   @HostListener('click')
   closeDropDowns() {
     this.closeDropdownList = true;
@@ -83,6 +89,9 @@ export class AddTaskComponent {
     }, 1);
   }
 
+  /**
+   * Handles form submission for creating or editing a task.
+   */
   onSubmit() {
     const isEditMode = this.taskDataService.editModeActive;
     const task = this.getAllTaskData();
@@ -94,10 +103,17 @@ export class AddTaskComponent {
     }
   }
 
+  /**
+   * Returns whether the form is invalid.
+   */
   get formInvalid() {
     return this.isFormInvalid();
   }
 
+  /**
+   * Checks if the form is invalid based on required fields.
+   * @returns True if the form is invalid, otherwise false.
+   */
   isFormInvalid(): boolean {
     return (
       !this.taskDataService.selectedCategory ||
@@ -105,6 +121,10 @@ export class AddTaskComponent {
     );
   }
 
+  /**
+   * Gathers all task data from the form and state.
+   * @returns A complete TaskInterface object for submission.
+   */
   getAllTaskData() {
     const isEditMode = this.taskDataService.editModeActive;
     const baseTaskData = this.currentTaskData();
@@ -118,12 +138,20 @@ export class AddTaskComponent {
     return task;
   }
 
+  /**
+   * Submits the edited task, updates the task, and shows a toast.
+   * @param task The edited task object.
+   */
   submitEdit(task: TaskInterface) {
     this.tasksService.updateTask(task);
     this.toastService.triggerToast('Task updated', 'update');
     this.cancelEditTask.emit();
   }
 
+  /**
+   * Submits a new task, adds it, shows a toast, and navigates to the board.
+   * @param task The new task object.
+   */
   submitCreate(task: TaskInterface) {
     this.tasksService.addTask(task);
     this.toastService.triggerToast(
@@ -138,173 +166,64 @@ export class AddTaskComponent {
     }, 1000);
   }
 
+  /**
+   * Clears all form fields and resets task data.
+   */
   clearForm() {
     this.taskDataService.clearData();
   }
 
+  /**
+   * Sets signals to indicate that the form fields have been reset.
+   */
   setFormResetSignals() {
     this.signalService.titleCleared.set(true);
     this.signalService.dateCleared.set(true);
   }
 
+  /**
+   * Returns the current task data excluding the task ID.
+   * @returns Task data object without ID.
+   */
   currentTaskData(): Omit<TaskInterface, 'id'> {
-    const subtasksForForm = this.taskDataService.subtasksContainer.map(
-      (subtask) => ({
-        text: subtask.text,
-        isChecked: subtask.isChecked,
-      })
-    );
-
-    const activeBtn = this.taskDataService.priorityButtons.find(
-      (btnStatus) => btnStatus.btnActive
-    );
-
+    const subtasksForForm = this.getSubtasksForForm();
     const submittedTask: TaskInterface = {
       title: this.taskDataService.inputTaskTitle,
       description: this.taskDataService.inputTaskDescription,
       dueDate: this.taskDataService.inputTaskDueDate,
       assignedTo: this.taskDataService.assignedTo,
       subTasks: subtasksForForm,
-      priority: (activeBtn?.priority.toLowerCase() || 'medium') as
-        | 'urgent'
-        | 'medium'
-        | 'low',
+      priority: this.getSelectedPriority(),
       category: this.taskDataService.selectedCategory,
       taskType: this.taskDataService.taskStatus,
     };
     return submittedTask;
   }
 
-  addSubtask() {
-    const subtask = {
-      text: this.taskDataService.subtaskText,
-      isEditing: false,
-      isHovered: false,
-      isChecked: false,
-    };
-    if (this.taskDataService.subtaskText.trim()) {
-      this.taskDataService.subtasksContainer.push(subtask);
-      this.taskDataService.subtaskText = '';
-    }
-  }
+  /**
+ * Maps subtasks to the required form structure.
+ * @returns Array of subtasks for the form.
+ */
+private getSubtasksForForm(): { text: string; isChecked: boolean }[] {
+  return this.taskDataService.subtasksContainer.map(subtask => ({
+    text: subtask.text,
+    isChecked: subtask.isChecked,
+  }));
+}
 
-  clearSubtask() {
-    this.taskDataService.subtaskText = '';
-  }
+/**
+ * Returns the selected priority as a string ('urgent' | 'medium' | 'low').
+ * Defaults to 'medium' if none is selected.
+ * @returns The selected priority.
+ */
+private getSelectedPriority(): 'urgent' | 'medium' | 'low' {
+  const activeBtn = this.taskDataService.priorityButtons.find(btn => btn.btnActive);
+  return (activeBtn?.priority.toLowerCase() || 'medium') as 'urgent' | 'medium' | 'low';
+}
 
-  editSubtask(subtask: any) {
-    subtask.isEditing = true;
-    this.inputFieldSubT = subtask.text;
-    setTimeout(() => {
-      this.inputFieldSubTaskRef.nativeElement.focus();
-    }, 0);
-  }
-
-  editCheckSubtask(subtask: any) {
-    const index = this.taskDataService.subtasksContainer.indexOf(subtask);
-    this.taskDataService.subtasksContainer[index].text = this.inputFieldSubT;
-    subtask.isEditing = false;
-  }
-
-  deleteSubtask(subtask: any) {
-    const index = this.taskDataService.subtasksContainer.indexOf(subtask);
-    if (index !== -1) {
-      this.taskDataService.subtasksContainer.splice(index, 1);
-    }
-  }
-
-  focusInput(input: HTMLInputElement) {
-    input.focus();
-  }
-
-  setPriority(index: number, prioOutput: string) {
-    this.resetOtherBtnStatuses(index);
-    this.taskDataService.priorityButtons[index].btnActive =
-      !this.taskDataService.priorityButtons[index].btnActive;
-  }
-
-  resetOtherBtnStatuses(index: number) {
-    this.taskDataService.priorityButtons.forEach((btn) => {
-      if (this.taskDataService.priorityButtons.indexOf(btn) === index) return;
-      btn.btnActive = false;
-    });
-  }
-
-  toggleAssignedContacts(contactId: any) {
-    const exists = this.taskDataService.assignedTo.some(
-      (contact) => contact.contactId === contactId
-    );
-    if (!exists) {
-      this.taskDataService.assignedTo.push({ contactId });
-    } else {
-      this.taskDataService.assignedTo = this.taskDataService.assignedTo.filter(
-        (contact) => contact.contactId !== contactId
-      );
-    }
-  }
-
-  contactSelected() {
-    this.taskDataService.assignedTo.forEach((contact) => {
-      const exists = this.contactsService.contacts.some(
-        (c) => c.id === contact.contactId
-      );
-    });
-  }
-
-  isContactAssigned(contactId: any): boolean {
-    return this.taskDataService.assignedTo.some(
-      (a) => a.contactId === contactId
-    );
-  }
-
-  searchContact(event: Event) {
-    const value = (event.target as HTMLInputElement).value;
-    this.searchedContactName = value;
-  }
-
-  searchCategory(event: Event) {
-    const value = (event.target as HTMLInputElement).value;
-    this.searchedCategoryName = value;
-  }
-
-  filteredContacts() {
-    return this.contactsService.contacts.filter((contact) =>
-      contact.name
-        .toLowerCase()
-        .includes(this.searchedContactName.toLowerCase())
-    );
-  }
-
-  filteredCategories() {
-    return this.taskDataService.taskCategories.filter((category) =>
-      category.toLowerCase().includes(this.searchedCategoryName.toLowerCase())
-    );
-  }
-
-  startContactHover(contact: any) {
-    this.hoveredContact = contact;
-  }
-
-  moveContactHover(event: MouseEvent) {
-    this.mouseX = event.clientX + 10;
-    this.mouseY = event.clientY + 10;
-  }
-
-  endContactHover() {
-    this.hoveredContact = undefined;
-  }
-
-  removeAssignedContact(contactId: string): void {
-    this.taskDataService.assignedTo = this.taskDataService.assignedTo.filter(
-      (id) => id !== contactId
-    );
-    this.hoveredContact = undefined;
-  }
-
-  setCategory(index: number) {
-    this.taskDataService.selectedCategory = this.filteredCategories()[index];
-  }
-
+  /**
+   * Emits the close event if the component is used as a dialog.
+   */
   closeIfDialog() {
     this.close.emit();
   }
