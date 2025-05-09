@@ -5,13 +5,9 @@ import {
   EventEmitter,
   inject,
   HostListener,
-  ViewChild,
-  ElementRef,
 } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
-import { ContactsService } from '../../services/contacts.service';
-import { CdkAccordionItem, CdkAccordionModule } from '@angular/cdk/accordion';
 import { TaskInterface } from '../../interfaces/task.interface';
 import { TasksService } from '../../services/tasks.service';
 import { TaskDetailsComponent } from './task-details/task-details.component';
@@ -27,7 +23,6 @@ import { SignalsService } from '../../services/signals.service';
   imports: [
     FormsModule,
     CommonModule,
-    CdkAccordionModule,
     TaskDetailsComponent,
     TaskOverviewComponent,
   ],
@@ -37,35 +32,17 @@ import { SignalsService } from '../../services/signals.service';
 export class AddTaskComponent {
   constructor(private router: Router) {}
 
-  @ViewChild('accordionItem') accordionItem!: CdkAccordionItem;
-  @ViewChild('categoryAccordionItem') categoryAccordionItem!: CdkAccordionItem;
-  @ViewChild('inputFieldSubTask') inputFieldSubTaskRef!: ElementRef;
-
-  inputFieldSubT: string = '';
-  contactsService = inject(ContactsService);
   tasksService = inject(TasksService);
   taskDataService = inject(SingleTaskDataService);
   toastService = inject(ToastService);
   signalService = inject(SignalsService);
-  closeDropdownList: boolean = false;
-
-  mouseX: number = 0;
-  mouseY: number = 0;
-  hoveredContact: any = undefined;
-
-  isEdited: boolean = false;
-  isFormValid: boolean = false;
-
-  searchedContactName: string = '';
-  searchedCategoryName: string = '';
 
   // add-task status
   @Input() isEditTaskDialog: boolean = false;
   @Input() isAddTaskDialog: boolean = false;
-
   @Input() taskData!: TaskInterface;
+
   @Output() cancelEditTask = new EventEmitter<void>();
-  @Output() taskUpdated = new EventEmitter<void>();
   @Output() taskCreated = new EventEmitter<void>();
   @Output() close = new EventEmitter<void>();
 
@@ -76,17 +53,6 @@ export class AddTaskComponent {
     if (!this.taskDataService.editModeActive) {
       this.clearForm();
     }
-  }
-
-  /**
-   * Closes dropdown lists on click.
-   */
-  @HostListener('click')
-  closeDropDowns() {
-    this.closeDropdownList = true;
-    setTimeout(() => {
-      this.closeDropdownList = false;
-    }, 1);
   }
 
   /**
@@ -201,25 +167,30 @@ export class AddTaskComponent {
   }
 
   /**
- * Maps subtasks to the required form structure.
- * @returns Array of subtasks for the form.
- */
-private getSubtasksForForm(): { text: string; isChecked: boolean }[] {
-  return this.taskDataService.subtasksContainer.map(subtask => ({
-    text: subtask.text,
-    isChecked: subtask.isChecked,
-  }));
-}
+   * Maps subtasks to the required form structure.
+   * @returns Array of subtasks for the form.
+   */
+  private getSubtasksForForm(): { text: string; isChecked: boolean }[] {
+    return this.taskDataService.subtasksContainer.map((subtask) => ({
+      text: subtask.text,
+      isChecked: subtask.isChecked,
+    }));
+  }
 
-/**
- * Returns the selected priority as a string ('urgent' | 'medium' | 'low').
- * Defaults to 'medium' if none is selected.
- * @returns The selected priority.
- */
-private getSelectedPriority(): 'urgent' | 'medium' | 'low' {
-  const activeBtn = this.taskDataService.priorityButtons.find(btn => btn.btnActive);
-  return (activeBtn?.priority.toLowerCase() || 'medium') as 'urgent' | 'medium' | 'low';
-}
+  /**
+   * Returns the selected priority as a string ('urgent' | 'medium' | 'low').
+   * Defaults to 'medium' if none is selected.
+   * @returns The selected priority.
+   */
+  private getSelectedPriority(): 'urgent' | 'medium' | 'low' {
+    const activeBtn = this.taskDataService.priorityButtons.find(
+      (btn) => btn.btnActive
+    );
+    return (activeBtn?.priority.toLowerCase() || 'medium') as
+      | 'urgent'
+      | 'medium'
+      | 'low';
+  }
 
   /**
    * Emits the close event if the component is used as a dialog.
