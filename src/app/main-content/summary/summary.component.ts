@@ -9,15 +9,14 @@ import { AuthenticationService } from '../../services/authentication.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './summary.component.html',
-  styleUrl: './summary.component.scss'
+  styleUrl: './summary.component.scss',
 })
 export class SummaryComponent {
-
-  constructor(private router: Router) { }
+  constructor(private router: Router) {}
 
   tasksService = inject(TasksService);
   authService = inject(AuthenticationService);
-  taskOverviewBottom: { text: string; taskCount: number }[] = [];
+  taskOverviewBottom: { text: string }[] = [];
   userName: string | null = null;
 
   taskOverviewTop: {
@@ -25,27 +24,32 @@ export class SummaryComponent {
     text: string;
     icon: string;
     iconHovered: string;
-    isHovered: boolean
+    isHovered: boolean;
   }[] = [
-      {
-        type: 'toDo',
-        text: 'To-Do',
-        icon: './assets/icons/general/edit_white.svg',
-        iconHovered: './assets/icons/general/edit.svg',
-        isHovered: false
-      },
-      {
-        type: 'done',
-        text: 'Done',
-        icon: './assets/icons/general/check_white.svg',
-        iconHovered: './assets/icons/general/check.svg',
-        isHovered: false
-      }
-    ];
+    {
+      type: 'toDo',
+      text: 'To-Do',
+      icon: './assets/icons/general/edit_white.svg',
+      iconHovered: './assets/icons/general/edit.svg',
+      isHovered: false,
+    },
+    {
+      type: 'done',
+      text: 'Done',
+      icon: './assets/icons/general/check_white.svg',
+      iconHovered: './assets/icons/general/check.svg',
+      isHovered: false,
+    },
+  ];
 
   ngOnInit() {
     this.setOverviewDataBottom();
+    this.tasksService.loadTasks();
     this.authService.showActiveUserName();
+  }
+
+  ngOnChanges() {
+    this.setOverviewDataBottom();
   }
 
   // Moved to Authentication Service (global use)
@@ -55,16 +59,13 @@ export class SummaryComponent {
     this.taskOverviewBottom = [
       {
         text: 'Tasks in<br>Board',
-        taskCount: this.tasksCount(),
       },
       {
         text: 'Tasks In<br>Progress',
-        taskCount: this.tasksByType('inProgress'),
       },
       {
         text: 'Awaiting<br>Feedback',
-        taskCount: this.tasksByType('feedback'),
-      }
+      },
     ];
   }
 
@@ -72,25 +73,14 @@ export class SummaryComponent {
     this.router.navigate(['/board']);
   }
 
-  tasksCount() {
-    return this.tasksService.tasks.length;
-  }
-
-  tasksByType(typeInput: string): number {
-    return this.tasksService.tasks.filter(task => task.taskType === typeInput).length;
-  }
-
-  tasksByPriority(priorityInput: string): number {
-    return this.tasksService.tasks.filter(task => task.priority === priorityInput).length;
-  }
-
   today: string = this.formatDate(new Date())!;
   // today: string = new Date().toISOString().split('T')[0]
 
   urgentTasksCount() {
-    const urgentTasksToday = this.tasksService.tasks.filter(task =>
-      task.priority === 'urgent' &&
-      this.formatDate(task.dueDate) === this.today
+    const urgentTasksToday = this.tasksService.tasks.filter(
+      (task) =>
+        task.priority === 'urgent' &&
+        this.formatDate(task.dueDate) === this.today
     );
     return urgentTasksToday.length;
   }

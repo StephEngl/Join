@@ -8,6 +8,7 @@ import {
     addDoc,
     updateDoc,
     deleteDoc,
+    getDocs,
     query,
     orderBy,
     DocumentReference
@@ -51,6 +52,32 @@ export class TasksService implements OnDestroy {
                 console.error('Firestore Error', error.message);
             }
         );
+    }
+
+    async loadTasks(): Promise<void> {
+        try {
+            const snapshot = await getDocs(this.getTasksRef());
+            const tasks: TaskInterface[] = [];
+        
+            snapshot.forEach((docSnap) => {
+            const contact = docSnap.data();
+            tasks.push(this.setTaskObject(docSnap.id, contact));
+            });
+        } catch (error) {
+            console.error('Error loading tasks:', error);
+        }
+    }
+
+    tasksCount() {
+        return this.tasks.length;
+    }
+
+    tasksByType(typeInput: string): number {
+        return this.tasks.filter(task => task.taskType === typeInput).length;
+    }
+
+    tasksByPriority(priorityInput: string): number {
+        return this.tasks.filter(task => task.priority === priorityInput).length;
     }
 
     /**
