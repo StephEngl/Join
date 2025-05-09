@@ -50,9 +50,9 @@ export class ContactsComponent {
   showContactInfo(index: number | undefined) {
     if (this.activeContactIndex === index && this.contactClicked && this.activeContactIndex !== undefined) {
       this.contactClicked = false;
-      setTimeout(() => {
-        this.activeContactIndex = undefined;
-      }, 500);
+      // setTimeout(() => {
+      //   this.activeContactIndex = undefined;
+      // }, 500);
     } else {
       this.activeContactIndex = index;
       this.contactClicked = true;

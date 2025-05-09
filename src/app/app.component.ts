@@ -27,6 +27,11 @@ export class AppComponent {
       this.dailyReset.checkAndResetIfNeeded();
     }, 1000);
   }
+
+  ngOnInit() {
+    this.authService.setActiveUserInitials();
+  }
+
   
 
 }

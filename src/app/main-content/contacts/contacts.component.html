@@ -51,12 +51,21 @@
         <img src="" alt=""
             [src]="this.signalService.isInfoShown() ? './assets/icons/contacts/contact_menu.svg' : './assets/icons/contacts/new_contact.svg'">
     </button>
-    <div class="button-menu" [style.opacity]="showBtnMenu ? '1': '0'"
-        [style.transform]="showBtnMenu ? 'translateX(0)': 'translateX(100%)'" (click)="$event.stopPropagation()">
-        <button (click)="activeContactIndex != undefined ? editContact(activeContactIndex) :  undefined"
-            (mouseenter)="btnEdit = true" (mouseleave)="btnEdit = false">
-            <img class="contact-menu-icon"
-                [src]="btnEdit ? './assets/icons/kanban/edit_active.svg' : './assets/icons/kanban/edit.svg'" alt="">
+
+    <div 
+        class="button-menu" 
+        [style.opacity]="showBtnMenu ? '1': '0'"
+        [style.transform]="showBtnMenu ? 'translateX(0)': 'translateX(100%)'" 
+        (click)="$event.stopPropagation()"
+    >
+    @if (activeContactIndex != undefined && !contactsService.canEditOrDeleteContact(contactsService.contacts[activeContactIndex!].id!)) {
+        <p class="no-edit">Require login to edit own user.</p>
+    } @else {
+        <button
+            (click)="activeContactIndex != undefined ? editContact(activeContactIndex) :  undefined"
+            (mouseenter)="btnEdit = true" (mouseleave)="btnEdit = false"
+        >
+            <img class="contact-menu-icon" [src]="btnEdit ? './assets/icons/kanban/edit_active.svg' : './assets/icons/kanban/edit.svg'" alt="">
             <p [style.color]="btnEdit ? '#29ABE2' : '#0b0e13'">Edit</p>
         </button>
         <button (click)="activeContactIndex != undefined ? deleteContact(activeContactIndex) :  undefined"
@@ -66,7 +75,9 @@
                 alt="">
             <p [style.color]="btnDelete ? '#29ABE2' : '#0b0e13'">Delete</p>
         </button>
+    }
     </div>
+
     <img class="close-info-btn" src="./assets/icons/contacts/arrow_back.svg" alt=""
         [style.opacity]="signalService.isMobile() && contactClicked ? '1' : '0'"
         [style.transform]="signalService.isMobile() && contactClicked ? 'translateY(0)' : 'translateY(-100%)'"

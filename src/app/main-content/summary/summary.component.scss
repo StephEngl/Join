@@ -53,7 +53,7 @@
 
 .summary-section {
     @include dFlex(flex-start, center, 55px);
-    margin-top: 40px;
+    margin-top: 20px;
 }
 
 .summary-wrapper {
@@ -61,7 +61,7 @@
     flex-direction: column;
     flex: 2;
     max-width: 500px;
-    max-height: 502px
+    max-height: 480px
 }
 
 .summary-row {

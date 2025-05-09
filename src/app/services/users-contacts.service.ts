@@ -47,4 +47,5 @@ export class UsersContactsService {
       color: object.color || this.getRandomColor(),
     };
   }
+  
 }

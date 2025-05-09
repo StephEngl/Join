@@ -1,8 +1,19 @@
 import { Injectable, signal, inject } from '@angular/core';
 import { initializeApp } from "firebase/app";
 import { Router } from '@angular/router';
-import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword, Auth, updateProfile, onAuthStateChanged, signOut } from "@angular/fire/auth";
+import {
+  getAuth,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  Auth,
+  updateProfile,
+  onAuthStateChanged,
+  signOut,
+  UserCredential,
+  deleteUser
+} from "@angular/fire/auth";
 import { SignalsService } from './signals.service';
+import { UsersService } from './users.service';
 
 @Injectable({
   providedIn: 'root'
@@ -10,6 +21,7 @@ import { SignalsService } from './signals.service';
 export class AuthenticationService {
   isAuthenticated = signal<boolean>(false);
   signalService = inject(SignalsService);
+  usersService = inject(UsersService);
   activeUserName: string = '';
   private auth: Auth;
 
@@ -32,24 +44,13 @@ export class AuthenticationService {
   isLoggedIn(): boolean {
     return this.isAuthenticated();
   }
-  // end test functions
 
-  // await setDoc(doc(this.firestore, 'users', user.uid), {
-  //   name: name,
-  //   mail: email,
-  //   phone: 'no number set',
-  //   createdAt: new Date(),
-  // });
-
-
-  async createUser(email: string, password: string, name: string): Promise<any> {
+  async createUser(email: string, password: string, name: string): Promise<UserCredential> {
     try {
       const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
-      setTimeout(() => {
-        this.updateProfileUser(name);
-        this.router.navigate(['/login']);
-      }, 10);
-      return userCredential.user;
+      await updateProfile(userCredential.user, { displayName: name });
+      this.router.navigate(['/login']);
+      return userCredential;
     } catch (error) {
       throw error;
     }
@@ -122,67 +123,40 @@ export class AuthenticationService {
       this.activeUserName = 'Guest';
     }
   }
+
+  activeInitials = signal<string>('');
+
+  async setActiveUserInitials() {
+    try {
+      const user = await this.onAuthStateChanged();
+      const initials = this.displayNameInitials(user?.displayName);
+      this.activeInitials.set(initials || 'G');
+    } catch (error) {
+      console.error('Error:', error);
+      this.activeInitials.set('Er');
+    }
+  }
+
+  displayNameInitials(displayName: string | undefined) {
+    if (!displayName) return '';
+    const parts = displayName.trim().split(' ');
+    const firstLetter = parts[0]?.charAt(0).toUpperCase() || '';
+    const lastLetter = parts[parts.length - 1]?.charAt(0).toUpperCase() || '';
+    return firstLetter + lastLetter;
+  }
+
+  async deleteUser(): Promise<void> {
+    const user = this.auth.currentUser;
+    if (!user) return;
+    try {
+      await deleteUser(user);
+      this.isAuthenticated.set(false);
+      this.router.navigate(['/login']);
+    } catch (error) {
+      console.error("Deleting active user failed", error);
+    }
+  }
   
-  // createUser(email: string, password: string): Promise<any> {
-  //   return createUserWithEmailAndPassword(this.auth, email, password)
-  //     .then((userCredential) => {
-  //       const user = userCredential.user;
-  //       return user;
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       throw error;
-  //     });
-  // }
-
-  // signInUser(email: string, password: string): Promise<any> {
-  //   return signInWithEmailAndPassword(this.auth, email, password)
-  //     .then((userCredential) => {
-  //       const user = userCredential.user;
-  //       return user;
-  //     })
-  //     .catch((error) => {
-  //       const errorCode = error.code;
-  //       const errorMessage = error.message;
-  //       throw error;
-  //     });
-  // }
-
-  // updateProfileUser(): Promise<void> {
-  //   if (this.auth.currentUser) {
-  //     return updateProfile(this.auth.currentUser, {
-  //       displayName: "Jane Q. User"
-  //     });
-  //   }
-  //   else {
-  //     return Promise.reject(new Error('Current no user logged in.'));
-  //   }
-  // }
-
-  // onAuthStateChanged(): Promise<any> {
-  //   return new Promise((resolve) => {
-  //     onAuthStateChanged(this.auth, (user) => {
-  //       resolve(user);
-  //     });
-  //   }).then((user) => {
-  //     return user;
-  //   }).catch((error) => {
-  //     console.log('Auth status error:', error);
-  //     return null;
-  //   });
-  // }
-
-  // signOutUser(): Promise<void> {
-  //   return signOut(this.auth)
-  //     .then(() => {
-  //       return;
-  //     })
-  //     .catch((error) => {
-  //       console.log('Sign out error:', error);
-  //       return;
-  //     });
-  // }
 }
 
 

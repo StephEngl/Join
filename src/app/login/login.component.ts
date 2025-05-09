@@ -37,35 +37,6 @@ export class LoginComponent {
         this.startAnimation();
     }
 
-    /* DO NOT DELETE test variables & functions SIGN UP USER -> */
-    // emailTemp: string = "";
-    // passwordTemp: string = "";
-    // nameTemp: string = "";
-
-    // createUser() {
-    //   const user = {
-    //     name: this.nameTemp,
-    //     mail: this.emailTemp,
-    //     phone: '',
-    //   }
-
-    //   if (this.userAlreadyExists(this.emailTemp)) {
-    //     console.log("User already exists!");
-    //     return;
-    //   }
-    //   this.authService.createUser(this.emailTemp, this.passwordTemp, this.nameTemp);
-    //   this.usersService.addUser(user);
-    // }
-
-    // userAlreadyExists(mail: string): boolean {
-    //   return (
-    //     this.usersService.users.some(
-    //       user => user.mail.trim().toLowerCase() === mail.trim().toLowerCase()
-    //     )
-    //   );
-    // }
-    /* <--  DO NOT DELETE test variables & functions SIGN UP USER */
-
     startAnimation() {
         if (this.signalService.isMobile()) {
             this.loginBackgroundColor = "#2A3647";
@@ -90,13 +61,7 @@ export class LoginComponent {
         this.signalService.hideHrefs.set(true);
         this.router.navigate(['/legal-notice']);
     }
-
-    // /* OLD ROUTING VERSION */
-    // toSignUp() {
-    //     this.signalService.hideHrefs.set(true);
-    //     this.router.navigate(['/sign-up']);
-    // }
-
+    
     /* Opens the sign-up dialog inline (replaces app-login-dialog via @if) */
     toSignUpDialog() {
         this.signalService.hideHrefs.set(true);

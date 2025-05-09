@@ -1,8 +1,9 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, HostListener, inject, signal } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SignalsService } from '../../services/signals.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
+import { UsersService } from '../../services/users.service';
 
 @Component({
   selector: 'app-header',
@@ -14,6 +15,7 @@ import { Router } from '@angular/router';
 export class HeaderComponent {
   signalService = inject(SignalsService);
   authService = inject(AuthenticationService);
+  usersService = inject(UsersService);
   showDropdown = false;
   isDropdownOpen = false;
   dropdownVisible = false;
@@ -25,7 +27,8 @@ export class HeaderComponent {
    * Initializes the HeaderComponent.
    * @param router Angular Router for navigation.
    */
-  constructor(private router: Router) {}
+  constructor(private router: Router) {
+  }
 
   /**
    * Handles window resize events to update responsive state.
@@ -121,5 +124,7 @@ export class HeaderComponent {
   backToLogin() {
     this.signalService.hideHrefs.set(false);
     this.router.navigate(['login']);
-  }
+  };
+
+
 }
