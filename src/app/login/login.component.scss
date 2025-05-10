@@ -6,7 +6,7 @@
 
 app-login-dialog {
     @include dFlex();
-    height: 100%;
+    height: 100vh;
     padding: 16px;
     z-index: 2;
 }
@@ -42,23 +42,6 @@ app-login-dialog {
     }
 }
 
-// will be deleted after sprint is done // auth implemented -->
-    .test-login {
-        @include dFlex();
-        bottom: 10vh;
-        z-index: 4;
-    }
-    .temp-to-main {
-        position: absolute;
-        bottom: 8vh;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 100px;
-        height: 50px;
-        background-color: pink;
-    }
-// <-- will be deleted after sprint is done // auth implemented
-
 .login-header {
     @include dFlex(center, center, 15px, absolute);
     padding: 15px;
@@ -79,6 +62,7 @@ app-login-dialog {
 
 .login-footer {
     @include dFlex(center, center, 15px, absolute);
+    text-wrap: nowrap;
     bottom: 5vh;
     left: 50%;
     transform: translateX(-50%);
@@ -92,8 +76,40 @@ app-login-dialog {
 
 
 // Media Queries
+@media screen and (max-width: 700px) {
+    .login-header {
+        @include dFlex(center, center, 15px, absolute);
+        padding: 15px;
+        top: auto;
+        bottom: 10vh;
+        right: 50%;
+        transform: translateX(50%);
+        width: 100vw;
+        >p {
+            font-weight: 400;
+        }
+        .signup-btn {
+            font-weight: 600;
+            padding: 15px 20px;
+            border-radius: 8px;
+            color: white;
+            background-color: $col-ref-active-nav;
+            z-index: 10;
+        }
+    }
+
+    .logo-animated {
+        &.animate {
+            width: 100px;
+            height: 100px;
+        }
+    }
+}
 @media screen and (max-width:360px) {
     app-login-dialog {
         padding: 8px
     }
+
+
+    
 }

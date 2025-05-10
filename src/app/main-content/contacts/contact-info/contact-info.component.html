@@ -16,7 +16,7 @@
             <h3>{{ contactsService.contacts[contactIndex].name }}</h3>
             <div class="btn-container">
                 @if (!contactsService.canEditOrDeleteContact(contactsService.contacts[contactIndex].id!)) {
-                    Require login to edit own user.
+                    <p class="no-edit">Require login to edit own user.</p>
                 } @else {
                     <button (click)="editContact(contactIndex)" (mouseenter)="btnEdit = true"
                     (mouseleave)="btnEdit = false">
