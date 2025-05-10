@@ -15,6 +15,11 @@ import { ContactsService } from '../services/contacts.service';
     templateUrl: './login.component.html',
     styleUrl: './login.component.scss'
 })
+
+/**
+ * LoginComponent provides the login and registration entry point of the application.
+ * Handles routing to legal pages, logo animations, and switching between login and sign-up views.
+*/
 export class LoginComponent {
 
     signalService = inject(SignalsService);
@@ -33,10 +38,12 @@ export class LoginComponent {
 
     constructor(private router: Router) { }
 
+    /** Triggers the intro animation and logo adjustments for mobile or desktop. */
     ngOnInit() {
         this.startAnimation();
     }
 
+    /** Starts the login screen animation sequence. */
     startAnimation() {
         if (this.signalService.isMobile()) {
             this.loginBackgroundColor = "#2A3647";
@@ -44,7 +51,6 @@ export class LoginComponent {
         } else {
             this.loginBackgroundColor = "#F6F7F8";
         }
-
         setTimeout(() => {
             this.loginLogoImgSrc = "./assets/icons/header/logo.svg";
             this.loginBackgroundColor = "transparent";
@@ -52,16 +58,18 @@ export class LoginComponent {
         }, 400);
     }
 
+    /** Navigates to the privacy policy page. */
     toPrivacyPolicy() {
         this.signalService.hideHrefs.set(true);
         this.router.navigate(['/privacy-policy']);
     }
 
+    /** Navigates to the legal notice page. */
     toLegalNotice() {
         this.signalService.hideHrefs.set(true);
         this.router.navigate(['/legal-notice']);
     }
-    
+
     /* Opens the sign-up dialog inline (replaces app-login-dialog via @if) */
     toSignUpDialog() {
         this.signalService.hideHrefs.set(true);
