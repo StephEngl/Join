@@ -23,7 +23,6 @@ import { SignalsService } from '../../../../services/signals.service';
     export class TaskInfoComponent {
     contactsService = inject(ContactsService);
     toastService = inject(ToastService);
-
     signalsService = inject(SignalsService);
     tasksService = inject(TasksService);
     @Input() taskDataDialogInfo!: TaskInterface;
