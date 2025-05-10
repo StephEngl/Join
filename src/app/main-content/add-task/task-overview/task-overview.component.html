@@ -40,7 +40,7 @@
   <label for="due-date">Due date <span>*</span></label>
   <input
     [ngModel]="taskDataService.editModeActive ? formatDate(tasksService.tasks[taskIndex()].dueDate) : formatDate(taskDataService.inputTaskDueDate)"
-    (ngModelChange)="taskDataService.editModeActive ? onDueDateEditChange($event) : onDueDateChange($event)"
+    (ngModelChange)="onDueDateChange($event)"
     #dateInput="ngModel"
     id="due-date"
     name="dueDate"
