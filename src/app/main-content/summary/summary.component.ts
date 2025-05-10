@@ -11,14 +11,30 @@ import { AuthenticationService } from '../../services/authentication.service';
   templateUrl: './summary.component.html',
   styleUrl: './summary.component.scss',
 })
+
+/**
+ * SummaryComponent displays an overview of the user's tasks and current day information.
+ * Includes greeting logic, task statistics, and navigation to the task board.
+ */
 export class SummaryComponent {
+  
   constructor(private router: Router) {}
 
   tasksService = inject(TasksService);
   authService = inject(AuthenticationService);
-  taskOverviewBottom: { text: string }[] = [];
   userName: string | null = null;
-
+  today: string = this.formatDate(new Date())!;
+  taskOverviewBottom: { text: string }[] = [
+    {
+      text: 'Tasks in<br>Board',
+    },
+    {
+      text: 'Tasks In<br>Progress',
+    },
+    {
+      text: 'Awaiting<br>Feedback',
+    },
+  ];
   taskOverviewTop: {
     type: string;
     text: string;
@@ -42,40 +58,21 @@ export class SummaryComponent {
     },
   ];
 
+  /** Lifecycle hook: loads tasks and shows active user name. */
   ngOnInit() {
-    this.setOverviewDataBottom();
     this.tasksService.loadTasks();
     this.authService.showActiveUserName();
   }
 
-  ngOnChanges() {
-    this.setOverviewDataBottom();
-  }
-
-  // Moved to Authentication Service (global use)
-  // async showUserName() {}
-
-  setOverviewDataBottom() {
-    this.taskOverviewBottom = [
-      {
-        text: 'Tasks in<br>Board',
-      },
-      {
-        text: 'Tasks In<br>Progress',
-      },
-      {
-        text: 'Awaiting<br>Feedback',
-      },
-    ];
-  }
-
+  /** Navigates to the task board view. */
   toBoard() {
     this.router.navigate(['/board']);
   }
 
-  today: string = this.formatDate(new Date())!;
-  // today: string = new Date().toISOString().split('T')[0]
-
+  /**
+   * Returns number of urgent tasks due today.
+   * @returns Count of urgent tasks with due date matching today.
+   */
   urgentTasksCount() {
     const urgentTasksToday = this.tasksService.tasks.filter(
       (task) =>
@@ -85,12 +82,11 @@ export class SummaryComponent {
     return urgentTasksToday.length;
   }
 
-  // formatDate(date: Date | null): string | null {
-  //   return date ? date.toISOString().split('T')[0] : null;
-  // }
-
-  //FIXME: Date name full show Octotber XX, XXXX
-
+  /**
+   * Formats a given date to 'Month Day, Year' format.
+   * @param date - A Date object or null.
+   * @returns A formatted string or null.
+   */
   formatDate(date: Date | null): string | null {
     if (!date) return null;
     return new Intl.DateTimeFormat('en-US', {
@@ -100,6 +96,10 @@ export class SummaryComponent {
     }).format(date);
   }
 
+  /**
+   * Returns a greeting based on current hour.
+   * @returns A string like "Good morning" or "Good evening".
+   */
   textChangeTime(): string {
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 9) return 'Good morning';
