@@ -15,6 +15,10 @@ import { ToastService } from '../../services/toast.service';
   styleUrl: './contacts.component.scss',
 })
 
+/**
+ * Component responsible for displaying and managing contacts.
+ * Allows adding, editing, deleting, and viewing contact information.
+ */
 export class ContactsComponent {
   toastService = inject(ToastService);
   contactsService = inject(ContactsService);
@@ -32,12 +36,15 @@ export class ContactsComponent {
   btnDelete: boolean = false;
   btnEdit: boolean = false;
 
+
+  /** Initializes the component by loading contacts and grouping them by the first letter. */
   async ngOnInit() {
     await this.loadContacts(); 
     this.signalService.checkScreenSize();
     this.groupContactsByFirstLetter();
   }
 
+  /** Loads contacts from the service. */
   async loadContacts() {
     try {
       await this.contactsService.loadContacts();
@@ -46,32 +53,43 @@ export class ContactsComponent {
     }
   }
 
+  /** Handles window resize events to update screen size info. */
   @HostListener('window:resize', [])
   onWindowResize() {
     this.signalService.checkScreenSize();
   }
 
+  /**Groups contacts by their first letter. */
   groupContactsByFirstLetter() {
     this.firstLetters = [...new Set(this.contactsService.contacts.map(contact => contact.name.charAt(0).toUpperCase()))];
     return this.firstLetters;
   }
 
+  /**
+   * Toggles the display of contact info.
+   * @param index The index of the contact to display.
+   */
   showContactInfo(index: number | undefined) {
     if (this.activeContactIndex === index && this.contactClicked && this.activeContactIndex !== undefined) {
       this.contactClicked = false;
-      // setTimeout(() => {
-      //   this.activeContactIndex = undefined;
-      // }, 500);
     } else {
       this.activeContactIndex = index;
       this.contactClicked = true;
     }
   }
 
+  /**
+   * Handles the display status of the contact dialog.
+   * @param event Whether to show the dialog.
+   */
   handleStatusDialog(event: boolean): void {
     this.showDialog = event;
   }
 
+  /**
+   * Sets the data for editing a contact.
+   * @param data The contact data to edit.
+   */
   handleContactData(data: { id: string, name: string; mail: string; phone: string }) {
     this.editId = data.id;
     this.editName = data.name;
@@ -79,18 +97,33 @@ export class ContactsComponent {
     this.editPhone = data.phone;
   }
 
+  /**
+   * Sets the active contact index for editing.
+   * @param event The index of the contact.
+   */
   handleEditIndex(event: any) {
     this.activeContactIndex = event;
   }
 
+  /**
+   * Handles closing of the contact info view.
+   * @param event Whether the contact info should be closed.
+   */
   handleCloseContactInfo(event: boolean): void {
     this.contactClicked = !event;
   }
 
+  /**
+   * Handles the creation of a new contact.
+   * @param event The index for a new contact.
+   */
   handleNewContact(event: number) {
     this.showContactInfo(event);
   }
 
+  /**
+   * Starts a new contact creation process.
+   */
   newContact() {
     this.contactClicked = false;
     this.activeContactIndex = undefined;
@@ -100,6 +133,10 @@ export class ContactsComponent {
     this.editPhone = undefined;
   }
 
+  /**
+   * Returns the last initial of a contact's name.
+   * @param index The contact index.
+   */
   lastInitial(index: number): string {
     const contact = index != null ? this.contactsService.contacts[index] : null;
     if (!contact || !contact.name) return '';
@@ -108,10 +145,15 @@ export class ContactsComponent {
     return lastWord.charAt(0).toUpperCase();
   }
 
+  /** Displays additional contact info. */
   showInfos() {
     this.signalService.isInfoShown.set(true);
   }
 
+  /**
+   * Prepares a contact for editing.
+   * @param index The contact index.
+   */
   editContact(index: number) {
     this.showDialog = true;
     const contact = this.contactsService.contacts[index];
@@ -120,6 +162,10 @@ export class ContactsComponent {
     this.editPhone = contact.phone;
   }
 
+  /**
+   * Deletes a contact.
+   * @param index The contact index to delete.
+   */
   async deleteContact(index: number) {
     const contactId = this.contactsService.contacts[index].id;
     if (contactId) {
@@ -134,37 +180,44 @@ export class ContactsComponent {
     }
   }
 
+  /** Toggles the visibility of the button menu. */
   toggleBtnMenu() {
     this.showBtnMenu = !this.showBtnMenu;
   }
 
+  /** Closes the contact info view. */
   closeContactInfo() {
     this.signalService.isInfoShown.set(false);
     this.contactClicked = false;
   }
 
+  /** Toggles the visibility of the dialog. */
   toggleDialog() {
     this.showDialog = !this.showDialog;
   }
 
+  /** Displays a success message when a contact is created. */
   onContactCreated() {
     this.toastService.triggerToast('Contact successfully created', 'create');
   }
 
-
+  /** Displays a success message when a contact is updated. */
   onContactUpdated() {
     this.toastService.triggerToast('Changes saved', 'update');
   }
 
+  /** Displays a success message when a contact is deleted. */
   onContactDeleted() {
     this.toastService.triggerToast('Contact deleted', 'delete');
   }
 
+  /** Displays an error message when an error occurs. */
   onContactError() {
     this.showDialog = false;
     this.toastService.triggerToast('Something went wrong', 'error');
   }
 
+  /** Deletes a contact from the dialog. */
   deleteContactFromDialog(): void {
     this.showDialog = false;
     if (this.activeContactIndex !== undefined) {
