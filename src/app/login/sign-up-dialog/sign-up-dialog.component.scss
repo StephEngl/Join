@@ -1,11 +1,163 @@
-.sign-up-dialog-section {
-    /* Outer wrapper for the dialog container */
+@import "../../../assets/styles/mixins.scss";
+@import "../../../assets/styles/variables.scss";
+@import "../../../assets/fonts/fonts.scss";
+
+.sign-up-section {
     display: flex;
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    padding: 32px;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    padding: 32px;
+    gap: 24px;
+
+    .sign-up-header {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+
+        .sign-up-header-left,
+        .sign-up-header-right {
+            width: 20%;
+        }
+
+        .sign-up-header-middle {
+            width: 60%;
+            text-align: center;
+
+            .sign-up-header-txt h2 {
+                margin: 0;
+                font-size: 1.5rem;
+            }
+
+            .sign-up-header-underline {
+                width: 100%;
+                height: 2px;
+                background-color: #ccc;
+                margin-top: 8px;
+            }
+        }
+    }
+
+    .sign-up-content {
+        display: flex;
+        flex-direction: column;
+        gap: 24px;
+
+        .sign-up-form-and-accept-container {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+
+            form {
+                display: flex;
+                flex-direction: column;
+
+                .sign-up-form-container {
+                    display: flex;
+                    flex-direction: column;
+                    gap: 16px;
+
+                    .form-field {
+                        position: relative;
+
+                        input {
+                            width: 100%;
+                            padding: 12px 40px 12px 12px;
+                            font-size: 1rem;
+                            border: 1px solid #ccc;
+                            border-radius: 8px;
+                            outline: none;
+                            transition: border-color 0.2s ease;
+
+                            &:focus {
+                                border-color: #666;
+                            }
+                        }
+
+                        &.invalid input {
+                            border-color: red;
+                        }
+
+                        .form-icon {
+                            position: absolute;
+                            right: 12px;
+                            top: 50%;
+                            transform: translateY(-50%);
+                            font-size: 1.2rem;
+                            color: #777;
+
+                            &.clickable {
+                                cursor: pointer;
+                            }
+                        }
+
+                        .error-message {
+                            color: red;
+                            font-size: 0.875rem;
+                            margin-top: 4px;
+                            padding-left: 4px;
+                        }
+                    }
+                }
+
+                .sign-up-accept-container {
+                    display: flex;
+
+                    .custom-checkbox {
+                        display: flex;
+                        align-items: center;
+                        font-size: 0.875rem;
+                        cursor: pointer;
+                        user-select: none;
+                        gap: 0.5rem;
+
+                        input[type="checkbox"] {
+                            appearance: none;
+                            width: 1rem;
+                            height: 1rem;
+                            background-color: #f0f0f0;
+                            border: 1px solid black;
+                            border-radius: 4px;
+
+                            &:checked::after {
+                                content: '✓';
+                                font-size: 0.75rem;
+                                color: black;
+                                display: inline-block;
+                                text-align: center;
+                                width: 100%;
+                            }
+                        }
+
+                        a {
+                            text-decoration: underline;
+                            color: #092931;
+                        }
+                    }
+                }
+
+                .sign-up-footer {
+                    margin-top: 16px;
+
+                    .sign-up-button {
+                        width: 100%;
+                        padding: 12px;
+                        background-color: #092931;
+                        color: white;
+                        border: none;
+                        border-radius: 8px;
+                        font-size: 1rem;
+                        cursor: pointer;
+
+                        &:hover {
+                            background-color: #0b3a45;
+                        }
+                    }
+                }
+            }
+        }
+    }
 }
