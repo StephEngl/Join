@@ -1,11 +1,18 @@
 <div class="sign-up-section">
     <div class="sign-up-header">
-        <div class="sign-up-header-left"><div class="sign-up-arrow"></div></div>
-        <div class="sign-up-header-middle">
-            <div class="sign-up-header-txt"><h2>Sign up</h2></div>
-            <div class="sign-up-header-underline"></div>
+        <div class="sign-up-header-left">
+            <div class="sign-up-arrow">
+            </div>
         </div>
-        <div class="sign-up-header-right"></div>
+        <div class="sign-up-header-middle">
+            <div class="sign-up-header-txt">
+                <h2>Sign up</h2>
+            </div>
+            <div class="sign-up-header-underline">
+            </div>
+        </div>
+        <div class="sign-up-header-right">
+        </div>
     </div>
     <div class="sign-up-content">
         <div class="sign-up-form-and-accept-container">
@@ -55,8 +62,9 @@
                 <div class="sign-up-accept-container">
                     <label class="custom-checkbox">
                         <input type="checkbox" [checked]="acceptPolicy" (change)="acceptPolicy = !acceptPolicy" />
-                        <span class="checkmark"></span>
-                        I accept the <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>.
+                        <span class="checkmark">
+                            I accept the <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>.
+                        </span>
                     </label>
                 </div>
                 <div class="sign-up-footer">

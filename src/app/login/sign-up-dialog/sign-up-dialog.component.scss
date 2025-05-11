@@ -3,48 +3,51 @@
 @import "../../../assets/fonts/fonts.scss";
 
 .sign-up-section {
-    display: flex;
+    @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
     flex-direction: column;
-    align-items: center;
-    justify-content: center;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
     padding: 32px;
-    gap: 24px;
 
     .sign-up-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        @include dFlex($jc: space-between, $ai: center, $gap: 0px, $position: relative);
+        width: 100%;
+        height: auto;
 
         .sign-up-header-left,
         .sign-up-header-right {
-            width: 20%;
+            @include dFlex($jc: center, $ai: center, $gap: 0px, $position: relative);
+            width: 10%;
         }
 
         .sign-up-header-middle {
-            width: 60%;
+            @include dFlex($jc: center, $ai: center, $gap: 0px, $position: relative);
+            flex-direction: column;
+            width: 80%;
             text-align: center;
 
             .sign-up-header-txt h2 {
+                @include dFlex($jc: center, $ai: center, $gap: 0px, $position: relative);
+                width: 100%;
                 margin: 0;
-                font-size: 1.5rem;
+                font-size: clamp(2.9375rem, 2.5rem + 1.2vw, 4rem);
             }
 
             .sign-up-header-underline {
-                width: 100%;
+                @include dFlex($jc: center, $ai: center, $gap: 0px, $position: relative);
+                width: 150px;
                 height: 2px;
-                background-color: #ccc;
+                background-color: $col-ref-highlight;
                 margin-top: 8px;
             }
         }
     }
 
     .sign-up-content {
-        display: flex;
+        @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
         flex-direction: column;
-        gap: 24px;
+        padding: 1.5rem;
 
         .sign-up-form-and-accept-container {
             display: flex;
@@ -104,12 +107,12 @@
                 }
 
                 .sign-up-accept-container {
-                    display: flex;
+                    @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
+                    padding: 1.5rem;
 
                     .custom-checkbox {
-                        display: flex;
-                        align-items: center;
-                        font-size: 0.875rem;
+                    @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
+                        font-size: 1rem;
                         cursor: pointer;
                         user-select: none;
                         gap: 0.5rem;
@@ -133,18 +136,22 @@
                         }
 
                         a {
-                            text-decoration: underline;
-                            color: #092931;
+                            text-decoration: none;
+                            color: $col-ref-highlight;
+                            font-weight: bold;
                         }
                     }
                 }
 
                 .sign-up-footer {
-                    margin-top: 16px;
+                    @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
+                    width: auto;
+                    padding: 1rem;
+                    font-size: 1rem;
 
                     .sign-up-button {
-                        width: 100%;
-                        padding: 12px;
+                        width: auto;
+                        padding: 1rem;
                         background-color: #092931;
                         color: white;
                         border: none;
