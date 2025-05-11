@@ -11,6 +11,14 @@ app-login-dialog {
     z-index: 2;
 }
 
+app-sign-up-dialog {
+    @include dFlex();
+    width: auto;
+    height: 100%;
+    padding: 1rem;
+    z-index: 2;
+}
+
 .background-animated,
 .logo-animated {
     position: absolute;

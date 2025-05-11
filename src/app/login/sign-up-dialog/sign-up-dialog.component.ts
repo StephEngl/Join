@@ -9,6 +9,7 @@ import { SignUpComponent } from './sign-up/sign-up.component';
     templateUrl: './sign-up-dialog.component.html',
     styleUrl: './sign-up-dialog.component.scss'
 })
+
 export class SignUpDialogComponent {
     @Output() closeDialog = new EventEmitter<void>(); /* Emits when user clicks outside dialog */
     @Output() signUpSuccess = new EventEmitter<void>(); /* Emits when sign-up is successful */

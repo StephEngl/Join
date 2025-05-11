@@ -3,42 +3,45 @@
 @import "../../../../assets/fonts/fonts.scss";
 
 .sign-up-section {
-    /* Main wrapper for the sign-up screen */
-    display: flex;
+    @include dFlex($jc: center, $ai: center);
     flex-direction: column;
     padding: 32px;
     gap: 24px;
 
     .sign-up-header {
-        display: flex;
-        justify-content: space-between;
-        align-items: center;
+        width: 100%;
+        @include dFlex($jc: space-between, $ai: center);
 
         .sign-up-header-left,
         .sign-up-header-right {
             width: 20%;
+            @include dFlex($jc: center, $ai: center);
         }
 
         .sign-up-header-middle {
             width: 60%;
+            @include dFlex($jc: center, $ai: center);
+            flex-direction: column;
             text-align: center;
 
             .sign-up-header-txt h2 {
+                @include dFlex($jc: center, $ai: center);
                 margin: 0;
                 font-size: 1.5rem;
             }
 
             .sign-up-header-underline {
-                width: 100%;
+                width: 150px;
                 height: 2px;
-                background-color: #ccc;
+                @include dFlex($jc: center, $ai: center);
+                background-color: $col-ref-highlight;
                 margin-top: 8px;
             }
         }
     }
 
     .sign-up-content {
-        display: flex;
+        @include dFlex($jc: center, $ai: center);
         flex-direction: column;
         gap: 24px;
 
