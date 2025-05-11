@@ -1,5 +1,12 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Service for providing dummy contact data.
+ * 
+ * This service contains a predefined list of dummy contacts that can be used for testing
+ * or populating a contact list in the application. Each contact includes a name, email address,
+ * and phone number.
+ */
 @Injectable({
   providedIn: 'root'
 })

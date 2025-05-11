@@ -9,98 +9,84 @@ import { AuthenticationService } from '../../services/authentication.service';
   standalone: true,
   imports: [CommonModule],
   templateUrl: './summary.component.html',
-  styleUrl: './summary.component.scss'
+  styleUrl: './summary.component.scss',
 })
-export class SummaryComponent {
 
-  constructor(private router: Router) { }
+/**
+ * SummaryComponent displays an overview of the user's tasks and current day information.
+ * Includes greeting logic, task statistics, and navigation to the task board.
+ */
+export class SummaryComponent {
+  
+  constructor(private router: Router) {}
 
   tasksService = inject(TasksService);
   authService = inject(AuthenticationService);
-  taskOverviewBottom: { text: string; taskCount: number }[] = [];
   userName: string | null = null;
-
+  today: string = this.formatDate(new Date())!;
+  taskOverviewBottom: { text: string }[] = [
+    {
+      text: 'Tasks in<br>Board',
+    },
+    {
+      text: 'Tasks In<br>Progress',
+    },
+    {
+      text: 'Awaiting<br>Feedback',
+    },
+  ];
   taskOverviewTop: {
     type: string;
     text: string;
     icon: string;
     iconHovered: string;
-    isHovered: boolean
+    isHovered: boolean;
   }[] = [
-      {
-        type: 'toDo',
-        text: 'To-Do',
-        icon: './assets/icons/general/edit_white.svg',
-        iconHovered: './assets/icons/general/edit.svg',
-        isHovered: false
-      },
-      {
-        type: 'done',
-        text: 'Done',
-        icon: './assets/icons/general/check_white.svg',
-        iconHovered: './assets/icons/general/check.svg',
-        isHovered: false
-      }
-    ];
+    {
+      type: 'toDo',
+      text: 'To-Do',
+      icon: './assets/icons/general/edit_white.svg',
+      iconHovered: './assets/icons/general/edit.svg',
+      isHovered: false,
+    },
+    {
+      type: 'done',
+      text: 'Done',
+      icon: './assets/icons/general/check_white.svg',
+      iconHovered: './assets/icons/general/check.svg',
+      isHovered: false,
+    },
+  ];
 
+  /** Lifecycle hook: loads tasks and shows active user name. */
   ngOnInit() {
-    this.setOverviewDataBottom();
+    this.tasksService.loadTasks();
     this.authService.showActiveUserName();
   }
 
-  // Moved to Authentication Service (global use)
-  // async showUserName() {}
-
-  setOverviewDataBottom() {
-    this.taskOverviewBottom = [
-      {
-        text: 'Tasks in<br>Board',
-        taskCount: this.tasksCount(),
-      },
-      {
-        text: 'Tasks In<br>Progress',
-        taskCount: this.tasksByType('inProgress'),
-      },
-      {
-        text: 'Awaiting<br>Feedback',
-        taskCount: this.tasksByType('feedback'),
-      }
-    ];
-  }
-
+  /** Navigates to the task board view. */
   toBoard() {
     this.router.navigate(['/board']);
   }
 
-  tasksCount() {
-    return this.tasksService.tasks.length;
-  }
-
-  tasksByType(typeInput: string): number {
-    return this.tasksService.tasks.filter(task => task.taskType === typeInput).length;
-  }
-
-  tasksByPriority(priorityInput: string): number {
-    return this.tasksService.tasks.filter(task => task.priority === priorityInput).length;
-  }
-
-  today: string = this.formatDate(new Date())!;
-  // today: string = new Date().toISOString().split('T')[0]
-
+  /**
+   * Returns number of urgent tasks due today.
+   * @returns Count of urgent tasks with due date matching today.
+   */
   urgentTasksCount() {
-    const urgentTasksToday = this.tasksService.tasks.filter(task =>
-      task.priority === 'urgent' &&
-      this.formatDate(task.dueDate) === this.today
+    const urgentTasksToday = this.tasksService.tasks.filter(
+      (task) =>
+        task.priority === 'urgent' &&
+        this.formatDate(task.dueDate) === this.today
     );
     return urgentTasksToday.length;
   }
 
-  // formatDate(date: Date | null): string | null {
-  //   return date ? date.toISOString().split('T')[0] : null;
-  // }
-
-  //FIXME: Date name full show Octotber XX, XXXX
-
+  /**
+   * Formats a given date to 'Month Day, Year' format.
+   * @param date - A Date object or null.
+   * @returns A formatted string or null.
+   */
   formatDate(date: Date | null): string | null {
     if (!date) return null;
     return new Intl.DateTimeFormat('en-US', {
@@ -110,6 +96,10 @@ export class SummaryComponent {
     }).format(date);
   }
 
+  /**
+   * Returns a greeting based on current hour.
+   * @returns A string like "Good morning" or "Good evening".
+   */
   textChangeTime(): string {
     const hour = new Date().getHours();
     if (hour >= 5 && hour < 9) return 'Good morning';

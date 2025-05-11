@@ -12,10 +12,10 @@ import {
   DragDropModule,
 } from '@angular/cdk/drag-drop';
 import { AddTaskComponent } from '../add-task/add-task.component';
-import { Subscription } from 'rxjs';
 import { SingleTaskDataService } from '../../services/single-task-data.service';
 import { trigger, transition, style, animate } from '@angular/animations';
 import { ViewChildren, ElementRef, QueryList } from '@angular/core';
+
 @Component({
   selector: 'app-board',
   standalone: true,
@@ -39,30 +39,35 @@ import { ViewChildren, ElementRef, QueryList } from '@angular/core';
     ]),
   ],
 })
+
+/**
+ * The `BoardComponent` represents a Kanban-like task board that supports
+ * task filtering, drag-and-drop reordering, responsive behavior, and task dialogs.
+ */
 export class BoardComponent {
+
   tasksService = inject(TasksService);
   singleTaskDataService = inject(SingleTaskDataService);
+  @ViewChildren('taskList') taskLists!: QueryList<ElementRef<HTMLElement>>;
   searchText: string = '';
   searchActive: boolean = false;
   isMobile = 'ontouchstart' in window || window.innerWidth <= 830;
-
   showTaskDialog: boolean = false;
   showAddTaskDialog: boolean = false;
   isAddTaskDialog: boolean = false;
   selectedTask: TaskInterface | null = null;
-
+  btnAddHover = false;
+  hoveredColumn: string = '';
   boardColumns: { taskStatus: string; title: string }[] = [
     { taskStatus: 'toDo', title: 'To do' },
     { taskStatus: 'inProgress', title: 'In progress' },
     { taskStatus: 'feedback', title: 'Await feedback' },
     { taskStatus: 'done', title: 'Done' },
   ];
+  /** Array of task statuses used to connect drop lists */
+  connectedDropLists = this.boardColumns.map((col) => col.taskStatus);
 
-  btnAddHover = false;
-  hoveredColumn: string = '';
-
-  @ViewChildren('taskList') taskLists!: QueryList<ElementRef<HTMLElement>>;
-
+  /** Closes all open dialogs and resets selection state. */
   @HostListener('click')
   closeTaskDialog(): void {
     this.showTaskDialog = false;
@@ -71,24 +76,29 @@ export class BoardComponent {
     this.selectedTask = null;
   }
 
+
+  /** Called on window resize; updates mobile flag and shadow UI. */
   @HostListener('window:resize')
   setDataOnWindowResize() {
     this.checkIsMobile();
     this.refreshShadow();
   }
 
+  /** Refreshes the scroll shadows after a short delay. */
   refreshShadow() {
-    setTimeout(() => {
-      this.taskLists.forEach(
-        (taskList) => this.onTaskListScrollShadow(taskList.nativeElement)
-      );
-    }, 100);
+    this.updateAllScrollShadows(100);
   }
 
+  /** Checks the current viewport width and updates the mobile state. */
   checkIsMobile() {
     this.isMobile = window.innerWidth <= 830;
   }
 
+  /**
+   * Filters tasks by given column status and sorts them by priority.
+   * @param status - Task type/category (e.g., 'toDo', 'done')
+   * @returns Sorted list of tasks in this category
+   */
   filterTasksByCategory(status: string): TaskInterface[] {
     return this.tasksService.tasks
       .filter((task) => task.taskType === status)
@@ -98,6 +108,12 @@ export class BoardComponent {
       });
   }
 
+  /**
+   * Determines if there are search results for a given column.
+   * @param status - Column status to filter by
+   * @param searchText - The string to search for
+   * @returns Whether any task in that category matches the query
+   */
   hasSearchResults(status: string, searchText: string): boolean {
     const search = searchText.toLowerCase();
     return this.tasksService.tasks
@@ -109,8 +125,10 @@ export class BoardComponent {
       );
   }
 
-  connectedDropLists = this.boardColumns.map((col) => col.taskStatus);
-
+  /**
+   * Handles drag-and-drop behavior within and across columns.
+   * @param event - Drag drop event containing source and target info
+   */
   drop(event: CdkDragDrop<TaskInterface[]>) {
     if (event.previousContainer === event.container) {
       moveItemInArray(
@@ -119,30 +137,52 @@ export class BoardComponent {
         event.currentIndex
       );
     } else {
-      const task = event.previousContainer.data[event.previousIndex];
-      task.taskType = event.container.id as TaskInterface['taskType'];
-      this.tasksService.updateTask(task);
-      transferArrayItem(
-        event.previousContainer.data,
-        event.container.data,
-        event.previousIndex,
-        event.currentIndex
-      );
+      this.placeItemToNewColumn(event);
     }
-
-    setTimeout(() => {
-      this.taskLists.forEach((listRef) => {
-        this.onTaskListScrollShadow(listRef.nativeElement);
-      });
-    }, 50);
+    this.updateAllScrollShadows(50);
   }
 
+  /**
+   * Moves a task to a new column and updates its taskType.
+   * @param event - Drag drop event with task data
+   */
+  placeItemToNewColumn(event: CdkDragDrop<TaskInterface[]>) {
+    const task = event.previousContainer.data[event.previousIndex];
+    task.taskType = event.container.id as TaskInterface['taskType'];
+    this.tasksService.updateTask(task);
+    transferArrayItem(
+      event.previousContainer.data,
+      event.container.data,
+      event.previousIndex,
+      event.currentIndex
+    );
+  }
+
+  /**
+   * Updates scroll shadow styles on all columns with optional delay.
+   * @param delay - Time to wait before applying shadows in ms
+   */
+  updateAllScrollShadows(delay: number = 0): void {
+    setTimeout(() => {
+      this.taskLists.forEach((listRef) =>
+        this.onTaskListScrollShadow(listRef.nativeElement)
+      );
+    }, delay);
+  }
+
+  /**
+   * Opens the detail dialog for the given task.
+   * @param taskData - Task to display
+   */
   openTaskDialog(taskData: TaskInterface): void {
     this.selectedTask = taskData;
     this.showTaskDialog = true;
     this.showAddTaskDialog = false;
   }
 
+  /**
+   * Opens the dialog to create a new task.
+   */
   openAddTaskDialog(): void {
     this.showTaskDialog = true;
     this.showAddTaskDialog = true;
@@ -150,6 +190,10 @@ export class BoardComponent {
     this.singleTaskDataService.editModeActive = false;
   }
 
+  /**
+   * Opens the add task dialog and sets the status for the new task.
+   * @param taskStatus - Status to assign to the new task
+   */
   addTaskWithStatus(taskStatus: string) {
     this.showTaskDialog = true;
     this.showAddTaskDialog = true;
@@ -158,41 +202,52 @@ export class BoardComponent {
     this.singleTaskDataService.editModeActive = false;
   }
 
+  /**
+   * Applies top and bottom scroll shadow classes to a column.
+   * @param taskList - The scrollable task list element
+   */
   onTaskListScrollShadow(taskList: HTMLElement) {
     const boardColumn = taskList.closest('.board-column');
     if (!boardColumn) return;
-    const scrollTop = taskList.scrollTop;
-    const scrollHeight = taskList.scrollHeight;
-    const offsetHeight = taskList.offsetHeight;
-    if (scrollTop > 0) {
+    this.setShadowClasses(taskList, boardColumn);
+  }
+
+  /**
+   * Sets scroll shadow classes based on element scroll position.
+   * @param taskList - Scrollable list
+   * @param boardColumn - Container element
+   */
+  setShadowClasses(taskList: HTMLElement, boardColumn: any) {
+    if (taskList.scrollTop > 0) {
       boardColumn.classList.add('scrolled-top');
     } else {
       boardColumn.classList.remove('scrolled-top');
     }
-    // math.ceil rounds number up
-    if (Math.ceil(scrollTop + offsetHeight) < Math.floor(scrollHeight)) {
+    if (Math.ceil(taskList.scrollTop + taskList.offsetHeight) < Math.floor(taskList.scrollHeight)) {
       boardColumn.classList.add('scrolled-bottom');
     } else {
       boardColumn.classList.remove('scrolled-bottom');
     }
-  }
+  } 
 
+  /**
+   * Applies left and right scroll shadow classes (for mobile).
+   * @param taskList - The scrollable horizontal list element
+   */
   onTaskListScrollShadowMobile(taskList: HTMLElement) {
-    const scrollLeft = taskList.scrollLeft;
-    const scrollWidth = taskList.scrollWidth;
-    const offsetWidth = taskList.offsetWidth;
-    if (scrollLeft > 0) {
+    if (taskList.scrollLeft > 0) {
       taskList.classList.add('scrolled-left');
     } else {
       taskList.classList.remove('scrolled-left');
     }
-    if (scrollLeft + offsetWidth < scrollWidth - 1) {
+    if (taskList.scrollLeft + taskList.offsetWidth < taskList.scrollWidth - 1) {
       taskList.classList.add('scrolled-right');
     } else {
       taskList.classList.remove('scrolled-right');
     }
   }
 
+  /** Triggers the search animation temporarily. */
   triggerSearch() {
     this.searchActive = true;
     setTimeout(() => {
@@ -200,6 +255,10 @@ export class BoardComponent {
     }, 50);
   }
 
+  /**
+   * Updates a task's column by ID and new type.
+   * @param event - Contains task ID and the new type
+   */
   updateTaskColumn(event: { id: string; newType: TaskInterface['taskType'] }) {
     const task = this.tasksService.tasks.find((task) => task.id === event.id);
     if (task) {

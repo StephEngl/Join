@@ -213,7 +213,6 @@
         @include dFlex(flex-start, center, 5px);
         width: 90%;
         background-color: transparent;
-
         >p {
             font-size: 14px;
         }
@@ -221,10 +220,8 @@
 
     &:hover {
         background-color: $col-bg-main;
-
         >button {
             cursor: pointer;
-
             >p {
                 color: $col-ref-highlight;
             }
@@ -245,6 +242,13 @@
     cursor: pointer;
 }
 
+.no-edit {
+    word-break: break-word;
+    padding: 5px;
+    font-size: 1rem;
+    color: $col-error-red;
+}
+
 @media screen and (max-width: 1400px) {
     .contacts-section {
         @include dFlex(center, center, 0, fixed);
@@ -253,7 +257,6 @@
         width: 100%;
         height: calc(100% - $header-height - $nav-height-mobile);
     }
-
 }
 
 @media screen and (max-width: 1000px) {

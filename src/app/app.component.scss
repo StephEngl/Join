@@ -37,7 +37,7 @@ app-login {
 }
 
 .orientation-lock {
-  @include dFlex(center, center, 20px, absolute);
+  @include dFlex(center, center, 20px, fixed);
   // display: none !important; // toogle / delete
   flex-direction: column;
   padding: 20px;
@@ -49,6 +49,10 @@ app-login {
   height: 100%;
   z-index: 98;
   background-color: $col-bg-main;
+  .logo-lock {
+    max-width: 80px;
+    max-height: 80px;
+  }
   >img:last-child {
     animation: rotateImage 4s infinite ease-in-out;
   }
@@ -71,6 +75,9 @@ app-login {
 @media (pointer: coarse) and (orientation: landscape) {
   .orientation-lock {
     display: flex;
+  }
+  .page-content {
+    display: none;
   }
 }
 

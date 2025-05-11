@@ -12,6 +12,7 @@ import { AuthenticationService } from '../../services/authentication.service';
     templateUrl: './navbar.component.html',
     styleUrl: './navbar.component.scss'
 })
+
 export class NavbarComponent {
     activeLink: string = '';
     signalService = inject(SignalsService);
@@ -44,21 +45,27 @@ export class NavbarComponent {
         }
     ];
 
+    /**
+     * Handles routing logic, active link tracking, and navigation behaviors within the application.
+     */
     constructor(private router: Router) {
 
+        /**
+         * Subscribes to router navigation events to track the current active URL.
+         * Updates the `activeLink` property whenever a navigation ends.
+         */
         this.router.events
             .pipe(filter(event => event instanceof NavigationEnd))
             .subscribe(event => {
                 const url = (event as NavigationEnd).urlAfterRedirects;
                 this.activeLink = url;
             });
-        // this.router.events
-        //     .pipe(filter(event => event instanceof NavigationEnd))
-        //     .subscribe(() => {
-        //         this.activeLink = this.router.url;
-        //     });
     }
 
+    /**
+     * Sets the current active navigation link and optionally hides the contact info panel.
+     * @param route - The route path to set as active.
+     */
     setActiveLink(route: string) {
         if (this.activeLink === "/contacts") {
             this.signalService.isInfoShown.set(false)
@@ -66,10 +73,12 @@ export class NavbarComponent {
         this.activeLink = route;
     }
 
+    /** Navigates the application to the summary page. */
     toSummary() {
         this.router.navigate(['/summary']);
     };
 
+    /** Navigates back to the login page and ensures header links are visible again. */
     backToLogin() {
         this.signalService.hideHrefs.set(false);
         this.router.navigate(['login']);

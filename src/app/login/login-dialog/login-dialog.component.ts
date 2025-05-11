@@ -31,7 +31,6 @@ export class LoginDialogComponent {
   onSubmit(ngForm: NgForm) {
     if (!this.isGuestLogin) {
     this.formSubmitted = true;
-    console.log('Login bestätigt:', this.formSubmitted);
     }
   }
 
@@ -39,7 +38,6 @@ export class LoginDialogComponent {
     try {
       this.noUserFound = false;
       await this.authService.signInUser(mail, password);
-      console.log('Login erfolgreich');
     } catch (error) {
       this.noUserFound = true;
       setTimeout(() => {

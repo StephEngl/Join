@@ -2,8 +2,12 @@ import { Component, Output, EventEmitter, inject } from '@angular/core';
 import { FormBuilder, FormGroup, Validators, AbstractControl, ValidationErrors, ReactiveFormsModule } from '@angular/forms';
 import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
+import { Router } from '@angular/router';
 import { Auth, createUserWithEmailAndPassword, sendEmailVerification } from '@angular/fire/auth';
 import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar'; /* Angular Material Toast */
+import { AuthenticationService } from '../../../services/authentication.service';
+import { UsersService } from '../../../services/users.service';
+import { SignalsService } from '../../../services/signals.service';
 
 @Component({
     selector: 'app-sign-up',
@@ -22,8 +26,11 @@ export class SignUpComponent {
     acceptPolicy: boolean = false;
 
     private snackBar = inject(MatSnackBar); /* Injecting Angular Toast service */
+    authService = inject(AuthenticationService);
+    usersService = inject (UsersService);
+    signalsService = inject(SignalsService);
 
-    constructor(private fb: FormBuilder, private auth: Auth) {
+    constructor(private fb: FormBuilder, private auth: Auth, private router: Router) {
         this.signUpForm = this.fb.group({
             name: ['', Validators.required],
             email: ['', [Validators.required, Validators.email]],
@@ -57,11 +64,14 @@ export class SignUpComponent {
     
             return;
         }
-    
-        const { email, password } = this.signUpForm.value;
+        const name = this.signUpForm.get('name')?.value;
+        const email = this.signUpForm.get('email')?.value;
+        const password = this.signUpForm.get('password')?.value;
+        // const { email, password } = this.signUpForm.value;
         try {
-            const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
-            await sendEmailVerification(userCredential.user);
+            await this.createUser(name, email, password);
+            //const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+            //await sendEmailVerification(userCredential.user);  => we do not net user feedback 
             this.snackBar.open('Sign up was successful', 'OK', { duration: 3000 });
             this.signUpSuccess.emit();
         } catch (error: any) {
@@ -80,5 +90,26 @@ export class SignUpComponent {
         if (error.code === 'auth/invalid-email') return 'The email address is not valid.';
         if (error.code === 'auth/weak-password') return 'The password is too weak (minimum 6 characters).';
         return 'Registration failed. Please try again later.';
+    }
+
+    // creating a user and navigate to summary
+    async createUser(nameInput: string, mailInput: string, password: string) {
+        const user = { name: nameInput, mail: mailInput, phone: ''}
+
+        if (this.userAlreadyExists(user.name)) return;
+
+        const userCredential = await this.authService.createUser(user.mail, password, user.name);
+        const uid = userCredential.user.uid;
+        this.usersService.addUser(uid, user);
+        await this.authService.setActiveUserInitials();
+        this.signalsService.hideHrefs.set(false);
+        this.router.navigate(['/summary']);
+
+    }
+    //checks if email already exists
+    userAlreadyExists(mail: string): boolean {
+        return (
+            this.usersService.users.some(user => user.mail.trim().toLowerCase() === mail.trim().toLowerCase())
+        );
     }
 }

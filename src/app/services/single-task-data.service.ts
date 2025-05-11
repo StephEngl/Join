@@ -1,5 +1,11 @@
 import { Injectable } from '@angular/core';
 
+/**
+ * Service to manage task-related data in the application.
+ * 
+ * Provides methods and properties to store and manipulate task input data,
+ * priority settings, subtasks, and task status.
+ */
 @Injectable({
     providedIn: 'root'
 })
@@ -13,6 +19,8 @@ export class SingleTaskDataService {
     inputTaskDueDate: Date  | null = null;
     today: string = new Date().toISOString().split('T')[0];
     subtaskText = '';
+    editModeActive: boolean = false;
+    taskStatus: 'toDo' | 'inProgress' | 'feedback' = 'toDo';
     subtasksContainer: {
         text: string;
         isEditing: boolean;
@@ -52,14 +60,18 @@ export class SingleTaskDataService {
         },
     ];
 
-    editModeActive: boolean = false;
-    taskStatus: 'toDo' | 'inProgress' | 'feedback' = 'toDo';
-
+    /**
+     * Resets all priority buttons to their inactive state,
+     * and sets the medium priority button to active.
+     */
     resetAllPrioBtns() {
         this.priorityButtons.forEach((p) => (p.btnActive = false));
         this.priorityButtons[1].btnActive = true;
     }
 
+    /**
+     * Clears all task data and resets the state to its initial values.
+     */
     clearData() {
         this.inputTaskTitle = '';
         this.inputTaskDescription = '';
