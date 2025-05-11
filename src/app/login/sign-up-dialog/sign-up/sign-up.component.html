@@ -1,85 +1,78 @@
 <div class="sign-up-section">
     <div class="sign-up-header">
         <div class="sign-up-header-left">
-            <div class="sign-up-arrow">
-            </div>
+            <div class="sign-up-arrow"></div>
         </div>
         <div class="sign-up-header-middle">
-            <div class="sign-up-header-txt">
-                <h2>Sign up</h2>
-            </div>
-            <div class="sign-up-header-underline">
-            </div>
+            <div class="sign-up-header-txt"><h2>Sign up</h2></div>
+            <div class="sign-up-header-underline"></div>
         </div>
-        <div class="sign-up-header-right">
-        </div>
+        <div class="sign-up-header-right"></div>
     </div>
+
     <div class="sign-up-content">
         <div class="sign-up-form-and-accept-container">
             <form [formGroup]="signUpForm" (ngSubmit)="submitSignUp()">
                 <div class="sign-up-form-container">
-                <!-- Name field with touched validation -->
-                <div class="form-field" [ngClass]="{ invalid: signUpForm.get('name')?.invalid && signUpForm.get('name')?.touched }">
-                    <input type="text" formControlName="name" placeholder="Name" />
-                    <span class="form-icon">👤</span>
-                    <div class="error-message" *ngIf=" signUpForm.get('name')?.hasError('required') && signUpForm.get('name')?.touched">
-                        Please enter your name.
+
+                    <div class="form-field" [ngClass]="{ invalid: signUpForm.get('name')?.invalid && signUpForm.get('name')?.touched }">
+                        <input type="text" formControlName="name" placeholder="Name" autocomplete="name" />
+                        <span class="form-icon">👤</span>
+                        <div class="error-message" *ngIf="signUpForm.get('name')?.hasError('required') && signUpForm.get('name')?.touched">
+                            Please enter your name.
+                        </div>
+                    </div>
+
+                    <div class="form-field" [ngClass]="{ invalid: signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched }">
+                        <input type="email" formControlName="email" placeholder="E-Mail" autocomplete="email" />
+                        <span class="form-icon">📧</span>
+                        <div class="error-message" *ngIf="signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched">
+                            Please enter your email address.
+                        </div>
+                        <div class="error-message" *ngIf="signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched">
+                            Please enter a valid email address.
+                        </div>
+                    </div>
+
+                    <div class="form-field" [ngClass]="{ invalid: signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched }">
+                        <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Password" autocomplete="new-password" />
+                        <span class="form-icon clickable" (click)="hidePassword = !hidePassword">
+                            {{ hidePassword ? "🙈" : "👁️" }}
+                        </span>
+                        <div class="error-message" *ngIf="signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched">
+                            Please enter a password.
+                        </div>
+                        <div class="error-message" *ngIf="signUpForm.get('password')?.hasError('minlength') && signUpForm.get('password')?.touched">
+                            Password must be at least 8 characters long.
+                        </div>
+                    </div>
+
+                    <div class="form-field" [ngClass]="{ invalid: signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched }">
+                        <input [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirm Password" autocomplete="new-password" />
+                        <span class="form-icon clickable" (click)="hideConfirmPassword = !hideConfirmPassword">
+                            {{ hideConfirmPassword ? "🙈" : "👁️" }}
+                        </span>
+                        <div class="error-message" *ngIf="signUpForm.get('confirmPassword')?.hasError('required') && signUpForm.get('confirmPassword')?.touched">
+                            Please confirm your password.
+                        </div>
+                        <div class="error-message" *ngIf="signUpForm.hasError('passwordMismatch') && signUpForm.get('confirmPassword')?.touched">
+                            Passwords do not match.
+                        </div>
+                    </div>
+
+                    <div class="error-message" *ngIf="signUpErrorMessage">
+                        {{ signUpErrorMessage }}
                     </div>
                 </div>
-                <!-- Email field -->
-                <div class="form-field" [ngClass]="{ invalid: signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched }">
-                    <input type="email" formControlName="email" placeholder="E-Mail" />
-                    <span class="form-icon">
-                        📧
-                    </span>
-                    <div class="error-message" *ngIf=" signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched">
-                        Please enter your email address.
-                    </div>
-                    <div class="error-message" *ngIf=" signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched">
-                        Please enter a valid email address.
-                    </div>
-                </div>
-                <!-- Password field -->
-                <div class="form-field" [ngClass]="{ invalid: signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched }">
-                    <input [type]="hidePassword ? 'password' : 'text' "formControlName="password" placeholder="Password"/>
-                    <span class="form-icon clickable" (click)="hidePassword = !hidePassword">
-                        {{ hidePassword ? "🙈" : "👁️" }}
-                    </span>
-                    <div class="error-message" *ngIf=" signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched">
-                        Please enter a password.
-                    </div>
-                    <div class="error-message" *ngIf=" signUpForm.get('password')?.hasError('minlength') && signUpForm.get('password')?.touched">
-                        Password must be at least 8 characters long.
-                    </div>
-                </div>
-                <!-- Confirm Password -->
-                <div class="form-field" [ngClass]="{ invalid: signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched}">
-                    <input [type]="hideConfirmPassword ? 'password' : 'text' "formControlName="confirmPassword" placeholder="Confirm Password"/>
-                    <span class="form-icon clickable" (click)="hideConfirmPassword = !hideConfirmPassword">
-                        {{ hideConfirmPassword ? "🙈" : "👁️" }}
-                    </span>
-                    <div class="error-message" *ngIf=" signUpForm.get('confirmPassword')?.hasError('required') && signUpForm.get('confirmPassword')?.touched">
-                        Please confirm your password.
-                    </div>
-                    <div class="error-message" *ngIf=" signUpForm.hasError('passwordMismatch') && signUpForm.get('confirmPassword')?.touched">
-                        Passwords do not match.
-                    </div>
-                </div>
-                <!-- Global error message for server (Firebase) feedback -->
-                <div class="error-message" *ngIf="signUpErrorMessage">
-                    {{ signUpErrorMessage }}
-                </div>
-                </div>
-                <!-- Accept policy -->
+
                 <div class="sign-up-accept-container">
                     <label class="custom-checkbox">
-                        <input type="checkbox" [checked]="acceptPolicy" (change)="acceptPolicy = !acceptPolicy"/>
+                        <input type="checkbox" [checked]="acceptPolicy" (change)="acceptPolicy = !acceptPolicy" />
                         <span class="checkmark"></span>
-                            I accept the
-                        <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>.
+                        I accept the <a routerLink="/privacy-policy" target="_blank">Privacy Policy</a>.
                     </label>
                 </div>
-                <!-- Submit -->
+
                 <div class="sign-up-footer">
                     <button class="sign-up-button" type="submit" [disabled]="!acceptPolicy">
                         Sign up
