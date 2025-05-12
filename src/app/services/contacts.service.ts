@@ -1,5 +1,5 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
-import { getAuth } from "@angular/fire/auth"; 
+import { getAuth } from '@angular/fire/auth';
 import { ContactInterface } from '../interfaces/contact.interface';
 import {
   Firestore,
@@ -19,10 +19,10 @@ import { TasksService } from './tasks.service';
 
 /**
  * Service for managing contacts in the Firestore database.
- * Provides methods to add, delete, update, and retrieve contacts. 
+ * Provides methods to add, delete, update, and retrieve contacts.
  * Additionally, it allows for subscribing to changes in the contacts list.
  * @remarks
- * This service interacts with Firestore to fetch, update, and delete contact data. 
+ * This service interacts with Firestore to fetch, update, and delete contact data.
  * It also manages the contact list and ensures the user can only edit their own contacts.
  */
 @Injectable({
@@ -53,7 +53,7 @@ export class ContactsService implements OnDestroy {
     '#FFBB2B',
   ];
 
-   /** Unsubscribe function for the contact list subscription. */
+  /** Unsubscribe function for the contact list subscription. */
   unsubscribeContact;
 
   constructor() {
@@ -97,8 +97,10 @@ export class ContactsService implements OnDestroy {
   canEditOrDeleteContact(docId: string): boolean {
     const user = getAuth().currentUser;
     if (!user || !docId) return false;
-  
-    const userExists = this.usersService.users.some(user => user.id === docId);
+
+    const userExists = this.usersService.users.some(
+      (user) => user.id === docId
+    );
     if (userExists && user.uid !== docId) {
       return false;
     }
@@ -111,9 +113,13 @@ export class ContactsService implements OnDestroy {
    */
   async deleteContact(docId: string) {
     if (!this.canEditOrDeleteContact(docId)) return;
-    const userExists = this.usersService.users.some(user => user.id === docId);
-    const docRef = userExists ? this.usersService.getSingleUsersRef(docId) : this.getSingleDocRef(docId); 
-  
+    const userExists = this.usersService.users.some(
+      (user) => user.id === docId
+    );
+    const docRef = userExists
+      ? this.usersService.getSingleUsersRef(docId)
+      : this.getSingleDocRef(docId);
+
     try {
       await deleteDoc(docRef);
       const user = getAuth().currentUser;
@@ -121,7 +127,7 @@ export class ContactsService implements OnDestroy {
         await this.authService.deleteUser();
       }
     } catch (err) {
-      console.error("Deleting failed", err);
+      console.error('Deleting failed', err);
     }
   }
 
@@ -130,16 +136,18 @@ export class ContactsService implements OnDestroy {
    * @param contact - The updated contact object.
    */
   async updateContact(contact: ContactInterface) {
-  if (!contact.id || !this.canEditOrDeleteContact(contact.id)) return;
-    const userExists = this.usersService.users.some(user => user.id === contact.id);
+    if (!contact.id || !this.canEditOrDeleteContact(contact.id)) return;
+    const userExists = this.usersService.users.some(
+      (user) => user.id === contact.id
+    );
     const docRef = userExists
-      ? this.usersService.getSingleUsersRef(contact.id) 
-      : this.getSingleDocRef(contact.id);  
-  
+      ? this.usersService.getSingleUsersRef(contact.id)
+      : this.getSingleDocRef(contact.id);
+
     try {
       await updateDoc(docRef, this.usersContactsService.getCleanJson(contact));
     } catch (err) {
-      console.error("Error during update:", err);
+      console.error('Error during update:', err);
     }
   }
 
@@ -147,20 +155,30 @@ export class ContactsService implements OnDestroy {
    * Subscribes to the Firestore contacts collection and updates the contacts list in real-time.
    */
   subContactsList() {
-    return onSnapshot(this.getContactsRef(), (snapshot) => {
-      const firestoreContacts: ContactInterface[] = [];
-      snapshot.forEach((element) => {
-        const contact = element.data();
-        firestoreContacts.push(this.usersContactsService.setObjectData(element.id, contact));
-      });
-      const uniqueList = [...firestoreContacts, ...this.usersService.users]
-        .filter((value, index, self) => index === self.findIndex((t) => t.id === value.id));
-  
-      this.sortUniqueList(uniqueList);
-    },
-    (error) => {
-      console.error('Firestore Error', error.message);
-    });
+    return onSnapshot(
+      this.getContactsRef(),
+      (snapshot) => {
+        const firestoreContacts: ContactInterface[] = [];
+        snapshot.forEach((element) => {
+          const contact = element.data();
+          firestoreContacts.push(
+            this.usersContactsService.setObjectData(element.id, contact)
+          );
+        });
+        const uniqueList = [
+          ...firestoreContacts,
+          ...this.usersService.users,
+        ].filter(
+          (value, index, self) =>
+            index === self.findIndex((t) => t.id === value.id)
+        );
+
+        this.sortUniqueList(uniqueList);
+      },
+      (error) => {
+        console.error('Firestore Error', error.message);
+      }
+    );
   }
 
   /**
@@ -171,13 +189,18 @@ export class ContactsService implements OnDestroy {
     try {
       const snapshot = await getDocs(this.getContactsRef());
       const contacts: ContactInterface[] = [];
-  
+
       snapshot.forEach((docSnap) => {
         const contact = docSnap.data();
-        contacts.push(this.usersContactsService.setObjectData(docSnap.id, contact));
+        contacts.push(
+          this.usersContactsService.setObjectData(docSnap.id, contact)
+        );
       });
       const combinedList = [...contacts, ...this.usersService.users];
-      const uniqueList = combinedList.filter((value, index, self) => index === self.findIndex((t) => t.id === value.id));
+      const uniqueList = combinedList.filter(
+        (value, index, self) =>
+          index === self.findIndex((t) => t.id === value.id)
+      );
       this.sortUniqueList(uniqueList);
     } catch (error) {
       console.error('Error loading contacts:', error);
@@ -230,7 +253,7 @@ export class ContactsService implements OnDestroy {
    * @returns The initials of the contact's name.
    */
   nameInitials(id: string | undefined) {
-    const contact = this.contacts.find(c => c.id === id);
+    const contact = this.contacts.find((c) => c.id === id);
     const parts = contact?.name.trim().split(' ') || [];
     const nameLetter1 = contact?.name.charAt(0).toUpperCase() || '';
     const lastName = parts?.at(-1) || '';
@@ -244,18 +267,17 @@ export class ContactsService implements OnDestroy {
    * @returns The color associated with the contact.
    */
   contactColor(id: string | undefined) {
-    const contact = this.contacts.find(c => c.id === id);
+    const contact = this.contacts.find((c) => c.id === id);
     return contact?.color;
   }
-  
+
   /**
    * Gets the contact name for a given ID.
    * @param id - The ID of the contact.
    * @returns The name of the contact.
    */
   contactName(id: string | undefined) {
-    const contact = this.contacts.find(c => c.id === id);
+    const contact = this.contacts.find((c) => c.id === id);
     return contact?.name;
   }
-
 }
