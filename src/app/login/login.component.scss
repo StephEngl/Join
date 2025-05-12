@@ -2,14 +2,13 @@
 
 :host {
     height: 100vh;
-    // max-width: 1400px;
 }
 
 .wrapper-max-width {
     position: relative;
     height: 100vh;
     width: 100%;
-    max-width: 1400px;
+    max-width: 1920px;
     max-height: 1080px;
 }
 
@@ -95,10 +94,10 @@ app-sign-up-dialog {
 
 
 // Media Queries
-// @media screen and (min-width: 1400px) {
+// @media screen and (min-width: 1920px) {
 // .login-header {
 //     right: auto;
-//     left: 1400px;
+//     left: 1920px;
 //     }
 // }
 
