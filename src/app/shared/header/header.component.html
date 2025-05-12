@@ -23,9 +23,9 @@
         <a (click)="toggleDropdown()" routerLink="/privacy-policy"
           >Privacy Policy</a
         >
-        @if(authService.isLoggedIn()) {
-          <p (click)="toggleDropdown(); logout()">Log out</p>
-        }
+          <p (click)="toggleDropdown(); logout()">
+            @if (authService.isLoggedIn()) {Log out} @else { To Login }
+          </p>
       </div>
     </div>
 
@@ -34,7 +34,7 @@
       class="logout-popup-btn" 
       [class.show]="showLogoutPopup" 
       (click)="logout()">
-      @if (authService.isLoggedIn()) {Log out} @else { to Login }
+      @if (authService.isLoggedIn()) {Log out} @else { To Login }
     </button>
     }
   </div>

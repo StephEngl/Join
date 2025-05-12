@@ -36,11 +36,18 @@ export class SignUpDialogComponent {
 
     constructor() {
         this.signUpForm = this.fb.group({
-            name: ['', Validators.required],
+            name: ['', [Validators.required, this.validateFullName]],
             email: ['', [Validators.required, Validators.email]],
             password: ['', [Validators.required, Validators.minLength(8)]],
             confirmPassword: ['', Validators.required]
         }, { validators: this.passwordMatchValidator });
+    }
+
+    validateFullName(control: AbstractControl): ValidationErrors | null {
+        const value = control.value?.trim();
+        if (!value) return null;
+        const words = value.split(/\s+/);
+        return words.length >= 2 ? null : { invalidFullName: true };
     }
 
     passwordMatchValidator(form: AbstractControl): ValidationErrors | null {
