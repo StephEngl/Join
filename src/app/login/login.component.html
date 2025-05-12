@@ -13,12 +13,12 @@
     <app-sign-up-dialog (closeDialog)="toLogin()" (signUpSuccess)="onSignUpSuccess()" />
 }
 
-<section class="login-header">
-    <p>Not a Join User?</p>
-    @if (!showSignUpDialog) {
+@if (!showSignUpDialog) {
+    <section class="login-header">
+        <p>Not a Join User?</p>
         <button class="signup-btn" type="button" (click)="toSignUpDialog(); $event.stopPropagation()">Sign up</button>
-    }
-</section>
+    </section>
+}
 
 <section class="login-footer">
     <p (click)="toPrivacyPolicy()">Privacy policy</p>
