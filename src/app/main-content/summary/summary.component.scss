@@ -2,372 +2,361 @@
 @import "./../../../assets/styles/mixins.scss";
 
 .comma {
-    margin-left: -1px;
+  margin-left: -1px;
 }
 
 .summary-middle-box {
-    @include dFlex($jc: space-around, $ai: center, $gap: 16px);
-    width: 100%;
-    padding: 0 45px;
+  @include dFlex($jc: space-around, $ai: center, $gap: 16px);
+  width: 100%;
+  padding: 0 45px;
 }
 
 .left-half-summary-box {
-    display: flex;
-    align-items: center;
-    gap: 12px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
 
-    img {
-        background-color: $col-bg-secondary;
-        border-radius: 50%;
-        height: 55px;
-        width: 55px;
-        padding: 8px;
-        object-fit: contain;
-    }
+  img {
+    background-color: $col-bg-secondary;
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+    padding: 8px;
+    object-fit: contain;
+  }
 }
 
 .right-half-summary-box {
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
 }
 
 .summary-main {
-    position: relative;
-    max-width: calc($appMaxWidth - $navbar-width);
-    height: calc(100vh - $header-height);
-    padding: 55px 0 0 55px;
-    overflow-y: auto;
+  position: relative;
+  max-width: calc($appMaxWidth - $navbar-width);
+  height: calc(100vh - $header-height);
+  padding: 55px 0 0 55px;
+  overflow-y: auto;
 }
 
 .summary-header {
-    @include dFlex($jc: flex-start, $ai: center);
+  @include dFlex($jc: flex-start, $ai: center);
 }
 
 .v-line-white {
-    @include vLineWhiteBlack()
+  @include vLineWhiteBlack();
 }
 
 .v-line {
-    @include vLine();
+  @include vLine();
 }
 
 .h-line {
-    @include hLine();
+  @include hLine();
 }
 
 .summary-section {
-    @include dFlex($jc: flex-start, $ai: center, $gap: 55px);
-    margin-top: 20px;
+  @include dFlex($jc: flex-start, $ai: center, $gap: 55px);
+  margin-top: 20px;
 }
 
 .summary-wrapper {
-    @include dFlex($jc: center, $ai: space-between, $gap: 25px);
-    flex-direction: column;
-    flex: 2;
-    max-width: 500px;
-    max-height: 480px
+  @include dFlex($jc: center, $ai: space-between, $gap: 25px);
+  flex-direction: column;
+  flex: 2;
+  max-width: 500px;
+  max-height: 480px;
 }
 
 .summary-row {
-    @include dFlex($jc: flex-start, $ai: center, $gap: 25px);
-    height: 160px;
+  @include dFlex($jc: flex-start, $ai: center, $gap: 25px);
+  height: 160px;
 }
 
 .sum-icon {
-    @include dFlex($jc: center, $ai: center, $gap: 10px);
-    flex: 1;
+  @include dFlex($jc: center, $ai: center, $gap: 10px);
+  flex: 1;
 
-    >img {
-        background-color: $col-bg-secondary;
-        border: 5px solid transparent;
-        border-radius: 50%;
-        height: 55px;
-        width: 55px;
-        padding: 8px;
-        object-fit: contain;
-        overflow: visible;
-    }
+  > img {
+    background-color: $col-bg-secondary;
+    border: 5px solid transparent;
+    border-radius: 50%;
+    height: 55px;
+    width: 55px;
+    padding: 8px;
+    object-fit: contain;
+    overflow: visible;
+  }
 }
 
 .transform-right {
-    transform-origin: right center;
+  transform-origin: right center;
 }
 
 .transform-left {
-    transform-origin: left center;
+  transform-origin: left center;
 }
 
 .transform-center {
-    transform-origin: center center;
+  transform-origin: center center;
 }
 
 .transform-bottom {
-    transform-origin: left top;
+  transform-origin: left top;
 }
 
 .summary-btn {
-    flex: 1;
-    @include dFlex($jc: center, $ai: center);
-    border-radius: 30px;
-    background-color: white;
-    height: 100%;
-    box-shadow: 0px 0px 5px $col-shadow-black;
-    transition: transform 0.2s ease, background-color 0.3s ease;
+  flex: 1;
+  @include dFlex($jc: center, $ai: center);
+  border-radius: 30px;
+  background-color: white;
+  height: 100%;
+  box-shadow: 0px 0px 5px $col-shadow-black;
+  transition: transform 0.2s ease, background-color 0.3s ease;
 
-    &:hover {
-        cursor: pointer;
-        background-color: $col-ref-hover;
-        transform: scale(1.04);
-        box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.35);
+  &:hover {
+    cursor: pointer;
+    background-color: $col-ref-hover;
+    transform: scale(1.04);
+    box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.35);
 
-        .task-count {
-            color: white;
-        }
-
-        .sum-icon {
-            >img {
-                background-color: white;
-            }
-        }
-
-        .right-half-summary-box {
-            color: white;
-        }
-    }
-}
-
-.date-text {
-    font-size: 21px;
-    line-height: 120%;
-    font-weight: 700;
-}
-
-.timeText {
-    font-size: 35px;
-    line-height: 120%;
-}
-
-.user-name {
-    font-size: 44px;
-    line-height: 120%;
-    color: $col-ref-highlight;
-    font-weight: 600
-}
-
-.task-count {
-    @include dFlex($jc: center, $ai: center);
-    flex-direction: column;
-
-    >h5 {
-        font-size: 48px;
-    }
-
-    >p {
-        text-align: center;
-    }
-}
-
-.summary-welcome {
-    flex: 1;
-}
-
-.summary-welcome-mobil {
-    display: none;
-}
-
-.fade-in {
-    animation: fadeIn 0.7s ease-out;
-}
-
-.fade-out {
-    animation: fadeOut 0.7s ease-in forwards;
-}
-
-@keyframes fadeIn {
-    0% {
-        opacity: 0;
-        transform: translateY(20px);
-        filter: blur(2px);
-    }
-
-    100% {
-        opacity: 1;
-        transform: translateY(0);
-        filter: blur(0);
-    }
-}
-
-@keyframes fadeOut {
-    0% {
-        opacity: 1;
-        transform: scale(1);
-        filter: blur(0);
-    }
-
-    100% {
-        opacity: 0;
-        transform: scale(0.97);
-        filter: blur(2px);
-    }
-}
-
-.fade-in-delayed {
-    animation: fadeIn 0.6s ease-out;
-}
-
-@media screen and (max-width: 1400px) {
-
-    .summary-main {
-        height: calc(100vh - $header-height - $nav-height-mobile);
-    }
-
-}
-
-@media screen and (max-width: 1000px) {
-
-    .summary-welcome-mobil {
-        @include dFlex($jc: center, $ai: center, $gap: 0, $position: fixed);
-        inset: 0;
-        text-align: center;
-        height: 100%;
-        width: 100%;
-        margin: auto;
-    }
-
-    .timeText {
-        font-size: 25px;
-    }
-
-    .user-name {
-        font-size: 32px;
-    }
-
-    .summary-main {
-        @include dFlex($jc: flex-start, $ai: center);
-        flex-direction: column;
-        padding: 20px 20px 0 20px;
-        display: flex;
-        margin-top: 5px;
-    }
-
-    .summary-section {
-        display: flex;
-        flex-direction: column;
-    }
-
-    .summary-header {
-        @include dFlex($jc: flex-start, $ai: flex-start);
-        flex-direction: column;
-        gap: 6px;
-        margin-left: -155px;
-
-    }
-
-    .v-line {
-        display: none;
-    }
-
-    .h-line {
-        display: block;
-    }
-
-    .transform-bottom {
-        transform-origin: center bottom;
-    }
-
-    .summary-welcome {
-        display: none;
-    }
-}
-
-@media screen and (max-width: 550px) {
-
-    .summary-main {
-        padding: 10px 10px 0 15px;
+    .task-count {
+      color: white;
     }
 
     .sum-icon {
-
-        >img {
-            height: 40px;
-            width: 40px;
-        }
-    }
-
-    .left-half-summary-box {
-        gap: 10px;
-
-        img {
-            height: 40px;
-            width: 40px;
-        }
-    }
-
-    .v-line-white {
-        height: 80px;
+      > img {
+        background-color: white;
+      }
     }
 
     .right-half-summary-box {
+      color: white;
+    }
+  }
+}
 
-        >p {
-            font-size: 14px;
-        }
+.date-text {
+  font-size: 21px;
+  line-height: 120%;
+  font-weight: 700;
+}
+
+.timeText {
+  font-size: 35px;
+  line-height: 120%;
+}
+
+.user-name {
+  font-size: 44px;
+  line-height: 120%;
+  color: $col-ref-highlight;
+  font-weight: 600;
+}
+
+.task-count {
+  @include dFlex($jc: center, $ai: center);
+  flex-direction: column;
+
+  > h5 {
+    font-size: 48px;
+  }
+
+  > p {
+    text-align: center;
+  }
+}
+
+.summary-welcome {
+  flex: 1;
+}
+
+.summary-welcome-mobil {
+  display: none;
+}
+
+.fade-in {
+  animation: fadeIn 0.7s ease-out;
+}
+
+.fade-out {
+  animation: fadeOut 0.7s ease-in forwards;
+}
+
+@keyframes fadeIn {
+  0% {
+    opacity: 0;
+    transform: translateY(20px);
+    filter: blur(2px);
+  }
+
+  100% {
+    opacity: 1;
+    transform: translateY(0);
+    filter: blur(0);
+  }
+}
+
+@keyframes fadeOut {
+  0% {
+    opacity: 1;
+    transform: scale(1);
+    filter: blur(0);
+  }
+
+  100% {
+    opacity: 0;
+    transform: scale(0.97);
+    filter: blur(2px);
+  }
+}
+
+.fade-in-delayed {
+  animation: fadeIn 0.6s ease-out;
+}
+
+@media screen and (max-width: 1400px) {
+  .summary-main {
+    height: calc(100vh - $header-height - $nav-height-mobile);
+  }
+}
+
+@media screen and (max-width: 1000px) {
+  .summary-welcome-mobil {
+    @include dFlex($jc: center, $ai: center, $gap: 0, $position: fixed);
+    inset: 0;
+    text-align: center;
+    height: 100%;
+    width: 100%;
+    margin: auto;
+  }
+
+  .timeText {
+    font-size: 25px;
+  }
+
+  .user-name {
+    font-size: 32px;
+  }
+
+  .summary-main {
+    @include dFlex($jc: flex-start, $ai: center);
+    flex-direction: column;
+    padding: 20px 20px 0 20px;
+    display: flex;
+    padding-top: 5px;
+  }
+
+  .summary-section {
+    display: flex;
+    flex-direction: column;
+  }
+
+  .summary-header {
+    @include dFlex($jc: flex-start, $ai: flex-start);
+    flex-direction: column;
+    gap: 6px;
+    margin-left: -155px;
+  }
+
+  .v-line {
+    display: none;
+  }
+
+  .h-line {
+    display: block;
+  }
+
+  .transform-bottom {
+    transform-origin: center bottom;
+  }
+
+  .summary-welcome {
+    display: none;
+  }
+}
+
+@media screen and (max-width: 550px) {
+  .summary-main {
+    padding: 10px 10px 0 15px;
+  }
+
+  .sum-icon {
+    > img {
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  .left-half-summary-box {
+    gap: 10px;
+
+    img {
+      height: 40px;
+      width: 40px;
+    }
+  }
+
+  .v-line-white {
+    height: 80px;
+  }
+
+  .right-half-summary-box {
+    > p {
+      font-size: 14px;
+    }
+  }
+
+  .task-count {
+    > h5 {
+      font-size: 35px;
     }
 
-    .task-count {
-
-        >h5 {
-            font-size: 35px;
-        }
-
-        >p {
-            font-size: 14px;
-        }
+    > p {
+      font-size: 14px;
     }
+  }
 
-    .summary-header {
-        gap: 0px;
-        margin-left: -65px;
-    }
+  .summary-header {
+    gap: 0px;
+    margin-left: -65px;
+  }
 
-    .summary-section {
-        gap: 15px;
-        margin-top: 15px;
-    }
+  .summary-section {
+    gap: 15px;
+    padding-top: 15px;
+  }
 
-    .summary-wrapper {
-        gap: 15px;
-        max-height: 400px;
-    }
+  .summary-wrapper {
+    gap: 15px;
+    max-height: 400px;
+  }
 
-    .summary-row {
-        gap: 15px;
-    }
+  .summary-row {
+    gap: 15px;
+  }
 
-    .summary-middle-box {
-        padding: 0 25px;
-        gap: 0px;
-    }
-
+  .summary-middle-box {
+    padding: 0 25px;
+    gap: 0px;
+  }
 }
 
 @media screen and (max-width: 385px) {
-
-    .right-half-summary-box {
-        >p {
-            font-size: 11px;
-        }
+  .right-half-summary-box {
+    > p {
+      font-size: 11px;
     }
+  }
 
-    .summary-wrapper {
-        gap: 10px;
-        max-height: 350px;
-    }
+  .summary-wrapper {
+    gap: 10px;
+    max-height: 350px;
+  }
 
-    .summary-section {
-        gap: 10px;
-        margin-top: 2px;
-    }
-
+  .summary-section {
+    gap: 10px;
+    padding-top: 2px;
+  }
 }
