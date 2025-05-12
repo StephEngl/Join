@@ -2,7 +2,7 @@
   <label for="title">Title <span>*</span></label>
   <input
     [ngModel]="taskDataService.editModeActive ? tasksService.tasks[taskIndex()].title : taskDataService.inputTaskTitle"
-    (ngModelChange)="taskDataService.editModeActive ? tasksService.tasks[taskIndex()].title = $event:taskDataService.inputTaskTitle = $event"
+    (ngModelChange)="taskDataService.inputTaskTitle = $event"
     #titleInput="ngModel"
     id="title"
     name="title"
@@ -24,7 +24,7 @@
   <label for="description">Description</label>
   <textarea
     [ngModel]="taskDataService.editModeActive ? tasksService.tasks[taskIndex()].description : taskDataService.inputTaskDescription"
-    (ngModelChange)="taskDataService.editModeActive ? tasksService.tasks[taskIndex()].description = $event : taskDataService.inputTaskDescription = $event"
+    (ngModelChange)="taskDataService.inputTaskDescription = $event"
     #descriptionInput="ngModel"
     id="description"
     name="description"
