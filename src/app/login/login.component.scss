@@ -1,140 +1,133 @@
-@import  "../../assets/styles/mixins.scss";
+@import "../../assets/styles/mixins.scss";
 
 :host {
-    height: 100vh;
+  height: 100vh;
 }
 
 .wrapper-max-width {
-    position: relative;
-    height: 100vh;
-    width: 100%;
-    max-width: 1920px;
-    max-height: 1080px;
+  position: relative;
+  height: 100vh;
+  width: 100%;
+  max-width: 1920px;
+  max-height: 1080px;
 }
 
 app-login-dialog {
-    @include dFlex();
-    height: 100%;
-    max-height: 1080px;
-    padding: 16px;
-    z-index: 2;
+  @include dFlex();
+  height: 100%;
+  max-height: 1080px;
+  padding: 16px;
+  z-index: 2;
 }
 
 app-sign-up-dialog {
-    @include dFlex();
-    width: auto;
-    height: 100%;
-    max-height: 1080px;
-    padding: 1rem;
-    z-index: 2;
+  @include dFlex();
+  width: auto;
+  height: 100%;
+  max-height: 1080px;
+  padding: 1rem;
+  z-index: 2;
 }
 
 .background-animated,
 .logo-animated {
-    position: absolute;
-    top: 50%!important;
-    left: 50%;
-    transform: translate(-50%, -50%) scale(1);
+  position: absolute;
+  top: 50% !important;
+  left: 50%;
+  transform: translate(-50%, -50%) scale(1);
 }
 
 .background-animated {
-    pointer-events: none;
-    min-height: 100vh;
-    width: 100vw;
-    z-index: 3;
-    transition:all 1s linear;
+  pointer-events: none;
+  min-height: 100vh;
+  width: 100vw;
+  z-index: 3;
+  transition: all 1s linear;
 }
 
 .logo-animated {
-    position: absolute;
-    padding: 20px;
-    width: 310px;
-    height: 310px;
-    transition: all 1s ease;
-    z-index: 4;
+  position: absolute;
+  padding: 20px;
+  width: 310px;
+  height: 310px;
+  transition: all 1s ease;
+  z-index: 4;
 
-    &.animate {
-        width: 120px;
-        height: 120px;
-        transform: translate(-50vw, -50vh) scale(1.2);
-    }
+  &.animate {
+    width: 120px;
+    height: 120px;
+    transform: translate(-50vw, -50vh) scale(1.2);
+  }
 }
 
 .login-header {
-    @include dFlex(center, center, 15px, absolute);
-    padding: 15px;
-    top: 0;
-    right: 0;
-    >p {
-        font-weight: 400;
-    }
-    .signup-btn {
-        font-weight: 600;
-        padding: 15px 20px;
-        border-radius: 8px;
-        color: white;
-        background-color: $col-ref-active-nav;
-        z-index: 10;
-    }
+  @include dFlex(center, center, 15px, absolute);
+  padding: 15px;
+  top: 0;
+  right: 0;
+
+  > p {
+    font-weight: 400;
+  }
+
+  .signup-btn {
+    font-weight: 600;
+    padding: 15px 20px;
+    border-radius: 8px;
+    color: white;
+    background-color: $col-ref-active-nav;
+    z-index: 10;
+  }
 }
 
 .login-footer {
-    @include dFlex(center, center, 15px, absolute);
-    text-wrap: nowrap;
-    bottom: 5vh;
-    left: 50%;
-    transform: translateX(-50%);
-    z-index: 4;
+  @include dFlex(center, center, 15px, absolute);
+  text-wrap: nowrap;
+  bottom: 5vh;
+  left: 50%;
+  transform: translateX(-50%);
+  z-index: 4;
 
-    >p {
-        cursor: pointer;
-        color: $col-font-inactive;
-    }
+  > p {
+    cursor: pointer;
+    color: $col-font-inactive;
+  }
 }
-
-
-// Media Queries
-// @media screen and (min-width: 1920px) {
-// .login-header {
-//     right: auto;
-//     left: 1920px;
-//     }
-// }
 
 @media screen and (max-width: 700px) {
-    .login-header {
-        @include dFlex(center, center, 15px, absolute);
-        padding: 15px;
-        top: auto;
-        bottom: 10vh;
-        right: 50%;
-        transform: translateX(50%);
-        width: 100vw;
-        >p {
-            font-weight: 400;
-        }
-        .signup-btn {
-            font-weight: 600;
-            padding: 15px 20px;
-            border-radius: 8px;
-            color: white;
-            background-color: $col-ref-active-nav;
-            z-index: 10;
-        }
+  .login-header {
+    @include dFlex(center, center, 15px, absolute);
+    padding: 15px;
+    top: auto;
+    bottom: 10vh;
+    right: 50%;
+    transform: translateX(50%);
+    width: 100vw;
+
+    > p {
+      font-weight: 400;
     }
 
-    .logo-animated {
-        &.animate {
-            width: 100px;
-            height: 100px;
-        }
+    .signup-btn {
+      font-weight: 600;
+      padding: 15px 20px;
+      border-radius: 8px;
+      color: white;
+      background-color: $col-ref-active-nav;
+      z-index: 10;
     }
+  }
+
+  .logo-animated {
+    &.animate {
+      width: 100px;
+      height: 100px;
+    }
+  }
 }
-@media screen and (max-width:360px) {
-    app-login-dialog {
-        padding: 8px
-    }
 
-
-    
+@media screen and (max-width: 360px) {
+  app-login-dialog {
+    padding: 8px;
+  }
 }
