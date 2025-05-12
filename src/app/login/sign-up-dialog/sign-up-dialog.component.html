@@ -24,7 +24,11 @@
                         <div class="error-message" *ngIf="signUpForm.get('name')?.hasError('required') && signUpForm.get('name')?.touched">
                             Please enter your name.
                         </div>
+                        <div class="error-message" *ngIf="signUpForm.get('name')?.hasError('invalidFullName') && signUpForm.get('name')?.touched">
+                            Please enter a first and last name.
+                        </div>
                     </div>
+
 
                     <!-- E-Mail -->
                     <div class="form-field" [ngClass]="{ invalid: signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched }">
