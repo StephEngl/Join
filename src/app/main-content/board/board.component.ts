@@ -28,7 +28,7 @@ import { ViewChildren, ElementRef, QueryList } from '@angular/core';
     AddTaskComponent,
   ],
   templateUrl: './board.component.html',
-  styleUrls: ['./board.component.scss'],
+  styleUrls: ['./board.component.scss', './board-media.component.scss'],
   animations: [
     trigger('slideInOut', [
       transition(':enter', [
@@ -228,7 +228,7 @@ export class BoardComponent {
     } else {
       boardColumn.classList.remove('scrolled-bottom');
     }
-  } 
+  }
 
   /**
    * Applies left and right scroll shadow classes (for mobile).
