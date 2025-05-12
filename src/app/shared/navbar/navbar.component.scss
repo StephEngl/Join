@@ -3,12 +3,18 @@
 
 /** ----------DESKTOP---------- **/
 .navbar-section-desktop {
-  @include dFlex(space-around, center);
+  @include dFlex(flex-start, center);
   flex-direction: column;
   width: $navbar-width;
   height: 100dvh;
   background-color: $col-bg-secondary;
 
+  .navbar-icon-container,
+  .navbar-components-container,
+  .privacy-and-legal-container  {
+    max-height: 360px;
+  }
+  
   .navbar-icon-container {
     @include dFlex(center, center);
     cursor: pointer;
