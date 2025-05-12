@@ -18,7 +18,10 @@ import { AuthenticationService } from '../../services/authentication.service';
  */
 export class SummaryComponent {
 
-  constructor(private router: Router) {}
+  constructor(private router: Router) { }
+
+  showWelcome = false;
+  fadeOutWelcome = false;
 
   tasksService = inject(TasksService);
   authService = inject(AuthenticationService);
@@ -42,26 +45,39 @@ export class SummaryComponent {
     iconHovered: string;
     isHovered: boolean;
   }[] = [
-    {
-      type: 'toDo',
-      text: 'To-Do',
-      icon: './assets/icons/general/edit_white.svg',
-      iconHovered: './assets/icons/general/edit.svg',
-      isHovered: false,
-    },
-    {
-      type: 'done',
-      text: 'Done',
-      icon: './assets/icons/general/check_white.svg',
-      iconHovered: './assets/icons/general/check.svg',
-      isHovered: false,
-    },
-  ];
+      {
+        type: 'toDo',
+        text: 'To-Do',
+        icon: './assets/icons/general/edit_white.svg',
+        iconHovered: './assets/icons/general/edit.svg',
+        isHovered: false,
+      },
+      {
+        type: 'done',
+        text: 'Done',
+        icon: './assets/icons/general/check_white.svg',
+        iconHovered: './assets/icons/general/check.svg',
+        isHovered: false,
+      },
+    ];
 
-  /** Lifecycle hook: loads tasks and shows active user name. */
+  /**
+* Initializes task data and user name.
+* Shows and fades out welcome message on mobile.
+*/
   ngOnInit() {
     this.tasksService.loadTasks();
     this.authService.showActiveUserName();
+    if (window.innerWidth < 1000) {
+      this.showWelcome = true;
+      setTimeout(() => {
+        this.fadeOutWelcome = true;
+      }, 2000);
+      setTimeout(() => {
+        this.showWelcome = false;
+        this.fadeOutWelcome = false;
+      }, 3000);
+    }
   }
 
   /** Navigates to the task board view. */

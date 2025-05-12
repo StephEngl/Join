@@ -1,11 +1,24 @@
 <section class="summary-main">
+  @if (showWelcome) {
+  <aside class="summary-welcome-mobil fade-in" [class]="{ 'fade-out': fadeOutWelcome }">
+    <h4 class="timeText">
+      <span class="greeting">{{ textChangeTime() }}</span>
+      @if (authService.activeUserName !== 'G U') {
+      <span class="comma">,</span><br>
+      <span class="user-name">{{ authService.activeUserName }}</span>
+      } @else {
+      <span class="comma">!</span><br>
+      }
+    </h4>
+  </aside>
+  } @else {
   <div class="summary-header">
     <h1>Join 360</h1>
     <span class="v-line"></span>
     <h4>Key Metrics at a Glance</h4>
     <span class="h-line"></span>
   </div>
-  <section class="summary-section">
+  <section class="summary-section fade-in-delayed">
     <article class="summary-wrapper">
       <section class="summary-row">
         @for (card of taskOverviewTop; track card; let i = $index) {
@@ -71,9 +84,10 @@
         <span class="comma">,</span><br />
         <span class="user-name">{{ authService.activeUserName }}</span>
         } @else {
-        <br />
+        <span class="comma">!</span><br />
         }
       </h4>
     </aside>
   </section>
+  }
 </section>
