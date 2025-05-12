@@ -6,7 +6,7 @@
         [class.animate]="startAnimationTrigger"
     />
 </section>
-
+<div class="wrapper-max-width">
 <!-- Dynamically render either login or sign-up dialog -->
 @if (!showSignUpDialog) {
     <app-login-dialog />
@@ -14,6 +14,7 @@
     <!-- Sign-up dialog emits closeDialog and signUpSuccess -->
     <app-sign-up-dialog (closeDialog)="toLogin()" (signUpSuccess)="onSignUpSuccess()" />
 }
+
 
 <section class="login-header">
     <p>Not a Join User?</p>
@@ -27,4 +28,6 @@
     <p (click)="toPrivacyPolicy()">Privacy policy</p>
     <p (click)="toLegalNotice()">Legal notice</p>
 </section>
+
+</div>
 
