@@ -7,6 +7,8 @@
     />
 </section>
 
+<div class="wrapper-max-width">
+<!-- Dynamically render either login or sign-up dialog -->
 @if (!showSignUpDialog) {
     <app-login-dialog />
 } @else {
@@ -24,4 +26,6 @@
     <p (click)="toPrivacyPolicy()">Privacy policy</p>
     <p (click)="toLegalNotice()">Legal notice</p>
 </section>
+
+</div>
 

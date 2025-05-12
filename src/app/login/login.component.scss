@@ -4,9 +4,18 @@
     height: 100vh;
 }
 
+.wrapper-max-width {
+    position: relative;
+    height: 100vh;
+    width: 100%;
+    max-width: 1920px;
+    max-height: 1080px;
+}
+
 app-login-dialog {
     @include dFlex();
-    height: 100vh;
+    height: 100%;
+    max-height: 1080px;
     padding: 16px;
     z-index: 2;
 }
@@ -15,6 +24,7 @@ app-sign-up-dialog {
     @include dFlex();
     width: auto;
     height: 100%;
+    max-height: 1080px;
     padding: 1rem;
     z-index: 2;
 }
@@ -84,6 +94,13 @@ app-sign-up-dialog {
 
 
 // Media Queries
+// @media screen and (min-width: 1920px) {
+// .login-header {
+//     right: auto;
+//     left: 1920px;
+//     }
+// }
+
 @media screen and (max-width: 700px) {
     .login-header {
         @include dFlex(center, center, 15px, absolute);
