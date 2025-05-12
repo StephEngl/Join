@@ -125,7 +125,8 @@ app-sign-up-dialog {
 }
 
 @media screen and (max-width: 360px) {
-  app-login-dialog {
+  app-login-dialog,
+  app-sign-up-dialog {
     padding: 8px;
   }
 }
