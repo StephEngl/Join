@@ -9,6 +9,7 @@
       @if (authService.isLoggedIn()) {
         {{ this.authService.activeInitials() }}
       } @else {
+        <img src="./assets/icons/header/menu.svg" alt="Menu Button">
         <!-- img triple point  -->
       }
     </button>
