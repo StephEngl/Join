@@ -23,6 +23,7 @@ export class SignalsService {
   titleCleared = signal<boolean>(false);
   dateCleared = signal<boolean>(false);
   hideHrefs = signal<boolean>(false);
+  signingIn = signal<boolean>(true);
 
 
   /**

@@ -1,6 +1,9 @@
 <section class="summary-main">
   @if (showWelcome) {
-  <aside class="summary-welcome-mobil fade-in" [class]="{ 'fade-out': fadeOutWelcome }">
+  <aside class="summary-welcome-mobil" [class]="{ 
+    'fade-in': signalService.signingIn(), 
+    'fade-out': fadeOutWelcome 
+  }">
     <h4 class="timeText">
       <span class="greeting">{{ textChangeTime() }}</span>
       @if (authService.activeUserName !== 'G U') {

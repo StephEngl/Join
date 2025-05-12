@@ -3,6 +3,7 @@ import { CommonModule } from '@angular/common';
 import { Router } from '@angular/router';
 import { TasksService } from '../../services/tasks.service';
 import { AuthenticationService } from '../../services/authentication.service';
+import { SignalsService } from '../../services/signals.service';
 
 @Component({
   selector: 'app-summary',
@@ -25,6 +26,7 @@ export class SummaryComponent {
 
   tasksService = inject(TasksService);
   authService = inject(AuthenticationService);
+  signalService = inject(SignalsService);
   userName: string | null = null;
   today: string = this.formatDate(new Date())!;
   taskOverviewBottom: { text: string }[] = [
@@ -63,12 +65,18 @@ export class SummaryComponent {
 
   /**
 * Initializes task data and user name.
-* Shows and fades out welcome message on mobile.
 */
   ngOnInit() {
     this.tasksService.loadTasks();
     this.authService.showActiveUserName();
-    if (window.innerWidth < 1000) {
+    this.startWelcomeAnimation();
+  }
+  
+  /**
+  * Shows and fades out welcome message on mobile.
+  */
+  startWelcomeAnimation() {
+    if (window.innerWidth < 1000 && this.signalService.signingIn()) {
       this.showWelcome = true;
       setTimeout(() => {
         this.fadeOutWelcome = true;
@@ -78,6 +86,7 @@ export class SummaryComponent {
         this.fadeOutWelcome = false;
       }, 3000);
     }
+    this.signalService.signingIn.set(false);
   }
 
   /** Navigates to the task board view. */
