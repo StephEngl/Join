@@ -171,7 +171,7 @@ export class AuthenticationService {
     try {
       const user = await this.onAuthStateChanged();
       const initials = this.displayNameInitials(user?.displayName);
-      this.activeInitials.set(initials || 'GU');
+      this.activeInitials.set(initials);
     } catch (error) {
       console.error('Error:', error);
       this.activeInitials.set('Er');
