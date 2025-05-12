@@ -30,7 +30,7 @@
       class="logout-popup-btn" 
       [class.show]="showLogoutPopup" 
       (click)="logout()">
-      Log out
+      @if (authService.isLoggedIn()) {Log out} @else { to Login }
     </button>
     }
   </div>
