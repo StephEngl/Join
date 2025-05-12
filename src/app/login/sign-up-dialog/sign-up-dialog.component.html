@@ -11,13 +11,10 @@
         </div>
         <div class="sign-up-header-right"></div>
     </div>
-
     <div class="sign-up-content">
         <div class="sign-up-form-and-accept-container">
             <form [formGroup]="signUpForm" (ngSubmit)="submitSignUp()">
                 <div class="sign-up-form-container">
-
-                    <!-- Name -->
                     <div class="form-field" [ngClass]="{ invalid: signUpForm.get('name')?.invalid && signUpForm.get('name')?.touched }">
                         <input type="text" formControlName="name" placeholder="Name" />
                         <span class="form-icon person"></span>
@@ -28,9 +25,6 @@
                             Please enter a first and last name.
                         </div>
                     </div>
-
-
-                    <!-- E-Mail -->
                     <div class="form-field" [ngClass]="{ invalid: signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched }">
                         <input type="email" formControlName="email" placeholder="E-Mail" />
                         <span class="form-icon mail"></span>
@@ -41,8 +35,6 @@
                             Please enter a valid email address.
                         </div>
                     </div>
-
-                    <!-- Password -->
                     <div class="form-field" [ngClass]="{ invalid: signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched }">
                         <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Password" />
                         <span *ngIf="signUpForm.get('password')?.untouched" class="form-icon lock"></span>
@@ -57,8 +49,6 @@
                             Password must be at least 8 characters long.
                         </div>
                     </div>
-
-                    <!-- Confirm Password -->
                     <div class="form-field" [ngClass]="{ invalid: signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched }">
                         <input [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirm Password" />
                         <span *ngIf="signUpForm.get('confirmPassword')?.untouched" class="form-icon lock"></span>
@@ -73,12 +63,10 @@
                             Passwords do not match.
                         </div>
                     </div>
-
                     <div class="error-message" *ngIf="signUpErrorMessage">
                         {{ signUpErrorMessage }}
                     </div>
                 </div>
-
                 <div class="sign-up-accept-container">
                     <label class="custom-checkbox">
                         <input type="checkbox" [checked]="acceptPolicy" (change)="acceptPolicy = !acceptPolicy" />
@@ -87,7 +75,6 @@
                         </span>
                     </label>
                 </div>
-
                 <div class="sign-up-footer">
                     <button class="sign-up-button" type="submit" [disabled]="!acceptPolicy">Sign up</button>
                 </div>

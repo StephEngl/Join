@@ -5,7 +5,7 @@
 .sign-up-section {
     @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
     flex-direction: column;
-    width: 598px;
+    width: 600px;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -19,7 +19,7 @@
         .sign-up-header-left,
         .sign-up-header-right {
             @include dFlex($jc: center, $ai: center, $gap: 0px, $position: relative);
-            width: 10%;
+            width: 12%;
 
             .sign-up-arrow {
                 background-image: url('/assets/icons/sign-up/sign-up-arrow.svg');
@@ -40,7 +40,7 @@
         .sign-up-header-middle {
             @include dFlex($jc: center, $ai: center, $gap: 0px, $position: relative);
             flex-direction: column;
-            width: 80%;
+            width: 76%;
             text-align: center;
 
             .sign-up-header-txt h2 {
@@ -66,10 +66,11 @@
         padding: 1.5rem;
 
         .sign-up-form-and-accept-container {
-            width: 422px;
-            display: flex;
+            @include dFlex($jc: center, $ai: center, $gap: 1.5rem, $position: relative);
+            width: 100%;
+            max-width: 422px;
+            padding: 0 1rem;
             flex-direction: column;
-            gap: 24px;
 
             form {
                 display: flex;
@@ -78,12 +79,11 @@
                 .sign-up-form-container {
                     display: flex;
                     flex-direction: column;
-                    gap: 16px;
+                    gap: 1rem;
 
                     .form-field {
                         position: relative;
-                        width: auto;
-                        height: 66px;
+                        height: 70px;
 
                         input {
                             width: 100%;
@@ -145,9 +145,6 @@
                                 cursor: pointer;
                             }
 
-                            &.clickable {
-                                cursor: pointer;
-                            }
                         }
 
                         .error-message {
@@ -161,7 +158,7 @@
 
                 .sign-up-accept-container {
                     @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
-                    padding: 1.5rem;
+                    padding: 1rem;
 
                     .custom-checkbox {
                         @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
@@ -169,7 +166,7 @@
                         color: $col-font-inactive;
                         cursor: pointer;
                         user-select: none;
-                        gap: 0.5rem;
+                        gap: 0.4rem;
 
                         input[type="checkbox"] {
                             appearance: none;
@@ -193,6 +190,10 @@
                             text-decoration: none;
                             color: $col-ref-highlight;
                         }
+
+                        .checkmark {
+                            font-size: 0.9rem;
+                        }
                     }
                 }
 
@@ -200,10 +201,8 @@
                     @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
                     width: auto;
                     padding: 1rem;
-                    font-size: 1rem;
 
                     .sign-up-button {
-                        width: auto;
                         padding: 1rem;
                         background-color: $col-bg-secondary;
                         color: white;
@@ -225,6 +224,60 @@
                     }
                 }
             }
+        }
+    }
+}
+
+@media (max-width: 570px) {
+    .sign-up-section {
+        width: 100%;
+        max-width: 500px;
+        padding: 0.5rem;
+    }
+
+    .sign-up-form-and-accept-container {
+        width: 100%;
+        max-width: 450px;
+        padding: 0 1rem;
+        margin: 0 auto;
+        gap: 24px;
+    }
+}
+
+@media (max-width: 480px) {
+    .sign-up-form-and-accept-container {
+        width: 100%;
+        max-width: 380px;
+    }
+}
+
+@media (max-width: 410px) {
+    .sign-up-form-and-accept-container {
+        width: 100%;
+        max-width: 280px;
+        padding: 0 0.5rem;
+    }
+
+    .sign-up-accept-container {
+        @include dFlex($jc: center, $ai: center, $gap: 0, $position: relative);
+        width: 100%;
+        padding: 0px!important;
+        font-size: 0.8rem;
+    }
+
+    .sign-up-header {
+        padding: 0.1rem;
+    }
+
+    .sign-up-content {
+        padding: 0.1rem!important;
+    }
+
+    .checkmark {
+        padding: 0.1rem;
+        font-size: 0.8rem;
+        a {
+            font-size: 0.8rem;
         }
     }
 }
