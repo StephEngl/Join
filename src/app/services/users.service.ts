@@ -10,7 +10,6 @@ import {
 } from '@angular/fire/firestore';
 import { UsersContactsService } from './users-contacts.service';
 
-
 /**
  * Service that interacts with Firestore to manage user contacts.
  * It provides methods to subscribe to a users list, add a user,
