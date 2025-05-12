@@ -30,6 +30,7 @@
                 width: 48px;
                 border-radius: 50%;
                 transition: background-color 0.2s ease;
+                cursor: pointer;
 
                 &:hover {
                     background-color: $col-bg-hovered-subtask; 
