@@ -65,16 +65,14 @@
       </section>
     </article>
     <aside class="summary-welcome">
-      <h4>
-        <p class="timeText">
-          {{ textChangeTime() }}
-          @if (authService.activeUserName !== 'G U')
-          {,<br>
-          <span class="user-name">{{ authService.activeUserName }}</span>
-          } @else {
-          <br>
-          }
-        </p>
+      <h4 class="timeText">
+        <span class="greeting">{{ textChangeTime() }}</span>
+        @if (authService.activeUserName !== 'G U') {
+        <span class="comma">,</span><br />
+        <span class="user-name">{{ authService.activeUserName }}</span>
+        } @else {
+        <br />
+        }
       </h4>
     </aside>
   </section>

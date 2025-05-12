@@ -17,7 +17,7 @@ import { AuthenticationService } from '../../services/authentication.service';
  * Includes greeting logic, task statistics, and navigation to the task board.
  */
 export class SummaryComponent {
-  
+
   constructor(private router: Router) {}
 
   tasksService = inject(TasksService);
@@ -109,4 +109,5 @@ export class SummaryComponent {
     if (hour >= 17 && hour < 21) return 'Good evening';
     return 'Good night';
   }
+
 }

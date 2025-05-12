@@ -1,6 +1,10 @@
 @import "./../../../assets/styles/variables.scss";
 @import "./../../../assets/styles/mixins.scss";
 
+.comma {
+    margin-left: -1px;
+}
+
 .summary-middle-box {
     @include dFlex($jc: space-around, $ai: center, $gap: 16px);
     width: 100%;
@@ -37,7 +41,7 @@
 }
 
 .summary-header {
-    @include dFlex(flex-start, center);
+    @include dFlex($jc: flex-start, $ai: center);
 }
 
 .v-line-white {
@@ -53,12 +57,12 @@
 }
 
 .summary-section {
-    @include dFlex(flex-start, center, 55px);
+    @include dFlex($jc: flex-start, $ai: center, $gap: 55px);
     margin-top: 20px;
 }
 
 .summary-wrapper {
-    @include dFlex(center, space-between, 25px);
+    @include dFlex($jc: center, $ai: space-between, $gap: 25px);
     flex-direction: column;
     flex: 2;
     max-width: 500px;
@@ -66,12 +70,12 @@
 }
 
 .summary-row {
-    @include dFlex(flex-start, center, 25px);
+    @include dFlex($jc: flex-start, $ai: center, $gap: 25px);
     height: 160px;
 }
 
 .sum-icon {
-    @include dFlex(center, center, 10px);
+    @include dFlex($jc: center, $ai: center, $gap: 10px);
     flex: 1;
 
     >img {
@@ -104,7 +108,7 @@
 
 .summary-btn {
     flex: 1;
-    @include dFlex(center, center);
+    @include dFlex($jc: center, $ai: center);
     border-radius: 30px;
     background-color: white;
     height: 100%;
@@ -152,7 +156,7 @@
 }
 
 .task-count {
-    @include dFlex(center, center);
+    @include dFlex($jc: center, $ai: center);
     flex-direction: column;
 
     >h5 {
@@ -169,9 +173,11 @@
 }
 
 @media screen and (max-width: 1400px) {
+
     .summary-main {
         height: calc(100vh - $header-height - $nav-height-mobile);
     }
+
 }
 
 @media screen and (max-width: 1000px) {
@@ -186,7 +192,7 @@
     }
 
     .summary-header {
-        @include dFlex(flex-start, flex-start);
+        @include dFlex($jc: flex-start, $ai: flex-start);
         flex-direction: column;
         gap: 6px;
     }
@@ -204,7 +210,7 @@
     }
 
     .summary-welcome {
-        display: none; // will be absolute and none / flex toggled (animation on start)
+        display: none;
     }
 }
 
@@ -295,4 +301,5 @@
         gap: 10px;
         margin-top: 2px;
     }
+
 }
