@@ -7,20 +7,17 @@
     />
 </section>
 
-<!-- Dynamically render either login or sign-up dialog -->
 @if (!showSignUpDialog) {
     <app-login-dialog />
 } @else {
-    <!-- Sign-up dialog emits closeDialog and signUpSuccess -->
     <app-sign-up-dialog (closeDialog)="toLogin()" (signUpSuccess)="onSignUpSuccess()" />
 }
 
 <section class="login-header">
     <p>Not a Join User?</p>
-
-    <!-- Changed function name to toSignUpDialog() to avoid overlap - this sign up button opens the sign-up dialog -->
-    <button class="signup-btn" type="button" (click)="toSignUpDialog(); $event.stopPropagation()">Sign up</button>
-
+    @if (!showSignUpDialog) {
+        <button class="signup-btn" type="button" (click)="toSignUpDialog(); $event.stopPropagation()">Sign up</button>
+    }
 </section>
 
 <section class="login-footer">

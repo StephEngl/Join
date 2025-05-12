@@ -16,13 +16,7 @@ export const routes: Routes = [
         loadComponent: () =>
             import('./login/login.component').then((m) => m.LoginComponent),
     },
-    {
-        path: 'sign-up',
-        loadComponent: () =>
-            import('./login/sign-up-dialog/sign-up-dialog.component').then(
-            (m) => m.SignUpDialogComponent
-            ),
-    },
+
     {
         path: 'summary',
         loadComponent: () =>
