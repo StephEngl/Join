@@ -5,6 +5,7 @@
 .sign-up-section {
     @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
     flex-direction: column;
+    width: 598px;
     background-color: white;
     border-radius: 12px;
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
@@ -19,6 +20,21 @@
         .sign-up-header-right {
             @include dFlex($jc: center, $ai: center, $gap: 0px, $position: relative);
             width: 10%;
+
+            .sign-up-arrow {
+                background-image: url('/assets/icons/sign-up/sign-up-arrow.svg');
+                background-repeat: no-repeat;
+                background-size: contain;
+                background-position: center;
+                height: 48px;
+                width: 48px;
+                border-radius: 50%; /* circular shape */
+                transition: background-color 0.2s ease;
+
+                &:hover {
+                    background-color: $col-ref-hover; /* use project hover color */
+                }
+            }
         }
 
         .sign-up-header-middle {
@@ -111,7 +127,7 @@
                     padding: 1.5rem;
 
                     .custom-checkbox {
-                    @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
+                        @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
                         font-size: 1rem;
                         cursor: pointer;
                         user-select: none;
