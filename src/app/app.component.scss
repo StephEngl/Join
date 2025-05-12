@@ -3,7 +3,6 @@
 
 .page-content {
   display: flex;
-  // overlay: hidden;
   @media (max-width: 1400px) {
     flex-direction: column-reverse;
   }
@@ -38,7 +37,6 @@ app-login {
 
 .orientation-lock {
   @include dFlex(center, center, 20px, fixed);
-  // display: none !important; // toogle / delete
   flex-direction: column;
   padding: 20px;
   text-align: center;

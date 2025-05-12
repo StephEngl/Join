@@ -56,10 +56,14 @@ export class SignUpDialogComponent {
             return;
         }
 
-        const { email, password } = this.signUpForm.value;
+        // const { email, password } = this.signUpForm.value;
+        const name = this.signUpForm.get('name')?.value;
+        const email = this.signUpForm.get('email')?.value;
+        const password = this.signUpForm.get('password')?.value;
         try {
-            const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
-            await sendEmailVerification(userCredential.user);
+            await this.createUser(name, email, password);
+            // const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+            // await sendEmailVerification(userCredential.user);
             this.snackbar.open('Sign up was successful', 'OK', { duration: 3000 });
             this.signUpSuccess.emit();
         } catch (error: any) {
@@ -73,4 +77,20 @@ export class SignUpDialogComponent {
         if (error.code === 'auth/weak-password') return 'The password is too weak (minimum 8 characters).';
         return 'Registration failed. Please try again later.';
     }
+
+    async createUser(nameInput: string, mailInput: string, password: string) {
+        const user = { name: nameInput, mail: mailInput, phone: ''}
+        if (this.userAlreadyExists(user.name)) return;
+        const userCredential = await this.authService.createUser(user.mail, password, user.name);
+        const uid = userCredential.user.uid;
+        this.usersService.addUser(uid, user);
+        await this.authService.setActiveUserInitials();
+        this.router.navigate(['/summary']);
+    }
+    userAlreadyExists(mail: string): boolean {
+        return (
+            this.usersService.users.some(user => user.mail.trim().toLowerCase() === mail.trim().toLowerCase())
+        );
+    }
 }
+

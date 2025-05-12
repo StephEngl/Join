@@ -6,7 +6,11 @@
       ><img class="help-icon" src="./assets/icons/header/help.svg" alt=""
     /></a>
     <button class="menu-button" (click)="onMenuButtonClick($event); $event.stopPropagation()">
-      {{ this.authService.activeInitials() }}
+      @if (authService.isLoggedIn()) {
+        {{ this.authService.activeInitials() }}
+      } @else {
+        <!-- img triple point  -->
+      }
     </button>
 
     @if (dropdownVisible) {
