@@ -28,11 +28,11 @@
                 background-position: center;
                 height: 48px;
                 width: 48px;
-                border-radius: 50%; /* circular shape */
+                border-radius: 50%;
                 transition: background-color 0.2s ease;
 
                 &:hover {
-                    background-color: $col-ref-hover; /* use project hover color */
+                    background-color: $col-bg-hovered-subtask; 
                 }
             }
         }
