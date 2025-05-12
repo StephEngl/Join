@@ -66,6 +66,7 @@
         padding: 1.5rem;
 
         .sign-up-form-and-accept-container {
+            width: 422px;
             display: flex;
             flex-direction: column;
             gap: 24px;
@@ -105,8 +106,37 @@
                             right: 12px;
                             top: 50%;
                             transform: translateY(-50%);
+                            width: 24px;
+                            height: 24px;
+                            background-repeat: no-repeat;
+                            background-size: contain;
+                            background-position: center;
                             font-size: 1.2rem;
                             color: #777;
+
+                            &.person {
+                                background-image: url('/assets/icons/sign-up/person.svg');
+                            }
+
+                            &.mail {
+                                background-image: url('/assets/icons/sign-up/mail.svg');
+                            }
+
+                            &.lock {
+                                background-image: url('/assets/icons/sign-up/lock.svg');
+                            }
+
+                            &.eye-open {
+                                background-image: url('/assets/icons/sign-up/visibility.svg');
+                            }
+
+                            &.eye-closed {
+                                background-image: url('/assets/icons/sign-up/visibility_off.svg');
+                            }
+
+                            &.clickable {
+                                cursor: pointer;
+                            }
 
                             &.clickable {
                                 cursor: pointer;
@@ -129,6 +159,7 @@
                     .custom-checkbox {
                         @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
                         font-size: 1rem;
+                        color: $col-font-inactive;
                         cursor: pointer;
                         user-select: none;
                         gap: 0.5rem;
@@ -154,7 +185,6 @@
                         a {
                             text-decoration: none;
                             color: $col-ref-highlight;
-                            font-weight: bold;
                         }
                     }
                 }
