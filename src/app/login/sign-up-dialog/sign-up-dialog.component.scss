@@ -205,15 +205,22 @@
                     .sign-up-button {
                         width: auto;
                         padding: 1rem;
-                        background-color: #092931;
+                        background-color: $col-bg-secondary;
                         color: white;
                         border: none;
                         border-radius: 8px;
                         font-size: 1rem;
                         cursor: pointer;
+                        transition: background-color 0.2s ease;
 
-                        &:hover {
-                            background-color: #0b3a45;
+                        &:disabled {
+                            cursor: not-allowed;
+                            opacity: 0.6;
+                            background-color: $col-bg-secondary; 
+                        }
+
+                        &:not(:disabled):hover {
+                            background-color: $col-ref-highlight;
                         }
                     }
                 }
