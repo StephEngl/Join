@@ -83,7 +83,7 @@ export class LoginComponent {
 
     /* Called from dialog when sign-up was successful */
     onSignUpSuccess() {
-        alert('Sign up was successful'); /* Replace with toast service if needed */
+        alert('Sign up was successful'); 
         this.toLogin();
     }
 }

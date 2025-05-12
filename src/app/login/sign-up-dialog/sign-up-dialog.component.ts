@@ -64,14 +64,11 @@ export class SignUpDialogComponent {
             this.signUpForm.markAllAsTouched();
             return;
         }
-        // const { email, password } = this.signUpForm.value;
         const name = this.signUpForm.get('name')?.value;
         const email = this.signUpForm.get('email')?.value;
         const password = this.signUpForm.get('password')?.value;
         try {
             await this.createUser(name, email, password);
-            // const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
-            // await sendEmailVerification(userCredential.user);
             this.toastService.triggerToast(
                 'Sign up successful',
                 'create',

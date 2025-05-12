@@ -235,6 +235,21 @@
         padding: 0.5rem;
     }
 
+    .sign-up-form-container {
+        gap: 2px !important;
+    }
+    .sign-up-footer {
+        padding: 6px !important;
+    }
+    .form-field {
+        >input {
+            height: 42px !important;
+        }
+    }
+    .form-icon {
+        height: 21px !important;
+    }
+
     .sign-up-form-and-accept-container {
         width: 100%;
         max-width: 450px;
