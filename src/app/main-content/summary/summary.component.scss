@@ -33,6 +33,7 @@
     max-width: calc($appMaxWidth - $navbar-width);
     height: calc(100vh - $header-height);
     padding: 55px 0 0 55px;
+    overflow-y: auto;
 }
 
 .summary-header {
