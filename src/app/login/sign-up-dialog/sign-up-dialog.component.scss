@@ -22,7 +22,7 @@
             width: 12%;
 
             .sign-up-arrow {
-                background-image: url('/assets/icons/sign-up/sign-up-arrow.svg');
+                background-image: url('../../assets/icons/sign-up/sign-up-arrow.svg');
                 background-repeat: no-repeat;
                 background-size: contain;
                 background-position: center;
@@ -122,23 +122,23 @@
                             color: #777;
 
                             &.person {
-                                background-image: url('/assets/icons/sign-up/person.svg');
+                                background-image: url('../../assets/icons/sign-up/person.svg');
                             }
 
                             &.mail {
-                                background-image: url('/assets/icons/sign-up/mail.svg');
+                                background-image: url('../../assets/icons/sign-up/mail.svg');
                             }
 
                             &.lock {
-                                background-image: url('/assets/icons/sign-up/lock.svg');
+                                background-image: url('../../assets/icons/sign-up/lock.svg');
                             }
 
                             &.eye-open {
-                                background-image: url('/assets/icons/sign-up/visibility.svg');
+                                background-image: url('../../assets/icons/sign-up/visibility.svg');
                             }
 
                             &.eye-closed {
-                                background-image: url('/assets/icons/sign-up/visibility_off.svg');
+                                background-image: url('../../assets/icons/sign-up/visibility_off.svg');
                             }
 
                             &.clickable {
