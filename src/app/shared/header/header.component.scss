@@ -28,6 +28,7 @@
 
   .menu-button {
     cursor: pointer;
+    @include dFlex();
     border: 3px solid $col-bg-secondary;
     width: 56px;
     height: 56px;
