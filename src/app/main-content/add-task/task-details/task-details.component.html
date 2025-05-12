@@ -42,7 +42,6 @@
         />
         <img
           src="./assets/icons/kanban/drop_down_open.svg"
-          alt=""
           [style.transform]="
           accordionItem.expanded ? 'rotate(180deg)' : 'rotate(0deg)'"
         />
@@ -145,7 +144,6 @@
         />
         <img
           src="./assets/icons/kanban/drop_down_open.svg"
-          alt=""
           [style.transform]="
             categoryAccordionItem.expanded ? 'rotate(180deg)' : 'rotate(0deg)'
           "
@@ -205,14 +203,13 @@
             : './assets/icons/kanban/add.svg'
         "
         (click)="subtaskText ? clearSubtask() : focusInput(subtaskInput)"
-        alt=""
       />
       @if (subtaskText) {
       <div class="v-line">|</div>
       <img
         [src]="'./assets/icons/kanban/check.svg'"
         (click)="addSubtask()"
-        alt="checkBtn"
+        alt="Check Button"
       />
       }
     </div>
