@@ -9,6 +9,8 @@ import { AuthenticationService } from '../../services/authentication.service';
 import { UsersService } from '../../services/users.service';
 import { SignalsService } from '../../services/signals.service';
 
+import { ToastService } from '../../services/toast.service';
+
 @Component({
     selector: 'app-sign-up-dialog',
     standalone: true,
@@ -25,7 +27,11 @@ export class SignUpDialogComponent {
     usersService = inject(UsersService);
     signalService = inject(SignalsService);
     router = inject(Router);
-    snackbar = inject(MatSnackBar);
+
+    // snackbar = inject(MatSnackBar);
+
+    toastService = inject(ToastService);
+
     fb = inject(FormBuilder);
 
     signUpForm: FormGroup;
@@ -71,10 +77,22 @@ export class SignUpDialogComponent {
             await this.createUser(name, email, password);
             // const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
             // await sendEmailVerification(userCredential.user);
-            this.snackbar.open('Sign up was successful', 'OK', { duration: 3000 });
+
+            //FIXME: Toast.service bind
+            // this.snackbar.open('Sign up was successful', 'OK', { duration: 3000 });
+            this.toastService.triggerToast(
+                'Sign up was successful',
+                'create',
+            );
+            
             this.signUpSuccess.emit();
+
         } catch (error: any) {
             this.signUpErrorMessage = this.getFirebaseErrorMessage(error);
+            this.toastService.triggerToast(
+                this.signUpErrorMessage,
+                'error',
+            );
         }
     }
 
@@ -86,7 +104,7 @@ export class SignUpDialogComponent {
     }
 
     async createUser(nameInput: string, mailInput: string, password: string) {
-        const user = { name: nameInput, mail: mailInput, phone: ''}
+        const user = { name: nameInput, mail: mailInput, phone: '' }
         if (this.userAlreadyExists(user.name)) return;
         const userCredential = await this.authService.createUser(user.mail, password, user.name);
         const uid = userCredential.user.uid;

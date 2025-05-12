@@ -308,11 +308,11 @@ input:not(.invalid)+img+.error {
     height: 55px;
 
     &:hover {
-      background-color: $col-font-secondary;
-      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
+        background-color: $col-font-secondary;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
     }
-  }
+}
 
 
 .contact-initials {
@@ -388,11 +388,11 @@ input:not(.invalid)+img+.error {
     height: 57px;
 
     &:hover {
-      background-color: $col-ref-highlight;
-      box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
-      cursor: pointer;
+        background-color: $col-ref-highlight;
+        box-shadow: 0 3px 5px rgba(0, 0, 0, 0.2);
+        cursor: pointer;
     }
-  }
+}
 
 
 .button-save.disabled {
