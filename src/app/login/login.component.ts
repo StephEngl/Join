@@ -72,7 +72,7 @@ export class LoginComponent {
 
     /* Opens the sign-up dialog inline (replaces app-login-dialog via @if) */
     toSignUpDialog() {
-        this.signalService.hideHrefs.set(true);
+        this.signalService.hideHrefs.set(false);
         this.showSignUpDialog = true;
     }
 

@@ -1,12 +1,12 @@
 <div class="page-content">
     <!-- CHANGED: Removed '|| signalService.hideHrefs()' to prevent showing navbar during login/signup -->
-    @if (authService.isLoggedIn()) {
+    @if (authService.isLoggedIn() || signalService.hideHrefs()) {
         <app-navbar />
     }
 
     <div class="header-content">
         <!-- CHANGED: Removed '|| signalService.hideHrefs()' to prevent showing header during login/signup -->
-        @if (authService.isLoggedIn()) {
+        @if (authService.isLoggedIn() || signalService.hideHrefs()) {
             <app-header />
         }
 
