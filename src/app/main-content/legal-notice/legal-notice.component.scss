@@ -13,8 +13,9 @@
 }
 
 .section-legal-notice {
+  max-width: calc($appMaxWidth - $navbar-width);
+  
   h2 {
-    max-width: calc($appMaxWidth - $navbar-width);
     width: 100%;
     height: auto;
     font-weight: bold;
