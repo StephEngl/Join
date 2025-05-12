@@ -55,18 +55,18 @@
                 width: 150px;
                 height: 2px;
                 background-color: $col-ref-highlight;
-                margin-top: 8px;
+                margin-top: 6px;
             }
         }
     }
 
     .sign-up-content {
-        @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
+        @include dFlex($jc: center, $ai: center, $gap: 0.5rem, $position: relative);
         flex-direction: column;
         padding: 1.5rem;
 
         .sign-up-form-and-accept-container {
-            @include dFlex($jc: center, $ai: center, $gap: 1.5rem, $position: relative);
+            @include dFlex($jc: center, $ai: center, $gap: 1rem, $position: relative);
             width: 100%;
             max-width: 422px;
             padding: 0 1rem;
@@ -122,34 +122,35 @@
                             color: #777;
 
                             &.person {
-                                background-image: url('/assets/icons/sign-up/person.svg');
+                                background-image: url('./assets/icons/sign-up/person.svg');
                             }
 
                             &.mail {
-                                background-image: url('/assets/icons/sign-up/mail.svg');
+                                background-image: url('./assets/icons/sign-up/mail.svg');
                             }
 
                             &.lock {
-                                background-image: url('/assets/icons/sign-up/lock.svg');
+                                background-image: url('./assets/icons/sign-up/lock.svg');
                             }
 
                             &.eye-open {
-                                background-image: url('/assets/icons/sign-up/visibility.svg');
+                                background-image: url('./assets/icons/sign-up/visibility.svg');
                             }
 
                             &.eye-closed {
-                                background-image: url('/assets/icons/sign-up/visibility_off.svg');
+                                background-image: url('./assets/icons/sign-up/visibility_off.svg');
                             }
 
                             &.clickable {
                                 cursor: pointer;
                             }
+
                         }
 
                         .error-message {
                             color: red;
                             font-size: 0.875rem;
-                            margin-top: 2px;
+                            margin-top: 4px;
                             padding-left: 4px;
                         }
                     }
@@ -278,5 +279,26 @@
         a {
             font-size: 0.8rem;
         }
+    }
+}
+
+@media (max-width: 360px) {
+    .sign-up-form-and-accept-container {
+        font-size: 0.8rem!important;
+    }
+
+    .input {
+        font-size: 0.8rem!important;
+        height: 40px!important;
+    }
+    
+        .sign-up-footer {
+        padding: 0!important;
+        padding-top: 4px!important;
+        gap: 0!important;
+    }
+
+    .sign-up-section {
+        margin-top: 16px;
     }
 }
