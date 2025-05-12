@@ -4,17 +4,15 @@ import { CommonModule } from '@angular/common';
 import { RouterModule } from '@angular/router';
 import { Router } from '@angular/router';
 import { Auth, createUserWithEmailAndPassword, sendEmailVerification } from '@angular/fire/auth';
-import { MatSnackBar, MatSnackBarModule } from '@angular/material/snack-bar';
 import { AuthenticationService } from '../../services/authentication.service';
 import { UsersService } from '../../services/users.service';
 import { SignalsService } from '../../services/signals.service';
-
 import { ToastService } from '../../services/toast.service';
 
 @Component({
     selector: 'app-sign-up-dialog',
     standalone: true,
-    imports: [CommonModule, ReactiveFormsModule, RouterModule, MatSnackBarModule],
+    imports: [CommonModule, ReactiveFormsModule, RouterModule],
     templateUrl: './sign-up-dialog.component.html',
     styleUrl: './sign-up-dialog.component.scss'
 })
@@ -27,11 +25,7 @@ export class SignUpDialogComponent {
     usersService = inject(UsersService);
     signalService = inject(SignalsService);
     router = inject(Router);
-
-    // snackbar = inject(MatSnackBar);
-
     toastService = inject(ToastService);
-
     fb = inject(FormBuilder);
 
     signUpForm: FormGroup;
@@ -77,16 +71,11 @@ export class SignUpDialogComponent {
             await this.createUser(name, email, password);
             // const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
             // await sendEmailVerification(userCredential.user);
-
-            //FIXME: Toast.service bind
-            // this.snackbar.open('Sign up was successful', 'OK', { duration: 3000 });
             this.toastService.triggerToast(
-                'Sign up was successful',
+                'Sign up successful',
                 'create',
             );
-            
             this.signUpSuccess.emit();
-
         } catch (error: any) {
             this.signUpErrorMessage = this.getFirebaseErrorMessage(error);
             this.toastService.triggerToast(
