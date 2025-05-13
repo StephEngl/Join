@@ -96,6 +96,7 @@ export class DailyResetService {
         });
       }
     });
+    this.contactsService.contacts = [];
   }
 
   /**  Deletes all tasks currently stored in the task service. */
