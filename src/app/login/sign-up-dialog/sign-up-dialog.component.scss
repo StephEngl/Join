@@ -102,8 +102,6 @@
                         }
 
                         &.invalid input {
-                            width: 100%;
-                            height: 48px;
                             border-color: red;
                         }
 
@@ -145,7 +143,6 @@
                             &.clickable {
                                 cursor: pointer;
                             }
-
                         }
 
                         .error-message {
@@ -187,6 +184,12 @@
                             }
                         }
 
+                        &.invalid input[type="checkbox"] {
+                            border: 2px solid red;
+                            box-shadow: 0 0 4px red;
+                            transition: border-color 0.3s ease, box-shadow 0.3s ease;
+                        }
+
                         a {
                             text-decoration: none;
                             color: $col-ref-highlight;
@@ -216,7 +219,7 @@
                         &:disabled {
                             cursor: not-allowed;
                             opacity: 0.6;
-                            background-color: $col-bg-secondary; 
+                            background-color: $col-bg-secondary;
                         }
 
                         &:not(:disabled):hover {
@@ -277,6 +280,7 @@
     .checkmark {
         padding: 0.1rem;
         font-size: 0.8rem;
+
         a {
             font-size: 0.8rem;
         }
@@ -292,8 +296,8 @@
         font-size: 0.8rem!important;
         height: 40px!important;
     }
-    
-        .sign-up-footer {
+
+    .sign-up-footer {
         padding: 0!important;
         padding-top: 4px!important;
         gap: 0!important;

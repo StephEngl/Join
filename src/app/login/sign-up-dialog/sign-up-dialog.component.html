@@ -1,20 +1,15 @@
 <div class="sign-up-section">
     <div class="sign-up-header">
         <div class="sign-up-header-left">
-            <div class="sign-up-arrow" (click)="closeDialog.emit()">
-            </div>
+            <div class="sign-up-arrow" (click)="closeDialog.emit()"></div>
         </div>
         <div class="sign-up-header-middle">
             <div class="sign-up-header-txt">
-                <h2>
-                    Sign up
-                </h2>
+                <h2>Sign up</h2>
             </div>
-            <div class="sign-up-header-underline">
-            </div>
+            <div class="sign-up-header-underline"></div>
         </div>
-        <div class="sign-up-header-right">
-        </div>
+        <div class="sign-up-header-right"></div>
     </div>
     <div class="sign-up-content">
         <div class="sign-up-form-and-accept-container">
@@ -24,78 +19,62 @@
                         <input type="text" formControlName="name" placeholder="Name" />
                         <span class="form-icon person"></span>
                         @if (signUpForm.get('name')?.hasError('required') && signUpForm.get('name')?.touched) {
-                            <div class="error-message">
-                                Please enter your name.
-                            </div>
+                            <div class="error-message">Please enter your name.</div>
                         }
                         @if (signUpForm.get('name')?.hasError('invalidFullName') && signUpForm.get('name')?.touched) {
-                            <div class="error-message">
-                                Please enter a first and last name.
-                            </div>
+                            <div class="error-message">Please enter a first and last name.</div>
                         }
                     </div>
                     <div class="form-field" [ngClass]="{ invalid: signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched }">
                         <input type="email" formControlName="email" placeholder="E-Mail" />
                         <span class="form-icon mail"></span>
                         @if (signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched) {
-                            <div class="error-message">
-                                Please enter your email address.
-                            </div>
+                            <div class="error-message">Please enter your email address.</div>
                         }
                         @if (signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched) {
-                            <div class="error-message">
-                                Please enter a valid email address.
-                            </div>
+                            <div class="error-message">Please enter a valid email address.</div>
                         }
                     </div>
                     <div class="form-field" [ngClass]="{ invalid: signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched }">
                         <input [type]="hidePassword ? 'password' : 'text'" formControlName="password" placeholder="Password" />
                         @if (signUpForm.get('password')?.untouched) {
-                            <span class="form-icon lock">
-                            </span>
+                            <span class="form-icon lock"></span>
                         }
                         @if (!signUpForm.get('password')?.untouched) {
-                            <span class="form-icon clickable"
-                                [ngClass]="hidePassword ? 'eye-closed' : 'eye-open'"
-                                (click)="hidePassword = !hidePassword">
-                            </span>
+                            <span class="form-icon clickable" [ngClass]="hidePassword ? 'eye-closed' : 'eye-open'" (click)="hidePassword = !hidePassword"></span>
                         }
                         @if (signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched) {
-                            <div class="error-message">
-                                Please enter a password.
-                            </div>
+                            <div class="error-message">Please enter a password.</div>
                         }
                         @if (signUpForm.get('password')?.hasError('minlength') && signUpForm.get('password')?.touched) {
-                            <div class="error-message">
-                                Password must be at least 8 characters long.
-                            </div>
+                            <div class="error-message">Password must be at least 8 characters long.</div>
                         }
                     </div>
                     <div class="form-field" [ngClass]="{ invalid: signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched }">
                         <input [type]="hideConfirmPassword ? 'password' : 'text'" formControlName="confirmPassword" placeholder="Confirm Password" />
-                        <span *ngIf="signUpForm.get('confirmPassword')?.untouched" class="form-icon lock">
-                        </span>
+                        <span *ngIf="signUpForm.get('confirmPassword')?.untouched" class="form-icon lock"></span>
                         <span *ngIf="!signUpForm.get('confirmPassword')?.untouched"
                             class="form-icon clickable"
                             [ngClass]="hideConfirmPassword ? 'eye-closed' : 'eye-open'"
-                            (click)="hideConfirmPassword = !hideConfirmPassword">
-                        </span>
-                        <div class="error-message" *ngIf="signUpForm.get('confirmPassword')?.hasError('required') && signUpForm.get('confirmPassword')?.touched">
+                            (click)="hideConfirmPassword = !hideConfirmPassword"></span>
+
+                        <div class="error-message"
+                             *ngIf="signUpForm.get('confirmPassword')?.hasError('required') && signUpForm.get('confirmPassword')?.touched">
                             Please confirm your password.
                         </div>
-                        <div class="error-message" *ngIf="signUpForm.hasError('passwordMismatch') && signUpForm.get('confirmPassword')?.touched">
+
+                        <div class="error-message"
+                             *ngIf="signUpForm.hasError('passwordMismatch') && signUpForm.get('confirmPassword')?.touched && signUpForm.get('confirmPassword')?.value?.length > 0">
                             Passwords do not match.
-                        </div>
-                        <div class="error-message" *ngIf="signUpForm.valid && !acceptPolicy">
-                            Privacy policy must be accepted.
                         </div>
                     </div>
                     <div class="error-message" *ngIf="signUpErrorMessage">
                         {{ signUpErrorMessage }}
                     </div>
                 </div>
+
                 <div class="sign-up-accept-container">
-                    <label class="custom-checkbox">
+                    <label class="custom-checkbox" [ngClass]="{ invalid: signUpForm.valid && !acceptPolicy }">
                         <input type="checkbox" [checked]="acceptPolicy" (change)="acceptPolicy = !acceptPolicy" />
                         <span class="checkmark">
                             I accept the 
@@ -105,6 +84,7 @@
                         </span>
                     </label>
                 </div>
+
                 <div class="sign-up-footer">
                     <button class="sign-up-button" type="submit" [disabled]="!acceptPolicy">
                         Sign up
