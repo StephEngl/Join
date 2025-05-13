@@ -1,5 +1,9 @@
 import { Component } from '@angular/core';
 
+/**
+ * Component for displaying the legal notice page.
+ * Handles orientation detection (portrait vs. landscape).
+ */
 @Component({
   selector: 'app-legal-notice',
   standalone: true,
@@ -9,17 +13,33 @@ import { Component } from '@angular/core';
 })
 export class LegalNoticeComponent {
 
+  /**
+   * Indicates if the screen is currently in portrait orientation.
+   * Set to true when height > width.
+   */
   isPortrait = false;
 
+  /**
+   * Lifecycle hook that is called after component initialization.
+   * Sets up orientation check and adds a resize event listener.
+   */
   ngOnInit() {
     this.checkOrientation();
     window.addEventListener('resize', this.checkOrientation.bind(this));
   }
 
+  /**
+   * Lifecycle hook that is called just before the component is destroyed.
+   * Removes the resize event listener to prevent memory leaks.
+   */
   ngOnDestroy() {
     window.removeEventListener('resize', this.checkOrientation.bind(this));
   }
 
+  /**
+   * Checks the current window orientation and updates the isPortrait flag.
+   * Sets `isPortrait` to true if height is greater than width.
+   */
   checkOrientation() {
     this.isPortrait = window.innerHeight > window.innerWidth;
   }
