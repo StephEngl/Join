@@ -76,14 +76,15 @@ span {
 }
 
 input[type="text"],
-input[type="search"],
-textarea {
+input[type="search"] {
   width: 440px;
   border: 1px solid $col-font-grey;
   border-radius: 10px;
   padding: 12px 20px;
-  color: $col-font-inactive;
+  color: $col-bg-secondary;
   resize: none;
+  font-family: "Inter", sans-serif;
+  font-size: 1rem;
 
   &:focus {
     outline: none;
@@ -210,7 +211,7 @@ textarea {
 
 .subtask-item-icons {
   @include dFlex(center, center, 6px);
-  >img:first-child {
+  > img:first-child {
     padding-left: 10px;
   }
 }
@@ -266,8 +267,7 @@ textarea {
     }
   }
 
-  input.form-control,
-  textarea.form-control {
+  input.form-control {
     padding-left: 12px !important;
     padding-right: 12px !important;
   }
