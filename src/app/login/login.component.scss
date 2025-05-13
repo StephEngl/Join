@@ -37,7 +37,7 @@ app-sign-up-dialog {
 
 .background-animated {
   pointer-events: none;
-  min-height: 100vh;
+  min-height: 100%;
   width: 100%;
   z-index: 3;
   transition: all 1s linear;
