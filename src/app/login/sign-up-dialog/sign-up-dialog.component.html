@@ -47,7 +47,7 @@
                             <div class="error-message">Please enter a password.</div>
                         }
                         @if (signUpForm.get('password')?.hasError('minlength') && signUpForm.get('password')?.touched) {
-                            <div class="error-message">Password must be at least 8 characters long.</div>
+                            <div class="error-message">Use at least 8 characters.</div>
                         }
                     </div>
                     <div class="form-field" [ngClass]="{ invalid: signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched }">
