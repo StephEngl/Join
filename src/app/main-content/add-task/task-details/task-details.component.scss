@@ -8,7 +8,7 @@
 }
 
 span {
-  color: $col-task-urgent;
+  color: var(--col-task-urgent);
 }
 
 .priority-button {
@@ -30,10 +30,10 @@ span {
 }
 
 .btnInActive {
-  border: 1px solid $col-font-grey;
+  border: 1px solid var(--col-font-grey);
   background-color: white;
   &:hover {
-    box-shadow: 0px 4px 4px $col-shadow-black;
+    box-shadow: 0px 4px 4px var(--col-shadow-black);
   }
 }
 
@@ -78,24 +78,24 @@ span {
 input[type="text"],
 input[type="search"] {
   width: 440px;
-  border: 1px solid $col-font-grey;
+  border: 1px solid var(--col-font-grey);
   border-radius: 10px;
   padding: 12px 20px;
-  color: $col-bg-secondary;
+  color: var(--col-bg-secondary);
   resize: none;
   font-family: "Inter", sans-serif;
   font-size: 1rem;
 
   &:focus {
     outline: none;
-    border-color: $col-font-inactive;
+    border-color: var(--col-font-inactive);
   }
 
   &::placeholder {
     font-family: "Inter", sans-serif;
     font-size: 1rem;
-    color: $col-font-inactive;
-    opacity: 1; // for Firefox
+    color: var(--col-font-inactive);
+    opacity: 1;
   }
 }
 
@@ -147,7 +147,7 @@ input[type="search"] {
   border-radius: 10px;
   cursor: pointer;
   &:hover {
-    background-color: $col-font-dropdown;
+    background-color: var(--col-font-dropdown);
   }
 }
 
@@ -202,7 +202,7 @@ input[type="search"] {
     background-color: transparent;
     font-size: 1rem;
     font-weight: 300;
-    color: $col-font-main;
+    color: var(--col-font-main);
   }
   > input:focus {
     outline: none;

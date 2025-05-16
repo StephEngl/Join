@@ -284,7 +284,7 @@
                 .task-info-delete-container {
                     @include dFlex(center, center);
                     width: 95px;
-                    color: $col-bg-secondary;
+                    color: var(--col-bg-secondary);
                     cursor: pointer;
 
                     :hover {
@@ -312,7 +312,7 @@
 
                 .task-info-delete-container:hover 
                 .task-info-delete-txt {
-                    color: $col-ref-highlight;
+                    color: var(--col-ref-highlight);
                     font-weight: bold;
                 }
                 
@@ -325,13 +325,13 @@
                     @include dFlex($jc: center, $ai: center);
                     width: 1rem;
                     height: auto;
-                    color: $col-bg-secondary;
+                    color: var(--col-bg-secondary);
                 }
     
                 .task-info-edit-container {
                     @include dFlex($jc: center, $ai: center);
                     width: 70px;
-                    color: $col-bg-secondary;
+                    color: var(--col-bg-secondary);
                     cursor: pointer;
 
                     :hover {
@@ -361,7 +361,7 @@
 
                 .task-info-edit-container:hover 
                 .task-info-edit-txt {
-                    color: $col-ref-highlight;
+                    color: var(--col-ref-highlight);
                     font-weight: bold;
                 }
                 

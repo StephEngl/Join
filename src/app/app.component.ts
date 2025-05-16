@@ -44,4 +44,8 @@ export class AppComponent {
     this.authService.setActiveUserInitials();
   }
 
+  toggleDarkMode(): void {
+    document.body.classList.toggle('dark-mode');
+  }
+
 }

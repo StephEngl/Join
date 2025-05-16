@@ -37,7 +37,7 @@
         cursor: pointer;
 
         &:hover {
-            color: $col-ref-highlight;
+            color: var(--col-ref-highlight);
 
             >img {
                 src: url('./../../../../assets/icons/kanban/close.svg');
@@ -101,7 +101,7 @@
 }
 
 .no-edit {
-    color: $col-error-red;
+    color: var(--col-error-red);
 }
 
 @media screen and (max-height: 800px) {

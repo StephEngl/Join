@@ -133,7 +133,7 @@
             }
 
             &:hover {
-                background-color: $col-ref-highlight;
+                background-color: var(--col-ref-highlight);
             }
         }
     }
@@ -184,7 +184,7 @@
             left: 50%;
             transform: translateX(-50%);
             border-radius: 50%;
-            background-color: $col-font-dropdown;
+            background-color: var(--col-font-dropdown);
             display: flex;
             justify-content: center;
             align-items: center;
@@ -211,23 +211,23 @@
         font-weight: 400;
         line-height: 120%;
         border-radius: 10px;
-        border: 1px solid $col-font-inactive;
+        border: 1px solid var(--col-font-inactive);
         width: 100%;
         flex: 1;
         transition: border-color 0.3s ease;
 
         &.invalid {
-            border-color: $col-error-red;
+            border-color: var(--col-error-red);
         }
 
         &::placeholder {
-            color: $col-shadow-black;
+            color: var(--col-shadow-black);
             opacity: 0.7;
         }
 
         &:focus {
             outline: none;
-            border-color: $col-ref-highlight;
+            border-color: var(--col-ref-highlight);
         }
     }
 

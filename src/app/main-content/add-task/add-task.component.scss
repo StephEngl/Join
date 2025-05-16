@@ -33,7 +33,7 @@
 
   .disabled {
     pointer-events: none;
-    background-color: $col-font-inactive !important;
+    background-color: var(--col-font-inactive) !important;
   }
 
   .task-form {
@@ -44,7 +44,7 @@
 }
 
 span {
-  color: $col-task-urgent;
+  color: var(--col-task-urgent);
 }
 
 .task-scroll-container {
@@ -58,7 +58,7 @@ span {
 .vertical-divider {
   width: 1px;
   height: 420px;
-  background-color: $col-font-dropdown;
+  background-color: var(--col-font-dropdown);
 }
 
 .task-details {
@@ -75,12 +75,12 @@ span {
     gap: 16px;
 
     .button-cancel {
-      background-color: $col-bg-main;
-      border: 1px solid $col-bg-secondary;
+      background-color: var(--col-bg-main);
+      border: 1px solid var(--col-bg-secondary);
 
       &:hover {
-        border-color: $col-ref-highlight;
-        color: $col-ref-highlight;
+        border-color: var(--col-ref-highlight);
+        color: var(--col-ref-highlight);
         filter: drop-shadow(2px 4px 4px #a8a8a8);
       }
 
@@ -98,12 +98,12 @@ span {
     }
 
     .button-save {
-      background-color: $col-bg-secondary;
+      background-color: var(--col-bg-secondary);
       color: white;
       white-space: nowrap;
 
       &:hover {
-        background-color: $col-ref-highlight;
+        background-color: var(--col-ref-highlight);
         filter: drop-shadow(2px 4px 4px #a8a8a8);
       }
     }

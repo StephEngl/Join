@@ -17,7 +17,7 @@
   gap: 12px;
 
   img {
-    background-color: $col-bg-secondary;
+    background-color: var(--col-bg-secondary);
     border-radius: 50%;
     height: 55px;
     width: 55px;
@@ -79,7 +79,7 @@
   flex: 1;
 
   > img {
-    background-color: $col-bg-secondary;
+    background-color: var(--col-bg-secondary);
     border: 5px solid transparent;
     border-radius: 50%;
     height: 55px;
@@ -112,12 +112,12 @@
   border-radius: 30px;
   background-color: white;
   height: 100%;
-  box-shadow: 0px 0px 5px $col-shadow-black;
+  box-shadow: 0px 0px 5px var(--col-shadow-black);
   transition: transform 0.2s ease, background-color 0.3s ease;
 
   &:hover {
     cursor: pointer;
-    background-color: $col-ref-hover;
+    background-color: var(--col-ref-hover);
     transform: scale(1.04);
     box-shadow: 0px 4px 5px rgba(0, 0, 0, 0.35);
 
@@ -151,7 +151,7 @@
 .user-name {
   font-size: 44px;
   line-height: 120%;
-  color: $col-ref-highlight;
+  color: var(--col-ref-highlight);
   font-weight: 600;
 }
 

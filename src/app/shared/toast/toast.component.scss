@@ -8,7 +8,7 @@
     width: 325px;
     height: 75px;
     transform: translateX(100vw);
-    background-color: $col-bg-secondary;
+    background-color: var(--col-bg-secondary);
     color: white;
     padding: 12px 24px;
     border-radius: 20px;
@@ -31,16 +31,16 @@
     }
 
     &.create {
-        background-color: $col-bg-secondary;
+        background-color: var(--col-bg-secondary);
     }
 
     &.update {
-        background-color: $col-bg-secondary;
+        background-color: var(--col-bg-secondary);
     }
 
     &.delete {
         color: white;
-        background-color: $col-bg-secondary;
+        background-color: var(--col-bg-secondary);
     }
 
     &.error {

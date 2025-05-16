@@ -78,7 +78,7 @@ app-sign-up-dialog {
     padding: 15px 20px;
     border-radius: 8px;
     color: white;
-    background-color: $col-ref-active-nav;
+    background-color: var(--col-ref-active-nav);
     z-index: 2;
   }
 }
@@ -93,7 +93,7 @@ app-sign-up-dialog {
 
   > p {
     cursor: pointer;
-    color: $col-font-inactive;
+    color: var(--col-font-inactive);
   }
 }
 
@@ -116,7 +116,7 @@ app-sign-up-dialog {
       padding: 15px 20px;
       border-radius: 8px;
       color: white;
-      background-color: $col-ref-active-nav;
+      background-color: var(--col-ref-active-nav);
       z-index: 10;
     }
   }

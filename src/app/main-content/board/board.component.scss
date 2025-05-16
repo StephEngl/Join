@@ -23,21 +23,21 @@
   align-items: center;
   height: 48px;
   width: 312px;
-  border: 1px solid $col-font-grey;
+  border: 1px solid var(--col-font-grey);
   border-radius: 10px;
   padding: 8px 12px;
-  background-color: $col-font-secondary;
+  background-color: var(--col-font-secondary);
 
   input {
     border: none;
     outline: none;
     flex: 1;
     font-size: 16px;
-    color: $col-bg-secondary;
+    color: var(--col-bg-secondary);
     background-color: transparent;
 
     &::placeholder {
-      color: $col-font-inactive;
+      color: var(--col-font-inactive);
     }
   }
 
@@ -65,8 +65,8 @@
   width: 160px;
 
   &:hover {
-    background-color: $col-ref-highlight;
-    box-shadow: 0 3px 5px $col-shadow-black;
+    background-color: var(--col-ref-highlight);
+    box-shadow: 0 3px 5px var(--col-shadow-black);
     cursor: pointer;
   }
 }
@@ -90,7 +90,7 @@
   }
 
   &::-webkit-scrollbar-thumb {
-    background-color: $col-font-shadow-black;
+    background-color: var(--col-font-shadow-black);
     border-radius: 3px;
   }
 }
@@ -100,9 +100,9 @@
   height: 24px;
   width: 24px;
   background: none;
-  border: 2px solid $col-bg-secondary;
+  border: 2px solid var(--col-bg-secondary);
   border-radius: 8px;
-  color: $col-bg-secondary;
+  color: var(--col-bg-secondary);
   transition: all 0.2s ease;
 
   img {
@@ -112,8 +112,8 @@
 
   &:hover {
     cursor: pointer;
-    border: 2px solid $col-ref-highlight;
-    color: $col-ref-highlight;
+    border: 2px solid var(--col-ref-highlight);
+    color: var(--col-ref-highlight);
   }
 }
 

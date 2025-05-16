@@ -16,28 +16,27 @@ input[type="text"],
 input[type="date"],
 textarea {
   width: 440px;
-  border: 1px solid $col-font-grey;
+  border: 1px solid var(--col-font-grey);
   border-radius: 10px;
   padding: 12px 20px;
-  color: $col-bg-secondary;
+  color: var(--col-bg-secondary);
   resize: none;
   font-family: "Inter", sans-serif;
   font-size: 1rem;
 
   &:focus {
     outline: none;
-    border-color: $col-font-inactive;
+    border-color: var(--col-font-inactive);
   }
 
   &::placeholder {
     font-family: "Inter", sans-serif;
     font-size: 1rem;
-    color: $col-font-inactive;
+    color: var(--col-font-inactive);
     opacity: 1;
   }
 }
 
-// cursor pointer at datepicker sideboard
 input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
@@ -48,7 +47,7 @@ textarea {
 
 span,
 .validation-alert {
-  color: $col-task-urgent;
+  color: var(--col-task-urgent);
 }
 
 .validation-alert {

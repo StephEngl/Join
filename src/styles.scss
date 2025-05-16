@@ -41,7 +41,7 @@ $join-theme: mat.define-light-theme((
 body {
   font-family: "Inter", sans-serif;
   min-height: 100vh;
-  background-color: $col-bg-main;
+  background-color: var(--col-bg-main);
 }
 
 * {

@@ -17,7 +17,7 @@
 
     &:hover {
         cursor: pointer;
-        background-color: $col-ref-highlight !important;
+        background-color: var(--col-ref-highlight) !important;
     }
 }
 
@@ -119,14 +119,14 @@
             border-radius: 10px;
             flex: 1;
             height: 6px;
-            background-color: $col-font-grey;
+            background-color: var(--col-font-grey);
 
             .progress-fill {
                 position: absolute;
                 border-radius: 10px;
                 left: 0;
                 top: 0;
-                background-color: $col-bg-subtaskbar;
+                background-color: var(--col-bg-subtaskbar);
                 height: 100%;
             }
         }

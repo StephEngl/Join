@@ -57,8 +57,8 @@
     width: 24px;
 
     &:hover {
-      background-color: $col-ref-highlight;
-      box-shadow: 0 3px 5px $col-shadow-black;
+      background-color: var(--col-ref-highlight);
+      box-shadow: 0 3px 5px var(--col-shadow-black);
       cursor: pointer;
     }
   }

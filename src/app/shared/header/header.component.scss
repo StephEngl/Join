@@ -29,14 +29,14 @@
   .menu-button {
     cursor: pointer;
     @include dFlex();
-    border: 3px solid $col-bg-secondary;
+    border: 3px solid var(--col-bg-secondary);
     width: 56px;
     height: 56px;
     border-radius: 50%;
     background-color: white;
     font-size: 20px;
     font-weight: bold;
-    color: $col-ref-highlight;
+    color: var(--col-ref-highlight);
   }
 
   @media (max-width: $queryBreak1) {
@@ -52,7 +52,7 @@
   top: 96px;
   right: 0;
   width: 150px;
-  background-color: $col-bg-secondary;
+  background-color: var(--col-bg-secondary);
   border: unset;
   border-radius: 20px 0 20px 20px;
   transform: translateX(150px);
@@ -75,10 +75,10 @@
       width: 100%;
       padding: 14px 0 14px 16px;
       text-decoration: none;
-      color: $col-font-dropdown;
+      color: var(--col-font-dropdown);
 
       &:hover {
-        background-color: $col-ref-hover;
+        background-color: var(--col-ref-hover);
       }
     }
   }
@@ -108,6 +108,6 @@
   }
 
   &:hover {
-    background-color: $col-ref-active-nav;
+    background-color: var(--col-ref-active-nav);
   }
 }

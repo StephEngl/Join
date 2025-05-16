@@ -8,11 +8,11 @@
   transition: background-color 0.3s ease;
 
   &:hover:not(.active) {
-    background-color: $col-ref-highlight;
+    background-color: var(--col-ref-highlight);
   }
 
   &.active {
-    background-color: $col-ref-active-nav;
+    background-color: var(--col-ref-active-nav);
   }
 }
 
@@ -41,7 +41,7 @@
 
     p {
       text-decoration: none;
-      color: $col-font-dropdown;
+      color: var(--col-font-dropdown);
       font-size: 1rem;
       padding: 8px 12px;
     }
@@ -55,14 +55,14 @@
     padding: 1rem;
 
     &:hover:not(.active) {
-      background-color: $col-ref-highlight;
+      background-color: var(--col-ref-highlight);
       border-radius: 8px;
       padding-bottom: 16px;
       padding-top: 16px;
     }
 
     &.active {
-      background-color: $col-ref-active-nav;
+      background-color: var(--col-ref-active-nav);
       border-radius: 8px;
     }
   }
@@ -87,7 +87,7 @@
     .link-container {
       p {
         text-decoration: none;
-        color: $col-font-dropdown;
+        color: var(--col-font-dropdown);
         font-size: 1rem;
         padding: 1rem;
       }

@@ -1,3 +1,4 @@
+
 @import "../../../assets/styles/mixins.scss";
 @import "../../../assets/styles/variables.scss";
 @import "../../../assets/fonts/fonts.scss";
@@ -20,7 +21,7 @@
     .login-underline {
       width: 75%;
       height: 1px;
-      border: 1px solid $col-ref-highlight;
+      border: 1px solid var(--col-ref-highlight);
       margin-top: 16px;
     }
   }
@@ -50,23 +51,23 @@
     input[type="email"],
     input[type="password"] {
       width: 100%;
-      border: 1px solid $col-font-grey;
+      border: 1px solid var(--col-font-grey);
       border-radius: 10px;
       padding: 12px 50px 12px 20px;
-      color: $col-bg-secondary;
+      color: var(--col-bg-secondary);
       resize: none;
       font-family: "Inter", sans-serif;
       font-size: 1rem;
 
       &:focus {
         outline: none;
-        border-color: $col-font-inactive;
+        border-color: var(--col-font-inactive);
       }
 
       &::placeholder {
         font-family: "Inter", sans-serif;
         font-size: 1rem;
-        color: $col-font-inactive;
+        color: var(--col-font-inactive);
         opacity: 1;
       }
 
@@ -100,30 +101,30 @@
   }
 
   .guest-button {
-    background-color: $col-bg-main;
-    border: 1px solid $col-bg-secondary;
+    background-color: var(--col-bg-main);
+    border: 1px solid var(--col-bg-secondary);
 
     &:hover {
-      border-color: $col-ref-highlight;
-      color: $col-ref-highlight;
+      border-color: var(--col-ref-highlight);
+      color: var(--col-ref-highlight);
       filter: drop-shadow(2px 4px 4px #a8a8a8);
     }
   }
 
   .login-button,
   .sign-up-button {
-    background-color: $col-bg-secondary;
+    background-color: var(--col-bg-secondary);
     color: white;
     white-space: nowrap;
 
     &:hover {
-      background-color: $col-ref-highlight;
+      background-color: var(--col-ref-highlight);
       filter: drop-shadow(2px 4px 4px #a8a8a8);
     }
 
     &:disabled {
       pointer-events: none;
-      background-color: $col-font-inactive;
+      background-color: var(--col-font-inactive);
     }
   }
 }

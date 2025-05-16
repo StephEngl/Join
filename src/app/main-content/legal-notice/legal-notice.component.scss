@@ -34,7 +34,7 @@
   }
 
   span {
-    color: $col-ref-highlight;
+    color: var(--col-ref-highlight);
     font-size: 1rem;
   }
 
@@ -45,7 +45,7 @@
     .name-developers {
       padding: 1rem 1rem 1rem 0;
       a {
-        color: $col-font-main;
+        color: var(--col-font-main);
       }
     }
 
@@ -55,7 +55,7 @@
       @include dFlex($ai: flex-start, $gap: 1rem);
 
       a {
-        color: $col-font-main;
+        color: var(--col-font-main);
       }
     }
   }
