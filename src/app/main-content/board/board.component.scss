@@ -63,6 +63,7 @@
   @include btn();
   height: 48px;
   width: 160px;
+  color: var(--col-bg-btn);
 
   &:hover {
     background-color: var(--col-ref-highlight);

@@ -20,8 +20,7 @@
                 @if (letter === contact.name.charAt(0).toUpperCase() &&contact.name != undefined) {
                 <section class="single-contact" (click)="showContactInfo(index)"
                     (click)="signalService.isMobile() ? showInfos() :  undefined"
-                    [style.backgroundColor]="activeContactIndex === index && contactClicked ? '#2A3647' : ''"
-                    [style.color]="activeContactIndex === index && contactClicked ? 'white' : ''">
+                    [class]="activeContactIndex === index && contactClicked ? 'active' : ''">
                     <div class="contact-icon-small" [style.backgroundColor]="contact.color"
                         [style.border]="activeContactIndex === index && contactClicked ? '2px solid white' : ''">
                         {{contact.name.charAt(0).toUpperCase()}}
