@@ -84,7 +84,7 @@ input:not(.invalid)+img+.error {
         font-size: 61px;
         font-weight: 700;
         line-height: 120%;
-        color: var(--col-font-secondary);
+        color: var(--col-bg-btn);
         margin: 0;
     }
 
@@ -105,7 +105,7 @@ input:not(.invalid)+img+.error {
 .dialog-right {
     @include dFlex(flex-start, center, 32px, relative);
     flex-direction: column;
-    background-color: var(--col-font-secondary);
+    background-color: var(--col-bg-btn);
     color: var(--col-dialog-right);
     padding: 66px 50px;
     width: 934px;

@@ -10,8 +10,9 @@
     padding-top: 2rem;
     padding-left: 1.5rem;
     padding-right: 1.5rem;
-    background: #FFFFFF;
-    border-radius: 1rem;
+    color: var(--col-font-main);
+    background: var(--col-bg-main);
+    border-radius: 16px;
     overflow: auto;
     max-width: $queryBreak1;
     
@@ -35,7 +36,7 @@
             position: sticky;
             top: 0;
             z-index: 2;
-            background-color: white; 
+            background-color: var(--col-bg-main); 
             
             .task-info-top-container {
                 @include dFlex(space-between, center);
@@ -46,7 +47,7 @@
                 .task-info-category {
                     padding: 4px 8px;
                     border-radius: 0.5rem;
-                    color: white;
+                    color: var(--col-bg-btn);
                     font-weight: 400;
                     font-size: clamp(1rem, 1.2rem + 0.5vw, 1.4375rem);
                 }
@@ -115,7 +116,7 @@
                         font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
                         font-weight: 400;
                         line-height: 120%;
-                        color: black;
+                        color: var(--col-font-main);
                         padding-top: 0.8rem;
                         padding-bottom: 0.8rem;
                         text-align: left;
@@ -272,7 +273,7 @@
             position: sticky;
             bottom: 0;
             z-index: 2;
-            background: white;
+            background: var(--col-bg-main);
 
             .task-info-delete-edit-container {
                 @include dFlex(center, center);
@@ -284,7 +285,7 @@
                 .task-info-delete-container {
                     @include dFlex(center, center);
                     width: 95px;
-                    color: var(--col-bg-secondary);
+                    color: var(--col-font-main);
                     cursor: pointer;
 
                     :hover {
@@ -325,13 +326,13 @@
                     @include dFlex($jc: center, $ai: center);
                     width: 1rem;
                     height: auto;
-                    color: var(--col-bg-secondary);
+                    color: var(--col-font-main);
                 }
     
                 .task-info-edit-container {
                     @include dFlex($jc: center, $ai: center);
                     width: 70px;
-                    color: var(--col-bg-secondary);
+                    color: var(--col-font-main);
                     cursor: pointer;
 
                     :hover {

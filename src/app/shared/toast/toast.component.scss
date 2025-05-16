@@ -9,7 +9,7 @@
     height: 75px;
     transform: translateX(100vw);
     background-color: var(--col-bg-secondary);
-    color: white;
+    color: var(--col-bg-tertiary);
     padding: 12px 24px;
     border-radius: 20px;
     font-size: 20px;
@@ -39,7 +39,7 @@
     }
 
     &.delete {
-        color: white;
+        color: var(--col-bg-tertiary);
         background-color: var(--col-bg-secondary);
     }
 

@@ -33,7 +33,7 @@
     width: 56px;
     height: 56px;
     border-radius: 50%;
-    background-color: white;
+    background-color: var(--col-bg-btn);
     font-size: 20px;
     font-weight: bold;
     color: var(--col-ref-highlight);
@@ -92,7 +92,7 @@
   left: calc(50% - 77px);
   background-color: #2a3647;
   border-radius: 10px;
-  color: white;
+  color: var(--col-bg-tertiary);
   padding: 16px;
   width: 210px;
   height: 56px;

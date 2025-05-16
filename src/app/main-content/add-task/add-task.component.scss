@@ -7,6 +7,7 @@
   container-name: task-section;
   display: flex;
   max-width: $queryBreak1;
+  color: var(--col-font-main);
 
   .task-section-content {
     display: flex;
@@ -99,7 +100,7 @@ span {
 
     .button-save {
       background-color: var(--col-bg-secondary);
-      color: white;
+      color: var(--col-bg-tertiary);
       white-space: nowrap;
 
       &:hover {
@@ -145,7 +146,7 @@ span {
 @media screen and (max-width: 830px) {
   .add-dialog-class {
     position: absolute;
-    background-color: white;
+    background-color: var(--col-bg-tertiary);
     top: 0;
   }
 }

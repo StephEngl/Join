@@ -68,7 +68,7 @@
 }
 
 .task-card {
-    background: white;
+    background: var(--col-bg-tertiary);
     padding: 12px;
     border-radius: 16px;
     box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
@@ -92,7 +92,7 @@
         font-size: 12px;
         font-weight: 600;
         padding: 4px 8px;
-        color: white;
+        color: var(--col-bg-btn);
         border-radius: 8px;
         width: fit-content;
     }
@@ -154,11 +154,11 @@
                 border-radius: 50%;
                 font-size: 12px;
                 font-weight: 400;
-                color: white;
+                color: var(--col-bg-tertiary);
                 display: flex;
                 align-items: center;
                 justify-content: center;
-                border: 1px solid white;
+                border: 1px solid var(--col-bg-tertiary);
                 margin-left: -6px;
 
                 &:first-child {

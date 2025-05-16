@@ -1,8 +1,57 @@
 :root {
+    --col-bg-main: #2A2A2A;
+    --col-bg-secondary: #121a24;
+    --col-bg-tertiary: rgb(155, 155, 155);
+    --col-ref-highlight: #1E90FF;
+    --col-bg-header: #121a24;
+    --col-bg-btn: #F0F0F0;
+    --col-ref-hover: #3A3A3A;
+    --col-ref-active-nav: #121212;
+    --col-dialog-right: #2c2c2c;
+    --col-bg-hovered-subtask: #333333;
+    --col-bg-subtaskbar: #3B6EF6;
+
+    --col-task-urgent: #FF6E6E;
+    --col-task-medium: #FFC266;
+    --col-task-low: #A8E16D;
+
+    --col-font-main: #F0F0F0;
+    --col-font-secondary: #FFFFFF;
+    --col-font-inactive: #7A7A7A;
+    --col-font-dropdown: #A0A0A0;
+    --col-font-grey: #B0B0B0;
+
+    --col-user-01: #FF9B3B;
+    --col-user-02: #FF80C0;
+    --col-user-03: #9580FF;
+    --col-user-04: #B266FF;
+    --col-user-05: #33DDEE;
+    --col-user-06: #3FE7D1;
+    --col-user-07: #FF9980;
+    --col-user-08: #FFC080;
+    --col-user-09: #FF99FF;
+    --col-user-10: #FFD700;
+    --col-user-11: #4D6DFF;
+    --col-user-12: #8CE34A;
+    --col-user-13: #D9C300;
+    --col-user-14: #FF6A6A;
+    --col-user-15: #FFCD60;
+
+    --col-error-red: #FF4C4C;
+    --col-shadow-black: rgba(255, 255, 255, 0.05);
+    --col-shadow-background: rgba(0, 0, 0, 0.6);
+    --col-font-shadow-black: rgba(255, 255, 255, 0.4);
+
+}
+
+body.dark-mode {
     /* main colors app */
     --col-bg-main: #F6F7F8;
     --col-bg-secondary: #2A3647;
+    --col-bg-tertiary: white;
     --col-ref-highlight: #29ABE2;
+    --col-bg-header: white;
+    --col-bg-btn: white;
     --col-ref-hover: #2A3D59;
     --col-ref-active-nav: #091931;
     --col-dialog-right: #1e1e1e;
@@ -16,7 +65,7 @@
 
     /* font colors */
     --col-font-main: #0b0e13;
-    --col-font-secondary: #FFFFFF;
+    --col-font-secondary: #292929;
     --col-font-inactive: #A8A8A8;
     --col-font-dropdown: #CDCDCD;
     --col-font-grey: #d1d1d1;
@@ -42,46 +91,4 @@
     --col-shadow-black: rgba(0, 0, 0, 0.1);
     --col-shadow-background: rgba(0, 0, 0, 0.4);
     --col-font-shadow-black: rgba(0, 0, 0, 0.5);
-}
-
-body.dark-mode {
-  --col-bg-main: #1e1e1e;
-  --col-bg-secondary: #2A2A2A;
-  --col-ref-highlight: #1E90FF;
-  --col-ref-hover: #3A3A3A;
-  --col-ref-active-nav: #121212;
-  --col-dialog-right: #2c2c2c;
-  --col-bg-hovered-subtask: #333333;
-  --col-bg-subtaskbar: #3B6EF6;
-
-  --col-task-urgent: #FF6E6E;
-  --col-task-medium: #FFC266;
-  --col-task-low: #A8E16D;
-
-  --col-font-main: #F0F0F0;
-  --col-font-secondary: #FFFFFF;
-  --col-font-inactive: #7A7A7A;
-  --col-font-dropdown: #A0A0A0;
-  --col-font-grey: #B0B0B0;
-
-  --col-user-01: #FF9B3B;
-  --col-user-02: #FF80C0;
-  --col-user-03: #9580FF;
-  --col-user-04: #B266FF;
-  --col-user-05: #33DDEE;
-  --col-user-06: #3FE7D1;
-  --col-user-07: #FF9980;
-  --col-user-08: #FFC080;
-  --col-user-09: #FF99FF;
-  --col-user-10: #FFD700;
-  --col-user-11: #4D6DFF;
-  --col-user-12: #8CE34A;
-  --col-user-13: #D9C300;
-  --col-user-14: #FF6A6A;
-  --col-user-15: #FFCD60;
-
-  --col-error-red: #FF4C4C;
-  --col-shadow-black: rgba(255, 255, 255, 0.05);
-  --col-shadow-background: rgba(0, 0, 0, 0.6);
-  --col-font-shadow-black: rgba(255, 255, 255, 0.4);
 }

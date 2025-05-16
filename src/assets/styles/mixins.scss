@@ -49,7 +49,7 @@
     flex-direction: column;
     list-style-type: none;
     max-height: $maxHeight;
-    background-color: white;
+    background-color: var(--col-bg-tertiary);
     overflow-y: auto;
     width: 100%;
     z-index: 4;

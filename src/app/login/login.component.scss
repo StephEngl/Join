@@ -77,7 +77,7 @@ app-sign-up-dialog {
     font-weight: 600;
     padding: 15px 20px;
     border-radius: 8px;
-    color: white;
+    color: var(--col-bg-tertiary);
     background-color: var(--col-ref-active-nav);
     z-index: 2;
   }
@@ -115,7 +115,7 @@ app-sign-up-dialog {
       font-weight: 600;
       padding: 15px 20px;
       border-radius: 8px;
-      color: white;
+      color: var(--col-bg-tertiary);
       background-color: var(--col-ref-active-nav);
       z-index: 10;
     }

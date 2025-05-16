@@ -25,13 +25,13 @@ span {
 }
 
 .btnActive {
-  color: white;
+  color: var(--col-bg-tertiary);
   border: 1px solid transparent;
 }
 
 .btnInActive {
   border: 1px solid var(--col-font-grey);
-  background-color: white;
+  background-color: var(--col-bg-tertiary);
   &:hover {
     box-shadow: 0px 4px 4px var(--col-shadow-black);
   }
