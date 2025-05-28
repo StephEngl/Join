@@ -2,7 +2,8 @@
 @import "../../../assets/styles/variables.scss";
 @import "../../../assets/fonts/fonts.scss";
 
-.login-dialog {
+.login-dialog,
+.sign-up-dialog {
   width: 100%;
   max-width: 650px;
   height: 450px;
@@ -32,18 +33,21 @@
   flex-direction: column;
 
   .mail-input-wrapper,
-  .password-input-wrapper {
+  .password-input-wrapper, 
+  .form-field {
     display: flex;
     position: relative;
+    flex-direction: column;
     width: 100%;
 
-    .icon {
+    .icon, .form-icon {
       position: absolute;
       right: 20px;
       top: 12px;
     }
 
     input[type="text"],
+    input[type="email"],
     input[type="password"] {
       width: 100%;
       border: 1px solid $col-font-grey;
@@ -73,17 +77,21 @@
   }
 
   .error-message {
-    margin-top: -25px;
+    position: absolute;
+    bottom: -20px;
+    left: 20px;
     color: #e44c36;
     font-size: 12px;
   }
 }
 
-.login-button-wrapper {
+.login-button-wrapper,
+.sign-up-button-wrapper {
   @include dFlex($gap: 36px);
 
   .login-button,
-  .guest-button {
+  .guest-button,
+  .sign-up-button {
     @include dFlex($jc: space-between, $gap: 4px);
     font-size: 21px;
     font-weight: 700;
@@ -102,7 +110,8 @@
     }
   }
 
-  .login-button {
+  .login-button,
+  .sign-up-button {
     background-color: $col-bg-secondary;
     color: white;
     white-space: nowrap;
@@ -120,10 +129,11 @@
 }
 
 @media screen and (max-width: 700px) {
-  .login-dialog {
+  .login-dialog,
+  .sign-up-dialog {
     width: 400px;
     height: 475px;
-    padding: 0 16px;
+    padding: 16px !important;
   }
 
   .form-login {
@@ -132,20 +142,22 @@
 }
 
 @media screen and (max-width: 440px) {
-  .login-dialog {
+  .login-dialog,
+  .sign-up-dialog {
     width: 100%;
     max-height: 475px;
     height: auto;
-    padding: 16px;
   }
 
-  .login-button-wrapper {
+  .login-button-wrapper,
+  .sign-up-button-wrapper {
     flex-direction: column;
     gap: 10px;
     margin: 4vh 0;
 
     .login-button,
-    .guest-button {
+    .guest-button,
+    .sign-up-button {
       width: 180px;
       height: 40px;
       font-size: 16px;
@@ -156,11 +168,11 @@
   .form-login {
     gap: 6px !important;
   }
-
 }
 
 @media screen and (max-width: 360px) {
-  .login-dialog {
+  .login-dialog,
+  .sign-up-dialog {
     padding: 8px;
   }
 }

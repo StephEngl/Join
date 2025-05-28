@@ -31,7 +31,6 @@ export class LoginDialogComponent {
     this.passwordVisible = !this.passwordVisible;
   }
 
-
   /**
    * Called when the login form is submitted.
    * Sets the submission flag if the login is not a guest login.

@@ -3,10 +3,16 @@ import { DummyContactsService } from './dummy-contacts.service';
 import { DummyTasksService } from './dummy-tasks.service';
 import { TasksService } from './tasks.service';
 import { ContactsService } from './contacts.service';
-import { Firestore, doc, getDoc, setDoc, DocumentReference} from '@angular/fire/firestore';
+import {
+  Firestore,
+  doc,
+  getDoc,
+  setDoc,
+  DocumentReference,
+} from '@angular/fire/firestore';
 
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class DailyResetService {
   dummyContacts = inject(DummyContactsService);
@@ -14,8 +20,8 @@ export class DailyResetService {
   taskService = inject(TasksService);
   contactsService = inject(ContactsService);
   firestore: Firestore = inject(Firestore);
-  
-  constructor() { }
+
+  constructor() {}
 
   /**  Returns the current date as a string in YYYY-MM-DD format. */
   getTodayDateString(): string {
@@ -28,16 +34,17 @@ export class DailyResetService {
    * @param date - Date string in YYYY-MM-DD format.
    */
   async updateDayStamp(docRef: DocumentReference, date: string) {
-  await setDoc(docRef, { currentDay: date });
+    await setDoc(docRef, { currentDay: date });
   }
 
   /**
    * Runs the reset procedure: deletes all current contacts and tasks,
    * then adds dummy contacts and tasks.
    */
-  runReset() {
-    this.deleteAllContacts();
-    this.deleteAllTasks();
+  async runReset() {
+    await this.deleteAllContacts();
+    this.contactsService.contacts = [];
+    await this.deleteAllTasks();
     this.createDummyContacts();
     setTimeout(() => {
       this.createDummyTasks();
@@ -53,16 +60,19 @@ export class DailyResetService {
     const docRef = doc(this.firestore, 'timeStamp', 'currentDayStamp');
     try {
       const stampSnap = await getDoc(docRef);
-      const storedDate = stampSnap.exists() ? stampSnap.data()['currentDay'] : null;
+      const storedDate = stampSnap.exists()
+        ? stampSnap.data()['currentDay']
+        : null;
       if (storedDate !== currentDate) {
         await this.runReset();
         await this.updateDayStamp(docRef, currentDate);
-      } else {}
+      } else {
+      }
     } catch (err) {
       console.error('Error reading current timestamp:', err);
     }
   }
-  
+
   /** Creates and adds dummy tasks after assigning them to contacts. */
   createDummyTasks() {
     this.setDummyAssignees();
@@ -74,10 +84,10 @@ export class DailyResetService {
   /** Updates dummy tasks to use real contact IDs from the contacts service. */
   setDummyAssignees() {
     this.dummyTasks.dummyTasks.forEach((task) => {
-      task.assignedTo.forEach((element)=> {
+      task.assignedTo.forEach((element) => {
         const index = Number(element.contactId);
         element.contactId = this.contactsService.contacts[index].id;
-      })
+      });
     });
   }
 
@@ -89,25 +99,21 @@ export class DailyResetService {
   }
 
   /** Deletes all contacts currently stored in the contacts service. */
-  deleteAllContacts() {
+  async deleteAllContacts() {
     this.contactsService.contacts.forEach((contact) => {
       if (contact.id) {
-        this.contactsService.deleteContact(contact.id).then(() => {
-        });
+        this.contactsService.deleteContact(contact.id).then(() => {});
       }
     });
     this.contactsService.contacts = [];
   }
 
   /**  Deletes all tasks currently stored in the task service. */
-  deleteAllTasks() {
+  async deleteAllTasks() {
     this.taskService.tasks.forEach((task) => {
       if (task.id) {
-        this.taskService.deleteTask(task.id).then(() => {
-        });
+        this.taskService.deleteTask(task.id).then(() => {});
       }
     });
   }
-
 }
-
