@@ -145,13 +145,13 @@
         />
         <span class="checkmark">
           I accept the
-          <a routerLink="/privacy-policy" target="_blank"> Privacy Policy </a>.
+          <a routerLink="/privacy-policy" target="_blank"> Privacy Policy</a>.
         </span>
       </label>
     </div>
     <!-- Sign up Button -->
     <div class="sign-up-button-wrapper">
-      <button class="sign-up-button" type="submit" [disabled]="!acceptPolicy">
+      <button class="sign-up-button" type="submit" [disabled]="signUpForm.invalid || !acceptPolicy">
         Sign up
       </button>
     </div>
