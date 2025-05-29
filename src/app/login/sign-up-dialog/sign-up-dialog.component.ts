@@ -35,8 +35,6 @@ export class SignUpDialogComponent {
   toastService = inject(ToastService);
   fb = inject(FormBuilder);
   signUpForm: FormGroup;
-//   hidePassword = true;
-//   hideConfirmPassword = true;
   signUpErrorMessage: string | null = null;
   acceptPolicy: boolean = false;
   passwordVisible: Boolean = false;

@@ -79,7 +79,7 @@
   .error-message {
     position: absolute;
     bottom: -20px;
-    left: 20px;
+    left: 8px;
     color: #e44c36;
     font-size: 12px;
   }
@@ -141,7 +141,7 @@
   }
 }
 
-@media screen and (max-width: 440px) {
+@media screen and (max-width: 440px), screen and (max-height: 750px) {
   .login-dialog,
   .sign-up-dialog {
     width: 100%;
@@ -153,7 +153,7 @@
   .sign-up-button-wrapper {
     flex-direction: column;
     gap: 10px;
-    margin: 4vh 0;
+    margin: 20px 0 4px;
 
     .login-button,
     .guest-button,
@@ -166,13 +166,17 @@
   }
 
   .form-login {
-    gap: 6px !important;
+    gap: 20px !important;
   }
 }
 
 @media screen and (max-width: 360px) {
   .login-dialog,
   .sign-up-dialog {
-    padding: 8px;
+    gap: 24px;
+  }
+
+  h2 {
+    font-size: 36px;
   }
 }

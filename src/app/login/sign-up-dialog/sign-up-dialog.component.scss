@@ -4,6 +4,17 @@
   max-width: 600px;
   height: auto;
   padding: 50px 90px;
+
+  @media screen and (max-width: 440px) {
+    width: 100%;
+    margin-top: 36px;
+
+    .sign-up-button-wrapper {
+      flex-direction: column;
+      gap: 10px;
+      margin: 0;
+    }
+  }
 }
 
 .head-wrapper {
@@ -43,14 +54,14 @@
 
   .error-message {
     position: absolute;
-    bottom: -20px;
-    left: 20px;
+    bottom: -16px;
+    left: 8px;
   }
 }
 
 .privacy-policy-wrapper {
-  @include dFlex($gap: 1rem);
-  padding: 1rem;
+  @include dFlex();
+  font-size: 16px;
   width: 100%;
 
   .custom-checkbox {
@@ -89,27 +100,14 @@
       text-decoration: none;
       color: $col-ref-highlight;
     }
-
-    .checkmark {
-      font-size: 0.9rem;
-    }
   }
 }
 
-@media (max-width: 410px) {
-  .privacy-policy-wrapper {
-    @include dFlex($jc: center, $ai: center, $gap: 0, $position: relative);
-    width: 100%;
-    padding: 0px !important;
-    font-size: 0.8rem;
-  }
-
-  .checkmark {
-    padding: 0.1rem;
-    font-size: 0.8rem;
-
-    a {
-      font-size: 0.8rem;
+@media screen and (max-width: 440px), screen and (max-height: 750px) {
+  .head-wrapper {
+    .back-to-login {
+      width: 32px;
+      height: 32px;
     }
   }
 }
