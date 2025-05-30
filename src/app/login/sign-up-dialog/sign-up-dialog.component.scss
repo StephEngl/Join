@@ -65,7 +65,7 @@
   width: 100%;
 
   .custom-checkbox {
-    @include dFlex($gap: 1rem);
+    @include dFlex($gap: 12px);
     font-size: 1rem;
     color: $col-font-inactive;
     user-select: none;
