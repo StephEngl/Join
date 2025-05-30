@@ -69,31 +69,28 @@
     font-size: 1rem;
     color: $col-font-inactive;
     user-select: none;
-    gap: 0.4rem;
 
     input[type="checkbox"] {
       cursor: pointer;
       appearance: none;
       width: 1rem;
       height: 1rem;
-      background-color: #f0f0f0;
-      border: 1px solid black;
-      border-radius: 4px;
+      background-image: url("/assets/icons/kanban/checkbox_unchecked_blue.svg");
+      background-position: center;
+      background-repeat: no-repeat;
+      background-size: contain;
+      transition: border-color 0.3s ease, box-shadow 0.3s ease;
 
-      &:checked::after {
+      &:checked {
         background-image: url("/assets/icons/kanban/checkbox_checked_blue.svg");
-        font-size: 0.75rem;
-        color: black;
-        display: inline-block;
-        text-align: center;
-        width: 100%;
       }
     }
 
     &.invalid input[type="checkbox"] {
       border: 2px solid red;
       box-shadow: 0 0 4px red;
-      transition: border-color 0.3s ease, box-shadow 0.3s ease;
+      border-radius: 4px;
+      background-image: none;
     }
 
     a {
