@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { AddTaskComponent } from "../add-task/add-task.component";
 
 /**
  * Component for displaying the legal notice page.
@@ -7,7 +8,7 @@ import { Component } from '@angular/core';
 @Component({
   selector: 'app-legal-notice',
   standalone: true,
-  imports: [],
+  imports: [AddTaskComponent],
   templateUrl: './legal-notice.component.html',
   styleUrl: './legal-notice.component.scss'
 })
