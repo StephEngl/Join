@@ -21,6 +21,8 @@ export class DailyResetService {
   contactsService = inject(ContactsService);
   firestore: Firestore = inject(Firestore);
 
+  private isResetting = false;
+
   constructor() {}
 
   /**  Returns the current date as a string in YYYY-MM-DD format. */
@@ -42,13 +44,19 @@ export class DailyResetService {
    * then adds dummy contacts and tasks.
    */
   async runReset() {
-    await this.deleteAllContacts();
-    this.contactsService.contacts = [];
-    await this.deleteAllTasks();
-    this.createDummyContacts();
-    setTimeout(() => {
-      this.createDummyTasks();
-    }, 200);
+    if (this.isResetting) return;
+    this.isResetting = true;
+    try {
+      await this.deleteAllContacts();
+      this.contactsService.contacts = [];
+      await this.deleteAllTasks();
+      this.createDummyContacts();
+      setTimeout(() => {
+        this.createDummyTasks();
+      }, 200);
+    } finally {
+      this.isResetting = false;
+    }
   }
 
   /**
@@ -93,18 +101,27 @@ export class DailyResetService {
 
   /** Creates and adds dummy contacts to the contact list. */
   createDummyContacts() {
-    this.dummyContacts.dummyContacts.forEach((contact) => {
-      this.contactsService.addContact(contact);
-    });
+    if (this.contactsService.contacts.length === 0) {
+      this.dummyContacts.dummyContacts.forEach((contact) => {
+        this.contactsService.addContact(contact);
+      });
+    }
   }
 
   /** Deletes all contacts currently stored in the contacts service. */
   async deleteAllContacts() {
-    this.contactsService.contacts.forEach((contact) => {
+    // this.contactsService.contacts.forEach((contact) => {
+    //   if (contact.id) {
+    //     this.contactsService.deleteContact(contact.id).then(() => {});
+    //   }
+    // });
+    const deletePromises = this.contactsService.contacts.map((contact) => {
       if (contact.id) {
-        this.contactsService.deleteContact(contact.id).then(() => {});
+        return this.contactsService.deleteContact(contact.id);
       }
+      return Promise.resolve();
     });
+    await Promise.all(deletePromises);
     this.contactsService.contacts = [];
   }
 
