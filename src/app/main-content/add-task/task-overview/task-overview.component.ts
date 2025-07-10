@@ -1,15 +1,17 @@
 import { CommonModule } from '@angular/common';
-import { Component, Input, inject } from '@angular/core';
+import { Component, Input, inject, ViewChild } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { SingleTaskDataService } from '../../../services/single-task-data.service';
 import { TaskInterface } from '../../../interfaces/task.interface';
 import { TasksService } from '../../../services/tasks.service';
 import { SignalsService } from '../../../services/signals.service';
+import { CdkAccordionItem, CdkAccordionModule } from '@angular/cdk/accordion';
+
 
 @Component({
   selector: 'app-task-overview',
   standalone: true,
-  imports: [FormsModule, CommonModule],
+  imports: [FormsModule, CommonModule, CdkAccordionModule],
   host: { class: 'task-overview' },
   templateUrl: './task-overview.component.html',
   styleUrl: './task-overview.component.scss',
@@ -26,6 +28,9 @@ export class TaskOverviewComponent {
 
   @Input() taskData!: TaskInterface;
   @Input() today: string = new Date().toISOString().split('T')[0];
+
+  @ViewChild('accordionItem') accordionItem!: CdkAccordionItem;
+  
 
   ngOnInit() {
     this.setFormData();

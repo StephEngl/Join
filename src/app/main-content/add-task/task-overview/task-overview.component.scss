@@ -55,6 +55,12 @@ span,
   font-size: 14px;
 }
 
+.file-add {
+  position: absolute;
+  right: 0;
+  top: 0;
+}
+
 // container queries
 @container task-section (max-width: 500px) {
   :host,

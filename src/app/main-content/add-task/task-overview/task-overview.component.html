@@ -54,3 +54,26 @@
     <p class="validation-alert">No due date set</p>
   }
 </div>
+
+<div class="form-group">
+  <cdk-accordion
+  class="dropdown-list-container form-group"
+    id="file-upload"
+    (click)="$event.stopPropagation()">
+    
+    <cdk-accordion-item
+      class="form-control"
+      #fileAccordionItem="cdkAccordionItem"
+    >
+  <label for="filepicker">Files</label>
+        <span
+        class="toggle-dropdown-list"
+        (click)="fileAccordionItem.toggle(); accordionItem.close()"
+      >
+  <input type="text" placeholder="Select file" onclick="filepicker.click()">
+  <input type="file" id="filepicker" style="display: none;">
+  <img class="file-add" src="./assets/icons/kanban/add.svg" alt="Adding sign">
+  </span>
+  </cdk-accordion-item>
+  </cdk-accordion>
+</div>
