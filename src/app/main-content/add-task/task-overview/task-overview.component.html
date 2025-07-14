@@ -1,7 +1,11 @@
 <div class="form-group">
   <label for="title">Title <span>*</span></label>
   <input
-    [ngModel]="taskDataService.editModeActive ? tasksService.tasks[taskIndex()].title : taskDataService.inputTaskTitle"
+    [ngModel]="
+      taskDataService.editModeActive
+        ? tasksService.tasks[taskIndex()].title
+        : taskDataService.inputTaskTitle
+    "
     (ngModelChange)="taskDataService.inputTaskTitle = $event"
     #titleInput="ngModel"
     id="title"
@@ -15,15 +19,20 @@
     (click)="this.signalService.titleCleared.set(false)"
     required
   />
-  @if (!titleInput.valid && titleInput.touched && !this.signalService.titleCleared()) {
-    <p class="validation-alert">The title must be at least 3 letters</p>
+  @if (!titleInput.valid && titleInput.touched &&
+  !this.signalService.titleCleared()) {
+  <p class="validation-alert">The title must be at least 3 letters</p>
   }
 </div>
 
 <div class="form-group">
   <label for="description">Description</label>
   <textarea
-    [ngModel]="taskDataService.editModeActive ? tasksService.tasks[taskIndex()].description : taskDataService.inputTaskDescription"
+    [ngModel]="
+      taskDataService.editModeActive
+        ? tasksService.tasks[taskIndex()].description
+        : taskDataService.inputTaskDescription
+    "
     (ngModelChange)="taskDataService.inputTaskDescription = $event"
     #descriptionInput="ngModel"
     id="description"
@@ -39,7 +48,11 @@
 <div class="form-group">
   <label for="due-date">Due date <span>*</span></label>
   <input
-    [ngModel]="taskDataService.editModeActive ? formatDate(tasksService.tasks[taskIndex()].dueDate) : formatDate(taskDataService.inputTaskDueDate)"
+    [ngModel]="
+      taskDataService.editModeActive
+        ? formatDate(tasksService.tasks[taskIndex()].dueDate)
+        : formatDate(taskDataService.inputTaskDueDate)
+    "
     (ngModelChange)="onDueDateChange($event)"
     #dateInput="ngModel"
     id="due-date"
@@ -50,30 +63,43 @@
     (click)="this.signalService.dateCleared.set(false)"
     required
   />
-  @if (!dateInput.valid && dateInput.touched && !this.signalService.dateCleared()) {
-    <p class="validation-alert">No due date set</p>
+  @if (!dateInput.valid && dateInput.touched &&
+  !this.signalService.dateCleared()) {
+  <p class="validation-alert">No due date set</p>
   }
 </div>
 
 <div class="form-group">
-  <cdk-accordion
-  class="dropdown-list-container form-group"
-    id="file-upload"
-    (click)="$event.stopPropagation()">
-    
+  <cdk-accordion class="dropdown-list-container form-group" id="file-upload">
+    <label for="filepicker">Files</label>
     <cdk-accordion-item
       class="form-control"
       #fileAccordionItem="cdkAccordionItem"
     >
-  <label for="filepicker">Files</label>
-        <span
+      <span
         class="toggle-dropdown-list"
-        (click)="fileAccordionItem.toggle(); accordionItem.close()"
+        (click)="fileAccordionItem.toggle()"
       >
-  <input type="text" placeholder="Select file" onclick="filepicker.click()">
-  <input type="file" id="filepicker" style="display: none;">
-  <img class="file-add" src="./assets/icons/kanban/add.svg" alt="Adding sign">
-  </span>
-  </cdk-accordion-item>
+        <!-- (click)="fileAccordionItem.toggle(); accordionItem.close()" -->
+
+        <input type="text" placeholder="Click to upload" />
+        <input type="file" id="filepicker" style="display: none" (change)="onBlobs($event)" />
+        <img
+          class="file-add"
+          src="./assets/icons/kanban/add.svg"
+          alt="Adding sign"
+          onclick="filepicker.click()"
+        />
+      </span>
+    </cdk-accordion-item>
   </cdk-accordion>
+  <div id="gallery">
+    @if (images.length > 0) {
+      @for (img of images; track img) {
+        <img [src]="img.base64" [alt]="img.filename">
+      }
+    } @else {
+      <p>Keine Bilder vorhanden.</p>
+    }
+  </div>
 </div>
