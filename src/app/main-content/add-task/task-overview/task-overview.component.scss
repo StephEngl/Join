@@ -56,9 +56,30 @@ span,
 }
 
 .file-add {
+  cursor: pointer;
   position: absolute;
-  right: 0;
-  top: 0;
+  right: 22px;
+  top: 41px;
+  width: 15px;
+}
+
+#gallery {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+#gallery img {
+  height: 100px;
+  width: 100px;
+  object-fit: cover;
+  background-color: rgba(0, 0, 0, 0.1);
+
+  &:hover {
+    cursor: pointer;
+    filter: brightness(1.1);
+    box-shadow: 2px 2px 2px rgba(0, 0, 0, 0.2);
+  }
 }
 
 // container queries

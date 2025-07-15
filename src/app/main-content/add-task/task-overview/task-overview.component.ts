@@ -5,8 +5,9 @@ import { SingleTaskDataService } from '../../../services/single-task-data.servic
 import { TaskInterface } from '../../../interfaces/task.interface';
 import { TasksService } from '../../../services/tasks.service';
 import { SignalsService } from '../../../services/signals.service';
+import { ToastService } from '../../../services/toast.service';
 import { CdkAccordionItem, CdkAccordionModule } from '@angular/cdk/accordion';
-
+import { TaskImageData } from '../../../interfaces/task-image-data';
 
 @Component({
   selector: 'app-task-overview',
@@ -25,15 +26,17 @@ export class TaskOverviewComponent {
   taskDataService = inject(SingleTaskDataService);
   tasksService = inject(TasksService);
   signalService = inject(SignalsService);
+  toastService = inject(ToastService);
+  taskImages: TaskImageData[] = [];
 
   @Input() taskData!: TaskInterface;
   @Input() today: string = new Date().toISOString().split('T')[0];
 
   @ViewChild('accordionItem') accordionItem!: CdkAccordionItem;
-  
 
   ngOnInit() {
     this.setFormData();
+    // this.imageService.subscribeToImages;
   }
 
   /** Returns the index of the current task or -1 if not found. */
@@ -70,4 +73,96 @@ export class TaskOverviewComponent {
   formatDate(date: Date | null): string | null {
     return date ? date.toISOString().split('T')[0] : null;
   }
+
+  // Images and Gallery Viewer methods
+
+  async onFileSelected(event: Event) {
+    const input = event.target as HTMLInputElement;
+    if (!input.files) return;
+    for (const file of Array.from(input.files)) {
+      if (!file.type.startsWith('image/')) {
+        this.toastService.triggerToast('Incorrect file-type. Please load image', 'error');
+        return;
+      }
+      try {
+        const compressedBase64 = await this.convertBlobToCompressedBase64(
+          file, 800, 800, 0.8);
+       this.taskImages.push({
+        filename: file.name,
+        fileType: file.type,
+        size: file.size,
+        base64: compressedBase64,
+      });
+      } catch (error) {
+        console.error('Fehler beim Hinzufügen:', error);
+
+        this.toastService.triggerToast(
+          `Error while processing ${file.name}: ${(error as Error).message}`,
+        "error"
+        );
+      }
+    }
+  }
+
+  /**
+   * Komprimiert ein Bild (Blob) auf eine Zielgröße oder -qualität
+   * @param {Blob} blob - Das Bild, das komprimiert werden soll
+   * @param {number} maxWidth - Die maximale Breite des Bildes
+   * @param {number} maxHeight - Die maximale Höhe des Bildes
+   * @param {number} quality - Qualität des komprimierten Bildes (zwischen 0 und 1)
+   * @returns {Promise<string>} - Base64-String des komprimierten Bildes
+   */
+  convertBlobToCompressedBase64(
+    blob: Blob,
+    maxWidth: number = 800,
+    maxHeight: number = 800,
+    quality: number = 0.8
+  ): Promise<string> {
+    return new Promise((resolve, reject) => {
+      const reader = new FileReader();
+
+      reader.onload = (event) => {
+        const img = new Image();
+        img.onload = () => {
+          const canvas = document.createElement('canvas');
+          const ctx = canvas.getContext('2d');
+
+          // Holding proportions
+          let width = img.width;
+          let height = img.height;
+
+          if (width > maxWidth || height > maxHeight) {
+            if (width > height) {
+              height = (height * maxWidth) / width;
+              width = maxWidth;
+            } else {
+              width = (width * maxHeight) / height;
+              height = maxHeight;
+            }
+          }
+
+          canvas.width = width;
+          canvas.height = height;
+
+          ctx?.drawImage(img, 0, 0, width, height);
+
+          // Export image as compressed Base64
+          const compressedBase64 = canvas.toDataURL('image/jpeg', quality);
+          resolve(compressedBase64);
+        };
+
+        img.onerror = () => reject('Error while loading image.');
+        img.src = event.target?.result as string;
+      };
+
+      reader.onerror = () => reject('Error while reading blob.');
+      reader.readAsDataURL(blob);
+    });
+  }
+
+  removeImage(index: number) {
+    this.taskImages.splice(index, 1);
+  }
+
+  
 }
