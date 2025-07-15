@@ -24,6 +24,7 @@ export class SignalsService {
   dateCleared = signal<boolean>(false);
   hideHrefs = signal<boolean>(false);
   signingIn = signal<boolean>(true);
+  isGalleryViewerOpen = signal <boolean>(false);
   hasAnimated = false;
 
 
