@@ -1,5 +1,4 @@
 import { Injectable, inject, OnDestroy } from '@angular/core';
-import { Timestamp } from '@angular/fire/firestore';
 import { TaskInterface } from '../interfaces/task.interface';
 import {
     Firestore,
