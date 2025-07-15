@@ -27,7 +27,6 @@ export class TaskOverviewComponent {
   tasksService = inject(TasksService);
   signalService = inject(SignalsService);
   toastService = inject(ToastService);
-  taskImages: TaskImageData[] = [];
 
   @Input() taskData!: TaskInterface;
   @Input() today: string = new Date().toISOString().split('T')[0];
@@ -81,24 +80,32 @@ export class TaskOverviewComponent {
     if (!input.files) return;
     for (const file of Array.from(input.files)) {
       if (!file.type.startsWith('image/')) {
-        this.toastService.triggerToast('Incorrect file-type. Please load image', 'error');
+        this.toastService.triggerToast(
+          'Incorrect file-type. Please load image',
+          'error'
+        );
         return;
       }
       try {
         const compressedBase64 = await this.convertBlobToCompressedBase64(
-          file, 800, 800, 0.8);
-       this.taskImages.push({
-        filename: file.name,
-        fileType: file.type,
-        size: file.size,
-        base64: compressedBase64,
-      });
+          file,
+          800,
+          800,
+          0.8
+        );
+        const image: TaskImageData = {
+          filename: file.name,
+          fileType: file.type,
+          size: file.size,
+          base64: compressedBase64,
+        };
+        this.signalService.addTaskImage(image);
       } catch (error) {
         console.error('Fehler beim Hinzufügen:', error);
 
         this.toastService.triggerToast(
           `Error while processing ${file.name}: ${(error as Error).message}`,
-        "error"
+          'error'
         );
       }
     }
@@ -161,8 +168,6 @@ export class TaskOverviewComponent {
   }
 
   removeImage(index: number) {
-    this.taskImages.splice(index, 1);
+    this.signalService.removeTaskImage(index);
   }
-
-  
 }
