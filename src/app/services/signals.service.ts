@@ -1,18 +1,17 @@
-import { Injectable, signal} from '@angular/core';
-
+import { Injectable, signal } from '@angular/core';
+import { TaskImageData } from '../interfaces/task-image-data';
 
 /**
  * Service to manage signals related to screen size and form state.
- * 
+ *
  * Provides reactive signals to track the screen size (mobile or desktop),
  * form field visibility, and various states related to form handling.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class SignalsService {
-
-  constructor() { 
+  constructor() {
     this.checkScreenSize();
   }
 
@@ -24,16 +23,14 @@ export class SignalsService {
   dateCleared = signal<boolean>(false);
   hideHrefs = signal<boolean>(false);
   signingIn = signal<boolean>(true);
-  isGalleryViewerOpen = signal <boolean>(false);
   hasAnimated = false;
-
-
+  
   /**
    * Checks the current screen width and sets the corresponding mobile or desktop signal.
    * If the window width is 1000px or less, sets the isMobile signal to true and isDesktop to false.
    * Otherwise, sets the isMobile signal to false and isDesktop to true.
-   */
-  checkScreenSize() {
+  */
+ checkScreenSize() {
     if (window.innerWidth <= 1000) {
       this.isMobile.set(true);
       this.isDesktop.set(false);
@@ -42,5 +39,34 @@ export class SignalsService {
       this.isDesktop.set(true);
     }
   }
+  
+  // Signal and methods for task data images
+  galleryCurrentIndex = signal<number>(0);
+  isGalleryViewerOpen = signal<boolean>(false);
 
+  private readonly _taskImages = signal<TaskImageData[]>([]);
+  readonly taskImages = this._taskImages.asReadonly();
+
+  setTaskImages(images: TaskImageData[]) {
+    this._taskImages.set(images);
+  }
+
+  addTaskImage(image: TaskImageData) {
+    this._taskImages.update((current) => [...current, image]);
+  }
+
+  removeTaskImage(index: number) {
+    this._taskImages.update((current) =>
+      current.filter((_, i) => i !== index)
+    );
+  }
+
+  clearTaskImages() {
+    this._taskImages.set([]);
+  }
+
+  openViewerAt(index: number) {
+    this.galleryCurrentIndex.set(index);
+    this.isGalleryViewerOpen.set(true);
+  }
 }
