@@ -1,4 +1,4 @@
-import { Timestamp } from "@angular/fire/firestore";
+import { TaskImageData } from "./task-image-data";
 
 export interface TaskInterface {
   id?: string;
@@ -10,4 +10,5 @@ export interface TaskInterface {
   taskType: 'toDo' | 'done' | 'inProgress' | 'feedback';
   subTasks: any[];
   assignedTo: any[];
+  images?: TaskImageData[];
 }
