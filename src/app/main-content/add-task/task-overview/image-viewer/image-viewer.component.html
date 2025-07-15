@@ -1,0 +1,9 @@
+<div class="viewer-overlay" (click)="signalService.isGalleryViewerOpen.set(false)">
+  <div class="viewer-content" (click)="$event.stopPropagation()">
+    <div class="button-container">
+      <button (click)="showPreviousImage()">Previous</button>
+      <button (click)="showNextImage()">Next</button>
+    </div>
+    <img [src]="imageSources[currentIndex]" class="img-size" />
+  </div>
+</div>
