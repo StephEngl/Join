@@ -125,36 +125,20 @@
   </span>
 </div>
 
-<!-- <div id="gallery"> -->
-  <!-- @if (imagesForCurrentTask.length > 0) { @for (img of imagesForCurrentTask;
-  track img) { -->
-  <!-- <img
-    [src]="img.base64"
-    [alt]="img.filename"
-    (click)="signalService.isGalleryViewerOpen.set(true)"
-  /> -->
-  <!-- } } -->
-<!-- </div> -->
-
-<!-- Galerie-Vorschau -->
+<!-- Galery -->
 <div id="gallery">
-  @if (taskImages.length > 0) {
-    @for (img of taskImages; track img) {
+  @if (signalService.taskImages().length > 0) {
+    @for (img of signalService.taskImages(); let i = $index; track img) {
       <div class="image-preview-item">
         <img
           [src]="img.base64"
           [alt]="img.filename"
-          (click)="signalService.isGalleryViewerOpen.set(true)"
+          (click)="signalService.openViewerAt(i)"
           class="gallery-image"
         />
-        <div class="file-info">
-          <p>{{ img.filename }}</p>
-          <p>{{ img.size | number }} Bytes</p>
-          <p>{{ img.fileType }}</p>
-          <button type="button" (click)="removeImage($index)" aria-label="Bild entfernen">
-            ✗
+          <button class="delete-button" type="button" (click)="removeImage(i)" aria-label="Delete picture">
+            x
           </button>
-        </div>
       </div>
     }
   }
