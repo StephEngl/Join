@@ -27,14 +27,22 @@
             "inlineStyleLanguage": "scss",
             "assets": [
               "src/favicon.ico",
-              "src/assets"
+              "src/assets",
+              {
+                "glob": "**/*",
+                "input": "public/viewerjs",
+                "output": "/viewerjs"
+              }
             ],
             "styles": [
               "src/styles.scss",
               "src/assets/styles/font-types.scss",
-              "src/assets/fonts/fonts.scss"
+              "src/assets/fonts/fonts.scss",
+              "node_modules/viewerjs/dist/viewer.min.css"
             ],
-            "scripts": []
+            "scripts": [
+              "node_modules/viewerjs/dist/viewer.min.js"
+            ]
           },
           "configurations": {
             "production": {

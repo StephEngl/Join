@@ -35,6 +35,15 @@ app-login {
   background-color: $col-bg-main;
 }
 
+app-image-viewer {
+  position:absolute;
+  top: 50px;
+  left: 50px;
+  z-index: 100;
+  height: 50vh;
+  width: 80%;
+}
+
 .orientation-lock {
   @include dFlex(center, center, 20px, fixed);
   flex-direction: column;

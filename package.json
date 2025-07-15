@@ -23,6 +23,7 @@
     "@angular/router": "^17.3.0",
     "rxjs": "^7.4.0",
     "tslib": "^2.3.0",
+    "viewerjs": "^1.11.7",
     "zone.js": "~0.14.3"
   },
   "devDependencies": {

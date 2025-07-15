@@ -1,23 +1,27 @@
 <div class="page-content">
-    <!-- CHANGED: Removed '|| signalService.hideHrefs()' to prevent showing navbar during login/signup -->
+  <!-- CHANGED: Removed '|| signalService.hideHrefs()' to prevent showing navbar during login/signup -->
+  @if (authService.isLoggedIn() || signalService.hideHrefs()) {
+  <app-navbar />
+  }
+
+  <div class="header-content">
+    <!-- CHANGED: Removed '|| signalService.hideHrefs()' to prevent showing header during login/signup -->
     @if (authService.isLoggedIn() || signalService.hideHrefs()) {
-        <app-navbar />
+    <app-header />
     }
 
-    <div class="header-content">
-        <!-- CHANGED: Removed '|| signalService.hideHrefs()' to prevent showing header during login/signup -->
-        @if (authService.isLoggedIn() || signalService.hideHrefs()) {
-            <app-header />
-        }
+    <router-outlet />
+  </div>
 
-        <router-outlet />
-    </div>
-
-    <app-toast />
+  <app-toast />
 </div>
 
 <div class="orientation-lock">
-    <img src="./assets/icons/header/logo.svg" class="logo-lock">
-    <p>Please rotate your device into portrait mode to use the app</p>
-    <img src="./assets/icons/general/mobile.png" class="rotate-phone">
+  <img src="./assets/icons/header/logo.svg" class="logo-lock" />
+  <p>Please rotate your device into portrait mode to use the app</p>
+  <img src="./assets/icons/general/mobile.png" class="rotate-phone" />
 </div>
+
+@if (signalService.isGalleryViewerOpen()) {
+<app-image-viewer></app-image-viewer>
+}

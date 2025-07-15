@@ -6,6 +6,7 @@ import { DailyResetService } from './services/daily-reset.service';
 import { ToastComponent } from './shared/toast/toast.component';
 import { SignalsService } from './services/signals.service';
 import { AuthenticationService } from './services/authentication.service';
+import { ImageViewerComponent } from "./main-content/add-task/task-overview/image-viewer/image-viewer.component"
 
 
 /**
@@ -16,7 +17,7 @@ import { AuthenticationService } from './services/authentication.service';
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, NavbarComponent, ToastComponent],
+  imports: [RouterOutlet, HeaderComponent, NavbarComponent, ToastComponent, ImageViewerComponent],
   templateUrl: './app.component.html',
   styleUrl: './app.component.scss'
 })
