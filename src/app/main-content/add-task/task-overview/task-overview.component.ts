@@ -8,11 +8,12 @@ import { SignalsService } from '../../../services/signals.service';
 import { ToastService } from '../../../services/toast.service';
 import { CdkAccordionItem, CdkAccordionModule } from '@angular/cdk/accordion';
 import { TaskImageData } from '../../../interfaces/task-image-data';
+import { GalleryComponent } from '../../../shared/gallery/gallery.component';
 
 @Component({
   selector: 'app-task-overview',
   standalone: true,
-  imports: [FormsModule, CommonModule, CdkAccordionModule],
+  imports: [FormsModule, CommonModule, CdkAccordionModule, GalleryComponent],
   host: { class: 'task-overview' },
   templateUrl: './task-overview.component.html',
   styleUrl: './task-overview.component.scss',
@@ -35,7 +36,6 @@ export class TaskOverviewComponent {
 
   ngOnInit() {
     this.setFormData();
-    // this.imageService.subscribeToImages;
   }
 
   /** Returns the index of the current task or -1 if not found. */
@@ -165,9 +165,5 @@ export class TaskOverviewComponent {
       reader.onerror = () => reject('Error while reading blob.');
       reader.readAsDataURL(blob);
     });
-  }
-
-  removeImage(index: number) {
-    this.signalService.removeTaskImage(index);
   }
 }

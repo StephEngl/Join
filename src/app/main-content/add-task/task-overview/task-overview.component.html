@@ -97,24 +97,4 @@
 </div>
 
 <!-- Gallery -->
-<div class="gallery" id="gallery">
-  @if (signalService.taskImages().length > 0) { @for (img of
-  signalService.taskImages(); let i = $index; track img) {
-  <div class="image-preview-item">
-    <img
-      class="gallery-image"
-      [src]="img.base64"
-      [alt]="img.filename"
-      (click)="signalService.openViewerAt(i)"
-    />
-    <button
-      class="delete-button"
-      type="button"
-      (click)="removeImage(i)"
-      aria-label="Delete picture"
-    >
-      x
-    </button>
-  </div>
-  } }
-</div>
+<app-gallery></app-gallery>
