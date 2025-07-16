@@ -69,35 +69,6 @@
   }
 </div>
 
-<!-- <div class="form-group">
-  <cdk-accordion class="dropdown-list-container form-group" id="file-upload">
-    <label for="filepicker">Files</label>
-    <cdk-accordion-item
-      class="form-control"
-      #fileAccordionItem="cdkAccordionItem"
-    >
-      <span class="toggle-dropdown-list" (click)="fileAccordionItem.toggle()"> -->
-        <!-- (click)="fileAccordionItem.toggle(); accordionItem.close()" -->
-<!-- 
-        <input type="text" placeholder="Click to upload" />
-        <input
-          type="file"
-          id="filepicker"
-          style="display: none"
-          accept="image/*"
-          (change)="onFileSelected($event)"
-        />
-        <img
-          class="file-add"
-          src="./assets/icons/general/upload.svg"
-          alt="Adding sign"
-          onclick="filepicker.click()"
-        />
-      </span>
-    </cdk-accordion-item>
-  </cdk-accordion>
-</div> -->
-
 <div class="form-group">
   <!-- Label bleibt sichtbar und semantisch -->
   <label for="filepicker">Files</label>
@@ -125,21 +96,25 @@
   </span>
 </div>
 
-<!-- Galery -->
-<div id="gallery">
-  @if (signalService.taskImages().length > 0) {
-    @for (img of signalService.taskImages(); let i = $index; track img) {
-      <div class="image-preview-item">
-        <img
-          [src]="img.base64"
-          [alt]="img.filename"
-          (click)="signalService.openViewerAt(i)"
-          class="gallery-image"
-        />
-          <button class="delete-button" type="button" (click)="removeImage(i)" aria-label="Delete picture">
-            x
-          </button>
-      </div>
-    }
-  }
+<!-- Gallery -->
+<div class="gallery" id="gallery">
+  @if (signalService.taskImages().length > 0) { @for (img of
+  signalService.taskImages(); let i = $index; track img) {
+  <div class="image-preview-item">
+    <img
+      class="gallery-image"
+      [src]="img.base64"
+      [alt]="img.filename"
+      (click)="signalService.openViewerAt(i)"
+    />
+    <button
+      class="delete-button"
+      type="button"
+      (click)="removeImage(i)"
+      aria-label="Delete picture"
+    >
+      x
+    </button>
+  </div>
+  } }
 </div>
