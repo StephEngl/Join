@@ -35,18 +35,37 @@
   padding-bottom: 16px;
 }
 
-button {
+button,
+.download-btn {
   @include dFlex($jc: space-around, $position: relative);
   border-radius: 10px;
   padding: 16px;
-  font-size: 21px;
   background-color: #2a3647;
   color: #ffffff;
+}
+
+.download-btn {
+  font-size: 21px;
   height: 48px;
   width: 160px;
+}
+
+button {
+  height: 30px;
+  width: 120px;
 }
 
 .download-button-wrapper {
   width: 100%;
   @include dFlex($jc: flex-end);
+  padding-top: 16px;
+}
+
+@media screen and (max-width: 900px) {
+  .download-btn,
+  button {
+    font-size: 16px;
+    height: 30px;
+    width: 120px;
+  }
 }
