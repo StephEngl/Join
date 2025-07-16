@@ -1,507 +1,240 @@
 @import "../../../../../assets/styles/mixins.scss";
-@import "../../../../../assets/styles/variables.scss";
 @import "../../../../../assets/fonts/fonts.scss";
 
 .task-info-section {
-    @include dFlex(center, center, 1rem);
+  @include dFlex(center, center, 1rem);
+  flex-direction: column;
+  width: 100%;
+  height: 90dvh;
+  margin: 0;
+  padding: clamp(1.75rem, -0.2012rem + 9.7561vw, 3rem)
+    clamp(1.25rem, -0.7012rem + 9.7561vw, 2.5rem)
+    clamp(1.75rem, -0.2012rem + 9.7561vw, 3rem)
+    clamp(1.25rem, -0.7012rem + 9.7561vw, 2.5rem);
+  font-family: "Inter", sans-serif;
+  background: #ffffff;
+  border-radius: 1rem;
+  max-width: $queryBreak1;
+}
+
+h2 {
+  width: 100%;
+  overflow-wrap: break-word;
+  font-weight: 700;
+  font-size: clamp(2rem, -0.7317rem + 13.6585vw, 3.75rem);
+}
+
+p,
+span,
+td,
+th {
+  font-family: "Inter", sans-serif;
+  font-size: clamp(1rem, 0.6098rem + 1.9512vw, 1.25rem);
+  font-weight: 400;
+  text-align: left;
+  word-break: break-word;
+}
+
+.subtitle {
+  color: #42526e;
+  min-width: 80px;
+  white-space: nowrap;
+}
+
+.task-info-header-container {
+  position: sticky;
+  top: 0;
+  z-index: 2;
+  background-color: white;
+
+  .task-info-top-container {
+    @include dFlex(space-between, center);
     width: 100%;
-    height: 90dvh;
-    margin: 0;
-    padding-top: 2rem;
-    padding-left: 1.5rem;
-    padding-right: 1.5rem;
-    background: #FFFFFF;
-    border-radius: 1rem;
-    overflow: auto;
-    max-width: $queryBreak1;
-    
-    &::-webkit-scrollbar {
-        display: none;
+    padding-top: 0rem;
+    padding-bottom: 0.8rem;
+
+    .task-info-category {
+      padding: 4px 8px;
+      border-radius: 0.5rem;
+      color: white;
+      font-weight: 400;
+      font-size: clamp(1rem, 1.2rem + 0.5vw, 1.4375rem);
     }
 
-    -ms-overflow-style: none;
-    scrollbar-width: none;
-    font-family: 'Inter', sans-serif;
+    .task-info-close {
+      font-size: 1.5rem;
+      cursor: pointer;
+    }
+  }
+}
 
-    .task-info-container {
+.task-info-content-container {
+  // flex-grow: 1;
+  @include dFlex($ai: flex-start, $jc: flex-start, $gap: 24px);
+  flex-direction: column;
+  overflow-y: auto;
+  scrollbar-width: thin;
+  scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
+
+  &::-webkit-scrollbar {
+    width: 8px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background-color: rgba(0, 0, 0, 0.3);
+    border-radius: 4px;
+    border: 3px solid transparent;
+    background-clip: content-box;
+  }
+}
+
+// Info table with due date and priority
+.task-info-table {
+  border-collapse: collapse;
+
+  td:first-child {
+    padding: 0 40px 0 0;
+  }
+
+  tr:not(:last-child) td {
+    padding-bottom: 24px;
+  }
+
+  .task-info-due-date-output,
+  .task-info-priority-output {
+    @include dFlex($gap: 10px);
+  }
+
+  .task-info-priority-label {
+    text-transform: capitalize;
+  }
+
+  .task-info-priority-img {
+    width: 18px;
+    height: 18px;
+    display: flex;
+    vertical-align: text-bottom;
+  }
+}
+
+// Assigned-to-Section
+.task-info-assigned-to-container {
+  @include dFlex($jc: space-between, $ai: flex-start, $gap: 8px);
+  flex-direction: column;
+  width: 100%;
+
+  .task-info-assigned-to-output {
+    display: flex;
+    flex-direction: column;
+    border: 2px solid transparent;
+    gap: 0.5rem;
+    padding-left: 16px;
+
+    .assigned-person {
+      @include dFlex(flex-start, center);
+
+      .initials {
+        @include contactIcon(42px, 12px, 0);
+      }
+
+      .name {
         display: flex;
-        width: 100%;
-        max-width: $queryBreak1;
-        height: 100%;
-        justify-content: center;
-        flex-direction: column;
-
-        .task-info-header-container {
-            position: sticky;
-            top: 0;
-            z-index: 2;
-            background-color: white; 
-            
-            .task-info-top-container {
-                @include dFlex(space-between, center);
-                width: 100%;
-                padding-top: 0rem;
-                padding-bottom: 0.8rem;
-    
-                .task-info-category {
-                    padding: 4px 8px;
-                    border-radius: 0.5rem;
-                    color: white;
-                    font-weight: 400;
-                    font-size: clamp(1rem, 1.2rem + 0.5vw, 1.4375rem);
-                }
-    
-                .task-info-close {
-                    font-size: 1.5rem;
-                    cursor: pointer;
-                }
-            }
-    
-            .task-info-header-txt {
-                width: 100%;
-                height: auto;
-                padding-top: 0.8rem;
-                padding-bottom: 0.8rem;
-                gap: 1rem;
-                @include dFlex(flex-start, center);
-    
-                h2 {
-                    width: 100%;
-                    overflow-wrap: break-word;  
-                    font-weight: 700;
-                    line-height: 120%;
-                    padding-top: 0.8rem;
-                    padding-bottom: 0.8rem;
-                }
-            }
-        }
-        
-
-        .task-info-content-container {
-            flex-grow: 1;
-            overflow-y: scroll;
-            overflow-x: hidden;
-            min-height: 0;
-            position: relative;
-            padding: 0.5rem;
-
-            &::-webkit-scrollbar {
-                width: 8px;
-            }
-    
-            &::-webkit-scrollbar-track {
-                background: transparent;
-            }
-    
-            &::-webkit-scrollbar-thumb {
-                background-color: rgba(0, 0, 0, 0.3);
-                border-radius: 4px;
-                border: 3px solid transparent; 
-                background-clip: content-box;
-            }
-    
-            scrollbar-width: thin;
-            scrollbar-color: rgba(0, 0, 0, 0.2) transparent;
-            z-index: 3;
-
-            .task-info-build-txt {
-                display: flex;
-    
-                .task-info-description-container {
-                    @include dFlex(center, flex-start);
-    
-                    p {
-                        font-family: 'Inter', sans-serif;
-                        font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
-                        font-weight: 400;
-                        line-height: 120%;
-                        color: black;
-                        padding-top: 0.8rem;
-                        padding-bottom: 0.8rem;
-                        text-align: left;
-                        word-break: break-word;
-                    }
-                }
-            }
-    
-            .task-info-due-date-container {
-                @include dFlex(flex-start, center);
-                width: 100%;
-                padding-top: 0.8rem;
-                padding-bottom: 0.8rem;
-    
-                .task-info-due-date-txt {
-                    @include dFlex(flex-start, center);
-                    width: 100px;
-                    font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
-                    font-weight: 400;
-                    line-height: 120%;
-                    gap: 1rem;
-                }
-    
-                .task-info-due-date-output {
-                    display: flex;
-                    padding-left: 40px;
-                    gap: 1rem;
-                }
-            }
-    
-            .task-info-priority-container {
-                @include dFlex(flex-start, center);
-                width: 100%;
-                padding-top: 0.8rem;
-                padding-bottom: 0.8rem;
-    
-                .task-info-priority-txt {
-                    @include dFlex(flex-start, center);
-                    width: 100px;
-                    font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
-                    font-weight: 400;
-                    line-height: 120%;
-                    gap: 1rem;
-                }
-    
-                .task-info-priority-output {
-                    display: flex;
-                    padding-left: 40px;
-                    gap: 1rem;
-    
-                    span {
-                        display: flex;
-                    }
-    
-                    .task-info-priority-img {
-                        display: flex;
-                    }
-                }
-            }
-    
-            .task-info-assigned-to-container {
-                @include dFlex(space-between, flex-start);
-                flex-direction: column;
-                width: 100%;
-                padding-top: 0.8rem;
-                padding-bottom: 0.8rem;
-                gap: 1rem;
-    
-                .task-info-assigned-to-txt {
-                    @include dFlex(flex-start, center);
-                    font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
-                    font-weight: 400;
-                    line-height: 120%;
-                    gap: 1rem;
-                }
-    
-                .task-info-assigned-to-output {
-                    display: flex;
-                    flex-direction: column;
-                    border: 2px solid transparent;
-                    gap: 0.5rem;
-                    padding: 1rem;
-    
-                    .assigned-person {
-                        @include dFlex(flex-start, center);
-    
-                        .initials {
-                            @include contactIcon(42px, 12px, 0);
-                        }
-    
-                        .name {
-                            display: flex;
-                            font-family: 'Open Sans';
-                            padding-left: 1rem;
-                        }
-                    }
-                }
-            }
-    
-            .task-info-subtasks-container {
-                display: flex;
-                flex-direction: column;
-    
-                .task-info-subtasks-header {
-                    font-size: clamp(1rem, 0.875rem + 0.5vw, 1.25rem);
-                    font-weight: 400;
-                    line-height: 120%;
-                    gap: 1rem;
-                }
-    
-                .task-info-subtask-list {
-                    display: flex;
-                    flex-direction: column;
-                    gap: 0.8rem;
-                    width: 100%;
-                    padding-left: 1rem;
-                    padding-top: 0.8rem;
-                    padding-bottom: 0.8rem;
-    
-                    .task-info-subtask-item {
-                        @include dFlex(flex-start, center);
-                        cursor: pointer;
-    
-                        span {
-
-                            font-family: "Inter", sans-serif;
-                            font-weight: 400;
-                            font-size: 1rem;
-                            line-height: 120%;
-                            padding-left: 1rem;
-                            word-break: break-all;
-                            width: 100%;
-                        }
-    
-                        .checkbox {
-                            display: flex;
-                        }
-    
-                        .completed {
-                            text-decoration: line-through;
-                            color: gray;
-                        }
-
-                        .subtask-checkbox {
-                            display: none;
-                        }
-                    }
-                }
-            }
-        }
-
-        .task-info-footer-container {
-            @include dFlex(flex-end, center);
-            position: sticky;
-            bottom: 0;
-            z-index: 2;
-            background: white;
-
-            .task-info-delete-edit-container {
-                @include dFlex(center, center);
-                width: 160px;
-                padding-top: 1rem;
-                padding-bottom: 1rem;
-                gap: 8px;
-
-                .task-info-delete-container {
-                    @include dFlex(center, center);
-                    width: 95px;
-                    color: $col-bg-secondary;
-                    cursor: pointer;
-
-                    :hover {
-                        cursor: pointer;
-                    }
-    
-                    .task-info-delete-img {
-                        @include dFlex($jc: center, $ai: center);
-                        width: 24px;
-                        height: 24px;
-                        background-image: url('../../../../../assets/icons/kanban/delete.svg');
-                        background-size: 16px, 18px;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        transition: background-image 0.3s ease;
-                    }
-    
-                    .task-info-delete-txt {       
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 1rem;
-                    }
-                }
-
-                .task-info-delete-container:hover 
-                .task-info-delete-txt {
-                    color: $col-ref-highlight;
-                    font-weight: bold;
-                }
-                
-                .task-info-delete-container:hover 
-                .task-info-delete-img {
-                    background-image: url('../../../../../assets/icons/kanban/delete_active.svg');
-                }
-
-                .task-info-between-delete-and-edit {
-                    @include dFlex($jc: center, $ai: center);
-                    width: 1rem;
-                    height: auto;
-                    color: $col-bg-secondary;
-                }
-    
-                .task-info-edit-container {
-                    @include dFlex($jc: center, $ai: center);
-                    width: 70px;
-                    color: $col-bg-secondary;
-                    cursor: pointer;
-
-                    :hover {
-                        cursor: pointer;
-                    }
-    
-                    .task-info-edit-img {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        width: 24px;
-                        height: 24px;
-                        background-image: url('../../../../../assets/icons/kanban/edit.svg');
-                        background-size: 16px, 18px;
-                        background-repeat: no-repeat;
-                        background-position: center;
-                        transition: background-image 0.3s ease;
-                    }
-    
-                    .task-info-edit-txt {
-                        display: flex;
-                        align-items: center;
-                        justify-content: center;
-                        font-size: 1rem;
-                    }
-                }
-
-                .task-info-edit-container:hover 
-                .task-info-edit-txt {
-                    color: $col-ref-highlight;
-                    font-weight: bold;
-                }
-                
-                .task-info-edit-container:hover 
-                .task-info-edit-img {
-                    background-image: url('../../../../../assets/icons/kanban/edit_active.svg');
-                }
-            }
-        }
+        font-family: "Open Sans";
+        padding-left: 1rem;
+      }
     }
+  }
 }
 
-@media (min-width: 630px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 3rem;
-        }
+// Subtasks
+.task-info-subtasks-container {
+  @include dFlex($ai: flex-start, $gap: 8px);
+  flex-direction: column;
+  width: 100%;
+
+  .task-info-subtask-list {
+    @include dFlex($ai: flex-start, $gap: 10px);
+    flex-direction: column;
+  }
+
+  .task-info-subtask-item {
+    @include dFlex($jc: flex-start, $gap: 16px);
+    cursor: pointer;
+    border-radius: 4px;
+    padding: 4px 16px 4px 16px;
+
+    .checkbox {
+      display: flex;
     }
+
+    .subtask-checkbox {
+      display: none;
+    }
+
+    &:hover {
+      background-color: $col-bg-hovered-subtask;
+    }
+  }
+
+  .subtask-text {
+    font-size: 16px;
+  }
 }
 
-
-@media (max-width: 630px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 2.7rem;
-        }
-    }
+// Footer Buttons
+.task-info-footer-container {
+  @include dFlex($jc: flex-end, $position: sticky);
+  width: 100%;
+  bottom: 0;
 }
 
-@media (max-width: 590px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 2.65rem;
-        }
-    }
+.task-info-action-group {
+  @include dFlex($gap: 8px);
 }
 
-@media (max-width: 570px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 2.55rem;
-        }
-    }
+.task-info-action-button {
+  @include dFlex($gap: 8px, $position: relative);
+  min-width: 70px;
+  cursor: pointer;
+  color: $col-bg-secondary;
+  background: none;
+  border: none;
+  padding: 0;
+
+  .task-footer-icon {
+    @include dFlex();
+    width: 18px;
+    height: 18px;
+  }
+
+  .task-info-action-text {
+    @include dFlex();
+    font-size: 16px;
+    transition: color 0.15s, font-weight 0.15s;
+  }
+
+  &:hover,
+  &:focus-visible {
+    color: $col-ref-highlight;
+    font-weight: bold;
+  }
 }
 
-@media (max-width: 550px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 2.45rem;
-        }
-    }
-}
-
-@media (max-width: 530px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 2.35rem;
-        }
-    }
-}
-
-@media (max-width: 510px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 2.25rem;
-        }
-    }
-}
-
-@media (max-width: 500px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 2.15rem;
-        }
-    }
-}
-
-@media (max-width: 470px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 2.05rem;
-        }
-    }
-}
-
-@media (max-width: 450px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 1.95rem;
-        }
-    }
-}
-
-@media (max-width: 430px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 1.85rem;
-        }
-    }
-}
-
-@media (max-width: 410px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 1.75rem;
-        }
-    }
-}
-
-@media (max-width: 390px) {
-    .task-info-header-container {
-        h2 {
-            font-size: 1.65rem;
-        }
-    }
-}
-
-@media (max-width: 340px) {
-    .task-info-due-date-output {
-        padding-left: 22px!important;
-    }
-
-    .task-info-priority-output {
-        padding-left: 22px!important;
-    }
-}
-
+// Media Queries
 @media (min-height: 1400px) {
-
-    .task-info-section {
-        height: 100%;
-        max-height: 1400px;
-    }
+  .task-info-section {
+    height: 100%;
+    max-height: 1400px;
+  }
 }
 
 @media (min-height: 1000px) {
-
-    .task-info-container {
-        height: 100%;
-        max-height: 1400px;
-    }
+  .task-info-container {
+    height: 100%;
+    max-height: 1400px;
+  }
 }
-

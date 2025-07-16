@@ -1,135 +1,152 @@
 @if (tasksService.tasks[taskIndex()]) {
 <section class="task-info-section">
-  <div class="task-info-container">
-    <div class="task-info-header-container">
-      <div class="task-info-top-container">
-        <div
-          class="task-info-category"
-          [style.backgroundColor]="
-            tasksService.tasks[taskIndex()].category === 'User Story'
-              ? '#003cff'
-              : '#1FD7C1'
+  <div class="task-info-header-container">
+    <div class="task-info-top-container">
+      <div
+        class="task-info-category"
+        [style.backgroundColor]="
+          tasksService.tasks[taskIndex()].category === 'User Story'
+            ? '#003cff'
+            : '#1FD7C1'
+        "
+      >
+        {{ tasksService.tasks[taskIndex()].category }}
+      </div>
+      <div class="task-info-close" (click)="closeDialog()">&#10005;</div>
+    </div>
+    <h2>{{ tasksService.tasks[taskIndex()].title }}</h2>
+  </div>
+
+  <div class="task-info-content-container">
+    <p>{{ tasksService.tasks[taskIndex()].description }}</p>
+
+    <table class="task-info-table">
+      <tbody>
+        <tr>
+          <td class="subtitle">Due date:</td>
+          <td class="task-info-due-date-output">
+            {{ tasksService.tasks[taskIndex()].dueDate | date : "yyyy-MM-dd" }}
+          </td>
+        </tr>
+        <tr>
+          <td class="subtitle">Priority:</td>
+          <td class="task-info-priority-output">
+            <span class="task-info-priority-label">{{ taskPriority }}</span>
+            @if (priorityIcon) {
+            <img
+              class="task-info-priority-img"
+              [src]="priorityIcon"
+              [alt]="priorityAlt"
+            />
+            }
+          </td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="task-info-assigned-to-container">
+      <span class="subtitle">Assigned To:</span>
+      <div class="task-info-assigned-to-output">
+        @for (person of tasksService.tasks[taskIndex()].assignedTo; track
+        person.contactId; let index = $index) { @if
+        (contactsService.contactName(person.contactId)) {
+        <div class="assigned-person">
+          <span
+            class="initials"
+            [style.backgroundColor]="
+              contactsService.contactColor(person.contactId)
+            "
+          >
+            {{ contactsService.nameInitials(person.contactId) }}
+          </span>
+          <span class="name">
+            {{ contactsService.contactName(person.contactId) }}
+          </span>
+        </div>
+        } }
+      </div>
+    </div>
+
+    <div class="task-info-subtasks-container">
+      <span class="subtitle">Subtasks:</span>
+      <div class="task-info-subtask-list">
+        @for (subtask of tasksService.tasks[taskIndex()].subTasks; track
+        subtask.id) {
+        <label class="task-info-subtask-item">
+          <input
+            type="checkbox"
+            class="subtask-checkbox"
+            [(ngModel)]="subtask.isChecked"
+            (change)="checkSubTask()"
+            [id]="'checkbox-' + subtask.id"
+          />
+          <img
+            [src]="
+              subtask.isChecked
+                ? './assets/icons/kanban/checkbox_checked_blue.svg'
+                : './assets/icons/kanban/checkbox_unchecked_blue.svg'
+            "
+            alt=""
+          />
+          <span class="subtask-text">
+            {{ subtask.text }}
+          </span>
+        </label>
+        }
+      </div>
+    </div>
+
+    <app-gallery [isEditMode]="false"></app-gallery>
+  </div>
+
+  <!-- Footer Section -->
+  <div class="task-info-footer-container">
+    <div class="task-info-action-group">
+      <button
+        class="task-info-action-button"
+        type="button"
+        aria-label="Delte Task"
+        (mouseenter)="isDeleteButtonHovered = true"
+        (mouseleave)="isDeleteButtonHovered = false"
+        (focus)="isDeleteButtonHovered = true"
+        (blur)="isDeleteButtonHovered = false"
+        (click)="deleteTask()"
+      >
+        <img
+          class="task-footer-icon"
+          [src]="
+            isDeleteButtonHovered
+              ? '/assets/icons/kanban/delete_active.svg'
+              : '/assets/icons/kanban/delete.svg'
           "
-        >
-          {{ tasksService.tasks[taskIndex()].category }}
-        </div>
-        <div class="task-info-close" (click)="closeDialog()">&#10005;</div>
-      </div>
-      <div class="task-info-header-txt">
-        <h2>{{ tasksService.tasks[taskIndex()].title }}</h2>
-      </div>
-    </div>
-    <div class="task-info-content-container">
-      <div class="task-info-build-txt">
-        <div class="task-info-description-container">
-          <p>{{ tasksService.tasks[taskIndex()].description }}</p>
-        </div>
-      </div>
+          alt="Delete Icon"
+        />
+        <span class="task-info-action-text">Delete</span>
+      </button>
 
-      <div class="task-info-due-date-container">
-        <div class="task-info-due-date-txt">Due date:</div>
-        <div class="task-info-due-date-output">
-          {{ tasksService.tasks[taskIndex()].dueDate | date : "yyyy-MM-dd" }}
-        </div>
-      </div>
+      <span class="task-info-divider" aria-hidden="true">|</span>
 
-      <div class="task-info-priority-container">
-        <div class="task-info-priority-txt">Priority:</div>
-        <div class="task-info-priority-output">
-          <span>{{ tasksService.tasks[taskIndex()].priority }}</span>
-          @switch (tasksService.tasks[taskIndex()].priority) { @case ('urgent')
-          {
-          <img
-            class="task-info-priority-img"
-            src="assets/icons/kanban/prio_urgent.svg"
-            alt="urgent"
-          />
-          } @case ('medium') {
-          <img
-            class="task-info-priority-img"
-            src="assets/icons/kanban/prio_medium.svg"
-            alt="Medium"
-          />
-          } @case ('low') {
-          <img
-            class="task-info-priority-img"
-            src="assets/icons/kanban/prio_low.svg"
-            alt="low"
-          />
-          } }
-        </div>
-      </div>
-
-      <div class="task-info-assigned-to-container">
-        <div class="task-info-assigned-to-txt">Assigned To:</div>
-        <div class="task-info-assigned-to-output">
-          @for (person of tasksService.tasks[taskIndex()].assignedTo; track
-          person.contactId; let index = $index) { @if
-          (contactsService.contactName(person.contactId)) {
-          <div class="assigned-person">
-            <span
-              class="initials"
-              [style.backgroundColor]="
-                contactsService.contactColor(person.contactId)
-              "
-            >
-              {{ contactsService.nameInitials(person.contactId) }}
-            </span>
-            <span class="name">
-              {{ contactsService.contactName(person.contactId) }}
-            </span>
-          </div>
-          } }
-        </div>
-      </div>
-
-      <div class="task-info-subtasks-container">
-        <div class="task-info-subtasks-header">Subtasks:</div>
-        <div class="task-info-subtask-list">
-          @for (subtask of tasksService.tasks[taskIndex()].subTasks; track
-          subtask.id) {
-          <div class="task-info-subtask-item">
-            <label class="task-info-subtask-item">
-              <input
-                type="checkbox"
-                class="subtask-checkbox"
-                [(ngModel)]="subtask.isChecked"
-                (change)="checkSubTask()"
-                [id]="'checkbox-' + subtask.id"
-              />
-              <img
-                [src]="
-                  subtask.isChecked
-                    ? './assets/icons/kanban/checkbox_checked_blue.svg'
-                    : './assets/icons/kanban/checkbox_unchecked_blue.svg'
-                "
-                alt=""
-              />
-              <span [class.completed]="subtask.isChecked">
-                {{ subtask.text }}
-              </span>
-            </label>
-          </div>
-          }
-        </div>
-      </div>
-
-      <app-gallery></app-gallery>
-      
-    </div>
-
-    <div class="task-info-footer-container">
-      <div class="task-info-delete-edit-container">
-        <div class="task-info-delete-container" (click)="deleteTask()">
-          <div class="task-info-delete-img"></div>
-          <div class="task-info-delete-txt">Delete</div>
-        </div>
-        <div class="task-info-between-delete-and-edit">|</div>
-        <div class="task-info-edit-container" (click)="onEditTask()">
-          <div class="task-info-edit-img"></div>
-          <div class="task-info-edit-txt">Edit</div>
-        </div>
-      </div>
+      <button
+        class="task-info-action-button"
+        type="button"
+        aria-label="Edit Task"
+        (mouseenter)="isEditButtonHovered = true"
+        (mouseleave)="isEditButtonHovered = false"
+        (focus)="isEditButtonHovered = true"
+        (blur)="isEditButtonHovered = false"
+        (click)="onEditTask()"
+      >
+        <img
+          class="task-footer-icon"
+          [src]="
+            isEditButtonHovered
+              ? '/assets/icons/kanban/edit_active.svg'
+              : '/assets/icons/kanban/edit.svg'
+          "
+          alt="Edit Icon"
+        />
+        <span class="task-info-action-text">Edit</span>
+      </button>
     </div>
   </div>
 </section>
