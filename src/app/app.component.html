@@ -22,6 +22,6 @@
   <img src="./assets/icons/general/mobile.png" class="rotate-phone" />
 </div>
 
-@if (signalService.isGalleryViewerOpen()) {
+@if (signalService.isGalleryViewerOpen() && signalService.taskImages().length > 0) {
 <app-image-viewer></app-image-viewer>
 }
