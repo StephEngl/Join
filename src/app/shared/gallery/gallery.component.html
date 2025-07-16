@@ -8,14 +8,20 @@
       [alt]="img.filename"
       (click)="signalService.openViewerAt(i)"
     />
+    @if (isEditMode) {
     <button
       class="delete-button"
       type="button"
       (click)="removeImage(i)"
       aria-label="Delete picture"
     >
-      x
+      <i class="material-icons">delete_outline</i>
     </button>
+    }
   </div>
-  } }
+  } } @if (signalService.canUndo()) {
+  <button class="undo-button" (click)="signalService.undoRemoveImage()">
+    Restore
+  </button>
+  }
 </div>

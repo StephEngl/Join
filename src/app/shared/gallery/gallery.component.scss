@@ -12,6 +12,7 @@
   .gallery-image {
     height: 100px;
     width: 100px;
+    border-radius: 8px;
     object-fit: cover;
     background-color: rgba(0, 0, 0, 0.1);
 
@@ -23,10 +24,12 @@
   }
 
   .delete-button {
-    position: absolute;
+    @include dFlex($position: absolute);
     top: 4px;
     right: 4px;
     background-color: $col-bg-main;
     border-radius: 4px;
+    width: 26px;
+    height: 24px;
   }
 }

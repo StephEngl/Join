@@ -1,4 +1,4 @@
-import { Component, inject } from '@angular/core';
+import { Component, inject, Input } from '@angular/core';
 import { SignalsService } from '../../services/signals.service';
 
 @Component({
@@ -10,6 +10,7 @@ import { SignalsService } from '../../services/signals.service';
 })
 export class GalleryComponent {
   signalService = inject(SignalsService);
+  @Input() isEditMode = false;
 
     removeImage(index: number) {
     this.signalService.removeTaskImage(index);
