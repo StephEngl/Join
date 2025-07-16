@@ -53,6 +53,9 @@ export class AddTaskComponent {
     if (!this.taskDataService.editModeActive) {
       this.clearForm();
     }
+    // if (this.taskData && this.taskData.images) {
+    //   this.signalService.setTaskImages(this.taskData.images);
+    // }
   }
 
   /**
@@ -128,6 +131,7 @@ export class AddTaskComponent {
     this.taskCreated.emit();
     setTimeout(() => {
       this.router.navigate(['/board']);
+      this.signalService.clearTaskImages();
       this.clearForm();
     }, 1000);
   }
@@ -162,6 +166,7 @@ export class AddTaskComponent {
       priority: this.getSelectedPriority(),
       category: this.taskDataService.selectedCategory,
       taskType: this.taskDataService.taskStatus,
+      images: this.signalService.taskImages(),
     };
     return submittedTask;
   }

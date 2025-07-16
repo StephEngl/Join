@@ -1,10 +1,18 @@
-import { Component, Input, Output, EventEmitter, inject, HostListener } from '@angular/core';
+import {
+  Component,
+  Input,
+  Output,
+  EventEmitter,
+  inject,
+  HostListener,
+} from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { TaskInterface } from '../../../interfaces/task.interface';
 import { TaskInfoComponent } from './task-info/task-info.component';
 import { AddTaskComponent } from '../../add-task/add-task.component';
 import { TasksService } from '../../../services/tasks.service';
 import { SingleTaskDataService } from '../../../services/single-task-data.service';
+import { SignalsService } from '../../../services/signals.service';
 
 @Component({
   selector: 'app-task-dialog',
@@ -19,7 +27,7 @@ import { SingleTaskDataService } from '../../../services/single-task-data.servic
  * supporting viewing, editing, and deleting a task.
  */
 export class TaskDialogComponent {
-
+  signalService = inject(SignalsService);
   taskDataService = inject(SingleTaskDataService);
   showTaskInfo: boolean = true;
   isEditTaskDialog: boolean = false;
@@ -27,7 +35,15 @@ export class TaskDialogComponent {
   @Input() dialogType: 'add' | 'info' = 'info';
   @Output() close = new EventEmitter<void>();
 
-  constructor(private tasksService: TasksService) { }
+  constructor(private tasksService: TasksService) {}
+
+  ngOnInit(): void {
+    if (this.taskDataDialog && this.taskDataDialog.images) {
+      this.signalService.setTaskImages(this.taskDataDialog.images);
+    } else {
+      this.signalService.setTaskImages([]);
+    }
+  }
 
   /**
    * Closes the dialog when clicking outside and resets edit state.
@@ -38,10 +54,16 @@ export class TaskDialogComponent {
     this.close.emit();
     this.taskDataService.editModeActive = false;
     this.isEditTaskDialog = false;
+    this.signalService.clearTaskImages();
   }
 
   /** Enables edit mode and switches view after a short delay. */
   onEditTask(): void {
+    if (this.taskDataDialog && this.taskDataDialog.images) {
+      this.signalService.setTaskImages(this.taskDataDialog.images);
+    } else {
+      this.signalService.setTaskImages([]);
+    }
     this.taskDataService.editModeActive = true;
     this.isEditTaskDialog = true;
     setTimeout(() => {
@@ -69,5 +91,4 @@ export class TaskDialogComponent {
       this.closeDialog();
     }
   }
-
 }
