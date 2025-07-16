@@ -133,7 +133,8 @@ export class TasksService implements OnDestroy {
             priority: taskData.priority || '',
             taskType: taskData.taskType || 'toDo',
             subTasks: taskData.subTasks || [],
-            assignedTo: taskData.assignedTo || []
+            assignedTo: taskData.assignedTo || [],
+            images: taskData.images || []
         };
     }
 
@@ -226,7 +227,8 @@ export class TasksService implements OnDestroy {
             priority: task.priority,
             subTasks: task.subTasks,
             taskType: task.taskType,
-            assignedTo: task.assignedTo
+            assignedTo: task.assignedTo,
+            images: task.images
         };
     }
 
