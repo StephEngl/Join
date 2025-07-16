@@ -8,13 +8,14 @@ import { ContactsService } from '../../../../services/contacts.service';
 import { ToastService } from '../../../../services/toast.service';
 
 import { SignalsService } from '../../../../services/signals.service';
+import { GalleryComponent } from '../../../../shared/gallery/gallery.component';
 
 @Component({
     selector: 'app-task-info',
     templateUrl: './task-info.component.html',
     styleUrls: ['./task-info.component.scss'],
     standalone: true,
-    imports: [CommonModule, FormsModule],
+    imports: [CommonModule, FormsModule, GalleryComponent],
     })
 
     /**
