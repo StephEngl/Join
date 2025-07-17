@@ -1,8 +1,8 @@
 @if (tasksService.tasks[taskIndex()]) {
 <section class="task-info-section">
-  <div class="task-info-header-container">
+  <header>
     <div class="task-info-top-container">
-      <div
+      <span
         class="task-info-category"
         [style.backgroundColor]="
           tasksService.tasks[taskIndex()].category === 'User Story'
@@ -11,12 +11,20 @@
         "
       >
         {{ tasksService.tasks[taskIndex()].category }}
-      </div>
-      <div class="task-info-close" (click)="closeDialog()">&#10005;</div>
+      </span>
+      <button
+        class="task-info-close-button"
+        (click)="closeDialog()"
+        type="button"
+        aria-label="Close dialog"
+      >
+        &#10005;
+      </button>
     </div>
     <h2>{{ tasksService.tasks[taskIndex()].title }}</h2>
-  </div>
+  </header>
 
+  <!-- Content Info Section -->
   <div class="task-info-content-container">
     <p>{{ tasksService.tasks[taskIndex()].description }}</p>
 
@@ -100,12 +108,12 @@
   </div>
 
   <!-- Footer Section -->
-  <div class="task-info-footer-container">
-    <div class="task-info-action-group">
+  <footer>
+    <div class="task-info-action-group" role="group" aria-label="Task actions">
       <button
         class="task-info-action-button"
         type="button"
-        aria-label="Delte Task"
+        aria-label="Delete Task"
         (mouseenter)="isDeleteButtonHovered = true"
         (mouseleave)="isDeleteButtonHovered = false"
         (focus)="isDeleteButtonHovered = true"
@@ -148,6 +156,6 @@
         <span class="task-info-action-text">Edit</span>
       </button>
     </div>
-  </div>
+  </footer>
 </section>
 }
