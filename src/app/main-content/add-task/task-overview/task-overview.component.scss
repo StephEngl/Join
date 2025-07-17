@@ -15,9 +15,9 @@ input[type="text"],
 input[type="date"],
 textarea {
   width: 440px;
+  padding: 12px 20px;
   border: 1px solid $col-font-grey;
   border-radius: 10px;
-  padding: 12px 20px;
   color: $col-bg-secondary;
   resize: none;
   font-family: "Inter", sans-serif;
@@ -54,12 +54,40 @@ span,
   font-size: 14px;
 }
 
-.file-add {
-  cursor: pointer;
-  position: absolute;
-  right: 22px;
-  top: 41px;
-  width: 15px;
+.file-upload-trigger {
+  @include dFlex($ai: flex-start);
+  width: 440px;
+  min-height: 48px; // Höhe ggf. wie input (padding oben/unten x2 + fontgröße); anpassen wenn nötig
+  padding: 12px 20px;
+  border: 2px dashed $col-font-grey;
+  border-radius: 10px;
+  background-color: white;
+  color: $col-bg-secondary;
+  transition: border-color 0.2s;
+  
+  &:hover, &:focus {
+    border-color: $col-font-inactive;
+    outline: none;
+  }
+
+  .upload-button {
+    background-color: transparent;
+    padding: 16px;
+  }
+  
+  img {
+    cursor: pointer;
+    width: 20px;
+    height: 20px;
+    display: block;
+  }
+
+  // Optional: Damit Placeholder-Text mit Bild zentriert wirkt
+  .upload-button-text {
+    color: $col-font-main;
+    display: block;
+    line-height: 1;
+  }
 }
 
 // container queries

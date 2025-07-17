@@ -70,31 +70,31 @@
 </div>
 
 <div class="form-group">
-  <!-- Label bleibt sichtbar und semantisch -->
-  <label for="filepicker">Files</label>
-
-  <!-- Versteckter Filepicker -->
+  <label>Files</label>
+  <div class="file-upload-trigger">
+    <!-- Gallery -->
+    @if (this.signalService.taskImages().length) {
+    <app-gallery [isEditMode]="true" style="width: 100%"></app-gallery>
+    }
+    <button
+      class="upload-button"
+      type="button"
+      tabindex="0"
+      aria-label="Upload images"
+      (click)="filepicker.click()"
+      (keydown.enter)="filepicker.click()"
+      (keydown.space)="filepicker.click()"
+    >
+      <img src="./assets/icons/general/upload.svg" alt="Upload" />
+    </button>
+  </div>
   <input
+    #filepicker
     type="file"
-    id="filepicker"
     accept="image/*"
     multiple
     style="display: none"
     (change)="onFileSelected($event)"
-    aria-label="Bilder zum Hochladen auswählen"
+    aria-label="Chose images to upload"
   />
-
-  <!-- Sichtbarer, klickbarer Auslöser -->
-  <span class="toggle-dropdown-list">
-    <input type="text" placeholder="Click to upload" readonly />
-    <img
-      class="file-add"
-      src="./assets/icons/general/upload.svg"
-      alt="Datei auswählen"
-      onclick="filepicker.click()"
-    />
-  </span>
 </div>
-
-<!-- Gallery -->
-<app-gallery [isEditMode]="true"></app-gallery>
