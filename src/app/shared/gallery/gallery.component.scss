@@ -1,7 +1,7 @@
 @import "../../../assets/styles/mixins.scss";
 
 .gallery {
-  @include dFlex($gap: 8px);
+  @include dFlex($jc: flex-start, $gap: 8px);
   flex-wrap: wrap;
   max-width: 440px;
 }
@@ -31,5 +31,36 @@
     border-radius: 4px;
     width: 26px;
     height: 24px;
+
+    &:hover,
+    &:focus {
+      background-color: $col-font-inactive;
+      color: $col-font-secondary;
+    }
+  }
+}
+
+.undo-button {
+  @include dFlex();
+  height: 100px;
+  width: 100px;
+  border: 2px dashed $col-font-grey;
+  border-radius: 8px;
+  background-color: transparent;
+
+  &:focus,
+  &:active,
+  &:hover {
+    outline: none;
+    background-color: $col-font-grey;
+
+    .material-icons {
+      scale: 1.1;
+    }
+  }
+
+  .material-icons {
+    font-size: 30px;
+    width: 1em;
   }
 }

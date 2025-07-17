@@ -1,5 +1,14 @@
 <div class="gallery" id="gallery">
-  @if (signalService.taskImages().length > 0) { @for (img of
+  @if (signalService.canUndo()) {
+  <button
+    class="undo-button"
+    type="button"
+    (click)="signalService.undoRemoveImage()"
+    aria-label="Undo Image"
+  >
+    <i class="material-icons">replay_icon</i>
+  </button>
+  } @if (signalService.taskImages().length > 0) { @for (img of
   signalService.taskImages(); let i = $index; track img) {
   <div class="image-preview-item">
     <img
@@ -19,9 +28,5 @@
     </button>
     }
   </div>
-  } } @if (signalService.canUndo()) {
-  <button class="undo-button" (click)="signalService.undoRemoveImage()">
-    Restore
-  </button>
-  }
+  } }
 </div>
