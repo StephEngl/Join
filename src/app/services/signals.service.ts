@@ -56,12 +56,6 @@ export class SignalsService {
     this._taskImages.update((current) => [...current, image]);
   }
 
-  // removeTaskImage(index: number) {
-  //   this._taskImages.update((current) =>
-  //     current.filter((_, i) => i !== index)
-  //   );
-  // }
-
   clearTaskImages() {
     this._taskImages.set([]);
   }
@@ -75,6 +69,7 @@ export class SignalsService {
     const current = [...this._taskImages()];
     const removed = current[index];
     if (removed) {
+      this.clearUndoStack();
       this.undoStack.push({ image: removed, index });
       current.splice(index, 1);
       this._taskImages.set(current);
