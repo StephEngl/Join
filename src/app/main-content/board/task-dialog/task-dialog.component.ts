@@ -37,6 +37,12 @@ export class TaskDialogComponent {
 
   constructor(private tasksService: TasksService) {}
 
+  /**
+ * Angular lifecycle hook.
+ * Called once by Angular, after the component's inputs are assigned but before the view is rendered.
+ * - If images exist in the provided `taskDataDialog`, sets these as the current gallery images via the signal service.
+ * - If no images exist, ensures the gallery is reset to an empty state.
+ */
   ngOnInit(): void {
     if (this.taskDataDialog && this.taskDataDialog.images) {
       this.signalService.setTaskImages(this.taskDataDialog.images);
@@ -57,19 +63,52 @@ export class TaskDialogComponent {
     this.signalService.clearTaskImages();
   }
 
-  /** Enables edit mode and switches view after a short delay. */
+  /**
+   * Handles transitioning into task edit mode using SRP-conform helper functions.
+   */
   onEditTask(): void {
-    if (this.taskDataDialog && this.taskDataDialog.images) {
-      this.signalService.setTaskImages(this.taskDataDialog.images);
-    } else {
-      this.signalService.setTaskImages([]);
-    }
-    this.taskDataService.editModeActive = true;
-    this.isEditTaskDialog = true;
-    setTimeout(() => {
-      this.showTaskInfo = false;
-    }, 10);
+    const latestTask = this.getLatestTask();
+    // Update dialog data binding with the latest task object.
+    this.taskDataDialog = latestTask!;
+    // Initialize the gallery with the new task's images.
+    this.initializeGalleryImages(latestTask);
+    // Activate edit mode in component state.
+    this.activateEditMode();
   }
+
+  /**
+ * Retrieves the latest task object from the TasksService based on the task ID.
+ * @returns The latest TaskInterface object or undefined if not found.
+ */
+private getLatestTask(): TaskInterface | undefined {
+  return this.tasksService.tasks.find(
+    (t) => t.id === this.taskDataDialog.id
+  );
+}
+
+/**
+ * Initializes the gallery with the images from the provided task object.
+ * If no images exist, it clears the gallery images.
+ * @param task The TaskInterface object containing images.
+ */
+private initializeGalleryImages(task: TaskInterface | undefined): void {
+  if (task && task.images) {
+    this.signalService.setTaskImages(task.images);
+  } else {
+    this.signalService.setTaskImages([]);
+  }
+}
+
+/**
+ * Activates edit mode in the component state.
+ */
+private activateEditMode(): void {
+  this.taskDataService.editModeActive = true;
+  this.isEditTaskDialog = true;
+  setTimeout(() => {
+    this.showTaskInfo = false;
+  }, 10);
+}
 
   /**
    * Callback for when a task has been edited.
