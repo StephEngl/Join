@@ -46,6 +46,7 @@ export class SignalsService {
 
   private readonly _taskImages = signal<TaskImageData[]>([]);
   readonly taskImages = this._taskImages.asReadonly();
+  private undoStack: { image: TaskImageData, index: number }[] = [];
 
   setTaskImages(images: TaskImageData[]) {
     this._taskImages.set(images);
@@ -55,11 +56,11 @@ export class SignalsService {
     this._taskImages.update((current) => [...current, image]);
   }
 
-  removeTaskImage(index: number) {
-    this._taskImages.update((current) =>
-      current.filter((_, i) => i !== index)
-    );
-  }
+  // removeTaskImage(index: number) {
+  //   this._taskImages.update((current) =>
+  //     current.filter((_, i) => i !== index)
+  //   );
+  // }
 
   clearTaskImages() {
     this._taskImages.set([]);
@@ -68,5 +69,32 @@ export class SignalsService {
   openViewerAt(index: number) {
     this.galleryCurrentIndex.set(index);
     this.isGalleryViewerOpen.set(true);
+  }
+
+  removeTaskImage(index: number) {
+    const current = [...this._taskImages()];
+    const removed = current[index];
+    if (removed) {
+      this.undoStack.push({ image: removed, index });
+      current.splice(index, 1);
+      this._taskImages.set(current);
+    }
+  }
+
+  undoRemoveImage() {
+    if (this.undoStack.length > 0) {
+      const { image, index } = this.undoStack.pop()!;
+      const current = [...this._taskImages()];
+      current.splice(index, 0, image);
+      this._taskImages.set(current);
+    }
+  }
+
+  canUndo(): boolean {
+    return this.undoStack.length > 0;
+  }
+
+  clearUndoStack() {
+    this.undoStack = [];
   }
 }
