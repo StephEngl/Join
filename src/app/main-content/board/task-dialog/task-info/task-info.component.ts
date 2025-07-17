@@ -88,9 +88,16 @@ export class TaskInfoComponent {
       .slice(0, 4);
   }
 
+  /** 
+ * Returns the priority string of the current task.
+ */
   get taskPriority(): string {
     return this.tasksService.tasks[this.taskIndex()].priority;
   }
+
+  /** 
+ * Returns the SVG icon path for the current task's priority.
+ */
   get priorityIcon(): string | null {
     switch (this.taskPriority) {
       case 'urgent':
@@ -103,6 +110,10 @@ export class TaskInfoComponent {
         return null;
     }
   }
+
+  /** 
+ * Returns the alt text for the current task's priority icon.
+ */
   get priorityAlt(): string {
     return `${
       this.taskPriority.charAt(0).toUpperCase() + this.taskPriority.slice(1)
