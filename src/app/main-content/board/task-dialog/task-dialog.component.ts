@@ -49,6 +49,7 @@ export class TaskDialogComponent {
     } else {
       this.signalService.setTaskImages([]);
     }
+    this.signalService.clearUndoStack();
   }
 
   /**

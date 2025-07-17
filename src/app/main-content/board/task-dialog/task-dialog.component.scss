@@ -1,50 +1,49 @@
 @import "../../../../assets/styles/mixins.scss";
 
 :host {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  z-index: 98;
+  background-color: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  padding-top: 5vh;
+  overflow-y: auto;
+  overflow: auto;
 
-    position: fixed;
-    top: 0; 
-    left: 0; 
-    width: 100vw;
-    height: 100vh; 
-    z-index: 98;
-    background-color: rgba(0, 0, 0, 0.4); 
-    display: flex;
-    align-items: flex-start;
-    justify-content: center;
-    padding-top: 5vh; 
-    overflow-y: auto;
-    overflow: auto;
+  &::-webkit-scrollbar {
+    display: none;
+  }
 
-    &::-webkit-scrollbar {
-        display: none;
-    }
+  -ms-overflow-style: none;
+  scrollbar-width: none;
 
-    -ms-overflow-style: none;
-    scrollbar-width: none;
+  .task-dialog-section {
+    width: 525px;
+    background: #fff;
+    border-radius: 12px;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+  }
 
+  @media (max-width: 550px) {
     .task-dialog-section {
-        width: 525px;
-        background: #fff;
-        border-radius: 12px;
-        box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+      width: 100%;
+      height: auto;
+      margin: 0 8px;
     }
+  }
 
-    @media (max-width: 550px) {
-        .task-dialog-section {
-        width: 100%;
-        height: auto;
-        margin: 0 8px;
-        }
+  @media (min-width: 1920px) {
+    .task-dialog-section {
+      margin-left: calc($appMaxWidth + $navbar-width - 100vw);
     }
-
-    @media (min-width: 1920px) {
-        .task-dialog-section {
-            margin-left: calc( $appMaxWidth + $navbar-width - 100vw );
-    }
-}
+  }
 }
 
 app-add-task {
-    width: 100%;
+  width: 100%;
 }
