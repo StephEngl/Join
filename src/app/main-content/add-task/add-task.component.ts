@@ -53,9 +53,9 @@ export class AddTaskComponent {
     if (!this.taskDataService.editModeActive) {
       this.clearForm();
     }
-    // if (this.taskData && this.taskData.images) {
-    //   this.signalService.setTaskImages(this.taskData.images);
-    // }
+    if (this.taskData && this.taskData.images) {
+      this.signalService.setTaskImages(this.taskData.images);
+    }
   }
 
   /**
@@ -112,6 +112,7 @@ export class AddTaskComponent {
    * @param task The edited task object.
    */
   submitEdit(task: TaskInterface) {
+    this.signalService.clearUndoStack();
     this.tasksService.updateTask(task);
     this.toastService.triggerToast('Task updated', 'update');
     this.cancelEditTask.emit();
@@ -128,6 +129,7 @@ export class AddTaskComponent {
       'create',
       'assets/icons/navbar/board.svg'
     );
+    this.signalService.clearUndoStack();
     this.taskCreated.emit();
     setTimeout(() => {
       this.router.navigate(['/board']);
