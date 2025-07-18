@@ -1,0 +1,65 @@
+<section
+  class="viewer-overlay"
+  (click)="signalService.isGalleryViewerOpen.set(false)"
+>
+<div class="content-wrapper">
+
+
+  <div
+    class="viewer-content"
+    (swipeleft)="showNextImage()"
+    (swiperight)="showPreviousImage()"
+    (click)="$event.stopPropagation()"
+  >
+    @if (taskImages.length > 1) {
+    <header class="button-wrapper">
+      <button
+        type="button"
+        (click)="showPreviousImage()"
+        aria-label="Previous image"
+      >
+        <span class="material-icons">chevron_left</span>
+      </button>
+      <button type="button" (click)="showNextImage()" aria-label="Next image">
+        <span class="material-icons">chevron_right</span>
+      </button>
+    </header>
+    }
+    <img
+      [src]="taskImages[currentIndex].base64"
+      [alt]="taskImages[currentIndex].filename"
+      class="img-size"
+    />
+
+    <div class="image-metadata">
+      <table>
+        <tbody>
+          <tr>
+            <th scope="row">Filename:</th>
+            <td>{{ taskImages[currentIndex].filename }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Filetype:</th>
+            <td>{{ taskImages[currentIndex].fileType }}</td>
+          </tr>
+          <tr>
+            <th scope="row">Size:</th>
+            <td>{{ (taskImages[currentIndex].size / 1024) | number:'1.2-2' }} KB</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
+    <div class="download-button-wrapper">
+      <button
+        type="button"
+        class="download-btn"
+        (click)="downloadImage()"
+        aria-label="Download image"
+      >
+        Download
+      </button>
+    </div>
+    </div>
+  </div>
+</section>

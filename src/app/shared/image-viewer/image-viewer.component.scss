@@ -1,0 +1,100 @@
+@import "../../../assets/styles/mixins.scss";
+
+.viewer-overlay {
+  @include dFlex($ai: flex-start, $jc: flex-start, $position: fixed);
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.8);
+  z-index: 100;
+}
+
+.content-wrapper {
+  @include dFlex();
+  width: $appMaxWidth;
+}
+
+.viewer-content {
+  @include dFlex($gap: 16px, $position: relative);
+  flex-direction: column;
+  background-color: $col-font-secondary;
+  padding: 1rem;
+  max-width: 90%;
+  max-height: 90dvh;
+  border-radius: 16px;
+}
+
+.img-size {
+  min-height: 0; // <-- Damit Flexbox nicht min-content nimmt!
+  min-width: 0;
+  width: 100%;
+  flex: 1 1 auto; // <-- Füllt Resthöhe, schrumpft zuerst
+  object-fit: contain; // Bild niemals verzerren
+  display: block;
+}
+
+.image-metadata {
+  flex-shrink: 0;
+  overflow-y: auto;
+  max-height: 80px;
+  width: 100%;
+
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    font-size: 1rem;
+  }
+
+  th {
+    text-align: left;
+    font-weight: bold;
+    white-space: nowrap;
+    padding: 2px 8px 2px 0;
+    vertical-align: top;
+    width: 1%;
+  }
+
+  td {
+    word-break: break-all;
+  }
+}
+
+.button-wrapper {
+  @include dFlex($gap: 16px);
+  flex-shrink: 0;
+}
+
+button,
+.download-btn {
+  @include dFlex($jc: space-around, $position: relative);
+  border-radius: 10px;
+  padding: 16px;
+  background-color: #2a3647;
+  color: #ffffff;
+}
+
+button {
+  height: 30px;
+  width: 120px;
+}
+
+.download-btn {
+  font-size: 21px;
+  height: 48px;
+  width: 160px;
+}
+
+.download-button-wrapper {
+  width: 100%;
+  @include dFlex($jc: flex-end);
+}
+
+@media screen and (max-width: 900px) {
+  .download-btn,
+  button {
+    font-size: 16px;
+    height: 30px;
+    width: 120px;
+  }
+}
