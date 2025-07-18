@@ -40,7 +40,7 @@ export class LoginComponent {
 
     /** Triggers the intro animation and logo adjustments for mobile or desktop. */
     ngOnInit() {
-        // this.startAnimation();
+        this.startAnimation();
         this.signalService.signingIn.set(true);
     }
 
