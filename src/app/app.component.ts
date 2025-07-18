@@ -6,7 +6,7 @@ import { DailyResetService } from './services/daily-reset.service';
 import { ToastComponent } from './shared/toast/toast.component';
 import { SignalsService } from './services/signals.service';
 import { AuthenticationService } from './services/authentication.service';
-import { ImageViewerComponent } from "./main-content/add-task/task-overview/image-viewer/image-viewer.component"
+import { ImageViewerComponent } from "./shared/image-viewer/image-viewer.component"
 
 
 /**
