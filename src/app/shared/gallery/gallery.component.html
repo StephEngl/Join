@@ -1,4 +1,4 @@
-<div class="gallery" id="gallery" @viewTransition>
+<div class="gallery" id="gallery" viewTransition>
   @if (signalService.taskImages().length > 0) { @for (img of
   signalService.taskImages(); let i = $index; track img.filename) {
   <div class="image-preview-item" [@fadeInOut]>
