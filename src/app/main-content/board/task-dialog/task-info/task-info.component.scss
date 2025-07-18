@@ -229,13 +229,6 @@ footer {
 @media (min-height: 1400px) {
   .task-info-section {
     height: 100%;
-    max-height: 1400px;
-  }
-}
-
-@media (min-height: 1000px) {
-  .task-info-container {
-    height: 100%;
-    max-height: 1400px;
+    max-height: 800px;
   }
 }
