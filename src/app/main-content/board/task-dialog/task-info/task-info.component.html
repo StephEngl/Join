@@ -31,13 +31,13 @@
     <table class="task-info-table">
       <tbody>
         <tr>
-          <td class="subtitle">Due date:</td>
+          <td class="subtitle">Due date</td>
           <td class="task-info-due-date-output">
             {{ tasksService.tasks[taskIndex()].dueDate | date : "yyyy-MM-dd" }}
           </td>
         </tr>
         <tr>
-          <td class="subtitle">Priority:</td>
+          <td class="subtitle">Priority</td>
           <td class="task-info-priority-output">
             <span class="task-info-priority-label">{{ taskPriority }}</span>
             @if (priorityIcon) {
@@ -52,8 +52,8 @@
       </tbody>
     </table>
 
-    <div class="task-info-assigned-to-container">
-      <span class="subtitle">Assigned To:</span>
+    <div class="task-info-subtasks-container task-info-assigned-to-container">
+      <span class="subtitle">Assigned To</span>
       <div class="task-info-assigned-to-output">
         @for (person of tasksService.tasks[taskIndex()].assignedTo; track
         person.contactId; let index = $index) { @if
@@ -76,7 +76,7 @@
     </div>
 
     <div class="task-info-subtasks-container">
-      <span class="subtitle">Subtasks:</span>
+      <span class="subtitle">Subtasks</span>
       <div class="task-info-subtask-list">
         @for (subtask of tasksService.tasks[taskIndex()].subTasks; track
         subtask.id) {
@@ -104,7 +104,14 @@
       </div>
     </div>
 
-    <app-gallery [isEditMode]="false"></app-gallery>
+    <div class="task-info-subtasks-container">
+      <span class="subtitle">Attachments</span>
+      @if (signalsService.taskImages()) {
+        <app-gallery [isEditMode]="false"></app-gallery>
+      } @else {
+        <p>No images to show</p>
+      }
+    </div>
   </div>
 
   <!-- Footer Section -->
