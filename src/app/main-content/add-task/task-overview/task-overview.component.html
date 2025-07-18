@@ -1,5 +1,5 @@
 <div class="form-group">
-  <label for="title">Title <span>*</span></label>
+  <label for="title">Title <span class="red-star">*</span></label>
   <input
     [ngModel]="
       taskDataService.editModeActive
@@ -46,7 +46,7 @@
 </div>
 
 <div class="form-group">
-  <label for="due-date">Due date <span>*</span></label>
+  <label for="due-date">Due date <span class="red-star">*</span></label>
   <input
     [ngModel]="
       taskDataService.editModeActive
@@ -70,11 +70,41 @@
 </div>
 
 <div class="form-group">
-  <label>Files</label>
-  <div class="file-upload-trigger">
+
+  <div class="attachments-wrapper">
+    <label>Attachments</label>
+    <div class="action-control-button-group">
+      @if (signalService.canUndo()) {
+      <button
+        class="control-button undo-button"
+        type="button"
+        (click)="signalService.undoRemoveImage()"
+        aria-label="Undo Image"
+      >
+        <i class="material-icons">replay</i>
+      </button>
+      }
+      <button class="control-button" type="button" (click)="signalService.removeAllImages()">
+        Delete all <i class="material-icons">delete_outline</i>
+      </button>
+    </div>
+  </div>
+
+  <div
+    class="file-upload-trigger"
+    [class.drag-over]="isDragOver"
+    [class.has-gallery]="signalService.taskImages().length > 0"
+    (dragover)="onDragOver($event)"
+    (dragleave)="isDragOver = false"
+    (dragenter)="isDragOver = true"
+    (drop)="onDrop($event)"
+  >
     <!-- Gallery -->
     @if (this.signalService.taskImages().length) {
     <app-gallery [isEditMode]="true" style="width: 100%"></app-gallery>
+    } @if (this.signalService.taskImages().length <= 0) {
+    <span>Drag & Drop to Upload Image</span>
+    <span>OR</span>
     }
     <button
       class="upload-button"

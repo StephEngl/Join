@@ -4,6 +4,7 @@
   @include dFlex($jc: flex-start, $gap: 8px);
   flex-wrap: wrap;
   max-width: 440px;
+  overflow: hidden;
 }
 
 .image-preview-item {
@@ -23,7 +24,7 @@
     }
   }
 
-  .delete-button {
+  .delete-button, .download-button {
     @include dFlex($position: absolute);
     top: 4px;
     right: 4px;
@@ -36,6 +37,15 @@
     &:focus {
       background-color: $col-font-inactive;
       color: $col-font-secondary;
+    }
+  }
+
+  .download-button {
+    right: auto;
+    left: 4px;
+
+    .material-icons {
+      width: 24px;
     }
   }
 }

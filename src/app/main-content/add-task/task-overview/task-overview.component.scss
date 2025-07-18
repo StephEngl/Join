@@ -45,7 +45,7 @@ textarea {
   height: 120px;
 }
 
-span,
+.red-star,
 .validation-alert {
   color: $col-task-urgent;
 }
@@ -55,26 +55,28 @@ span,
 }
 
 .file-upload-trigger {
-  @include dFlex($ai: flex-start);
+  @include dFlex($gap: 8px);
+  flex-direction: column;
   width: 440px;
-  min-height: 48px; // Höhe ggf. wie input (padding oben/unten x2 + fontgröße); anpassen wenn nötig
-  padding: 12px 20px;
+  min-height: 48px;
+  padding: 16px;
   border: 2px dashed $col-font-grey;
   border-radius: 10px;
   background-color: white;
   color: $col-bg-secondary;
   transition: border-color 0.2s;
-  
-  &:hover, &:focus {
+
+  &:hover,
+  &:focus {
     border-color: $col-font-inactive;
     outline: none;
   }
 
   .upload-button {
     background-color: transparent;
-    padding: 16px;
+    padding: 8px;
   }
-  
+
   img {
     cursor: pointer;
     width: 20px;
@@ -82,19 +84,48 @@ span,
     display: block;
   }
 
-  // Optional: Damit Placeholder-Text mit Bild zentriert wirkt
-  .upload-button-text {
-    color: $col-font-main;
-    display: block;
-    line-height: 1;
+  &.drag-over {
+    border-color: $col-bg-subtaskbar;
+    background: rgba(0, 123, 255, 0.1);
+  }
+
+  &.has-gallery {
+    flex-direction: row;
+    align-items: flex-start;
   }
 }
 
+.attachments-wrapper {
+  @include dFlex($jc: space-between);
+  width: 100%;
+}
+
+.action-control-button-group {
+  @include dFlex($jc: space-between, $gap: 8px);
+  flex-shrink: 0;
+  
+  .control-button {
+    @include dFlex($jc: space-around, $position: relative);
+    border-radius: 10px;
+    padding: 0 0 0 12px;
+    background-color: $col-bg-secondary;
+    color: $col-font-secondary;
+    height: 30px;
+    width: 120px;
+  }
+
+  .undo-button {
+    width: 40px;
+    padding: unset;
+  }
+}
+  
 // container queries
 @container task-section (max-width: 500px) {
   :host,
   .form-group,
   .form-control,
+  .file-upload-trigger,
   h2 {
     width: 100% !important;
   }

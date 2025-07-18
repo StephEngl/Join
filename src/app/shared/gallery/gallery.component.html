@@ -1,28 +1,27 @@
-<div class="gallery" id="gallery">
-  @if (signalService.canUndo()) {
-  <button
-    class="undo-button"
-    type="button"
-    (click)="signalService.undoRemoveImage()"
-    aria-label="Undo Image"
-  >
-    <i class="material-icons">replay_icon</i>
-  </button>
-  } @if (signalService.taskImages().length > 0) { @for (img of
-  signalService.taskImages(); let i = $index; track img) {
-  <div class="image-preview-item">
+<div class="gallery" id="gallery" @viewTransition>
+  @if (signalService.taskImages().length > 0) { @for (img of
+  signalService.taskImages(); let i = $index; track img.filename) {
+  <div class="image-preview-item" [@fadeInOut]>
     <img
       class="gallery-image"
       [src]="img.base64"
       [alt]="img.filename"
       (click)="signalService.openViewerAt(i)"
     />
+    <button
+      class="download-button"
+      type="button"
+      (click)="downloadImage(i)"
+      aria-label="Download Icon"
+    >
+      <i class="material-icons">cloud_download_icon</i>
+    </button>
     @if (isEditMode) {
     <button
       class="delete-button"
       type="button"
       (click)="removeImage(i)"
-      aria-label="Delete picture"
+      aria-label="Delete Icon"
     >
       <i class="material-icons">delete_outline</i>
     </button>

@@ -28,6 +28,7 @@ export class TaskOverviewComponent {
   tasksService = inject(TasksService);
   signalService = inject(SignalsService);
   toastService = inject(ToastService);
+  isDragOver: Boolean = false;
 
   @Input() taskData!: TaskInterface;
   @Input() today: string = new Date().toISOString().split('T')[0];
@@ -165,5 +166,19 @@ export class TaskOverviewComponent {
       reader.onerror = () => reject('Error while reading blob.');
       reader.readAsDataURL(blob);
     });
+  }
+
+  // Drag & Drop
+  onDragOver(event: DragEvent) {
+    event.preventDefault();
+  }
+
+  onDrop(event: DragEvent) {
+    event.preventDefault();
+    const files = event.dataTransfer?.files;
+    if (files && files.length > 0) {
+      this.onFileSelected({ target: { files } } as any);
+    }
+    this.isDragOver = false;
   }
 }
