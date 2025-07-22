@@ -116,10 +116,7 @@ export class TaskOverviewComponent {
    * Shows a toast error when a non-image file is selected.
    */
   private showFileTypeError(): void {
-    this.toastService.triggerToast(
-      'Incorrect file-type. Please load image',
-      'error'
-    );
+    this.toastService.triggerToast('Incorrect file-type. Please load image', 'error');
   }
 
   /**
@@ -131,12 +128,7 @@ export class TaskOverviewComponent {
    */
   private async processImageFile(file: File): Promise<void> {
     try {
-      const compressedBase64 = await this.convertBlobToCompressedBase64(
-        file,
-        800,
-        800,
-        0.8
-      );
+      const compressedBase64 = await this.convertBlobToCompressedBase64(file, 800, 800, 0.8);
       const image: TaskImageData = {
         filename: file.name,
         fileType: file.type,
@@ -146,10 +138,7 @@ export class TaskOverviewComponent {
       this.signalService.addTaskImage(image);
     } catch (error) {
       console.error('Error while adding image:', error);
-      this.toastService.triggerToast(
-        `Error while processing ${file.name}: ${(error as Error).message}`,
-        'error'
-      );
+      this.toastService.triggerToast(`Error while processing ${file.name}: ${(error as Error).message}`, 'error');
     }
   }
 
@@ -169,11 +158,7 @@ export class TaskOverviewComponent {
   ): Promise<string> {
     const base64 = await this.readBlobAsDataURL(blob);
     const img = await this.loadImage(base64);
-    const { width, height } = this.getScaledDimensions(
-      img,
-      maxWidth,
-      maxHeight
-    );
+    const { width, height } = this.getScaledDimensions(img, maxWidth, maxHeight);
     const ctx = this.createCanvasContext(width, height);
     ctx.drawImage(img, 0, 0, width, height);
     const outputType = blob.type || 'image/png';
