@@ -176,7 +176,8 @@ export class TaskOverviewComponent {
     );
     const ctx = this.createCanvasContext(width, height);
     ctx.drawImage(img, 0, 0, width, height);
-    return ctx.canvas.toDataURL('image/jpeg', quality);
+    const outputType = blob.type || 'image/png';
+    return ctx.canvas.toDataURL(outputType, quality);
   }
 
   /**
