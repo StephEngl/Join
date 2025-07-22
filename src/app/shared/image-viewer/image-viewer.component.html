@@ -2,64 +2,114 @@
   class="viewer-overlay"
   (click)="signalService.isGalleryViewerOpen.set(false)"
 >
-<div class="content-wrapper">
-
-
-  <div
-    class="viewer-content"
-    (swipeleft)="showNextImage()"
-    (swiperight)="showPreviousImage()"
-    (click)="$event.stopPropagation()"
-  >
-    @if (taskImages.length > 1) {
-    <header class="button-wrapper">
-      <button
-        type="button"
-        (click)="showPreviousImage()"
-        aria-label="Previous image"
-      >
-        <span class="material-icons">chevron_left</span>
-      </button>
-      <button type="button" (click)="showNextImage()" aria-label="Next image">
-        <span class="material-icons">chevron_right</span>
-      </button>
-    </header>
-    }
-    <img
-      [src]="taskImages[currentIndex].base64"
-      [alt]="taskImages[currentIndex].filename"
-      class="img-size"
-    />
-
-    <div class="image-metadata">
-      <table>
-        <tbody>
-          <tr>
-            <th scope="row">Filename:</th>
-            <td>{{ taskImages[currentIndex].filename }}</td>
-          </tr>
-          <tr>
-            <th scope="row">Filetype:</th>
-            <td>{{ taskImages[currentIndex].fileType }}</td>
-          </tr>
-          <tr>
-            <th scope="row">Size:</th>
-            <td>{{ (taskImages[currentIndex].size / 1024) | number:'1.2-2' }} KB</td>
-          </tr>
-        </tbody>
-      </table>
+  <div class="content-wrapper">
+    <div class="viewer-host" style="display: none">
+      @if (currentImage) {
+      <img #imgViewer [src]="currentImage.base64" />
+      }
     </div>
-
-    <div class="download-button-wrapper">
-      <button
-        type="button"
-        class="download-btn"
-        (click)="downloadImage()"
-        aria-label="Download image"
+    <div
+      class="viewer-content"
+      (swipeleft)="showNextImage()"
+      (swiperight)="showPreviousImage()"
+      (click)="$event.stopPropagation()"
+    >
+      <header class="button-wrapper">
+        <button type="button" (click)="zoomIn()" aria-label="Zoom in">
+          <span class="material-icons">zoom_in</span>
+        </button>
+        <button type="button" (click)="zoomOut()" aria-label="Zoom out">
+          <span class="material-icons">zoom_out</span>
+        </button>
+        <button type="button" (click)="resetZoom()" aria-label="Reset Zoom">
+          <span class="material-icons">rotate_left_icon</span>
+        </button>
+      </header>
+      <div
+        class="image-container"
+        (pointerdown)="onDragStart($event)"
+        (pointermove)="onDragMove($event)"
+        (pointerup)="onDragEnd()"
+        (pointercancel)="onDragEnd()"
+        (pointerleave)="onDragEnd()"
       >
-        Download
-      </button>
-    </div>
+        <img
+          [src]="taskImages[currentIndex].base64"
+          [alt]="taskImages[currentIndex].filename"
+          class="img-size"
+          [style.transform]="
+            'translate(' +
+            translateX +
+            'px, ' +
+            translateY +
+            'px) scale(' +
+            zoom +
+            ')'
+          "
+          draggable="false"
+        />
+        <button
+          class="download-button"
+          type="button"
+          (click)="downloadImage()"
+          aria-label="Download Icon"
+        >
+          <i class="material-icons">cloud_download_icon</i>
+        </button>
+      </div>
+
+      <div class="image-metadata">
+        <table>
+          <tbody>
+            <tr>
+              <th scope="row">Filename:</th>
+              <td>{{ taskImages[currentIndex].filename }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Filetype:</th>
+              <td>{{ taskImages[currentIndex].fileType }}</td>
+            </tr>
+            <tr>
+              <th scope="row">Size:</th>
+              <td>
+                {{ taskImages[currentIndex].size / 1024 | number : "1.2-2" }} KB
+              </td>
+            </tr>
+          </tbody>
+        </table>
+      </div>
+
+      <footer class="navigation-buttons-wrapper">
+        @if (taskImages.length > 1) {
+          <button
+            class="navigation-buttons"
+            type="button"
+            (click)="showPreviousImage()"
+            aria-label="Previous image"
+          >
+            <span class="material-icons">chevron_left</span>
+          </button>
+          <button
+            class="navigation-buttons"
+            type="button"
+            (click)="showNextImage()"
+            aria-label="Next image"
+          >
+            <span class="material-icons">chevron_right</span>
+          </button>
+        }
+
+        <!-- <div class="download-button-wrapper">
+          <button
+            type="button"
+            class="download-btn"
+            (click)="downloadImage()"
+            aria-label="Download image"
+          >
+            Download
+          </button>
+        </div> -->
+      </footer>
     </div>
   </div>
 </section>

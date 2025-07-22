@@ -1,4 +1,4 @@
-@import "../../../assets/styles/mixins.scss";
+@import "../gallery/gallery.component.scss";
 
 .viewer-overlay {
   @include dFlex($ai: flex-start, $jc: flex-start, $position: fixed);
@@ -28,13 +28,26 @@
   border-radius: 16px;
 }
 
+.image-container {
+  @include dFlex();
+  width: 100%;
+  border: 1px solid rgba(0, 0, 0, 0.2);
+  border-radius: 12px;
+  overflow: hidden;
+}
+
 .img-size {
   min-height: 0;
   min-width: 0;
-  width: 100%;
+  width: auto;
+  max-width: 100%;
+  max-height: 100%;
   flex: 1 1 auto;
   object-fit: contain;
   display: block;
+  transition: transform 0.2s ease-in-out;
+  transform-origin: center center;
+  user-select: none;
 }
 
 .image-metadata {
@@ -72,14 +85,18 @@ button,
 .download-btn {
   @include dFlex($jc: space-around, $position: relative);
   border-radius: 10px;
-  padding: 16px;
-  background-color: #2a3647;
-  color: #ffffff;
+  background-color: $col-bg-secondary;
+  color: $col-font-secondary;
 }
 
 button {
   height: 30px;
-  width: 120px;
+  width: 80px;
+}
+
+.download-button-wrapper {
+  width: 100%;
+  @include dFlex($jc: flex-end);
 }
 
 .download-btn {
@@ -88,23 +105,36 @@ button {
   width: 160px;
 }
 
-.download-button-wrapper {
+.navigation-buttons-wrapper {
+  @include dFlex($gap: 16px);
   width: 100%;
-  @include dFlex($jc: flex-end);
+}
+
+.navigation-buttons {
+  height: 24px;
+  width: 120px;
 }
 
 @media screen and (max-width: 1400px) {
   .viewer-overlay {
-    padding: 0 20px;
+    padding: 0;
+    align-items: center;
+  }
+
+  .content-wrapper {
     align-items: center;
   }
 }
 
 @media screen and (max-width: 900px) {
-  .download-btn,
-  button {
+  .download-btn {
     font-size: 16px;
     height: 30px;
     width: 120px;
+  }
+
+  .viewer-content {
+    max-width: 100%;
+    max-height: 100dvh;
   }
 }
