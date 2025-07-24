@@ -138,7 +138,7 @@ export class TaskOverviewComponent {
       this.signalService.addTaskImage(image);
     } catch (error) {
       console.error('Error while adding image:', error);
-      this.toastService.triggerToast(`Error while processing ${file.name}: ${(error as Error).message}`, 'error');
+      this.toastService.triggerToast(`Error while adding image`, 'error');
     }
   }
 
