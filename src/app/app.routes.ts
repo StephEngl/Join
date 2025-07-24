@@ -1,13 +1,7 @@
 import { Routes } from '@angular/router';
-import { SummaryComponent } from './main-content/summary/summary.component';
-import { ContactsComponent } from './main-content/contacts/contacts.component';
 import { HelpComponent } from './main-content/help/help.component';
 import { LegalNoticeComponent } from './main-content/legal-notice/legal-notice.component';
 import { PrivacyPolicyComponent } from './main-content/privacy-policy/privacy-policy.component';
-import { AddTaskComponent } from './main-content/add-task/add-task.component';
-import { BoardComponent } from './main-content/board/board.component';
-import { LoginComponent } from './login/login.component';
-import { SignUpDialogComponent } from './login/sign-up-dialog/sign-up-dialog.component';
 import { AuthGuard } from './services/auth-guard.guard';
 
 export const routes: Routes = [

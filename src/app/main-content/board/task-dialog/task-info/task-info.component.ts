@@ -6,7 +6,6 @@ import { TasksService } from '../../../../services/tasks.service';
 import { Router } from '@angular/router';
 import { ContactsService } from '../../../../services/contacts.service';
 import { ToastService } from '../../../../services/toast.service';
-
 import { SignalsService } from '../../../../services/signals.service';
 import { GalleryComponent } from '../../../../shared/gallery/gallery.component';
 

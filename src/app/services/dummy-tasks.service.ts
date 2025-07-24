@@ -1,5 +1,4 @@
-import { Injectable, inject } from '@angular/core';
-import { ContactsService } from './contacts.service';
+import { Injectable } from '@angular/core';
 import { TaskInterface } from '../interfaces/task.interface';
 
 /**

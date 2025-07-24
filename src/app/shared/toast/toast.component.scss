@@ -39,12 +39,12 @@
     }
 
     &.delete {
-        color: white;
+        color: $col-font-secondary;
         background-color: $col-bg-secondary;
     }
 
     &.error {
-        background-color: #E74C3C;
+        background-color: $col-error-red;
     }
 }
 
