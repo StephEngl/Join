@@ -3,6 +3,10 @@ import { FormsModule, NgForm } from '@angular/forms';
 import { UserInterface } from '../../interfaces/user.interface';
 import { AuthenticationService } from '../../services/authentication.service';
 import { SignalsService } from '../../services/signals.service';
+import { TasksService } from '../../services/tasks.service';
+import { UsersService } from '../../services/users.service';
+import { ContactsService } from '../../services/contacts.service';
+import { DailyResetService } from '../../services/daily-reset.service';
 
 @Component({
   selector: 'app-login-dialog',
@@ -14,6 +18,10 @@ import { SignalsService } from '../../services/signals.service';
 export class LoginDialogComponent {
   authService = inject(AuthenticationService);
   signalService = inject(SignalsService);
+  taskService = inject(TasksService);
+  userService = inject(UsersService);
+  contactService = inject(ContactsService);
+  dailyResetService = inject(DailyResetService);
   formSubmitted = false;
   passwordVisible: Boolean = false;
   emailInput: string = '';
@@ -38,12 +46,13 @@ export class LoginDialogComponent {
    */
   onSubmit(ngForm: NgForm) {
     if (!this.isGuestLogin) {
-    this.formSubmitted = true;
+      this.formSubmitted = true;
     }
   }
 
-    /**
+  /**
    * Attempts to log in a user with the provided email and password.
+   * Starts Firebase services on success.
    * Sets error state if the login fails.
    * @param mail - The user's email address.
    * @param password - The user's password.
@@ -52,6 +61,7 @@ export class LoginDialogComponent {
     try {
       this.noUserFound = false;
       await this.authService.signInUser(mail, password);
+      this.startFirebaseServices();
     } catch (error) {
       this.noUserFound = true;
       setTimeout(() => {
@@ -62,16 +72,26 @@ export class LoginDialogComponent {
   }
 
   /**
-   * Logs in as a guest/admin user using pre-defined credentials.
-   * Temporarily sets the guest login flag during the login process.
-   * @param mail - The guest/admin email.
-   * @param password - The guest/admin password.
+   * Logs in as a guest/admin user with given credentials.
+   * Sets guest login flag during the login process and starts Firebase services on success.
+   * @param mail - Guest/admin email address.
+   * @param password - Guest/admin password.
    */
   async guestLogin(mail: string, password: string) {
     this.isGuestLogin = true;
     this.noUserFound = false;
     await this.authService.signInUser(mail, password);
-    setTimeout(() => this.isGuestLogin = false, 100);
+    this.startFirebaseServices();
+    setTimeout(() => (this.isGuestLogin = false), 100);
   }
 
+  /**
+   * Initializes all required Firebase-related services after successful login.
+   */
+  startFirebaseServices() {
+    this.taskService.initTasksService();
+    this.userService.initUserService();
+    this.contactService.initContactsService();
+    this.dailyResetService.initDailyResetService();
+  }
 }

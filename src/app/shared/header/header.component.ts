@@ -1,9 +1,11 @@
-import { Component, HostListener, inject, signal } from '@angular/core';
+import { Component, HostListener, inject } from '@angular/core';
 import { RouterLink } from '@angular/router';
 import { SignalsService } from '../../services/signals.service';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Router } from '@angular/router';
 import { UsersService } from '../../services/users.service';
+import { TasksService } from '../../services/tasks.service';
+import { ContactsService } from '../../services/contacts.service';
 
 @Component({
   selector: 'app-header',
@@ -16,6 +18,8 @@ export class HeaderComponent {
   signalService = inject(SignalsService);
   authService = inject(AuthenticationService);
   usersService = inject(UsersService);
+  taskService = inject(TasksService);
+  contactService = inject(ContactsService);
   showDropdown = false;
   isDropdownOpen = false;
   dropdownVisible = false;
@@ -30,7 +34,7 @@ export class HeaderComponent {
   constructor(private router: Router) {}
 
   /** Sets current user initials. */
-  async ngOnInit(){
+  async ngOnInit() {
     await this.authService.setActiveUserInitials();
   }
 
@@ -113,10 +117,14 @@ export class HeaderComponent {
     setTimeout(() => (this.dropdownVisible = false), 300);
   }
 
-  /** Logs out the current user and closes the logout popup. */
+  /**
+   * Logs out the current user, hides logout popup,
+   * and stops all Firebase services.
+   */
   logout() {
     this.authService.signOutUser();
     this.showLogoutPopup = false;
+    this.stopsFirebaseServices();
   }
 
   /** Navigates to the summary page. */
@@ -128,7 +136,14 @@ export class HeaderComponent {
   backToLogin() {
     this.signalService.hideHrefs.set(false);
     this.router.navigate(['login']);
-  };
+  }
 
-
+  /**
+   * Stops all active Firebase-related services.
+   */
+  stopsFirebaseServices() {
+    this.taskService.stopTasksService();
+    this.usersService.stopUserService();
+    this.contactService.stopContactsService();
+  }
 }

@@ -1,6 +1,10 @@
-import { Injectable, inject, OnDestroy } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { getAuth } from '@angular/fire/auth';
 import { ContactInterface } from '../interfaces/contact.interface';
+import { UsersContactsService } from './users-contacts.service';
+import { UsersService } from './users.service';
+import { AuthenticationService } from './authentication.service';
+import { TasksService } from './tasks.service';
 import {
   Firestore,
   collection,
@@ -12,10 +16,6 @@ import {
   deleteDoc,
   DocumentReference,
 } from '@angular/fire/firestore';
-import { UsersContactsService } from './users-contacts.service';
-import { UsersService } from './users.service';
-import { AuthenticationService } from './authentication.service';
-import { TasksService } from './tasks.service';
 
 /**
  * Service for managing contacts in the Firestore database.
@@ -28,7 +28,7 @@ import { TasksService } from './tasks.service';
 @Injectable({
   providedIn: 'root',
 })
-export class ContactsService implements OnDestroy {
+export class ContactsService {
   firestore: Firestore = inject(Firestore);
   usersContactsService = inject(UsersContactsService);
   usersService = inject(UsersService);
@@ -54,16 +54,23 @@ export class ContactsService implements OnDestroy {
   ];
 
   /** Unsubscribe function for the contact list subscription. */
-  unsubscribeContact;
+  unsubscribeContact?: () => void;
 
-  constructor() {
-    this.unsubscribeContact = this.subContactsList();
+  constructor() {}
+
+  /**
+   * Initializes the Firestore subscription for contacts if not already started.
+   */
+  initContactsService() {
+    if (!this.unsubscribeContact) {
+      this.unsubscribeContact = this.subContactsList();
+    }
   }
 
   /**
-   * Unsubscribes from the contacts list when the service is destroyed.
+   * Unsubscribes from the Firestore contacts listener to prevent memory leaks.
    */
-  ngOnDestroy() {
+  stopContactsService() {
     if (this.unsubscribeContact) {
       this.unsubscribeContact();
     }

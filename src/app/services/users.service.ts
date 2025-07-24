@@ -1,4 +1,4 @@
-import { Injectable, inject, OnDestroy } from '@angular/core';
+import { Injectable, inject } from '@angular/core';
 import { ContactInterface } from '../interfaces/contact.interface';
 import {
   Firestore,
@@ -18,26 +18,32 @@ import { UsersContactsService } from './users-contacts.service';
 @Injectable({
   providedIn: 'root',
 })
-export class UsersService implements OnDestroy {
+export class UsersService {
   firestore: Firestore = inject(Firestore);
   usersContactsService = inject(UsersContactsService);
   users: ContactInterface[] = [];
 
   /** Unsubscribe function for the user list listener */
-  unsubscribeUser;
+  unsubscribeUser?: () => void;
 
   /**
    * Constructor that initializes the user subscription on creation
    */
-  constructor() {
-    this.unsubscribeUser = this.subUsersList();
+  constructor() {}
+
+  /**
+   * Initializes the Firestore subscription for users if not already started.
+   */
+  initUserService() {
+    if (!this.unsubscribeUser) {
+      this.unsubscribeUser = this.subUsersList();
+    }
   }
 
   /**
-   * Lifecycle hook that is called when the service is destroyed.
-   * It unsubscribes from the user list listener to avoid memory leaks.
+   * Unsubscribes from the Firestore users listener to prevent memory leaks.
    */
-  ngOnDestroy() {
+  stopUserService() {
     if (this.unsubscribeUser) {
       this.unsubscribeUser();
     }
@@ -49,11 +55,15 @@ export class UsersService implements OnDestroy {
    * @returns A function to unsubscribe from the Firestore listener
    */
   subUsersList() {
-    return onSnapshot( this.getUsersRef(),(snapshot) => {
+    return onSnapshot(
+      this.getUsersRef(),
+      (snapshot) => {
         this.users = [];
         snapshot.forEach((element) => {
           const user = element.data();
-          this.users.push( this.usersContactsService.setObjectData(element.id, user));
+          this.users.push(
+            this.usersContactsService.setObjectData(element.id, user)
+          );
         });
       },
       (error) => {
@@ -69,7 +79,10 @@ export class UsersService implements OnDestroy {
    * @param user The user data to be added
    * @returns A promise that resolves with the document reference of the newly added user
    */
-  async addUser( uid: string, user: ContactInterface): Promise<void | DocumentReference> {
+  async addUser(
+    uid: string,
+    user: ContactInterface
+  ): Promise<void | DocumentReference> {
     try {
       const userWithColor = {
         ...user,

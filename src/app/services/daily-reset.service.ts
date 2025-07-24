@@ -25,6 +25,15 @@ export class DailyResetService {
 
   constructor() {}
 
+  /**
+   * Triggers the daily reset check after a short delay.
+   */
+  initDailyResetService() {
+    setTimeout(() => {
+      this.checkAndResetIfNeeded();
+    }, 1000);
+  }
+
   /**  Returns the current date as a string in YYYY-MM-DD format. */
   getTodayDateString(): string {
     return new Date().toISOString().split('T')[0];
@@ -50,8 +59,8 @@ export class DailyResetService {
       await this.deleteAllContacts();
       this.contactsService.contacts = [];
       await this.deleteAllTasks();
-      this.createDummyContacts();
       setTimeout(() => {
+        this.createDummyContacts();
         this.createDummyTasks();
       }, 200);
     } finally {
@@ -100,21 +109,16 @@ export class DailyResetService {
   }
 
   /** Creates and adds dummy contacts to the contact list. */
-  createDummyContacts() {
+  async createDummyContacts() {
     if (this.contactsService.contacts.length === 0) {
-      this.dummyContacts.dummyContacts.forEach((contact) => {
-        this.contactsService.addContact(contact);
-      });
+      for (const contact of this.dummyContacts.dummyContacts) {
+        await this.contactsService.addContact(contact);
+      }
     }
   }
 
   /** Deletes all contacts currently stored in the contacts service. */
   async deleteAllContacts() {
-    // this.contactsService.contacts.forEach((contact) => {
-    //   if (contact.id) {
-    //     this.contactsService.deleteContact(contact.id).then(() => {});
-    //   }
-    // });
     const deletePromises = this.contactsService.contacts.map((contact) => {
       if (contact.id) {
         return this.contactsService.deleteContact(contact.id);
