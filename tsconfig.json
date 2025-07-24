@@ -23,6 +23,12 @@
       "dom"
     ]
   },
+  "include": ["src/**/*"],
+  "typedocOptions": {
+  "entryPoints": ["src"],
+  "entryPointStrategy": "expand",
+  "out": "docs"
+  },
   "angularCompilerOptions": {
     "enableI18nLegacyMessageIdFormat": false,
     "strictInjectionParameters": true,
