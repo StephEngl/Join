@@ -1,13 +1,12 @@
-import { Component, HostListener, inject } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
-import { HeaderComponent } from "./shared/header/header.component";
-import { NavbarComponent } from "./shared/navbar/navbar.component";
+import { HeaderComponent } from './shared/header/header.component';
+import { NavbarComponent } from './shared/navbar/navbar.component';
 import { DailyResetService } from './services/daily-reset.service';
 import { ToastComponent } from './shared/toast/toast.component';
 import { SignalsService } from './services/signals.service';
 import { AuthenticationService } from './services/authentication.service';
-import { ImageViewerComponent } from "./shared/image-viewer/image-viewer.component"
-
+import { ImageViewerComponent } from './shared/image-viewer/image-viewer.component';
 
 /**
  * The root component of the application.
@@ -17,9 +16,15 @@ import { ImageViewerComponent } from "./shared/image-viewer/image-viewer.compone
 @Component({
   selector: 'app-root',
   standalone: true,
-  imports: [RouterOutlet, HeaderComponent, NavbarComponent, ToastComponent, ImageViewerComponent],
+  imports: [
+    RouterOutlet,
+    HeaderComponent,
+    NavbarComponent,
+    ToastComponent,
+    ImageViewerComponent,
+  ],
   templateUrl: './app.component.html',
-  styleUrl: './app.component.scss'
+  styleUrl: './app.component.scss',
 })
 export class AppComponent {
   title = 'join';
@@ -27,15 +32,7 @@ export class AppComponent {
   signalService = inject(SignalsService);
   authService = inject(AuthenticationService);
 
-
-  /**
-   * Initializes the component and triggers the daily reset after a short delay.
-   */
-  constructor() {
-    setTimeout(() => {
-      this.dailyReset.checkAndResetIfNeeded();
-    }, 1000);
-  }
+  constructor() {}
 
   /**
    * Angular lifecycle hook that runs after the component has been initialized.
@@ -44,5 +41,4 @@ export class AppComponent {
   ngOnInit() {
     this.authService.setActiveUserInitials();
   }
-
 }
