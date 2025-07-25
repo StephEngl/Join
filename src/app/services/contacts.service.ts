@@ -56,7 +56,11 @@ export class ContactsService {
   /** Unsubscribe function for the contact list subscription. */
   unsubscribeContact?: () => void;
 
-  constructor() {}
+  constructor() {
+     if (!this.unsubscribeContact) {
+      this.unsubscribeContact = this.subContactsList();
+    }
+  }
 
   /**
    * Initializes the Firestore subscription for contacts if not already started.

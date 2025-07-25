@@ -29,7 +29,11 @@ export class UsersService {
   /**
    * Constructor that initializes the user subscription on creation
    */
-  constructor() {}
+  constructor() {
+    if (!this.unsubscribeUser) {
+      this.unsubscribeUser = this.subUsersList();
+    }
+  }
 
   /**
    * Initializes the Firestore subscription for users if not already started.

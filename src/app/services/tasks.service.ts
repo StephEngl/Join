@@ -28,7 +28,11 @@ export class TasksService {
   auth = inject(AuthenticationService);
   unsubscribeTasks?: () => void;
 
-  constructor() {}
+  constructor() {
+      if (!this.unsubscribeTasks) {
+      this.unsubscribeTasks = this.subTasksList();
+    };
+  }
 
   /**
    * Initializes the Firestore subscription for tasks if not already started.
