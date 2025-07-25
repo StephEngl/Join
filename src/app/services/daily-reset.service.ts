@@ -53,19 +53,14 @@ export class DailyResetService {
    * then adds dummy contacts and tasks.
    */
   async runReset() {
-    if (this.isResetting) return;
-    this.isResetting = true;
-    try {
-      await this.deleteAllContacts();
-      this.contactsService.contacts = [];
-      await this.deleteAllTasks();
-      setTimeout(() => {
-        this.createDummyContacts();
-        this.createDummyTasks();
-      }, 200);
-    } finally {
-      this.isResetting = false;
-    }
+    await this.deleteAllContacts();
+    this.contactsService.contacts = [];
+    await this.deleteAllTasks();
+
+    setTimeout(() => {
+      this.createDummyContacts();
+      this.createDummyTasks();
+    }, 200);
   }
 
   /**
@@ -91,11 +86,12 @@ export class DailyResetService {
   }
 
   /** Creates and adds dummy tasks after assigning them to contacts. */
-  createDummyTasks() {
+  async createDummyTasks() {
+    await this.contactsService.loadContacts();
     this.setDummyAssignees();
-    this.dummyTasks.dummyTasks.forEach((task) => {
-      this.taskService.addTask(task);
-    });
+    for (const task of this.dummyTasks.dummyTasks) {
+      await this.taskService.addTask(task);
+    }
   }
 
   /** Updates dummy tasks to use real contact IDs from the contacts service. */
@@ -119,19 +115,16 @@ export class DailyResetService {
 
   /** Deletes all contacts currently stored in the contacts service. */
   async deleteAllContacts() {
-    const deletePromises = this.contactsService.contacts.map((contact) => {
+    await this.contactsService.contacts.forEach((contact) => {
       if (contact.id) {
-        return this.contactsService.deleteContact(contact.id);
+        this.contactsService.deleteContact(contact.id).then(() => {});
       }
-      return Promise.resolve();
     });
-    await Promise.all(deletePromises);
-    this.contactsService.contacts = [];
   }
 
   /**  Deletes all tasks currently stored in the task service. */
   async deleteAllTasks() {
-    this.taskService.tasks.forEach((task) => {
+    await this.taskService.tasks.forEach((task) => {
       if (task.id) {
         this.taskService.deleteTask(task.id).then(() => {});
       }
