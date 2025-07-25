@@ -1,6 +1,6 @@
 export interface TaskImageData {
   filename: string;
   fileType: string;
-  size: number; // in Bytes
+  size: number;
   base64: string;
 }
