@@ -1,5 +1,4 @@
 import { Injectable, signal, inject } from '@angular/core';
-import { initializeApp } from "firebase/app";
 import { Router } from '@angular/router';
 import {
   getAuth,
@@ -10,8 +9,8 @@ import {
   onAuthStateChanged,
   signOut,
   UserCredential,
-  deleteUser
-} from "@angular/fire/auth";
+  deleteUser,
+} from '@angular/fire/auth';
 import { SignalsService } from './signals.service';
 import { UsersService } from './users.service';
 
@@ -21,7 +20,7 @@ import { UsersService } from './users.service';
  * and provides reactive signals for tracking login state and active user initials.
  */
 @Injectable({
-  providedIn: 'root'
+  providedIn: 'root',
 })
 export class AuthenticationService {
   isAuthenticated = signal<boolean>(false);
@@ -33,9 +32,8 @@ export class AuthenticationService {
 
   constructor(private router: Router) {
     this.auth = getAuth();
-    this.checkAuthStatus(); 
+    this.checkAuthStatus();
   }
-
 
   /**
    * Returns whether the user is currently authenticated.
@@ -53,9 +51,17 @@ export class AuthenticationService {
    * @returns {Promise<UserCredential>} The user credential returned by Firebase after user creation.
    * @throws {Error} Throws an error if the user creation fails.
    */
-  async createUser(email: string, password: string, name: string): Promise<UserCredential> {
+  async createUser(
+    email: string,
+    password: string,
+    name: string
+  ): Promise<UserCredential> {
     try {
-      const userCredential = await createUserWithEmailAndPassword(this.auth, email, password);
+      const userCredential = await createUserWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
       await updateProfile(userCredential.user, { displayName: name });
       this.router.navigate(['/login']);
       return userCredential;
@@ -73,9 +79,14 @@ export class AuthenticationService {
    */
   async signInUser(email: string, password: string): Promise<any> {
     try {
-      const userCredential = await signInWithEmailAndPassword(this.auth, email, password);
+      const userCredential = await signInWithEmailAndPassword(
+        this.auth,
+        email,
+        password
+      );
       this.router.navigate(['/summary']);
       this.isAuthenticated.set(true);
+      this.signalService.isLoggedIn.set(true);
       return userCredential.user;
     } catch (error) {
       throw error;
@@ -95,7 +106,7 @@ export class AuthenticationService {
 
     try {
       await updateProfile(this.auth.currentUser, {
-        displayName: name
+        displayName: name,
       });
     } catch (error) {
       throw error;
@@ -127,6 +138,7 @@ export class AuthenticationService {
     try {
       await signOut(this.auth);
       this.isAuthenticated.set(false);
+      this.signalService.isLoggedIn.set(false);
       this.router.navigate(['/login']);
       this.signalService.hideHrefs.set(false);
     } catch (error) {
@@ -141,10 +153,13 @@ export class AuthenticationService {
   checkAuthStatus() {
     onAuthStateChanged(this.auth, (user) => {
       if (user) {
-        this.isAuthenticated.set(true); 
-        this.router.navigate(['/summary']); // after refresh to summary
+        this.isAuthenticated.set(true);
+        this.signalService.isLoggedIn.set(true);
+
+        this.router.navigate(['/summary']);
       } else {
         this.isAuthenticated.set(false);
+        this.signalService.isLoggedIn.set(false);
       }
     });
   }
@@ -202,11 +217,10 @@ export class AuthenticationService {
     try {
       await deleteUser(user);
       this.isAuthenticated.set(false);
+      this.signalService.isLoggedIn.set(false);
       this.router.navigate(['/login']).then(() => location.reload());
     } catch (error) {
-      console.error("Deleting active user failed", error);
+      console.error('Deleting active user failed', error);
     }
   }
 }
-
-
