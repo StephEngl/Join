@@ -124,7 +124,6 @@ export class HeaderComponent {
   logout() {
     this.authService.signOutUser();
     this.showLogoutPopup = false;
-    this.stopsFirebaseServices();
   }
 
   /** Navigates to the summary page. */
@@ -136,14 +135,5 @@ export class HeaderComponent {
   backToLogin() {
     this.signalService.hideHrefs.set(false);
     this.router.navigate(['login']);
-  }
-
-  /**
-   * Stops all active Firebase-related services.
-   */
-  stopsFirebaseServices() {
-    this.taskService.stopTasksService();
-    this.usersService.stopUserService();
-    this.contactService.stopContactsService();
   }
 }
