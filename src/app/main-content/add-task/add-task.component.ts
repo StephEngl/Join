@@ -110,11 +110,15 @@ export class AddTaskComponent {
    * Submits the edited task, updates the task, and shows a toast.
    * @param task The edited task object.
    */
-  submitEdit(task: TaskInterface) {
+  async submitEdit(task: TaskInterface) {
     this.signalService.clearUndoStack();
-    this.tasksService.updateTask(task);
-    this.toastService.triggerToast('Task updated', 'update');
-    this.cancelEditTask.emit();
+    try {
+      await this.tasksService.updateTask(task);
+      this.toastService.triggerToast('Task updated', 'update');
+      this.cancelEditTask.emit();
+    } catch (error) {
+      this.toastService.triggerToast('Error updating task: image size too large (>1MB)', 'error')
+    }
   }
 
   /**

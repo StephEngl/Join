@@ -13,7 +13,6 @@ import {
   orderBy,
   DocumentReference,
 } from '@angular/fire/firestore';
-import { AuthenticationService } from './authentication.service';
 import { SignalsService } from './signals.service';
 
 /**
@@ -182,6 +181,7 @@ export class TasksService {
         await updateDoc(docRef, this.getCleanJson(task));
       } catch (err) {
         console.error(err);
+        throw err; 
       }
     }
   }
