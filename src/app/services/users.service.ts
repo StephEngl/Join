@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, effect } from '@angular/core';
 import { ContactInterface } from '../interfaces/contact.interface';
 import {
   Firestore,
@@ -9,6 +9,7 @@ import {
   DocumentReference,
 } from '@angular/fire/firestore';
 import { UsersContactsService } from './users-contacts.service';
+import { SignalsService } from './signals.service';
 
 /**
  * Service that interacts with Firestore to manage user contacts.
@@ -21,6 +22,7 @@ import { UsersContactsService } from './users-contacts.service';
 export class UsersService {
   firestore: Firestore = inject(Firestore);
   usersContactsService = inject(UsersContactsService);
+  signalService = inject(SignalsService);
   users: ContactInterface[] = [];
 
   /** Unsubscribe function for the user list listener */
@@ -30,27 +32,18 @@ export class UsersService {
    * Constructor that initializes the user subscription on creation
    */
   constructor() {
-    if (!this.unsubscribeUser) {
-      this.unsubscribeUser = this.subUsersList();
-    }
-  }
-
-  /**
-   * Initializes the Firestore subscription for users if not already started.
-   */
-  initUserService() {
-    if (!this.unsubscribeUser) {
-      this.unsubscribeUser = this.subUsersList();
-    }
-  }
-
-  /**
-   * Unsubscribes from the Firestore users listener to prevent memory leaks.
-   */
-  stopUserService() {
-    if (this.unsubscribeUser) {
-      this.unsubscribeUser();
-    }
+    effect(() => {
+      if (this.signalService.isLoggedIn()) {
+        if (!this.unsubscribeUser) {
+          this.unsubscribeUser = this.subUsersList();
+        }
+      } else {
+        if (this.unsubscribeUser) {
+          this.unsubscribeUser();
+          this.unsubscribeUser = undefined;
+        }
+      }
+    });
   }
 
   /**

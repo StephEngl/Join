@@ -61,7 +61,6 @@ export class LoginDialogComponent {
     try {
       this.noUserFound = false;
       await this.authService.signInUser(mail, password);
-      this.startFirebaseServices();
     } catch (error) {
       this.noUserFound = true;
       setTimeout(() => {
@@ -81,16 +80,6 @@ export class LoginDialogComponent {
     this.isGuestLogin = true;
     this.noUserFound = false;
     await this.authService.signInUser(mail, password);
-    this.startFirebaseServices();
     setTimeout(() => (this.isGuestLogin = false), 100);
-  }
-
-  /**
-   * Initializes all required Firebase-related services after successful login.
-   */
-  startFirebaseServices() {
-    this.taskService.initTasksService();
-    this.userService.initUserService();
-    this.contactService.initContactsService();
   }
 }

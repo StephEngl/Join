@@ -28,6 +28,12 @@ export class SignalsService {
   hideHrefs = signal<boolean>(false);
   signingIn = signal<boolean>(true);
   hasAnimated = false;
+  
+  isLoggedIn = signal<boolean>(false);
+  
+  setLoginStatus(status: boolean) {
+    this.isLoggedIn.set(status);
+  }
 
   /**
    * Checks the current screen width and sets the corresponding mobile or desktop signal.

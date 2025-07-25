@@ -1,5 +1,5 @@
 import { Injectable, inject } from '@angular/core';
-import { getAuth } from '@angular/fire/auth';
+import { getAuth, SignInMethod } from '@angular/fire/auth';
 import { ContactInterface } from '../interfaces/contact.interface';
 import { UsersContactsService } from './users-contacts.service';
 import { UsersService } from './users.service';
@@ -16,6 +16,7 @@ import {
   deleteDoc,
   DocumentReference,
 } from '@angular/fire/firestore';
+import { SignalsService } from './signals.service';
 
 /**
  * Service for managing contacts in the Firestore database.
@@ -34,6 +35,8 @@ export class ContactsService {
   usersService = inject(UsersService);
   authService = inject(AuthenticationService);
   tasksService = inject(TasksService);
+  signalService = inject(SignalsService);
+
   contacts: ContactInterface[] = [];
   contactColors: string[] = [
     '#FF7A00',
@@ -57,26 +60,10 @@ export class ContactsService {
   unsubscribeContact?: () => void;
 
   constructor() {
-     if (!this.unsubscribeContact) {
-      this.unsubscribeContact = this.subContactsList();
-    }
-  }
-
-  /**
-   * Initializes the Firestore subscription for contacts if not already started.
-   */
-  initContactsService() {
-    if (!this.unsubscribeContact) {
-      this.unsubscribeContact = this.subContactsList();
-    }
-  }
-
-  /**
-   * Unsubscribes from the Firestore contacts listener to prevent memory leaks.
-   */
-  stopContactsService() {
-    if (this.unsubscribeContact) {
-      this.unsubscribeContact();
+    if (this.signalService.isLoggedIn()) {
+      if (!this.unsubscribeContact) {
+        this.unsubscribeContact = this.subContactsList();
+      }
     }
   }
 

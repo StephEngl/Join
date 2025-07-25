@@ -1,4 +1,4 @@
-import { Injectable, inject } from '@angular/core';
+import { Injectable, inject, effect } from '@angular/core';
 import { TaskInterface } from '../interfaces/task.interface';
 import {
   Firestore,
@@ -14,6 +14,7 @@ import {
   DocumentReference,
 } from '@angular/fire/firestore';
 import { AuthenticationService } from './authentication.service';
+import { SignalsService } from './signals.service';
 
 /**
  * Service for managing tasks in Firestore.
@@ -24,32 +25,25 @@ import { AuthenticationService } from './authentication.service';
 })
 export class TasksService {
   firestore: Firestore = inject(Firestore);
+  signalService = inject(SignalsService);
+
   tasks: TaskInterface[] = [];
-  auth = inject(AuthenticationService);
   unsubscribeTasks?: () => void;
 
   constructor() {
-      if (!this.unsubscribeTasks) {
-      this.unsubscribeTasks = this.subTasksList();
-    };
-  }
-
-  /**
-   * Initializes the Firestore subscription for tasks if not already started.
-   */
-  initTasksService() {
-    if (!this.unsubscribeTasks) {
-      this.unsubscribeTasks = this.subTasksList();
-    }
-  }
-
-  /**
-   * Unsubscribes from the Firestore tasks listener to prevent memory leaks.
-   */
-  stopTasksService() {
-    if (this.unsubscribeTasks) {
-      this.unsubscribeTasks();
-    }
+    effect(() => {
+      if (this.signalService.isLoggedIn()) {
+        if (!this.unsubscribeTasks) {
+          this.unsubscribeTasks = this.subTasksList();
+        }
+      } else {
+        if (this.unsubscribeTasks) {
+          this.unsubscribeTasks();
+          this.unsubscribeTasks = undefined;
+          this.tasks = [];
+        }
+      }
+    });
   }
 
   /**
