@@ -28,7 +28,7 @@ export class ToastService {
         this.toastIcon$.next(iconPath);
         this.isToastOpen$.next(true);
         setTimeout(() => this.isToastAnimated$.next(true), 10);
-        setTimeout(() => this.isToastAnimated$.next(false), 2000);
-        setTimeout(() => this.isToastOpen$.next(false), 2500);
+        setTimeout(() => this.isToastAnimated$.next(false), 3000);
+        setTimeout(() => this.isToastOpen$.next(false), 3500);
     }
 }
