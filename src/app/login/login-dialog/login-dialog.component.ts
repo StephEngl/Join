@@ -92,6 +92,5 @@ export class LoginDialogComponent {
     this.taskService.initTasksService();
     this.userService.initUserService();
     this.contactService.initContactsService();
-    this.dailyResetService.initDailyResetService();
   }
 }
