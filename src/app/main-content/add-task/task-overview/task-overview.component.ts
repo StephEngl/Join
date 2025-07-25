@@ -29,6 +29,7 @@ export class TaskOverviewComponent {
   signalService = inject(SignalsService);
   toastService = inject(ToastService);
   isDragOver: Boolean = false;
+  allowedMimeTypes = ['image/jpeg', 'image/png', 'image/svg+xml', 'image/webp'];
 
   @Input() taskData!: TaskInterface;
   @Input() today: string = new Date().toISOString().split('T')[0];
@@ -116,7 +117,10 @@ export class TaskOverviewComponent {
    * Shows a toast error when a non-image file is selected.
    */
   private showFileTypeError(): void {
-    this.toastService.triggerToast('Incorrect file-type. Please load image', 'error');
+    this.toastService.triggerToast(
+      'Incorrect file-type. Please load image',
+      'error'
+    );
   }
 
   /**
@@ -128,11 +132,18 @@ export class TaskOverviewComponent {
    */
   private async processImageFile(file: File): Promise<void> {
     try {
-      const compressedBase64 = await this.convertBlobToCompressedBase64(file, 800, 800, 0.8);
+      const compressedBase64 = await this.convertBlobToCompressedBase64(
+        file,
+        800,
+        800,
+        0.8
+      );
+      const base64String = compressedBase64.split(',')[1] ?? '';
+      const sizeInBytes = Math.round((base64String.length * 3) / 4);
       const image: TaskImageData = {
         filename: file.name,
         fileType: file.type,
-        size: file.size,
+        size: sizeInBytes,
         base64: compressedBase64,
       };
       this.signalService.addTaskImage(image);
@@ -158,10 +169,14 @@ export class TaskOverviewComponent {
   ): Promise<string> {
     const base64 = await this.readBlobAsDataURL(blob);
     const img = await this.loadImage(base64);
-    const { width, height } = this.getScaledDimensions(img, maxWidth, maxHeight);
+    const { width, height } = this.getScaledDimensions(
+      img,
+      maxWidth,
+      maxHeight
+    );
     const ctx = this.createCanvasContext(width, height);
     ctx.drawImage(img, 0, 0, width, height);
-    const outputType = blob.type || 'image/png';
+    const outputType = blob.type;
     return ctx.canvas.toDataURL(outputType, quality);
   }
 
@@ -251,7 +266,16 @@ export class TaskOverviewComponent {
     event.preventDefault();
     const files = event.dataTransfer?.files;
     if (files && files.length > 0) {
-      this.onFileSelected({ target: { files } } as any);
+      const filteredFiles = Array.from(files).filter(file => this.allowedMimeTypes.includes(file.type));
+
+    if (filteredFiles.length > 0) {
+      const dataTransfer = new DataTransfer();
+      filteredFiles.forEach(file => dataTransfer.items.add(file));
+
+      this.onFileSelected({ target: { files: dataTransfer.files } } as any);
+    } else {
+      this.toastService.triggerToast('Wrong image-type. Please, use JPG, PNG, SVG or WebP.', 'error');
+    }
     }
     this.isDragOver = false;
   }
