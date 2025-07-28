@@ -1,9 +1,6 @@
 import { Injectable, signal } from '@angular/core';
 import { TaskImageData } from '../interfaces/task-image-data';
-
-type UndoImageAction =
-  | { type: 'single'; image: TaskImageData; index: number }
-  | { type: 'all'; images: TaskImageData[] };
+import { UndoImageAction } from '../interfaces/undo-image-action';
 
 /**
  * Service to manage signals related to screen size and form state.
