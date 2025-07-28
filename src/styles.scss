@@ -69,3 +69,16 @@ html,
 body {
   height: 100%;
 }
+
+.go-back-button {
+  position: absolute;
+  top: 0;
+  right: 0;
+  width: 32px;
+  height: 32px;
+  background-color: transparent;
+
+  @media screen and (min-width: 1000px) {
+    display: none;
+  }
+}
