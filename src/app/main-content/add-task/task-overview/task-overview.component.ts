@@ -85,6 +85,11 @@ export class TaskOverviewComponent {
   async onFileSelected(event: Event) {
     const files = this.getFilesFromEvent(event);
     if (!files) return;
+    const maxAllowedImages = 5;
+    if (this.signalService.taskImages().length + files.length > maxAllowedImages) {
+      this.toastService.triggerToast(`You can upload a maximum of ${maxAllowedImages} images`, 'error')
+      return;
+    }
     for (const file of files) {
       if (!this.isImageFile(file)) {
         this.showFileTypeError();
@@ -118,39 +123,78 @@ export class TaskOverviewComponent {
    */
   private showFileTypeError(): void {
     this.toastService.triggerToast(
-      'Incorrect file-type. Please load image',
+      'Incorrect file-type. Please load image (JPEG, SVG, WebP, PNG)',
       'error'
     );
   }
 
   /**
-   * Attempts to process an image file:
-   * - Compresses it to Base64
-   * - Adds the image to the task
-   * - Shows an error toast if processing fails
-   * @param file - Image file to process
+   * Attempts to process an image file by compressing it,
+   * then adds it to the task or shows an error toast on failure.
+   * @param file - The image file to process.
    */
   private async processImageFile(file: File): Promise<void> {
     try {
-      const compressedBase64 = await this.convertBlobToCompressedBase64(
-        file,
-        800,
-        800,
-        0.8
-      );
-      const base64String = compressedBase64.split(',')[1] ?? '';
-      const sizeInBytes = Math.round((base64String.length * 3) / 4);
-      const image: TaskImageData = {
-        filename: file.name,
-        fileType: file.type,
-        size: sizeInBytes,
-        base64: compressedBase64,
-      };
-      this.signalService.addTaskImage(image);
+      let targetType = file.type === 'image/png' ? 'image/jpeg' : file.type;
+      const { base64, size } = await this.compressWithSizeLimit(file, 150 * 1024, targetType);
+
+      if (size > 150 * 1024) {
+        this.toastService.triggerToast('Error: Image is too large', 'error');
+      } else {
+        const filename = targetType === 'image/jpeg' ? file.name.replace(/\.png$/i, '.jpg') : file.name;
+
+        this.signalService.addTaskImage({
+          filename,
+          fileType: targetType,
+          size,
+          base64,
+        });
+      }
     } catch (error) {
       console.error('Error while adding image:', error);
       this.toastService.triggerToast(`Error while adding image`, 'error');
     }
+  }
+
+  /**
+  * Compresses an image file with iterative quality reduction
+  * and optional resizing to meet a maximum size limit.
+  * @param file - The image file to compress.
+  * @param maxSize - Maximum allowed size in bytes.
+  * @param targetType - Desired output MIME type (e.g., "image/jpeg").
+  * @returns Object containing the Base64 string and the compressed size in bytes.
+  */
+  async compressWithSizeLimit(file: File, maxSize: number, targetType: string): Promise<{ base64: string; size: number }> {
+    let quality = 0.8;
+    let result = await this.compressAndGetSize(file, 800, 800, quality, targetType);
+
+    while (result.size > maxSize && quality > 0.5) {
+      quality -= 0.1;
+      result = await this.compressAndGetSize(file, 800, 800, quality, targetType);
+    }
+
+    if (result.size > maxSize) {
+      result = await this.compressAndGetSize(file, 600, 600, quality, targetType);
+    }
+
+    return result;
+  }
+
+  /**
+  * Compresses a Blob to a Base64-encoded image string with specified dimensions, quality, and format,
+  * and calculates its byte size.
+  * @param blob - The image blob to compress.
+  * @param maxWidth - Maximum output width in pixels.
+  * @param maxHeight - Maximum output height in pixels.
+  * @param quality - Compression quality from 0 (lowest) to 1 (highest).
+  * @param outputType - MIME type for output (e.g., "image/jpeg").
+  * @returns Object containing the Base64-encoded string and its size in bytes.
+  */
+  async compressAndGetSize(blob: Blob, maxWidth: number, maxHeight: number, quality: number, outputType: string): Promise<{ base64: string; size: number }> {
+    const base64 = await this.convertBlobToCompressedBase64(blob, maxWidth, maxHeight, quality, outputType);
+    const base64String = base64.split(',')[1] ?? '';
+    const size = Math.round((base64String.length * 3) / 4);
+    return { base64, size };
   }
 
   /**
@@ -165,7 +209,8 @@ export class TaskOverviewComponent {
     blob: Blob,
     maxWidth: number = 800,
     maxHeight: number = 800,
-    quality: number = 0.8
+    quality: number = 0.8,
+    outputType = blob.type
   ): Promise<string> {
     const base64 = await this.readBlobAsDataURL(blob);
     const img = await this.loadImage(base64);
@@ -175,8 +220,13 @@ export class TaskOverviewComponent {
       maxHeight
     );
     const ctx = this.createCanvasContext(width, height);
+
+    if (outputType === 'image/jpeg') {
+      ctx.fillStyle = '#fff';
+      ctx.fillRect(0, 0, width, height);
+    }
+
     ctx.drawImage(img, 0, 0, width, height);
-    const outputType = blob.type;
     return ctx.canvas.toDataURL(outputType, quality);
   }
 
@@ -266,16 +316,21 @@ export class TaskOverviewComponent {
     event.preventDefault();
     const files = event.dataTransfer?.files;
     if (files && files.length > 0) {
-      const filteredFiles = Array.from(files).filter(file => this.allowedMimeTypes.includes(file.type));
+      const filteredFiles = Array.from(files).filter((file) =>
+        this.allowedMimeTypes.includes(file.type)
+      );
 
-    if (filteredFiles.length > 0) {
-      const dataTransfer = new DataTransfer();
-      filteredFiles.forEach(file => dataTransfer.items.add(file));
+      if (filteredFiles.length > 0) {
+        const dataTransfer = new DataTransfer();
+        filteredFiles.forEach((file) => dataTransfer.items.add(file));
 
-      this.onFileSelected({ target: { files: dataTransfer.files } } as any);
-    } else {
-      this.toastService.triggerToast('Wrong image-type. Please, use JPG, PNG, SVG or WebP.', 'error');
-    }
+        this.onFileSelected({ target: { files: dataTransfer.files } } as any);
+      } else {
+        this.toastService.triggerToast(
+          'Wrong image-type. Please, use JPG, PNG, SVG or WebP.',
+          'error'
+        );
+      }
     }
     this.isDragOver = false;
   }
