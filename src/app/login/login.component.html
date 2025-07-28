@@ -1,31 +1,31 @@
-<section class="start-animation">
+<div class="wrapper-max-width">
+    <section class="start-animation">
     <div class="background-animated" [style.backgroundColor]="loginBackgroundColor"></div>
     <img
         [src]="loginLogoImgSrc"
         class="logo-animated"
         [class.animate]="startAnimationTrigger"
     />
-</section>
-
-<div class="wrapper-max-width">
-<!-- Dynamically render either login or sign-up dialog -->
-@if (!showSignUpDialog) {
-    <app-login-dialog />
-} @else {
-    <app-sign-up-dialog (closeDialog)="toLogin()" (signUpSuccess)="onSignUpSuccess()" />
-}
-
-@if (!showSignUpDialog) {
-    <section class="login-header">
-        <p>Not a Join User?</p>
-        <button class="signup-btn" type="button" (click)="toSignUpDialog(); $event.stopPropagation()">Sign up</button>
     </section>
-}
 
-<section class="login-footer">
-    <p (click)="toPrivacyPolicy()">Privacy policy</p>
-    <p (click)="toLegalNotice()">Legal notice</p>
-</section>
+    <!-- Dynamically renders either login or sign-up dialog -->
+    @if (!showSignUpDialog) {
+        <app-login-dialog />
+    } @else {
+        <app-sign-up-dialog (closeDialog)="toLogin()" (signUpSuccess)="onSignUpSuccess()" />
+    }
+
+    @if (!showSignUpDialog) {
+        <section class="login-header">
+            <p>Not a Join User?</p>
+            <button class="signup-btn" type="button" (click)="toSignUpDialog(); $event.stopPropagation()">Sign up</button>
+        </section>
+    }
+
+    <section class="login-footer">
+        <p (click)="toPrivacyPolicy()">Privacy policy</p>
+        <p (click)="toLegalNotice()">Legal notice</p>
+    </section>
 
 </div>
 
