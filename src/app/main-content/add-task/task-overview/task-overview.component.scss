@@ -37,7 +37,7 @@ textarea {
   }
 }
 
-// cursor pointer at datepicker sideboard
+/** cursor pointer at datepicker sideboard **/
 input[type="date"]::-webkit-calendar-picker-indicator {
   cursor: pointer;
 }
@@ -123,7 +123,7 @@ textarea {
   }
 }
 
-// container queries
+/** container queries**/
 @container task-section (max-width: 500px) {
   :host,
   .form-group,
