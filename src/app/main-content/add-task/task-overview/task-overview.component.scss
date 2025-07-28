@@ -4,6 +4,7 @@
 :host {
   @include dFlex($ai: flex-start, $gap: 32px);
   flex-direction: column;
+  max-width: 440px;
 }
 
 .form-group {
@@ -103,7 +104,7 @@ textarea {
 .action-control-button-group {
   @include dFlex($jc: space-between, $gap: 8px);
   flex-shrink: 0;
-  
+
   .control-button {
     @include dFlex($jc: space-around, $position: relative);
     border-radius: 10px;
@@ -119,7 +120,7 @@ textarea {
     padding: unset;
   }
 }
-  
+
 // container queries
 @container task-section (max-width: 500px) {
   :host,

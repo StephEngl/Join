@@ -1,10 +1,10 @@
 @import "../../../../assets/styles/mixins.scss";
-@import "../../../../assets/styles/variables.scss";
 @import "../../../../assets/fonts/fonts.scss";
 
 .form-group {
   @include dFlex($jc: center, $ai: flex-start, $gap: 8px);
   flex-direction: column;
+  max-width: 440px;
 }
 
 span {
