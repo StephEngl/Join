@@ -65,8 +65,12 @@ export class TaskInfoComponent {
 
   /** Updates the task state (e.g., on subtask changes). */
   async checkSubTask(): Promise<void> {
-    if (this.taskDataDialogInfo?.id) {
-      await this.tasksService.updateTask(this.taskDataDialogInfo);
+    const currentTaskDataDialogInfo = this.tasksService.tasks.find(
+    (t) => t.id === this.taskDataDialogInfo.id
+    );
+    
+    if (currentTaskDataDialogInfo) {
+      await this.tasksService.updateSubTaskStatus(currentTaskDataDialogInfo);
     }
   }
 
