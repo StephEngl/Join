@@ -1,5 +1,5 @@
-import { Injectable, inject } from '@angular/core';
-import { getAuth, SignInMethod } from '@angular/fire/auth';
+import { Injectable, inject, effect } from '@angular/core';
+import { getAuth } from '@angular/fire/auth';
 import { ContactInterface } from '../interfaces/contact.interface';
 import { UsersContactsService } from './users-contacts.service';
 import { UsersService } from './users.service';
@@ -60,11 +60,26 @@ export class ContactsService {
   unsubscribeContact?: () => void;
 
   constructor() {
-    if (this.signalService.isLoggedIn()) {
-      if (!this.unsubscribeContact) {
-        this.unsubscribeContact = this.subContactsList();
+    this.handlesSubscribingContacts();
+  }
+
+  /**
+   * Manages subscription to contact updates based on login state.
+   * Subscribes to the task contact when logged in and unsubscribes (and clears contacts) when logged out.
+   */
+  handlesSubscribingContacts() {
+    effect(() => {
+      if (this.signalService.isLoggedIn()) {
+        if (!this.unsubscribeContact) {
+          this.unsubscribeContact = this.subContactsList();
+        }
+      } else {
+        if (this.unsubscribeContact) {
+          this.unsubscribeContact();
+          this.unsubscribeContact = undefined;
+        }
       }
-    }
+    });
   }
 
   /**

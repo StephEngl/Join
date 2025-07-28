@@ -30,6 +30,14 @@ export class TasksService {
   unsubscribeTasks?: () => void;
 
   constructor() {
+    this.handlesSubscribingTasks();
+  }
+
+  /**
+   * Manages subscription to task updates based on login state.
+   * Subscribes to the task list when logged in and unsubscribes (and clears tasks) when logged out.
+   */
+  handlesSubscribingTasks() {
     effect(() => {
       if (this.signalService.isLoggedIn()) {
         if (!this.unsubscribeTasks) {
@@ -181,7 +189,7 @@ export class TasksService {
         await updateDoc(docRef, this.getCleanJson(task));
       } catch (err) {
         console.error(err);
-        throw err; 
+        throw err;
       }
     }
   }

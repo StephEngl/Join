@@ -32,6 +32,14 @@ export class UsersService {
    * Constructor that initializes the user subscription on creation
    */
   constructor() {
+    this.handlesSubscribingUsers();
+  }
+
+  /**
+   * Manages subscription to user updates based on login state.
+   * Subscribes to the user list when logged in and unsubscribes (and clears users) when logged out.
+   */
+  handlesSubscribingUsers() {
     effect(() => {
       if (this.signalService.isLoggedIn()) {
         if (!this.unsubscribeUser) {
