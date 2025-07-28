@@ -69,11 +69,8 @@ export class TaskDialogComponent {
    */
   onEditTask(): void {
     const latestTask = this.getLatestTask();
-    // Update dialog data binding with the latest task object.
     this.taskDataDialog = latestTask!;
-    // Initialize the gallery with the new task's images.
     this.initializeGalleryImages(latestTask);
-    // Activate edit mode in component state.
     this.activateEditMode();
   }
 
@@ -81,7 +78,7 @@ export class TaskDialogComponent {
  * Retrieves the latest task object from the TasksService based on the task ID.
  * @returns The latest TaskInterface object or undefined if not found.
  */
-private getLatestTask(): TaskInterface | undefined {
+getLatestTask(): TaskInterface | undefined {
   return this.tasksService.tasks.find(
     (t) => t.id === this.taskDataDialog.id
   );
