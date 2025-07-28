@@ -1,4 +1,5 @@
 import { Component } from '@angular/core';
+import { Location } from '@angular/common';
 
 /**
  * Component for displaying the legal notice page.
@@ -9,9 +10,14 @@ import { Component } from '@angular/core';
   standalone: true,
   imports: [],
   templateUrl: './legal-notice.component.html',
-  styleUrl: './legal-notice.component.scss'
+  styleUrl: './legal-notice.component.scss',
 })
 export class LegalNoticeComponent {
+  constructor(private location: Location) {}
+
+  goBack() {
+    this.location.back();
+  }
 
   /**
    * Indicates if the screen is currently in portrait orientation.
@@ -43,5 +49,4 @@ export class LegalNoticeComponent {
   checkOrientation() {
     this.isPortrait = window.innerHeight > window.innerWidth;
   }
-  
 }
