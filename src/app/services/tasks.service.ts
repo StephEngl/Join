@@ -224,7 +224,9 @@ export class TasksService {
         await updateDoc(docRef, {
           subTasks: task.subTasks,
         });
-      } catch (err) {}
+      } catch (err) {
+        console.error(err);
+      }
     }
   }
 
