@@ -69,11 +69,7 @@
       } @else {
       <div class="icon" (click)="togglePasswordVisibility()">
         <img
-          [src]="
-            passwordVisible
-              ? './assets/icons/kanban/visibility_off.svg'
-              : './assets/icons/kanban/visibility.svg'
-          "
+          [src]="passwordVisible? './assets/icons/kanban/visibility.svg' : './assets/icons/kanban/visibility_off.svg'"
           alt="Toggle Password Visibility"
         />
       </div>
@@ -86,14 +82,10 @@
     <!-- Confirm Password Input -->
     <div
       class="form-field"
-      [ngClass]="{
-        invalid:
-          signUpForm.get('confirmPassword')?.invalid &&
-          signUpForm.get('confirmPassword')?.touched
-      }"
+      [ngClass]="{invalid: signUpForm.get('confirmPassword')?.invalid && signUpForm.get('confirmPassword')?.touched}"
     >
       <input
-        [type]="confirmPasswordVisible ? 'password' : 'text'"
+        [type]="confirmPasswordVisible ? 'text' : 'password'"
         formControlName="confirmPassword"
         placeholder="Confirm Password"
       />
@@ -104,11 +96,7 @@
       } @else {
       <div class="icon" (click)="toggleConfirmPasswordVisibility()">
         <img
-          [src]="
-            passwordVisible
-              ? './assets/icons/kanban/visibility_off.svg'
-              : './assets/icons/kanban/visibility.svg'
-          "
+          [src]="confirmPasswordVisible? './assets/icons/kanban/visibility.svg' : './assets/icons/kanban/visibility_off.svg'"
           alt="Toggle Confirm Password Visibility"
         />
       </div>
