@@ -7,40 +7,46 @@
   container-name: task-section;
   display: flex;
   max-width: $queryBreak1;
+}
 
-  .task-section-content {
-    display: flex;
-    flex-direction: column;
-    width: 100%;
-    max-height: calc(100vh - 96px);
-    padding: 110px 100px;
-
-    .task-form {
-      overflow-y: auto;
-    }
-  }
-
-  h2 {
-    padding-bottom: 50px;
-  }
-
-  .task-edit-close {
-    cursor: pointer;
-    width: 100%;
-    @include dFlex($jc: flex-end);
-    padding: 0 0 20px;
-  }
-
-  .disabled {
-    pointer-events: none;
-    background-color: $col-font-inactive !important;
-  }
+.task-section-content {
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  max-height: calc(100vh - 96px);
+  padding: 110px 100px;
 
   .task-form {
-    display: flex;
-    flex-direction: column;
     overflow-y: auto;
   }
+}
+
+.header-tasks {
+  position: relative;
+  min-height: 50px;
+}
+
+h2 {
+  padding-bottom: 50px;
+}
+
+.task-edit-close {
+  cursor: pointer;
+  position: absolute;
+  top: 6px;
+  right: 6px;
+  font-size: 24px;
+}
+
+.disabled {
+  pointer-events: none;
+  background-color: $col-font-inactive !important;
+}
+
+.task-form {
+  display: flex;
+  flex-direction: column;
+  overflow-y: auto;
 }
 
 span {
@@ -69,75 +75,75 @@ span {
 .footnote {
   @include dFlex($jc: space-between);
   padding: 24px 0;
+}
 
-  .button-wrapper {
-    display: flex;
-    gap: 16px;
+.button-wrapper {
+  display: flex;
+  gap: 16px;
 
-    .button-cancel {
-      background-color: $col-bg-main;
-      border: 1px solid $col-bg-secondary;
+  .button-cancel {
+    background-color: $col-bg-main;
+    border: 1px solid $col-bg-secondary;
 
-      &:hover {
-        border-color: $col-ref-highlight;
-        color: $col-ref-highlight;
-        filter: drop-shadow(2px 4px 4px #a8a8a8);
-      }
-
-      .icon {
-        width: 24px;
-        height: 24px;
-        background-image: url("../../../assets/icons/kanban/close.svg");
-        background-size: contain;
-        background-repeat: no-repeat;
-      }
-
-      &:hover .icon {
-        background-image: url("../../../assets/icons/kanban/cancel-blue.svg");
-      }
+    &:hover {
+      border-color: $col-ref-highlight;
+      color: $col-ref-highlight;
+      filter: drop-shadow(2px 4px 4px #a8a8a8);
     }
 
-    .button-save {
-      background-color: $col-bg-secondary;
-      color: white;
-      white-space: nowrap;
-
-      &:hover {
-        background-color: $col-ref-highlight;
-        filter: drop-shadow(2px 4px 4px #a8a8a8);
-      }
+    .icon {
+      width: 24px;
+      height: 24px;
+      background-image: url("../../../assets/icons/kanban/close.svg");
+      background-size: contain;
+      background-repeat: no-repeat;
     }
 
-    .button-cancel,
-    .button-save {
-      @include dFlex($jc: space-between, $gap: 4px);
-      font-size: 21px;
-      padding: 16px;
-      border-radius: 10px;
+    &:hover .icon {
+      background-image: url("../../../assets/icons/kanban/cancel-blue.svg");
     }
+  }
+
+  .button-save {
+    background-color: $col-bg-secondary;
+    color: white;
+    white-space: nowrap;
+
+    &:hover {
+      background-color: $col-ref-highlight;
+      filter: drop-shadow(2px 4px 4px #a8a8a8);
+    }
+  }
+
+  .button-cancel,
+  .button-save {
+    @include dFlex($jc: space-between, $gap: 4px);
+    font-size: 21px;
+    padding: 16px;
+    border-radius: 10px;
   }
 }
 
-// Media/Container Queries
+/** Media/Container Queries **/
 @media screen and (max-height: 970px) {
   .task-section-content {
-    padding: 20px 20px !important;
+    padding: 20px 20px;
     overflow-y: auto;
   }
 }
 
 @media screen and (max-width: 1400px) {
   .task-section-content {
-    max-height: calc(100vh - 96px - 80px) !important;
-    padding: 20px 20px !important;
-    scrollbar-width: none !important;
+    max-height: calc(100vh - 96px - 80px);
+    padding: 20px 20px;
+    scrollbar-width: none;
   }
 
   @container task-section (max-width: 1200px) {
     .task-section-content {
-      max-height: calc(100vh - 96px - 80px) !important;
-      padding: 20px 20px !important;
-      scrollbar-width: none !important;
+      max-height: calc(100vh - 96px - 80px);
+      padding: 20px 20px;
+      scrollbar-width: none;
     }
   }
 }
@@ -170,10 +176,10 @@ span {
 
 @container task-section (max-width: 660px) {
   .task-section-content {
-    padding: 20px !important;
+    padding: 20px;
 
     h2 {
-      padding-bottom: 24px !important;
+      padding-bottom: 24px;
     }
   }
 }
@@ -189,7 +195,7 @@ span {
   .button-wrapper {
     .button-cancel,
     .button-save {
-      font-size: 16px !important;
+      font-size: 16px;
     }
   }
 }
@@ -205,17 +211,17 @@ span {
 
 @container task-section (max-width: 360px) {
   .task-section-content {
-    padding: 12px !important;
+    padding: 12px;
   }
 
   .button-wrapper {
     button {
-      padding: 10px !important;
+      padding: 10px;
     }
   }
 }
 
-// Dialog specific classes
+/** Dialog specific classes **/
 .edit-dialog-class {
   max-height: 800px !important;
   height: 90dvh;

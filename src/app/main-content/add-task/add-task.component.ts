@@ -36,7 +36,7 @@ export class AddTaskComponent {
   toastService = inject(ToastService);
   signalService = inject(SignalsService);
 
-  // add-task status
+  /** add-task status**/
   @Input() isEditTaskDialog: boolean = false;
   @Input() isAddTaskDialog: boolean = false;
   @Input() taskData!: TaskInterface;

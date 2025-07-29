@@ -6,25 +6,23 @@
       'add-dialog-class': isAddTaskDialog
     }"
   >
-    @if (!taskDataService.editModeActive) {
-    <h2>Add Task</h2>
-    } @else {
-    <div class="task-edit-close" (click)="closeIfDialog()">&#10005;</div>
-    }
+    <header class="header-tasks">
+      @if (!taskDataService.editModeActive) {
+      <h2>Add Task</h2>
+      } 
+      @if (isEditTaskDialog || isAddTaskDialog) {
+      <div class="task-edit-close" (click)="closeIfDialog()">&#10005;</div>
+      }
+    </header>
 
     <form class="task-form" (ngSubmit)="onSubmit()">
       <div class="task-scroll-container">
         <div class="task-form-wrapper">
-          <app-task-overview
-            [taskData]="taskData">
-          </app-task-overview>
+          <app-task-overview [taskData]="taskData"> </app-task-overview>
 
           <div class="vertical-divider"></div>
 
-          <app-task-details
-            class="task-details"
-            [taskDataInput]="taskData"
-          >
+          <app-task-details class="task-details" [taskDataInput]="taskData">
           </app-task-details>
         </div>
       </div>
@@ -40,7 +38,7 @@
           <button
             class="button-cancel"
             type="button"
-            (click)="closeIfDialog(); clearForm(); setFormResetSignals();"
+            (click)="closeIfDialog(); clearForm(); setFormResetSignals()"
             active=""
           >
             @if(!taskDataService.editModeActive && !isAddTaskDialog) { Clear }
