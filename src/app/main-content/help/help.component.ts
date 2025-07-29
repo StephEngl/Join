@@ -11,6 +11,9 @@ import { Location } from '@angular/common';
 export class HelpComponent {
   constructor(private location: Location) {}
 
+  /**
+   * Navigates back to the previous page in browser history.
+   */
   goBack() {
     this.location.back();
   }

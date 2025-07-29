@@ -75,7 +75,7 @@ export class TaskOverviewComponent {
     return date ? date.toISOString().split('T')[0] : null;
   }
 
-  // Images and Gallery Viewer methods
+  /** Images and Gallery Viewer methods */
 
   /**
    * Handles the selection of files from a file input event.
@@ -298,7 +298,8 @@ export class TaskOverviewComponent {
     return ctx;
   }
 
-  // Drag & Drop
+  /** Drag & Drop */
+
   /**
    * Prevents the default browser behavior when a file is dragged over the drop area.
    * @param event - The drag over event
