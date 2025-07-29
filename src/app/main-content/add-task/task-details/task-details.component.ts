@@ -273,8 +273,15 @@ export class TaskDetailsComponent {
     }
   }
 
-  /** Saves edits made to a subtask's text */
+  /** Saves edits made to a subtask's text
+   *  Empty subtasks can't be saved
+   */
   editCheckSubtask(subtask: any) {
+    const trimmedSubtaskInput = this.inputFieldSubT.trim();
+    if (trimmedSubtaskInput.length === 0) {
+      subtask.isEditing = false;
+      return;
+    }
     const index = this.taskData.subtasksContainer.indexOf(subtask);
     this.taskData.subtasksContainer[index].text = this.inputFieldSubT;
     subtask.isEditing = false;
