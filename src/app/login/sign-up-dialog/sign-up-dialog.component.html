@@ -27,18 +27,17 @@
         src="/assets/icons/sign-up/person.svg"
         alt="Person Icon"
       />
-      @if (signUpForm.get('name')?.hasError('invalidFullName') &&
-      signUpForm.get('name')?.touched) {
+      @if (signUpForm.get('name')?.hasError('required') && signUpForm.get('name')?.touched) {
+      <span class="error-message">Please enter a first and last name.</span>
+      }
+      @if (signUpForm.get('name')?.hasError('invalidFullName') && signUpForm.get('name')?.touched) {
       <span class="error-message">Please enter a first and last name.</span>
       }
     </div>
     <!-- Mail Input -->
     <div
       class="form-field"
-      [ngClass]="{
-        invalid:
-          signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched
-      }"
+      [ngClass]="{invalid: signUpForm.get('email')?.invalid && signUpForm.get('email')?.touched}"
     >
       <input type="email" formControlName="email" placeholder="E-Mail" />
       <img
@@ -46,19 +45,17 @@
         src="/assets/icons/sign-up/mail.svg"
         alt="Mail Icon"
       />
-      @if (signUpForm.get('email')?.hasError('email') &&
-      signUpForm.get('email')?.touched) {
+      @if (signUpForm.get('email')?.hasError('required') && signUpForm.get('email')?.touched) {
+      <div class="error-message">Please enter an email address.</div>
+      }
+      @if (signUpForm.get('email')?.hasError('email') && signUpForm.get('email')?.touched) {
       <div class="error-message">Please enter a valid email address.</div>
       }
     </div>
     <!-- Password Input -->
     <div
       class="form-field"
-      [ngClass]="{
-        invalid:
-          signUpForm.get('password')?.invalid &&
-          signUpForm.get('password')?.touched
-      }"
+      [ngClass]="{invalid: signUpForm.get('password')?.invalid && signUpForm.get('password')?.touched}"
     >
       <input
         [type]="passwordVisible ? 'text' : 'password'"
@@ -80,11 +77,9 @@
           alt="Toggle Password Visibility"
         />
       </div>
-      } @if (signUpForm.get('password')?.hasError('required') &&
-      signUpForm.get('password')?.touched) {
+      } @if (signUpForm.get('password')?.hasError('required') && signUpForm.get('password')?.touched) {
       <span class="error-message">Please enter a password.</span>
-      } @if (signUpForm.get('password')?.hasError('minlength') &&
-      signUpForm.get('password')?.touched) {
+      } @if (signUpForm.get('password')?.hasError('minlength') && signUpForm.get('password')?.touched) {
       <span class="error-message">Use at least 8 characters.</span>
       }
     </div>
@@ -117,12 +112,9 @@
           alt="Toggle Confirm Password Visibility"
         />
       </div>
-      } @if (signUpForm.get('confirmPassword')?.hasError('required') &&
-      signUpForm.get('confirmPassword')?.touched) {
+      } @if (signUpForm.get('confirmPassword')?.hasError('required') && signUpForm.get('confirmPassword')?.touched) {
       <span class="error-message">Please confirm your password.</span>
-      } @if (signUpForm.hasError('passwordMismatch') &&
-      signUpForm.get('confirmPassword')?.touched &&
-      signUpForm.get('confirmPassword')?.value?.length > 0) {
+      } @if (signUpForm.hasError('passwordMismatch') && signUpForm.get('confirmPassword')?.touched && signUpForm.get('confirmPassword')?.value?.length > 0) {
       <span class="error-message">Passwords do not match.</span>
       }
     </div>
