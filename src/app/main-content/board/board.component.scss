@@ -281,3 +281,11 @@ app-task {
   box-shadow: 0 2px 16px rgba(0, 0, 0, 0.2);
   height: 100%;
 }
+
+@media screen and (max-height: 1200px) {
+  .overlay-container {
+    padding-top: 0;
+    align-items: center;
+  }
+  
+}
