@@ -60,7 +60,6 @@ app-sign-up-dialog {
     top: 60px !important;
     width: 120px;
     height: 120px;
-
   }
 }
 
@@ -95,6 +94,12 @@ app-sign-up-dialog {
   > p {
     cursor: pointer;
     color: $col-font-inactive;
+  }
+}
+
+@media screen and (max-width: 1920px) {
+  :host {
+    align-items: flex-start;
   }
 }
 
