@@ -1,5 +1,6 @@
-import { Component } from '@angular/core';
+import { Component, inject } from '@angular/core';
 import { Location } from '@angular/common';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
   selector: 'app-help',
@@ -10,6 +11,7 @@ import { Location } from '@angular/common';
 })
 export class HelpComponent {
   constructor(private location: Location) {}
+  authService = inject(AuthenticationService);
 
   /**
    * Navigates back to the previous page in browser history.

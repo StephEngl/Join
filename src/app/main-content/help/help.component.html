@@ -1,6 +1,13 @@
 <section class="section-help">
   <h2>Help</h2>
-  <button class="go-back-button" (click)="goBack()"><img src="/assets/icons/general/arrow_back.svg" alt=""></button>
+  @if (authService.isLoggedIn()) {
+  <button class="go-back-button" (click)="goBack()">
+    <img
+      src="/assets/icons/general/arrow_back.svg"
+      alt="Go back"
+      style="width: 18px; height: 18px"
+    /></button
+  >}
 
   <p>
     Welcome to the help page for <span>Join</span>, your guide to using our

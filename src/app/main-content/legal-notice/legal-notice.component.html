@@ -1,6 +1,13 @@
 <section class="section-legal-notice">
   <h2>Legal Notice</h2>
-  <button class="go-back-button" (click)="goBack()"><img src="/assets/icons/general/arrow_back.svg" alt=""></button>
+  @if (authService.isLoggedIn()) {
+  <button class="go-back-button" (click)="goBack()">
+    <img
+      src="/assets/icons/general/arrow_back.svg"
+      alt="Go back"
+      style="width: 18px; height: 18px"
+    /></button
+  >}
 
   <div class="paragraph">
     <h3 class="imprint">Imprint</h3>

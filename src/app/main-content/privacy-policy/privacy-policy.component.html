@@ -1,6 +1,14 @@
 <section class="section-privacy-policy">
   <h2>Privacy Policy</h2>
-  <button class="go-back-button" (click)="goBack()"><img src="/assets/icons/general/arrow_back.svg" alt=""></button>
+  @if (authService.isLoggedIn()) {
+  <button class="go-back-button" (click)="goBack()">
+    <img
+      src="/assets/icons/general/arrow_back.svg"
+      alt="Go back"
+      style="width: 18px; height: 18px"
+    />
+  </button>
+  }
 
   <div class="paragraph">
     <h4>1. Data Controller</h4>
@@ -66,17 +74,18 @@
   <div class="paragraph">
     <h4>6. Registration and User Accounts</h4>
     <p>
-      If you register and create a user account on this website, we collect and process 
-      the personal data you provide (such as your name, email address, and password)
-      to create and manage your account. The processing of this data is necessary for 
-      the performance of the contract (Art. 6(1)(b) GDPR). Your data will not be shared 
-      with third parties unless this is necessary for the operation of the website or required by law. 
-      The data will be stored for as long as your account exists and will be deleted when you delete 
-      your account, unless legal retention obligations apply.
+      If you register and create a user account on this website, we collect and
+      process the personal data you provide (such as your name, email address,
+      and password) to create and manage your account. The processing of this
+      data is necessary for the performance of the contract (Art. 6(1)(b) GDPR).
+      Your data will not be shared with third parties unless this is necessary
+      for the operation of the website or required by law. The data will be
+      stored for as long as your account exists and will be deleted when you
+      delete your account, unless legal retention obligations apply.
     </p>
   </div>
 
-<div class="paragraph">
+  <div class="paragraph">
     <h4>7. Changes to This Privacy Policy</h4>
     <p>
       We reserve the right to amend this Privacy Policy to reflect legal or
