@@ -25,12 +25,27 @@ import { SignalsService } from './signals.service';
 export class TasksService {
   firestore: Firestore = inject(Firestore);
   signalService = inject(SignalsService);
+  today: string = this.formatDate(new Date())!;
 
   tasks: TaskInterface[] = [];
   unsubscribeTasks?: () => void;
 
   constructor() {
     this.handlesSubscribingTasks();
+  }
+
+  /**
+   * Formats a given date to 'Month Day, Year' format.
+   * @param date - A Date object or null.
+   * @returns A formatted string or null.
+   */
+  formatDate(date: Date | null): string | null {
+    if (!date) return null;
+    return new Intl.DateTimeFormat('en-US', {
+      year: 'numeric',
+      month: 'long',
+      day: 'numeric',
+    }).format(date);
   }
 
   /**
@@ -114,6 +129,29 @@ export class TasksService {
    */
   tasksByPriority(priorityInput: string): number {
     return this.tasks.filter((task) => task.priority === priorityInput).length;
+  }
+
+  /**
+   * Returns the due date of the next upcoming task as a formatted string,
+   * or null if there are no tasks with a due date.
+   */
+  getNextDueDate(): string | null {
+    const dates = this.tasks
+      .map((t) => t.dueDate)
+      .filter((date) => !!date)
+      .sort((a, b) => (a as Date).getTime() - (b as Date).getTime());
+    return dates.length ? this.formatDate(dates[0]) : null;
+  }
+
+  /**
+   * Returns the number of tasks with priority 'urgent' that are due at the next due date.
+   */
+  urgentTasksAtNextDueDateCount(): number {
+    const nextDate = this.getNextDueDate();
+    return this.tasks.filter(
+      (task) =>
+        task.priority === 'urgent' && this.formatDate(task.dueDate) === nextDate
+    ).length;
   }
 
   /**
