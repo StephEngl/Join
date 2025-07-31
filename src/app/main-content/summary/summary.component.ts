@@ -28,7 +28,6 @@ export class SummaryComponent {
   authService = inject(AuthenticationService);
   signalService = inject(SignalsService);
   userName: string | null = null;
-  today: string = this.formatDate(new Date())!;
   taskOverviewBottom: { text: string }[] = [
     {
       text: 'Tasks in<br>Board',
@@ -92,33 +91,6 @@ export class SummaryComponent {
   /** Navigates to the task board view. */
   toBoard() {
     this.router.navigate(['/board']);
-  }
-
-  /**
-   * Returns number of urgent tasks due today.
-   * @returns Count of urgent tasks with due date matching today.
-   */
-  urgentTasksCount() {
-    const urgentTasksToday = this.tasksService.tasks.filter(
-      (task) =>
-        task.priority === 'urgent' &&
-        this.formatDate(task.dueDate) === this.today
-    );
-    return urgentTasksToday.length;
-  }
-
-  /**
-   * Formats a given date to 'Month Day, Year' format.
-   * @param date - A Date object or null.
-   * @returns A formatted string or null.
-   */
-  formatDate(date: Date | null): string | null {
-    if (!date) return null;
-    return new Intl.DateTimeFormat('en-US', {
-      year: 'numeric',
-      month: 'long',
-      day: 'numeric',
-    }).format(date);
   }
 
   /**
