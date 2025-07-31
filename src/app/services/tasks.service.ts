@@ -131,28 +131,23 @@ export class TasksService {
     return this.tasks.filter((task) => task.priority === priorityInput).length;
   }
 
-  /**
-   * Returns the due date of the next upcoming task as a formatted string,
-   * or null if there are no tasks with a due date.
-   */
-  getNextDueDate(): string | null {
-    const dates = this.tasks
-      .map((t) => t.dueDate)
-      .filter((date) => !!date)
-      .sort((a, b) => (a as Date).getTime() - (b as Date).getTime());
-    return dates.length ? this.formatDate(dates[0]) : null;
-  }
+/**
+ * Returns a fictional due date (today plus 30 days) as a formatted string.
+ */
+getNextDueDate(): string | null {
+  const today = new Date();
+  const dateIn30Days = new Date(today);
+  dateIn30Days.setDate(today.getDate() + 30);
 
-  /**
-   * Returns the number of tasks with priority 'urgent' that are due at the next due date.
-   */
-  urgentTasksAtNextDueDateCount(): number {
-    const nextDate = this.getNextDueDate();
-    return this.tasks.filter(
-      (task) =>
-        task.priority === 'urgent' && this.formatDate(task.dueDate) === nextDate
-    ).length;
-  }
+  return this.formatDate(dateIn30Days);
+}
+
+/**
+ * Returns the total number of urgent tasks (priority = 'urgent', regardless of date).
+ */
+getAlleUrgentTasks(): number {
+  return this.tasks.filter(task => task.priority === 'urgent').length;
+}
 
   /**
    * Returns the Firestore collection reference for tasks.
