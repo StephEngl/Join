@@ -6,7 +6,7 @@
 }
 
 .summary-middle-box {
-  @include dFlex($jc: space-around, $ai: center, $gap: 16px);
+  @include dFlex($jc: space-around, $ai: center, $gap: 20px);
   width: 100%;
   padding: 0 45px;
 }
@@ -58,7 +58,7 @@
 
 .summary-section {
   @include dFlex($jc: flex-start, $ai: center, $gap: 55px);
-  margin-top: 20px;
+  margin-top: 16px;
 }
 
 .summary-wrapper {
@@ -158,10 +158,6 @@
 .task-count {
   @include dFlex($jc: center, $ai: center);
   flex-direction: column;
-
-  > h5 {
-    font-size: 48px;
-  }
 
   > p {
     text-align: center;
@@ -278,6 +274,10 @@
 }
 
 @media screen and (max-width: 550px) {
+  p, .date-text {
+    font-size: 16px;
+  }
+
   .summary-main {
     padding: 10px 10px 0 15px;
   }
@@ -302,30 +302,9 @@
     height: 80px;
   }
 
-  .right-half-summary-box {
-    > p {
-      font-size: 14px;
-    }
-  }
-
-  .task-count {
-    > h5 {
-      font-size: 35px;
-    }
-
-    > p {
-      font-size: 14px;
-    }
-  }
-
   .summary-header {
     gap: 0px;
     margin-left: -65px;
-  }
-
-  .summary-section {
-    gap: 15px;
-    padding-top: 15px;
   }
 
   .summary-wrapper {
@@ -338,25 +317,14 @@
   }
 
   .summary-middle-box {
-    padding: 0 25px;
-    gap: 0px;
+    padding: 0 15px;
+    gap: 16px;
   }
 }
 
 @media screen and (max-width: 385px) {
-  .right-half-summary-box {
-    > p {
-      font-size: 11px;
-    }
-  }
-
   .summary-wrapper {
     gap: 10px;
     max-height: 350px;
-  }
-
-  .summary-section {
-    gap: 10px;
-    padding-top: 2px;
   }
 }

@@ -32,7 +32,7 @@
           <span class="sum-icon">
             <img [src]="card.isHovered ? card.iconHovered: card.icon" alt="icon edit">
             <div class="task-count">
-              <h5>{{ tasksService.tasksByType(card.type) }}</h5>
+              <h3>{{ tasksService.tasksByType(card.type) }}</h3>
               <p>{{ card.text }}</p>
             </div>
           </span>
@@ -45,7 +45,7 @@
             <div class="left-half-summary-box">
               <img src="./assets/icons/kanban/prio_urgent_white.svg" alt="" [style.backgroundColor]="'#FF3D00'">
               <div class="task-count">
-                <h5>{{ tasksService.getAlleUrgentTasks() }}</h5>
+                <h3>{{ tasksService.getAlleUrgentTasks() }}</h3>
                 <p>Urgent</p>
               </div>
             </div>
@@ -66,13 +66,13 @@
           }" (click)="toBoard()">
           <div class="task-count">
             @if (i === 0) {
-            <h5>{{ tasksService.tasksCount() }}</h5>
+            <h3>{{ tasksService.tasksCount() }}</h3>
             }
             @if (i === 1) {
-            <h5>{{ tasksService.tasksByType('inProgress') }}</h5>
+            <h3>{{ tasksService.tasksByType('inProgress') }}</h3>
             }
             @if (i === 2) {
-            <h5>{{ tasksService.tasksByType('feedback') }}</h5>
+            <h3>{{ tasksService.tasksByType('feedback') }}</h3>
             }
             <p [innerHTML]="category.text"></p>
           </div>

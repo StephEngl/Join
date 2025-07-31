@@ -78,7 +78,6 @@
 @mixin vLineWhiteBlack() {
     height: 100px;
     width: 2px;
-    margin: 0 20px;
     background-color: $col-font-grey;
     border-radius: 10px;
 }
